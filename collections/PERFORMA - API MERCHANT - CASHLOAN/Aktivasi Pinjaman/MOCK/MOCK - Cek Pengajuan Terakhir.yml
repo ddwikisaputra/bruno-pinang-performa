@@ -1,0 +1,115 @@
+info:
+  name: MOCK - Cek Pengajuan Terakhir
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: https://pinang-performa.free.mockoapp.net/v/1/aktivasi/cashloan/cek-pengajuan-terakhir/200-status-(-1)
+  headers:
+    - name: x-key
+      value: performa
+  params:
+    - name: "401"
+      value: ""
+      type: query
+      disabled: true
+    - name: "503"
+      value: ""
+      type: query
+      disabled: true
+    - name: "403"
+      value: ""
+      type: query
+      disabled: true
+    - name: "400"
+      value: ""
+      type: query
+      disabled: true
+    - name: 400-token-empty
+      value: ""
+      type: query
+      disabled: true
+    - name: 200-next-step-pengajuan
+      value: ""
+      type: query
+      disabled: true
+    - name: 200-limit-aktif
+      value: ""
+      type: query
+      disabled: true
+    - name: 200-success-status-(-3)-belum-kadaluarsa
+      value: ""
+      type: query
+      disabled: true
+    - name: 200-success-status-(-3)-kadaluarsa
+      value: ""
+      type: query
+      disabled: true
+    - name: 200-success-status-1
+      value: ""
+      type: query
+      disabled: true
+    - name: 200-success-status-3
+      value: ""
+      type: query
+      disabled: true
+    - name: 200-success-status-4-5-6
+      value: ""
+      type: query
+      disabled: true
+    - name: 200-success-status-7
+      value: ""
+      type: query
+      disabled: true
+    - name: 200-success-status-8
+      value: ""
+      type: query
+      disabled: true
+    - name: 200-success-status-9
+      value: ""
+      type: query
+      disabled: true
+    - name: 200-success-status-10
+      value: ""
+      type: query
+      disabled: true
+    - name: 200-status-(-1)
+      value: ""
+      type: query
+      disabled: true
+    - name: 200-success-status-(-2)-belum-kadaluarsa
+      value: ""
+      type: query
+      disabled: true
+    - name: 200-success-status-(-2)-kadaluarsa
+      value: ""
+      type: query
+      disabled: true
+    - name: 200-success-status-(-4)-belum-kadaluarsa
+      value: ""
+      type: query
+      disabled: true
+    - name: 200-success-status-(-4)-kadaluarsa
+      value: ""
+      type: query
+      disabled: true
+    - name: 200-success-status-(-5)-belum-kadaluarsa
+      value: ""
+      type: query
+      disabled: true
+    - name: 200-success-status-(-6)-belum-kadaluarsa
+      value: ""
+      type: query
+      disabled: true
+    - name: 200-success-status-(-6)-kadaluarsa
+      value: ""
+      type: query
+      disabled: true
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

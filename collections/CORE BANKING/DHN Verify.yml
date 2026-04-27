@@ -1,0 +1,261 @@
+info:
+  name: DHN Verify
+  type: http
+  seq: 27
+
+http:
+  method: POST
+  url: "{{URL}}/dwh/dhninquiry"
+  body:
+    type: form-urlencoded
+    data:
+      - name: NoIdentitas
+        value: 09.5003.051157.0585
+        description: No KTP
+      - name: NPWP
+        value: Kamal Hussein Radityo
+        description: No NPWP
+        disabled: true
+  auth:
+    type: basic
+    username: pinang-mikro
+    password: "0"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Not Found
+    request:
+      url: "{{URL}}/dwh/dhninquiry"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: NoIdentitas
+            value: "0260010010824"
+            description: No KTP
+          - name: NPWP
+            value: Kamal Hussein Radityo
+            description: No NPWP
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: no-cache
+        - name: Pragma
+          value: no-cache
+        - name: Content-Length
+          value: "51"
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Expires
+          value: "-1"
+        - name: Server
+          value: Microsoft-IIS/10.0
+        - name: X-AspNet-Version
+          value: 4.0.30319
+        - name: X-Powered-By
+          value: ASP.NET
+        - name: Date
+          value: Tue, 14 Mar 2023 00:35:23 GMT
+      body:
+        type: json
+        data: |-
+          {
+              "StatusCode": "99",
+              "StatusDescription": "Not Found"
+          }
+  - name: Found
+    request:
+      url: "{{URL}}/dwh/dhninquiry"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: NoIdentitas
+            value: 09.5003.051157.0585
+            description: No KTP
+          - name: NPWP
+            value: Kamal Hussein Radityo
+            description: No NPWP
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: no-cache
+        - name: Pragma
+          value: no-cache
+        - name: Content-Length
+          value: "3347"
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Expires
+          value: "-1"
+        - name: Server
+          value: Microsoft-IIS/10.0
+        - name: X-AspNet-Version
+          value: 4.0.30319
+        - name: X-Powered-By
+          value: ASP.NET
+        - name: Date
+          value: Tue, 14 Mar 2023 06:22:30 GMT
+      body:
+        type: json
+        data: |-
+          {
+              "StatusCode": "00",
+              "StatusDescription": "Success",
+              "Data": [
+                  {
+                      "NoUrut": "00446",
+                      "NamaBank": "BANK PERMATA",
+                      "NamaNasabah": "HARTONO",
+                      "NoIdentitas": "09.5003.051157.0585",
+                      "NPWP": "068221381027000",
+                      "TanggalLahir": "05111957",
+                      "Alamat": "JL.REMAJA RT.006/008 CEMPAKA BARU",
+                      "Kota": "JAKARTA PUSAT",
+                      "Propinsi": "DKI JAKARTA",
+                      "KodePos": "10640",
+                      "TanggalAkhirSanksi": "15102009"
+                  },
+                  {
+                      "NoUrut": "00446",
+                      "NamaBank": "BANK PERMATA",
+                      "NamaNasabah": "HARTONO",
+                      "NoIdentitas": "09.5003.051157.0585",
+                      "NPWP": "068221381027000",
+                      "TanggalLahir": "05111957",
+                      "Alamat": "JL.REMAJA RT.006/008 CEMPAKA BARU",
+                      "Kota": "JAKARTA PUSAT",
+                      "Propinsi": "DKI JAKARTA",
+                      "KodePos": "10640",
+                      "TanggalAkhirSanksi": "15102009"
+                  },
+                  {
+                      "NoUrut": "00446",
+                      "NamaBank": "BANK PERMATA",
+                      "NamaNasabah": "HARTONO",
+                      "NoIdentitas": "09.5003.051157.0585",
+                      "NPWP": "068221381027000",
+                      "TanggalLahir": "05111957",
+                      "Alamat": "JL.REMAJA RT.006/008 CEMPAKA BARU",
+                      "Kota": "JAKARTA PUSAT",
+                      "Propinsi": "DKI JAKARTA",
+                      "KodePos": "10640",
+                      "TanggalAkhirSanksi": "15102009"
+                  },
+                  {
+                      "NoUrut": "00446",
+                      "NamaBank": "BANK PERMATA",
+                      "NamaNasabah": "HARTONO",
+                      "NoIdentitas": "09.5003.051157.0585",
+                      "NPWP": "068221381027000",
+                      "TanggalLahir": "05111957",
+                      "Alamat": "JL.REMAJA RT.006/008 CEMPAKA BARU",
+                      "Kota": "JAKARTA PUSAT",
+                      "Propinsi": "DKI JAKARTA",
+                      "KodePos": "10640",
+                      "TanggalAkhirSanksi": "15102009"
+                  },
+                  {
+                      "NoUrut": "00446",
+                      "NamaBank": "BANK PERMATA",
+                      "NamaNasabah": "HARTONO",
+                      "NoIdentitas": "09.5003.051157.0585",
+                      "NPWP": "068221381027000",
+                      "TanggalLahir": "05111957",
+                      "Alamat": "JL.REMAJA RT.006/008 CEMPAKA BARU",
+                      "Kota": "JAKARTA PUSAT",
+                      "Propinsi": "DKI JAKARTA",
+                      "KodePos": "10640",
+                      "TanggalAkhirSanksi": "15102009"
+                  },
+                  {
+                      "NoUrut": "00446",
+                      "NamaBank": "BANK PERMATA",
+                      "NamaNasabah": "HARTONO",
+                      "NoIdentitas": "09.5003.051157.0585",
+                      "NPWP": "068221381027000",
+                      "TanggalLahir": "05111957",
+                      "Alamat": "JL.REMAJA RT.006/008 CEMPAKA BARU",
+                      "Kota": "JAKARTA PUSAT",
+                      "Propinsi": "DKI JAKARTA",
+                      "KodePos": "10640",
+                      "TanggalAkhirSanksi": "15102009"
+                  },
+                  {
+                      "NoUrut": "00446",
+                      "NamaBank": "BANK PERMATA",
+                      "NamaNasabah": "HARTONO",
+                      "NoIdentitas": "09.5003.051157.0585",
+                      "NPWP": "068221381027000",
+                      "TanggalLahir": "05111957",
+                      "Alamat": "JL.REMAJA RT.006/008 CEMPAKA BARU",
+                      "Kota": "JAKARTA PUSAT",
+                      "Propinsi": "DKI JAKARTA",
+                      "KodePos": "10640",
+                      "TanggalAkhirSanksi": "15102009"
+                  },
+                  {
+                      "NoUrut": "00446",
+                      "NamaBank": "BANK PERMATA",
+                      "NamaNasabah": "HARTONO",
+                      "NoIdentitas": "09.5003.051157.0585",
+                      "NPWP": "068221381027000",
+                      "TanggalLahir": "05111957",
+                      "Alamat": "JL.REMAJA RT.006/008 CEMPAKA BARU",
+                      "Kota": "JAKARTA PUSAT",
+                      "Propinsi": "DKI JAKARTA",
+                      "KodePos": "10640",
+                      "TanggalAkhirSanksi": "15102009"
+                  },
+                  {
+                      "NoUrut": "00446",
+                      "NamaBank": "BANK PERMATA",
+                      "NamaNasabah": "HARTONO",
+                      "NoIdentitas": "09.5003.051157.0585",
+                      "NPWP": "068221381027000",
+                      "TanggalLahir": "05111957",
+                      "Alamat": "JL.REMAJA RT.006/008 CEMPAKA BARU",
+                      "Kota": "JAKARTA PUSAT",
+                      "Propinsi": "DKI JAKARTA",
+                      "KodePos": "10640",
+                      "TanggalAkhirSanksi": "15102009"
+                  },
+                  {
+                      "NoUrut": "00446",
+                      "NamaBank": "BANK PERMATA",
+                      "NamaNasabah": "HARTONO",
+                      "NoIdentitas": "09.5003.051157.0585",
+                      "NPWP": "068221381027000",
+                      "TanggalLahir": "05111957",
+                      "Alamat": "JL.REMAJA RT.006/008 CEMPAKA BARU",
+                      "Kota": "JAKARTA PUSAT",
+                      "Propinsi": "DKI JAKARTA",
+                      "KodePos": "10640",
+                      "TanggalAkhirSanksi": "15102009"
+                  },
+                  {
+                      "NoUrut": "00446",
+                      "NamaBank": "BANK PERMATA",
+                      "NamaNasabah": "HARTONO",
+                      "NoIdentitas": "09.5003.051157.0585",
+                      "NPWP": "068221381027000",
+                      "TanggalLahir": "05111957",
+                      "Alamat": "JL.REMAJA RT.006/008 CEMPAKA BARU",
+                      "Kota": "JAKARTA PUSAT",
+                      "Propinsi": "DKI JAKARTA",
+                      "KodePos": "10640",
+                      "TanggalAkhirSanksi": "15102009"
+                  }
+              ]
+          }

@@ -1,0 +1,211 @@
+info:
+  name: Request Access Token
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: "{{base-url-dev}}/v/1/request-access-token"
+  headers:
+    - name: Api-Key
+      value: "{{apiKeyDevCL}}"
+      description: API KEY [MANDATORY]
+  body:
+    type: form-urlencoded
+    data:
+      - name: username
+        value: "{{usernameDevCL}}"
+        description: Username [MANDATORY]
+      - name: password
+        value: "{{passwordDevCL}}"
+        description: Password [MANDATORY]
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        var jsonData = res.getBody();
+        bru.setGlobalEnvVar("accessTokenPartner", jsonData.token)
+        bru.setEnvVar("accessTokenPartner", jsonData.token)
+        bru.setGlobalEnvVar("apiKeyDev", req.getHeaders().get("Api-Key"))
+        bru.setEnvVar("apiKeyDev", req.getHeaders().get("Api-Key"))
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: "503 : Service Unavailable"
+    request:
+      url: "{{base-url-local}}/v/1/request-access-token"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+          description: API KEY [MANDATORY]
+      body:
+        type: form-urlencoded
+        data:
+          - name: username
+            value: TUox
+            description: Username [MANDATORY]
+          - name: password
+            value: cGVyZm9ybWE=
+            description: Password [MANDATORY]
+    response:
+      status: 503
+      statusText: Service Unavailable
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 26 Sep 2024 09:09:28 GMT
+        - name: Content-Length
+          value: "122"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Jam operasional Pinang Performa dari jam 06:00 - 16:00 WIB setiap hari. Kembali lagi nanti, ya!",
+              "status": 503
+          }
+  - name: "200 : Success"
+    request:
+      url: "{{base-url-local}}/v/1/request-access-token"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+          description: API KEY [MANDATORY]
+      body:
+        type: form-urlencoded
+        data:
+          - name: username
+            value: QUdVLTE5MA==
+            description: Username [MANDATORY]
+          - name: password
+            value: TnE2c250Y2FJcw==
+            description: Password [MANDATORY]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 11 Jul 2024 09:27:19 GMT
+        - name: Content-Length
+          value: "519"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 200,
+              "expire": "2024-07-11T17:27:14.055578888+07:00",
+              "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NJZCI6IlVtRjVZVkJwVUdWeVZHOXcrdnhhTkorMHZVQzk3ak5ScHZHWVladz0iLCJhcGlLZXkiOiJWVzFHTlZsV1FuQlZSMVo1VmtjNWQycERiMWxuUjFnd2JFbGhWM2NyZEM5SVlUbFBWbGw2Vld0TmNIa3JTR2M5IiwiZXhwIjoxNzIwNjkzNjM0LCJwYXNzd29yZCI6IlVtRjVZVkJwVUdWeVZHOXdneHg3M2pxNXh4VVNhOFhLc05iS1pjakdLaUJOQ2I4Y3lubz0iLCJ1c2VybmFtZSI6IlVtRjVZVkJwVUdWeVZHOXdqQ29ZZ0dYMGxJYVd3K3QvSGE5T1ZZelVrTXB5K0hnPSJ9.UW2lEwnJ2osJf1BeWWWgvnlHC3g_cPkSylBhJmOXQG0"
+          }
+  - name: "400 : Parameter Tidak Sesuai"
+    request:
+      url: "{{base-url-local}}/v/1/request-access-token"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+          description: API KEY [MANDATORY]
+      body:
+        type: form-urlencoded
+        data:
+          - name: username
+            value: QUdVLTE5MA==
+            description: Username [MANDATORY]
+            disabled: true
+          - name: password
+            value: TnE2c250Y2FJcw==
+            description: Password [MANDATORY]
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 11 Jul 2024 09:28:23 GMT
+        - name: Content-Length
+          value: "54"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 400,
+              "message": "Maaf, Parameter tidak sesuai."
+          }
+  - name: "401 : Invalid API Key"
+    request:
+      url: "{{base-url-local}}/v/1/request-access-token"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: VW1GNVlWQnBVR1Z5Vkc5d2pDb1lnR1gwbGRBTmdSOUczSHIvaWtDaS9CdXJUVHc9
+          description: API KEY [MANDATORY]
+      body:
+        type: form-urlencoded
+        data:
+          - name: username
+            value: QUdVLTE5MA==
+            description: Username [MANDATORY]
+          - name: password
+            value: TnE2c250Y2FJcw==
+            description: Password [MANDATORY]
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 11 Jul 2024 09:33:23 GMT
+        - name: Content-Length
+          value: "52"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "message": "Maaf, API Key tidak sesuai."
+          }
+  - name: "500 : Request Token Gagal"
+    request:
+      url: "{{base-url-local}}/v/1/request-access-token"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+          description: API KEY [MANDATORY]
+      body:
+        type: form-urlencoded
+        data:
+          - name: username
+            value: QUdVLTE5MA==
+            description: Username [MANDATORY]
+          - name: password
+            value: TnE2c250Y2FJcw==
+            description: Password [MANDATORY]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 15 Jul 2024 03:21:48 GMT
+        - name: Content-Length
+          value: "51"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 500,
+              "message": "Maaf, Request token gagal."
+          }

@@ -1,0 +1,67 @@
+info:
+  name: MOCK - List Cicilan
+  type: http
+  seq: 5
+
+http:
+  method: POST
+  url: https://pinang-performa.free.mockoapp.net/v/1/monitoring/cashloan/list-cicilan/200-ada-telat-more
+  headers:
+    - name: x-key
+      value: performa
+  params:
+    - name: "503"
+      value: ""
+      type: query
+      disabled: true
+    - name: "401"
+      value: ""
+      type: query
+      disabled: true
+    - name: "403"
+      value: ""
+      type: query
+      disabled: true
+    - name: "400"
+      value: ""
+      type: query
+      disabled: true
+    - name: 400-token-empty
+      value: ""
+      type: query
+      disabled: true
+    - name: 500-unregist-wl
+      value: ""
+      type: query
+      disabled: true
+    - name: 200-lunas-semua
+      value: ""
+      type: query
+      disabled: true
+    - name: 200-ada-lunas-telat-jatuh-tempo
+      value: ""
+      type: query
+      disabled: true
+    - name: 200-ada-lunas-telat-jatuh-tempo-sebelum
+      value: ""
+      type: query
+      disabled: true
+    - name: 200-ada-telat-more-jatuh-tempo
+      value: ""
+      type: query
+      disabled: true
+    - name: 200-ada-telat-more
+      value: ""
+      type: query
+      disabled: true
+    - name: 200-cicilan-kosong
+      value: ""
+      type: query
+      disabled: true
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

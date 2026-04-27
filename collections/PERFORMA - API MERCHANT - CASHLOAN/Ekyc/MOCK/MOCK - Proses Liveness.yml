@@ -1,0 +1,63 @@
+info:
+  name: MOCK - Proses Liveness
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: https://pinang-performa.free.mockoapp.net/v/1/ekyc/cashloan/proses-liveness/200
+  headers:
+    - name: x-key
+      value: performa
+  body:
+    type: form-urlencoded
+    data:
+      - name: success liveness
+        value: "200"
+        disabled: true
+      - name: block waiting
+        value: 500-waiting
+        disabled: true
+      - name: gagal liveness percobaan terakhir
+        value: 500-final-attempt
+        disabled: true
+      - name: gagal liveness
+        value: 500-attempts
+        disabled: true
+      - name: 503 service unavailable
+        value: "503"
+        disabled: true
+      - name: 400 empty api key
+        value: "400"
+        disabled: true
+      - name: 400 param gk sesuai
+        value: 400-param-not
+        disabled: true
+      - name: 401 unauthorized
+        value: "401"
+        disabled: true
+      - name: 401 token empty
+        value: 401-token-empty
+        disabled: true
+      - name: "403"
+        value: "403"
+        disabled: true
+      - name: 403 invalid status
+        value: 403-invalid-status
+        disabled: true
+      - name: 403 unactivated
+        value: 403-unactivated
+        disabled: true
+      - name: 500 error general
+        value: 500-general
+        disabled: true
+      - name: 500 unregistered whitelist
+        value: 500-unregistered-WL
+        disabled: true
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

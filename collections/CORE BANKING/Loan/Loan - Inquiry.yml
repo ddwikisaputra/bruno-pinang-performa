@@ -1,0 +1,471 @@
+info:
+  name: Loan / Inquiry
+  type: http
+  seq: 5
+
+http:
+  method: GET
+  url: "{{URL}}/loan/inquiry/001001120263106"
+  body:
+    type: form-urlencoded
+  auth:
+    type: basic
+    username: pinang-mikro
+    password: "0"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: success
+    request:
+      url: "{{URL}}/loan/inquiry/151001000142109"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: no-cache
+        - name: Pragma
+          value: no-cache
+        - name: Content-Length
+          value: "1023"
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Expires
+          value: "-1"
+        - name: Server
+          value: Microsoft-IIS/10.0
+        - name: X-AspNet-Version
+          value: 4.0.30319
+        - name: X-Powered-By
+          value: ASP.NET
+        - name: Date
+          value: Thu, 02 Mar 2023 03:39:44 GMT
+      body:
+        type: json
+        data: |-
+          {
+              "StatusCode": "00",
+              "StatusDescription": "Success",
+              "Data": {
+                  "NomorRekening": "151001000142109",
+                  "CIF": "0000092847",
+                  "Plafon": "350000000.00",
+                  "Saldo": "341061847.96",
+                  "SaldoAdvance": "586048.39",
+                  "SaldoBlokir": "0.00",
+                  "Nama": "NASRI HARIS.IR.H",
+                  "TipeProduk": "00011 KKNB-AGRO GRIYA",
+                  "Status": "1",
+                  "MataUang": "IDR",
+                  "SukuBunga": "0.1600",
+                  "Accrue": "784050.25",
+                  "TanggalPembukaan": "30/10/2014",
+                  "HariTanggalPembayaran": "30",
+                  "JangkaWaktu": "180",
+                  "TipePerhitunganBunga": "EFEKTIF",
+                  "PerhitunganBunga": "12",
+                  "Penalti": "0.3000",
+                  "PenjadwalanAngsuran": "N",
+                  "NomorFasilitas": "1510/0000092847/PK2/001",
+                  "FrekuensiPembayaranBunga": "1",
+                  "TanggalPencairan": "30/10/2014",
+                  "TanggalJatuhTempo": "30/10/2029",
+                  "TanggalBilingSelanjutnya": "28/02/2021",
+                  "TunggakanPokok": "68771447.86",
+                  "TunggakanBunga": "270498423.74",
+                  "TunggakanPenalti": "44985100.70",
+                  "HariTunggakan": "1985",
+                  "Defer": "0",
+                  "DeferAccrue": "0",
+                  "DeferPenalti": "0",
+                  "FlagKolektabilitas": "SYSTEM",
+                  "Kolektabilitas": "5",
+                  "BungaDibayar": "14056609.06",
+                  "PrediksiAccrue": "3763441.20",
+                  "PokokDibayar": null,
+                  "PenaltyDibayar": null
+              }
+          }
+  - name: success - new
+    request:
+      url: "{{URL}}/loan/inquiry/001001118486108"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: no-cache
+        - name: Pragma
+          value: no-cache
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Expires
+          value: "-1"
+        - name: Server
+          value: Microsoft-IIS/10.0
+        - name: X-AspNet-Version
+          value: 4.0.30319
+        - name: X-Powered-By
+          value: ASP.NET
+        - name: Date
+          value: Fri, 20 Sep 2024 03:54:54 GMT
+      body:
+        type: json
+        data: |-
+          {
+              "StatusCode": "00",
+              "StatusDescription": "Success",
+              "Data": {
+                  "NomorRekening": "001001118486108",
+                  "CIF": "0000149512",
+                  "Plafon": "15000000",
+                  "Saldo": "0.00",
+                  "SaldoAdvance": "0.00",
+                  "SaldoBlokir": "0.00",
+                  "Nama": "Dwiki Saputra",
+                  "TipeProduk": "40004 PINANG MIKRO - PRK",
+                  "Status": "2",
+                  "MataUang": "IDR",
+                  "SukuBunga": "0.25",
+                  "Accrue": "0.00",
+                  "TanggalPembukaan": "08/10/2026",
+                  "HariTanggalPembayaran": "08",
+                  "JangkaWaktu": "1",
+                  "TipePerhitunganBunga": "EFEKTIF",
+                  "PerhitunganBunga": "360",
+                  "Penalti": "0.5",
+                  "PenjadwalanAngsuran": "Y",
+                  "NomorFasilitas": "0010/0000149512/PK3/002",
+                  "SegmentasiKredit": "400",
+                  "FrekuensiPembayaranBunga": "1",
+                  "TanggalPencairan": "08/10/2026",
+                  "TanggalJatuhTempo": "22/10/2026",
+                  "TanggalBilingSelanjutnya": "08/11/2026",
+                  "TunggakanPokok": "0.00",
+                  "TunggakanBunga": "0.00",
+                  "TunggakanPenalti": "0.00",
+                  "HariTunggakan": "0",
+                  "Defer": "0",
+                  "DeferAccrue": "0",
+                  "DeferPenalti": "0",
+                  "FlagKolektabilitas": "SYSTEM",
+                  "Kolektabilitas": "1",
+                  "BungaDibayar": "145833.38",
+                  "PrediksiAccrue": "0",
+                  "PokokDibayar": "15000000.00",
+                  "PenaltyDibayar": "0.00",
+                  "RekeningSettlement": "002001000115997",
+                  "TanggalPenutupan": "22/10/2026"
+              }
+          }
+  - name: success - sebelum jatuh tempo (belum lewat 1 hari)
+    request:
+      url: "{{URL}}/loan/inquiry/001001118971103"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: no-cache
+        - name: Pragma
+          value: no-cache
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Expires
+          value: "-1"
+        - name: Server
+          value: Microsoft-IIS/10.0
+        - name: X-AspNet-Version
+          value: 4.0.30319
+        - name: X-Powered-By
+          value: ASP.NET
+        - name: Date
+          value: Mon, 23 Dec 2024 03:09:54 GMT
+      body:
+        type: json
+        data: |-
+          {
+              "StatusCode": "00",
+              "StatusDescription": "Success",
+              "Data": {
+                  "NomorRekening": "001001118973105",
+                  "CIF": "0000149512",
+                  "Plafon": "150000",
+                  "Saldo": "150000.00",
+                  "SaldoAdvance": "0.00",
+                  "SaldoBlokir": "0.00",
+                  "Nama": "Dwiki Saputra",
+                  "TipeProduk": "40004 PINANG MIKRO - PRK",
+                  "Status": "4",
+                  "MataUang": "IDR",
+                  "SukuBunga": "0.25",
+                  "Accrue": "0.00",
+                  "TanggalPembukaan": "26/02/2028",
+                  "HariTanggalPembayaran": "26",
+                  "JangkaWaktu": "1",
+                  "TipePerhitunganBunga": "EFEKTIF",
+                  "PerhitunganBunga": "360",
+                  "Penalti": "0.5",
+                  "PenjadwalanAngsuran": "Y",
+                  "NomorFasilitas": "0010/0000149512/PK3/008",
+                  "SegmentasiKredit": "400",
+                  "FrekuensiPembayaranBunga": "1",
+                  "TanggalPencairan": "26/02/2028",
+                  "TanggalJatuhTempo": "28/02/2028",
+                  "TanggalBilingSelanjutnya": "28/02/2028",
+                  "TunggakanPokok": "0",
+                  "TunggakanBunga": "0",
+                  "TunggakanPenalti": "0",
+                  "HariTunggakan": "",
+                  "Defer": "0",
+                  "DeferAccrue": "0",
+                  "DeferPenalti": "0",
+                  "FlagKolektabilitas": "SYSTEM",
+                  "Kolektabilitas": "1",
+                  "BungaDibayar": "0",
+                  "PrediksiAccrue": "208.34",
+                  "PokokDibayar": "0",
+                  "PenaltyDibayar": "0",
+                  "RekeningSettlement": "001001000352994",
+                  "TanggalPenutupan": ""
+              }
+          }
+  - name: success - sebelum jatuh tempo (sudah jalan beberapa hari)
+    request:
+      url: "{{URL}}/loan/inquiry/001001118970107"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: no-cache
+        - name: Pragma
+          value: no-cache
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Expires
+          value: "-1"
+        - name: Server
+          value: Microsoft-IIS/10.0
+        - name: X-AspNet-Version
+          value: 4.0.30319
+        - name: X-Powered-By
+          value: ASP.NET
+        - name: Date
+          value: Mon, 23 Dec 2024 03:16:13 GMT
+      body:
+        type: json
+        data: |-
+          {
+              "StatusCode": "00",
+              "StatusDescription": "Success",
+              "Data": {
+                  "NomorRekening": "001001118970107",
+                  "CIF": "0000149512",
+                  "Plafon": "450000",
+                  "Saldo": "450000.00",
+                  "SaldoAdvance": "0.00",
+                  "SaldoBlokir": "0.00",
+                  "Nama": "Dwiki Saputra",
+                  "TipeProduk": "40004 PINANG MIKRO - PRK",
+                  "Status": "1",
+                  "MataUang": "IDR",
+                  "SukuBunga": "0.25",
+                  "Accrue": "937.50",
+                  "TanggalPembukaan": "23/02/2028",
+                  "HariTanggalPembayaran": "23",
+                  "JangkaWaktu": "1",
+                  "TipePerhitunganBunga": "EFEKTIF",
+                  "PerhitunganBunga": "360",
+                  "Penalti": "0.5",
+                  "PenjadwalanAngsuran": "Y",
+                  "NomorFasilitas": "0010/0000149512/PK3/008",
+                  "SegmentasiKredit": "400",
+                  "FrekuensiPembayaranBunga": "1",
+                  "TanggalPencairan": "23/02/2028",
+                  "TanggalJatuhTempo": "23/05/2028",
+                  "TanggalBilingSelanjutnya": "23/05/2028",
+                  "TunggakanPokok": "0",
+                  "TunggakanBunga": "0",
+                  "TunggakanPenalti": "0",
+                  "HariTunggakan": "0",
+                  "Defer": "0",
+                  "DeferAccrue": "0",
+                  "DeferPenalti": "0",
+                  "FlagKolektabilitas": "SYSTEM",
+                  "Kolektabilitas": "1",
+                  "BungaDibayar": "0",
+                  "PrediksiAccrue": "27187.50",
+                  "PokokDibayar": "0",
+                  "PenaltyDibayar": "0",
+                  "RekeningSettlement": "001001000352994",
+                  "TanggalPenutupan": ""
+              }
+          }
+  - name: success - jatuh tempo
+    request:
+      url: "{{URL}}/loan/inquiry/001001118973105"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: no-cache
+        - name: Pragma
+          value: no-cache
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Expires
+          value: "-1"
+        - name: Server
+          value: Microsoft-IIS/10.0
+        - name: X-AspNet-Version
+          value: 4.0.30319
+        - name: X-Powered-By
+          value: ASP.NET
+        - name: Date
+          value: Mon, 23 Dec 2024 04:16:12 GMT
+      body:
+        type: json
+        data: |-
+          {
+              "StatusCode": "00",
+              "StatusDescription": "Success",
+              "Data": {
+                  "NomorRekening": "001001118973105",
+                  "CIF": "0000149512",
+                  "Plafon": "150000",
+                  "Saldo": "150000.00",
+                  "SaldoAdvance": "0.00",
+                  "SaldoBlokir": "0.00",
+                  "Nama": "Dwiki Saputra",
+                  "TipeProduk": "40004 PINANG MIKRO - PRK",
+                  "Status": "1",
+                  "MataUang": "IDR",
+                  "SukuBunga": "0.25",
+                  "Accrue": "0.00",
+                  "TanggalPembukaan": "26/02/2028",
+                  "HariTanggalPembayaran": "26",
+                  "JangkaWaktu": "1",
+                  "TipePerhitunganBunga": "EFEKTIF",
+                  "PerhitunganBunga": "360",
+                  "Penalti": "0.5",
+                  "PenjadwalanAngsuran": "Y",
+                  "NomorFasilitas": "0010/0000149512/PK3/008",
+                  "SegmentasiKredit": "400",
+                  "FrekuensiPembayaranBunga": "1",
+                  "TanggalPencairan": "26/02/2028",
+                  "TanggalJatuhTempo": "28/02/2028",
+                  "TanggalBilingSelanjutnya": "26/03/2028",
+                  "TunggakanPokok": "150000.00",
+                  "TunggakanBunga": "208.34",
+                  "TunggakanPenalti": "0.00",
+                  "HariTunggakan": "0",
+                  "Defer": "0",
+                  "DeferAccrue": "0",
+                  "DeferPenalti": "0",
+                  "FlagKolektabilitas": "SYSTEM",
+                  "Kolektabilitas": "1",
+                  "BungaDibayar": "0.00",
+                  "PrediksiAccrue": "0",
+                  "PokokDibayar": "0.00",
+                  "PenaltyDibayar": "0.00",
+                  "RekeningSettlement": "001001000352994",
+                  "TanggalPenutupan": ""
+              }
+          }
+  - name: success - telat
+    request:
+      url: "{{URL}}/loan/inquiry/001001120376103"
+      method: GET
+      body:
+        type: form-urlencoded
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: no-cache
+        - name: Pragma
+          value: no-cache
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Expires
+          value: "-1"
+        - name: Server
+          value: Microsoft-IIS/10.0
+        - name: X-AspNet-Version
+          value: 4.0.30319
+        - name: X-Powered-By
+          value: ASP.NET
+        - name: Date
+          value: Fri, 19 Sep 2025 04:19:27 GMT
+      body:
+        type: json
+        data: |-
+          {
+              "StatusCode": "00",
+              "StatusDescription": "Success",
+              "Data": {
+                  "NomorRekening": "001001120376103",
+                  "CIF": "0000149512",
+                  "Plafon": "300000",
+                  "Saldo": "300000.00",
+                  "SaldoAdvance": "0.00",
+                  "SaldoBlokir": "0.00",
+                  "Nama": "Dwiki Saputra",
+                  "TipeProduk": "40004 PINANG MIKRO - PRK",
+                  "Status": "1",
+                  "MataUang": "IDR",
+                  "SukuBunga": "0.27",
+                  "Accrue": "1125.00",
+                  "TanggalPembukaan": "27/10/2032",
+                  "HariTanggalPembayaran": "27",
+                  "JangkaWaktu": "1",
+                  "TipePerhitunganBunga": "EFEKTIF",
+                  "PerhitunganBunga": "360",
+                  "Penalti": "0.5",
+                  "PenjadwalanAngsuran": "Y",
+                  "NomorFasilitas": "0010/0000149512/PK3/017",
+                  "SegmentasiKredit": "400",
+                  "FrekuensiPembayaranBunga": "1",
+                  "TanggalPencairan": "27/10/2032",
+                  "TanggalJatuhTempo": "28/10/2032",
+                  "TanggalBilingSelanjutnya": "27/11/2032",
+                  "TunggakanPokok": "300000.00",
+                  "TunggakanBunga": "225.00",
+                  "TunggakanPenalti": "562.50",
+                  "HariTunggakan": "5",
+                  "Defer": "0",
+                  "DeferAccrue": "0",
+                  "DeferPenalti": "0",
+                  "FlagKolektabilitas": "SYSTEM",
+                  "Kolektabilitas": "2",
+                  "BungaDibayar": "0.00",
+                  "PrediksiAccrue": "0",
+                  "PokokDibayar": "0.00",
+                  "PenaltyDibayar": "0.00",
+                  "RekeningSettlement": "",
+                  "TanggalPenutupan": ""
+              }
+          }

@@ -1,0 +1,141 @@
+info:
+  name: Unset Schedule Admin Fee
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{URL}}/loan/unset-settlement"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Basic YWdybzow
+  body:
+    type: json
+    data: |-
+      {
+          "KodeCabang":"0010",
+          "RekeningSumber":"001001021115317",
+          "seq":"31881",
+          "Keterangan":"PELUNASAN DIPERCEPAT"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: success
+    request:
+      url: "{{URL}}/loan/unset-settlement"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: Basic YWdybzow
+      body:
+        type: json
+        data: |-
+          {
+              "KodeCabang":"0010",
+              "RekeningSumber":"001001021115317",
+              "seq":"31881",
+              "Keterangan":"PELUNASAN DIPERCEPAT"
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: no-cache
+        - name: Pragma
+          value: no-cache
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Content-Type
+          value: application/json
+        - name: Expires
+          value: "-1"
+        - name: Server
+          value: Microsoft-IIS/10.0
+        - name: X-AspNet-Version
+          value: 4.0.30319
+        - name: X-Powered-By
+          value: ASP.NET
+        - name: Date
+          value: Fri, 12 Sep 2025 09:01:06 GMT
+      body:
+        type: json
+        data: |-
+          {
+              "StatusCode": "00",
+              "StatusDescription": "Success",
+              "Seq": "31881"
+          }
+  - name: error - validasi parameter
+    request:
+      url: "{{URL}}/loan/unset-settlement"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: Basic YWdybzow
+      body:
+        type: json
+        data: |-
+          {
+              "KodeCabang":"0010",
+              "RekeningSumber":"001001021115317a",
+              "seq":"31881",
+              "Keterangan":"PELUNASAN DIPERCEPAT"
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: no-cache
+        - name: Pragma
+          value: no-cache
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Content-Type
+          value: application/json
+        - name: Expires
+          value: "-1"
+        - name: Server
+          value: Microsoft-IIS/10.0
+        - name: X-AspNet-Version
+          value: 4.0.30319
+        - name: X-Powered-By
+          value: ASP.NET
+        - name: Date
+          value: Fri, 12 Sep 2025 09:01:18 GMT
+      body:
+        type: json
+        data: |-
+          {
+              "StatusCode": "99",
+              "StatusDescription": "Validation Error",
+              "Validation": [
+                  "Rekening Sumber tidak valid"
+              ]
+          }
+
+docs: |-
+  Generated from cURL: 	
+  curl --location 'http://172.16.31.93:8882/api/loan/unset-settlement' \
+  --header 'Content-Type: application/json' \
+  --header 'Authorization: Basic YWdybzow' \
+  --data '{
+      "KodeCabang":"0020",
+      "RekeningSumber":"002001000512319",
+      "seq":"31860",
+      "Keterangan":"REMARK UNSET"
+  }'

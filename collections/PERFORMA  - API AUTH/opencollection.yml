@@ -1,0 +1,21 @@
+opencollection: 1.0.0
+
+info:
+  name: PERFORMA  - API AUTH
+
+request:
+  variables:
+    - name: tokenMerchant
+      value: ""
+    - name: apiKeyMerchant
+      value: ""
+    - name: accessTokenPartner
+      value: ""
+    - name: apiKeyDev
+      value: ""
+bundled: false
+extensions:
+  bruno:
+    ignore:
+      - node_modules
+      - .git

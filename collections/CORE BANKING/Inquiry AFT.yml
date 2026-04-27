@@ -1,0 +1,25 @@
+info:
+  name: Inquiry AFT
+  type: http
+  seq: 30
+
+http:
+  method: POST
+  url: "{{URL}}/v1/agro-core/data-aft"
+  body:
+    type: json
+    data: |-
+      {
+          "debetAccount":"001001003982316", //saving account
+          "creditAccount":"002001003491106" //loan account
+      }
+  auth:
+    type: basic
+    username: userdev
+    password: wpqD9o3HyLdf24
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

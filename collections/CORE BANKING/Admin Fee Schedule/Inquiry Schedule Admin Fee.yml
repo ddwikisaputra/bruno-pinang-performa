@@ -1,0 +1,205 @@
+info:
+  name: Inquiry Schedule Admin Fee
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: "{{URL}}/account/scheduled-transfer-inquiry"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Basic YWdybzow
+  body:
+    type: json
+    data: |-
+      {
+        "NomorRekening": "001001021115317",
+        "Sequence": "31881"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: success - aktif
+    request:
+      url: "{{URL}}/account/scheduled-transfer-inquiry"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: Basic YWdybzow
+      body:
+        type: json
+        data: |-
+          {
+            "NomorRekening": "001001021115317",
+            "Sequence": "31880"
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: no-cache
+        - name: Pragma
+          value: no-cache
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Content-Type
+          value: application/json
+        - name: Expires
+          value: "-1"
+        - name: Server
+          value: Microsoft-IIS/10.0
+        - name: X-AspNet-Version
+          value: 4.0.30319
+        - name: X-Powered-By
+          value: ASP.NET
+        - name: Date
+          value: Fri, 12 Sep 2025 07:15:01 GMT
+      body:
+        type: json
+        data: |-
+          {
+              "StatusCode": "00",
+              "StatusDescription": "Success",
+              "Data": {
+                  "KodeCabang": "0010",
+                  "RekeningDebet": "001001021115317",
+                  "RekeningKredit": "401999994114",
+                  "Jenis": "N",
+                  "Nominal": "1500.00",
+                  "Frekuensi": "M",
+                  "KeteranganTransaksi": "ADMIN FEE LOAN 001001120263106",
+                  "TanggalInput": "2032-11-13",
+                  "TanggalSelanjutnya": "2032-11-13",
+                  "TanggalKadaluarsa": "2033-08-22",
+                  "Aktif": "Y",
+                  "StatusDeskripsi": ":"
+              }
+          }
+  - name: success - unset
+    request:
+      url: "{{URL}}/account/scheduled-transfer-inquiry"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: Basic YWdybzow
+      body:
+        type: json
+        data: |-
+          {
+            "NomorRekening": "001001021115317",
+            "Sequence": "31881"
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: no-cache
+        - name: Pragma
+          value: no-cache
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Content-Type
+          value: application/json
+        - name: Expires
+          value: "-1"
+        - name: Server
+          value: Microsoft-IIS/10.0
+        - name: X-AspNet-Version
+          value: 4.0.30319
+        - name: X-Powered-By
+          value: ASP.NET
+        - name: Date
+          value: Fri, 12 Sep 2025 09:01:47 GMT
+      body:
+        type: json
+        data: |-
+          {
+              "StatusCode": "00",
+              "StatusDescription": "Success",
+              "Data": {
+                  "KodeCabang": "0010",
+                  "RekeningDebet": "001001021115317",
+                  "RekeningKredit": "401999994114",
+                  "Jenis": "N",
+                  "Nominal": "0.00",
+                  "Frekuensi": "M",
+                  "KeteranganTransaksi": "PELUNASAN DIPERCEPAT",
+                  "TanggalInput": "2032-11-13",
+                  "TanggalSelanjutnya": "2032-11-13",
+                  "TanggalKadaluarsa": "2033-08-22",
+                  "Aktif": "N",
+                  "StatusDeskripsi": ":"
+              }
+          }
+  - name: error - validasi parameter
+    request:
+      url: "{{URL}}/account/scheduled-transfer-inquiry"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: Basic YWdybzow
+      body:
+        type: json
+        data: |-
+          {
+            "NomorRekening": "001001021115317a",
+            "Sequence": "31881"
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: no-cache
+        - name: Pragma
+          value: no-cache
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Content-Type
+          value: application/json
+        - name: Expires
+          value: "-1"
+        - name: Server
+          value: Microsoft-IIS/10.0
+        - name: X-AspNet-Version
+          value: 4.0.30319
+        - name: X-Powered-By
+          value: ASP.NET
+        - name: Date
+          value: Fri, 12 Sep 2025 09:04:36 GMT
+      body:
+        type: json
+        data: |-
+          {
+              "StatusCode": "99",
+              "StatusDescription": "Validation Error",
+              "Validation": [
+                  "Tipe 'Nomor Rekening Debet' tidak valid. Allowed: [S,D]",
+                  "'Nomor Rekening Debet' tidak valid"
+              ]
+          }
+
+docs: |-
+  Generated from cURL: curl --location 'http://172.16.31.93:8882/api/account/scheduled-transfer-inquiry' \
+  --header 'Content-Type: application/json' \
+  --header 'Authorization: Basic YWdybzow' \
+  --data '{
+    "NomorRekening": "002001000512319",
+    "Sequence": "31857"
+  }'

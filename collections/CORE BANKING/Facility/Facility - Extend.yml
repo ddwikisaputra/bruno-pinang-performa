@@ -1,0 +1,183 @@
+info:
+  name: Facility / Extend
+  type: http
+  seq: 5
+
+http:
+  method: POST
+  url: "{{URL}}/facility/extend"
+  body:
+    type: json
+    data: "{\r
+
+      \   \"NomorFasilitas\":\"0010/0000093380/PK3/001\",\r
+
+      \   \"Nominal\":\"165000000\",\r
+
+      \   \"TanggalJatuhTempo\":\"2029-12-31\",\r
+
+      \   \"NoAkadBaru\":\"AK-432124-NEW-1\", \r
+
+      \   \"TanggalAkadBaru\":\"2029-07-11\"\r
+
+      }"
+  auth:
+    type: basic
+    username: pinang-mikro
+    password: "0"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: success
+    request:
+      url: "{{URL}}/transaction/paid-off"
+      method: POST
+      body:
+        type: json
+        data: "{\r
+
+          \    \"RekeningDebet\":\"001001000352994\", // rek saving / giro\r
+
+          \    \"RekeningKredit\" :\"001001118973105\", // rek loan\r
+
+          \    \"Penalty\" : \"0\", // konfirmasi ke GL apa (bukan denda karna telat tp sesuai perjanjian kredit)\r
+
+          \    \"Remark\" : \"PELUNASAN PINJAMAN 001001118973105\"\r
+
+          }"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: no-cache
+        - name: Pragma
+          value: no-cache
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Expires
+          value: "-1"
+        - name: Server
+          value: Microsoft-IIS/10.0
+        - name: X-AspNet-Version
+          value: 4.0.30319
+        - name: X-Powered-By
+          value: ASP.NET
+        - name: Date
+          value: Mon, 23 Dec 2024 04:33:26 GMT
+      body:
+        type: json
+        data: |-
+          {
+              "StatusCode": "00",
+              "StatusDescription": "Success",
+              "ErrorCode": "",
+              "JournalSequence": "9542853",
+              "TransactionReference": "001089128022895428530"
+          }
+  - name: error - validation
+    request:
+      url: "{{URL}}/transaction/paid-off"
+      method: POST
+      body:
+        type: json
+        data: "{\r
+
+          \    \"RekeningDebet\":\"001001000352994\", // rek saving / giro\r
+
+          \    \"RekeningKredit\" :\"001001118973105a\", // rek loan\r
+
+          \    \"Penalty\" : \"0\", // konfirmasi ke GL apa (bukan denda karna telat tp sesuai perjanjian kredit)\r
+
+          \    \"Remark\" : \"PELUNASAN PINJAMAN 001001118973105\"\r
+
+          }"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: no-cache
+        - name: Pragma
+          value: no-cache
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Expires
+          value: "-1"
+        - name: Server
+          value: Microsoft-IIS/10.0
+        - name: X-AspNet-Version
+          value: 4.0.30319
+        - name: X-Powered-By
+          value: ASP.NET
+        - name: Date
+          value: Tue, 31 Dec 2024 06:07:22 GMT
+      body:
+        type: json
+        data: |-
+          {
+              "StatusCode": "99",
+              "StatusDescription": "Validation Error",
+              "Validation": [
+                  "Rekening Kredit tidak valid",
+                  "Currency Rekening Debet dan Kredit tidak valid",
+                  "Tipe Currency Rekening tidak valid. Allowed: IDR"
+              ]
+          }
+  - name: Facility / Extend Success
+    request:
+      url: "{{URL}}/facility/extend"
+      method: POST
+      body:
+        type: json
+        data: "{\r
+
+          \   \"NomorFasilitas\":\"0010/0000688910/PK3/001\",\r
+
+          \   \"Nominal\":\"165000000\",\r
+
+          \   \"TanggalJatuhTempo\":\"2031-01-01\",\r
+
+          \   \"NoAkadBaru\":\"AK-432124-NEW-1\", \r
+
+          \   \"TanggalAkadBaru\":\"2030-03-11\"\r
+
+          }"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: no-cache
+        - name: Pragma
+          value: no-cache
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Expires
+          value: "-1"
+        - name: Server
+          value: Microsoft-IIS/10.0
+        - name: X-AspNet-Version
+          value: 4.0.30319
+        - name: X-Powered-By
+          value: ASP.NET
+        - name: Date
+          value: Thu, 08 May 2025 07:12:55 GMT
+      body:
+        type: json
+        data: |-
+          {
+              "StatusCode": "00",
+              "StatusDescription": "Success"
+          }

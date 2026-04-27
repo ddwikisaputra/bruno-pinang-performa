@@ -1,0 +1,57 @@
+info:
+  name: MOCK - Kirim OTP
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: https://pinang-performa.free.mockoapp.net/v/1/pencairan/cashloan/kirim-otp/500-block-kirim-otp
+  headers:
+    - name: x-key
+      value: performa
+  params:
+    - name: "401"
+      value: ""
+      type: query
+      disabled: true
+    - name: "503"
+      value: ""
+      type: query
+      disabled: true
+    - name: "403"
+      value: ""
+      type: query
+      disabled: true
+    - name: "400"
+      value: ""
+      type: query
+      disabled: true
+    - name: 400-token-empty
+      value: ""
+      type: query
+      disabled: true
+    - name: 500-unregist-wl
+      value: ""
+      type: query
+      disabled: true
+    - name: 500-block-kirim-otp
+      value: ""
+      type: query
+      disabled: true
+    - name: 500-error-kirim-otp
+      value: ""
+      type: query
+      disabled: true
+    - name: "200"
+      value: ""
+      type: query
+      disabled: true
+  body:
+    type: form-urlencoded
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

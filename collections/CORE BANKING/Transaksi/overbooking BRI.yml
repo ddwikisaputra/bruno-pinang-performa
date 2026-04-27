@@ -1,0 +1,423 @@
+info:
+  name: overbooking BRI
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: "{{URL}}/transaction/overbooking/bri"
+  headers:
+    - name: Content-Type
+      value: application/json
+      disabled: true
+    - name: Authorization
+      value: Basic YWdybzow
+      disabled: true
+  body:
+    type: json
+    data: |-
+      {    
+          "RekeningDebet": "20601121736506",  // giro penampungan bri
+          "RekeningKredit": "020601009221502", // saving bri
+          // "Nominal": "83000.00", 
+          "KeteranganTransaksi": "testing dwiki"
+      }
+  auth:
+    type: basic
+    username: pinang-mikro
+    password: "0"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: error - timeout
+    request:
+      url: "{{URL}}/transaction/overbooking/bri"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+          disabled: true
+        - name: Authorization
+          value: Basic YWdybzow
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {    
+              "RekeningDebet": "20601000002561", 
+              "RekeningKredit": "20601121736506", 
+              "Nominal": "1000.00", 
+              "KeteranganTransaksi": "testing dwiki"
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: no-cache
+        - name: Pragma
+          value: no-cache
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Content-Type
+          value: application/json
+        - name: Expires
+          value: "-1"
+        - name: Server
+          value: Microsoft-IIS/10.0
+        - name: X-AspNet-Version
+          value: 4.0.30319
+        - name: X-Powered-By
+          value: ASP.NET
+        - name: Date
+          value: Tue, 23 Sep 2025 06:44:20 GMT
+      body:
+        type: json
+        data: |-
+          {
+              "StatusCode": "99",
+              "StatusDescription": "Overbooking BRI gagal. Keterangan: Transaksi Timeout",
+              "Data": {
+                  "rc": "Q4",
+                  "description": "Transaksi Timeout",
+                  "jurnalSeq": null
+              }
+          }
+  - name: error - validasi parameter
+    request:
+      url: "{{URL}}/transaction/overbooking/bri"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+          disabled: true
+        - name: Authorization
+          value: Basic YWdybzow
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {    
+              "RekeningDebet": "20601121736506",  // giro penampungan bri
+              "RekeningKredit": "020601009221502", // saving bri
+              // "Nominal": "83000.00", 
+              "KeteranganTransaksi": "testing dwiki"
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: no-cache
+        - name: Pragma
+          value: no-cache
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Content-Type
+          value: application/json
+        - name: Expires
+          value: "-1"
+        - name: Server
+          value: Microsoft-IIS/10.0
+        - name: X-AspNet-Version
+          value: 4.0.30319
+        - name: X-Powered-By
+          value: ASP.NET
+        - name: Date
+          value: Wed, 24 Sep 2025 03:30:27 GMT
+      body:
+        type: json
+        data: |-
+          {
+              "StatusCode": "99",
+              "StatusDescription": "Validation Error",
+              "Validation": [
+                  "'Nominal' tidak valid"
+              ]
+          }
+  - name: error - koneksi brinets terputus
+    request:
+      url: "{{URL}}/transaction/overbooking/bri"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+          disabled: true
+        - name: Authorization
+          value: Basic YWdybzow
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {    
+              "RekeningDebet": "20601000002561", 
+              "RekeningKredit": "20601121736506", 
+              "Nominal": "1000.00", 
+              "KeteranganTransaksi": "testing dwiki"
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: no-cache
+        - name: Pragma
+          value: no-cache
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Content-Type
+          value: application/json
+        - name: Expires
+          value: "-1"
+        - name: Server
+          value: Microsoft-IIS/10.0
+        - name: X-AspNet-Version
+          value: 4.0.30319
+        - name: X-Powered-By
+          value: ASP.NET
+        - name: Date
+          value: Tue, 23 Sep 2025 06:46:41 GMT
+      body:
+        type: json
+        data: |-
+          {
+              "StatusCode": "99",
+              "StatusDescription": "Overbooking BRI gagal. Keterangan: Koneksi Brinets Terputus",
+              "Data": {
+                  "rc": "92",
+                  "description": "Koneksi Brinets Terputus",
+                  "jurnalSeq": null
+              }
+          }
+  - name: error - rekening pasif
+    request:
+      url: "{{URL}}/transaction/overbooking/bri"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+          disabled: true
+        - name: Authorization
+          value: Basic YWdybzow
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {    
+              "RekeningDebet": "20601000002561", 
+              "RekeningKredit": "20601121736506", 
+              "Nominal": "1000.00", 
+              "KeteranganTransaksi": "testing dwiki"
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: no-cache
+        - name: Pragma
+          value: no-cache
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Content-Type
+          value: application/json
+        - name: Expires
+          value: "-1"
+        - name: Server
+          value: Microsoft-IIS/10.0
+        - name: X-AspNet-Version
+          value: 4.0.30319
+        - name: X-Powered-By
+          value: ASP.NET
+        - name: Date
+          value: Tue, 23 Sep 2025 06:53:20 GMT
+      body:
+        type: json
+        data: |-
+          {
+              "StatusCode": "99",
+              "StatusDescription": "Overbooking BRI gagal. Keterangan: Rekening Pasif",
+              "Data": {
+                  "rc": "NH",
+                  "description": "Rekening Pasif",
+                  "jurnalSeq": null
+              }
+          }
+  - name: error - saldo giro tidak mencukupi
+    request:
+      url: "{{URL}}/transaction/overbooking/bri"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+          disabled: true
+        - name: Authorization
+          value: Basic YWdybzow
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {    
+              "RekeningDebet": "20601121736506", 
+              "RekeningKredit": "020601009221502", 
+              "Nominal": "83000.00", 
+              "KeteranganTransaksi": "testing dwiki"
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: no-cache
+        - name: Pragma
+          value: no-cache
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Content-Type
+          value: application/json
+        - name: Expires
+          value: "-1"
+        - name: Server
+          value: Microsoft-IIS/10.0
+        - name: X-AspNet-Version
+          value: 4.0.30319
+        - name: X-Powered-By
+          value: ASP.NET
+        - name: Date
+          value: Tue, 23 Sep 2025 07:04:36 GMT
+      body:
+        type: json
+        data: |-
+          {
+              "StatusCode": "99",
+              "StatusDescription": "Overbooking BRI gagal. Keterangan: Saldo Tidak Cukup",
+              "Data": {
+                  "rc": "51",
+                  "description": "Saldo Tidak Cukup",
+                  "jurnalSeq": null
+              }
+          }
+  - name: error - cek manual mutasi (berhasil tanpa response bri)
+    request:
+      url: "{{URL}}/transaction/overbooking/bri"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+          disabled: true
+        - name: Authorization
+          value: Basic YWdybzow
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {    
+              "RekeningDebet": "20601121736506", 
+              "RekeningKredit": "020601009221502", 
+              "Nominal": "83000.00", 
+              "KeteranganTransaksi": "testing dwiki"
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: no-cache
+        - name: Pragma
+          value: no-cache
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Content-Type
+          value: application/json
+        - name: Expires
+          value: "-1"
+        - name: Server
+          value: Microsoft-IIS/10.0
+        - name: X-AspNet-Version
+          value: 4.0.30319
+        - name: X-Powered-By
+          value: ASP.NET
+        - name: Date
+          value: Tue, 23 Sep 2025 07:04:36 GMT
+      body:
+        type: json
+        data: |-
+          {
+              "StatusCode": "99",
+              "StatusDescription": "Overbooking BRI gagal. Keterangan: ",
+              "Data": {
+                  "rc": null,
+                  "description": null,
+                  "jurnalSeq": null
+              }
+          }
+  - name: success
+    request:
+      url: "{{URL}}/transaction/overbooking/bri"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+          disabled: true
+        - name: Authorization
+          value: Basic YWdybzow
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {    
+              "RekeningDebet": "020601009221502", 
+              "RekeningKredit": "20601121736506", 
+              "Nominal": "1000.00", 
+              "KeteranganTransaksi": "testing dwiki"
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: no-cache
+        - name: Pragma
+          value: no-cache
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Content-Type
+          value: application/json
+        - name: Expires
+          value: "-1"
+        - name: Server
+          value: Microsoft-IIS/10.0
+        - name: X-AspNet-Version
+          value: 4.0.30319
+        - name: X-Powered-By
+          value: ASP.NET
+        - name: Date
+          value: Tue, 23 Sep 2025 07:01:38 GMT
+      body:
+        type: json
+        data: |-
+          {
+              "StatusCode": "00",
+              "StatusDescription": "Success",
+              "Data": {
+                  "rc": "00",
+                  "description": "Transaksi Anda Sukses",
+                  "jurnalSeq": "1251419"
+              }
+          }
+
+docs: |-
+  Generated from cURL: curl --location 'http://172.16.31.93:8882/api/transaction/overbooking/bri' \
+  --header 'Content-Type: application/json' \
+  --header 'Authorization: Basic YWdybzow' \
+  --data '{    
+      "RekeningDebet": "020601009221502", 
+      "RekeningKredit": "20601009195303", 
+      "Nominal": "1000000.00", 
+      "KeteranganTransaksi": "harus diisi remaks"
+  }'

@@ -1,0 +1,73 @@
+info:
+  name: MOCK - Proses
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: https://pinang-performa.free.mockoapp.net/v/1/pencairan/cashloan/proses/200
+  headers:
+    - name: x-key
+      value: performa
+  params:
+    - name: "401"
+      value: ""
+      type: query
+      disabled: true
+    - name: "503"
+      value: ""
+      type: query
+      disabled: true
+    - name: "403"
+      value: ""
+      type: query
+      disabled: true
+    - name: "400"
+      value: ""
+      type: query
+      disabled: true
+    - name: 400-token-empty
+      value: ""
+      type: query
+      disabled: true
+    - name: 500-unregist-wl
+      value: ""
+      type: query
+      disabled: true
+    - name: 500-error-ver-otp
+      value: ""
+      type: query
+      disabled: true
+    - name: 500-block-quota-ver-otp
+      value: ""
+      type: query
+      disabled: true
+    - name: 500-facility-expired
+      value: ""
+      type: query
+      disabled: true
+    - name: 500-tenor-tidak-mencukupi
+      value: ""
+      type: query
+      disabled: true
+    - name: 500-terdapat-pinjaman-aktif
+      value: ""
+      type: query
+      disabled: true
+    - name: 200-pending-pencairan
+      value: ""
+      type: query
+      disabled: true
+    - name: "200"
+      value: ""
+      type: query
+      disabled: true
+  body:
+    type: form-urlencoded
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

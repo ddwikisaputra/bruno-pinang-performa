@@ -1,0 +1,365 @@
+info:
+  name: List
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{base-url-local}}/v/1/partnership/whitelist/list"
+  headers:
+    - name: Api-Key
+      value: "{{ApiKeyMajoMF}}"
+  body:
+    type: form-urlencoded
+  auth:
+    type: bearer
+    token: "{{accessTokenPartner}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 503 - Error Unavailable
+    request:
+      url: "{{base-url-local}}/v/1/partnership/whitelist/list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: startIndex
+            value: "0"
+            description: "OPTIONAL | NUMBER "
+          - name: recordCount
+            value: "200"
+            description: OPTIONAL | NUMBER
+          - name: textSearch
+            value: "32091220"
+            description: OPTIONAL | VARCHAR [ktp_number, id_merchant, name]
+            disabled: true
+          - name: sortBy
+            value: updated_at asc
+            description: OPTIONAL | One Of [updated_at asc, updated_at desc, updated_at ASC, updated_at DESC, name asc, name desc, name ASC, name DESC]
+            disabled: true
+    response:
+      status: 503
+      statusText: Service Unavailable
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Tue, 24 Mar 2026 10:07:12 GMT
+        - name: Content-Length
+          value: "122"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Jam operasional Pinang Performa dari jam xx:xx - xx:xx WIB setiap hari. Kembali lagi nanti, ya!",
+              "status": 503
+          }
+  - name: 401 - Unauthorized / Expired.
+    request:
+      url: "{{base-url-local}}/v/1/partnership/whitelist/list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: startIndex
+            value: "0"
+          - name: recordCount
+            value: "0"
+          - name: textSearch
+            value: "3209122003940006"
+            disabled: true
+          - name: sortBy
+            value: updated_at ASC
+            disabled: true
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Tue, 10 Feb 2026 06:13:11 GMT
+        - name: Content-Length
+          value: "50"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Unauthorized / Expired.",
+              "status": 401
+          }
+  - name: 400 - Validation Parameter tidak sesuai
+    request:
+      url: "{{base-url-local}}/v/1/partnership/whitelist/list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: startIndex
+            value: a
+          - name: recordCount
+            value: "0"
+          - name: textSearch
+            value: "3209122003940006"
+            disabled: true
+          - name: sortBy
+            value: updated_at ASC
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Tue, 10 Feb 2026 06:14:52 GMT
+        - name: Content-Length
+          value: "69"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Start Index hanya boleh menggunakan angka.",
+              "status": 400
+          }
+  - name: 200 - Success List Kosong
+    request:
+      url: "{{base-url-local}}/v/1/partnership/whitelist/list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: startIndex
+            value: "0"
+            description: "OPTIONAL | NUMBER "
+          - name: recordCount
+            value: "10"
+            description: OPTIONAL | NUMBER
+          - name: textSearch
+            value: "0000000"
+            description: OPTIONAL | VARCHAR [ktp_number, id_merchant, name]
+            disabled: true
+          - name: sortBy
+            value: created_at asc
+            description: OPTIONAL | One Of [updated_at asc, updated_at desc, updated_at ASC, updated_at DESC, name asc, name desc, name ASC, name DESC]
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Tue, 10 Feb 2026 06:19:55 GMT
+        - name: Content-Length
+          value: "96"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "list": [],
+                  "total": 0
+              },
+              "message": "Data partnership member tidak ditemukan.",
+              "status": 200
+          }
+  - name: 200 - Success
+    request:
+      url: "{{base-url-local}}/v/1/partnership/whitelist/list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: startIndex
+            value: "0"
+            description: "OPTIONAL | NUMBER "
+          - name: recordCount
+            value: "10"
+            description: OPTIONAL | NUMBER
+          - name: textSearch
+            value: "0000000"
+            description: OPTIONAL | VARCHAR [ktp_number, id_merchant, name]
+            disabled: true
+          - name: sortBy
+            value: created_at asc
+            description: OPTIONAL | One Of [updated_at asc, updated_at desc, updated_at ASC, updated_at DESC, name asc, name desc, name ASC, name DESC]
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Tue, 10 Feb 2026 06:20:57 GMT
+        - name: Content-Length
+          value: "1489"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "list": [
+                      {
+                          "name": "R2FuIEFuIFdv",
+                          "status": 0,
+                          "statusText": "Belum Aktivasi",
+                          "updatedAt": "2026-02-10 11:39:04.930",
+                          "userId": ""
+                      },
+                      {
+                          "name": "SmlrYQ==",
+                          "status": 0,
+                          "statusText": "Belum Aktivasi",
+                          "updatedAt": "2026-02-10 11:39:04.247",
+                          "userId": "MzUyNDUzNDU0MzY3ODk4Mg=="
+                      },
+                      {
+                          "name": "SUtBIERBUllBTlRJ",
+                          "status": 0,
+                          "statusText": "Belum Aktivasi",
+                          "updatedAt": "2026-02-10 11:39:03.110",
+                          "userId": "MzYwMzEyNzAwODk2MDAwMg=="
+                      },
+                      {
+                          "name": "TXVoYW1tYWQgQXJkaXlhbnN5YWggQWtiYXI=",
+                          "status": 0,
+                          "statusText": "Belum Aktivasi",
+                          "updatedAt": "2026-02-10 11:39:03.043",
+                          "userId": "MzU3ODE5MjUwNTkwMDAwMQ=="
+                      },
+                      {
+                          "name": "TXV0aWE=",
+                          "status": 0,
+                          "statusText": "Belum Aktivasi",
+                          "updatedAt": "2026-02-10 11:39:03.037",
+                          "userId": "MzE3MTA1NDIwODk3MDAwMg=="
+                      },
+                      {
+                          "name": "SnVtaGFkaQ==",
+                          "status": 0,
+                          "statusText": "Belum Aktivasi",
+                          "updatedAt": "2026-02-10 11:39:03.030",
+                          "userId": "MzIxNjA3MDgwOTY3MDAxMA=="
+                      },
+                      {
+                          "name": "SWJyYWhpbSBTaG9sZWg=",
+                          "status": 0,
+                          "statusText": "Belum Aktivasi",
+                          "updatedAt": "2026-02-10 11:39:03.023",
+                          "userId": "MzUwOTE2MTcxMTY4MDAwMg=="
+                      },
+                      {
+                          "name": "TSBEam9oYW4=",
+                          "status": 0,
+                          "statusText": "Belum Aktivasi",
+                          "updatedAt": "2026-02-10 11:39:03.017",
+                          "userId": "MzUwOTE3MDIwMTU0MDAwMQ=="
+                      },
+                      {
+                          "name": "RmF0aHVycm9zaQ==",
+                          "status": 0,
+                          "statusText": "Belum Aktivasi",
+                          "updatedAt": "2026-02-10 11:39:03.010",
+                          "userId": "MzUwOTE2MjgwODc5MDAwMQ=="
+                      },
+                      {
+                          "name": "SW5zaXlhaA==",
+                          "status": 0,
+                          "statusText": "Belum Aktivasi",
+                          "updatedAt": "2026-02-10 11:39:03.003",
+                          "userId": "MzUwOTE2NDcwNDgwMDAwMQ=="
+                      }
+                  ],
+                  "total": 115
+              },
+              "message": "Data partnership member ditemukan.",
+              "status": 200
+          }

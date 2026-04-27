@@ -1,0 +1,657 @@
+info:
+  name: Cek Fasilitas
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{base-url-staging}}/v/1/partnership/cashloan/cek-fasilitas"
+  headers:
+    - name: Api-Key
+      value: VW1GNVlWQnBVR1Z5Vkc5d25qOE9nR0QvbkhtSE9iTHlCUUduMEt3UDN2WDZObE09
+  body:
+    type: form-urlencoded
+    data:
+      - name: nomorIdentitas
+        value: MzE3MTA1MTIxMTk1MDAwMQ==
+        description: Nomor Identitas User [MANDATORY] [BASE64 STRING]
+      - name: kodePartnership
+        value: U1JDLTQyOA==
+        description: Kode Partnership [MANDATORY][BASE64 STRING]
+  auth:
+    type: bearer
+    token: "{{accessTokenPartner}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 503 - Service Unavailable
+    request:
+      url: "{{base-url-local}}/v/1/partnership/cashloan/cek-fasilitas"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Nomor Identitas User [MANDATORY] [BASE64 STRING]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+    response:
+      status: 503
+      statusText: Service Unavailable
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 12 Sep 2024 02:32:57 GMT
+        - name: Content-Length
+          value: "69"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Jam operasional Pinang Performa dari jam XX.XX - XX.XX WIB setiap hari. Kembali lagi nanti, ya!",
+              "status": 503
+          }
+  - name: Error - Token Expired
+    request:
+      url: "{{base-url-local}}/v/1/partnership/cashloan/cek-fasilitas"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Nomor Identitas User [MANDATORY] [BASE64 STRING]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 12 Sep 2024 02:32:57 GMT
+        - name: Content-Length
+          value: "69"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "token has invalid claims: token is expired",
+              "status": 401
+          }
+  - name: Error - Unauthorized / Expired
+    request:
+      url: "{{base-url-local}}/v/1/partnership/cashloan/cek-fasilitas"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Nomor Identitas User [MANDATORY] [BASE64 STRING]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 05 Sep 2024 00:54:41 GMT
+        - name: Content-Length
+          value: "50"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Unauthorized / Expired.",
+              "status": 401
+          }
+  - name: Error - Parameter Token /  API Key Empty
+    request:
+      url: "{{base-url-local}}/v/1/partnership/cashloan/cek-fasilitas"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+          disabled: true
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Nomor Identitas User [MANDATORY] [BASE64 STRING]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 05 Sep 2024 01:20:14 GMT
+        - name: Content-Length
+          value: "51"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "parameter token is empty",
+              "status": 401
+          }
+  - name: Error - Access Forbidden
+    request:
+      url: "{{base-url-local}}/v/1/partnership/cashloan/cek-fasilitas"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Nomor Identitas User [MANDATORY] [BASE64 STRING]
+          - name: kodePartnership
+            value: QkxBLTUwMQ==
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 05 Sep 2024 01:25:15 GMT
+        - name: Content-Length
+          value: "76"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "you don't have permission to access this resource",
+              "status": 403
+          }
+  - name: Error - Access Forbidden (No Data Partnership)
+    request:
+      url: "{{base-url-local}}/v/1/partnership/cashloan/cek-fasilitas"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Nomor Identitas User [MANDATORY] [BASE64 STRING]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 05 Sep 2024 01:22:48 GMT
+        - name: Content-Length
+          value: "70"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "your access to this resource is unactivated",
+              "status": 403
+          }
+  - name: Error - Parameter Validation (Total Mandatory Tidak Sesuai)
+    request:
+      url: "{{base-url-local}}/v/1/partnership/cashloan/cek-fasilitas"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Nomor Identitas User [MANDATORY] [BASE64 STRING]
+            disabled: true
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 05 Sep 2024 01:17:46 GMT
+        - name: Content-Length
+          value: "63"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Parameter tidak terpenuhi.",
+              "status": 400
+          }
+  - name: Error - Parameter Validation (Tidak Sesuai)
+    request:
+      url: "{{base-url-local}}/v/1/partnership/cashloan/cek-fasilitas"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Nomor Identitas User [MANDATORY] [BASE64 STRING]
+          - name: kodePartnership
+            value: TUoxa
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 05 Sep 2024 01:17:16 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "... tidak sesuai.",
+              "status": 400
+          }
+  - name: Error - Unregistered Whitelist
+    request:
+      url: "{{base-url-local}}/v/1/partnership/cashloan/cek-fasilitas"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Nomor Identitas User [MANDATORY] [BASE64 STRING]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 05 Sep 2024 01:19:26 GMT
+        - name: Content-Length
+          value: "79"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Maaf, anda tidak terdaftar pada whitelist.",
+              "status": 500
+          }
+  - name: Error - General
+    request:
+      url: "{{base-url-local}}/v/1/partnership/cashloan/cek-fasilitas"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Nomor Identitas User [MANDATORY] [BASE64 STRING]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 05 Sep 2024 01:15:51 GMT
+        - name: Content-Length
+          value: "107"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Maaf, Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 500
+          }
+  - name: Success - Cek Fasilitas Berhasil Limit Aktif
+    request:
+      url: "{{base-url-local}}/v/1/partnership/cashloan/cek-fasilitas"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3NjA5MTcxMTAwMDA1MQ==
+            description: Nomor Identitas User [MANDATORY] [BASE64 STRING]
+          - name: kodePartnership
+            value: TUNBLTI0NA==
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Mon, 14 Jul 2025 08:01:03 GMT
+        - name: Content-Length
+          value: "307"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "kodePrakarsa": "CL-MJ1-UmF5YVBpUGVyVG9w/l96m2T0lUNqKW+KHO4+3pdfFJjjaK85iNCYnUzYHolXQ/WN7sToY+FBXKKlTv4=",
+                  "kodeTipePinjaman": "CHILD-MMF-652",
+                  "plafond": 1000000,
+                  "sisaLimit": 1000000,
+                  "limitTerpakai": 0,
+                  "limitDalamProses": 0,
+                  "status": "limit-aktif"
+              },
+              "message": "Cek fasilitas berhasil.",
+              "status": 200
+          }
+  - name: Success - Cek Fasilitas Berhassil - Aktivasi Ditolak
+    request:
+      url: "{{base-url-local}}/v/1/partnership/cashloan/cek-fasilitas"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3NjA5MTcxMTAwMDA1MQ==
+            description: Nomor Identitas User [MANDATORY] [BASE64 STRING]
+          - name: kodePartnership
+            value: TUNBLTI0NA==
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Mon, 14 Jul 2025 08:01:03 GMT
+        - name: Content-Length
+          value: "307"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "kodePrakarsa": "",
+                  "kodeTipePinjaman": "",
+                  "plafond": 0,
+                  "sisaLimit": 0,
+                  "limitTerpakai": 0,
+                  "limitDalamProses": 0,
+                  "status": "aktivasi-ditolak"
+              },
+              "message": "Cek fasilitas berhasil.",
+              "status": 200
+          }
+  - name: Success - Cek Fasilitas Berhasil Belum Aktivasi
+    request:
+      url: "{{base-url-local}}/v/1/partnership/cashloan/cek-fasilitas"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3NjA5MTcxMTAwMDA1MQ==
+            description: Nomor Identitas User [MANDATORY] [BASE64 STRING]
+          - name: kodePartnership
+            value: TUNBLTI0NA==
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Mon, 14 Jul 2025 08:01:03 GMT
+        - name: Content-Length
+          value: "307"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "kodePrakarsa": "",
+                  "kodeTipePinjaman": "",
+                  "plafond": 0,
+                  "sisaLimit": 0,
+                  "limitTerpakai": 0,
+                  "limitDalamProses": 0,
+                  "status": "belum-aktivasi"
+              },
+              "message": "Cek fasilitas berhasil.",
+              "status": 200
+          }
+  - name: Success - Cek Fasilitas Belum Rewhitelist
+    request:
+      url: "{{base-url-local}}/v/1/partnership/cashloan/cek-fasilitas"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3NjA5MTcxMTAwMDA1OA==
+            description: Nomor Identitas User [MANDATORY] [BASE64 STRING]
+          - name: kodePartnership
+            value: TUNBLTI0NA==
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Tue, 21 Oct 2025 10:52:29 GMT
+        - name: Content-Length
+          value: "193"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "kodePrakarsa": "",
+                  "kodeTipePinjaman": "",
+                  "plafond": 0,
+                  "sisaLimit": 0,
+                  "limitTerpakai": 0,
+                  "limitDalamProses": 0,
+                  "status": "belum-rewhitelist"
+              },
+              "message": "Cek fasilitas berhasil.",
+              "status": 200
+          }
+  - name: Success - Cek Fasilitas Belum Whitelist
+    request:
+      url: "{{base-url-local}}/v/1/partnership/cashloan/cek-fasilitas"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3NjA5MTcxMTAwMDA3Nw==
+            description: Nomor Identitas User [MANDATORY] [BASE64 STRING]
+          - name: kodePartnership
+            value: TUNBLTI0NA==
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Tue, 21 Oct 2025 11:00:55 GMT
+        - name: Content-Length
+          value: "191"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "kodePrakarsa": "",
+                  "kodeTipePinjaman": "",
+                  "limitDalamProses": 0,
+                  "limitTerpakai": 0,
+                  "plafond": 0,
+                  "sisaLimit": 0,
+                  "status": "belum-whitelist"
+              },
+              "message": "Cek fasilitas berhasil.",
+              "status": 200
+          }

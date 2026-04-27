@@ -1,0 +1,17 @@
+info:
+  name: MOCK - Checklist TNC Digital Saving
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: https://pinang-performa.free.mockoapp.net/v/1/aktivasi/cashloan/checklist-tnc-digisaving/200
+  headers:
+    - name: x-key
+      value: performa
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

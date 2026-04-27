@@ -1,0 +1,72 @@
+info:
+  name: MOCK - List Tenor Aktif
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: https://pinang-performa.free.mockoapp.net/v/1/master/cashloan/list-tenor-aktif/500-limit-expired
+  headers:
+    - name: x-key
+      value: performa
+  params:
+    - name: "401"
+      value: ""
+      type: query
+      disabled: true
+    - name: "503"
+      value: ""
+      type: query
+      disabled: true
+    - name: "403"
+      value: ""
+      type: query
+      disabled: true
+    - name: "400"
+      value: ""
+      type: query
+      disabled: true
+    - name: 400-token-empty
+      value: ""
+      type: query
+      disabled: true
+    - name: 500-general
+      value: ""
+      type: query
+      disabled: true
+    - name: 500-unregist-wl
+      value: ""
+      type: query
+      disabled: true
+    - name: 500-list-tenor-empty
+      value: ""
+      type: query
+      disabled: true
+    - name: 500-terdapat-pinjaman-dalam-proses
+      value: ""
+      type: query
+      disabled: true
+    - name: 500-limit-expired
+      value: ""
+      type: query
+      disabled: true
+    - name: 500-limit-tidak-mencukupi
+      value: ""
+      type: query
+      disabled: true
+    - name: 500-terdapat-pinjaman-aktif
+      value: ""
+      type: query
+      disabled: true
+    - name: "200"
+      value: ""
+      type: query
+      disabled: true
+  body:
+    type: form-urlencoded
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

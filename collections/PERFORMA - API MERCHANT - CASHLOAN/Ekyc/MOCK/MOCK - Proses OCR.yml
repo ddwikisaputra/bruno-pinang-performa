@@ -1,0 +1,69 @@
+info:
+  name: MOCK - Proses OCR
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: https://pinang-performa.free.mockoapp.net/v/1/ekyc/cashloan/proses-ocr
+  headers:
+    - name: x-key
+      value: performa
+  body:
+    type: form-urlencoded
+    data:
+      - name: ocr-not-found
+        value: 500-ocr-not-found
+        disabled: true
+      - name: ocr-found
+        value: 200-ocr-found
+        disabled: true
+      - name: no ktp gk sama
+        value: 500-id-not-match
+        disabled: true
+      - name: gagal masih ada quota
+        value: 500-attempts
+        disabled: true
+      - name: gagal out of quota
+        value: 500-final-attempt
+        disabled: true
+      - name: masa tunggu
+        value: 500-waiting
+        disabled: true
+      - name: 503 service unavailable
+        value: "503"
+        disabled: true
+      - name: 400 empty api key
+        value: "400"
+        disabled: true
+      - name: 400 param gk sesuai
+        value: 400-param-not
+        disabled: true
+      - name: 401 unauthorized
+        value: "401"
+        disabled: true
+      - name: 401 token empty
+        value: 401-token-empty
+        disabled: true
+      - name: "403"
+        value: "403"
+        disabled: true
+      - name: 403 invalid status
+        value: 403-invalid-status
+        disabled: true
+      - name: 403 unactivated
+        value: 403-unactivated
+        disabled: true
+      - name: 500 error general
+        value: 500-general
+        disabled: true
+      - name: 500 unregistered whitelist
+        value: 500-unregistered-WL
+        disabled: true
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

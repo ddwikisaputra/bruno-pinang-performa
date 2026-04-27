@@ -1,0 +1,475 @@
+info:
+  name: Kirim OTP TTE
+  type: http
+  seq: 9
+
+http:
+  method: POST
+  url: "{{base-url-local}}/v/1/aktivasi/cashloan/kirim-otp-tte"
+  headers:
+    - name: Api-Key
+      value: "{{apiKeyMerchant}}"
+  body:
+    type: form-urlencoded
+    data:
+      - name: kodePrakarsa
+        value: Q0wtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbDk2bm1YMWxFTnFLbWFNSE80NzJKZGZGSmpqYUswN2d0R1ZtazNiRVpRZ0xBUjVBMHF1WUJWajIrcFpFQXc9
+        description: Kode Prakarsa [MANDATORY] [Base64]
+      - name: kodePartnership
+        value: TUox
+        description: Kode Partnership [MANDATORY] [Base64]
+  auth:
+    type: bearer
+    token: "{{tokenMerchant}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 503 - Service Unavailable
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/kirim-otp-tte"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrN2lkR2NuRTdkRjB0WXIzTi9NQVV1eTZ1RWluM2JSRXc9
+            description: Kode Prakarsa [MANDATORY] [Base64] (express_prakarsa.references.id)
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 503
+      statusText: Service Unavailable
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 20 Aug 2024 07:16:21 GMT
+        - name: Content-Length
+          value: "69"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Jam operasional Pinang Performa dari jam XX.XX - XX.XX WIB setiap hari. Kembali lagi nanti, ya!",
+              "status": 503
+          }
+  - name: Error - Token Expired
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/kirim-otp-tte"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrN2lkR2NuRTdkRjB0WXIzTi9NQVV1eTZ1RWluM2JSRXc9
+            description: Kode Prakarsa [MANDATORY] [Base64] (express_prakarsa.references.id)
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 20 Aug 2024 07:16:21 GMT
+        - name: Content-Length
+          value: "69"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "token has invalid claims: token is expired",
+              "status": 401
+          }
+  - name: Error - Unauthorized / Expired
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/kirim-otp-tte"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrN2lkR2NuRTdkRjB0WXIzTi9NQVV1eTZ1RWluM2JSRXc9
+            description: Kode Prakarsa [MANDATORY] [Base64] (express_prakarsa.references.id)
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 20 Aug 2024 07:15:46 GMT
+        - name: Content-Length
+          value: "50"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Unauthorized / Expired.",
+              "status": 401
+          }
+  - name: Error - Parameter Token /  API Key Empty
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/kirim-otp-tte"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+          disabled: true
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrN2lkR2NuRTdkRjB0WXIzTi9NQVV1eTZ1RWluM2JSRXc9
+            description: Kode Prakarsa [MANDATORY] [Base64] (express_prakarsa.references.id)
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 20 Aug 2024 06:46:22 GMT
+        - name: Content-Length
+          value: "51"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "parameter token is empty",
+              "status": 400
+          }
+  - name: Error - Access Forbidden
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/kirim-otp-tte"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: VW1GNVlWQnBVR1Z5Vkc5d2p5RU1nR0g5bFYrVEF2L3hDU1FIM25JVTl0M2Naam89
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrN2lkR2NuRTdkRjB0WXIzTi9NQVV1eTZ1RWluM2JSRXc9
+            description: Kode Prakarsa [MANDATORY] [Base64] (express_prakarsa.references.id)
+          - name: kodePartnership
+            value: QkxBLTUwMTA=
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 20 Aug 2024 06:47:17 GMT
+        - name: Content-Length
+          value: "76"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "you don't have permission to access this resource",
+              "status": 403
+          }
+  - name: Error - Access Forbidden (No Data Partnership)
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/kirim-otp-tte"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrN2lkR2NuRTdkRjB0WXIzTi9NQVV1eTZ1RWluM2JSRXc9
+            description: Kode Prakarsa [MANDATORY] [Base64] (express_prakarsa.references.id)
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 20 Aug 2024 06:47:51 GMT
+        - name: Content-Length
+          value: "70"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "your access to this resource is unactivated",
+              "status": 403
+          }
+  - name: Error - Access Forbidden (Status Not Access)
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/kirim-otp-tte"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrN2lkR2NuRTdkRjB0WXIzTi9NQVV1eTZ1RWluM2JSRXc9
+            description: Kode Prakarsa [MANDATORY] [Base64] (express_prakarsa.references.id)
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 20 Aug 2024 06:49:00 GMT
+        - name: Content-Length
+          value: "62"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Data tidak dapat diakses.",
+              "status": 403
+          }
+  - name: Error - Parameter Validation (Total Mandatory)
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/kirim-otp-tte"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrN2lkR2NuRTdkRjB0WXIzTi9NQVV1eTZ1RWluM2JSRXc9
+            description: Kode Prakarsa [MANDATORY] [Base64] (express_prakarsa.references.id)
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 20 Aug 2024 07:01:51 GMT
+        - name: Content-Length
+          value: "63"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Parameter tidak terpenuhi.",
+              "status": 400
+          }
+  - name: Error - Parameter Validation (Tidak Sesuai)
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/kirim-otp-tte"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrN2lkR2NuRTdkRjB0WXIzTi9NQVV1eTZ1RWluM2JSRXc9
+            description: Kode Prakarsa [MANDATORY] [Base64] (express_prakarsa.references.id)
+          - name: kodePartnership
+            value: TUoxa
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 20 Aug 2024 07:02:23 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "... tidak sesuai.",
+              "status": 400
+          }
+  - name: Error - Unregistered Whitelist
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/kirim-otp-tte"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrN2lkR2NuRTdkRjB0WXIzTi9NQVV1eTZ1RWluM2JSRXc9
+            description: Kode Prakarsa [MANDATORY] [Base64] (express_prakarsa.references.id)
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 20 Aug 2024 07:06:01 GMT
+        - name: Content-Length
+          value: "79"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Maaf, anda tidak terdaftar pada whitelist.",
+              "status": 500
+          }
+  - name: Error - Gagal Kirim OTP
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/kirim-otp-tte"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrN2lkR2NuRTdkRjB0WXIzTi9NQVV1eTZ1RWluM2JSRXc9
+            description: Kode Prakarsa [MANDATORY] [Base64] (express_prakarsa.references.id)
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 20 Aug 2024 07:09:05 GMT
+        - name: Content-Length
+          value: "109"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Maaf, Proses kirim OTP tidak berhasil. Silahkan coba beberapa saat lagi.",
+              "status": 500
+          }
+  - name: Error - Validasi Kuota OTP Habis
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/kirim-otp-tte"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrN2lkR2NuRTdkRjB0WXIzTi9NQVV1eTZ1RWluM2JSRXc9
+            description: Kode Prakarsa [MANDATORY] [Base64] (express_prakarsa.references.id)
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 20 Aug 2024 07:11:46 GMT
+        - name: Content-Length
+          value: "162"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Maaf, Proses OTP tidak dapat dilakukan karena sudah melebihi batas maksimal, silahkan coba kembali pada DD MM YYYY HH:II",
+              "status": 500
+          }
+  - name: Success - OTP Terkirim
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/kirim-otp-tte"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: VW1GNVlWQnBVR1Z5Vkc5d2pDb1lnR1gwbElhV3crdC9IYTlPVll6VWtNcHkrSGc9
+          description: "{{apiKeyMerchant}}"
+        - name: ""
+          value: ""
+          disabled: true
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtQUdVLTE5MC1VbUY1WVZCcFVHVnlWRzl3L2x4Nm5HVCtsRWRxS21hTkhPNDQzSmRmRkpqaWFLNDdqZENhbjB6ZEVwaXZaY3pYakRFY1BJaFZ2cGVhbU5ZPQ==
+            description: Kode Prakarsa [MANDATORY] [Base64] (express_prakarsa.references.id)
+          - name: kodePartnership
+            value: QUdVLTE5MA==
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 15 Aug 2024 11:07:34 GMT
+        - name: Content-Length
+          value: "149"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "otpKey": "RAYAXXXXXXXXXXX"
+              },
+              "message": "OTP berhasil dikirim. Silahkan cek inbox message anda untuk mendapatkan OTP verifikasi.",
+              "status": 200
+          }

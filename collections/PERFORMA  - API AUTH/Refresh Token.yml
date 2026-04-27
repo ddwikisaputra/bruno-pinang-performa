@@ -1,0 +1,149 @@
+info:
+  name: Refresh Token
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{base-url-dev}}/v/1/refresh-token"
+  auth:
+    type: bearer
+    token: "{{tokenJWT}}"
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        var jsonData = res.getBody();
+        bru.setGlobalEnvVar("tokenJWT", jsonData.token)
+        bru.setEnvVar("tokenJWT", jsonData.token)
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: "200 : Success"
+    request:
+      url: localhost:4004/v/1/refresh-token
+      method: POST
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Sun, 10 Mar 2024 05:30:40 GMT
+        - name: Content-Length
+          value: "426"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 200,
+              "expire": "2024-03-10T13:30:39.967165+07:00",
+              "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NJZCI6IlVtRjVZVkJwVUdWeVZHOXcvTEgrOURhQjE2Um9VYXA3ZGFlRk1zUT0iLCJleHAiOjE3MTAwNTIyMzksInBhc3N3b3JkIjoiVW1GNVlWQnBVR1Z5Vkc5d2pDby9uREQ4dzBVdmVUT0lIT3c2MmI2RFhIc2w3aXRRZHhTYUU3T05ZUT09IiwidXNlcm5hbWUiOiJVbUY1WVZCcFVHVnlWRzl3ckFvL3hIbXMxQjMwZ1hoSTJMM3JaTDNzeFFtd1p6eVkifQ.172qHZHsDHFA0rwTdbI_Hkp1gR64pCUgXvNduYw_-6Y"
+          }
+  - name: "400 : Auth header is empty"
+    request:
+      url: "{{base_url}}/v/1/refresh-token"
+      method: POST
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Date
+          value: Thu, 14 Mar 2024 02:28:42 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "45"
+        - name: Connection
+          value: keep-alive
+        - name: Strict-Transport-Security
+          value: max-age=15724800; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "code": 400,
+              "message": "auth header is empty"
+          }
+  - name: "500 : Internal Server Error"
+    request:
+      url: "{{base_url}}/v/1/refresh-token"
+      method: POST
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Date
+          value: Thu, 14 Mar 2024 02:26:18 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "53"
+        - name: Connection
+          value: keep-alive
+        - name: Strict-Transport-Security
+          value: max-age=15724800; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "code": 500,
+              "message": "Maaf, Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi."
+          }
+  - name: "401 : Invalid Token"
+    request:
+      url: "{{base_url}}/v/1/refresh-token"
+      method: POST
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Date
+          value: Thu, 14 Mar 2024 02:34:21 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "73"
+        - name: Connection
+          value: keep-alive
+        - name: Strict-Transport-Security
+          value: max-age=15724800; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "message": "token signature is invalid: signature is invalid"
+          }
+  - name: "401 : Token Expired"
+    request:
+      url: "{{base_url}}/v/1/refresh-token"
+      method: POST
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Date
+          value: Thu, 14 Mar 2024 03:46:31 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "67"
+        - name: Connection
+          value: keep-alive
+        - name: Strict-Transport-Security
+          value: max-age=15724800; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "message": "token has invalid claims: token is expired"
+          }

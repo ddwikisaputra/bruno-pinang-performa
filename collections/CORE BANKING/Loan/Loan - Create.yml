@@ -1,0 +1,85 @@
+info:
+  name: Loan / Create
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{URL}}/loan/create"
+  body:
+    type: json
+    data: "{\r
+
+      \    \"KodeCabang\": \"0010\",\r
+
+      \    \"NomorCIF\": \"0000149512\",\r
+
+      \    \"Nominal\": \"30000000\",\r
+
+      \    \"NamaSesuaiId\": \"Dwiki Saputra\",\r
+
+      \    \"TipeProduk\": \"40008\",\r
+
+      \    \"MataUang\": \"IDR\",\r
+
+      \    \"SukuBunga\": \"0.25\",\r
+
+      \    \"HariTanggalPembayaran\": \"22\",\r
+
+      \    \"JangkaWaktu\": \"3\",\r
+
+      \    \"TipePerhitunganBunga\": \"EFEKTIF\",\r
+
+      \    \"PerhitunganBunga\": \"12\",\r
+
+      \    \"Penalti\": \"0.5\",\r
+
+      \    \"PenjadwalanAngsuran\": \"N\",\r
+
+      \    \"JadwalAngsuran\": \"\",\r
+
+      \    \"NomorFasilitas\": \"0020/0000149512/PK2/001\",\r
+
+      \    \"FrekuensiPembayaranBunga\": \"1\",\r
+
+      \    \"TanggalPencairan\": \"22/07/2030\",\r
+
+      \    \"TanggalJatuhTempo\": \"22/10/2030\",\r
+
+      \    \"TanggalBilingSelanjutnya\": \"22/08/2030\",\r
+
+      \    \"BiayaProvisi\": \"0\",\r
+
+      \    \"BiayaAsuransiJiwa\": \"0\",\r
+
+      \    \"BiayaAdministrasi\": \"0\",\r
+
+      \    \"BiayaNotaris\": \"0\",\r
+
+      \    \"BiayaAsuransiKebakaran\": \"0\",\r
+
+      \    \"BiayaAsuransiKerugian\": \"0\",\r
+
+      \    \"NomorRekening\": \"\",\r
+
+      \    \"Defer\": \"\",\r
+
+      \    \"FlagRestrukturisasi\": \"\",\r
+
+      \    \"TanggalRestruk\": \"\",\r
+
+      \    \"FlagKolektabilitas\": \"\",\r
+
+      \    \"Kolektabilitas\": \"\"\r
+
+      }"
+  auth:
+    type: basic
+    username: pinang-mikro
+    password: "0"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

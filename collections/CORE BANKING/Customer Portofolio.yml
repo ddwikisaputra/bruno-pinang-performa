@@ -1,0 +1,983 @@
+info:
+  name: Customer Portofolio
+  type: http
+  seq: 16
+
+http:
+  method: GET
+  url: "{{URL}}/account/customer-portofolio/0000201053"
+  auth:
+    type: basic
+    username: pinang-mikro
+    password: HfbZzxqYr3Y33SLg
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: success
+    request:
+      url: "{{URL}}/account/customer-portofolio/0000118826"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: no-cache
+        - name: Pragma
+          value: no-cache
+        - name: Content-Length
+          value: "19114"
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Expires
+          value: "-1"
+        - name: Server
+          value: Microsoft-IIS/10.0
+        - name: X-AspNet-Version
+          value: 4.0.30319
+        - name: X-Powered-By
+          value: ASP.NET
+        - name: Date
+          value: Mon, 17 Apr 2023 06:47:46 GMT
+      body:
+        type: json
+        data: |-
+          {
+              "StatusCode": "00",
+              "StatusDescription": "Success",
+              "Data": [
+                  {
+                      "AccountNumber": "001001004145315",
+                      "AccountName": "DWIKI SAPUTRA",
+                      "AccountType": "S",
+                      "AccountDesc": "TABUNGAN RAYA",
+                      "AccountStatus": "Active",
+                      "ProductType": "00084"
+                  },
+                  {
+                      "AccountNumber": "001001004148313",
+                      "AccountName": "DWIKI SAPUTRA",
+                      "AccountType": "S",
+                      "AccountDesc": "TABUNGAN RAYA",
+                      "AccountStatus": "Active",
+                      "ProductType": "00084"
+                  },
+                  {
+                      "AccountNumber": "001001004149319",
+                      "AccountName": "DWIKI SAPUTRA",
+                      "AccountType": "S",
+                      "AccountDesc": "TABUNGAN RAYA",
+                      "AccountStatus": "Active",
+                      "ProductType": "00084"
+                  },
+                  {
+                      "AccountNumber": "001001004150310",
+                      "AccountName": "DWIKI SAPUTRA",
+                      "AccountType": "S",
+                      "AccountDesc": "TABUNGAN RAYA",
+                      "AccountStatus": "Active",
+                      "ProductType": "00084"
+                  },
+                  {
+                      "AccountNumber": "001001004155310",
+                      "AccountName": "DWIKI SAPUTRA",
+                      "AccountType": "S",
+                      "AccountDesc": "TABUNGAN RAYA",
+                      "AccountStatus": "Active",
+                      "ProductType": "00084"
+                  },
+                  {
+                      "AccountNumber": "001001004156316",
+                      "AccountName": "DWIKI SAPUTRA",
+                      "AccountType": "S",
+                      "AccountDesc": "TABUNGAN RAYA",
+                      "AccountStatus": "Active",
+                      "ProductType": "00084"
+                  },
+                  {
+                      "AccountNumber": "001001000318990",
+                      "AccountName": "DWIKI SAPUTRA",
+                      "AccountType": "D",
+                      "AccountDesc": "GIRO PENAMPUNGAN IDR",
+                      "AccountStatus": "Active",
+                      "ProductType": "00047"
+                  },
+                  {
+                      "AccountNumber": "001001002279312",
+                      "AccountName": "DWIKI SAPUTRA",
+                      "AccountType": "S",
+                      "AccountDesc": "TABUNGAN RAYA",
+                      "AccountStatus": "Active",
+                      "ProductType": "00084"
+                  },
+                  {
+                      "AccountNumber": "001001002280313",
+                      "AccountName": "DWIKI SAPUTRA",
+                      "AccountType": "S",
+                      "AccountDesc": "TABUNGAN RAYA",
+                      "AccountStatus": "Active",
+                      "ProductType": "00084"
+                  },
+                  {
+                      "AccountNumber": "001001002281319",
+                      "AccountName": "DWIKI SAPUTRA",
+                      "AccountType": "S",
+                      "AccountDesc": "TABUNGAN RAYA",
+                      "AccountStatus": "Active",
+                      "ProductType": "00084"
+                  },
+                  {
+                      "AccountNumber": "001001002282315",
+                      "AccountName": "DWIKI SAPUTRA",
+                      "AccountType": "S",
+                      "AccountDesc": "TABUNGAN RAYA",
+                      "AccountStatus": "Active",
+                      "ProductType": "00084"
+                  },
+                  {
+                      "AccountNumber": "001001002283311",
+                      "AccountName": "DWIKI SAPUTRA",
+                      "AccountType": "S",
+                      "AccountDesc": "TABUNGAN RAYA",
+                      "AccountStatus": "Active",
+                      "ProductType": "00084"
+                  },
+                  {
+                      "AccountNumber": "001001002284317",
+                      "AccountName": "DWIKI SAPUTRA",
+                      "AccountType": "S",
+                      "AccountDesc": "TABUNGAN RAYA",
+                      "AccountStatus": "Active",
+                      "ProductType": "00084"
+                  },
+                  {
+                      "AccountNumber": "001001002288311",
+                      "AccountName": "DWIKI SAPUTRA",
+                      "AccountType": "S",
+                      "AccountDesc": "TABUNGAN RAYA",
+                      "AccountStatus": "Active",
+                      "ProductType": "00084"
+                  },
+                  {
+                      "AccountNumber": "001001002289317",
+                      "AccountName": "DWIKI SAPUTRA",
+                      "AccountType": "S",
+                      "AccountDesc": "TABUNGAN RAYA",
+                      "AccountStatus": "Active",
+                      "ProductType": "00084"
+                  },
+                  {
+                      "AccountNumber": "001001002290318",
+                      "AccountName": "DWIKI SAPUTRA",
+                      "AccountType": "S",
+                      "AccountDesc": "TABUNGAN RAYA",
+                      "AccountStatus": "Active",
+                      "ProductType": "00084"
+                  },
+                  {
+                      "AccountNumber": "001001002277310",
+                      "AccountName": "DWIKI SAPUTRA",
+                      "AccountType": "S",
+                      "AccountDesc": "TABUNGAN RAYA",
+                      "AccountStatus": "Active",
+                      "ProductType": "00084"
+                  },
+                  {
+                      "AccountNumber": "001001002278316",
+                      "AccountName": "DWIKI SAPUTRA",
+                      "AccountType": "S",
+                      "AccountDesc": "TABUNGAN RAYA",
+                      "AccountStatus": "Active",
+                      "ProductType": "00084"
+                  },
+                  {
+                      "AccountNumber": "001001000001315",
+                      "AccountName": "DWIKI SAPUTRA",
+                      "AccountType": "S",
+                      "AccountDesc": "TABUNGAN RAYA",
+                      "AccountStatus": "Active",
+                      "ProductType": "00084"
+                  },
+                  {
+                      "AccountNumber": "001001000045319",
+                      "AccountName": "DWIKI SAPUTRA",
+                      "AccountType": "S",
+                      "AccountDesc": "TABUNGAN RAYA",
+                      "AccountStatus": "Active",
+                      "ProductType": "00084"
+                  },
+                  {
+                      "AccountNumber": "001001000313990",
+                      "AccountName": "DWIKI SAPUTRA",
+                      "AccountType": "D",
+                      "AccountDesc": "GIRO PENAMPUNGAN IDR",
+                      "AccountStatus": "Active",
+                      "ProductType": "00047"
+                  },
+                  {
+                      "AccountNumber": "001001000317994",
+                      "AccountName": "DWIKI SAPUTRA",
+                      "AccountType": "D",
+                      "AccountDesc": "GIRO PENAMPUNGAN IDR",
+                      "AccountStatus": "Active",
+                      "ProductType": "00047"
+                  },
+                  {
+                      "AccountNumber": "001001003092315",
+                      "AccountName": "DWIKI SAPUTRA",
+                      "AccountType": "S",
+                      "AccountDesc": "SAKU JAGA",
+                      "AccountStatus": "Active",
+                      "ProductType": "00092"
+                  },
+                  {
+                      "AccountNumber": "001001000310992",
+                      "AccountName": "DWIKI SAPUTRA",
+                      "AccountType": "D",
+                      "AccountDesc": "GIRO PENAMPUNGAN IDR",
+                      "AccountStatus": "Active",
+                      "ProductType": "00047"
+                  },
+                  {
+                      "AccountNumber": "001001000311998",
+                      "AccountName": "DWIKI SAPUTRA",
+                      "AccountType": "D",
+                      "AccountDesc": "GIRO PENAMPUNGAN IDR",
+                      "AccountStatus": "Active",
+                      "ProductType": "00047"
+                  },
+                  {
+                      "AccountNumber": "001001000312994",
+                      "AccountName": "DWIKI SAPUTRA",
+                      "AccountType": "D",
+                      "AccountDesc": "GIRO PENAMPUNGAN IDR",
+                      "AccountStatus": "Active",
+                      "ProductType": "00047"
+                  },
+                  {
+                      "AccountNumber": "001001000368408",
+                      "AccountName": "DWIKI SAPUTRA",
+                      "AccountType": "D",
+                      "AccountDesc": "GIRO PERORANGAN IDR",
+                      "AccountStatus": "Active",
+                      "ProductType": "00012"
+                  },
+                  {
+                      "AccountNumber": "001001003746312",
+                      "AccountName": "DWIKI SAPUTRA",
+                      "AccountType": "S",
+                      "AccountDesc": "TABUNGAN RAYA",
+                      "AccountStatus": "Active",
+                      "ProductType": "00084"
+                  },
+                  {
+                      "AccountNumber": "001001004128313",
+                      "AccountName": "DWIKI SAPUTRA",
+                      "AccountType": "S",
+                      "AccountDesc": "TABUNGAN RAYA",
+                      "AccountStatus": "Active",
+                      "ProductType": "00084"
+                  },
+                  {
+                      "AccountNumber": "001001004135310",
+                      "AccountName": "DWIKI SAPUTRA",
+                      "AccountType": "S",
+                      "AccountDesc": "TABUNGAN RAYA",
+                      "AccountStatus": "Active",
+                      "ProductType": "00084"
+                  },
+                  {
+                      "AccountNumber": "001001004136316",
+                      "AccountName": "DWIKI SAPUTRA",
+                      "AccountType": "S",
+                      "AccountDesc": "TABUNGAN RAYA",
+                      "AccountStatus": "Active",
+                      "ProductType": "00084"
+                  },
+                  {
+                      "AccountNumber": "001001004137312",
+                      "AccountName": "DWIKI SAPUTRA",
+                      "AccountType": "S",
+                      "AccountDesc": "TABUNGAN RAYA",
+                      "AccountStatus": "Active",
+                      "ProductType": "00084"
+                  },
+                  {
+                      "AccountNumber": "001001004138318",
+                      "AccountName": "DWIKI SAPUTRA",
+                      "AccountType": "S",
+                      "AccountDesc": "TABUNGAN RAYA",
+                      "AccountStatus": "Active",
+                      "ProductType": "00084"
+                  },
+                  {
+                      "AccountNumber": "001001004164319",
+                      "AccountName": "DWIKI SAPUTRA",
+                      "AccountType": "S",
+                      "AccountDesc": "TABUNGAN RAYA",
+                      "AccountStatus": "Active",
+                      "ProductType": "00084"
+                  },
+                  {
+                      "AccountNumber": "001001004167317",
+                      "AccountName": "DWIKI SAPUTRA",
+                      "AccountType": "S",
+                      "AccountDesc": "TABUNGAN RAYA",
+                      "AccountStatus": "Active",
+                      "ProductType": "00084"
+                  },
+                  {
+                      "AccountNumber": "001001004168313",
+                      "AccountName": "DWIKI SAPUTRA",
+                      "AccountType": "S",
+                      "AccountDesc": "TABUNGAN RAYA",
+                      "AccountStatus": "Active",
+                      "ProductType": "00084"
+                  },
+                  {
+                      "AccountNumber": "001001004169319",
+                      "AccountName": "DWIKI SAPUTRA",
+                      "AccountType": "S",
+                      "AccountDesc": "TABUNGAN RAYA",
+                      "AccountStatus": "Active",
+                      "ProductType": "00084"
+                  },
+                  {
+                      "AccountNumber": "001001004170310",
+                      "AccountName": "DWIKI SAPUTRA",
+                      "AccountType": "S",
+                      "AccountDesc": "TABUNGAN RAYA",
+                      "AccountStatus": "Active",
+                      "ProductType": "00084"
+                  },
+                  {
+                      "AccountNumber": "001001004171316",
+                      "AccountName": "DWIKI SAPUTRA",
+                      "AccountType": "S",
+                      "AccountDesc": "TABUNGAN RAYA",
+                      "AccountStatus": "Active",
+                      "ProductType": "00084"
+                  },
+                  {
+                      "AccountNumber": "001001004172312",
+                      "AccountName": "DWIKI SAPUTRA",
+                      "AccountType": "S",
+                      "AccountDesc": "TABUNGAN RAYA",
+                      "AccountStatus": "Active",
+                      "ProductType": "00084"
+                  },
+                  {
+                      "AccountNumber": "001001004956318",
+                      "AccountName": "DWIKI SAPUTRA",
+                      "AccountType": "S",
+                      "AccountDesc": "TABUNGAN RAYA",
+                      "AccountStatus": "Active",
+                      "ProductType": "00084"
+                  },
+                  {
+                      "AccountNumber": "001001004948315",
+                      "AccountName": "DWIKI SAPUTRA",
+                      "AccountType": "S",
+                      "AccountDesc": "TABUNGAN RAYA",
+                      "AccountStatus": "Active",
+                      "ProductType": "00084"
+                  },
+                  {
+                      "AccountNumber": "001001004952314",
+                      "AccountName": "DWIKI SAPUTRA",
+                      "AccountType": "S",
+                      "AccountDesc": "TABUNGAN RAYA",
+                      "AccountStatus": "Active",
+                      "ProductType": "00084"
+                  },
+                  {
+                      "AccountNumber": "001001004953310",
+                      "AccountName": "DWIKI SAPUTRA",
+                      "AccountType": "S",
+                      "AccountDesc": "TABUNGAN RAYA",
+                      "AccountStatus": "Active",
+                      "ProductType": "00084"
+                  },
+                  {
+                      "AccountNumber": "001001004954316",
+                      "AccountName": "DWIKI SAPUTRA",
+                      "AccountType": "S",
+                      "AccountDesc": "TABUNGAN RAYA",
+                      "AccountStatus": "Active",
+                      "ProductType": "00084"
+                  },
+                  {
+                      "AccountNumber": "001001004955312",
+                      "AccountName": "DWIKI SAPUTRA",
+                      "AccountType": "S",
+                      "AccountDesc": "TABUNGAN RAYA",
+                      "AccountStatus": "Active",
+                      "ProductType": "00084"
+                  },
+                  {
+                      "AccountNumber": "001001003429318",
+                      "AccountName": "DWIKI SAPUTRA",
+                      "AccountType": "S",
+                      "AccountDesc": "SAKU PINTAR",
+                      "AccountStatus": "Restricted",
+                      "ProductType": "00091"
+                  },
+                  {
+                      "AccountNumber": "001001003515313",
+                      "AccountName": "DWIKI SAPUTRA",
+                      "AccountType": "S",
+                      "AccountDesc": "SAKU PINTAR",
+                      "AccountStatus": "Restricted",
+                      "ProductType": "00091"
+                  },
+                  {
+                      "AccountNumber": "001001004380305",
+                      "AccountName": "DWIKI SAPUTRA",
+                      "AccountType": "S",
+                      "AccountDesc": "TABUNGAN RAYA",
+                      "AccountStatus": "Dormant",
+                      "ProductType": "00005"
+                  },
+                  {
+                      "AccountNumber": "001001004381301",
+                      "AccountName": "DWIKI SAPUTRA",
+                      "AccountType": "S",
+                      "AccountDesc": "TABUNGAN RAYA",
+                      "AccountStatus": "Dormant",
+                      "ProductType": "00005"
+                  },
+                  {
+                      "AccountNumber": "001001008055106",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PTA",
+                      "AccountStatus": "Active",
+                      "ProductType": "40002"
+                  },
+                  {
+                      "AccountNumber": "001001008056102",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PTR",
+                      "AccountStatus": "Active",
+                      "ProductType": "40003"
+                  },
+                  {
+                      "AccountNumber": "001001008057108",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PTA",
+                      "AccountStatus": "Active",
+                      "ProductType": "40002"
+                  },
+                  {
+                      "AccountNumber": "001001008058104",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PTA",
+                      "AccountStatus": "Active",
+                      "ProductType": "40002"
+                  },
+                  {
+                      "AccountNumber": "001001008065101",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PTA",
+                      "AccountStatus": "Active",
+                      "ProductType": "40002"
+                  },
+                  {
+                      "AccountNumber": "001001008066107",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PTA",
+                      "AccountStatus": "Active",
+                      "ProductType": "40002"
+                  },
+                  {
+                      "AccountNumber": "001001008068109",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PTA",
+                      "AccountStatus": "Active",
+                      "ProductType": "40002"
+                  },
+                  {
+                      "AccountNumber": "001001008074100",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PTA",
+                      "AccountStatus": "Active",
+                      "ProductType": "40002"
+                  },
+                  {
+                      "AccountNumber": "001001008075106",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PTA",
+                      "AccountStatus": "Active",
+                      "ProductType": "40002"
+                  },
+                  {
+                      "AccountNumber": "001001008078104",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PTA",
+                      "AccountStatus": "Active",
+                      "ProductType": "40002"
+                  },
+                  {
+                      "AccountNumber": "001001008081107",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PTA",
+                      "AccountStatus": "Active",
+                      "ProductType": "40002"
+                  },
+                  {
+                      "AccountNumber": "001001008082103",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PTA",
+                      "AccountStatus": "Active",
+                      "ProductType": "40002"
+                  },
+                  {
+                      "AccountNumber": "001001008085101",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PTA",
+                      "AccountStatus": "Active",
+                      "ProductType": "40002"
+                  },
+                  {
+                      "AccountNumber": "001001008087103",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PTA",
+                      "AccountStatus": "Active",
+                      "ProductType": "40002"
+                  },
+                  {
+                      "AccountNumber": "001001008088109",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PTA",
+                      "AccountStatus": "Active",
+                      "ProductType": "40002"
+                  },
+                  {
+                      "AccountNumber": "001001008089105",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PTA",
+                      "AccountStatus": "Active",
+                      "ProductType": "40002"
+                  },
+                  {
+                      "AccountNumber": "001001008090106",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PTA",
+                      "AccountStatus": "Active",
+                      "ProductType": "40002"
+                  },
+                  {
+                      "AccountNumber": "001001008093104",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PTA",
+                      "AccountStatus": "Active",
+                      "ProductType": "40002"
+                  },
+                  {
+                      "AccountNumber": "001001008094100",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PTA",
+                      "AccountStatus": "Active",
+                      "ProductType": "40002"
+                  },
+                  {
+                      "AccountNumber": "001001008098104",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PTA",
+                      "AccountStatus": "Active",
+                      "ProductType": "40002"
+                  },
+                  {
+                      "AccountNumber": "001001008099100",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PTA",
+                      "AccountStatus": "Active",
+                      "ProductType": "40002"
+                  },
+                  {
+                      "AccountNumber": "001001008104109",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PTA",
+                      "AccountStatus": "Active",
+                      "ProductType": "40002"
+                  },
+                  {
+                      "AccountNumber": "001001008105105",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PTA",
+                      "AccountStatus": "Active",
+                      "ProductType": "40002"
+                  },
+                  {
+                      "AccountNumber": "001001008108103",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PTA",
+                      "AccountStatus": "Active",
+                      "ProductType": "40002"
+                  },
+                  {
+                      "AccountNumber": "001001008110100",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PTA",
+                      "AccountStatus": "Active",
+                      "ProductType": "40002"
+                  },
+                  {
+                      "AccountNumber": "001001008121101",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PTA",
+                      "AccountStatus": "Active",
+                      "ProductType": "40002"
+                  },
+                  {
+                      "AccountNumber": "001001008043109",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PTA",
+                      "AccountStatus": "Active",
+                      "ProductType": "40002"
+                  },
+                  {
+                      "AccountNumber": "001001008044105",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PTA",
+                      "AccountStatus": "Active",
+                      "ProductType": "40002"
+                  },
+                  {
+                      "AccountNumber": "001001008045101",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PTA",
+                      "AccountStatus": "Active",
+                      "ProductType": "40002"
+                  },
+                  {
+                      "AccountNumber": "001001008049105",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PTA",
+                      "AccountStatus": "Active",
+                      "ProductType": "40002"
+                  },
+                  {
+                      "AccountNumber": "001001008189109",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PTA",
+                      "AccountStatus": "Active",
+                      "ProductType": "40002"
+                  },
+                  {
+                      "AccountNumber": "001001008281105",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PTA",
+                      "AccountStatus": "Active",
+                      "ProductType": "40002"
+                  },
+                  {
+                      "AccountNumber": "001001008282101",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PRK",
+                      "AccountStatus": "Active",
+                      "ProductType": "40004"
+                  },
+                  {
+                      "AccountNumber": "001001008255104",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PTA",
+                      "AccountStatus": "Active",
+                      "ProductType": "40002"
+                  },
+                  {
+                      "AccountNumber": "001001008159104",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PTA",
+                      "AccountStatus": "Active",
+                      "ProductType": "40002"
+                  },
+                  {
+                      "AccountNumber": "001001008166101",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PTA",
+                      "AccountStatus": "Active",
+                      "ProductType": "40002"
+                  },
+                  {
+                      "AccountNumber": "001001008158108",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PTA",
+                      "AccountStatus": "Active",
+                      "ProductType": "40002"
+                  },
+                  {
+                      "AccountNumber": "002001002986108",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PRK",
+                      "AccountStatus": "Active",
+                      "ProductType": "40004"
+                  },
+                  {
+                      "AccountNumber": "002001002989106",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PRK",
+                      "AccountStatus": "Active",
+                      "ProductType": "40004"
+                  },
+                  {
+                      "AccountNumber": "002001002990107",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PRK",
+                      "AccountStatus": "Active",
+                      "ProductType": "40004"
+                  },
+                  {
+                      "AccountNumber": "002001003005109",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PRK",
+                      "AccountStatus": "Active",
+                      "ProductType": "40004"
+                  },
+                  {
+                      "AccountNumber": "002001003006105",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PRK",
+                      "AccountStatus": "Active",
+                      "ProductType": "40004"
+                  },
+                  {
+                      "AccountNumber": "002001002962104",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PRK",
+                      "AccountStatus": "Active",
+                      "ProductType": "40004"
+                  },
+                  {
+                      "AccountNumber": "002001002975107",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PRK",
+                      "AccountStatus": "Active",
+                      "ProductType": "40004"
+                  },
+                  {
+                      "AccountNumber": "002001002976103",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PRK",
+                      "AccountStatus": "Active",
+                      "ProductType": "40004"
+                  },
+                  {
+                      "AccountNumber": "002001002977109",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PRK",
+                      "AccountStatus": "Active",
+                      "ProductType": "40004"
+                  },
+                  {
+                      "AccountNumber": "002001002978105",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PRK",
+                      "AccountStatus": "Active",
+                      "ProductType": "40004"
+                  },
+                  {
+                      "AccountNumber": "002001002979101",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PRK",
+                      "AccountStatus": "Active",
+                      "ProductType": "40004"
+                  },
+                  {
+                      "AccountNumber": "002001002980102",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PRK",
+                      "AccountStatus": "Active",
+                      "ProductType": "40004"
+                  },
+                  {
+                      "AccountNumber": "002001002981108",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PRK",
+                      "AccountStatus": "Active",
+                      "ProductType": "40004"
+                  },
+                  {
+                      "AccountNumber": "002001002982104",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PRK",
+                      "AccountStatus": "Active",
+                      "ProductType": "40004"
+                  },
+                  {
+                      "AccountNumber": "002001002983100",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PRK",
+                      "AccountStatus": "Active",
+                      "ProductType": "40004"
+                  },
+                  {
+                      "AccountNumber": "002001002984106",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PRK",
+                      "AccountStatus": "Active",
+                      "ProductType": "40004"
+                  },
+                  {
+                      "AccountNumber": "002001002985102",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PRK",
+                      "AccountStatus": "Active",
+                      "ProductType": "40004"
+                  },
+                  {
+                      "AccountNumber": "002001003030104",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PRK",
+                      "AccountStatus": "Active",
+                      "ProductType": "40004"
+                  },
+                  {
+                      "AccountNumber": "002001003053102",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PRK",
+                      "AccountStatus": "Active",
+                      "ProductType": "40004"
+                  },
+                  {
+                      "AccountNumber": "002001003054108",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PRK",
+                      "AccountStatus": "Active",
+                      "ProductType": "40004"
+                  },
+                  {
+                      "AccountNumber": "002001003057106",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PRK",
+                      "AccountStatus": "Active",
+                      "ProductType": "40004"
+                  },
+                  {
+                      "AccountNumber": "002001003058102",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PRK",
+                      "AccountStatus": "Active",
+                      "ProductType": "40004"
+                  },
+                  {
+                      "AccountNumber": "002001003059108",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PRK",
+                      "AccountStatus": "Active",
+                      "ProductType": "40004"
+                  },
+                  {
+                      "AccountNumber": "002001003060109",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PRK",
+                      "AccountStatus": "Active",
+                      "ProductType": "40004"
+                  },
+                  {
+                      "AccountNumber": "002001003061105",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PRK",
+                      "AccountStatus": "Active",
+                      "ProductType": "40004"
+                  },
+                  {
+                      "AccountNumber": "002001003062101",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PRK",
+                      "AccountStatus": "Active",
+                      "ProductType": "40004"
+                  },
+                  {
+                      "AccountNumber": "002001003076100",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PRK",
+                      "AccountStatus": "Active",
+                      "ProductType": "40004"
+                  },
+                  {
+                      "AccountNumber": "171101000051105",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PTA",
+                      "AccountStatus": "Active",
+                      "ProductType": "40002"
+                  },
+                  {
+                      "AccountNumber": "001001008332100",
+                      "AccountName": "Dwiki Saputra",
+                      "AccountType": "L",
+                      "AccountDesc": "PINANG MIKRO - PRK",
+                      "AccountStatus": "Active",
+                      "ProductType": "40004"
+                  }
+              ]
+          }

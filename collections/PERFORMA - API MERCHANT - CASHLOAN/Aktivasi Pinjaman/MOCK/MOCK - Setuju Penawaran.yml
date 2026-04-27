@@ -1,0 +1,50 @@
+info:
+  name: MOCK - Setuju Penawaran
+  type: http
+  seq: 4
+
+http:
+  method: POST
+  url: https://pinang-performa.free.mockoapp.net/v/1/aktivasi/cashloan/setuju-penawaran/200
+  headers:
+    - name: x-key
+      value: performa
+  params:
+    - name: "200"
+      value: ""
+      type: query
+      disabled: true
+    - name: 200-failed
+      value: ""
+      type: query
+      disabled: true
+    - name: 500-unregist-wl
+      value: ""
+      type: query
+      disabled: true
+    - name: 400-token-empty
+      value: ""
+      type: query
+      disabled: true
+    - name: "400"
+      value: ""
+      type: query
+      disabled: true
+    - name: "403"
+      value: ""
+      type: query
+      disabled: true
+    - name: "401"
+      value: ""
+      type: query
+      disabled: true
+    - name: "503"
+      value: ""
+      type: query
+      disabled: true
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

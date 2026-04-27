@@ -1,0 +1,168 @@
+info:
+  name: Request Token
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{base-url-dev}}/v/1/request-token"
+  body:
+    type: form-urlencoded
+    data:
+      - name: username
+        value: QkxBLTUwMQ==
+        description: "[MANDATORY] Base64"
+      - name: password
+        value: VURwQjl1SDFTMw==
+        description: "[MANDATORY] Base64"
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        var jsonData = res.getBody();
+        bru.setGlobalEnvVar("tokenJWT", jsonData.token)
+        bru.setEnvVar("tokenJWT", jsonData.token)
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: "200 : Success"
+    request:
+      url: "{{base-url-dev}}/v/1/request-token"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: username
+            value: YWdyaS1hcGk=
+            description: "[MANDATORY]"
+          - name: password
+            value: QUdyMWQxZzF0YWwyMDIx
+            description: "[MANDATORY]"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Sun, 10 Mar 2024 04:46:32 GMT
+        - name: Content-Length
+          value: "426"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 200,
+              "expire": "2024-03-10T12:46:31.866943+07:00",
+              "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NJZCI6IlVtRjVZVkJwVUdWeVZHOXcvTEgrOURhQjE2Um9VYXA3ZGFlRk1zUT0iLCJleHAiOjE3MTAwNDk1OTEsInBhc3N3b3JkIjoiVW1GNVlWQnBVR1Z5Vkc5d2pDby9uREQ4dzBVdmVUT0lIT3c2MmI2RFhIc2w3aXRRZHhTYUU3T05ZUT09IiwidXNlcm5hbWUiOiJVbUY1WVZCcFVHVnlWRzl3ckFvL3hIbXMxQjMwZ1hoSTJMM3JaTDNzeFFtd1p6eVkifQ.MfeIYFPbw2QcU5uotAZm-UGt7zrXCjrGf1_FKV4cBlI"
+          }
+  - name: "401 : Incorrect Username or Password"
+    request:
+      url: "{{base_url}}/v/1/request-token"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: username
+            value: TUoxsA
+            description: "[MANDATORY]"
+          - name: password
+            value: cGVyZm9ybWE=
+            description: "[MANDATORY]"
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Date
+          value: Wed, 13 Mar 2024 10:11:13 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "55"
+        - name: Connection
+          value: keep-alive
+        - name: Strict-Transport-Security
+          value: max-age=15724800; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "message": "incorrect Username or Password"
+          }
+  - name: "400 : Missing Username or Password"
+    request:
+      url: "{{base_url}}/v/1/request-token"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: username
+            value: TUoxs
+            description: "[MANDATORY]"
+            disabled: true
+          - name: password
+            value: cGVyZm9ybWE=
+            description: "[MANDATORY]"
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Date
+          value: Thu, 14 Mar 2024 02:26:18 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "53"
+        - name: Connection
+          value: keep-alive
+        - name: Strict-Transport-Security
+          value: max-age=15724800; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "code": 400,
+              "message": "missing Username or Password"
+          }
+  - name: "500 : Internal Server Error"
+    request:
+      url: "{{base_url}}/v/1/request-token"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: username
+            value: TUoxs
+            description: "[MANDATORY]"
+            disabled: true
+          - name: password
+            value: cGVyZm9ybWE=
+            description: "[MANDATORY]"
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Date
+          value: Thu, 14 Mar 2024 02:26:18 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "53"
+        - name: Connection
+          value: keep-alive
+        - name: Strict-Transport-Security
+          value: max-age=15724800; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "code": 500,
+              "message": "Maaf, Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi."
+          }

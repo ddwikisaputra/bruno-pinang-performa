@@ -1,0 +1,44 @@
+info:
+  name: Loan / Admin Fee Scheduled Transfer
+  type: http
+  seq: 4
+
+http:
+  method: POST
+  url: http://172.16.31.93:8882/api/loan/admin-fee-scheduled-transfer
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Basic YWdybzow
+  body:
+    type: json
+    data: |-
+      {
+          "KodeCabang":"0010",
+          "RekeningDebet":"001001005384310", 
+          "GLKredit":"101999990829", 
+          "TanggalTransfer":"2031-10-12", 
+          "Nominal":"1500.00",
+          "KeteranganTransaksi":"REMARK ADMIN FEE"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |-
+  Generated from cURL: curl --location 'http://172.16.31.93:8882/api/loan/admin-fee-scheduled-transfer' \
+  --header 'Content-Type: application/json' \
+  --header 'Authorization: Basic YWdybzow' \
+  --data '{
+      "KodeCabang":"0010",
+      "RekeningDebet":"001001005384310", 
+      "GLKredit":"101999990829", 
+      "TanggalTransfer":"2031-10-12", 
+      "Nominal":"1500.00",
+      "KeteranganTransaksi":"REMARK ADMIN FEE"
+  }'

@@ -1,0 +1,159 @@
+info:
+  name: Facility / Close
+  type: http
+  seq: 4
+
+http:
+  method: POST
+  url: "{{URL}}/facility/close"
+  body:
+    type: form-urlencoded
+    data:
+      - name: NomorFasilitas
+        value: 0010/0000000860/PK1/001
+  auth:
+    type: basic
+    username: pinang-mikro
+    password: "0"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: success
+    request:
+      url: "{{URL}}/loan/inquiry-agf"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: Tanggal
+            value: 20/09/2015
+          - name: noRekening[0]
+            value: "151001000142109"
+          - name: noRekening[1]
+            value: "112001000236103"
+          - name: noRekening[2]
+            value: "011001014522106"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: no-cache
+        - name: Pragma
+          value: no-cache
+        - name: Content-Length
+          value: "212"
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Expires
+          value: "-1"
+        - name: Server
+          value: Microsoft-IIS/10.0
+        - name: X-AspNet-Version
+          value: 4.0.30319
+        - name: X-Powered-By
+          value: ASP.NET
+        - name: Date
+          value: Thu, 02 Mar 2023 03:41:00 GMT
+      body:
+        type: json
+        data: |-
+          {
+              "StatusCode": "00",
+              "StatusDescription": "Success",
+              "Data": [
+                  {
+                      "NoRekening": "112001000236103",
+                      "Nominal": "4.11"
+                  },
+                  {
+                      "NoRekening": "011001014522106",
+                      "Nominal": "13.86"
+                  },
+                  {
+                      "NoRekening": "151001000142109",
+                      "Nominal": "6733.84"
+                  }
+              ]
+          }
+  - name: Fasilitas Sudah Ditutup
+    request:
+      url: "{{URL}}/facility/close"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: NomorFasilitas
+            value: 0010/0000000860/PK1/001
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: no-cache
+        - name: Pragma
+          value: no-cache
+        - name: Content-Length
+          value: "65"
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Expires
+          value: "-1"
+        - name: Server
+          value: Microsoft-IIS/10.0
+        - name: X-AspNet-Version
+          value: 4.0.30319
+        - name: X-Powered-By
+          value: ASP.NET
+        - name: Date
+          value: Wed, 05 Apr 2023 00:31:29 GMT
+      body:
+        type: json
+        data: |-
+          {
+              "StatusCode": "99",
+              "StatusDescription": "Fasilitas Telah Ditutup"
+          }
+  - name: Loan Aktif
+    request:
+      url: "{{URL}}/facility/close"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: NomorFasilitas
+            value: 0020/0000149512/PK3/001
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: no-cache
+        - name: Pragma
+          value: no-cache
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Expires
+          value: "-1"
+        - name: Server
+          value: Microsoft-IIS/10.0
+        - name: X-AspNet-Version
+          value: 4.0.30319
+        - name: X-Powered-By
+          value: ASP.NET
+        - name: Date
+          value: Thu, 01 Aug 2024 02:07:06 GMT
+      body:
+        type: json
+        data: |-
+          {
+              "StatusCode": "99",
+              "StatusDescription": "Penutupan fasilitas tidak diijinkan : LN Account masih aktif"
+          }

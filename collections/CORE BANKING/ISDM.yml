@@ -1,0 +1,25 @@
+info:
+  name: ISDM
+  type: http
+  seq: 23
+
+http:
+  method: POST
+  url: http://172.31.1.91:1945/api/sdm/login
+  body:
+    type: form-urlencoded
+    data:
+      - name: id
+        value: "000585"
+      - name: password
+        value: YnJpRHdpa2kyMDIx
+  auth:
+    type: basic
+    username: digital
+    password: ZkNu7hD56t
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

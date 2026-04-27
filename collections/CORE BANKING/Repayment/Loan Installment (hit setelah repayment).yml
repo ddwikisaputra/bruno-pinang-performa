@@ -1,0 +1,39 @@
+info:
+  name: Loan Installment (hit setelah repayment)
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{BASE_URL}}/api/transaction/loan-installment"
+  body:
+    type: json
+    data: "{\r
+
+      \    \"Rekening\":\"001001008692102\"\r
+
+      }"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 2. loan-installment
+    request:
+      url: "{{BASE_URL}}/api/transaction/loan-installment"
+      method: POST
+      body:
+        type: json
+        data: "{\r
+
+          \    \"Rekening\":\"001001008692102\"\r
+
+          }"
+    response:
+      body:
+        type: text
+        data: '{"StatusCode":"00","StatusDescription":"Success"}'

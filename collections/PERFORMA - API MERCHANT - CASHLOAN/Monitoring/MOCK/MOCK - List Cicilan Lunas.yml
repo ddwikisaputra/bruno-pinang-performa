@@ -1,0 +1,51 @@
+info:
+  name: MOCK - List Cicilan Lunas
+  type: http
+  seq: 4
+
+http:
+  method: POST
+  url: https://pinang-performa.free.mockoapp.net/v/1/monitoring/cashloan/list-cicilan-lunas/200-empty-cicilan-lunas
+  headers:
+    - name: x-key
+      value: performa
+  params:
+    - name: "503"
+      value: ""
+      type: query
+      disabled: true
+    - name: "401"
+      value: ""
+      type: query
+      disabled: true
+    - name: "403"
+      value: ""
+      type: query
+      disabled: true
+    - name: "400"
+      value: ""
+      type: query
+      disabled: true
+    - name: 400-token-empty
+      value: ""
+      type: query
+      disabled: true
+    - name: 500-unregist-wl
+      value: ""
+      type: query
+      disabled: true
+    - name: 200-empty-cicilan-lunas
+      value: ""
+      type: query
+      disabled: true
+    - name: "200"
+      value: ""
+      type: query
+      disabled: true
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

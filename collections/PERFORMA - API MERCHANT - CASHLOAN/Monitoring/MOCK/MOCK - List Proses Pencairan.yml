@@ -1,0 +1,51 @@
+info:
+  name: MOCK - List Proses Pencairan
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: https://pinang-performa.free.mockoapp.net/v/1/monitoring/cashloan/list-proses-pencairan/200-tidak-tersedia
+  headers:
+    - name: x-key
+      value: performa
+  params:
+    - name: "200"
+      value: ""
+      type: query
+      disabled: true
+    - name: 200-tidak-tersedia
+      value: ""
+      type: query
+      disabled: true
+    - name: "503"
+      value: ""
+      type: query
+      disabled: true
+    - name: "403"
+      value: ""
+      type: query
+      disabled: true
+    - name: "400"
+      value: ""
+      type: query
+      disabled: true
+    - name: "401"
+      value: ""
+      type: query
+      disabled: true
+    - name: 400-token-empty
+      value: ""
+      type: query
+      disabled: true
+    - name: 500-unregist-wl
+      value: ""
+      type: query
+      disabled: true
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

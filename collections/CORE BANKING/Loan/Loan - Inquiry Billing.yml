@@ -1,0 +1,451 @@
+info:
+  name: Loan / Inquiry Billing
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: "{{URL}}/loan/inquiry-billing"
+  body:
+    type: form-urlencoded
+    data:
+      - name: noRekening
+        value: "001001120380102"
+  auth:
+    type: basic
+    username: pinang-mikro
+    password: "0"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Loan Close (AGF)
+    request:
+      url: "{{URL}}/loan/inquiry-billing"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: noRekening
+            value: "001001008703107"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: no-cache
+        - name: Pragma
+          value: no-cache
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Expires
+          value: "-1"
+        - name: Server
+          value: Microsoft-IIS/10.0
+        - name: X-AspNet-Version
+          value: 4.0.30319
+        - name: X-Powered-By
+          value: ASP.NET
+        - name: Date
+          value: Tue, 29 Jul 2025 03:19:27 GMT
+      body:
+        type: json
+        data: |-
+          {
+              "StatusCode": "00",
+              "StatusDescription": "Success",
+              "Data": [
+                  {
+                      "SeqNum": "1",
+                      "TanggalJatuhTempo": "2029-05-03",
+                      "BillingPokokAmount": "300000000.00",
+                      "BillingBungaAmount": "293666390.66",
+                      "BillingPenaltyAmount": "24101310.53",
+                      "BillingFeeAmount": "0.00",
+                      "BillingMiscAmount": "0.00",
+                      "BillingPokok": "0.00",
+                      "BillingBunga": "0.00",
+                      "BillingPenalty": "0.00",
+                      "BillingFee": "0.00",
+                      "BillingMisc": "0.00",
+                      "BillingPokokPaid": "300000000.00",
+                      "BillingBungaPaid": "293666390.66",
+                      "BillingPenaltyPaid": "24101310.53",
+                      "BillingFeePaid": "0.00",
+                      "BillingMiscPaid": "0.00",
+                      "TotalTunggakan": "0.00",
+                      "TotalPembayaran": "617767701.19",
+                      "TanggalPembayaran": "2030-03-09"
+                  },
+                  {
+                      "SeqNum": "2",
+                      "TanggalJatuhTempo": "2029-06-03",
+                      "BillingPokokAmount": "0.00",
+                      "BillingBungaAmount": "5638599.81",
+                      "BillingPenaltyAmount": "414420.17",
+                      "BillingFeeAmount": "0.00",
+                      "BillingMiscAmount": "0.00",
+                      "BillingPokok": "0.00",
+                      "BillingBunga": "0.00",
+                      "BillingPenalty": "0.00",
+                      "BillingFee": "0.00",
+                      "BillingMisc": "0.00",
+                      "BillingPokokPaid": "0.00",
+                      "BillingBungaPaid": "5638599.81",
+                      "BillingPenaltyPaid": "414420.17",
+                      "BillingFeePaid": "0.00",
+                      "BillingMiscPaid": "0.00",
+                      "TotalTunggakan": "0.00",
+                      "TotalPembayaran": "6053019.98",
+                      "TanggalPembayaran": "2030-03-09"
+                  },
+                  {
+                      "SeqNum": "3",
+                      "TanggalJatuhTempo": "2029-07-03",
+                      "BillingPokokAmount": "0.00",
+                      "BillingBungaAmount": "3303673.01",
+                      "BillingPenaltyAmount": "217104.37",
+                      "BillingFeeAmount": "0.00",
+                      "BillingMiscAmount": "0.00",
+                      "BillingPokok": "0.00",
+                      "BillingBunga": "0.00",
+                      "BillingPenalty": "0.00",
+                      "BillingFee": "0.00",
+                      "BillingMisc": "0.00",
+                      "BillingPokokPaid": "0.00",
+                      "BillingBungaPaid": "3303673.01",
+                      "BillingPenaltyPaid": "217104.37",
+                      "BillingFeePaid": "0.00",
+                      "BillingMiscPaid": "0.00",
+                      "TotalTunggakan": "0.00",
+                      "TotalPembayaran": "3520777.38",
+                      "TanggalPembayaran": "2030-03-09"
+                  },
+                  {
+                      "SeqNum": "4",
+                      "TanggalJatuhTempo": "2029-08-03",
+                      "BillingPokokAmount": "0.00",
+                      "BillingBungaAmount": "4173060.64",
+                      "BillingPenaltyAmount": "242960.52",
+                      "BillingFeeAmount": "0.00",
+                      "BillingMiscAmount": "0.00",
+                      "BillingPokok": "0.00",
+                      "BillingBunga": "0.00",
+                      "BillingPenalty": "0.00",
+                      "BillingFee": "0.00",
+                      "BillingMisc": "0.00",
+                      "BillingPokokPaid": "0.00",
+                      "BillingBungaPaid": "4173060.64",
+                      "BillingPenaltyPaid": "242960.52",
+                      "BillingFeePaid": "0.00",
+                      "BillingMiscPaid": "0.00",
+                      "TotalTunggakan": "0.00",
+                      "TotalPembayaran": "4416021.16",
+                      "TanggalPembayaran": "2030-03-09"
+                  },
+                  {
+                      "SeqNum": "5",
+                      "TanggalJatuhTempo": "2029-09-03",
+                      "BillingPokokAmount": "0.00",
+                      "BillingBungaAmount": "6075777.59",
+                      "BillingPenaltyAmount": "296618.80",
+                      "BillingFeeAmount": "0.00",
+                      "BillingMiscAmount": "0.00",
+                      "BillingPokok": "0.00",
+                      "BillingBunga": "0.00",
+                      "BillingPenalty": "0.00",
+                      "BillingFee": "0.00",
+                      "BillingMisc": "0.00",
+                      "BillingPokokPaid": "0.00",
+                      "BillingBungaPaid": "6075777.59",
+                      "BillingPenaltyPaid": "296618.80",
+                      "BillingFeePaid": "0.00",
+                      "BillingMiscPaid": "0.00",
+                      "TotalTunggakan": "0.00",
+                      "TotalPembayaran": "6372396.39",
+                      "TanggalPembayaran": "2030-03-09"
+                  },
+                  {
+                      "SeqNum": "6",
+                      "TanggalJatuhTempo": "2029-10-03",
+                      "BillingPokokAmount": "0.00",
+                      "BillingBungaAmount": "4803987.67",
+                      "BillingPenaltyAmount": "190739.94",
+                      "BillingFeeAmount": "0.00",
+                      "BillingMiscAmount": "0.00",
+                      "BillingPokok": "0.00",
+                      "BillingBunga": "0.00",
+                      "BillingPenalty": "0.00",
+                      "BillingFee": "0.00",
+                      "BillingMisc": "0.00",
+                      "BillingPokokPaid": "0.00",
+                      "BillingBungaPaid": "4803987.67",
+                      "BillingPenaltyPaid": "190739.94",
+                      "BillingFeePaid": "0.00",
+                      "BillingMiscPaid": "0.00",
+                      "TotalTunggakan": "0.00",
+                      "TotalPembayaran": "4994727.61",
+                      "TanggalPembayaran": "2030-03-09"
+                  },
+                  {
+                      "SeqNum": "7",
+                      "TanggalJatuhTempo": "2029-11-03",
+                      "BillingPokokAmount": "0.00",
+                      "BillingBungaAmount": "5360395.77",
+                      "BillingPenaltyAmount": "164062.26",
+                      "BillingFeeAmount": "0.00",
+                      "BillingMiscAmount": "0.00",
+                      "BillingPokok": "0.00",
+                      "BillingBunga": "0.00",
+                      "BillingPenalty": "0.00",
+                      "BillingFee": "0.00",
+                      "BillingMisc": "0.00",
+                      "BillingPokokPaid": "0.00",
+                      "BillingBungaPaid": "5360395.77",
+                      "BillingPenaltyPaid": "164062.26",
+                      "BillingFeePaid": "0.00",
+                      "BillingMiscPaid": "0.00",
+                      "TotalTunggakan": "0.00",
+                      "TotalPembayaran": "5524458.03",
+                      "TanggalPembayaran": "2030-03-09"
+                  },
+                  {
+                      "SeqNum": "8",
+                      "TanggalJatuhTempo": "2029-12-03",
+                      "BillingPokokAmount": "0.00",
+                      "BillingBungaAmount": "3581877.05",
+                      "BillingPenaltyAmount": "79319.13",
+                      "BillingFeeAmount": "0.00",
+                      "BillingMiscAmount": "0.00",
+                      "BillingPokok": "0.00",
+                      "BillingBunga": "0.00",
+                      "BillingPenalty": "0.00",
+                      "BillingFee": "0.00",
+                      "BillingMisc": "0.00",
+                      "BillingPokokPaid": "0.00",
+                      "BillingBungaPaid": "3581877.05",
+                      "BillingPenaltyPaid": "79319.13",
+                      "BillingFeePaid": "0.00",
+                      "BillingMiscPaid": "0.00",
+                      "TotalTunggakan": "0.00",
+                      "TotalPembayaran": "3661196.18",
+                      "TanggalPembayaran": "2030-03-09"
+                  },
+                  {
+                      "SeqNum": "9",
+                      "TanggalJatuhTempo": "2030-01-03",
+                      "BillingPokokAmount": "0.00",
+                      "BillingBungaAmount": "3576909.12",
+                      "BillingPenaltyAmount": "55967.51",
+                      "BillingFeeAmount": "0.00",
+                      "BillingMiscAmount": "0.00",
+                      "BillingPokok": "0.00",
+                      "BillingBunga": "0.00",
+                      "BillingPenalty": "0.00",
+                      "BillingFee": "0.00",
+                      "BillingMisc": "0.00",
+                      "BillingPokokPaid": "0.00",
+                      "BillingBungaPaid": "3576909.12",
+                      "BillingPenaltyPaid": "55967.51",
+                      "BillingFeePaid": "0.00",
+                      "BillingMiscPaid": "0.00",
+                      "TotalTunggakan": "0.00",
+                      "TotalPembayaran": "3632876.63",
+                      "TanggalPembayaran": "2030-03-09"
+                  },
+                  {
+                      "SeqNum": "10",
+                      "TanggalJatuhTempo": "2030-02-03",
+                      "BillingPokokAmount": "0.00",
+                      "BillingBungaAmount": "6195717.48",
+                      "BillingPenaltyAmount": "42032.48",
+                      "BillingFeeAmount": "0.00",
+                      "BillingMiscAmount": "0.00",
+                      "BillingPokok": "0.00",
+                      "BillingBunga": "0.00",
+                      "BillingPenalty": "0.00",
+                      "BillingFee": "0.00",
+                      "BillingMisc": "0.00",
+                      "BillingPokokPaid": "0.00",
+                      "BillingBungaPaid": "6195717.48",
+                      "BillingPenaltyPaid": "42032.48",
+                      "BillingFeePaid": "0.00",
+                      "BillingMiscPaid": "0.00",
+                      "TotalTunggakan": "0.00",
+                      "TotalPembayaran": "6237749.96",
+                      "TanggalPembayaran": "2030-03-09"
+                  },
+                  {
+                      "SeqNum": "11",
+                      "TanggalJatuhTempo": "2030-03-03",
+                      "BillingPokokAmount": "0.00",
+                      "BillingBungaAmount": "660024.88",
+                      "BillingPenaltyAmount": "1086.30",
+                      "BillingFeeAmount": "0.00",
+                      "BillingMiscAmount": "0.00",
+                      "BillingPokok": "0.00",
+                      "BillingBunga": "0.00",
+                      "BillingPenalty": "0.00",
+                      "BillingFee": "0.00",
+                      "BillingMisc": "0.00",
+                      "BillingPokokPaid": "0.00",
+                      "BillingBungaPaid": "660024.88",
+                      "BillingPenaltyPaid": "1086.30",
+                      "BillingFeePaid": "0.00",
+                      "BillingMiscPaid": "0.00",
+                      "TotalTunggakan": "0.00",
+                      "TotalPembayaran": "661111.18",
+                      "TanggalPembayaran": "2030-03-09"
+                  }
+              ]
+          }
+  - name: Loan Close (Paid Off)
+    request:
+      url: "{{URL}}/loan/inquiry-billing"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: noRekening
+            value: "001001119807103"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: no-cache
+        - name: Pragma
+          value: no-cache
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Expires
+          value: "-1"
+        - name: Server
+          value: Microsoft-IIS/10.0
+        - name: X-AspNet-Version
+          value: 4.0.30319
+        - name: X-Powered-By
+          value: ASP.NET
+        - name: Date
+          value: Tue, 29 Jul 2025 03:21:03 GMT
+      body:
+        type: json
+        data: |-
+          {
+              "StatusCode": "99",
+              "StatusDescription": "Data tidak ditemukan"
+          }
+  - name: Loan Close (Dengan Billing Tambahan , Seq 3)
+    request:
+      url: "{{URL}}/loan/inquiry-billing"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: noRekening
+            value: "001001120037107"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: no-cache
+        - name: Pragma
+          value: no-cache
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Content-Type
+          value: application/json
+        - name: Expires
+          value: "-1"
+        - name: Server
+          value: Microsoft-IIS/10.0
+        - name: X-AspNet-Version
+          value: 4.0.30319
+        - name: X-Powered-By
+          value: ASP.NET
+        - name: Date
+          value: Mon, 01 Sep 2025 03:28:05 GMT
+      body:
+        type: json
+        data: |-
+          {
+              "StatusCode": "00",
+              "StatusDescription": "Success",
+              "Data": [
+                  {
+                      "SeqNum": "1",
+                      "TanggalJatuhTempo": "2032-03-29",
+                      "BillingPokokAmount": "4948453.55",
+                      "BillingBungaAmount": "208333.39",
+                      "BillingPenaltyAmount": "153987.30",
+                      "BillingFeeAmount": "0.00",
+                      "BillingMiscAmount": "0.00",
+                      "BillingPokok": "0.00",
+                      "BillingBunga": "0.00",
+                      "BillingPenalty": "0.00",
+                      "BillingFee": "0.00",
+                      "BillingMisc": "0.00",
+                      "BillingPokokPaid": "4948453.55",
+                      "BillingBungaPaid": "208333.39",
+                      "BillingPenaltyPaid": "153987.30",
+                      "BillingFeePaid": "0.00",
+                      "BillingMiscPaid": "0.00",
+                      "TotalTunggakan": "0.00",
+                      "TotalPembayaran": "5310774.24",
+                      "TanggalPembayaran": "2032-06-23"
+                  },
+                  {
+                      "SeqNum": "2",
+                      "TanggalJatuhTempo": "2032-04-29",
+                      "BillingPokokAmount": "5051546.45",
+                      "BillingBungaAmount": "208333.33",
+                      "BillingPenaltyAmount": "100449.25",
+                      "BillingFeeAmount": "0.00",
+                      "BillingMiscAmount": "0.00",
+                      "BillingPokok": "0.00",
+                      "BillingBunga": "0.00",
+                      "BillingPenalty": "0.00",
+                      "BillingFee": "0.00",
+                      "BillingMisc": "0.00",
+                      "BillingPokokPaid": "5051546.45",
+                      "BillingBungaPaid": "208333.33",
+                      "BillingPenaltyPaid": "100449.25",
+                      "BillingFeePaid": "0.00",
+                      "BillingMiscPaid": "0.00",
+                      "TotalTunggakan": "0.00",
+                      "TotalPembayaran": "5360329.03",
+                      "TanggalPembayaran": "2032-06-23"
+                  },
+                  {
+                      "SeqNum": "3",
+                      "TanggalJatuhTempo": "2032-05-29",
+                      "BillingPokokAmount": "0.00",
+                      "BillingBungaAmount": "376343.95",
+                      "BillingPenaltyAmount": "1808.50",
+                      "BillingFeeAmount": "0.00",
+                      "BillingMiscAmount": "0.00",
+                      "BillingPokok": "0.00",
+                      "BillingBunga": "0.00",
+                      "BillingPenalty": "0.00",
+                      "BillingFee": "0.00",
+                      "BillingMisc": "0.00",
+                      "BillingPokokPaid": "0.00",
+                      "BillingBungaPaid": "376343.95",
+                      "BillingPenaltyPaid": "1808.50",
+                      "BillingFeePaid": "0.00",
+                      "BillingMiscPaid": "0.00",
+                      "TotalTunggakan": "0.00",
+                      "TotalPembayaran": "378152.45",
+                      "TanggalPembayaran": ""
+                  }
+              ]
+          }

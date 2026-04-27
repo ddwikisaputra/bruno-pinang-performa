@@ -1,0 +1,30 @@
+info:
+  name: Req Send SMS OTP
+  type: http
+  seq: 8
+
+http:
+  method: POST
+  url: http://10.99.0.112:4343/api/reqotp
+  body:
+    type: json
+    data: |-
+      {
+          "userId" :"999941",
+          "application" :"PINANG-PERFORMA",
+          "client" :"asb",
+          "phone" :"087877278830",
+          "transactionDetail" :"OTP",
+          "mataUang" :"IDR",
+          "nominal" :"0",
+          "tokenType" :"OTP"
+      }
+  auth:
+    type: bearer
+    token: _OHZ6vZn0Dlwfyhr1ixNFRWu9Nci5pfTm_Ec7bbesTC1wuXz06kUmx1kiem34F5q3ClvgzWBIXNZYMknSAWw4AeWj1cvUsQ36-VhSA-x-bE57zP_7X3rbpJk-CuaiWfqrqx0O6ip4_6h8bsUe-t770mge04mOSeOtCbNIebEvpw0RsH-Gt0vQNUNlCDXJsklZ2d41_pFj_sU65-pbQ5V4YQF6w0Mj1eaHcxkfQ5MCKDGYyX4lF2kJRe8JGugWmns-X8wFhNKYirMWmEPV1xzKk1OZH5YA_iaEgs4_J9C2iPOoyzFxkGDmkoaWrTaI2CS
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

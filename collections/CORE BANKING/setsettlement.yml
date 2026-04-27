@@ -1,0 +1,39 @@
+info:
+  name: setsettlement
+  type: http
+  seq: 13
+
+http:
+  method: POST
+  url: "{{URL}}/loan/setsettlement"
+  body:
+    type: json
+    data: "{\r
+
+      \    \"KodeCabang\": \"0010\",\r
+
+      \    \"RekeningSumber\": \"031001001581304\", //harus 15 digit\r
+
+      \    \"RekeningTujuan\": \"harus 15 digit\", //harus 15 digit\r
+
+      \    \"JenisSettlement\": \"AGF\", //diisi AGF/AFT\r
+
+      \    \"TanggalEfektif\": \"25/09/2021\", //dd/mm/yyyy\r
+
+      \    \"TanggalExpired\": \"26/10/2022\", //dd/mm/yyyy\r
+
+      \    \"Nominal\": \"1000000.00\", //decimal\r
+
+      \    \"Keterangan\": \"\"\r
+
+      }"
+  auth:
+    type: basic
+    username: pinang-mikro
+    password: "0"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

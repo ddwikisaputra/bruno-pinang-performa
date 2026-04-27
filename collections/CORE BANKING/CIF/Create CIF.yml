@@ -1,0 +1,237 @@
+info:
+  name: Create CIF
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: "{{URL}}/cif/create"
+  body:
+    type: json
+    data: "{\r
+
+      \    \"CIF\":\"\",\r
+
+      \    \"BranchCode\":\"0010\",\r
+
+      \    \"ParentCIF\":\"\",\r
+
+      \    \"TitleBeforeName\":\"\",\r
+
+      \    \"TitleAfterName\":\"\",\r
+
+      \    \"NamaCetakan\":\"SUNARDI PRAMONO\",\r
+
+      \    \"Negara\":\"ID\",\r
+
+      \    \"FederalWhCode\":\"1\",\r
+
+      \    \"NoId\":\"1122223122222224\",\r
+
+      \    // \"NPWP\":\"\",\r
+
+      \    \"Email\":\"sunar98.harsa09@gmail.com\",\r
+
+      \    \"NamaBank1\":\"\",\r
+
+      \    \"JenisBank1\":\"\",\r
+
+      \    \"NamaBank2\":\"\",\r
+
+      \    \"JenisBank2\":\"\",\r
+
+      \    \"NamaSesuaiId\":\"SUNARDI PRAMONO\",\r
+
+      \    \"NamaLengkap\":\"SUNARDI PRAMONO\",\r
+
+      \    \"JenisKelamin\":\"M\",\r
+
+      \    \"Kewarganegaraan\":\"0\",\r
+
+      \    \"TempatLahir\":\"WONOGIRI\",\r
+
+      \    \"TanggalLahir\":\"31/01/1992\",\r
+
+      \    \"NamaGadisIbuKandung\":\"MARILA\",\r
+
+      \    \"JenisKartuIdentitas\":\"KE\",\r
+
+      \    \"TanggalIdTerbit\":\"31/01/2009\",\r
+
+      \    \"TanggalIdExpired\":\"31/01/2092\",\r
+
+      \    \"PendidikanTerakhir\":\"S1\",\r
+
+      \    \"Agama\":\"ISL\",\r
+
+      \    \"StatusPerkawinan\":\"K\",\r
+
+      \    \"LokasiDati2\":\"\",\r
+
+      \    \"AlamatId1\":\"SENO\",\r
+
+      \    \"AlamatId2\":\"\",\r
+
+      \    \"RtId\":\"006\",\r
+
+      \    \"RwId\":\"012\",\r
+
+      \    \"KodePosId\":\"80606\",\r
+
+      \    \"KelurahanId\":\"CIBALIUNG\",\r
+
+      \    \"KecamatanId\":\"CIBALIUNG\",\r
+
+      \    \"KotaId\":\"PANDEGLANG\",\r
+
+      \    \"PropinsiId\":\"BANTEN\",\r
+
+      \    \"AlamatDomisili1\":\"OK\",\r
+
+      \    \"AlamatDomisili2\":\"\",\r
+
+      \    \"RtDomisili\":\"006\",\r
+
+      \    \"RwDomisili\":\"012\",\r
+
+      \    \"KodePosDomisili\":\"80606\",\r
+
+      \    \"KelurahanDomisili\":\"CIBALIUNG\",\r
+
+      \    \"KecamatanDomisili\":\"CIBALIUNG\",\r
+
+      \    \"KotaDomisili\":\"PANDEGLANG\",\r
+
+      \    \"PropinsiDomisili\":\"BANTEN\",\r
+
+      \    \"NoTelp\":\"0210809899979\",\r
+
+      \    \"NoHp\":\"081513523445\",\r
+
+      \    \"JenisNasabahTerkait\":\"N\",\r
+
+      \    \"JenisNasabahPrioritas\":\"N\",\r
+
+      \    \"JenisPekerjaan\":\"28\",\r
+
+      \    \"NamaTempatKerja\":\"PT Perkebunan Nusantara V\",\r
+
+      \    \"BidangPekerjaan\":\"0072\",\r
+
+      \    \"Jabatan\":\"61\",\r
+
+      \    \"GolonganDebitur\":\"9000\",\r
+
+      \    \"LamaBekerja\":\"09\",\r
+
+      \    \"AlamatTempatKerja1\":\"OK\",\r
+
+      \    \"AlamatTempatKerja2\":\"\",\r
+
+      \    \"RtTempatKerja\":\"001\",\r
+
+      \    \"RwTempatKerja\":\"004\",\r
+
+      \    \"KodePosTempatKerja\":\"67153\",\r
+
+      \    \"KelurahanTempatKerja\":\"Angantaka\",\r
+
+      \    \"KecamatanTempatKerja\":\"Abiansemal\",\r
+
+      \    \"KotaTempatKerja\":\"Badung\",\r
+
+      \    \"PropinsiTempatKerja\":\"Bali\",\r
+
+      \    \"TelpKantor\":\"081292827221\",\r
+
+      \    \"FacsKantor\":\"0210486553\",\r
+
+      \    \"AlamatSuratMenyurat\":\"1\",\r
+
+      \    \"TujuanPembukaanRekening\":\"T2\",\r
+
+      \    \"PenghasilanPerbulan\":\"G5\",\r
+
+      \    \"NominalPenghasilanPerbulan\":\"1250000000\",\r
+
+      \    \"TransaksiNormalPerhari\":\"N1\",\r
+
+      \    \"SumberUtama\":\"00011\",\r
+
+      \    \"Penerbit1\":\"\",\r
+
+      \    \"TipeKartu1\":\"\",\r
+
+      \    \"Penerbit2\":\"\",\r
+
+      \    \"TipeKartu2\":\"\",\r
+
+      \    \"KeteranganPendidikan\":\"\",\r
+
+      \    \"KeteranganAgama\":\"\",\r
+
+      \    \"PboName\":\"\",\r
+
+      \    \"PboTelp\":\"\",\r
+
+      \    \"KeteranganPekerjaan\":\"\",\r
+
+      \    \"KetBidPekerjaan\":\"\",\r
+
+      \    \"KeteranganJabatan\":\"\",\r
+
+      \    \"KetTujBukaRek\":\"\",\r
+
+      \    \"KetSumberUtama\":\"\",\r
+
+      \    \"KetJenisProdBank1\":\"\",\r
+
+      \    \"KetJenisProdBank2\":\"\",\r
+
+      \    \"FaktorResiko\":\"\",\r
+
+      \    \"JumlahTanggungan\":\"0\",\r
+
+      \    \"HubunganDenganPelapor\":\"\",\r
+
+      \    \"IdentitasPasangan\":\"3516161171000002\",\r
+
+      \    \"NamaPasangan\":\"Irmi\",\r
+
+      \    \"TanggalLahirPasangan\":\"30/12/1994\",\r
+
+      \    \"PerjanjianPisahHarta\":\"T\",\r
+
+      \    \"PEP\":\"T\",\r
+
+      \    \"MelanggarBMPK\":\"\",\r
+
+      \    \"MelampauiBMPK\":\"\",\r
+
+      \    \"FlagNPWP\":\"Y\",\r
+
+      \    \"KetNPWP\":\"\",\r
+
+      \    \"KeterkaitanPEP\":\"\",\r
+
+      \    \"HubunganDalamKeluarga\" : \"Pembantu\",\r
+
+      \    \"NamaKerabat\" : \"sohib\",\r
+
+      \    \"HPKerabat\" : \"081554261628\",\r
+
+      \    \"HubunganDenganKerabat\" : \"\",\r
+
+      \    \"AlamatKerabat\" : \"\"\r
+
+      }"
+  auth:
+    type: basic
+    username: pinang-mikro
+    password: "0"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -1,0 +1,66 @@
+info:
+  name: Loan / Interest to Billing
+  type: http
+  seq: 6
+
+http:
+  method: POST
+  url: "{{URL}}/loan/interest-to-bill"
+  body:
+    type: form-urlencoded
+    data:
+      - name: NomorRekening
+        value: "001001120263106"
+  auth:
+    type: basic
+    username: pinang-mikro
+    password: "0"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: error - loan belum jatuh tempo
+    request:
+      url: "{{URL}}/loan/interest-to-bill"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: NomorRekening
+            value: "001001120263106"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: no-cache
+        - name: Pragma
+          value: no-cache
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Content-Type
+          value: application/json
+        - name: Expires
+          value: "-1"
+        - name: Server
+          value: Microsoft-IIS/10.0
+        - name: X-AspNet-Version
+          value: 4.0.30319
+        - name: X-Powered-By
+          value: ASP.NET
+        - name: Date
+          value: Thu, 11 Sep 2025 04:54:41 GMT
+      body:
+        type: json
+        data: |-
+          {
+              "StatusCode": "99",
+              "StatusDescription": "Validation Error",
+              "Validation": [
+                  "Pinjaman harus sudah jatuh tempo"
+              ]
+          }

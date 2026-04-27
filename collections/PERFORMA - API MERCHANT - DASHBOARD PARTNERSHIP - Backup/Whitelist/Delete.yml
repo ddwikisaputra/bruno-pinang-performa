@@ -1,0 +1,240 @@
+info:
+  name: Delete
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: "{{base-url-local}}/v/1/partnership/whitelist/delete"
+  body:
+    type: form-urlencoded
+    data:
+      - name: id
+        value: MTAzNzU=
+        description: MANDATORY | BASE64
+  auth:
+    type: bearer
+    token: "{{tokenPartnership}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 503 - Error Service Unavailable
+    request:
+      url: "{{base-url-local}}/v/1/partnership/whitelist/delete"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: MTAzNzU=
+            description: MANDATORY | BASE64
+    response:
+      status: 503
+      statusText: Service Unavailable
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Tue, 24 Mar 2026 10:13:10 GMT
+        - name: Content-Length
+          value: "122"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Jam operasional Pinang Performa dari jam xx:xx - xx:xx WIB setiap hari. Kembali lagi nanti, ya!",
+              "status": 503
+          }
+  - name: 401 - Unauthorized / Expired
+    request:
+      url: "{{base-url-local}}/v/1/partnership/whitelist/delete"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: MTAzNzU=
+            description: MANDATORY | BASE64
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Tue, 24 Feb 2026 02:47:24 GMT
+        - name: Content-Length
+          value: "50"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Unauthorized / Expired.",
+              "status": 401
+          }
+  - name: 400 - Error Validation Parameter
+    request:
+      url: "{{base-url-local}}/v/1/partnership/whitelist/delete"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: ""
+            description: MANDATORY | BASE64
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Tue, 24 Feb 2026 02:48:18 GMT
+        - name: Content-Length
+          value: "48"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "id tidak boleh kosong",
+              "status": 400
+          }
+  - name: 400 - Partnerhsip member not found
+    request:
+      url: "{{base-url-local}}/v/1/partnership/whitelist/delete"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: MA==
+            description: MANDATORY | BASE64
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Tue, 24 Feb 2026 02:48:44 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Data partnership member tidak ditemukan.",
+              "status": 400
+          }
+  - name: 200 - Success Deleted a whitelist
+    request:
+      url: "{{base-url-local}}/v/1/partnership/whitelist/delete"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: MTAzNzU=
+            description: MANDATORY | BASE64
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Tue, 24 Feb 2026 02:49:52 GMT
+        - name: Content-Length
+          value: "68"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Data partnership member berhasil dihapus.",
+              "status": 200
+          }

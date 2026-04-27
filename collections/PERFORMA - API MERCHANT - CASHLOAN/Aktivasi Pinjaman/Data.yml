@@ -1,0 +1,611 @@
+info:
+  name: Data
+  type: http
+  seq: 14
+
+http:
+  method: POST
+  url: "{{base-url-local}}/v/1/aktivasi/cashloan/data"
+  headers:
+    - name: Api-Key
+      value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
+  body:
+    type: form-urlencoded
+    data:
+      - name: kodePrakarsa
+        value: Q0wtTUNBLTI0NC1VbUY1WVZCcFVHVnlWRzl3L2w5Nm0yVDBsVU5xS1crS0hPNCsxNWRmRkpqamFLRTRqTkNkbjAvYUh6dnZnWENSNjFiamJ5UCszWG95Nng0PQ==
+        description: Kode Cashloan Prakarsa [MANDATORY] [Base64]
+      - name: nomorIdentitas
+        value: MzI3NjA5MTcxMTAwMDA1OA==
+        description: Nomor Identitas [MANDATORY] [Base64]
+      - name: kodePartnership
+        value: TUNBLTI0NA==
+  auth:
+    type: bearer
+    token: "{{tokenMerchant}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Error - Service Unavailable
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cashloan/data"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
+      body:
+        type: form-urlencoded
+    response:
+      status: 503
+      statusText: Service Unavailable
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Mon, 21 Jul 2025 03:43:49 GMT
+        - name: Content-Length
+          value: "122"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Jam operasional Pinang Performa dari jam 06:00 - 07:00 WIB setiap hari. Kembali lagi nanti, ya!",
+              "status": 503
+          }
+  - name: Error - Token Expired
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cashloan/data"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3NjA5MTcxMTAwMDA1OA==
+            description: Nomor Identitas [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUNBLTI0NA==
+            description: Kode Partnership [MANDATTORY] [Base64]
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Mon, 20 Oct 2025 04:15:13 GMT
+        - name: Content-Length
+          value: "69"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "token has invalid claims: token is expired",
+              "status": 401
+          }
+  - name: Error - Unauthorized / Expired
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cashloan/data"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3NjA5MTcxMTAwMDA1OA==
+            description: Nomor Identitas [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUNBLTI0NA==
+            description: Kode Partnership [MANDATTORY] [Base64]
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Mon, 20 Oct 2025 04:16:13 GMT
+        - name: Content-Length
+          value: "50"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Unauthorized / Expired.",
+              "status": 401
+          }
+  - name: Error - Parameter Token / API Key Empty
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cashloan/data"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+          disabled: true
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3NjA5MTcxMTAwMDA1OA==
+            description: Nomor Identitas [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUNBLTI0NA==
+            description: Kode Partnership [MANDATTORY] [Base64]
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Mon, 20 Oct 2025 04:01:17 GMT
+        - name: Content-Length
+          value: "51"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "parameter token is empty",
+              "status": 401
+          }
+  - name: Error - Access Forbidden
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cashloan/data"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3NjA5MTcxMTAwMDA1OA==
+            description: Nomor Identitas [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATTORY] [Base64]
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Mon, 20 Oct 2025 04:05:52 GMT
+        - name: Content-Length
+          value: "76"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "you don't have permission to access this resource",
+              "status": 403
+          }
+  - name: Error - Access Forbidden (No Data Partnership)
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cashloan/data"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3NjA5MTcxMTAwMDA1OA==
+            description: Nomor Identitas [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUNBLTI0NA==
+            description: Kode Partnership [MANDATTORY] [Base64]
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Mon, 20 Oct 2025 04:07:37 GMT
+        - name: Content-Length
+          value: "70"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "your access to this resource is unactivated",
+              "status": 403
+          }
+  - name: Error - Parameter Validation (Total Mandatory)
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cashloan/data"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3NjA5MTcxMTAwMDA1OA==
+            description: Nomor Identitas [MANDATORY] [Base64]
+            disabled: true
+          - name: kodePartnership
+            value: TUNBLTI0NA==
+            description: Kode Partnership [MANDATTORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Mon, 20 Oct 2025 03:59:28 GMT
+        - name: Content-Length
+          value: "63"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Parameter tidak terpenuhi.",
+              "status": 400
+          }
+  - name: Error - Parameter Validation (Tidak Sesuai)
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cashloan/data"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3NjA5MTcxMTAwMDA1OA=
+            description: Nomor Identitas [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUNBLTI0NA==
+            description: Kode Partnership [MANDATTORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Mon, 20 Oct 2025 04:00:13 GMT
+        - name: Content-Length
+          value: "66"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Nomor Identitas tidak sesuai.",
+              "status": 400
+          }
+  - name: Error - Unregistered Whitelist
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cashloan/data"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3NjA5MTcxMTAwMDA1OA==
+            description: Nomor Identitas [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUNBLTI0NA==
+            description: Kode Partnership [MANDATTORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Tue, 21 Oct 2025 10:46:00 GMT
+        - name: Content-Length
+          value: "79"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Maaf, anda tidak terdaftar pada whitelist.",
+              "status": 500
+          }
+  - name: Success - Data Not Found
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cashloan/data"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3NjA5MTcxMTAwMDA1OA==
+            description: Nomor Identitas [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUNBLTI0NA==
+            description: Kode Partnership [MANDATTORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Mon, 20 Oct 2025 03:38:39 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Data aktivasi tidak ditemukan.",
+              "status": 200
+          }
+  - name: Success - Data Found
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cashloan/data"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3NjA5MTcxMTAwMDA1OA==
+            description: Nomor Identitas [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUNBLTI0NA==
+            description: Kode Partnership [MANDATTORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Mon, 20 Oct 2025 03:37:55 GMT
+        - name: Content-Length
+          value: "1343"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "alamat": "Jl.Peninggaran Timur Ii",
+                  "alamatUsaha": "Jl. Peninggaran Timur II",
+                  "deskripsiAgama": "Islam",
+                  "deskripsiArea": "12240, Kebayoran Lama Utara, Kebayoran Lama, Jakarta Selatan, DKI Jakarta",
+                  "deskripsiAreaUsaha": "12240, Kebayoran Lama Utara, Kebayoran Lama, Jakarta Selatan, DKI Jakarta",
+                  "deskripsiPendidikanTerakhir": "Diploma 3",
+                  "email": "aGFycnlAYmFua3JheWEuY28uaWQ=",
+                  "jenisKelamin": "Laki-Laki",
+                  "jumlahTanggungan": 0,
+                  "kodeAgama": "ISL",
+                  "kodeArea": 7673,
+                  "kodeAreaUsaha": 7673,
+                  "kodePartnership": "MCA-244",
+                  "kodePendidikanTerakhir": "D3",
+                  "kodePrakarsa": "CL-MCA-244-UmF5YVBpUGVyVG9w/l96m2T0lUNqKW+KHO4+15dfFJjjaKE4jNCdn0/aHzvvgXCR61bjbyP+3Xoy6x4=",
+                  "kodeTipePinjaman": "CHILD-MCA-730",
+                  "latitude": "-10",
+                  "latitudeUsaha": "32",
+                  "longitude": "-20",
+                  "longitudeUsaha": "12",
+                  "nama": "SGFycnkgUGFtdW5na2Fz",
+                  "namaIbuKandung": "V2luYXJuaQ==",
+                  "namaPartnership": "MAJOO CASHLOAN",
+                  "namaPasangan": "VGVzdGE=",
+                  "nomorIdentitas": "MzI3NjA5MTcxMTAwMDA1OA==",
+                  "nomorIdentitasPasangan": "MzI3NjA5MTcxMTAwMDAwMQ==",
+                  "nomorTelepon": "KzYyODk1NDIxNTgzNzIw",
+                  "rt": "003",
+                  "rtUsaha": "003",
+                  "rw": "009",
+                  "rwUsaha": "001",
+                  "statusPernikahan": "Kawin",
+                  "statusPrakarsa": 11,
+                  "tanggalLahir": "MjAyNS0wOS0xNw==",
+                  "tanggalLahirPasangan": "MjAyNS0xMC0yMA==",
+                  "tempatLahir": "Jakarta",
+                  "tempatLahirPasangan": "SmFrYXJ0YQ==",
+                  "updatedAt": "2025-09-16 15:21:13"
+              },
+              "message": "Data aktivasi ditemukan.",
+              "status": 200
+          }

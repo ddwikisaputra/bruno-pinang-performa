@@ -1,0 +1,21 @@
+info:
+  name: Dukcapil Verify
+  type: http
+  seq: 31
+
+http:
+  method: POST
+  url: http://172.31.1.91:1903/api/dukcapil/verifyelement
+  body:
+    type: json
+    data: '{"NIK":"3203064102680031","NO_KK":"","NAMA_LGKP":"Eni rohaeni","AGAMA":"","ALAMAT":"","TMPT_LHR":" Cianjur","TGL_LHR":"01-02-1968","NAMA_LGKP_AYAH":null,"NAMA_LGKP_IBU":null,"KAB_NAME":"","KEC_NAME":"","KEL_NAME":"","PROP_NAME":"","NO_KAB":null,"NO_KEC":null,"NO_KEL":null,"NO_PROP":null,"NO_RT":"","NO_RW":"","PDDK_AKH":"","JENIS_KLMIN":"","JENIS_PKRJN":"","STATUS_KAWIN":"","TRESHOLD":"80","USER_ID":"0012891","PASSWORD":"DIGITAL","IP_USER":"131.101.1.1"}'
+  auth:
+    type: basic
+    username: pinang-mikro
+    password: AukaTJpnSyMrYk7F
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

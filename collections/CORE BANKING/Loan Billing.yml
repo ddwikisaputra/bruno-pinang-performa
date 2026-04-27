@@ -1,0 +1,3384 @@
+info:
+  name: Loan Billing
+  type: http
+  seq: 24
+
+http:
+  method: POST
+  url: "{{base_url}}/api/loan/inquiry-billing"
+  body:
+    type: form-urlencoded
+    data:
+      - name: noRekening
+        value: "001001008516102"
+  auth:
+    type: basic
+    username: pinang-mikro
+    password: "0"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: '"SeqNum": "5",'
+    request:
+      url: "{{base_url}}/api/loan/inquiry-billing"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: noRekening
+            value: "151001000142109"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: no-cache
+        - name: Pragma
+          value: no-cache
+        - name: Content-Length
+          value: "17413"
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Expires
+          value: "-1"
+        - name: Server
+          value: Microsoft-IIS/10.0
+        - name: X-AspNet-Version
+          value: 4.0.30319
+        - name: X-Powered-By
+          value: ASP.NET
+        - name: Date
+          value: Sat, 17 Jun 2023 12:13:00 GMT
+      body:
+        type: json
+        data: |-
+          {
+              "StatusCode": "00",
+              "StatusDescription": "Success",
+              "Data": [
+                  {
+                      "SeqNum": "1",
+                      "TanggalJatuhTempo": "2015-04-30",
+                      "BillingPokok": "0.00",
+                      "BillingBunga": "0.00",
+                      "BillingPenalty": "0.00",
+                      "TotalTunggakan": "0.00",
+                      "TotalPembayaran": "5140452.00",
+                      "TanggalPembayaran": "2015-04-30"
+                  },
+                  {
+                      "SeqNum": "2",
+                      "TanggalJatuhTempo": "2015-05-30",
+                      "BillingPokok": "0.00",
+                      "BillingBunga": "0.00",
+                      "BillingPenalty": "0.00",
+                      "TotalTunggakan": "0.00",
+                      "TotalPembayaran": "5140452.60",
+                      "TanggalPembayaran": "2015-05-30"
+                  },
+                  {
+                      "SeqNum": "3",
+                      "TanggalJatuhTempo": "2015-06-30",
+                      "BillingPokok": "0.00",
+                      "BillingBunga": "0.00",
+                      "BillingPenalty": "0.00",
+                      "TotalTunggakan": "0.00",
+                      "TotalPembayaran": "5140452.60",
+                      "TanggalPembayaran": "2015-06-30"
+                  },
+                  {
+                      "SeqNum": "4",
+                      "TanggalJatuhTempo": "2015-07-30",
+                      "BillingPokok": "0.00",
+                      "BillingBunga": "0.00",
+                      "BillingPenalty": "0.00",
+                      "TotalTunggakan": "0.00",
+                      "TotalPembayaran": "5141138.00",
+                      "TanggalPembayaran": "2015-08-01"
+                  },
+                  {
+                      "SeqNum": "5",
+                      "TanggalJatuhTempo": "2015-08-30",
+                      "BillingPokok": "4260292.98",
+                      "BillingBunga": "880159.62",
+                      "BillingPenalty": "1487981.69",
+                      "TotalTunggakan": "6628434.29",
+                      "TotalPembayaran": "6710681.09",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "6",
+                      "TanggalJatuhTempo": "2015-09-30",
+                      "BillingPokok": "649765.32",
+                      "BillingBunga": "4490687.28",
+                      "BillingPenalty": "1549004.00",
+                      "TotalTunggakan": "6689456.60",
+                      "TotalPembayaran": "6689456.60",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "7",
+                      "TanggalJatuhTempo": "2015-10-30",
+                      "BillingPokok": "658428.60",
+                      "BillingBunga": "4482024.00",
+                      "BillingPenalty": "1528419.70",
+                      "TotalTunggakan": "6668872.30",
+                      "TotalPembayaran": "6668872.30",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "8",
+                      "TanggalJatuhTempo": "2015-11-30",
+                      "BillingPokok": "667207.78",
+                      "BillingBunga": "4473244.82",
+                      "BillingPenalty": "1507172.61",
+                      "TotalTunggakan": "6647625.21",
+                      "TotalPembayaran": "6647625.21",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "9",
+                      "TanggalJatuhTempo": "2015-12-30",
+                      "BillingPokok": "676104.00",
+                      "BillingBunga": "4464348.60",
+                      "BillingPenalty": "1486632.60",
+                      "TotalTunggakan": "6627085.20",
+                      "TotalPembayaran": "6627085.20",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "10",
+                      "TanggalJatuhTempo": "2016-01-30",
+                      "BillingPokok": "685118.65",
+                      "BillingBunga": "4455333.95",
+                      "BillingPenalty": "1465363.82",
+                      "TotalTunggakan": "6605816.42",
+                      "TotalPembayaran": "6605816.42",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "11",
+                      "TanggalJatuhTempo": "2016-02-29",
+                      "BillingPokok": "694253.40",
+                      "BillingBunga": "4446199.20",
+                      "BillingPenalty": "1444823.20",
+                      "TotalTunggakan": "6585275.80",
+                      "TotalPembayaran": "6585275.80",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "12",
+                      "TanggalJatuhTempo": "2016-03-30",
+                      "BillingPokok": "703510.20",
+                      "BillingBunga": "4436942.40",
+                      "BillingPenalty": "1424240.42",
+                      "TotalTunggakan": "6564693.02",
+                      "TotalPembayaran": "6564693.02",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "13",
+                      "TanggalJatuhTempo": "2016-04-30",
+                      "BillingPokok": "712890.31",
+                      "BillingBunga": "4427562.29",
+                      "BillingPenalty": "1402993.33",
+                      "TotalTunggakan": "6543445.93",
+                      "TotalPembayaran": "6543445.93",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "14",
+                      "TanggalJatuhTempo": "2016-05-30",
+                      "BillingPokok": "722395.50",
+                      "BillingBunga": "4418057.10",
+                      "BillingPenalty": "1382431.63",
+                      "TotalTunggakan": "6522884.23",
+                      "TotalPembayaran": "6522884.23",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "15",
+                      "TanggalJatuhTempo": "2016-06-30",
+                      "BillingPokok": "732027.54",
+                      "BillingBunga": "4408425.06",
+                      "BillingPenalty": "1361184.54",
+                      "TotalTunggakan": "6501637.14",
+                      "TotalPembayaran": "6501637.14",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "16",
+                      "TanggalJatuhTempo": "2016-07-30",
+                      "BillingPokok": "741787.80",
+                      "BillingBunga": "4398664.80",
+                      "BillingPenalty": "1340642.40",
+                      "TotalTunggakan": "6481095.00",
+                      "TotalPembayaran": "6481095.00",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "17",
+                      "TanggalJatuhTempo": "2016-08-30",
+                      "BillingPokok": "751678.44",
+                      "BillingBunga": "4388774.16",
+                      "BillingPenalty": "1319375.75",
+                      "TotalTunggakan": "6459828.35",
+                      "TotalPembayaran": "6459828.35",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "18",
+                      "TanggalJatuhTempo": "2016-09-30",
+                      "BillingPokok": "761700.74",
+                      "BillingBunga": "4378751.86",
+                      "BillingPenalty": "1298128.66",
+                      "TotalTunggakan": "6438581.26",
+                      "TotalPembayaran": "6438581.26",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "19",
+                      "TanggalJatuhTempo": "2016-10-30",
+                      "BillingPokok": "771856.80",
+                      "BillingBunga": "4368595.80",
+                      "BillingPenalty": "1277566.96",
+                      "TotalTunggakan": "6418019.56",
+                      "TotalPembayaran": "6418019.56",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "20",
+                      "TanggalJatuhTempo": "2016-11-30",
+                      "BillingPokok": "782148.34",
+                      "BillingBunga": "4358304.26",
+                      "BillingPenalty": "1256338.20",
+                      "TotalTunggakan": "6396790.80",
+                      "TotalPembayaran": "6396790.80",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "21",
+                      "TanggalJatuhTempo": "2016-12-30",
+                      "BillingPokok": "792576.90",
+                      "BillingBunga": "4347875.70",
+                      "BillingPenalty": "1235776.20",
+                      "TotalTunggakan": "6376228.80",
+                      "TotalPembayaran": "6376228.80",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "22",
+                      "TanggalJatuhTempo": "2017-01-30",
+                      "BillingPokok": "803144.64",
+                      "BillingBunga": "4337307.96",
+                      "BillingPenalty": "1214528.80",
+                      "TotalTunggakan": "6354981.40",
+                      "TotalPembayaran": "6354981.40",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "23",
+                      "TanggalJatuhTempo": "2017-02-28",
+                      "BillingPokok": "813852.99",
+                      "BillingBunga": "4326599.61",
+                      "BillingPenalty": "1194634.77",
+                      "TotalTunggakan": "6335087.37",
+                      "TotalPembayaran": "6335087.37",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "24",
+                      "TanggalJatuhTempo": "2017-03-30",
+                      "BillingPokok": "824704.50",
+                      "BillingBunga": "4315748.10",
+                      "BillingPenalty": "1174073.07",
+                      "TotalTunggakan": "6314525.67",
+                      "TotalPembayaran": "6314525.67",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "25",
+                      "TanggalJatuhTempo": "2017-04-30",
+                      "BillingPokok": "835700.53",
+                      "BillingBunga": "4304752.07",
+                      "BillingPenalty": "1152842.80",
+                      "TotalTunggakan": "6293295.40",
+                      "TotalPembayaran": "6293295.40",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "26",
+                      "TanggalJatuhTempo": "2017-05-30",
+                      "BillingPokok": "846843.30",
+                      "BillingBunga": "4293609.30",
+                      "BillingPenalty": "1132264.28",
+                      "TotalTunggakan": "6272716.88",
+                      "TotalPembayaran": "6272716.88",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "27",
+                      "TanggalJatuhTempo": "2017-06-30",
+                      "BillingPokok": "858134.61",
+                      "BillingBunga": "4282317.99",
+                      "BillingPenalty": "1111033.40",
+                      "TotalTunggakan": "6251486.00",
+                      "TotalPembayaran": "6251486.00",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "28",
+                      "TanggalJatuhTempo": "2017-07-30",
+                      "BillingPokok": "869576.40",
+                      "BillingBunga": "4270876.20",
+                      "BillingPenalty": "1090455.49",
+                      "TotalTunggakan": "6230908.09",
+                      "TotalPembayaran": "6230908.09",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "29",
+                      "TanggalJatuhTempo": "2017-08-30",
+                      "BillingPokok": "881170.71",
+                      "BillingBunga": "4259281.89",
+                      "BillingPenalty": "1069208.40",
+                      "TotalTunggakan": "6209661.00",
+                      "TotalPembayaran": "6209661.00",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "30",
+                      "TanggalJatuhTempo": "2017-09-30",
+                      "BillingPokok": "892919.71",
+                      "BillingBunga": "4247532.89",
+                      "BillingPenalty": "1047976.60",
+                      "TotalTunggakan": "6188429.20",
+                      "TotalPembayaran": "6188429.20",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "31",
+                      "TanggalJatuhTempo": "2017-10-30",
+                      "BillingPokok": "904825.20",
+                      "BillingBunga": "4235627.40",
+                      "BillingPenalty": "1027399.61",
+                      "TotalTunggakan": "6167852.21",
+                      "TotalPembayaran": "6167852.21",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "32",
+                      "TanggalJatuhTempo": "2017-11-30",
+                      "BillingPokok": "916889.53",
+                      "BillingBunga": "4223563.07",
+                      "BillingPenalty": "1006152.52",
+                      "TotalTunggakan": "6146605.12",
+                      "TotalPembayaran": "6146605.12",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "33",
+                      "TanggalJatuhTempo": "2017-12-30",
+                      "BillingPokok": "929114.70",
+                      "BillingBunga": "4211337.90",
+                      "BillingPenalty": "985590.82",
+                      "TotalTunggakan": "6126043.42",
+                      "TotalPembayaran": "6126043.42",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "34",
+                      "TanggalJatuhTempo": "2018-01-30",
+                      "BillingPokok": "941502.91",
+                      "BillingBunga": "4198949.69",
+                      "BillingPenalty": "964343.73",
+                      "TotalTunggakan": "6104796.33",
+                      "TotalPembayaran": "6104796.33",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "35",
+                      "TanggalJatuhTempo": "2018-02-28",
+                      "BillingPokok": "954056.39",
+                      "BillingBunga": "4186396.21",
+                      "BillingPenalty": "944481.20",
+                      "TotalTunggakan": "6084933.80",
+                      "TotalPembayaran": "6084933.80",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "36",
+                      "TanggalJatuhTempo": "2018-03-30",
+                      "BillingPokok": "966777.00",
+                      "BillingBunga": "4173675.60",
+                      "BillingPenalty": "923905.72",
+                      "TotalTunggakan": "6064358.32",
+                      "TotalPembayaran": "6064358.32",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "37",
+                      "TanggalJatuhTempo": "2018-04-30",
+                      "BillingPokok": "979667.32",
+                      "BillingBunga": "4160785.28",
+                      "BillingPenalty": "902658.63",
+                      "TotalTunggakan": "6043111.23",
+                      "TotalPembayaran": "6043111.23",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "38",
+                      "TanggalJatuhTempo": "2018-05-30",
+                      "BillingPokok": "992729.70",
+                      "BillingBunga": "4147722.90",
+                      "BillingPenalty": "882096.93",
+                      "TotalTunggakan": "6022549.53",
+                      "TotalPembayaran": "6022549.53",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "39",
+                      "TanggalJatuhTempo": "2018-06-30",
+                      "BillingPokok": "1005965.86",
+                      "BillingBunga": "4134486.74",
+                      "BillingPenalty": "860849.84",
+                      "TotalTunggakan": "6001302.44",
+                      "TotalPembayaran": "6001302.44",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "40",
+                      "TanggalJatuhTempo": "2018-07-30",
+                      "BillingPokok": "1019379.00",
+                      "BillingBunga": "4121073.60",
+                      "BillingPenalty": "840300.40",
+                      "TotalTunggakan": "5980753.00",
+                      "TotalPembayaran": "5980753.00",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "41",
+                      "TanggalJatuhTempo": "2018-08-30",
+                      "BillingPokok": "1032970.58",
+                      "BillingBunga": "4107482.02",
+                      "BillingPenalty": "819041.05",
+                      "TotalTunggakan": "5959493.65",
+                      "TotalPembayaran": "5959493.65",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "42",
+                      "TanggalJatuhTempo": "2018-09-30",
+                      "BillingPokok": "1046743.57",
+                      "BillingBunga": "4093709.03",
+                      "BillingPenalty": "797805.60",
+                      "TotalTunggakan": "5938258.20",
+                      "TotalPembayaran": "5938258.20",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "43",
+                      "TanggalJatuhTempo": "2018-10-30",
+                      "BillingPokok": "1060700.10",
+                      "BillingBunga": "4079752.50",
+                      "BillingPenalty": "777243.60",
+                      "TotalTunggakan": "5917696.20",
+                      "TotalPembayaran": "5917696.20",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "44",
+                      "TanggalJatuhTempo": "2018-11-30",
+                      "BillingPokok": "1074842.90",
+                      "BillingBunga": "4065609.70",
+                      "BillingPenalty": "755985.17",
+                      "TotalTunggakan": "5896437.77",
+                      "TotalPembayaran": "5896437.77",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "45",
+                      "TanggalJatuhTempo": "2018-12-30",
+                      "BillingPokok": "1089174.00",
+                      "BillingBunga": "4051278.60",
+                      "BillingPenalty": "735423.47",
+                      "TotalTunggakan": "5875876.07",
+                      "TotalPembayaran": "5875876.07",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "46",
+                      "TanggalJatuhTempo": "2019-01-30",
+                      "BillingPokok": "1103696.46",
+                      "BillingBunga": "4036756.14",
+                      "BillingPenalty": "714176.38",
+                      "TotalTunggakan": "5854628.98",
+                      "TotalPembayaran": "5854628.98",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "47",
+                      "TanggalJatuhTempo": "2019-02-28",
+                      "BillingPokok": "1118412.44",
+                      "BillingBunga": "4022040.16",
+                      "BillingPenalty": "694300.07",
+                      "TotalTunggakan": "5834752.67",
+                      "TotalPembayaran": "5834752.67",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "48",
+                      "TanggalJatuhTempo": "2019-03-30",
+                      "BillingPokok": "1133324.40",
+                      "BillingBunga": "4007128.20",
+                      "BillingPenalty": "673738.37",
+                      "TotalTunggakan": "5814190.97",
+                      "TotalPembayaran": "5814190.97",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "49",
+                      "TanggalJatuhTempo": "2019-04-30",
+                      "BillingPokok": "1148435.35",
+                      "BillingBunga": "3992017.25",
+                      "BillingPenalty": "652491.28",
+                      "TotalTunggakan": "5792943.88",
+                      "TotalPembayaran": "5792943.88",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "50",
+                      "TanggalJatuhTempo": "2019-05-30",
+                      "BillingPokok": "1163748.00",
+                      "BillingBunga": "3976704.60",
+                      "BillingPenalty": "631938.80",
+                      "TotalTunggakan": "5772391.40",
+                      "TotalPembayaran": "5772391.40",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "51",
+                      "TanggalJatuhTempo": "2019-06-30",
+                      "BillingPokok": "1179264.54",
+                      "BillingBunga": "3961188.06",
+                      "BillingPenalty": "610691.40",
+                      "TotalTunggakan": "5751144.00",
+                      "TotalPembayaran": "5751144.00",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "52",
+                      "TanggalJatuhTempo": "2019-07-30",
+                      "BillingPokok": "1194988.20",
+                      "BillingBunga": "3945464.40",
+                      "BillingPenalty": "590120.79",
+                      "TotalTunggakan": "5730573.39",
+                      "TotalPembayaran": "5730573.39",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "53",
+                      "TanggalJatuhTempo": "2019-08-30",
+                      "BillingPokok": "1210921.43",
+                      "BillingBunga": "3929531.17",
+                      "BillingPenalty": "568882.00",
+                      "TotalTunggakan": "5709334.60",
+                      "TotalPembayaran": "5709334.60",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "54",
+                      "TanggalJatuhTempo": "2019-09-30",
+                      "BillingPokok": "1227066.85",
+                      "BillingBunga": "3913385.75",
+                      "BillingPenalty": "547626.61",
+                      "TotalTunggakan": "5688079.21",
+                      "TotalPembayaran": "5688079.21",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "55",
+                      "TanggalJatuhTempo": "2019-10-30",
+                      "BillingPokok": "1243427.70",
+                      "BillingBunga": "3897024.90",
+                      "BillingPenalty": "527064.91",
+                      "TotalTunggakan": "5667517.51",
+                      "TotalPembayaran": "5667517.51",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "56",
+                      "TanggalJatuhTempo": "2019-11-30",
+                      "BillingPokok": "1260006.83",
+                      "BillingBunga": "3880445.77",
+                      "BillingPenalty": "505817.82",
+                      "TotalTunggakan": "5646270.42",
+                      "TotalPembayaran": "5646270.42",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "57",
+                      "TanggalJatuhTempo": "2019-12-30",
+                      "BillingPokok": "1276806.90",
+                      "BillingBunga": "3863645.70",
+                      "BillingPenalty": "485256.12",
+                      "TotalTunggakan": "5625708.72",
+                      "TotalPembayaran": "5625708.72",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "58",
+                      "TanggalJatuhTempo": "2020-01-30",
+                      "BillingPokok": "1293830.93",
+                      "BillingBunga": "3846621.67",
+                      "BillingPenalty": "464009.03",
+                      "TotalTunggakan": "5604461.63",
+                      "TotalPembayaran": "5604461.63",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "59",
+                      "TanggalJatuhTempo": "2020-02-29",
+                      "BillingPokok": "1311082.20",
+                      "BillingBunga": "3829370.40",
+                      "BillingPenalty": "443447.33",
+                      "TotalTunggakan": "5583899.93",
+                      "TotalPembayaran": "5583899.93",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "60",
+                      "TanggalJatuhTempo": "2020-03-30",
+                      "BillingPokok": "1328563.20",
+                      "BillingBunga": "3811889.40",
+                      "BillingPenalty": "422885.63",
+                      "TotalTunggakan": "5563338.23",
+                      "TotalPembayaran": "5563338.23",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "61",
+                      "TanggalJatuhTempo": "2020-04-30",
+                      "BillingPokok": "1346277.35",
+                      "BillingBunga": "3794175.25",
+                      "BillingPenalty": "401638.54",
+                      "TotalTunggakan": "5542091.14",
+                      "TotalPembayaran": "5542091.14",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "62",
+                      "TanggalJatuhTempo": "2020-05-30",
+                      "BillingPokok": "1364227.80",
+                      "BillingBunga": "3776224.80",
+                      "BillingPenalty": "381082.40",
+                      "TotalTunggakan": "5521535.00",
+                      "TotalPembayaran": "5521535.00",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "63",
+                      "TanggalJatuhTempo": "2020-06-30",
+                      "BillingPokok": "1382417.46",
+                      "BillingBunga": "3758035.14",
+                      "BillingPenalty": "359829.75",
+                      "TotalTunggakan": "5500282.35",
+                      "TotalPembayaran": "5500282.35",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "64",
+                      "TanggalJatuhTempo": "2020-07-30",
+                      "BillingPokok": "1400849.70",
+                      "BillingBunga": "3739602.90",
+                      "BillingPenalty": "339268.05",
+                      "TotalTunggakan": "5479720.65",
+                      "TotalPembayaran": "5479720.65",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "65",
+                      "TanggalJatuhTempo": "2020-08-30",
+                      "BillingPokok": "1419527.56",
+                      "BillingBunga": "3720925.04",
+                      "BillingPenalty": "317335.57",
+                      "TotalTunggakan": "5457788.17",
+                      "TotalPembayaran": "5457788.17",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "66",
+                      "TanggalJatuhTempo": "2020-09-30",
+                      "BillingPokok": "1438454.61",
+                      "BillingBunga": "3701997.99",
+                      "BillingPenalty": "296088.48",
+                      "TotalTunggakan": "5436541.08",
+                      "TotalPembayaran": "5436541.08",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "67",
+                      "TanggalJatuhTempo": "2020-10-30",
+                      "BillingPokok": "1457634.00",
+                      "BillingBunga": "3682818.60",
+                      "BillingPenalty": "275526.78",
+                      "TotalTunggakan": "5415979.38",
+                      "TotalPembayaran": "5415979.38",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "68",
+                      "TanggalJatuhTempo": "2020-11-30",
+                      "BillingPokok": "1277431.87",
+                      "BillingBunga": "3863020.73",
+                      "BillingPenalty": "254279.69",
+                      "TotalTunggakan": "5394732.29",
+                      "TotalPembayaran": "5394732.29",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "69",
+                      "TanggalJatuhTempo": "2020-12-30",
+                      "BillingPokok": "592961.40",
+                      "BillingBunga": "4547491.20",
+                      "BillingPenalty": "233717.99",
+                      "TotalTunggakan": "5374170.59",
+                      "TotalPembayaran": "5374170.59",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "70",
+                      "TanggalJatuhTempo": "2021-01-30",
+                      "BillingPokok": "592961.23",
+                      "BillingBunga": "4547491.37",
+                      "BillingPenalty": "212470.90",
+                      "TotalTunggakan": "5352923.50",
+                      "TotalPembayaran": "5352923.50",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "71",
+                      "TanggalJatuhTempo": "2021-02-28",
+                      "BillingPokok": "592961.15",
+                      "BillingBunga": "4547491.45",
+                      "BillingPenalty": "192594.59",
+                      "TotalTunggakan": "5333047.19",
+                      "TotalPembayaran": "5333047.19",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "72",
+                      "TanggalJatuhTempo": "2021-03-30",
+                      "BillingPokok": "592961.40",
+                      "BillingBunga": "4547491.20",
+                      "BillingPenalty": "172032.89",
+                      "TotalTunggakan": "5312485.49",
+                      "TotalPembayaran": "5312485.49",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "73",
+                      "TanggalJatuhTempo": "2021-04-30",
+                      "BillingPokok": "592961.23",
+                      "BillingBunga": "4547491.37",
+                      "BillingPenalty": "150785.80",
+                      "TotalTunggakan": "5291238.40",
+                      "TotalPembayaran": "5291238.40",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "74",
+                      "TanggalJatuhTempo": "2021-05-30",
+                      "BillingPokok": "592961.40",
+                      "BillingBunga": "4547491.20",
+                      "BillingPenalty": "130224.10",
+                      "TotalTunggakan": "5270676.70",
+                      "TotalPembayaran": "5270676.70",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "75",
+                      "TanggalJatuhTempo": "2021-06-30",
+                      "BillingPokok": "592961.23",
+                      "BillingBunga": "4547491.37",
+                      "BillingPenalty": "108977.01",
+                      "TotalTunggakan": "5249429.61",
+                      "TotalPembayaran": "5249429.61",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "76",
+                      "TanggalJatuhTempo": "2021-07-30",
+                      "BillingPokok": "592961.40",
+                      "BillingBunga": "4547491.20",
+                      "BillingPenalty": "88415.31",
+                      "TotalTunggakan": "5228867.91",
+                      "TotalPembayaran": "5228867.91",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "77",
+                      "TanggalJatuhTempo": "2021-08-30",
+                      "BillingPokok": "592961.23",
+                      "BillingBunga": "4547491.37",
+                      "BillingPenalty": "67168.22",
+                      "TotalTunggakan": "5207620.82",
+                      "TotalPembayaran": "5207620.82",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "78",
+                      "TanggalJatuhTempo": "2021-09-30",
+                      "BillingPokok": "592961.23",
+                      "BillingBunga": "4547491.37",
+                      "BillingPenalty": "45921.13",
+                      "TotalTunggakan": "5186373.73",
+                      "TotalPembayaran": "5186373.73",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "79",
+                      "TanggalJatuhTempo": "2021-10-30",
+                      "BillingPokok": "592961.40",
+                      "BillingBunga": "4547491.20",
+                      "BillingPenalty": "25359.43",
+                      "TotalTunggakan": "5165812.03",
+                      "TotalPembayaran": "5165812.03",
+                      "TanggalPembayaran": ""
+                  },
+                  {
+                      "SeqNum": "80",
+                      "TanggalJatuhTempo": "2021-11-30",
+                      "BillingPokok": "592961.23",
+                      "BillingBunga": "4547491.37",
+                      "BillingPenalty": "4112.34",
+                      "TotalTunggakan": "5144564.94",
+                      "TotalPembayaran": "5144564.94",
+                      "TanggalPembayaran": ""
+                  }
+              ]
+          }
+  - name: example @_@
+    request:
+      url: "{{base_url}}/api/loan/inquiry-billing"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: noRekening
+            value: "151001000142109"
+    response:
+      body:
+        type: text
+        data: "{\r
+
+          \    \"StatusCode\": \"00\",\r
+
+          \    \"StatusDescription\": \"Success\",\r
+
+          \    \"Data\": [\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"1\",\r
+
+          \            \"TanggalJatuhTempo\": \"2015-04-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"486293.00\",\r
+
+          \            \"BillingBungaPaid\": \"4654159.00\",\r
+
+          \            \"BillingPenaltyPaid\": \"0.00\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"5140452.00\",\r
+
+          \            \"TanggalPembayaran\": \"2015-04-30\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"2\",\r
+
+          \            \"TanggalJatuhTempo\": \"2015-05-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"512709.30\",\r
+
+          \            \"BillingBungaPaid\": \"4627743.30\",\r
+
+          \            \"BillingPenaltyPaid\": \"0.00\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"5140452.60\",\r
+
+          \            \"TanggalPembayaran\": \"2015-05-30\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"3\",\r
+
+          \            \"TanggalJatuhTempo\": \"2015-06-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"519545.17\",\r
+
+          \            \"BillingBungaPaid\": \"4620907.43\",\r
+
+          \            \"BillingPenaltyPaid\": \"0.00\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"5140452.60\",\r
+
+          \            \"TanggalPembayaran\": \"2015-06-30\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"4\",\r
+
+          \            \"TanggalJatuhTempo\": \"2015-07-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"4986653.27\",\r
+
+          \            \"BillingBungaPaid\": \"153799.33\",\r
+
+          \            \"BillingPenaltyPaid\": \"685.40\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"5141138.00\",\r
+
+          \            \"TanggalPembayaran\": \"2015-08-01\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"5\",\r
+
+          \            \"TanggalJatuhTempo\": \"2015-08-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"4260292.98\",\r
+
+          \            \"BillingBungaPaid\": \"880159.62\",\r
+
+          \            \"BillingPenaltyPaid\": \"1758025.35\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"6898477.95\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"6\",\r
+
+          \            \"TanggalJatuhTempo\": \"2015-09-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"649765.32\",\r
+
+          \            \"BillingBungaPaid\": \"4490687.28\",\r
+
+          \            \"BillingPenaltyPaid\": \"1736803.60\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"6877256.20\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"7\",\r
+
+          \            \"TanggalJatuhTempo\": \"2015-10-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"658428.60\",\r
+
+          \            \"BillingBungaPaid\": \"4482024.00\",\r
+
+          \            \"BillingPenaltyPaid\": \"1716216.56\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"6856669.16\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"8\",\r
+
+          \            \"TanggalJatuhTempo\": \"2015-11-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"667207.78\",\r
+
+          \            \"BillingBungaPaid\": \"4473244.82\",\r
+
+          \            \"BillingPenaltyPaid\": \"1694969.47\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"6835422.07\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"9\",\r
+
+          \            \"TanggalJatuhTempo\": \"2015-12-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"676104.00\",\r
+
+          \            \"BillingBungaPaid\": \"4464348.60\",\r
+
+          \            \"BillingPenaltyPaid\": \"1674432.20\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"6814884.80\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"10\",\r
+
+          \            \"TanggalJatuhTempo\": \"2016-01-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"685118.65\",\r
+
+          \            \"BillingBungaPaid\": \"4455333.95\",\r
+
+          \            \"BillingPenaltyPaid\": \"1653160.68\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"6793613.28\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"11\",\r
+
+          \            \"TanggalJatuhTempo\": \"2016-02-29\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"694253.40\",\r
+
+          \            \"BillingBungaPaid\": \"4446199.20\",\r
+
+          \            \"BillingPenaltyPaid\": \"1632622.80\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"6773075.40\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"12\",\r
+
+          \            \"TanggalJatuhTempo\": \"2016-03-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"703510.20\",\r
+
+          \            \"BillingBungaPaid\": \"4436942.40\",\r
+
+          \            \"BillingPenaltyPaid\": \"1612037.28\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"6752489.88\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"13\",\r
+
+          \            \"TanggalJatuhTempo\": \"2016-04-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"712890.31\",\r
+
+          \            \"BillingBungaPaid\": \"4427562.29\",\r
+
+          \            \"BillingPenaltyPaid\": \"1590790.19\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"6731242.79\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"14\",\r
+
+          \            \"TanggalJatuhTempo\": \"2016-05-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"722395.50\",\r
+
+          \            \"BillingBungaPaid\": \"4418057.10\",\r
+
+          \            \"BillingPenaltyPaid\": \"1570228.49\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"6710681.09\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"15\",\r
+
+          \            \"TanggalJatuhTempo\": \"2016-06-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"732027.54\",\r
+
+          \            \"BillingBungaPaid\": \"4408425.06\",\r
+
+          \            \"BillingPenaltyPaid\": \"1548981.40\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"6689434.00\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"16\",\r
+
+          \            \"TanggalJatuhTempo\": \"2016-07-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"741787.80\",\r
+
+          \            \"BillingBungaPaid\": \"4398664.80\",\r
+
+          \            \"BillingPenaltyPaid\": \"1528442.00\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"6668894.60\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"17\",\r
+
+          \            \"TanggalJatuhTempo\": \"2016-08-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"751678.44\",\r
+
+          \            \"BillingBungaPaid\": \"4388774.16\",\r
+
+          \            \"BillingPenaltyPaid\": \"1507172.61\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"6647625.21\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"18\",\r
+
+          \            \"TanggalJatuhTempo\": \"2016-09-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"761700.74\",\r
+
+          \            \"BillingBungaPaid\": \"4378751.86\",\r
+
+          \            \"BillingPenaltyPaid\": \"1485925.52\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"6626378.12\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"19\",\r
+
+          \            \"TanggalJatuhTempo\": \"2016-10-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"771856.80\",\r
+
+          \            \"BillingBungaPaid\": \"4368595.80\",\r
+
+          \            \"BillingPenaltyPaid\": \"1465363.82\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"6605816.42\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"20\",\r
+
+          \            \"TanggalJatuhTempo\": \"2016-11-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"782148.34\",\r
+
+          \            \"BillingBungaPaid\": \"4358304.26\",\r
+
+          \            \"BillingPenaltyPaid\": \"1444137.80\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"6584590.40\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"21\",\r
+
+          \            \"TanggalJatuhTempo\": \"2016-12-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"792576.90\",\r
+
+          \            \"BillingBungaPaid\": \"4347875.70\",\r
+
+          \            \"BillingPenaltyPaid\": \"1423575.80\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"6564028.40\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"22\",\r
+
+          \            \"TanggalJatuhTempo\": \"2017-01-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"803144.64\",\r
+
+          \            \"BillingBungaPaid\": \"4337307.96\",\r
+
+          \            \"BillingPenaltyPaid\": \"1402328.40\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"6542781.00\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"23\",\r
+
+          \            \"TanggalJatuhTempo\": \"2017-02-28\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"813852.99\",\r
+
+          \            \"BillingBungaPaid\": \"4326599.61\",\r
+
+          \            \"BillingPenaltyPaid\": \"1382431.63\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"6522884.23\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"24\",\r
+
+          \            \"TanggalJatuhTempo\": \"2017-03-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"824704.50\",\r
+
+          \            \"BillingBungaPaid\": \"4315748.10\",\r
+
+          \            \"BillingPenaltyPaid\": \"1361869.93\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"6502322.53\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"25\",\r
+
+          \            \"TanggalJatuhTempo\": \"2017-04-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"835700.53\",\r
+
+          \            \"BillingBungaPaid\": \"4304752.07\",\r
+
+          \            \"BillingPenaltyPaid\": \"1340642.40\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"6481095.00\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"26\",\r
+
+          \            \"TanggalJatuhTempo\": \"2017-05-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"846843.30\",\r
+
+          \            \"BillingBungaPaid\": \"4293609.30\",\r
+
+          \            \"BillingPenaltyPaid\": \"1320061.14\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"6460513.74\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"27\",\r
+
+          \            \"TanggalJatuhTempo\": \"2017-06-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"858134.61\",\r
+
+          \            \"BillingBungaPaid\": \"4282317.99\",\r
+
+          \            \"BillingPenaltyPaid\": \"1298833.00\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"6439285.60\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"28\",\r
+
+          \            \"TanggalJatuhTempo\": \"2017-07-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"869576.40\",\r
+
+          \            \"BillingBungaPaid\": \"4270876.20\",\r
+
+          \            \"BillingPenaltyPaid\": \"1278252.35\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"6418704.95\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"29\",\r
+
+          \            \"TanggalJatuhTempo\": \"2017-08-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"881170.71\",\r
+
+          \            \"BillingBungaPaid\": \"4259281.89\",\r
+
+          \            \"BillingPenaltyPaid\": \"1257005.26\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"6397457.86\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"30\",\r
+
+          \            \"TanggalJatuhTempo\": \"2017-09-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"892919.71\",\r
+
+          \            \"BillingBungaPaid\": \"4247532.89\",\r
+
+          \            \"BillingPenaltyPaid\": \"1235776.20\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"6376228.80\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"31\",\r
+
+          \            \"TanggalJatuhTempo\": \"2017-10-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"904825.20\",\r
+
+          \            \"BillingBungaPaid\": \"4235627.40\",\r
+
+          \            \"BillingPenaltyPaid\": \"1215196.47\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"6355649.07\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"32\",\r
+
+          \            \"TanggalJatuhTempo\": \"2017-11-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"916889.53\",\r
+
+          \            \"BillingBungaPaid\": \"4223563.07\",\r
+
+          \            \"BillingPenaltyPaid\": \"1193949.38\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"6334401.98\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"33\",\r
+
+          \            \"TanggalJatuhTempo\": \"2017-12-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"929114.70\",\r
+
+          \            \"BillingBungaPaid\": \"4211337.90\",\r
+
+          \            \"BillingPenaltyPaid\": \"1173387.68\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"6313840.28\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"34\",\r
+
+          \            \"TanggalJatuhTempo\": \"2018-01-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"941502.91\",\r
+
+          \            \"BillingBungaPaid\": \"4198949.69\",\r
+
+          \            \"BillingPenaltyPaid\": \"1152140.59\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"6292593.19\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"35\",\r
+
+          \            \"TanggalJatuhTempo\": \"2018-02-28\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"954056.39\",\r
+
+          \            \"BillingBungaPaid\": \"4186396.21\",\r
+
+          \            \"BillingPenaltyPaid\": \"1132280.80\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"6272733.40\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"36\",\r
+
+          \            \"TanggalJatuhTempo\": \"2018-03-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"966777.00\",\r
+
+          \            \"BillingBungaPaid\": \"4173675.60\",\r
+
+          \            \"BillingPenaltyPaid\": \"1111702.58\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"6252155.18\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"37\",\r
+
+          \            \"TanggalJatuhTempo\": \"2018-04-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"979667.32\",\r
+
+          \            \"BillingBungaPaid\": \"4160785.28\",\r
+
+          \            \"BillingPenaltyPaid\": \"1090455.49\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"6230908.09\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"38\",\r
+
+          \            \"TanggalJatuhTempo\": \"2018-05-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"992729.70\",\r
+
+          \            \"BillingBungaPaid\": \"4147722.90\",\r
+
+          \            \"BillingPenaltyPaid\": \"1069893.79\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"6210346.39\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"39\",\r
+
+          \            \"TanggalJatuhTempo\": \"2018-06-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"1005965.86\",\r
+
+          \            \"BillingBungaPaid\": \"4134486.74\",\r
+
+          \            \"BillingPenaltyPaid\": \"1048646.70\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"6189099.30\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"40\",\r
+
+          \            \"TanggalJatuhTempo\": \"2018-07-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"1019379.00\",\r
+
+          \            \"BillingBungaPaid\": \"4121073.60\",\r
+
+          \            \"BillingPenaltyPaid\": \"1028100.00\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"6168552.60\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"41\",\r
+
+          \            \"TanggalJatuhTempo\": \"2018-08-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"1032970.58\",\r
+
+          \            \"BillingBungaPaid\": \"4107482.02\",\r
+
+          \            \"BillingPenaltyPaid\": \"1006837.91\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"6147290.51\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"42\",\r
+
+          \            \"TanggalJatuhTempo\": \"2018-09-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"1046743.57\",\r
+
+          \            \"BillingBungaPaid\": \"4093709.03\",\r
+
+          \            \"BillingPenaltyPaid\": \"985605.20\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"6126057.80\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"43\",\r
+
+          \            \"TanggalJatuhTempo\": \"2018-10-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"1060700.10\",\r
+
+          \            \"BillingBungaPaid\": \"4079752.50\",\r
+
+          \            \"BillingPenaltyPaid\": \"965043.20\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"6105495.80\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"44\",\r
+
+          \            \"TanggalJatuhTempo\": \"2018-11-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"1074842.90\",\r
+
+          \            \"BillingBungaPaid\": \"4065609.70\",\r
+
+          \            \"BillingPenaltyPaid\": \"943782.03\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"6084234.63\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"45\",\r
+
+          \            \"TanggalJatuhTempo\": \"2018-12-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"1089174.00\",\r
+
+          \            \"BillingBungaPaid\": \"4051278.60\",\r
+
+          \            \"BillingPenaltyPaid\": \"923220.33\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"6063672.93\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"46\",\r
+
+          \            \"TanggalJatuhTempo\": \"2019-01-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"1103696.46\",\r
+
+          \            \"BillingBungaPaid\": \"4036756.14\",\r
+
+          \            \"BillingPenaltyPaid\": \"901973.24\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"6042425.84\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"47\",\r
+
+          \            \"TanggalJatuhTempo\": \"2019-02-28\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"1118412.44\",\r
+
+          \            \"BillingBungaPaid\": \"4022040.16\",\r
+
+          \            \"BillingPenaltyPaid\": \"882096.93\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"6022549.53\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"48\",\r
+
+          \            \"TanggalJatuhTempo\": \"2019-03-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"1133324.40\",\r
+
+          \            \"BillingBungaPaid\": \"4007128.20\",\r
+
+          \            \"BillingPenaltyPaid\": \"861535.23\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"6001987.83\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"49\",\r
+
+          \            \"TanggalJatuhTempo\": \"2019-04-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"1148435.35\",\r
+
+          \            \"BillingBungaPaid\": \"3992017.25\",\r
+
+          \            \"BillingPenaltyPaid\": \"840288.14\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"5980740.74\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"50\",\r
+
+          \            \"TanggalJatuhTempo\": \"2019-05-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"1163748.00\",\r
+
+          \            \"BillingBungaPaid\": \"3976704.60\",\r
+
+          \            \"BillingPenaltyPaid\": \"819738.40\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"5960191.00\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"51\",\r
+
+          \            \"TanggalJatuhTempo\": \"2019-06-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"1179264.54\",\r
+
+          \            \"BillingBungaPaid\": \"3961188.06\",\r
+
+          \            \"BillingPenaltyPaid\": \"798491.00\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"5938943.60\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"52\",\r
+
+          \            \"TanggalJatuhTempo\": \"2019-07-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"1194988.20\",\r
+
+          \            \"BillingBungaPaid\": \"3945464.40\",\r
+
+          \            \"BillingPenaltyPaid\": \"777917.65\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"5918370.25\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"53\",\r
+
+          \            \"TanggalJatuhTempo\": \"2019-08-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"1210921.43\",\r
+
+          \            \"BillingBungaPaid\": \"3929531.17\",\r
+
+          \            \"BillingPenaltyPaid\": \"756681.60\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"5897134.20\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"54\",\r
+
+          \            \"TanggalJatuhTempo\": \"2019-09-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"1227066.85\",\r
+
+          \            \"BillingBungaPaid\": \"3913385.75\",\r
+
+          \            \"BillingPenaltyPaid\": \"735423.47\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"5875876.07\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"55\",\r
+
+          \            \"TanggalJatuhTempo\": \"2019-10-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"1243427.70\",\r
+
+          \            \"BillingBungaPaid\": \"3897024.90\",\r
+
+          \            \"BillingPenaltyPaid\": \"714861.77\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"5855314.37\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"56\",\r
+
+          \            \"TanggalJatuhTempo\": \"2019-11-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"1260006.83\",\r
+
+          \            \"BillingBungaPaid\": \"3880445.77\",\r
+
+          \            \"BillingPenaltyPaid\": \"693614.68\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"5834067.28\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"57\",\r
+
+          \            \"TanggalJatuhTempo\": \"2019-12-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"1276806.90\",\r
+
+          \            \"BillingBungaPaid\": \"3863645.70\",\r
+
+          \            \"BillingPenaltyPaid\": \"673052.98\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"5813505.58\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"58\",\r
+
+          \            \"TanggalJatuhTempo\": \"2020-01-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"1293830.93\",\r
+
+          \            \"BillingBungaPaid\": \"3846621.67\",\r
+
+          \            \"BillingPenaltyPaid\": \"651805.89\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"5792258.49\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"59\",\r
+
+          \            \"TanggalJatuhTempo\": \"2020-02-29\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"1311082.20\",\r
+
+          \            \"BillingBungaPaid\": \"3829370.40\",\r
+
+          \            \"BillingPenaltyPaid\": \"631244.19\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"5771696.79\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"60\",\r
+
+          \            \"TanggalJatuhTempo\": \"2020-03-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"1328563.20\",\r
+
+          \            \"BillingBungaPaid\": \"3811889.40\",\r
+
+          \            \"BillingPenaltyPaid\": \"610682.49\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"5751135.09\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"61\",\r
+
+          \            \"TanggalJatuhTempo\": \"2020-04-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"1346277.35\",\r
+
+          \            \"BillingBungaPaid\": \"3794175.25\",\r
+
+          \            \"BillingPenaltyPaid\": \"589435.40\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"5729888.00\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"62\",\r
+
+          \            \"TanggalJatuhTempo\": \"2020-05-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"1364227.80\",\r
+
+          \            \"BillingBungaPaid\": \"3776224.80\",\r
+
+          \            \"BillingPenaltyPaid\": \"568882.00\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"5709334.60\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"63\",\r
+
+          \            \"TanggalJatuhTempo\": \"2020-06-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"1382417.46\",\r
+
+          \            \"BillingBungaPaid\": \"3758035.14\",\r
+
+          \            \"BillingPenaltyPaid\": \"547626.61\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"5688079.21\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"64\",\r
+
+          \            \"TanggalJatuhTempo\": \"2020-07-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"1400849.70\",\r
+
+          \            \"BillingBungaPaid\": \"3739602.90\",\r
+
+          \            \"BillingPenaltyPaid\": \"527064.91\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"5667517.51\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"65\",\r
+
+          \            \"TanggalJatuhTempo\": \"2020-08-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"1419527.56\",\r
+
+          \            \"BillingBungaPaid\": \"3720925.04\",\r
+
+          \            \"BillingPenaltyPaid\": \"505132.43\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"5645585.03\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"66\",\r
+
+          \            \"TanggalJatuhTempo\": \"2020-09-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"1438454.61\",\r
+
+          \            \"BillingBungaPaid\": \"3701997.99\",\r
+
+          \            \"BillingPenaltyPaid\": \"483885.34\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"5624337.94\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"67\",\r
+
+          \            \"TanggalJatuhTempo\": \"2020-10-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"1457634.00\",\r
+
+          \            \"BillingBungaPaid\": \"3682818.60\",\r
+
+          \            \"BillingPenaltyPaid\": \"463323.64\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"5603776.24\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"68\",\r
+
+          \            \"TanggalJatuhTempo\": \"2020-11-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"1277431.87\",\r
+
+          \            \"BillingBungaPaid\": \"3863020.73\",\r
+
+          \            \"BillingPenaltyPaid\": \"442076.55\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"5582529.15\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"69\",\r
+
+          \            \"TanggalJatuhTempo\": \"2020-12-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"592961.40\",\r
+
+          \            \"BillingBungaPaid\": \"4547491.20\",\r
+
+          \            \"BillingPenaltyPaid\": \"421514.85\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"5561967.45\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"70\",\r
+
+          \            \"TanggalJatuhTempo\": \"2021-01-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"592961.23\",\r
+
+          \            \"BillingBungaPaid\": \"4547491.37\",\r
+
+          \            \"BillingPenaltyPaid\": \"400267.76\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"5540720.36\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"71\",\r
+
+          \            \"TanggalJatuhTempo\": \"2021-02-28\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"592961.15\",\r
+
+          \            \"BillingBungaPaid\": \"4547491.45\",\r
+
+          \            \"BillingPenaltyPaid\": \"380391.45\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"5520844.05\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"72\",\r
+
+          \            \"TanggalJatuhTempo\": \"2021-03-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"592961.40\",\r
+
+          \            \"BillingBungaPaid\": \"4547491.20\",\r
+
+          \            \"BillingPenaltyPaid\": \"359829.75\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"5500282.35\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"73\",\r
+
+          \            \"TanggalJatuhTempo\": \"2021-04-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"592961.23\",\r
+
+          \            \"BillingBungaPaid\": \"4547491.37\",\r
+
+          \            \"BillingPenaltyPaid\": \"338582.66\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"5479035.26\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"74\",\r
+
+          \            \"TanggalJatuhTempo\": \"2021-05-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"592961.40\",\r
+
+          \            \"BillingBungaPaid\": \"4547491.20\",\r
+
+          \            \"BillingPenaltyPaid\": \"318020.96\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"5458473.56\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"75\",\r
+
+          \            \"TanggalJatuhTempo\": \"2021-06-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"592961.23\",\r
+
+          \            \"BillingBungaPaid\": \"4547491.37\",\r
+
+          \            \"BillingPenaltyPaid\": \"296773.87\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"5437226.47\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"76\",\r
+
+          \            \"TanggalJatuhTempo\": \"2021-07-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"592961.40\",\r
+
+          \            \"BillingBungaPaid\": \"4547491.20\",\r
+
+          \            \"BillingPenaltyPaid\": \"276212.17\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"5416664.77\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"77\",\r
+
+          \            \"TanggalJatuhTempo\": \"2021-08-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"592961.23\",\r
+
+          \            \"BillingBungaPaid\": \"4547491.37\",\r
+
+          \            \"BillingPenaltyPaid\": \"254965.08\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"5395417.68\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"78\",\r
+
+          \            \"TanggalJatuhTempo\": \"2021-09-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"592961.23\",\r
+
+          \            \"BillingBungaPaid\": \"4547491.37\",\r
+
+          \            \"BillingPenaltyPaid\": \"233717.99\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"5374170.59\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"79\",\r
+
+          \            \"TanggalJatuhTempo\": \"2021-10-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"592961.40\",\r
+
+          \            \"BillingBungaPaid\": \"4547491.20\",\r
+
+          \            \"BillingPenaltyPaid\": \"213156.29\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"5353608.89\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"80\",\r
+
+          \            \"TanggalJatuhTempo\": \"2021-11-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"592961.23\",\r
+
+          \            \"BillingBungaPaid\": \"4547491.37\",\r
+
+          \            \"BillingPenaltyPaid\": \"191909.20\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"5332361.80\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"81\",\r
+
+          \            \"TanggalJatuhTempo\": \"2021-12-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"592961.40\",\r
+
+          \            \"BillingBungaPaid\": \"4547491.20\",\r
+
+          \            \"BillingPenaltyPaid\": \"171347.50\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"5311800.10\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"82\",\r
+
+          \            \"TanggalJatuhTempo\": \"2022-01-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"592961.23\",\r
+
+          \            \"BillingBungaPaid\": \"4547491.37\",\r
+
+          \            \"BillingPenaltyPaid\": \"150100.41\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"5290553.01\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"83\",\r
+
+          \            \"TanggalJatuhTempo\": \"2022-02-28\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"592961.15\",\r
+
+          \            \"BillingBungaPaid\": \"4547491.45\",\r
+
+          \            \"BillingPenaltyPaid\": \"130224.10\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"5270676.70\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"84\",\r
+
+          \            \"TanggalJatuhTempo\": \"2022-03-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"592961.40\",\r
+
+          \            \"BillingBungaPaid\": \"4547491.20\",\r
+
+          \            \"BillingPenaltyPaid\": \"109662.40\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"5250115.00\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"85\",\r
+
+          \            \"TanggalJatuhTempo\": \"2022-04-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"592961.23\",\r
+
+          \            \"BillingBungaPaid\": \"4547491.37\",\r
+
+          \            \"BillingPenaltyPaid\": \"88415.31\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"5228867.91\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"86\",\r
+
+          \            \"TanggalJatuhTempo\": \"2022-05-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"592961.40\",\r
+
+          \            \"BillingBungaPaid\": \"4547491.20\",\r
+
+          \            \"BillingPenaltyPaid\": \"67853.61\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"5208306.21\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"87\",\r
+
+          \            \"TanggalJatuhTempo\": \"2022-06-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"592961.23\",\r
+
+          \            \"BillingBungaPaid\": \"4547491.37\",\r
+
+          \            \"BillingPenaltyPaid\": \"92002.21\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"5232454.81\",\r
+
+          \            \"TanggalPembayaran\": \"2022-09-05\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"88\",\r
+
+          \            \"TanggalJatuhTempo\": \"2022-07-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"592961.40\",\r
+
+          \            \"BillingBungaPaid\": \"4547491.20\",\r
+
+          \            \"BillingPenaltyPaid\": \"77449.07\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"5217901.67\",\r
+
+          \            \"TanggalPembayaran\": \"2022-11-20\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"89\",\r
+
+          \            \"TanggalJatuhTempo\": \"2022-08-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"592961.23\",\r
+
+          \            \"BillingBungaPaid\": \"4547491.37\",\r
+
+          \            \"BillingPenaltyPaid\": \"56201.98\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"5196654.58\",\r
+
+          \            \"TanggalPembayaran\": \"2022-11-20\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"90\",\r
+
+          \            \"TanggalJatuhTempo\": \"2022-09-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"1440829.98\",\r
+
+          \            \"BillingBungaPaid\": \"3699622.62\",\r
+
+          \            \"BillingPenaltyPaid\": \"34954.89\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"5175407.49\",\r
+
+          \            \"TanggalPembayaran\": \"2022-11-20\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"91\",\r
+
+          \            \"TanggalJatuhTempo\": \"2022-10-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"1644318.60\",\r
+
+          \            \"BillingBungaPaid\": \"3496134.00\",\r
+
+          \            \"BillingPenaltyPaid\": \"14393.19\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"5154845.79\",\r
+
+          \            \"TanggalPembayaran\": \"2022-11-20\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"92\",\r
+
+          \            \"TanggalJatuhTempo\": \"2022-11-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"1662688.68\",\r
+
+          \            \"BillingBungaPaid\": \"3477763.92\",\r
+
+          \            \"BillingPenaltyPaid\": \"0.00\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"5140452.60\",\r
+
+          \            \"TanggalPembayaran\": \"2022-11-30\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"93\",\r
+
+          \            \"TanggalJatuhTempo\": \"2022-12-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"1723435.20\",\r
+
+          \            \"BillingBungaPaid\": \"3417017.40\",\r
+
+          \            \"BillingPenaltyPaid\": \"0.00\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"5140452.60\",\r
+
+          \            \"TanggalPembayaran\": \"2022-12-30\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"94\",\r
+
+          \            \"TanggalJatuhTempo\": \"2023-01-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"1746414.50\",\r
+
+          \            \"BillingBungaPaid\": \"3394038.10\",\r
+
+          \            \"BillingPenaltyPaid\": \"0.00\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"5140452.60\",\r
+
+          \            \"TanggalPembayaran\": \"2023-01-30\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"95\",\r
+
+          \            \"TanggalJatuhTempo\": \"2023-02-28\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"1769699.95\",\r
+
+          \            \"BillingBungaPaid\": \"3370752.65\",\r
+
+          \            \"BillingPenaltyPaid\": \"0.00\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"5140452.60\",\r
+
+          \            \"TanggalPembayaran\": \"2023-02-28\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"SeqNum\": \"96\",\r
+
+          \            \"TanggalJatuhTempo\": \"2023-03-30\",\r
+
+          \            \"BillingPokok\": \"0.00\",\r
+
+          \            \"BillingBunga\": \"0.00\",\r
+
+          \            \"BillingPenalty\": \"0.00\",\r
+
+          \            \"BillingPokokPaid\": \"1793295.90\",\r
+
+          \            \"BillingBungaPaid\": \"3347156.70\",\r
+
+          \            \"BillingPenaltyPaid\": \"0.00\",\r
+
+          \            \"TotalTunggakan\": \"0.00\",\r
+
+          \            \"TotalPembayaran\": \"5140452.60\",\r
+
+          \            \"TanggalPembayaran\": \"2023-03-30\"\r
+
+          \        }\r
+
+          \    ]\r
+
+          }"

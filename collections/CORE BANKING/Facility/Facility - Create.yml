@@ -1,0 +1,147 @@
+info:
+  name: Facility / Create
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: "{{URL}}/facility/create"
+  body:
+    type: json
+    data: "{\r
+
+      \    \"KodeCabang\": \"0010\",\r
+
+      \    \"NomorCIF\": \"0000149512\",\r
+
+      \    \"KodeFasilitas\": \"PK2\",\r
+
+      \    \"NamaLengkap\": \"Dwiki Saputra\",\r
+
+      \    \"MataUang\": \"IDR\",\r
+
+      \    \"Nominal\": \"100000000\",\r
+
+      \    \"SektorEkonomi\": \"401002\",\r
+
+      \    \"KodeLokasi\": \"0394\",\r
+
+      \    \"JenisPenggunaan\": \"3\",\r
+
+      \    \"GolonganDebitur\": \"7174\",\r
+
+      \    \"SifatKredit\": \"9\",\r
+
+      \    \"KategoriDebitur\": \"99\",\r
+
+      \    \"GolonganPenjamin\": \"000\",\r
+
+      \    \"NoAkadAwal\": \"\",\r
+
+      \    \"TanggalJatuhTempo\": \"25/08/2035\",\r
+
+      \    \"NomorFasilitas\": \"\",\r
+
+      \    \"NominalPenyesuaianFasilitas\": \"0\",\r
+
+      \    \"TandaPenyesuaianFasilitas\": \"+\",\r
+
+      \    \"SegmentasiKredit\": \"310\",\r
+
+      \    \"AOPemrakarsa\": \"999941\",\r
+
+      \    \"AOBookingOffice\": \"\",\r
+
+      \    \"TanggalPembukaan\": \"25/08/2030\",\r
+
+      \    \"RatingDebitur\": \"\",\r
+
+      \    \"Keterangan\": \"\",\r
+
+      \    \"JenisRating\": \"\",\r
+
+      \    \"KeteranganRating\": \"\",\r
+
+      \    \"KeteranganOverride\": \"\",\r
+
+      \    \"StatusDebitur\": \"9\",\r
+
+      \    \"KategoriPortofolio\": \"40\",\r
+
+      \    \"LembagaPemeringkat\": \"00\",\r
+
+      \    \"NamaLembagaPemeringkat\": \"\",\r
+
+      \    \"KeteranganPeringkat\": \"\",\r
+
+      \    \"TanggalPemeringkatan\": \"\",\r
+
+      \    \"JenisKredit\": \"05\",\r
+
+      \    \"OrientasiPenggunaan\": \"9\",\r
+
+      \    \"KategoriPengukuran\": \"2\",\r
+
+      \    \"TanggalAkadAwal\": \"25/08/2030\",\r
+
+      \    \"TanggalTersedia\": \"25/08/2035\",\r
+
+      \    \"NoAkadAkhir\": \"\",\r
+
+      \    \"TanggalAkadAkhir\": \"\",\r
+
+      \    \"GolonganDebiturSID\": \"9000\",\r
+
+      \    \"TanggalMulai\": \"25/08/2030\",\r
+
+      \    \"AOPengelola\": \"999941\",\r
+
+      \    \"FrekuensiRestrukturisasi\": \"\",\r
+
+      \    \"CaraRestrukturisasi\": \"\",\r
+
+      \    \"BankCounterparty\": \"\",\r
+
+      \    \"NamaYangDijamin\": \"\",\r
+
+      \    \"FlagRestrukturisasi\": \"N\",\r
+
+      \    \"HubunganDenganPelapor\": \"0110\",\r
+
+      \    \"NamaGroup\": \"\",\r
+
+      \    \"MelanggarBMPK\": \"N\",\r
+
+      \    \"MelampauiBMPK\": \"N\",\r
+
+      \    \"AgunanList\": \"\",\r
+
+      \    \"PenjaminList\": \"\",\r
+
+      \    \"PenghasilanPerbulan\": \"8000000\",\r
+
+      \    \"Prakarsa\": \"UKER\",\r
+
+      \    \"CKPN\": \"I\",\r
+
+      \    \"Pemutus\": \"UKER\",\r
+
+      \    \"Referal\": \"\",\r
+
+      \    \"TanggalRestrukAwal\": \"\",\r
+
+      \    \"TanggalRestrukAkhir\": \"\",\r
+
+      \    \"NilaiProyek\": \"100000000\"\r
+
+      }"
+  auth:
+    type: basic
+    username: pinang-mikro
+    password: "0"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

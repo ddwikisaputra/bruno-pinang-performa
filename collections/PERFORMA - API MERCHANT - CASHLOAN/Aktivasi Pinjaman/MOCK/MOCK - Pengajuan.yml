@@ -1,0 +1,22 @@
+info:
+  name: MOCK - Pengajuan
+  type: http
+  seq: 5
+
+http:
+  method: POST
+  url: https://pinang-performa.free.mockoapp.net/v/1/aktivasi/cashloan/pengajuan/400-validate-age
+  headers:
+    - name: x-key
+      value: performa
+  params:
+    - name: 400-validate-age
+      value: Validasi Umur
+      type: query
+      disabled: true
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

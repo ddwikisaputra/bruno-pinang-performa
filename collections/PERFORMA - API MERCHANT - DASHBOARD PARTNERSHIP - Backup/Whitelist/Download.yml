@@ -1,0 +1,875 @@
+info:
+  name: Download
+  type: http
+  seq: 4
+
+http:
+  method: POST
+  url: "{{base-url-local}}/v/1/partnership/whitelist/download"
+  auth:
+    type: bearer
+    token: "{{tokenPartnership}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 503 - Error Service Unavailable
+    request:
+      url: "{{base-url-local}}/v/1/partnership/whitelist/download"
+      method: POST
+    response:
+      status: 503
+      statusText: Service Unavailable
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Tue, 24 Mar 2026 10:11:55 GMT
+        - name: Content-Length
+          value: "122"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Jam operasional Pinang Performa dari jam xx:xx - xx:xx WIB setiap hari. Kembali lagi nanti, ya!",
+              "status": 503
+          }
+  - name: 401 - Unauthorized / Expired
+    request:
+      url: "{{base-url-local}}/v/1/partnership/whitelist/download"
+      method: POST
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Wed, 25 Feb 2026 03:48:22 GMT
+        - name: Content-Length
+          value: "50"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Unauthorized / Expired.",
+              "status": 401
+          }
+  - name: 200 - Success data tidak ditemukan
+    request:
+      url: "{{base-url-local}}/v/1/partnership/whitelist/download"
+      method: POST
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Wed, 25 Feb 2026 03:46:51 GMT
+        - name: Content-Length
+          value: "77"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Data partnership member tidak di temukan",
+              "status": 200
+          }
+  - name: 200 - Success data ditemukan
+    request:
+      url: "{{base-url-local}}/v/1/partnership/whitelist/download"
+      method: POST
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Wed, 25 Feb 2026 03:47:47 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "data": [
+                  {
+                      "id": "MTAxNzg=",
+                      "userId": "MzE3MTA1MTIxMTk1MDAwMQ==",
+                      "name": "RHdpa2kgU2FwdXRyYQ==",
+                      "mobileNumber": "ODE3NzY1MjczNzE=",
+                      "birthDate": "MTk5NS0xMS0xMg==",
+                      "placeOfBirth": "SmFrYXJ0YQ==",
+                      "address": "Cempaka Putih Barat",
+                      "rt": "010",
+                      "rw": "002",
+                      "postalCode": "12820",
+                      "maritalStatus": "Belum Kawin",
+                      "motherMaidenName": "UnVtaXlhdGk=",
+                      "email": "ZHdpa2kuc2FwdXRyYUBiYW5rcmF5YS5jby5pZA==",
+                      "ktpPicturePath": "",
+                      "ktpPictureSelfiePath": "",
+                      "partnerKtpNumber": "MzE3MTA1MTIxMTk1MDAwMQ==",
+                      "partnerName": "RHdpa2kgMg==",
+                      "partnerBirthPlace": "",
+                      "partnerBirthDate": "",
+                      "partnerGender": "UGVyZW1wdWFu",
+                      "partnerRelationship": "",
+                      "ktpPicturePartnerPath": "",
+                      "businessName": "Toko Dwiki",
+                      "businessAddress": "Jl Joha Baru",
+                      "businessRt": "010",
+                      "businessRw": "002",
+                      "businessPostalCode": "12820",
+                      "plafond": "MTAwMDAwMDAw",
+                      "tenor": "MTI=",
+                      "createdAt": "2022-11-15 08:37:20.000",
+                      "updatedAt": "2026-02-25 10:40:31.357",
+                      "transactionList": [
+                          {
+                              "partnershipMemberId": "MTAxNzg=",
+                              "partnershipId": "MTky",
+                              "userId": "MzE3MTA1MTIxMTk1MDAwMQ==",
+                              "perMonth": "11",
+                              "perPeriod": "0",
+                              "year": "2024",
+                              "volumeAmount": "MTE=",
+                              "transactionAmount": "NTYwMDAwMA==",
+                              "createdAt": "2024-11-25 14:11:26",
+                              "updatedAt": "2024-11-25 14:11:26"
+                          },
+                          {
+                              "partnershipMemberId": "MTAxNzg=",
+                              "partnershipId": "MTky",
+                              "userId": "MzE3MTA1MTIxMTk1MDAwMQ==",
+                              "perMonth": "12",
+                              "perPeriod": "0",
+                              "year": "2024",
+                              "volumeAmount": "MTI=",
+                              "transactionAmount": "NTYwMDAwMA==",
+                              "createdAt": "2024-11-25 14:11:26",
+                              "updatedAt": "2024-11-25 14:11:26"
+                          },
+                          {
+                              "partnershipMemberId": "MTAxNzg=",
+                              "partnershipId": "MTky",
+                              "userId": "MzE3MTA1MTIxMTk1MDAwMQ==",
+                              "perMonth": "1",
+                              "perPeriod": "0",
+                              "year": "2025",
+                              "volumeAmount": "MQ==",
+                              "transactionAmount": "NTYwMDAwMA==",
+                              "createdAt": "2024-11-25 14:11:26",
+                              "updatedAt": "2024-11-25 14:11:26"
+                          },
+                          {
+                              "partnershipMemberId": "MTAxNzg=",
+                              "partnershipId": "MTky",
+                              "userId": "MzE3MTA1MTIxMTk1MDAwMQ==",
+                              "perMonth": "2",
+                              "perPeriod": "0",
+                              "year": "2025",
+                              "volumeAmount": "Mg==",
+                              "transactionAmount": "NTYwMDAwMA==",
+                              "createdAt": "2024-11-25 14:11:26",
+                              "updatedAt": "2024-11-25 14:11:26"
+                          },
+                          {
+                              "partnershipMemberId": "MTAxNzg=",
+                              "partnershipId": "MTky",
+                              "userId": "MzE3MTA1MTIxMTk1MDAwMQ==",
+                              "perMonth": "3",
+                              "perPeriod": "0",
+                              "year": "2025",
+                              "volumeAmount": "Mw==",
+                              "transactionAmount": "NTYwMDAwMA==",
+                              "createdAt": "2024-11-25 14:11:26",
+                              "updatedAt": "2024-11-25 14:11:26"
+                          },
+                          {
+                              "partnershipMemberId": "MTAxNzg=",
+                              "partnershipId": "MTky",
+                              "userId": "MzE3MTA1MTIxMTk1MDAwMQ==",
+                              "perMonth": "4",
+                              "perPeriod": "0",
+                              "year": "2025",
+                              "volumeAmount": "NA==",
+                              "transactionAmount": "NTYwMDAwMA==",
+                              "createdAt": "2024-11-25 14:11:26",
+                              "updatedAt": "2024-11-25 14:11:26"
+                          }
+                      ]
+                  },
+                  {
+                      "id": "MTA0MTQ=",
+                      "userId": "",
+                      "name": "",
+                      "mobileNumber": "KzYyODE3NzY1MjczNzE=",
+                      "birthDate": "MTk5NS0xMS0xMg==",
+                      "placeOfBirth": "SmFrYXJ0YQ==",
+                      "address": "Cempaka Putih Barat",
+                      "rt": "010",
+                      "rw": "002",
+                      "postalCode": "12820",
+                      "maritalStatus": "Belum Kawin",
+                      "motherMaidenName": "UnVtaXlhdGk=",
+                      "email": "YWJjQGdtYWlsLmNvbQ==",
+                      "ktpPicturePath": "",
+                      "ktpPictureSelfiePath": "",
+                      "partnerKtpNumber": "MzE3MTA1MTIxMTk1MDAwMQ==",
+                      "partnerName": "RHdpa2kgMg==",
+                      "partnerBirthPlace": "",
+                      "partnerBirthDate": "",
+                      "partnerGender": "UGVyZW1wdWFu",
+                      "partnerRelationship": "",
+                      "ktpPicturePartnerPath": "",
+                      "businessName": "Toko Dwiki",
+                      "businessAddress": "Jl Joha Baru",
+                      "businessRt": "010",
+                      "businessRw": "002",
+                      "businessPostalCode": "12820",
+                      "plafond": "MA==",
+                      "tenor": "MA==",
+                      "createdAt": "2022-11-15 08:37:20.000",
+                      "updatedAt": "2026-02-25 10:40:29.163",
+                      "transactionList": [
+                          {
+                              "partnershipMemberId": "MTA0MTQ=",
+                              "partnershipId": "MTky",
+                              "userId": "",
+                              "perMonth": "7",
+                              "perPeriod": "0",
+                              "year": "0",
+                              "volumeAmount": "Mw==",
+                              "transactionAmount": "MjAwMDAwMA==",
+                              "createdAt": "2025-07-24 08:33:14",
+                              "updatedAt": "2025-07-24 08:33:14"
+                          }
+                      ]
+                  },
+                  {
+                      "id": "MTA0MTc=",
+                      "userId": "MzI3NjA5MTcxMTAwMDA1MQ==",
+                      "name": "SGFycnkgUGFtdW5na2Fz",
+                      "mobileNumber": "ODk1NDIxNTgzNzIw",
+                      "birthDate": "MjAwMC0xMS0xNw==",
+                      "placeOfBirth": "SmFrYXJ0YQ==",
+                      "address": "Jl.Peninggaran Timur Ii",
+                      "rt": "003",
+                      "rw": "009",
+                      "postalCode": "12240",
+                      "maritalStatus": "Belum Kawin",
+                      "motherMaidenName": "V2luYXJuaQ==",
+                      "email": "aGFoYUBtYWlsLmNvbQ==",
+                      "ktpPicturePath": "/ocr/ktp/2024/7/29/IMG_KTP_MERCHANT_3276091711000001.jpg",
+                      "ktpPictureSelfiePath": "/ocr/ktp/2024/7/29/IMG_SELFIE_MERCHANT_3276091711000001.jpg",
+                      "partnerKtpNumber": "MzI3NjA5MTcxMTAwMDAwMg==",
+                      "partnerName": "TWFuZGF0b3J5",
+                      "partnerBirthPlace": "TWFuZGF0b3J5",
+                      "partnerBirthDate": "MjAwMC0xMS0xNw==",
+                      "partnerGender": "UGVyZW1wdWFu",
+                      "partnerRelationship": "Suami",
+                      "ktpPicturePartnerPath": "/ocr/ktp/2024/7/29/IMG_KTP_PARTNER_MERCHANT_3276091711000001.jpg",
+                      "businessName": "Whatever",
+                      "businessAddress": "Jl. Keong no 22",
+                      "businessRt": "004",
+                      "businessRw": "001",
+                      "businessPostalCode": "12240",
+                      "plafond": "MA==",
+                      "tenor": "MA==",
+                      "createdAt": "2024-07-29 14:34:37.720",
+                      "updatedAt": "2026-02-25 10:40:29.147",
+                      "transactionList": []
+                  },
+                  {
+                      "id": "MTA0MTg=",
+                      "userId": "MzMyOTAzMzAxMTk5MDAwNw==",
+                      "name": "U3lhaGJhbmkgRmFyaGFu",
+                      "mobileNumber": "ODUzODUyMTA5OTM=",
+                      "birthDate": "MTk5OS0xMS0zMA==",
+                      "placeOfBirth": "RGVwb2s=",
+                      "address": "Dk. Kramat",
+                      "rt": "004",
+                      "rw": "005",
+                      "postalCode": "52273",
+                      "maritalStatus": "Belum Kawin",
+                      "motherMaidenName": "dGVzdA==",
+                      "email": "c3lhaGJhbmlAYmFua3JheWEuY28uaWQ=",
+                      "ktpPicturePath": "",
+                      "ktpPictureSelfiePath": "",
+                      "partnerKtpNumber": "",
+                      "partnerName": "",
+                      "partnerBirthPlace": "",
+                      "partnerBirthDate": "",
+                      "partnerGender": "",
+                      "partnerRelationship": "",
+                      "ktpPicturePartnerPath": "",
+                      "businessName": "Bisnis Ternak Gajah",
+                      "businessAddress": "Dk. Kramat",
+                      "businessRt": "004",
+                      "businessRw": "005",
+                      "businessPostalCode": "52273",
+                      "plafond": "MTAwMDAwMDAw",
+                      "tenor": "MTI=",
+                      "createdAt": "2024-11-07 09:41:58.720",
+                      "updatedAt": "2026-02-25 10:40:29.083",
+                      "transactionList": []
+                  },
+                  {
+                      "id": "MTA0MTk=",
+                      "userId": "MzMwMTE0MDcxMTk2MDAwMg==",
+                      "name": "Q2VkcmljIFRyaWh1dG9tbyBTdXNhbnRv",
+                      "mobileNumber": "ODIyNDMzODI2NzY=",
+                      "birthDate": "MTk5NS0xMS0wNw==",
+                      "placeOfBirth": "QmFueXVtYXM=",
+                      "address": "Jl. Diponegoro No.4",
+                      "rt": "003",
+                      "rw": "001",
+                      "postalCode": "11480",
+                      "maritalStatus": "Belum Kawin",
+                      "motherMaidenName": "dGVzdA==",
+                      "email": "Y2VkcmljLnN1c2FudG9AYmFua3JheWEuY28uaWQ=",
+                      "ktpPicturePath": "/ocr/ktp/2024/10/7/IMG_KTP_MERCHANT_3301140711960002.jpg",
+                      "ktpPictureSelfiePath": "/ocr/ktp/2024/10/7/IMG_SELFIE_MERCHANT_3301140711960002.jpg",
+                      "partnerKtpNumber": "",
+                      "partnerName": "",
+                      "partnerBirthPlace": "",
+                      "partnerBirthDate": "",
+                      "partnerGender": "",
+                      "partnerRelationship": "",
+                      "ktpPicturePartnerPath": "/ocr/ktp/2024/10/7/IMG_KTP_PARTNER_MERCHANT_3301140711960002.jpg",
+                      "businessName": "Restoran",
+                      "businessAddress": "Jl. U no.23",
+                      "businessRt": "001",
+                      "businessRw": "001",
+                      "businessPostalCode": "11480",
+                      "plafond": "MTAwMDAwMDA=",
+                      "tenor": "Mw==",
+                      "createdAt": "2024-10-07 14:27:50.970",
+                      "updatedAt": "2026-02-25 10:40:29.077",
+                      "transactionList": []
+                  },
+                  {
+                      "id": "MTA0MjE=",
+                      "userId": "MzE3NDA4MjUwODk4MTAwMg==",
+                      "name": "TW9oYWxwaGFyZCBIYWZkeiBCdWNp",
+                      "mobileNumber": "ODc3Njg3Mjg0ODM=",
+                      "birthDate": "MTk5OC0wOC0yNQ==",
+                      "placeOfBirth": "WW9neSBBa2FydGE=",
+                      "address": "Jlasoka Komplek Puri Amelia No.7",
+                      "rt": "001",
+                      "rw": "001",
+                      "postalCode": "12780",
+                      "maritalStatus": "Belum Kawin",
+                      "motherMaidenName": "dGVz",
+                      "email": "dGVzdEBtYWlsLmNvbQ==",
+                      "ktpPicturePath": "",
+                      "ktpPictureSelfiePath": "",
+                      "partnerKtpNumber": "MzI3NjA5MTcxMTAwMDAwMQ==",
+                      "partnerName": "TWFuZGF0b3J5",
+                      "partnerBirthPlace": "TWFuZGF0b3J5",
+                      "partnerBirthDate": "MjAwMC0xMS0xNw==",
+                      "partnerGender": "UGVyZW1wdWFu",
+                      "partnerRelationship": "",
+                      "ktpPicturePartnerPath": "",
+                      "businessName": "tes",
+                      "businessAddress": "tes",
+                      "businessRt": "001",
+                      "businessRw": "001",
+                      "businessPostalCode": "12780",
+                      "plafond": "MA==",
+                      "tenor": "MA==",
+                      "createdAt": "2025-06-16 15:35:23.283",
+                      "updatedAt": "2026-02-25 10:40:29.070",
+                      "transactionList": []
+                  },
+                  {
+                      "id": "MTA0MjQ=",
+                      "userId": "MzI3NjA5MTcxMTAwMDA1NA==",
+                      "name": "SGFycnkgUGFtdW5na2Fz",
+                      "mobileNumber": "KzYyODE3NzY1MjczNzE=",
+                      "birthDate": "",
+                      "placeOfBirth": "",
+                      "address": "",
+                      "rt": "",
+                      "rw": "",
+                      "postalCode": "",
+                      "maritalStatus": "",
+                      "motherMaidenName": "",
+                      "email": "ZC5kd2lraXNhcHV0cmFAZ21haWwuY29t",
+                      "ktpPicturePath": "",
+                      "ktpPictureSelfiePath": "",
+                      "partnerKtpNumber": "",
+                      "partnerName": "",
+                      "partnerBirthPlace": "",
+                      "partnerBirthDate": "",
+                      "partnerGender": "",
+                      "partnerRelationship": "",
+                      "ktpPicturePartnerPath": "",
+                      "businessName": "",
+                      "businessAddress": "",
+                      "businessRt": "",
+                      "businessRw": "",
+                      "businessPostalCode": "",
+                      "plafond": "MA==",
+                      "tenor": "MA==",
+                      "createdAt": "2025-07-10 15:02:26.533",
+                      "updatedAt": "2026-02-25 10:40:29.060",
+                      "transactionList": [
+                          {
+                              "partnershipMemberId": "MTA0MjQ=",
+                              "partnershipId": "MTky",
+                              "userId": "MzI3NjA5MTcxMTAwMDA1NA==",
+                              "perMonth": "0",
+                              "perPeriod": "12",
+                              "year": "0",
+                              "volumeAmount": "MTI=",
+                              "transactionAmount": "NTYwMDAwMA==",
+                              "createdAt": "2025-07-10 15:02:26",
+                              "updatedAt": "2025-07-10 15:02:26"
+                          },
+                          {
+                              "partnershipMemberId": "MTA0MjQ=",
+                              "partnershipId": "MTky",
+                              "userId": "MzI3NjA5MTcxMTAwMDA1NA==",
+                              "perMonth": "0",
+                              "perPeriod": "6",
+                              "year": "0",
+                              "volumeAmount": "Ng==",
+                              "transactionAmount": "NTUwMDAwMA==",
+                              "createdAt": "2025-07-10 15:02:26",
+                              "updatedAt": "2025-07-10 15:02:26"
+                          },
+                          {
+                              "partnershipMemberId": "MTA0MjQ=",
+                              "partnershipId": "MTky",
+                              "userId": "MzI3NjA5MTcxMTAwMDA1NA==",
+                              "perMonth": "0",
+                              "perPeriod": "3",
+                              "year": "0",
+                              "volumeAmount": "Mw==",
+                              "transactionAmount": "NTQwMDAwMA==",
+                              "createdAt": "2025-07-10 15:02:26",
+                              "updatedAt": "2025-07-10 15:02:26"
+                          }
+                      ]
+                  },
+                  {
+                      "id": "MTA0Mjk=",
+                      "userId": "MzI3NjA5MTcxMTAwMDAzNw==",
+                      "name": "QXlhbm9rb2pp",
+                      "mobileNumber": "KzYyODE3NzY1MjczNzE=",
+                      "birthDate": "",
+                      "placeOfBirth": "",
+                      "address": "",
+                      "rt": "",
+                      "rw": "",
+                      "postalCode": "",
+                      "maritalStatus": "",
+                      "motherMaidenName": "",
+                      "email": "YWJjQGdtYWlsLmNvbQ==",
+                      "ktpPicturePath": "",
+                      "ktpPictureSelfiePath": "",
+                      "partnerKtpNumber": "",
+                      "partnerName": "",
+                      "partnerBirthPlace": "",
+                      "partnerBirthDate": "",
+                      "partnerGender": "",
+                      "partnerRelationship": "",
+                      "ktpPicturePartnerPath": "",
+                      "businessName": "",
+                      "businessAddress": "",
+                      "businessRt": "",
+                      "businessRw": "",
+                      "businessPostalCode": "",
+                      "plafond": "MA==",
+                      "tenor": "MA==",
+                      "createdAt": "2025-07-23 12:09:42.613",
+                      "updatedAt": "2026-02-25 10:40:29.017",
+                      "transactionList": [
+                          {
+                              "partnershipMemberId": "MTA0Mjk=",
+                              "partnershipId": "MTky",
+                              "userId": "MzI3NjA5MTcxMTAwMDAzNw==",
+                              "perMonth": "7",
+                              "perPeriod": "0",
+                              "year": "2025",
+                              "volumeAmount": "Mw==",
+                              "transactionAmount": "MjAwMDAwMA==",
+                              "createdAt": "2025-07-23 12:09:42",
+                              "updatedAt": "2025-07-23 12:09:42"
+                          }
+                      ]
+                  },
+                  {
+                      "id": "MTA0MzA=",
+                      "userId": "MzYwMzI4NjUwNzAwMDAwNw==",
+                      "name": "U29rYSBBZHphaGFyYSBBcmlla2E=",
+                      "mobileNumber": "KzYyODEyODI4MDA1MzQ=",
+                      "birthDate": "",
+                      "placeOfBirth": "",
+                      "address": "",
+                      "rt": "",
+                      "rw": "",
+                      "postalCode": "",
+                      "maritalStatus": "Belum Kawin",
+                      "motherMaidenName": "",
+                      "email": "YWJjQGdtYWlsLmNvbQ==",
+                      "ktpPicturePath": "",
+                      "ktpPictureSelfiePath": "",
+                      "partnerKtpNumber": "",
+                      "partnerName": "",
+                      "partnerBirthPlace": "",
+                      "partnerBirthDate": "",
+                      "partnerGender": "",
+                      "partnerRelationship": "",
+                      "ktpPicturePartnerPath": "",
+                      "businessName": "",
+                      "businessAddress": "",
+                      "businessRt": "",
+                      "businessRw": "",
+                      "businessPostalCode": "",
+                      "plafond": "MTAwMDAwMDAw",
+                      "tenor": "MTI=",
+                      "createdAt": "2025-07-23 12:09:42.613",
+                      "updatedAt": "2026-02-25 10:40:28.977",
+                      "transactionList": []
+                  },
+                  {
+                      "id": "MTA0MzI=",
+                      "userId": "MzI3NjA5MTcxMTAwMDA1NQ==",
+                      "name": "SGFycnkgUGFtdW5na2Fz",
+                      "mobileNumber": "KzYyODk1NDIxNTgzNzIw",
+                      "birthDate": "",
+                      "placeOfBirth": "",
+                      "address": "",
+                      "rt": "",
+                      "rw": "",
+                      "postalCode": "",
+                      "maritalStatus": "",
+                      "motherMaidenName": "",
+                      "email": "aGFycnlAYmFua3JheWEuY28uaWQ=",
+                      "ktpPicturePath": "",
+                      "ktpPictureSelfiePath": "",
+                      "partnerKtpNumber": "",
+                      "partnerName": "",
+                      "partnerBirthPlace": "",
+                      "partnerBirthDate": "",
+                      "partnerGender": "",
+                      "partnerRelationship": "",
+                      "ktpPicturePartnerPath": "",
+                      "businessName": "",
+                      "businessAddress": "",
+                      "businessRt": "",
+                      "businessRw": "",
+                      "businessPostalCode": "",
+                      "plafond": "MTAwMDAwMDA=",
+                      "tenor": "MTI=",
+                      "createdAt": "2025-07-10 15:02:26.533",
+                      "updatedAt": "2026-02-25 10:40:28.967",
+                      "transactionList": []
+                  },
+                  {
+                      "id": "MTA0Mzc=",
+                      "userId": "MzI3NjA5MTcxMTAwMDA1OA==",
+                      "name": "SGFycnkgUGFtdW5na2Fz",
+                      "mobileNumber": "KzYyODk1NDIxNTgzNzIw",
+                      "birthDate": "",
+                      "placeOfBirth": "",
+                      "address": "",
+                      "rt": "",
+                      "rw": "",
+                      "postalCode": "",
+                      "maritalStatus": "",
+                      "motherMaidenName": "",
+                      "email": "aGFycnlAYmFua3JheWEuY28uaWQ=",
+                      "ktpPicturePath": "",
+                      "ktpPictureSelfiePath": "",
+                      "partnerKtpNumber": "",
+                      "partnerName": "",
+                      "partnerBirthPlace": "",
+                      "partnerBirthDate": "",
+                      "partnerGender": "",
+                      "partnerRelationship": "",
+                      "ktpPicturePartnerPath": "",
+                      "businessName": "",
+                      "businessAddress": "",
+                      "businessRt": "",
+                      "businessRw": "",
+                      "businessPostalCode": "",
+                      "plafond": "MTAwMDAwMDA=",
+                      "tenor": "MTI=",
+                      "createdAt": "2025-07-10 15:02:26.533",
+                      "updatedAt": "2026-02-25 10:40:28.957",
+                      "transactionList": []
+                  },
+                  {
+                      "id": "MTA0NTM=",
+                      "userId": "MzI3NjA5MTcxMTAwMDA2Mg==",
+                      "name": "SGFycnkgUGFtdW5na2Fz",
+                      "mobileNumber": "ODk1NDIxNTgzNzIwYUAuLyo=",
+                      "birthDate": "MjAwMC0xMS0xNw==",
+                      "placeOfBirth": "SmFrYXJ0YQ==",
+                      "address": "Jl.Peninggaran Timur Ii",
+                      "rt": "003",
+                      "rw": "009",
+                      "postalCode": "12240",
+                      "maritalStatus": "Belum Kawin",
+                      "motherMaidenName": "V2luYXJuaQ==",
+                      "email": "aGFycnlAYmFua3JheWEuY28uaWQ=",
+                      "ktpPicturePath": "",
+                      "ktpPictureSelfiePath": "",
+                      "partnerKtpNumber": "",
+                      "partnerName": "",
+                      "partnerBirthPlace": "",
+                      "partnerBirthDate": "",
+                      "partnerGender": "",
+                      "partnerRelationship": "",
+                      "ktpPicturePartnerPath": "",
+                      "businessName": "",
+                      "businessAddress": "asdasd",
+                      "businessRt": "003",
+                      "businessRw": "003",
+                      "businessPostalCode": "12240",
+                      "plafond": "MA==",
+                      "tenor": "MA==",
+                      "createdAt": "2025-07-23 12:09:42.613",
+                      "updatedAt": "2026-02-25 10:40:28.763",
+                      "transactionList": []
+                  },
+                  {
+                      "id": "MTA0NTg=",
+                      "userId": "MzI3NjAxMTEwMjAwMDAxMg==",
+                      "name": "",
+                      "mobileNumber": "KzYyODk2NzgyMjI5OTQ=",
+                      "birthDate": "",
+                      "placeOfBirth": "",
+                      "address": "",
+                      "rt": "",
+                      "rw": "",
+                      "postalCode": "",
+                      "maritalStatus": "Belum Kawin",
+                      "motherMaidenName": "",
+                      "email": "",
+                      "ktpPicturePath": "",
+                      "ktpPictureSelfiePath": "",
+                      "partnerKtpNumber": "",
+                      "partnerName": "",
+                      "partnerBirthPlace": "",
+                      "partnerBirthDate": "",
+                      "partnerGender": "",
+                      "partnerRelationship": "",
+                      "ktpPicturePartnerPath": "",
+                      "businessName": "",
+                      "businessAddress": "",
+                      "businessRt": "",
+                      "businessRw": "",
+                      "businessPostalCode": "",
+                      "plafond": "MA==",
+                      "tenor": "MA==",
+                      "createdAt": "2025-10-20 11:43:38.927",
+                      "updatedAt": "2026-02-25 10:40:28.753",
+                      "transactionList": []
+                  },
+                  {
+                      "id": "MTA0Njg=",
+                      "userId": "MzIwOTEyMjAwMzk0MDAwNg==",
+                      "name": "U2Ftc3VsIEJhaHJp",
+                      "mobileNumber": "KzYyODE3ODk4Nzc3NjU=",
+                      "birthDate": "",
+                      "placeOfBirth": "",
+                      "address": "",
+                      "rt": "",
+                      "rw": "",
+                      "postalCode": "",
+                      "maritalStatus": "",
+                      "motherMaidenName": "",
+                      "email": "c3VuYXJ0b0BiYW5rcmF5YS5jby5pZA==",
+                      "ktpPicturePath": "",
+                      "ktpPictureSelfiePath": "",
+                      "partnerKtpNumber": "",
+                      "partnerName": "",
+                      "partnerBirthPlace": "",
+                      "partnerBirthDate": "",
+                      "partnerGender": "",
+                      "partnerRelationship": "",
+                      "ktpPicturePartnerPath": "",
+                      "businessName": "",
+                      "businessAddress": "",
+                      "businessRt": "",
+                      "businessRw": "",
+                      "businessPostalCode": "",
+                      "plafond": "NjAwMDAwMA==",
+                      "tenor": "Mw==",
+                      "createdAt": "2025-07-23 12:09:42.613",
+                      "updatedAt": "2026-02-25 10:40:28.680",
+                      "transactionList": [
+                          {
+                              "partnershipMemberId": "MTA0Njg=",
+                              "partnershipId": "MTky",
+                              "userId": "MzIwOTEyMjAwMzk0MDAwNg==",
+                              "perMonth": "1",
+                              "perPeriod": "0",
+                              "year": "2025",
+                              "volumeAmount": "Mw==",
+                              "transactionAmount": "MjAwMDAwMA==",
+                              "createdAt": "2026-02-23 14:30:17",
+                              "updatedAt": "2026-02-23 14:30:17"
+                          },
+                          {
+                              "partnershipMemberId": "MTA0Njg=",
+                              "partnershipId": "MTky",
+                              "userId": "MzIwOTEyMjAwMzk0MDAwNg==",
+                              "perMonth": "2",
+                              "perPeriod": "0",
+                              "year": "2025",
+                              "volumeAmount": "Mw==",
+                              "transactionAmount": "MjAwMDAwMA==",
+                              "createdAt": "2026-02-23 14:30:17",
+                              "updatedAt": "2026-02-23 14:30:17"
+                          }
+                      ]
+                  },
+                  {
+                      "id": "MTA1MzQ=",
+                      "userId": "MzI3NjA5MTcxMTAwMDA2OQ==",
+                      "name": "SGFycnkgUGFtdW5na2Fz",
+                      "mobileNumber": "KzYyODk1NDIxNTgzNzIw",
+                      "birthDate": "MjAwMC0xMS0xNw==",
+                      "placeOfBirth": "SmFrYXJ0YQ==",
+                      "address": "Jl.Peninggaran Timur Ii",
+                      "rt": "003",
+                      "rw": "009",
+                      "postalCode": "12240",
+                      "maritalStatus": "Kawin",
+                      "motherMaidenName": "V2luYXJuaQ==",
+                      "email": "aGFycnlAYmFua3JheWEuY28uaWQ=",
+                      "ktpPicturePath": "",
+                      "ktpPictureSelfiePath": "",
+                      "partnerKtpNumber": "MzI3NjA5MTcxMTAwMDAwMQ==",
+                      "partnerName": "VGVzdGE=",
+                      "partnerBirthPlace": "",
+                      "partnerBirthDate": "",
+                      "partnerGender": "",
+                      "partnerRelationship": "",
+                      "ktpPicturePartnerPath": "",
+                      "businessName": "",
+                      "businessAddress": "asdasd",
+                      "businessRt": "003",
+                      "businessRw": "003",
+                      "businessPostalCode": "12240",
+                      "plafond": "MA==",
+                      "tenor": "MA==",
+                      "createdAt": "2025-07-23 12:09:42.613",
+                      "updatedAt": "2026-02-25 10:40:28.153",
+                      "transactionList": []
+                  },
+                  {
+                      "id": "MTA1NTA=",
+                      "userId": "MzI3NjA5MTcxMTAwMDA3Mg==",
+                      "name": "SGFycnkgUGFtdW5na2Fz",
+                      "mobileNumber": "KzYyODk1NDIxNTgzNzIw",
+                      "birthDate": "MjAwMC0xMS0xNw==",
+                      "placeOfBirth": "Y2lhbmp1cg==",
+                      "address": "",
+                      "rt": "",
+                      "rw": "",
+                      "postalCode": "",
+                      "maritalStatus": "Belum Kawin",
+                      "motherMaidenName": "",
+                      "email": "",
+                      "ktpPicturePath": "",
+                      "ktpPictureSelfiePath": "",
+                      "partnerKtpNumber": "",
+                      "partnerName": "",
+                      "partnerBirthPlace": "",
+                      "partnerBirthDate": "",
+                      "partnerGender": "",
+                      "partnerRelationship": "",
+                      "ktpPicturePartnerPath": "",
+                      "businessName": "",
+                      "businessAddress": "",
+                      "businessRt": "",
+                      "businessRw": "",
+                      "businessPostalCode": "",
+                      "plafond": "NjAwMDAwMA==",
+                      "tenor": "Mw==",
+                      "createdAt": "2026-01-20 14:21:22.413",
+                      "updatedAt": "2026-02-25 10:40:28.110",
+                      "transactionList": []
+                  }
+              ],
+              "message": "Data partnership member di temukan",
+              "status": 200
+          }

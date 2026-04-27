@@ -1,0 +1,1756 @@
+info:
+  name: Pengajuan
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: "{{base-url-local}}/v/1/aktivasi/cashloan/pengajuan"
+  headers:
+    - name: Api-Key
+      value: "{{apiKeyMerchant}}"
+  body:
+    type: form-urlencoded
+    data:
+      - name: nomorIdentitas
+        value: MzI3NjAxMTEwMjAwMDAxMg==
+        description: Nomor Identitas User [MANDATORY] [Base64]
+      - name: nama
+        value: UmFpaGFu
+        description: Nama [MANDATORY] [Base64]
+      - name: tanggalLahir
+        value: MTk5Ni0xMC0xNQ==
+        description: Tanggal Lahir [MANDATORY] [Base64] [YYYY-MM-DD]
+      - name: tempatLahir
+        value: Tmdhd2k=
+        description: Tempat Lahir [MANDATORY] [Base64]
+      - name: jenisKelamin
+        value: TGFraS1MYWtp
+        description: Jenis Kelamin[MANDATORY] [Base64] ["Perempuan", "Laki-Laki"]
+      - name: namaIbuKandung
+        value: RnVhZA==
+        description: Nama Ibu Kandung [MANDATORY] [Base64]
+      - name: statusPernikahan
+        value: Kawin
+        description: Status Pernikahan [MANDATORY] ["Kawin", "Belum Kawin", "Cerai Hidup", "Cerai Mati"]
+      - name: nomorIdentitasPasangan
+        value: MzE3MTA1MTIxMTk1MDAwMg==
+        description: Nomor Identitas Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+      - name: namaPasangan
+        value: VGVzdGluZw==
+        description: Nama Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+      - name: tanggalLahirPasangan
+        value: MjAwMC0xMS0xNw==
+        description: Tanggal Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64] [YYYY-MM-DD]
+      - name: tempatLahirPasangan
+        value: SmFrYXJ0YQ==
+        description: Tempat Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+      - name: kodePartnership
+        value: TUNBLTI0NA==
+        description: Kode Partnership [MANDATORY] [Base64]
+      - name: kodeTipePinjaman
+        value: CHILD-MCA-730
+        description: Kode Loan Type [MANDATORY]
+      - name: tanggalJoinPartner
+        value: 2024-03-20
+  auth:
+    type: bearer
+    token: "{{tokenMerchant}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Error - Service Unavailable
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cashloan/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3MzE4MDcxMjk2MDAxOQ==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: nama
+            value: UnVzZGkgTG9udG9uZw==
+            description: Nama [MANDATORY] [Base64]
+          - name: tanggalLahir
+            value: MTk5NS0xMS0xMg==
+            description: Tanggal Lahir [MANDATORY] [Base64] [YYYY-MM-DD]
+          - name: tempatLahir
+            value: Tmdhd2k=
+            description: Tempat Lahir [MANDATORY] [Base64]
+          - name: jenisKelamin
+            value: TGFraS1MYWtp
+            description: Jenis Kelamin[MANDATORY] [Base64] ["Perempuan", "Laki-Laki"]
+          - name: namaIbuKandung
+            value: RnVhZA==
+            description: Nama Ibu Kandung [MANDATORY] [Base64]
+          - name: statusPernikahan
+            value: Kawin
+            description: Status Pernikahan [MANDATORY] ["Kawin", "Belum Kawin", "Cerai Hidup", "Cerai Mati"]
+          - name: nomorIdentitasPasangan
+            value: MzE3MTA1MTIxMTk1MDAwMg==
+            description: Nomor Identitas Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: namaPasangan
+            value: VGVzdGluZw==
+            description: Nama Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: tanggalLahirPasangan
+            value: MjAwMC0xMS0xNw==
+            description: Tanggal Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64] [YYYY-MM-DD]
+          - name: tempatLahirPasangan
+            value: SmFrYXJ0YQ==
+            description: Tempat Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: kodeTipePinjaman
+            value: CHILD-MMF-652
+            description: Kode Loan Type [MANDATORY]
+    response:
+      status: 503
+      statusText: Service Unavailable
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Mon, 21 Jul 2025 03:45:54 GMT
+        - name: Content-Length
+          value: "122"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Jam operasional Pinang Performa dari jam 06:00 - 07:00 WIB setiap hari. Kembali lagi nanti, ya!",
+              "status": 503
+          }
+  - name: Error - Unauthorized / Expired
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cashloan/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3MzE4MDcxMjk2MDAxOQ==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: nama
+            value: UnVzZGkgTG9udG9uZw==
+            description: Nama [MANDATORY] [Base64]
+          - name: tanggalLahir
+            value: MTk5NS0xMS0xMg==
+            description: Tanggal Lahir [MANDATORY] [Base64] [YYYY-MM-DD]
+          - name: tempatLahir
+            value: Tmdhd2k=
+            description: Tempat Lahir [MANDATORY] [Base64]
+          - name: jenisKelamin
+            value: TGFraS1MYWtp
+            description: Jenis Kelamin[MANDATORY] [Base64] ["Perempuan", "Laki-Laki"]
+          - name: namaIbuKandung
+            value: RnVhZA==
+            description: Nama Ibu Kandung [MANDATORY] [Base64]
+          - name: statusPernikahan
+            value: Kawin
+            description: Status Pernikahan [MANDATORY] ["Kawin", "Belum Kawin", "Cerai Hidup", "Cerai Mati"]
+          - name: nomorIdentitasPasangan
+            value: MzE3MTA1MTIxMTk1MDAwMg==
+            description: Nomor Identitas Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: namaPasangan
+            value: VGVzdGluZw==
+            description: Nama Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: tanggalLahirPasangan
+            value: MjAwMC0xMS0xNw==
+            description: Tanggal Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64] [YYYY-MM-DD]
+          - name: tempatLahirPasangan
+            value: SmFrYXJ0YQ==
+            description: Tempat Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: kodeTipePinjaman
+            value: CHILD-MMF-652
+            description: Kode Loan Type [MANDATORY]
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Wed, 16 Jul 2025 08:50:01 GMT
+        - name: Content-Length
+          value: "50"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Unauthorized / Expired.",
+              "status": 401
+          }
+  - name: Error - Access Forbidden
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cashloan/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3MzE4MDcxMjk2MDAxOQ==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: nama
+            value: UnVzZGkgTG9udG9uZw==
+            description: Nama [MANDATORY] [Base64]
+          - name: tanggalLahir
+            value: MTk5NS0xMS0xMg==
+            description: Tanggal Lahir [MANDATORY] [Base64] [YYYY-MM-DD]
+          - name: tempatLahir
+            value: Tmdhd2k=
+            description: Tempat Lahir [MANDATORY] [Base64]
+          - name: jenisKelamin
+            value: TGFraS1MYWtp
+            description: Jenis Kelamin[MANDATORY] [Base64] ["Perempuan", "Laki-Laki"]
+          - name: namaIbuKandung
+            value: RnVhZA==
+            description: Nama Ibu Kandung [MANDATORY] [Base64]
+          - name: statusPernikahan
+            value: Kawin
+            description: Status Pernikahan [MANDATORY] ["Kawin", "Belum Kawin", "Cerai Hidup", "Cerai Mati"]
+          - name: nomorIdentitasPasangan
+            value: MzE3MTA1MTIxMTk1MDAwMg==
+            description: Nomor Identitas Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: namaPasangan
+            value: VGVzdGluZw==
+            description: Nama Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: tanggalLahirPasangan
+            value: MjAwMC0xMS0xNw==
+            description: Tanggal Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64] [YYYY-MM-DD]
+          - name: tempatLahirPasangan
+            value: SmFrYXJ0YQ==
+            description: Tempat Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: kodeTipePinjaman
+            value: CHILD-MMF-652
+            description: Kode Loan Type [MANDATORY]
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Wed, 16 Jul 2025 09:00:35 GMT
+        - name: Content-Length
+          value: "76"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "you don't have permission to access this resource",
+              "status": 403
+          }
+  - name: Error - Prakarsa On Process
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cashloan/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3MzE4MDcxMjk2MDAxOQ==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: nama
+            value: UnVzZGkgTG9udG9uZw==
+            description: Nama [MANDATORY] [Base64]
+          - name: tanggalLahir
+            value: MTk5NS0xMS0xMg==
+            description: Tanggal Lahir [MANDATORY] [Base64] [YYYY-MM-DD]
+          - name: tempatLahir
+            value: Tmdhd2k=
+            description: Tempat Lahir [MANDATORY] [Base64]
+          - name: jenisKelamin
+            value: TGFraS1MYWtp
+            description: Jenis Kelamin[MANDATORY] [Base64] ["Perempuan", "Laki-Laki"]
+          - name: namaIbuKandung
+            value: RnVhZA==
+            description: Nama Ibu Kandung [MANDATORY] [Base64]
+          - name: statusPernikahan
+            value: Kawin
+            description: Status Pernikahan [MANDATORY] ["Kawin", "Belum Kawin", "Cerai Hidup", "Cerai Mati"]
+          - name: nomorIdentitasPasangan
+            value: MzE3MTA1MTIxMTk1MDAwMg==
+            description: Nomor Identitas Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: namaPasangan
+            value: VGVzdGluZw==
+            description: Nama Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: tanggalLahirPasangan
+            value: MjAwMC0xMS0xNw==
+            description: Tanggal Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64] [YYYY-MM-DD]
+          - name: tempatLahirPasangan
+            value: SmFrYXJ0YQ==
+            description: Tempat Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: kodeTipePinjaman
+            value: CHILD-MMF-652
+            description: Kode Loan Type [MANDATORY]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Wed, 16 Jul 2025 09:11:25 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Maaf, Anda sedang dalam proses pengajuan pada aplikasi Pinang Performa.",
+              "status": 500
+          }
+  - name: Error - Prakarsa Rejected [7 Days]
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cashloan/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3MzE4MDcxMjk2MDAxOQ==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: nama
+            value: UnVzZGkgTG9udG9uZw==
+            description: Nama [MANDATORY] [Base64]
+          - name: tanggalLahir
+            value: MTk5NS0xMS0xMg==
+            description: Tanggal Lahir [MANDATORY] [Base64] [YYYY-MM-DD]
+          - name: tempatLahir
+            value: Tmdhd2k=
+            description: Tempat Lahir [MANDATORY] [Base64]
+          - name: jenisKelamin
+            value: TGFraS1MYWtp
+            description: Jenis Kelamin[MANDATORY] [Base64] ["Perempuan", "Laki-Laki"]
+          - name: namaIbuKandung
+            value: RnVhZA==
+            description: Nama Ibu Kandung [MANDATORY] [Base64]
+          - name: statusPernikahan
+            value: Kawin
+            description: Status Pernikahan [MANDATORY] ["Kawin", "Belum Kawin", "Cerai Hidup", "Cerai Mati"]
+          - name: nomorIdentitasPasangan
+            value: MzE3MTA1MTIxMTk1MDAwMg==
+            description: Nomor Identitas Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: namaPasangan
+            value: VGVzdGluZw==
+            description: Nama Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: tanggalLahirPasangan
+            value: MjAwMC0xMS0xNw==
+            description: Tanggal Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64] [YYYY-MM-DD]
+          - name: tempatLahirPasangan
+            value: SmFrYXJ0YQ==
+            description: Tempat Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: kodeTipePinjaman
+            value: CHILD-MMF-652
+            description: Kode Loan Type [MANDATORY]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Wed, 16 Jul 2025 09:12:04 GMT
+        - name: Content-Length
+          value: "125"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Maaf, Anda belum bisa melakukan pengajuan karena belum 7 hari setelah pengajuan ditolak.",
+              "status": 500
+          }
+  - name: Error - Cashloan Prakarsa On Process
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cashloan/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3MzE4MDcxMjk2MDAxOQ==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: nama
+            value: UnVzZGkgTG9udG9uZw==
+            description: Nama [MANDATORY] [Base64]
+          - name: tanggalLahir
+            value: MTk5NS0xMS0xMg==
+            description: Tanggal Lahir [MANDATORY] [Base64] [YYYY-MM-DD]
+          - name: tempatLahir
+            value: Tmdhd2k=
+            description: Tempat Lahir [MANDATORY] [Base64]
+          - name: jenisKelamin
+            value: TGFraS1MYWtp
+            description: Jenis Kelamin[MANDATORY] [Base64] ["Perempuan", "Laki-Laki"]
+          - name: namaIbuKandung
+            value: RnVhZA==
+            description: Nama Ibu Kandung [MANDATORY] [Base64]
+          - name: statusPernikahan
+            value: Kawin
+            description: Status Pernikahan [MANDATORY] ["Kawin", "Belum Kawin", "Cerai Hidup", "Cerai Mati"]
+          - name: nomorIdentitasPasangan
+            value: MzE3MTA1MTIxMTk1MDAwMg==
+            description: Nomor Identitas Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: namaPasangan
+            value: VGVzdGluZw==
+            description: Nama Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: tanggalLahirPasangan
+            value: MjAwMC0xMS0xNw==
+            description: Tanggal Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64] [YYYY-MM-DD]
+          - name: tempatLahirPasangan
+            value: SmFrYXJ0YQ==
+            description: Tempat Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: kodeTipePinjaman
+            value: CHILD-MMF-652
+            description: Kode Loan Type [MANDATORY]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Wed, 16 Jul 2025 09:16:59 GMT
+        - name: Content-Length
+          value: "99"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Maaf, Calon Debitur sedang dalam proses Prakarsa di Bank Raya.",
+              "status": 500
+          }
+  - name: Error - Validation Screening Dukcapil [Debitur Tidak Lolos | Pasangan Lolos]
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cashloan/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3MzE4MDcxMjk2MDAxOQ==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: nama
+            value: UnVzZGkgTG9udG9uZw==
+            description: Nama [MANDATORY] [Base64]
+          - name: tanggalLahir
+            value: MTk5NS0xMS0xMg==
+            description: Tanggal Lahir [MANDATORY] [Base64] [YYYY-MM-DD]
+          - name: tempatLahir
+            value: Tmdhd2k=
+            description: Tempat Lahir [MANDATORY] [Base64]
+          - name: jenisKelamin
+            value: TGFraS1MYWtp
+            description: Jenis Kelamin[MANDATORY] [Base64] ["Perempuan", "Laki-Laki"]
+          - name: namaIbuKandung
+            value: RnVhZA==
+            description: Nama Ibu Kandung [MANDATORY] [Base64]
+          - name: statusPernikahan
+            value: Kawin
+            description: Status Pernikahan [MANDATORY] ["Kawin", "Belum Kawin", "Cerai Hidup", "Cerai Mati"]
+          - name: nomorIdentitasPasangan
+            value: MzE3MTA1MTIxMTk1MDAwMg==
+            description: Nomor Identitas Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: namaPasangan
+            value: VGVzdGluZw==
+            description: Nama Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: tanggalLahirPasangan
+            value: MjAwMC0xMS0xNw==
+            description: Tanggal Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64] [YYYY-MM-DD]
+          - name: tempatLahirPasangan
+            value: SmFrYXJ0YQ==
+            description: Tempat Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: kodeTipePinjaman
+            value: CHILD-MMF-652
+            description: Kode Loan Type [MANDATORY]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Wed, 16 Jul 2025 09:32:07 GMT
+        - name: Content-Length
+          value: "462"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "dukcapilDebitur": {
+                      "flagNamaDebitur": "0",
+                      "flagNamaIbuKandungDebitur": "0",
+                      "flagNikDebitur": "0",
+                      "flagTanggalLahirDebitur": "0",
+                      "flagTempatLahirDebitur": "0"
+                  },
+                  "dukcapilPasangan": {
+                      "flagNamaPasangan": "1",
+                      "flagNikPasangan": "1",
+                      "flagTanggalLahirPasangan": "1",
+                      "flagTempatLahirPasangan": "1"
+                  },
+                  "kodePrakarsa": "",
+                  "nextStep": "retry-dukcapil"
+              },
+              "message": "Data dukcapil belum sesuai! Kamu masih memiliki kesempatan 1 kali lagi, silakan mencobanya kembali.",
+              "status": 200
+          }
+  - name: Error - Validation Screening Dukcapil (Out of Quota) [Debitur Tidak Lolos | Pasangan Lolos]
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cashloan/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3MzE4MDcxMjk2MDAxOQ==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: nama
+            value: UnVzZGkgTG9udG9uZw==
+            description: Nama [MANDATORY] [Base64]
+          - name: tanggalLahir
+            value: MTk5NS0xMS0xMg==
+            description: Tanggal Lahir [MANDATORY] [Base64] [YYYY-MM-DD]
+          - name: tempatLahir
+            value: Tmdhd2k=
+            description: Tempat Lahir [MANDATORY] [Base64]
+          - name: jenisKelamin
+            value: TGFraS1MYWtp
+            description: Jenis Kelamin[MANDATORY] [Base64] ["Perempuan", "Laki-Laki"]
+          - name: namaIbuKandung
+            value: RnVhZA==
+            description: Nama Ibu Kandung [MANDATORY] [Base64]
+          - name: statusPernikahan
+            value: Kawin
+            description: Status Pernikahan [MANDATORY] ["Kawin", "Belum Kawin", "Cerai Hidup", "Cerai Mati"]
+          - name: nomorIdentitasPasangan
+            value: MzE3MTA1MTIxMTk1MDAwMg==
+            description: Nomor Identitas Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: namaPasangan
+            value: VGVzdGluZw==
+            description: Nama Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: tanggalLahirPasangan
+            value: MjAwMC0xMS0xNw==
+            description: Tanggal Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64] [YYYY-MM-DD]
+          - name: tempatLahirPasangan
+            value: SmFrYXJ0YQ==
+            description: Tempat Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: kodeTipePinjaman
+            value: CHILD-MMF-652
+            description: Kode Loan Type [MANDATORY]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Wed, 16 Jul 2025 09:33:48 GMT
+        - name: Content-Length
+          value: "637"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "dukcapilDebitur": {
+                      "flagNamaDebitur": "1",
+                      "flagNamaIbuKandungDebitur": "1",
+                      "flagNikDebitur": "1",
+                      "flagTanggalLahirDebitur": "1",
+                      "flagTempatLahirDebitur": "1"
+                  },
+                  "dukcapilPasangan": {
+                      "flagNamaPasangan": "0",
+                      "flagNikPasangan": "0",
+                      "flagTanggalLahirPasangan": "0",
+                      "flagTempatLahirPasangan": "0"
+                  },
+                  "kodePrakarsa": "CL-MJ1-UmF5YVBpUGVyVG9w/l96nmX1lENqKmaMHO461pdfFJjjaK84jNCanUjcH9a5i3ly63KczB1KPWpC8zA=",
+                  "nextStep": "ubah-pengajuan"
+              },
+              "message": "Data Dukcapil belum sesuai! Kesempatan kamu sudah habis karena sudah mencobanya sebanyak 3 kali. Namun tidak perlu khawatir, kamu dapat menunggu 10 Menit kedepan untuk mencobanya kembali.",
+              "status": 500
+          }
+  - name: Error - Validation Screening Dukcapil (Out of Quota) [Debitur Tidak Lolos]
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cashloan/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3MzE4MDcxMjk2MDAxOQ==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: nama
+            value: UnVzZGkgTG9udG9uZw==
+            description: Nama [MANDATORY] [Base64]
+          - name: tanggalLahir
+            value: MTk5NS0xMS0xMg==
+            description: Tanggal Lahir [MANDATORY] [Base64] [YYYY-MM-DD]
+          - name: tempatLahir
+            value: Tmdhd2k=
+            description: Tempat Lahir [MANDATORY] [Base64]
+          - name: jenisKelamin
+            value: TGFraS1MYWtp
+            description: Jenis Kelamin[MANDATORY] [Base64] ["Perempuan", "Laki-Laki"]
+          - name: namaIbuKandung
+            value: RnVhZA==
+            description: Nama Ibu Kandung [MANDATORY] [Base64]
+          - name: statusPernikahan
+            value: Kawin
+            description: Status Pernikahan [MANDATORY] ["Kawin", "Belum Kawin", "Cerai Hidup", "Cerai Mati"]
+          - name: nomorIdentitasPasangan
+            value: MzE3MTA1MTIxMTk1MDAwMg==
+            description: Nomor Identitas Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: namaPasangan
+            value: VGVzdGluZw==
+            description: Nama Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: tanggalLahirPasangan
+            value: MjAwMC0xMS0xNw==
+            description: Tanggal Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64] [YYYY-MM-DD]
+          - name: tempatLahirPasangan
+            value: SmFrYXJ0YQ==
+            description: Tempat Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: kodeTipePinjaman
+            value: CHILD-MMF-652
+            description: Kode Loan Type [MANDATORY]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Wed, 16 Jul 2025 09:38:00 GMT
+        - name: Content-Length
+          value: "637"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "dukcapilDebitur": {
+                      "flagNamaDebitur": "0",
+                      "flagNamaIbuKandungDebitur": "0",
+                      "flagNikDebitur": "0",
+                      "flagTanggalLahirDebitur": "0",
+                      "flagTempatLahirDebitur": "0"
+                  },
+                  "dukcapilPasangan": {
+                      "flagNamaPasangan": "0",
+                      "flagNikPasangan": "0",
+                      "flagTanggalLahirPasangan": "0",
+                      "flagTempatLahirPasangan": "0"
+                  },
+                  "kodePrakarsa": "CL-MJ1-UmF5YVBpUGVyVG9w/l96nmX1lENqKmaMHO461pdfFJjjaK84jNCanUzdHkqiPYIBzWTyghQb98SR6G8=",
+                  "nextStep": "ubah-pengajuan"
+              },
+              "message": "Data Dukcapil belum sesuai! Kesempatan kamu sudah habis karena sudah mencobanya sebanyak 3 kali. Namun tidak perlu khawatir, kamu dapat menunggu 10 Menit kedepan untuk mencobanya kembali.",
+              "status": 500
+          }
+  - name: Error - Validation Screening Dukcapil [Debitur Tidak Lolos]
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cashloan/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3MzE4MDcxMjk2MDAxOQ==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: nama
+            value: UnVzZGkgTG9udG9uZw==
+            description: Nama [MANDATORY] [Base64]
+          - name: tanggalLahir
+            value: MTk5NS0xMS0xMg==
+            description: Tanggal Lahir [MANDATORY] [Base64] [YYYY-MM-DD]
+          - name: tempatLahir
+            value: Tmdhd2k=
+            description: Tempat Lahir [MANDATORY] [Base64]
+          - name: jenisKelamin
+            value: TGFraS1MYWtp
+            description: Jenis Kelamin[MANDATORY] [Base64] ["Perempuan", "Laki-Laki"]
+          - name: namaIbuKandung
+            value: RnVhZA==
+            description: Nama Ibu Kandung [MANDATORY] [Base64]
+          - name: statusPernikahan
+            value: Kawin
+            description: Status Pernikahan [MANDATORY] ["Kawin", "Belum Kawin", "Cerai Hidup", "Cerai Mati"]
+          - name: nomorIdentitasPasangan
+            value: MzE3MTA1MTIxMTk1MDAwMg==
+            description: Nomor Identitas Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: namaPasangan
+            value: VGVzdGluZw==
+            description: Nama Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: tanggalLahirPasangan
+            value: MjAwMC0xMS0xNw==
+            description: Tanggal Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64] [YYYY-MM-DD]
+          - name: tempatLahirPasangan
+            value: SmFrYXJ0YQ==
+            description: Tempat Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: kodeTipePinjaman
+            value: CHILD-MMF-652
+            description: Kode Loan Type [MANDATORY]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Wed, 16 Jul 2025 09:41:43 GMT
+        - name: Content-Length
+          value: "462"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "dukcapilDebitur": {
+                      "flagNamaDebitur": "0",
+                      "flagNamaIbuKandungDebitur": "0",
+                      "flagNikDebitur": "0",
+                      "flagTanggalLahirDebitur": "0",
+                      "flagTempatLahirDebitur": "0"
+                  },
+                  "dukcapilPasangan": {
+                      "flagNamaPasangan": "0",
+                      "flagNikPasangan": "0",
+                      "flagTanggalLahirPasangan": "0",
+                      "flagTempatLahirPasangan": "0"
+                  },
+                  "kodePrakarsa": "",
+                  "nextStep": "retry-dukcapil"
+              },
+              "message": "Data dukcapil belum sesuai! Kamu masih memiliki kesempatan 1 kali lagi, silakan mencobanya kembali.",
+              "status": 200
+          }
+  - name: Error - Validation Screening Dukcapil (Out of Quota) [Debitur Tidak Lolos | Pasangan Lolos]
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cashloan/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3MzE4MDcxMjk2MDAxOQ==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: nama
+            value: UnVzZGkgTG9udG9uZw==
+            description: Nama [MANDATORY] [Base64]
+          - name: tanggalLahir
+            value: MTk5NS0xMS0xMg==
+            description: Tanggal Lahir [MANDATORY] [Base64] [YYYY-MM-DD]
+          - name: tempatLahir
+            value: Tmdhd2k=
+            description: Tempat Lahir [MANDATORY] [Base64]
+          - name: jenisKelamin
+            value: TGFraS1MYWtp
+            description: Jenis Kelamin[MANDATORY] [Base64] ["Perempuan", "Laki-Laki"]
+          - name: namaIbuKandung
+            value: RnVhZA==
+            description: Nama Ibu Kandung [MANDATORY] [Base64]
+          - name: statusPernikahan
+            value: Kawin
+            description: Status Pernikahan [MANDATORY] ["Kawin", "Belum Kawin", "Cerai Hidup", "Cerai Mati"]
+          - name: nomorIdentitasPasangan
+            value: MzE3MTA1MTIxMTk1MDAwMg==
+            description: Nomor Identitas Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: namaPasangan
+            value: VGVzdGluZw==
+            description: Nama Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: tanggalLahirPasangan
+            value: MjAwMC0xMS0xNw==
+            description: Tanggal Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64] [YYYY-MM-DD]
+          - name: tempatLahirPasangan
+            value: SmFrYXJ0YQ==
+            description: Tempat Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: kodeTipePinjaman
+            value: CHILD-MMF-652
+            description: Kode Loan Type [MANDATORY]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Wed, 16 Jul 2025 09:43:19 GMT
+        - name: Content-Length
+          value: "637"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "dukcapilDebitur": {
+                      "flagNamaDebitur": "0",
+                      "flagNamaIbuKandungDebitur": "0",
+                      "flagNikDebitur": "0",
+                      "flagTanggalLahirDebitur": "0",
+                      "flagTempatLahirDebitur": "0"
+                  },
+                  "dukcapilPasangan": {
+                      "flagNamaPasangan": "1",
+                      "flagNikPasangan": "1",
+                      "flagTanggalLahirPasangan": "1",
+                      "flagTempatLahirPasangan": "1"
+                  },
+                  "kodePrakarsa": "CL-MJ1-UmF5YVBpUGVyVG9w/l96nmX1lENqKmaMHO461pdfFJjjaK84jNCamkjZHumZeEZVZKkpKGJpP4AfNWI=",
+                  "nextStep": "ubah-pengajuan"
+              },
+              "message": "Data Dukcapil belum sesuai! Kesempatan kamu sudah habis karena sudah mencobanya sebanyak 3 kali. Namun tidak perlu khawatir, kamu dapat menunggu 10 Menit kedepan untuk mencobanya kembali.",
+              "status": 500
+          }
+  - name: Error - Validation Screening Dukcapil (Out of Quota) [Debitur Lolos | Pasangan Tidak Lolos]
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cashloan/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3MzE4MDcxMjk2MDAxOQ==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: nama
+            value: UnVzZGkgTG9udG9uZw==
+            description: Nama [MANDATORY] [Base64]
+          - name: tanggalLahir
+            value: MTk5NS0xMS0xMg==
+            description: Tanggal Lahir [MANDATORY] [Base64] [YYYY-MM-DD]
+          - name: tempatLahir
+            value: Tmdhd2k=
+            description: Tempat Lahir [MANDATORY] [Base64]
+          - name: jenisKelamin
+            value: TGFraS1MYWtp
+            description: Jenis Kelamin[MANDATORY] [Base64] ["Perempuan", "Laki-Laki"]
+          - name: namaIbuKandung
+            value: RnVhZA==
+            description: Nama Ibu Kandung [MANDATORY] [Base64]
+          - name: statusPernikahan
+            value: Kawin
+            description: Status Pernikahan [MANDATORY] ["Kawin", "Belum Kawin", "Cerai Hidup", "Cerai Mati"]
+          - name: nomorIdentitasPasangan
+            value: MzE3MTA1MTIxMTk1MDAwMg==
+            description: Nomor Identitas Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: namaPasangan
+            value: VGVzdGluZw==
+            description: Nama Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: tanggalLahirPasangan
+            value: MjAwMC0xMS0xNw==
+            description: Tanggal Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64] [YYYY-MM-DD]
+          - name: tempatLahirPasangan
+            value: SmFrYXJ0YQ==
+            description: Tempat Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: kodeTipePinjaman
+            value: CHILD-MMF-652
+            description: Kode Loan Type [MANDATORY]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Wed, 16 Jul 2025 09:46:13 GMT
+        - name: Content-Length
+          value: "637"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "dukcapilDebitur": {
+                      "flagNamaDebitur": "1",
+                      "flagNamaIbuKandungDebitur": "1",
+                      "flagNikDebitur": "1",
+                      "flagTanggalLahirDebitur": "1",
+                      "flagTempatLahirDebitur": "1"
+                  },
+                  "dukcapilPasangan": {
+                      "flagNamaPasangan": "0",
+                      "flagNikPasangan": "0",
+                      "flagTanggalLahirPasangan": "0",
+                      "flagTempatLahirPasangan": "0"
+                  },
+                  "kodePrakarsa": "CL-MJ1-UmF5YVBpUGVyVG9w/l96nmX1lENqKmaMHO461pdfFJjjaK84jNCamk3ZFEr6rhQtCuCKKKolsL7kk3I=",
+                  "nextStep": "ubah-pengajuan"
+              },
+              "message": "Data Dukcapil belum sesuai! Kesempatan kamu sudah habis karena sudah mencobanya sebanyak 3 kali. Namun tidak perlu khawatir, kamu dapat menunggu 10 Menit kedepan untuk mencobanya kembali.",
+              "status": 500
+          }
+  - name: Error - Validation Belum Upload Whitelist (is_renewal = 0)
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cashloan/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3MzE4MDcxMjk2MDAwNw==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: nama
+            value: UnVzZGkgTG9udG9uZw==
+            description: Nama [MANDATORY] [Base64]
+          - name: tanggalLahir
+            value: MTk5NS0xMS0xMg==
+            description: Tanggal Lahir [MANDATORY] [Base64] [YYYY-MM-DD]
+          - name: tempatLahir
+            value: Tmdhd2k=
+            description: Tempat Lahir [MANDATORY] [Base64]
+          - name: jenisKelamin
+            value: TGFraS1MYWtp
+            description: Jenis Kelamin[MANDATORY] [Base64] ["Perempuan", "Laki-Laki"]
+          - name: namaIbuKandung
+            value: RnVhZA==
+            description: Nama Ibu Kandung [MANDATORY] [Base64]
+          - name: statusPernikahan
+            value: Kawin
+            description: Status Pernikahan [MANDATORY] ["Kawin", "Belum Kawin", "Cerai Hidup", "Cerai Mati"]
+          - name: nomorIdentitasPasangan
+            value: MzE3MTA1MTIxMTk1MDAwMg==
+            description: Nomor Identitas Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: namaPasangan
+            value: VGVzdGluZw==
+            description: Nama Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: tanggalLahirPasangan
+            value: MjAwMC0xMS0xNw==
+            description: Tanggal Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64] [YYYY-MM-DD]
+          - name: tempatLahirPasangan
+            value: SmFrYXJ0YQ==
+            description: Tempat Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: kodeTipePinjaman
+            value: CHILD-MMF-652
+            description: Kode Loan Type [MANDATORY]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Wed, 15 Oct 2025 06:32:44 GMT
+        - name: Content-Length
+          value: "79"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Maaf, anda tidak terdaftar pada whitelist.",
+              "status": 500
+          }
+  - name: Error - Validtion Maksimum Age Belum Kawin
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cashloan/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzIwOTEyMjAwMzk0MDAwNg==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: nama
+            value: UnVzZGkgTG9udG9uZw==
+            description: Nama [MANDATORY] [Base64]
+          - name: tanggalLahir
+            value: MjAwOS0xMC0xNQ==
+            description: Tanggal Lahir [MANDATORY] [Base64] [YYYY-MM-DD]
+          - name: tempatLahir
+            value: Tmdhd2k=
+            description: Tempat Lahir [MANDATORY] [Base64]
+          - name: jenisKelamin
+            value: TGFraS1MYWtp
+            description: Jenis Kelamin[MANDATORY] [Base64] ["Perempuan", "Laki-Laki"]
+          - name: namaIbuKandung
+            value: RnVhZA==
+            description: Nama Ibu Kandung [MANDATORY] [Base64]
+          - name: statusPernikahan
+            value: Belum Kawin
+            description: Status Pernikahan [MANDATORY] ["Kawin", "Belum Kawin", "Cerai Hidup", "Cerai Mati"]
+          - name: nomorIdentitasPasangan
+            value: MzE3MTA1MTIxMTk1MDAwMg==
+            description: Nomor Identitas Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: namaPasangan
+            value: VGVzdGluZw==
+            description: Nama Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: tanggalLahirPasangan
+            value: MjAwMC0xMS0xNw==
+            description: Tanggal Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64] [YYYY-MM-DD]
+          - name: tempatLahirPasangan
+            value: SmFrYXJ0YQ==
+            description: Tempat Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: kodeTipePinjaman
+            value: CHILD-MMF-652
+            description: Kode Loan Type [MANDATORY]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Mon, 20 Oct 2025 06:42:54 GMT
+        - name: Content-Length
+          value: "77"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Pinjaman hanya untuk usia 21 - 55 Tahun.",
+              "status": 400
+          }
+  - name: Error - Validtion Minimum Age Belum Kawin
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cashloan/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzIwOTEyMjAwMzk0MDAwNg==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: nama
+            value: UnVzZGkgTG9udG9uZw==
+            description: Nama [MANDATORY] [Base64]
+          - name: tanggalLahir
+            value: MjAwOS0xMC0xNQ==
+            description: Tanggal Lahir [MANDATORY] [Base64] [YYYY-MM-DD]
+          - name: tempatLahir
+            value: Tmdhd2k=
+            description: Tempat Lahir [MANDATORY] [Base64]
+          - name: jenisKelamin
+            value: TGFraS1MYWtp
+            description: Jenis Kelamin[MANDATORY] [Base64] ["Perempuan", "Laki-Laki"]
+          - name: namaIbuKandung
+            value: RnVhZA==
+            description: Nama Ibu Kandung [MANDATORY] [Base64]
+          - name: statusPernikahan
+            value: Belum Kawin
+            description: Status Pernikahan [MANDATORY] ["Kawin", "Belum Kawin", "Cerai Hidup", "Cerai Mati"]
+          - name: nomorIdentitasPasangan
+            value: MzE3MTA1MTIxMTk1MDAwMg==
+            description: Nomor Identitas Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: namaPasangan
+            value: VGVzdGluZw==
+            description: Nama Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: tanggalLahirPasangan
+            value: MjAwMC0xMS0xNw==
+            description: Tanggal Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64] [YYYY-MM-DD]
+          - name: tempatLahirPasangan
+            value: SmFrYXJ0YQ==
+            description: Tempat Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: kodeTipePinjaman
+            value: CHILD-MMF-652
+            description: Kode Loan Type [MANDATORY]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Mon, 20 Oct 2025 06:45:29 GMT
+        - name: Content-Length
+          value: "77"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Pinjaman hanya untuk usia 21 - 55 Tahun.",
+              "status": 400
+          }
+  - name: Error - Validtion Maksimum Age Kawin, Cerai Mati, Cerai Hidup
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cashloan/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzIwOTEyMjAwMzk0MDAwNg==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: nama
+            value: UnVzZGkgTG9udG9uZw==
+            description: Nama [MANDATORY] [Base64]
+          - name: tanggalLahir
+            value: MTk2OS0xMC0xNQ==
+            description: Tanggal Lahir [MANDATORY] [Base64] [YYYY-MM-DD]
+          - name: tempatLahir
+            value: Tmdhd2k=
+            description: Tempat Lahir [MANDATORY] [Base64]
+          - name: jenisKelamin
+            value: TGFraS1MYWtp
+            description: Jenis Kelamin[MANDATORY] [Base64] ["Perempuan", "Laki-Laki"]
+          - name: namaIbuKandung
+            value: RnVhZA==
+            description: Nama Ibu Kandung [MANDATORY] [Base64]
+          - name: statusPernikahan
+            value: Kawin
+            description: Status Pernikahan [MANDATORY] ["Kawin", "Belum Kawin", "Cerai Hidup", "Cerai Mati"]
+          - name: nomorIdentitasPasangan
+            value: MzE3MTA1MTIxMTk1MDAwMg==
+            description: Nomor Identitas Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: namaPasangan
+            value: VGVzdGluZw==
+            description: Nama Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: tanggalLahirPasangan
+            value: MjAwMC0xMS0xNw==
+            description: Tanggal Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64] [YYYY-MM-DD]
+          - name: tempatLahirPasangan
+            value: SmFrYXJ0YQ==
+            description: Tempat Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: kodeTipePinjaman
+            value: CHILD-MMF-652
+            description: Kode Loan Type [MANDATORY]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Mon, 20 Oct 2025 06:56:36 GMT
+        - name: Content-Length
+          value: "77"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Pinjaman hanya untuk usia 17 - 55 Tahun.",
+              "status": 400
+          }
+  - name: Error - Validtion Minimum Age Kawin, Cerai Mati, Cerai Hidup
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cashloan/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzIwOTEyMjAwMzk0MDAwNg==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: nama
+            value: UnVzZGkgTG9udG9uZw==
+            description: Nama [MANDATORY] [Base64]
+          - name: tanggalLahir
+            value: MjAwOS0xMC0xNQ==
+            description: Tanggal Lahir [MANDATORY] [Base64] [YYYY-MM-DD]
+          - name: tempatLahir
+            value: Tmdhd2k=
+            description: Tempat Lahir [MANDATORY] [Base64]
+          - name: jenisKelamin
+            value: TGFraS1MYWtp
+            description: Jenis Kelamin[MANDATORY] [Base64] ["Perempuan", "Laki-Laki"]
+          - name: namaIbuKandung
+            value: RnVhZA==
+            description: Nama Ibu Kandung [MANDATORY] [Base64]
+          - name: statusPernikahan
+            value: Kawin
+            description: Status Pernikahan [MANDATORY] ["Kawin", "Belum Kawin", "Cerai Hidup", "Cerai Mati"]
+          - name: nomorIdentitasPasangan
+            value: MzE3MTA1MTIxMTk1MDAwMg==
+            description: Nomor Identitas Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: namaPasangan
+            value: VGVzdGluZw==
+            description: Nama Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: tanggalLahirPasangan
+            value: MjAwMC0xMS0xNw==
+            description: Tanggal Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64] [YYYY-MM-DD]
+          - name: tempatLahirPasangan
+            value: SmFrYXJ0YQ==
+            description: Tempat Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: kodeTipePinjaman
+            value: CHILD-MMF-652
+            description: Kode Loan Type [MANDATORY]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Mon, 20 Oct 2025 06:58:32 GMT
+        - name: Content-Length
+          value: "77"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Pinjaman hanya untuk usia 17 - 55 Tahun.",
+              "status": 400
+          }
+  - name: Error - Validasi Aktivasi MF
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cashloan/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3NjAxMTEwMjAwMDAxMg==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: nama
+            value: UmFpaGFu
+            description: Nama [MANDATORY] [Base64]
+          - name: tanggalLahir
+            value: MTk5Ni0xMC0xNQ==
+            description: Tanggal Lahir [MANDATORY] [Base64] [YYYY-MM-DD]
+          - name: tempatLahir
+            value: Tmdhd2k=
+            description: Tempat Lahir [MANDATORY] [Base64]
+          - name: jenisKelamin
+            value: TGFraS1MYWtp
+            description: Jenis Kelamin[MANDATORY] [Base64] ["Perempuan", "Laki-Laki"]
+          - name: namaIbuKandung
+            value: RnVhZA==
+            description: Nama Ibu Kandung [MANDATORY] [Base64]
+          - name: statusPernikahan
+            value: Kawin
+            description: Status Pernikahan [MANDATORY] ["Kawin", "Belum Kawin", "Cerai Hidup", "Cerai Mati"]
+          - name: nomorIdentitasPasangan
+            value: MzE3MTA1MTIxMTk1MDAwMg==
+            description: Nomor Identitas Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: namaPasangan
+            value: VGVzdGluZw==
+            description: Nama Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: tanggalLahirPasangan
+            value: MjAwMC0xMS0xNw==
+            description: Tanggal Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64] [YYYY-MM-DD]
+          - name: tempatLahirPasangan
+            value: SmFrYXJ0YQ==
+            description: Tempat Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: kodePartnership
+            value: TUNBLTI0NA==
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: kodeTipePinjaman
+            value: CHILD-MCA-730
+            description: Kode Loan Type [MANDATORY]
+          - name: tanggalJoinPartner
+            value: 2024-03-20
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Fri, 23 Jan 2026 04:18:08 GMT
+        - name: Content-Length
+          value: "136"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "block-cl-proses"
+              },
+              "message": "Maaf, anda sedang dalam proses aktivasi pada produk Merchant Financing.",
+              "status": 500
+          }
+  - name: Success - Debitur & Pasangan
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cashloan/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3MzE4MDcxMjk2MDAxOQ==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: nama
+            value: UnVzZGkgTG9udG9uZw==
+            description: Nama [MANDATORY] [Base64]
+          - name: tanggalLahir
+            value: MTk5NS0xMS0xMg==
+            description: Tanggal Lahir [MANDATORY] [Base64] [YYYY-MM-DD]
+          - name: tempatLahir
+            value: Tmdhd2k=
+            description: Tempat Lahir [MANDATORY] [Base64]
+          - name: jenisKelamin
+            value: TGFraS1MYWtp
+            description: Jenis Kelamin[MANDATORY] [Base64] ["Perempuan", "Laki-Laki"]
+          - name: namaIbuKandung
+            value: RnVhZA==
+            description: Nama Ibu Kandung [MANDATORY] [Base64]
+          - name: statusPernikahan
+            value: Kawin
+            description: Status Pernikahan [MANDATORY] ["Kawin", "Belum Kawin", "Cerai Hidup", "Cerai Mati"]
+          - name: nomorIdentitasPasangan
+            value: MzE3MTA1MTIxMTk1MDAwMg==
+            description: Nomor Identitas Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: namaPasangan
+            value: VGVzdGluZw==
+            description: Nama Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: tanggalLahirPasangan
+            value: MjAwMC0xMS0xNw==
+            description: Tanggal Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64] [YYYY-MM-DD]
+          - name: tempatLahirPasangan
+            value: SmFrYXJ0YQ==
+            description: Tempat Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: kodeTipePinjaman
+            value: CHILD-MMF-652
+            description: Kode Loan Type [MANDATORY]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Wed, 16 Jul 2025 09:04:39 GMT
+        - name: Content-Length
+          value: "469"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "dukcapilDebitur": {
+                      "flagNamaDebitur": "1",
+                      "flagNamaIbuKandungDebitur": "1",
+                      "flagNikDebitur": "1",
+                      "flagTanggalLahirDebitur": "1",
+                      "flagTempatLahirDebitur": "1"
+                  },
+                  "dukcapilPasangan": {
+                      "flagNamaPasangan": "1",
+                      "flagNikPasangan": "1",
+                      "flagTanggalLahirPasangan": "1",
+                      "flagTempatLahirPasangan": "1"
+                  },
+                  "kodePrakarsa": "CL-MJ1-UmF5YVBpUGVyVG9w/l96nmX1lENqKmaMHO461pdfFJjjaK84jNCank/bHq+YDov2bGZfAswrX+zeeGE=",
+                  "nextStep": ""
+              },
+              "message": "Data Pengajuan Berhasil Disimpan.",
+              "status": 200
+          }

@@ -1,0 +1,250 @@
+info:
+  name: Request User Access Token
+  type: http
+  seq: 4
+
+http:
+  method: POST
+  url: "{{base-url-dev}}/v/1/request-user-access-token"
+  headers:
+    - name: Api-Key
+      value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
+      description: "API KEY PARTNERSHIP_CODE -> GCM -> BASE64 "
+  body:
+    type: form-urlencoded
+    data:
+      - name: nomorIdentitas
+        value: UmF5YVBpUGVyVG9wgBcInhmZ5UUWTBbCYYpg3vcpZd2bCaU0B/ISS0WCC+9zruNNqK5JuA==
+        description: Nomor Identitas [MANDATORY] -> KTP -> BASE64 -> GCM
+      - name: pin
+        value: UmF5YVBpUGVyVG9wgCkmmRq3/UX27SN0PF1SrTRf6VNSajhf
+        description: PIN [MANDATORY] -> PIN ->  BASE64 -> GCM
+      - name: nomorIdentitas
+        value: "{{nomorIdentitasSunarto}}"
+        disabled: true
+      - name: pin
+        value: "{{pinSunarto}}"
+        disabled: true
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        var jsonData = res.getBody();
+        bru.setGlobalEnvVar("tokenMerchant", jsonData.token)
+        bru.setEnvVar("tokenMerchant", jsonData.token)
+        bru.setGlobalEnvVar("apiKeyMerchant", req.getHeaders().get("Api-Key"))
+        bru.setEnvVar("apiKeyMerchant", req.getHeaders().get("Api-Key"))
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: "503 : Service Unavailable"
+    request:
+      url: "{{base-url-local}}/v/1/request-user-access-token"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+          description: API KEY [MANDATORY] PARTNERSUPCODE -> GCM -> BASE64
+      body:
+        type: form-urlencoded
+        data:
+          - name: pin
+            value: "{{pinDwiki}}"
+            description: PIN [MANDATORY] -> PIN ->  BASE64 -> GCM
+          - name: nomorIdentitas
+            value: "{{nomorIdentitasDwiki}}"
+            description: Nomor Identitas [MANDATORY] -> KTP -> BASE64 -> GCM
+    response:
+      status: 503
+      statusText: Service Unavailable
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 26 Sep 2024 09:09:59 GMT
+        - name: Content-Length
+          value: "122"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Jam operasional Pinang Performa dari jam 06:00 - 16:00 WIB setiap hari. Kembali lagi nanti, ya!",
+              "status": 503
+          }
+  - name: "200 : Success"
+    request:
+      url: "{{base-url-local}}/v/1/request-user-access-token"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+          description: API KEY [MANDATORY]
+      body:
+        type: form-urlencoded
+        data:
+          - name: pin
+            value: ""
+            description: PIN [MANDATORY]
+          - name: nomorIdentitas
+            value: ""
+            description: Nomor Identitas [MANDATORY]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 11 Jul 2024 08:09:02 GMT
+        - name: Content-Length
+          value: "365"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 200,
+              "expire": "2024-07-11T16:08:56.62917284+07:00",
+              "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MjA2ODg5MzYsImstZGF0YSI6IlVtRjVZVkJwVUdWeVZHOXdnRGtFMXhxSjhVWndHVENrZUI3YzR0K05mQ0RKN2R0RyIsImsta2V5IjoiVW1GNVlWQnBVR1Z5Vkc5d2dCY0luaG1aNVVVV1RCYkNZWXBnM3ZjcFpkMmJDYVUwQi9JU1MwV0NDKzl6cnVOTnFLNUp1QT09In0.Vr_Ozt2R6VJaKAnQx5vHJ9jvjAbWkH-MfEFd-XwRBnI"
+          }
+  - name: "400 : Parameter Tidak Sesuai"
+    request:
+      url: "{{base-url-local}}/v/1/request-user-access-token"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+          description: API KEY [MANDATORY]
+      body:
+        type: form-urlencoded
+        data:
+          - name: pin
+            value: ""
+            description: PIN [MANDATORY]
+          - name: nomorIdentitas
+            value: ""
+            description: Nomor Identitas [MANDATORY]
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 11 Jul 2024 08:31:48 GMT
+        - name: Content-Length
+          value: "54"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 400,
+              "message": "Maaf, Parameter tidak sesuai."
+          }
+  - name: "401 : Invalid API Key"
+    request:
+      url: "{{base-url-local}}/v/1/request-user-access-token"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: VW1GNVlWQnBVR1Z5Vkc5d2pDb1lnR1gwbGRBTmdSOUczSHIvaWtDaS9CdXJUVHc9
+          description: API KEY [MANDATORY]
+      body:
+        type: form-urlencoded
+        data:
+          - name: pin
+            value: ""
+            description: PIN [MANDATORY]
+          - name: nomorIdentitas
+            value: ""
+            description: Nomor Identitas [MANDATORY]
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 11 Jul 2024 08:21:03 GMT
+        - name: Content-Length
+          value: "52"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "message": "Maaf, API Key tidak sesuai."
+          }
+  - name: "401 : Invalid User"
+    request:
+      url: "{{base-url-local}}/v/1/request-user-access-token"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+          description: API KEY [MANDATORY]
+      body:
+        type: form-urlencoded
+        data:
+          - name: pin
+            value: ""
+            description: PIN [MANDATORY]
+          - name: nomorIdentitas
+            value: ""
+            description: Nomor Identitas [MANDATORY]
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 11 Jul 2024 08:20:09 GMT
+        - name: Content-Length
+          value: "52"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "message": "Maaf, User tidak terdaftar."
+          }
+  - name: "500 : Request Token Gagal"
+    request:
+      url: "{{base-url-local}}/v/1/request-user-access-token"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+          description: API KEY [MANDATORY]
+      body:
+        type: form-urlencoded
+        data:
+          - name: pin
+            value: ""
+            description: PIN [MANDATORY]
+          - name: nomorIdentitas
+            value: ""
+            description: Nomor Identitas [MANDATORY]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 11 Jul 2024 08:23:20 GMT
+        - name: Content-Length
+          value: "51"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 500,
+              "message": "Maaf, Request token gagal."
+          }

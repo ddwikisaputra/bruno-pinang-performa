@@ -1,0 +1,66 @@
+info:
+  name: Repayment
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{URL}}/transaction/repayment"
+  body:
+    type: json
+    data: "{\r
+
+      \  \"RekeningDebet\": \"002001000115997\",\r
+
+      \  \"RekeningKredit\": \"001001118487104\",\r
+
+      \  \"Nominal\": \"22505786.84\", // tunggakan pokok + tunggakan bunga + denda\r
+
+      \  \"Remark\": \"REPAYMENT_PERFORMA_001001118487104\"\r
+
+      }"
+  auth:
+    type: basic
+    username: pinang-mikro
+    password: "0"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 1. repayment
+    request:
+      url: "{{BASE_URL}}/api/transaction/repayment"
+      method: POST
+      body:
+        type: json
+        data: "{\r
+
+          \  \"RekeningDebet\": \"001001000044304\",\r
+
+          \  \"RekeningKredit\": \"001001008692102\",\r
+
+          \  \"Nominal\": \"1369368.00\",\r
+
+          \  \"Remark\": \"REPAYMENT PINANG 001001008692102\"\r
+
+          }"
+    response:
+      body:
+        type: text
+        data: "{\r
+
+          \  \"StatusCode\": \"00\",\r
+
+          \  \"StatusDescription\": \"Success\",\r
+
+          \  \"ErrorCode\": \"\",\r
+
+          \  \"JournalSequence\": \"9395667\",\r
+
+          \  \"TransactionReference\": \"001089129092493956671\"\r
+
+          }"

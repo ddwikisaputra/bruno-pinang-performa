@@ -1,0 +1,43 @@
+info:
+  name: add guarantor
+  type: http
+  seq: 12
+
+http:
+  method: POST
+  url: "{{URL}}/guarantor/add"
+  body:
+    type: json
+    data: "{\r
+
+      \   \"KodeCabang\":\"0010\",\r
+
+      \   \"Action\":\"\",\r
+
+      \   \"NoPenjamin\":\"\",\r
+
+      \   \"NoId\":\"1122223122222222\",\r
+
+      \   \"TipeId\":\"1\",\r
+
+      \   \"NamaSesuaiId\":\"SUNARDI\",\r
+
+      \   \"NamaLengkap\":\"SUNARDI\",\r
+
+      \   \"Golongan\":\"7174\",\r
+
+      \   \"Alamat\":\"SENO 006/0012 kec CIBALIUNG\",\r
+
+      \   \"Keterangan\":\"-\"\r
+
+      }"
+  auth:
+    type: basic
+    username: pinang-mikro
+    password: "0"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

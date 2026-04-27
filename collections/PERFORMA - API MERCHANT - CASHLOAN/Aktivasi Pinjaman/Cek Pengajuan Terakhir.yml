@@ -1,0 +1,2915 @@
+info:
+  name: Cek Pengajuan Terakhir
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{base-url-local}}/v/1/aktivasi/cashloan/cek-pengajuan-terakhir"
+  headers:
+    - name: Api-Key
+      value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
+      description: MAJOO CASHLOAN
+  body:
+    type: form-urlencoded
+    data:
+      - name: nomorIdentitas
+        value: MzE3MTA1MTIxMTk1MDAwMQ==
+        description: Nomor Identitas User [MANDATORY] [Base64]
+      - name: kodePartnership
+        value: TUNBLTI0NA==
+        description: Kode Partnership [MANDATORY] [Base64]
+  auth:
+    type: bearer
+    token: "{{tokenMerchant}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 503 - Service Unavailable
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cashloan/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzIwOTEyMjAwMzk0MDAwNg==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 503
+      statusText: Service Unavailable
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Wed, 07 May 2025 03:36:30 GMT
+        - name: Content-Length
+          value: "50"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Jam operasional Pinang Performa dari jam XX.XX - XX.XX WIB setiap hari. Kembali lagi nanti, ya!",
+              "status": 503
+          }
+  - name: Error - Unauthorized / Expired
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cashloan/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzIwOTEyMjAwMzk0MDAwNg==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Wed, 07 May 2025 03:36:30 GMT
+        - name: Content-Length
+          value: "50"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Unauthorized / Expired.",
+              "status": 401
+          }
+  - name: Error - Token Expired
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cashloan/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzIwOTEyMjAwMzk0MDAwNg==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Wed, 07 May 2025 03:36:30 GMT
+        - name: Content-Length
+          value: "50"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "token has invalid claims: token is expired",
+              "status": 401
+          }
+  - name: Error - Parameter Token /  API Key Empty
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cashloan/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+          disabled: true
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzIwOTEyMjAwMzk0MDAwNg==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Wed, 07 May 2025 03:54:27 GMT
+        - name: Content-Length
+          value: "51"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "parameter token is empty",
+              "status": 400
+          }
+  - name: Error - Parameter Validation (Total Mandatory)
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cashloan/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzIwOTEyMjAwMzk0MDAwNg==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Wed, 07 May 2025 03:43:37 GMT
+        - name: Content-Length
+          value: "63"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Parameter tidak terpenuhi.",
+              "status": 400
+          }
+  - name: Error - Parameter Validation (Tidak Sesuai)
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cashloan/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzIwOTEyMjAwMzk0MDAwNg==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Wed, 07 May 2025 03:43:37 GMT
+        - name: Content-Length
+          value: "63"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "... tidak sesuai.",
+              "status": 400
+          }
+  - name: Error - Access Forbidden (No Data Partnership)
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cashloan/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzIwOTEyMjAwMzk0MDAwNg==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: VEVz
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Wed, 07 May 2025 03:49:03 GMT
+        - name: Content-Length
+          value: "70"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "your access to this resource is unactivated",
+              "status": 403
+          }
+  - name: Error - Not Registered Whitelist
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cashloan/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzIwOTEyMjAwMzk0MDAwNg==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Thu, 08 May 2025 04:16:41 GMT
+        - name: Content-Length
+          value: "117"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Maaf, anda tidak terdaftar pada whitelist.",
+              "status": 500
+          }
+  - name: Success - Data Pengajuan Tidak Ditemukan (is_renewal = 1)
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cashloan/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzIwOTEyMjAwMzk0MDAwNg==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Thu, 08 May 2025 04:16:41 GMT
+        - name: Content-Length
+          value: "117"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "pengajuan",
+                  "tncDigitsave": -1
+              },
+              "message": "Data pengajuan terakhir tidak ditemukan.",
+              "status": 200
+          }
+  - name: Success - Data Pengajuan Tidak Ditemukan (is_renewal = 0)
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cashloan/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3MzE4MDcxMjk2MDAwNw==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Wed, 15 Oct 2025 03:14:31 GMT
+        - name: Content-Length
+          value: "125"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "belum-rewhitelist",
+                  "tncDigitsave": -1
+              },
+              "message": "Data pengajuan terakhir tidak ditemukan.",
+              "status": 200
+          }
+  - name: Success - Data Ditemukan (Status 1) ==> DALAM PROSES PENGAJUAN (LOLOS DUKCAPIL)
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cashloan/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzIwOTEyMjAwMzk0MDAwNg==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Thu, 08 May 2025 09:01:11 GMT
+        - name: Content-Length
+          value: "1480"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "",
+                  "kodePrakarsa": "EX-MJ1-UmF5YVBpUGVyVG9w/l99lGX/lkRrK2aOHO472ZdfFJjjaKw7g9CfmkjdF57wACIB1I0v1zxTZ/lQkBI=",
+                  "nomorIdentitas": "MzIwOTEyMjAwMzk0MDAwNg==",
+                  "nama": "U3VuYXJ0bw==",
+                  "tempatLahir": "Cirebon",
+                  "tanggalLahir": "MTk5Ni0wMy0yMA==",
+                  "jenisKelamin": "Laki-Laki",
+                  "kodeArea": 7541,
+                  "deskripsiArea": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "longitude": "20",
+                  "latitude": "-10",
+                  "alamat": "Cempaka Putih Barat",
+                  "rt": "010",
+                  "rw": "002",
+                  "kodeAgama": "ISL",
+                  "deskripsiAgama": "Islam",
+                  "statusPernikahan": "Kawin",
+                  "namaIbuKandung": "TnVyeWF0aQ==",
+                  "nomorIdentitasPasangan": "MzIwOTEyMjMwMTkyMDAwMQ==",
+                  "namaPasangan": "VGVzdGluZw==",
+                  "tempatLahirPasangan": "SmFrYXJ0YQ==",
+                  "tanggalLahirPasangan": "MjAwMC0xMS0xNw==",
+                  "nomorTelepon": "KzYyODc4NzcyNzg4MzA=",
+                  "email": "c3VuYXJ0b0BiYW5rcmF5YS5jby5pZA==",
+                  "kodePendidikanTerakhir": "S1",
+                  "deskripsiPendidikanTerakhir": "S1 / Diploma 4",
+                  "jumlahTanggungan": 1,
+                  "kodeAreaUsaha": 7541,
+                  "deskripsiAreaUsaha": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "alamatUsaha": "Jl. Joha Baru 09",
+                  "latitudeUsaha": "-20",
+                  "longitudeUsaha": "20",
+                  "rtUsaha": "012",
+                  "rwUsaha": "002",
+                  "kodeTipePinjaman": "CHILD-ATM-38",
+                  "kodePartnership": "MJ1",
+                  "namaPartnership": "Majoo",
+                  "tenorPinjaman": 12,
+                  "statusPrakarsa": 1,
+                  "deskripsiStatus": "Dalam Proses Pengajuan",
+                  "updatedAt": "2025-04-29 13:43:52",
+                  "tncDigitsave": -1,
+                  "tenorPinjangan": 12,
+                  "dukcapilDebitur": null,
+                  "dukcapilPasangan": null,
+                  "bukaSaving": 0
+              },
+              "message": "Data pengajuan terakhir ditemukan.",
+              "status": 200
+          }
+  - name: Success - Data Ditemukan (Status -1) ==> DUKCAPIL TIDAK LOLOS
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cashloan/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzIwOTEyMjAwMzk0MDAwNg==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Thu, 08 May 2025 09:04:11 GMT
+        - name: Content-Length
+          value: "1712"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "",
+                  "kodePrakarsa": "EX-MJ1-UmF5YVBpUGVyVG9w/l99lGX/lkRrK2aOHO472ZdfFJjjaKw7g9CfmkjdF57wACIB1I0v1zxTZ/lQkBI=",
+                  "nomorIdentitas": "MzIwOTEyMjAwMzk0MDAwNg==",
+                  "nama": "U3VuYXJ0bw==",
+                  "tempatLahir": "Cirebon",
+                  "tanggalLahir": "MTk5Ni0wMy0yMA==",
+                  "jenisKelamin": "Laki-Laki",
+                  "kodeArea": 7541,
+                  "deskripsiArea": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "longitude": "20",
+                  "latitude": "-10",
+                  "alamat": "Cempaka Putih Barat",
+                  "rt": "010",
+                  "rw": "002",
+                  "kodeAgama": "ISL",
+                  "deskripsiAgama": "Islam",
+                  "statusPernikahan": "Kawin",
+                  "namaIbuKandung": "TnVyeWF0aQ==",
+                  "nomorIdentitasPasangan": "MzIwOTEyMjMwMTkyMDAwMQ==",
+                  "namaPasangan": "VGVzdGluZw==",
+                  "tempatLahirPasangan": "SmFrYXJ0YQ==",
+                  "tanggalLahirPasangan": "MjAwMC0xMS0xNw==",
+                  "nomorTelepon": "KzYyODc4NzcyNzg4MzA=",
+                  "email": "c3VuYXJ0b0BiYW5rcmF5YS5jby5pZA==",
+                  "kodePendidikanTerakhir": "S1",
+                  "deskripsiPendidikanTerakhir": "S1 / Diploma 4",
+                  "jumlahTanggungan": 1,
+                  "kodeAreaUsaha": 7541,
+                  "deskripsiAreaUsaha": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "alamatUsaha": "Jl. Joha Baru 09",
+                  "latitudeUsaha": "-20",
+                  "longitudeUsaha": "20",
+                  "rtUsaha": "012",
+                  "rwUsaha": "002",
+                  "kodeTipePinjaman": "CHILD-ATM-38",
+                  "kodePartnership": "MJ1",
+                  "namaPartnership": "Majoo",
+                  "tenorPinjaman": 12,
+                  "limitPinjaman": 100000000,
+                  "statusPrakarsa": -1,
+                  "deskripsiStatus": "Dukcapil Tidak Lolos",
+                  "updatedAt": "2025-04-29 13:43:52",
+                  "tncDigitsave": -1,
+                  "tanggalKadaluarsaBlock": "",
+                  "dukcapilDebitur": {
+                      "flagNikDebitur": "1",
+                      "flagNamaDebitur": "1",
+                      "flagTempatLahirDebitur": "1",
+                      "flagTanggalLahirDebitur": "1",
+                      "flagNamaIbuKandungDebitur": "1"
+                  },
+                  "dukcapilPasangan": {
+                      "flagNikPasangan": "0",
+                      "flagNamaPasangan": "1",
+                      "flagTempatLahirPasangan": "0",
+                      "flagTanggalLahirPasangan": "0"
+                  },
+                  "bukaSaving": 0
+              },
+              "message": "Data pengajuan terakhir ditemukan.",
+              "status": 200
+          }
+  - name: Success - Data Ditemukan (Status -3) ==> PENGAJUAN DITOLAK --> Belum Kadaluarsa
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cashloan/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzIwOTEyMjAwMzk0MDAwNg==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Thu, 08 May 2025 09:31:55 GMT
+        - name: Content-Length
+          value: "1538"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "block",
+                  "kodePrakarsa": "EX-MJ1-UmF5YVBpUGVyVG9w/l99lGX/lkRrK2aOHO472ZdfFJjjaKw7g9CfmkjdF57wACIB1I0v1zxTZ/lQkBI=",
+                  "nomorIdentitas": "MzIwOTEyMjAwMzk0MDAwNg==",
+                  "nama": "U3VuYXJ0bw==",
+                  "tempatLahir": "Cirebon",
+                  "tanggalLahir": "MTk5Ni0wMy0yMA==",
+                  "jenisKelamin": "Laki-Laki",
+                  "kodeArea": 7541,
+                  "deskripsiArea": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "longitude": "20",
+                  "latitude": "-10",
+                  "alamat": "Cempaka Putih Barat",
+                  "rt": "010",
+                  "rw": "002",
+                  "kodeAgama": "ISL",
+                  "deskripsiAgama": "Islam",
+                  "statusPernikahan": "Kawin",
+                  "namaIbuKandung": "TnVyeWF0aQ==",
+                  "nomorIdentitasPasangan": "MzIwOTEyMjMwMTkyMDAwMQ==",
+                  "namaPasangan": "VGVzdGluZw==",
+                  "tempatLahirPasangan": "SmFrYXJ0YQ==",
+                  "tanggalLahirPasangan": "MjAwMC0xMS0xNw==",
+                  "nomorTelepon": "KzYyODc4NzcyNzg4MzA=",
+                  "email": "c3VuYXJ0b0BiYW5rcmF5YS5jby5pZA==",
+                  "kodePendidikanTerakhir": "S1",
+                  "deskripsiPendidikanTerakhir": "S1 / Diploma 4",
+                  "jumlahTanggungan": 1,
+                  "kodeAreaUsaha": 7541,
+                  "deskripsiAreaUsaha": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "alamatUsaha": "Jl. Joha Baru 09",
+                  "latitudeUsaha": "-20",
+                  "longitudeUsaha": "20",
+                  "rtUsaha": "012",
+                  "rwUsaha": "002",
+                  "kodeTipePinjaman": "CHILD-ATM-38",
+                  "kodePartnership": "MJ1",
+                  "namaPartnership": "Majoo",
+                  "tenorPinjaman": 12,
+                  "limitPinjaman": 100000000,
+                  "statusPrakarsa": -3,
+                  "deskripsiStatus": "Pengajuan Ditolak",
+                  "updatedAt": "2025-04-29 13:43:52",
+                  "tncDigitsave": -1,
+                  "tanggalKadaluarsaBlock": "2025-05-14 23:59:59.000",
+                  "dukcapilDebitur": null,
+                  "dukcapilPasangan": null,
+                  "bukaSaving": 0
+              },
+              "message": "Data pengajuan terakhir ditemukan.",
+              "status": 200
+          }
+  - name: Success - Data Ditemukan (Status -3) ==> PENGAJUAN DITOLAK --> Sudah Kadaluarsa
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cashloan/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzIwOTEyMjAwMzk0MDAwNg==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Thu, 08 May 2025 09:39:03 GMT
+        - name: Content-Length
+          value: "1510"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "",
+                  "kodePrakarsa": "EX-MJ1-UmF5YVBpUGVyVG9w/l99lGX/lkRrK2aOHO472ZdfFJjjaKw7g9CfmkjdF57wACIB1I0v1zxTZ/lQkBI=",
+                  "nomorIdentitas": "MzIwOTEyMjAwMzk0MDAwNg==",
+                  "nama": "U3VuYXJ0bw==",
+                  "tempatLahir": "Cirebon",
+                  "tanggalLahir": "MTk5Ni0wMy0yMA==",
+                  "jenisKelamin": "Laki-Laki",
+                  "kodeArea": 7541,
+                  "deskripsiArea": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "longitude": "20",
+                  "latitude": "-10",
+                  "alamat": "Cempaka Putih Barat",
+                  "rt": "010",
+                  "rw": "002",
+                  "kodeAgama": "ISL",
+                  "deskripsiAgama": "Islam",
+                  "statusPernikahan": "Kawin",
+                  "namaIbuKandung": "TnVyeWF0aQ==",
+                  "nomorIdentitasPasangan": "MzIwOTEyMjMwMTkyMDAwMQ==",
+                  "namaPasangan": "VGVzdGluZw==",
+                  "tempatLahirPasangan": "SmFrYXJ0YQ==",
+                  "tanggalLahirPasangan": "MjAwMC0xMS0xNw==",
+                  "nomorTelepon": "KzYyODc4NzcyNzg4MzA=",
+                  "email": "c3VuYXJ0b0BiYW5rcmF5YS5jby5pZA==",
+                  "kodePendidikanTerakhir": "S1",
+                  "deskripsiPendidikanTerakhir": "S1 / Diploma 4",
+                  "jumlahTanggungan": 1,
+                  "kodeAreaUsaha": 7541,
+                  "deskripsiAreaUsaha": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "alamatUsaha": "Jl. Joha Baru 09",
+                  "latitudeUsaha": "-20",
+                  "longitudeUsaha": "20",
+                  "rtUsaha": "012",
+                  "rwUsaha": "002",
+                  "kodeTipePinjaman": "CHILD-ATM-38",
+                  "kodePartnership": "MJ1",
+                  "namaPartnership": "Majoo",
+                  "tenorPinjaman": 12,
+                  "limitPinjaman": 100000000,
+                  "statusPrakarsa": -3,
+                  "deskripsiStatus": "Pengajuan Ditolak",
+                  "updatedAt": "2025-04-29 13:43:52",
+                  "tncDigitsave": -1,
+                  "tanggalKadaluarsaBlock": "",
+                  "dukcapilDebitur": null,
+                  "dukcapilPasangan": null,
+                  "bukaSaving": 0
+              },
+              "message": "Data pengajuan terakhir ditemukan.",
+              "status": 200
+          }
+  - name: Success - Data Ditemukan (Status -5) ==> PENGAJUAN DITOLAK (LIVENESS BLOCK --> BELUM KADALUARSA)
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cashloan/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzIwOTEyMjAwMzk0MDAwNg==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Wed, 14 May 2025 03:25:52 GMT
+        - name: Content-Length
+          value: "1538"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "block",
+                  "kodePrakarsa": "EX-MJ1-UmF5YVBpUGVyVG9w/l99lGX/lkRrK2aOHO472ZdfFJjjaKw7g9CfmkjdF57wACIB1I0v1zxTZ/lQkBI=",
+                  "nomorIdentitas": "MzIwOTEyMjAwMzk0MDAwNg==",
+                  "nama": "U3VuYXJ0bw==",
+                  "tempatLahir": "Cirebon",
+                  "tanggalLahir": "MTk5Ni0wMy0yMA==",
+                  "jenisKelamin": "Laki-Laki",
+                  "kodeArea": 7541,
+                  "deskripsiArea": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "longitude": "20",
+                  "latitude": "-10",
+                  "alamat": "Cempaka Putih Barat",
+                  "rt": "010",
+                  "rw": "002",
+                  "kodeAgama": "ISL",
+                  "deskripsiAgama": "Islam",
+                  "statusPernikahan": "Kawin",
+                  "namaIbuKandung": "TnVyeWF0aQ==",
+                  "nomorIdentitasPasangan": "MzIwOTEyMjMwMTkyMDAwMQ==",
+                  "namaPasangan": "VGVzdGluZw==",
+                  "tempatLahirPasangan": "SmFrYXJ0YQ==",
+                  "tanggalLahirPasangan": "MjAwMC0xMS0xNw==",
+                  "nomorTelepon": "KzYyODc4NzcyNzg4MzA=",
+                  "email": "c3VuYXJ0b0BiYW5rcmF5YS5jby5pZA==",
+                  "kodePendidikanTerakhir": "S1",
+                  "deskripsiPendidikanTerakhir": "S1 / Diploma 4",
+                  "jumlahTanggungan": 1,
+                  "kodeAreaUsaha": 7541,
+                  "deskripsiAreaUsaha": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "alamatUsaha": "Jl. Joha Baru 09",
+                  "latitudeUsaha": "-20",
+                  "longitudeUsaha": "20",
+                  "rtUsaha": "012",
+                  "rwUsaha": "002",
+                  "kodeTipePinjaman": "CHILD-ATM-38",
+                  "kodePartnership": "MJ1",
+                  "namaPartnership": "Majoo",
+                  "tenorPinjaman": 12,
+                  "limitPinjaman": 100000000,
+                  "statusPrakarsa": -5,
+                  "deskripsiStatus": "Pengajuan Ditolak",
+                  "updatedAt": "2025-04-29 13:43:52",
+                  "tncDigitsave": -1,
+                  "tanggalKadaluarsaBlock": "2025-05-16 18:21:54.000",
+                  "dukcapilDebitur": null,
+                  "dukcapilPasangan": null,
+                  "bukaSaving": 0
+              },
+              "message": "Data pengajuan terakhir ditemukan.",
+              "status": 200
+          }
+  - name: Success - Data Ditemukan (Status -5) ==> TIDAK LOLOS LIVENESS --> Belum Kadaluarsa (LIVENESS BLOCK)
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cashloan/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzIwOTEyMjAwMzk0MDAwNg==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Wed, 14 May 2025 03:32:27 GMT
+        - name: Content-Length
+          value: "1510"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "",
+                  "kodePrakarsa": "EX-MJ1-UmF5YVBpUGVyVG9w/l99lGX/lkRrK2aOHO472ZdfFJjjaKw7g9CfmkjdF57wACIB1I0v1zxTZ/lQkBI=",
+                  "nomorIdentitas": "MzIwOTEyMjAwMzk0MDAwNg==",
+                  "nama": "U3VuYXJ0bw==",
+                  "tempatLahir": "Cirebon",
+                  "tanggalLahir": "MTk5Ni0wMy0yMA==",
+                  "jenisKelamin": "Laki-Laki",
+                  "kodeArea": 7541,
+                  "deskripsiArea": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "longitude": "20",
+                  "latitude": "-10",
+                  "alamat": "Cempaka Putih Barat",
+                  "rt": "010",
+                  "rw": "002",
+                  "kodeAgama": "ISL",
+                  "deskripsiAgama": "Islam",
+                  "statusPernikahan": "Kawin",
+                  "namaIbuKandung": "TnVyeWF0aQ==",
+                  "nomorIdentitasPasangan": "MzIwOTEyMjMwMTkyMDAwMQ==",
+                  "namaPasangan": "VGVzdGluZw==",
+                  "tempatLahirPasangan": "SmFrYXJ0YQ==",
+                  "tanggalLahirPasangan": "MjAwMC0xMS0xNw==",
+                  "nomorTelepon": "KzYyODc4NzcyNzg4MzA=",
+                  "email": "c3VuYXJ0b0BiYW5rcmF5YS5jby5pZA==",
+                  "kodePendidikanTerakhir": "S1",
+                  "deskripsiPendidikanTerakhir": "S1 / Diploma 4",
+                  "jumlahTanggungan": 1,
+                  "kodeAreaUsaha": 7541,
+                  "deskripsiAreaUsaha": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "alamatUsaha": "Jl. Joha Baru 09",
+                  "latitudeUsaha": "-20",
+                  "longitudeUsaha": "20",
+                  "rtUsaha": "012",
+                  "rwUsaha": "002",
+                  "kodeTipePinjaman": "CHILD-ATM-38",
+                  "kodePartnership": "MJ1",
+                  "namaPartnership": "Majoo",
+                  "tenorPinjaman": 12,
+                  "limitPinjaman": 100000000,
+                  "statusPrakarsa": -5,
+                  "deskripsiStatus": "Tidak Lolos Liveness",
+                  "updatedAt": "2025-04-29 13:43:52",
+                  "tncDigitsave": -1,
+                  "tanggalKadaluarsaBlock": "",
+                  "dukcapilDebitur": null,
+                  "dukcapilPasangan": null,
+                  "bukaSaving": 0
+              },
+              "message": "Data pengajuan terakhir ditemukan.",
+              "status": 200
+          }
+  - name: Success - Data Ditemukan (Status 7) ==> DALAM PROSES PERSETUJUAN & TANDA TANGAN ELEKTONIK (BLOK KIRIM OTP)
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cashloan/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzIwOTEyMjAwMzk0MDAwNg==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Wed, 14 May 2025 03:40:35 GMT
+        - name: Content-Length
+          value: "1547"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "block",
+                  "kodePrakarsa": "EX-MJ1-UmF5YVBpUGVyVG9w/l99lGX/lkRrK2aOHO472ZdfFJjjaKw7g9CfmkjdF57wACIB1I0v1zxTZ/lQkBI=",
+                  "nomorIdentitas": "MzIwOTEyMjAwMzk0MDAwNg==",
+                  "nama": "U3VuYXJ0bw==",
+                  "tempatLahir": "Cirebon",
+                  "tanggalLahir": "MTk5Ni0wMy0yMA==",
+                  "jenisKelamin": "Laki-Laki",
+                  "kodeArea": 7541,
+                  "deskripsiArea": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "longitude": "20",
+                  "latitude": "-10",
+                  "alamat": "Cempaka Putih Barat",
+                  "rt": "010",
+                  "rw": "002",
+                  "kodeAgama": "ISL",
+                  "deskripsiAgama": "Islam",
+                  "statusPernikahan": "Kawin",
+                  "namaIbuKandung": "TnVyeWF0aQ==",
+                  "nomorIdentitasPasangan": "MzIwOTEyMjMwMTkyMDAwMQ==",
+                  "namaPasangan": "VGVzdGluZw==",
+                  "tempatLahirPasangan": "SmFrYXJ0YQ==",
+                  "tanggalLahirPasangan": "MjAwMC0xMS0xNw==",
+                  "nomorTelepon": "KzYyODc4NzcyNzg4MzA=",
+                  "email": "c3VuYXJ0b0BiYW5rcmF5YS5jby5pZA==",
+                  "kodePendidikanTerakhir": "S1",
+                  "deskripsiPendidikanTerakhir": "S1 / Diploma 4",
+                  "jumlahTanggungan": 1,
+                  "kodeAreaUsaha": 7541,
+                  "deskripsiAreaUsaha": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "alamatUsaha": "Jl. Joha Baru 09",
+                  "latitudeUsaha": "-20",
+                  "longitudeUsaha": "20",
+                  "rtUsaha": "012",
+                  "rwUsaha": "002",
+                  "kodeTipePinjaman": "CHILD-ATM-38",
+                  "kodePartnership": "MJ1",
+                  "namaPartnership": "Majoo",
+                  "tenorPinjaman": 12,
+                  "limitPinjaman": 100000000,
+                  "statusPrakarsa": 7,
+                  "deskripsiStatus": "Dalam Proses Persetujuan & Tanda Tangan Elektronik",
+                  "updatedAt": "2025-04-29 13:43:52",
+                  "tncDigitsave": -1,
+                  "tanggalKadaluarsaBlock": "2025-05-19 11:26:55.577",
+                  "dukcapilDebitur": null,
+                  "dukcapilPasangan": null,
+                  "bukaSaving": 0
+              },
+              "message": "Data pengajuan terakhir ditemukan.",
+              "status": 200
+          }
+  - name: Success - Data Ditemukan (Status 2) ==> DALAM PROSES PENGAJUAN (PRESCREENING/SCORING)
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cashloan/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzIwOTEyMjAwMzk0MDAwNg==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Sun, 18 May 2025 23:00:38 GMT
+        - name: Content-Length
+          value: "1514"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "",
+                  "kodePrakarsa": "EX-MJ1-UmF5YVBpUGVyVG9w/l99lGX/lkRrK2aOHO472ZdfFJjjaKw7g9CfmkjdF57wACIB1I0v1zxTZ/lQkBI=",
+                  "nomorIdentitas": "MzIwOTEyMjAwMzk0MDAwNg==",
+                  "nama": "U3VuYXJ0bw==",
+                  "tempatLahir": "Cirebon",
+                  "tanggalLahir": "MTk5Ni0wMy0yMA==",
+                  "jenisKelamin": "Laki-Laki",
+                  "kodeArea": 7541,
+                  "deskripsiArea": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "longitude": "20",
+                  "latitude": "-10",
+                  "alamat": "Cempaka Putih Barat",
+                  "rt": "010",
+                  "rw": "002",
+                  "kodeAgama": "ISL",
+                  "deskripsiAgama": "Islam",
+                  "statusPernikahan": "Kawin",
+                  "namaIbuKandung": "TnVyeWF0aQ==",
+                  "nomorIdentitasPasangan": "MzIwOTEyMjMwMTkyMDAwMQ==",
+                  "namaPasangan": "VGVzdGluZw==",
+                  "tempatLahirPasangan": "SmFrYXJ0YQ==",
+                  "tanggalLahirPasangan": "MjAwMC0xMS0xNw==",
+                  "nomorTelepon": "KzYyODc4NzcyNzg4MzA=",
+                  "email": "c3VuYXJ0b0BiYW5rcmF5YS5jby5pZA==",
+                  "kodePendidikanTerakhir": "S1",
+                  "deskripsiPendidikanTerakhir": "S1 / Diploma 4",
+                  "jumlahTanggungan": 1,
+                  "kodeAreaUsaha": 7541,
+                  "deskripsiAreaUsaha": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "alamatUsaha": "Jl. Joha Baru 09",
+                  "latitudeUsaha": "-20",
+                  "longitudeUsaha": "20",
+                  "rtUsaha": "012",
+                  "rwUsaha": "002",
+                  "kodeTipePinjaman": "CHILD-ATM-38",
+                  "kodePartnership": "MJ1",
+                  "namaPartnership": "Majoo",
+                  "tenorPinjaman": 12,
+                  "limitPinjaman": 100000000,
+                  "statusPrakarsa": 2,
+                  "deskripsiStatus": "Dalam Proses Pengajuan",
+                  "updatedAt": "2025-04-29 13:43:52",
+                  "tncDigitsave": -1,
+                  "tanggalKadaluarsaBlock": "",
+                  "dukcapilDebitur": null,
+                  "dukcapilPasangan": null,
+                  "bukaSaving": 0
+              },
+              "message": "Data pengajuan terakhir ditemukan.",
+              "status": 200
+          }
+  - name: Success - Data Ditemukan (Status 3) ==> DALAM PROSES PENGAJUAN (PROSES DISETUJUI)
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cashloan/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzIwOTEyMjAwMzk0MDAwNg==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Sun, 18 May 2025 23:02:32 GMT
+        - name: Content-Length
+          value: "1547"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "",
+                  "kodePrakarsa": "EX-MJ1-UmF5YVBpUGVyVG9w/l99lGX/lkRrK2aOHO472ZdfFJjjaKw7g9CfmkjdF57wACIB1I0v1zxTZ/lQkBI=",
+                  "nomorIdentitas": "MzIwOTEyMjAwMzk0MDAwNg==",
+                  "nama": "U3VuYXJ0bw==",
+                  "tempatLahir": "Cirebon",
+                  "tanggalLahir": "MTk5Ni0wMy0yMA==",
+                  "jenisKelamin": "Laki-Laki",
+                  "kodeArea": 7541,
+                  "deskripsiArea": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "longitude": "20",
+                  "latitude": "-10",
+                  "alamat": "Cempaka Putih Barat",
+                  "rt": "010",
+                  "rw": "002",
+                  "kodeAgama": "ISL",
+                  "deskripsiAgama": "Islam",
+                  "statusPernikahan": "Kawin",
+                  "namaIbuKandung": "TnVyeWF0aQ==",
+                  "nomorIdentitasPasangan": "MzIwOTEyMjMwMTkyMDAwMQ==",
+                  "namaPasangan": "VGVzdGluZw==",
+                  "tempatLahirPasangan": "SmFrYXJ0YQ==",
+                  "tanggalLahirPasangan": "MjAwMC0xMS0xNw==",
+                  "nomorTelepon": "KzYyODc4NzcyNzg4MzA=",
+                  "email": "c3VuYXJ0b0BiYW5rcmF5YS5jby5pZA==",
+                  "kodePendidikanTerakhir": "S1",
+                  "deskripsiPendidikanTerakhir": "S1 / Diploma 4",
+                  "jumlahTanggungan": 1,
+                  "kodeAreaUsaha": 7541,
+                  "deskripsiAreaUsaha": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "alamatUsaha": "Jl. Joha Baru 09",
+                  "latitudeUsaha": "-20",
+                  "longitudeUsaha": "20",
+                  "rtUsaha": "012",
+                  "rwUsaha": "002",
+                  "kodeTipePinjaman": "CHILD-ATM-38",
+                  "kodePartnership": "MJ1",
+                  "namaPartnership": "Majoo",
+                  "tenorPinjaman": 12,
+                  "limitPinjaman": 100000000,
+                  "statusPrakarsa": 3,
+                  "deskripsiStatus": "Dalam Proses Persetujuan & Tanda Tangan Elektronik",
+                  "updatedAt": "2025-04-29 13:43:52",
+                  "tncDigitsave": -1,
+                  "tanggalKadaluarsaBlock": "",
+                  "dukcapilDebitur": null,
+                  "dukcapilPasangan": null,
+                  "bukaSaving": 0
+              },
+              "message": "Data pengajuan terakhir ditemukan.",
+              "status": 200
+          }
+  - name: Success - Data Ditemukan (Status 4, 5, 6) ==> DALAM PROSES AKTIVASI LIMIT --> PRESCREENING
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cashloan/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzIwOTEyMjAwMzk0MDAwNg==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Sun, 18 May 2025 23:04:29 GMT
+        - name: Content-Length
+          value: "1519"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "",
+                  "kodePrakarsa": "EX-MJ1-UmF5YVBpUGVyVG9w/l99lGX/lkRrK2aOHO472ZdfFJjjaKw7g9CfmkjdF57wACIB1I0v1zxTZ/lQkBI=",
+                  "nomorIdentitas": "MzIwOTEyMjAwMzk0MDAwNg==",
+                  "nama": "U3VuYXJ0bw==",
+                  "tempatLahir": "Cirebon",
+                  "tanggalLahir": "MTk5Ni0wMy0yMA==",
+                  "jenisKelamin": "Laki-Laki",
+                  "kodeArea": 7541,
+                  "deskripsiArea": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "longitude": "20",
+                  "latitude": "-10",
+                  "alamat": "Cempaka Putih Barat",
+                  "rt": "010",
+                  "rw": "002",
+                  "kodeAgama": "ISL",
+                  "deskripsiAgama": "Islam",
+                  "statusPernikahan": "Kawin",
+                  "namaIbuKandung": "TnVyeWF0aQ==",
+                  "nomorIdentitasPasangan": "MzIwOTEyMjMwMTkyMDAwMQ==",
+                  "namaPasangan": "VGVzdGluZw==",
+                  "tempatLahirPasangan": "SmFrYXJ0YQ==",
+                  "tanggalLahirPasangan": "MjAwMC0xMS0xNw==",
+                  "nomorTelepon": "KzYyODc4NzcyNzg4MzA=",
+                  "email": "c3VuYXJ0b0BiYW5rcmF5YS5jby5pZA==",
+                  "kodePendidikanTerakhir": "S1",
+                  "deskripsiPendidikanTerakhir": "S1 / Diploma 4",
+                  "jumlahTanggungan": 1,
+                  "kodeAreaUsaha": 7541,
+                  "deskripsiAreaUsaha": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "alamatUsaha": "Jl. Joha Baru 09",
+                  "latitudeUsaha": "-20",
+                  "longitudeUsaha": "20",
+                  "rtUsaha": "012",
+                  "rwUsaha": "002",
+                  "kodeTipePinjaman": "CHILD-ATM-38",
+                  "kodePartnership": "MJ1",
+                  "namaPartnership": "Majoo",
+                  "tenorPinjaman": 12,
+                  "limitPinjaman": 100000000,
+                  "statusPrakarsa": 4,
+                  "deskripsiStatus": "Dalam Proses Aktivasi Limit",
+                  "updatedAt": "2025-04-29 13:43:52",
+                  "tncDigitsave": -1,
+                  "tanggalKadaluarsaBlock": "",
+                  "dukcapilDebitur": null,
+                  "dukcapilPasangan": null,
+                  "bukaSaving": 0
+              },
+              "message": "Data pengajuan terakhir ditemukan.",
+              "status": 200
+          }
+  - name: Success - Data Ditemukan (Status 5) ==> QUOTA POA HABIS (x)
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cashloan/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3MzE4MDcxMjk2MDAxOQ==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Thu, 11 Sep 2025 03:15:31 GMT
+        - name: Content-Length
+          value: "1570"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "block",
+                  "kodePrakarsa": "CL-MJ1-UmF5YVBpUGVyVG9w/l96nmX1lENqKmaMHO461pdfFJjjaK84jNCamk3ZFEr6rhQtCuCKKKolsL7kk3I=",
+                  "nomorIdentitas": "MzI3MzE4MDcxMjk2MDAxOQ==",
+                  "nama": "bWFzIHJ1c2RpIHVwZGF0ZQ==",
+                  "tempatLahir": "Ngawi",
+                  "tanggalLahir": "MTk5NS0xMS0xMg==",
+                  "jenisKelamin": "Laki-Laki",
+                  "kodeArea": 7541,
+                  "deskripsiArea": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "longitude": "20",
+                  "latitude": "-20",
+                  "alamat": "Kartonyono Ngawi Utara",
+                  "rt": "010",
+                  "rw": "002",
+                  "kodeAgama": "ISL",
+                  "deskripsiAgama": "Islam",
+                  "statusPernikahan": "Belum Kawin",
+                  "namaIbuKandung": "RnVhZA==",
+                  "nomorIdentitasPasangan": "",
+                  "namaPasangan": "",
+                  "tempatLahirPasangan": "",
+                  "tanggalLahirPasangan": "",
+                  "nomorTelepon": "KzYyODEzOTQzNTY4OTY=",
+                  "email": "enVseWFuby5yaXpxdWxsYWhAYmFua3JheWEuY28uaWQ=",
+                  "kodePendidikanTerakhir": "S1",
+                  "deskripsiPendidikanTerakhir": "S1 / Diploma 4",
+                  "jumlahTanggungan": 1,
+                  "kodeAreaUsaha": 7541,
+                  "deskripsiAreaUsaha": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "alamatUsaha": "Jl. Joha Baru 09",
+                  "latitudeUsaha": "20",
+                  "longitudeUsaha": "-20",
+                  "rtUsaha": "012",
+                  "rwUsaha": "002",
+                  "kodeTipePinjaman": "CHILD-MMF-652",
+                  "kodePartnership": "MJ1",
+                  "namaPartnership": "Majoo",
+                  "tenorPinjaman": 12,
+                  "limitPinjaman": 70000000,
+                  "statusPrakarsa": 5,
+                  "deskripsiStatus": "Dalam Proses Pengajuan",
+                  "updatedAt": "2025-09-11 10:08:07",
+                  "tncDigitsave": -1,
+                  "tanggalKadaluarsaBlock": "12 September 2025 10:15",
+                  "bukaSaving": 0,
+                  "nomorRekening": "",
+                  "pemilikRekening": "",
+                  "bank": "",
+                  "dukcapilDebitur": null,
+                  "dukcapilPasangan": null
+              },
+              "message": "Data pengajuan terakhir ditemukan.",
+              "status": 200
+          }
+  - name: Success - Data Ditemukan (Status -6) ==> TTE TIDAK BERHASIL --> Belum Kadaluarsa (OTP BLOCK)
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cashloan/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzIwOTEyMjAwMzk0MDAwNg==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Mon, 19 May 2025 06:13:06 GMT
+        - name: Content-Length
+          value: "1539"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "block",
+                  "kodePrakarsa": "EX-MJ1-UmF5YVBpUGVyVG9w/l99lGX/lkRrK2aOHO472ZdfFJjjaKw7g9CfmkjdF57wACIB1I0v1zxTZ/lQkBI=",
+                  "nomorIdentitas": "MzIwOTEyMjAwMzk0MDAwNg==",
+                  "nama": "U3VuYXJ0bw==",
+                  "tempatLahir": "Cirebon",
+                  "tanggalLahir": "MTk5Ni0wMy0yMA==",
+                  "jenisKelamin": "Laki-Laki",
+                  "kodeArea": 7541,
+                  "deskripsiArea": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "longitude": "20",
+                  "latitude": "-10",
+                  "alamat": "Cempaka Putih Barat",
+                  "rt": "010",
+                  "rw": "002",
+                  "kodeAgama": "ISL",
+                  "deskripsiAgama": "Islam",
+                  "statusPernikahan": "Kawin",
+                  "namaIbuKandung": "TnVyeWF0aQ==",
+                  "nomorIdentitasPasangan": "MzIwOTEyMjMwMTkyMDAwMQ==",
+                  "namaPasangan": "VGVzdGluZw==",
+                  "tempatLahirPasangan": "SmFrYXJ0YQ==",
+                  "tanggalLahirPasangan": "MjAwMC0xMS0xNw==",
+                  "nomorTelepon": "KzYyODc4NzcyNzg4MzA=",
+                  "email": "c3VuYXJ0b0BiYW5rcmF5YS5jby5pZA==",
+                  "kodePendidikanTerakhir": "S1",
+                  "deskripsiPendidikanTerakhir": "S1 / Diploma 4",
+                  "jumlahTanggungan": 1,
+                  "kodeAreaUsaha": 7541,
+                  "deskripsiAreaUsaha": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "alamatUsaha": "Jl. Joha Baru 09",
+                  "latitudeUsaha": "-20",
+                  "longitudeUsaha": "20",
+                  "rtUsaha": "012",
+                  "rwUsaha": "002",
+                  "kodeTipePinjaman": "CHILD-ATM-38",
+                  "kodePartnership": "MJ1",
+                  "namaPartnership": "Majoo",
+                  "tenorPinjaman": 12,
+                  "limitPinjaman": 100000000,
+                  "statusPrakarsa": -6,
+                  "deskripsiStatus": "TTE Tidak Berhasil",
+                  "updatedAt": "2025-04-29 13:43:52",
+                  "tncDigitsave": -1,
+                  "tanggalKadaluarsaBlock": "2025-12-10 16:02:59.087",
+                  "dukcapilDebitur": null,
+                  "dukcapilPasangan": null,
+                  "bukaSaving": 0
+              },
+              "message": "Data pengajuan terakhir ditemukan.",
+              "status": 200
+          }
+  - name: Success - Data Ditemukan (Status -6) ==> TTE TIDAK BERHASIL --> Sudah Kadaluarsa (OTP BLOCK)
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cashloan/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzIwOTEyMjAwMzk0MDAwNg==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Mon, 19 May 2025 06:15:54 GMT
+        - name: Content-Length
+          value: "1511"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "",
+                  "kodePrakarsa": "EX-MJ1-UmF5YVBpUGVyVG9w/l99lGX/lkRrK2aOHO472ZdfFJjjaKw7g9CfmkjdF57wACIB1I0v1zxTZ/lQkBI=",
+                  "nomorIdentitas": "MzIwOTEyMjAwMzk0MDAwNg==",
+                  "nama": "U3VuYXJ0bw==",
+                  "tempatLahir": "Cirebon",
+                  "tanggalLahir": "MTk5Ni0wMy0yMA==",
+                  "jenisKelamin": "Laki-Laki",
+                  "kodeArea": 7541,
+                  "deskripsiArea": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "longitude": "20",
+                  "latitude": "-10",
+                  "alamat": "Cempaka Putih Barat",
+                  "rt": "010",
+                  "rw": "002",
+                  "kodeAgama": "ISL",
+                  "deskripsiAgama": "Islam",
+                  "statusPernikahan": "Kawin",
+                  "namaIbuKandung": "TnVyeWF0aQ==",
+                  "nomorIdentitasPasangan": "MzIwOTEyMjMwMTkyMDAwMQ==",
+                  "namaPasangan": "VGVzdGluZw==",
+                  "tempatLahirPasangan": "SmFrYXJ0YQ==",
+                  "tanggalLahirPasangan": "MjAwMC0xMS0xNw==",
+                  "nomorTelepon": "KzYyODc4NzcyNzg4MzA=",
+                  "email": "c3VuYXJ0b0BiYW5rcmF5YS5jby5pZA==",
+                  "kodePendidikanTerakhir": "S1",
+                  "deskripsiPendidikanTerakhir": "S1 / Diploma 4",
+                  "jumlahTanggungan": 1,
+                  "kodeAreaUsaha": 7541,
+                  "deskripsiAreaUsaha": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "alamatUsaha": "Jl. Joha Baru 09",
+                  "latitudeUsaha": "-20",
+                  "longitudeUsaha": "20",
+                  "rtUsaha": "012",
+                  "rwUsaha": "002",
+                  "kodeTipePinjaman": "CHILD-ATM-38",
+                  "kodePartnership": "MJ1",
+                  "namaPartnership": "Majoo",
+                  "tenorPinjaman": 12,
+                  "limitPinjaman": 100000000,
+                  "statusPrakarsa": -6,
+                  "deskripsiStatus": "TTE Tidak Berhasil",
+                  "updatedAt": "2025-04-29 13:43:52",
+                  "tncDigitsave": -1,
+                  "tanggalKadaluarsaBlock": "",
+                  "dukcapilDebitur": null,
+                  "dukcapilPasangan": null,
+                  "bukaSaving": 0
+              },
+              "message": "Data pengajuan terakhir ditemukan.",
+              "status": 200
+          }
+  - name: Success - Data Ditemukan (Status -2) ==> PENGAJUAN DITOLAK --> Belum Kadaluarsa (PROSES PRESCREENING/SCORING)
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cashloan/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzIwOTEyMjAwMzk0MDAwNg==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Mon, 19 May 2025 06:30:07 GMT
+        - name: Content-Length
+          value: "1525"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "block",
+                  "kodePrakarsa": "EX-MJ1-UmF5YVBpUGVyVG9w/l99lGX/lkRrK2aOHO472ZdfFJjjaKw7g9CfmkjdF57wACIB1I0v1zxTZ/lQkBI=",
+                  "nomorIdentitas": "MzIwOTEyMjAwMzk0MDAwNg==",
+                  "nama": "U3VuYXJ0bw==",
+                  "tempatLahir": "Cirebon",
+                  "tanggalLahir": "MTk5Ni0wMy0yMA==",
+                  "jenisKelamin": "Laki-Laki",
+                  "kodeArea": 7541,
+                  "deskripsiArea": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "longitude": "20",
+                  "latitude": "-10",
+                  "alamat": "Cempaka Putih Barat",
+                  "rt": "010",
+                  "rw": "002",
+                  "kodeAgama": "ISL",
+                  "deskripsiAgama": "Islam",
+                  "statusPernikahan": "Kawin",
+                  "namaIbuKandung": "TnVyeWF0aQ==",
+                  "nomorIdentitasPasangan": "MzIwOTEyMjMwMTkyMDAwMQ==",
+                  "namaPasangan": "VGVzdGluZw==",
+                  "tempatLahirPasangan": "SmFrYXJ0YQ==",
+                  "tanggalLahirPasangan": "MjAwMC0xMS0xNw==",
+                  "nomorTelepon": "KzYyODc4NzcyNzg4MzA=",
+                  "email": "c3VuYXJ0b0BiYW5rcmF5YS5jby5pZA==",
+                  "kodePendidikanTerakhir": "S1",
+                  "deskripsiPendidikanTerakhir": "S1 / Diploma 4",
+                  "jumlahTanggungan": 1,
+                  "kodeAreaUsaha": 7541,
+                  "deskripsiAreaUsaha": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "alamatUsaha": "Jl. Joha Baru 09",
+                  "latitudeUsaha": "-20",
+                  "longitudeUsaha": "20",
+                  "rtUsaha": "012",
+                  "rwUsaha": "002",
+                  "kodeTipePinjaman": "CHILD-ATM-38",
+                  "kodePartnership": "MJ1",
+                  "namaPartnership": "Majoo",
+                  "tenorPinjaman": 12,
+                  "limitPinjaman": 100000000,
+                  "statusPrakarsa": -2,
+                  "deskripsiStatus": "Pengajuan Ditolak",
+                  "updatedAt": "2025-04-29 13:43:52",
+                  "tncDigitsave": -1,
+                  "tanggalKadaluarsaBlock": "2025-05-29",
+                  "dukcapilDebitur": null,
+                  "dukcapilPasangan": null,
+                  "bukaSaving": 0
+              },
+              "message": "Data pengajuan terakhir ditemukan.",
+              "status": 200
+          }
+  - name: Success - Data Ditemukan (Status -2) ==> PENGAJUAN DITOLAK --> Sudah Kadaluarsa (PROSES PRESCREENING/SCORING)
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cashloan/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzIwOTEyMjAwMzk0MDAwNg==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Mon, 19 May 2025 06:33:00 GMT
+        - name: Content-Length
+          value: "1510"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "",
+                  "kodePrakarsa": "EX-MJ1-UmF5YVBpUGVyVG9w/l99lGX/lkRrK2aOHO472ZdfFJjjaKw7g9CfmkjdF57wACIB1I0v1zxTZ/lQkBI=",
+                  "nomorIdentitas": "MzIwOTEyMjAwMzk0MDAwNg==",
+                  "nama": "U3VuYXJ0bw==",
+                  "tempatLahir": "Cirebon",
+                  "tanggalLahir": "MTk5Ni0wMy0yMA==",
+                  "jenisKelamin": "Laki-Laki",
+                  "kodeArea": 7541,
+                  "deskripsiArea": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "longitude": "20",
+                  "latitude": "-10",
+                  "alamat": "Cempaka Putih Barat",
+                  "rt": "010",
+                  "rw": "002",
+                  "kodeAgama": "ISL",
+                  "deskripsiAgama": "Islam",
+                  "statusPernikahan": "Kawin",
+                  "namaIbuKandung": "TnVyeWF0aQ==",
+                  "nomorIdentitasPasangan": "MzIwOTEyMjMwMTkyMDAwMQ==",
+                  "namaPasangan": "VGVzdGluZw==",
+                  "tempatLahirPasangan": "SmFrYXJ0YQ==",
+                  "tanggalLahirPasangan": "MjAwMC0xMS0xNw==",
+                  "nomorTelepon": "KzYyODc4NzcyNzg4MzA=",
+                  "email": "c3VuYXJ0b0BiYW5rcmF5YS5jby5pZA==",
+                  "kodePendidikanTerakhir": "S1",
+                  "deskripsiPendidikanTerakhir": "S1 / Diploma 4",
+                  "jumlahTanggungan": 1,
+                  "kodeAreaUsaha": 7541,
+                  "deskripsiAreaUsaha": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "alamatUsaha": "Jl. Joha Baru 09",
+                  "latitudeUsaha": "-20",
+                  "longitudeUsaha": "20",
+                  "rtUsaha": "012",
+                  "rwUsaha": "002",
+                  "kodeTipePinjaman": "CHILD-ATM-38",
+                  "kodePartnership": "MJ1",
+                  "namaPartnership": "Majoo",
+                  "tenorPinjaman": 12,
+                  "limitPinjaman": 100000000,
+                  "statusPrakarsa": -2,
+                  "deskripsiStatus": "Pengajuan Ditolak",
+                  "updatedAt": "2025-03-01 13:43:52",
+                  "tncDigitsave": -1,
+                  "tanggalKadaluarsaBlock": "",
+                  "dukcapilDebitur": null,
+                  "dukcapilPasangan": null,
+                  "bukaSaving": 0
+              },
+              "message": "Data pengajuan terakhir ditemukan.",
+              "status": 200
+          }
+  - name: Success - Data Ditemukan (Status -4) ==> TIDAK LOLOS OCR & DOC VERIF --> Sudah Kadaluarsa (OCR BLOCK)
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cashloan/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzIwOTEyMjAwMzk0MDAwNg==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Mon, 19 May 2025 06:39:18 GMT
+        - name: Content-Length
+          value: "1525"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "",
+                  "kodePrakarsa": "EX-MJ1-UmF5YVBpUGVyVG9w/l99lGX/lkRrK2aOHO472ZdfFJjjaKw7g9CfmkjdF57wACIB1I0v1zxTZ/lQkBI=",
+                  "nomorIdentitas": "MzIwOTEyMjAwMzk0MDAwNg==",
+                  "nama": "U3VuYXJ0bw==",
+                  "tempatLahir": "Cirebon",
+                  "tanggalLahir": "MTk5Ni0wMy0yMA==",
+                  "jenisKelamin": "Laki-Laki",
+                  "kodeArea": 7541,
+                  "deskripsiArea": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "longitude": "20",
+                  "latitude": "-10",
+                  "alamat": "Cempaka Putih Barat",
+                  "rt": "010",
+                  "rw": "002",
+                  "kodeAgama": "ISL",
+                  "deskripsiAgama": "Islam",
+                  "statusPernikahan": "Kawin",
+                  "namaIbuKandung": "TnVyeWF0aQ==",
+                  "nomorIdentitasPasangan": "MzIwOTEyMjMwMTkyMDAwMQ==",
+                  "namaPasangan": "VGVzdGluZw==",
+                  "tempatLahirPasangan": "SmFrYXJ0YQ==",
+                  "tanggalLahirPasangan": "MjAwMC0xMS0xNw==",
+                  "nomorTelepon": "KzYyODc4NzcyNzg4MzA=",
+                  "email": "c3VuYXJ0b0BiYW5rcmF5YS5jby5pZA==",
+                  "kodePendidikanTerakhir": "S1",
+                  "deskripsiPendidikanTerakhir": "S1 / Diploma 4",
+                  "jumlahTanggungan": 1,
+                  "kodeAreaUsaha": 7541,
+                  "deskripsiAreaUsaha": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "alamatUsaha": "Jl. Joha Baru 09",
+                  "latitudeUsaha": "-20",
+                  "longitudeUsaha": "20",
+                  "rtUsaha": "012",
+                  "rwUsaha": "002",
+                  "kodeTipePinjaman": "CHILD-ATM-38",
+                  "kodePartnership": "MJ1",
+                  "namaPartnership": "Majoo",
+                  "tenorPinjaman": 12,
+                  "limitPinjaman": 100000000,
+                  "statusPrakarsa": -4,
+                  "deskripsiStatus": "Tidak Lolos OCR & Doc Verif",
+                  "updatedAt": "2025-03-01 13:43:52",
+                  "tncDigitsave": -1,
+                  "tanggalKadaluarsaBlock": "",
+                  "dukcapilDebitur": null,
+                  "dukcapilPasangan": null,
+                  "bukaSaving": 0
+              },
+              "message": "Data pengajuan terakhir ditemukan.",
+              "status": 200
+          }
+  - name: uccess - Data Ditemukan (Status -4) ==> TIDAK LOLOS OCR & DOC VERIF --> Belum Kadaluarsa (OCR BLOCK)
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cashloan/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzIwOTEyMjAwMzk0MDAwNg==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Mon, 19 May 2025 06:48:23 GMT
+        - name: Content-Length
+          value: "1553"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "block",
+                  "kodePrakarsa": "EX-MJ1-UmF5YVBpUGVyVG9w/l99lGX/lkRrK2aOHO472ZdfFJjjaKw7g9CfmkjdF57wACIB1I0v1zxTZ/lQkBI=",
+                  "nomorIdentitas": "MzIwOTEyMjAwMzk0MDAwNg==",
+                  "nama": "U3VuYXJ0bw==",
+                  "tempatLahir": "Cirebon",
+                  "tanggalLahir": "MTk5Ni0wMy0yMA==",
+                  "jenisKelamin": "Laki-Laki",
+                  "kodeArea": 7541,
+                  "deskripsiArea": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "longitude": "20",
+                  "latitude": "-10",
+                  "alamat": "Cempaka Putih Barat",
+                  "rt": "010",
+                  "rw": "002",
+                  "kodeAgama": "ISL",
+                  "deskripsiAgama": "Islam",
+                  "statusPernikahan": "Kawin",
+                  "namaIbuKandung": "TnVyeWF0aQ==",
+                  "nomorIdentitasPasangan": "MzIwOTEyMjMwMTkyMDAwMQ==",
+                  "namaPasangan": "VGVzdGluZw==",
+                  "tempatLahirPasangan": "SmFrYXJ0YQ==",
+                  "tanggalLahirPasangan": "MjAwMC0xMS0xNw==",
+                  "nomorTelepon": "KzYyODc4NzcyNzg4MzA=",
+                  "email": "c3VuYXJ0b0BiYW5rcmF5YS5jby5pZA==",
+                  "kodePendidikanTerakhir": "S1",
+                  "deskripsiPendidikanTerakhir": "S1 / Diploma 4",
+                  "jumlahTanggungan": 1,
+                  "kodeAreaUsaha": 7541,
+                  "deskripsiAreaUsaha": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "alamatUsaha": "Jl. Joha Baru 09",
+                  "latitudeUsaha": "-20",
+                  "longitudeUsaha": "20",
+                  "rtUsaha": "012",
+                  "rwUsaha": "002",
+                  "kodeTipePinjaman": "CHILD-ATM-38",
+                  "kodePartnership": "MJ1",
+                  "namaPartnership": "Majoo",
+                  "tenorPinjaman": 12,
+                  "limitPinjaman": 100000000,
+                  "statusPrakarsa": -4,
+                  "deskripsiStatus": "Tidak Lolos OCR & Doc Verif",
+                  "updatedAt": "2025-03-01 13:43:52",
+                  "tncDigitsave": -1,
+                  "tanggalKadaluarsaBlock": "2025-08-20 05:55:56.000",
+                  "dukcapilDebitur": null,
+                  "dukcapilPasangan": null,
+                  "bukaSaving": 0
+              },
+              "message": "Data pengajuan terakhir ditemukan.",
+              "status": 200
+          }
+  - name: Success - Data Ditemukan (Status 8) ==> DALAM PROSES AKTIVASI LIMIT (PROSES AUTOMATION
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cashloan/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzIwOTEyMjAwMzk0MDAwNg==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Mon, 19 May 2025 06:50:10 GMT
+        - name: Content-Length
+          value: "1519"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "",
+                  "kodePrakarsa": "EX-MJ1-UmF5YVBpUGVyVG9w/l99lGX/lkRrK2aOHO472ZdfFJjjaKw7g9CfmkjdF57wACIB1I0v1zxTZ/lQkBI=",
+                  "nomorIdentitas": "MzIwOTEyMjAwMzk0MDAwNg==",
+                  "nama": "U3VuYXJ0bw==",
+                  "tempatLahir": "Cirebon",
+                  "tanggalLahir": "MTk5Ni0wMy0yMA==",
+                  "jenisKelamin": "Laki-Laki",
+                  "kodeArea": 7541,
+                  "deskripsiArea": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "longitude": "20",
+                  "latitude": "-10",
+                  "alamat": "Cempaka Putih Barat",
+                  "rt": "010",
+                  "rw": "002",
+                  "kodeAgama": "ISL",
+                  "deskripsiAgama": "Islam",
+                  "statusPernikahan": "Kawin",
+                  "namaIbuKandung": "TnVyeWF0aQ==",
+                  "nomorIdentitasPasangan": "MzIwOTEyMjMwMTkyMDAwMQ==",
+                  "namaPasangan": "VGVzdGluZw==",
+                  "tempatLahirPasangan": "SmFrYXJ0YQ==",
+                  "tanggalLahirPasangan": "MjAwMC0xMS0xNw==",
+                  "nomorTelepon": "KzYyODc4NzcyNzg4MzA=",
+                  "email": "c3VuYXJ0b0BiYW5rcmF5YS5jby5pZA==",
+                  "kodePendidikanTerakhir": "S1",
+                  "deskripsiPendidikanTerakhir": "S1 / Diploma 4",
+                  "jumlahTanggungan": 1,
+                  "kodeAreaUsaha": 7541,
+                  "deskripsiAreaUsaha": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "alamatUsaha": "Jl. Joha Baru 09",
+                  "latitudeUsaha": "-20",
+                  "longitudeUsaha": "20",
+                  "rtUsaha": "012",
+                  "rwUsaha": "002",
+                  "kodeTipePinjaman": "CHILD-ATM-38",
+                  "kodePartnership": "MJ1",
+                  "namaPartnership": "Majoo",
+                  "tenorPinjaman": 12,
+                  "limitPinjaman": 100000000,
+                  "statusPrakarsa": 8,
+                  "deskripsiStatus": "Dalam Proses Aktivasi Limit",
+                  "updatedAt": "2025-03-01 13:43:52",
+                  "tncDigitsave": -1,
+                  "tanggalKadaluarsaBlock": "",
+                  "dukcapilDebitur": null,
+                  "dukcapilPasangan": null,
+                  "bukaSaving": 0
+              },
+              "message": "Data pengajuan terakhir ditemukan.",
+              "status": 200
+          }
+  - name: Success - Data Ditemukan (Status 9) ==> DALAM PROSES AKTIVASI LIMIT (PROSES AUTOMATION)
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cashloan/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzIwOTEyMjAwMzk0MDAwNg==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Mon, 19 May 2025 06:52:50 GMT
+        - name: Content-Length
+          value: "1519"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "",
+                  "kodePrakarsa": "EX-MJ1-UmF5YVBpUGVyVG9w/l99lGX/lkRrK2aOHO472ZdfFJjjaKw7g9CfmkjdF57wACIB1I0v1zxTZ/lQkBI=",
+                  "nomorIdentitas": "MzIwOTEyMjAwMzk0MDAwNg==",
+                  "nama": "U3VuYXJ0bw==",
+                  "tempatLahir": "Cirebon",
+                  "tanggalLahir": "MTk5Ni0wMy0yMA==",
+                  "jenisKelamin": "Laki-Laki",
+                  "kodeArea": 7541,
+                  "deskripsiArea": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "longitude": "20",
+                  "latitude": "-10",
+                  "alamat": "Cempaka Putih Barat",
+                  "rt": "010",
+                  "rw": "002",
+                  "kodeAgama": "ISL",
+                  "deskripsiAgama": "Islam",
+                  "statusPernikahan": "Kawin",
+                  "namaIbuKandung": "TnVyeWF0aQ==",
+                  "nomorIdentitasPasangan": "MzIwOTEyMjMwMTkyMDAwMQ==",
+                  "namaPasangan": "VGVzdGluZw==",
+                  "tempatLahirPasangan": "SmFrYXJ0YQ==",
+                  "tanggalLahirPasangan": "MjAwMC0xMS0xNw==",
+                  "nomorTelepon": "KzYyODc4NzcyNzg4MzA=",
+                  "email": "c3VuYXJ0b0BiYW5rcmF5YS5jby5pZA==",
+                  "kodePendidikanTerakhir": "S1",
+                  "deskripsiPendidikanTerakhir": "S1 / Diploma 4",
+                  "jumlahTanggungan": 1,
+                  "kodeAreaUsaha": 7541,
+                  "deskripsiAreaUsaha": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "alamatUsaha": "Jl. Joha Baru 09",
+                  "latitudeUsaha": "-20",
+                  "longitudeUsaha": "20",
+                  "rtUsaha": "012",
+                  "rwUsaha": "002",
+                  "kodeTipePinjaman": "CHILD-ATM-38",
+                  "kodePartnership": "MJ1",
+                  "namaPartnership": "Majoo",
+                  "tenorPinjaman": 12,
+                  "limitPinjaman": 100000000,
+                  "statusPrakarsa": 9,
+                  "deskripsiStatus": "Dalam Proses Aktivasi Limit",
+                  "updatedAt": "2025-03-01 13:43:52",
+                  "tncDigitsave": -1,
+                  "tanggalKadaluarsaBlock": "",
+                  "dukcapilDebitur": null,
+                  "dukcapilPasangan": null,
+                  "bukaSaving": 1
+              },
+              "message": "Data pengajuan terakhir ditemukan.",
+              "status": 200
+          }
+  - name: Success - Data Ditemukan (Status 10) ==> DALAM PROSES AKTIVASI LIMIT (PROSES AUTOMATION)
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cashloan/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzIwOTEyMjAwMzk0MDAwNg==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Mon, 19 May 2025 06:54:47 GMT
+        - name: Content-Length
+          value: "1520"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "",
+                  "kodePrakarsa": "EX-MJ1-UmF5YVBpUGVyVG9w/l99lGX/lkRrK2aOHO472ZdfFJjjaKw7g9CfmkjdF57wACIB1I0v1zxTZ/lQkBI=",
+                  "nomorIdentitas": "MzIwOTEyMjAwMzk0MDAwNg==",
+                  "nama": "U3VuYXJ0bw==",
+                  "tempatLahir": "Cirebon",
+                  "tanggalLahir": "MTk5Ni0wMy0yMA==",
+                  "jenisKelamin": "Laki-Laki",
+                  "kodeArea": 7541,
+                  "deskripsiArea": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "longitude": "20",
+                  "latitude": "-10",
+                  "alamat": "Cempaka Putih Barat",
+                  "rt": "010",
+                  "rw": "002",
+                  "kodeAgama": "ISL",
+                  "deskripsiAgama": "Islam",
+                  "statusPernikahan": "Kawin",
+                  "namaIbuKandung": "TnVyeWF0aQ==",
+                  "nomorIdentitasPasangan": "MzIwOTEyMjMwMTkyMDAwMQ==",
+                  "namaPasangan": "VGVzdGluZw==",
+                  "tempatLahirPasangan": "SmFrYXJ0YQ==",
+                  "tanggalLahirPasangan": "MjAwMC0xMS0xNw==",
+                  "nomorTelepon": "KzYyODc4NzcyNzg4MzA=",
+                  "email": "c3VuYXJ0b0BiYW5rcmF5YS5jby5pZA==",
+                  "kodePendidikanTerakhir": "S1",
+                  "deskripsiPendidikanTerakhir": "S1 / Diploma 4",
+                  "jumlahTanggungan": 1,
+                  "kodeAreaUsaha": 7541,
+                  "deskripsiAreaUsaha": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "alamatUsaha": "Jl. Joha Baru 09",
+                  "latitudeUsaha": "-20",
+                  "longitudeUsaha": "20",
+                  "rtUsaha": "012",
+                  "rwUsaha": "002",
+                  "kodeTipePinjaman": "CHILD-ATM-38",
+                  "kodePartnership": "MJ1",
+                  "namaPartnership": "Majoo",
+                  "tenorPinjaman": 12,
+                  "limitPinjaman": 100000000,
+                  "statusPrakarsa": 10,
+                  "deskripsiStatus": "Dalam Proses Aktivasi Limit",
+                  "updatedAt": "2025-03-01 13:43:52",
+                  "tncDigitsave": -1,
+                  "tanggalKadaluarsaBlock": "",
+                  "dukcapilDebitur": null,
+                  "dukcapilPasangan": null,
+                  "bukaSaving": 0
+              },
+              "message": "Data pengajuan terakhir ditemukan.",
+              "status": 200
+          }
+  - name: Success - Data Ditemukan (Status 11) ==> LIMIT AKTIF
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cashloan/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzIwOTEyMjAwMzk0MDAwNg==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Mon, 19 May 2025 06:56:47 GMT
+        - name: Content-Length
+          value: "1504"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "",
+                  "kodePrakarsa": "EX-MJ1-UmF5YVBpUGVyVG9w/l99lGX/lkRrK2aOHO472ZdfFJjjaKw7g9CfmkjdF57wACIB1I0v1zxTZ/lQkBI=",
+                  "nomorIdentitas": "MzIwOTEyMjAwMzk0MDAwNg==",
+                  "nama": "U3VuYXJ0bw==",
+                  "tempatLahir": "Cirebon",
+                  "tanggalLahir": "MTk5Ni0wMy0yMA==",
+                  "jenisKelamin": "Laki-Laki",
+                  "kodeArea": 7541,
+                  "deskripsiArea": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "longitude": "20",
+                  "latitude": "-10",
+                  "alamat": "Cempaka Putih Barat",
+                  "rt": "010",
+                  "rw": "002",
+                  "kodeAgama": "ISL",
+                  "deskripsiAgama": "Islam",
+                  "statusPernikahan": "Kawin",
+                  "namaIbuKandung": "TnVyeWF0aQ==",
+                  "nomorIdentitasPasangan": "MzIwOTEyMjMwMTkyMDAwMQ==",
+                  "namaPasangan": "VGVzdGluZw==",
+                  "tempatLahirPasangan": "SmFrYXJ0YQ==",
+                  "tanggalLahirPasangan": "MjAwMC0xMS0xNw==",
+                  "nomorTelepon": "KzYyODc4NzcyNzg4MzA=",
+                  "email": "c3VuYXJ0b0BiYW5rcmF5YS5jby5pZA==",
+                  "kodePendidikanTerakhir": "S1",
+                  "deskripsiPendidikanTerakhir": "S1 / Diploma 4",
+                  "jumlahTanggungan": 1,
+                  "kodeAreaUsaha": 7541,
+                  "deskripsiAreaUsaha": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "alamatUsaha": "Jl. Joha Baru 09",
+                  "latitudeUsaha": "-20",
+                  "longitudeUsaha": "20",
+                  "rtUsaha": "012",
+                  "rwUsaha": "002",
+                  "kodeTipePinjaman": "CHILD-ATM-38",
+                  "kodePartnership": "MJ1",
+                  "namaPartnership": "Majoo",
+                  "tenorPinjaman": 12,
+                  "limitPinjaman": 100000000,
+                  "statusPrakarsa": 11,
+                  "deskripsiStatus": "Limit Aktif",
+                  "updatedAt": "2025-03-01 13:43:52",
+                  "tncDigitsave": -1,
+                  "tanggalKadaluarsaBlock": "",
+                  "dukcapilDebitur": null,
+                  "dukcapilPasangan": null,
+                  "bukaSaving": 0
+              },
+              "message": "Data pengajuan terakhir ditemukan.",
+              "status": 200
+          }
+  - name: Success - Data Ditemukan (Status 99) ==> IS_RENEWAL = 0
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cashloan/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3MzE4MDcxMjk2MDAwNw==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Wed, 15 Oct 2025 03:15:45 GMT
+        - name: Content-Length
+          value: "119"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "belum-rewhitelist",
+                  "tncDigitsave": -1
+              },
+              "message": "Data pengajuan terakhir ditemukan.",
+              "status": 200
+          }
+  - name: Success - Data Ditemukan (Status 99) ==> IS_RENEWAL = 1
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cashloan/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3MzE4MDcxMjk2MDAwNw==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Wed, 15 Oct 2025 03:16:39 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "pengajuan",
+                  "tncDigitsave": -1
+              },
+              "message": "Data pengajuan terakhir ditemukan.",
+              "status": 200
+          }
+  - name: Success - Data Ditemukan (Status 11) ==> LIMIT AKTIF, FACIL CLOSED, IS_RENEWAL = 0
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cashloan/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3MzE4MDcxMjk2MDAwNw==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Wed, 15 Oct 2025 04:04:16 GMT
+        - name: Content-Length
+          value: "1566"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "belum-rewhitelist",
+                  "kodePrakarsa": "CL-MJ1-UmF5YVBpUGVyVG9w/l96nmX1lENqKmaMHO472JdfFJjkaak7idGcnE7dF9LFN3wqfjPi15p9rrxAcTI=",
+                  "nomorIdentitas": "MzI3MzE4MDcxMjk2MDAwNw==",
+                  "nama": "WnVseWFubw==",
+                  "tempatLahir": "Jakarta",
+                  "tanggalLahir": "MTk5NS0xMS0xMg==",
+                  "jenisKelamin": "Laki-Laki",
+                  "kodeArea": 7541,
+                  "deskripsiArea": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "longitude": "20",
+                  "latitude": "-20",
+                  "alamat": "Kartonyono Ngawi Utara",
+                  "rt": "010",
+                  "rw": "002",
+                  "kodeAgama": "ISL",
+                  "deskripsiAgama": "Islam",
+                  "statusPernikahan": "Belum Kawin",
+                  "namaIbuKandung": "QU1BTg==",
+                  "nomorIdentitasPasangan": "",
+                  "namaPasangan": "",
+                  "tempatLahirPasangan": "",
+                  "tanggalLahirPasangan": "",
+                  "nomorTelepon": "KzYyODEzOTQzNTY4OTY=",
+                  "email": "enVseWFuby5yaXpxdWxsYWhAYmFua3JheWEuY28uaWQ=",
+                  "kodePendidikanTerakhir": "S1",
+                  "deskripsiPendidikanTerakhir": "S1 / Diploma 4",
+                  "jumlahTanggungan": 1,
+                  "kodeAreaUsaha": 7541,
+                  "deskripsiAreaUsaha": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "alamatUsaha": "Jl. Joha Baru 09",
+                  "latitudeUsaha": "20",
+                  "longitudeUsaha": "-20",
+                  "rtUsaha": "012",
+                  "rwUsaha": "002",
+                  "kodeTipePinjaman": "CHILD-MMF-652",
+                  "kodePartnership": "MJ1",
+                  "namaPartnership": "Majoo",
+                  "tenorPinjaman": 12,
+                  "limitPinjaman": 100000000,
+                  "statusPrakarsa": 11,
+                  "deskripsiStatus": "Limit Aktif",
+                  "updatedAt": "2025-07-01 17:11:21",
+                  "tncDigitsave": -1,
+                  "tanggalKadaluarsaBlock": "",
+                  "bukaSaving": 0,
+                  "nomorRekening": "001001018181311",
+                  "pemilikRekening": "ZULYANO",
+                  "bank": "RAYA",
+                  "dukcapilDebitur": null,
+                  "dukcapilPasangan": null
+              },
+              "message": "Data pengajuan terakhir ditemukan.",
+              "status": 200
+          }
+  - name: Success - Data Ditemukan (Status 11) ==> LIMIT AKTIF, FACIL CLOSED, IS_RENEWAL = 1
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cashloan/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3MzE4MDcxMjk2MDAwNw==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Wed, 15 Oct 2025 04:05:24 GMT
+        - name: Content-Length
+          value: "1561"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "open-suplesi",
+                  "kodePrakarsa": "CL-MJ1-UmF5YVBpUGVyVG9w/l96nmX1lENqKmaMHO472JdfFJjkaak7idGcnE7dF9LFN3wqfjPi15p9rrxAcTI=",
+                  "nomorIdentitas": "MzI3MzE4MDcxMjk2MDAwNw==",
+                  "nama": "WnVseWFubw==",
+                  "tempatLahir": "Jakarta",
+                  "tanggalLahir": "MTk5NS0xMS0xMg==",
+                  "jenisKelamin": "Laki-Laki",
+                  "kodeArea": 7541,
+                  "deskripsiArea": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "longitude": "20",
+                  "latitude": "-20",
+                  "alamat": "Kartonyono Ngawi Utara",
+                  "rt": "010",
+                  "rw": "002",
+                  "kodeAgama": "ISL",
+                  "deskripsiAgama": "Islam",
+                  "statusPernikahan": "Belum Kawin",
+                  "namaIbuKandung": "QU1BTg==",
+                  "nomorIdentitasPasangan": "",
+                  "namaPasangan": "",
+                  "tempatLahirPasangan": "",
+                  "tanggalLahirPasangan": "",
+                  "nomorTelepon": "KzYyODEzOTQzNTY4OTY=",
+                  "email": "enVseWFuby5yaXpxdWxsYWhAYmFua3JheWEuY28uaWQ=",
+                  "kodePendidikanTerakhir": "S1",
+                  "deskripsiPendidikanTerakhir": "S1 / Diploma 4",
+                  "jumlahTanggungan": 1,
+                  "kodeAreaUsaha": 7541,
+                  "deskripsiAreaUsaha": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "alamatUsaha": "Jl. Joha Baru 09",
+                  "latitudeUsaha": "20",
+                  "longitudeUsaha": "-20",
+                  "rtUsaha": "012",
+                  "rwUsaha": "002",
+                  "kodeTipePinjaman": "CHILD-MMF-652",
+                  "kodePartnership": "MJ1",
+                  "namaPartnership": "Majoo",
+                  "tenorPinjaman": 12,
+                  "limitPinjaman": 100000000,
+                  "statusPrakarsa": 11,
+                  "deskripsiStatus": "Limit Aktif",
+                  "updatedAt": "2025-07-01 17:11:21",
+                  "tncDigitsave": -1,
+                  "tanggalKadaluarsaBlock": "",
+                  "bukaSaving": 0,
+                  "nomorRekening": "001001018181311",
+                  "pemilikRekening": "ZULYANO",
+                  "bank": "RAYA",
+                  "dukcapilDebitur": null,
+                  "dukcapilPasangan": null
+              },
+              "message": "Data pengajuan terakhir ditemukan.",
+              "status": 200
+          }

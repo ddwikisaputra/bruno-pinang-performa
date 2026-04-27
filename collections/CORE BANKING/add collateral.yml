@@ -1,0 +1,93 @@
+info:
+  name: add collateral
+  type: http
+  seq: 11
+
+http:
+  method: POST
+  url: "{{URL}}/collateral/add"
+  body:
+    type: json
+    data: "{\r
+
+      \t\"KodeCabang\":\"0010\",\r
+
+      \   \"Action\":\"\",\r
+
+      \   \"NoAgunan\":\"\",\r
+
+      \   \"NamaPemilik\":\"SUNARDI\",\r
+
+      \   \"NoIdentitasPemilik\" : \"1122223122222222\",\r
+
+      \   \"JenisAgunan\":\"300\",\r
+
+      \   \"StatusAgunan\":\"1\",\r
+
+      \   \"NomorRekeningDeposit\":\"\",\r
+
+      \   \"BuktiKepemilikan\":\"-\",\r
+
+      \   \"LokasiDati2\":\"0394\",\r
+
+      \   \"AlamatAgunan\":\"jl. merdeka UTARA, Tebet Timur, Tebet, Jakarta Selatan, DKI Jakarta\",\r
+
+      \   \"TanggalTerbitSertifikat\":\"\",\r
+
+      \   \"TanggalExpiredSertifikat\":\"\",\r
+
+      \   \"PenerbitAgunan\":\"00\",\r
+
+      \   \"PenilaiIndepeden\":\"N\",\r
+
+      \   \"TanggalPenilaian\":\"22/07/2021\",\r
+
+      \   \"NilaiPenilai\":\"0\",\r
+
+      \   \"NamaPenilai\":\"\",\r
+
+      \   \"MataUangNilaiPasar\":\"IDR\",\r
+
+      \   \"NilaiPasar\":\"0\",\r
+
+      \   \"NilaiEkivalen\":\"0\",\r
+
+      \   \"NJOP\":\"0\",\r
+
+      \   \"NilaiLikuidasi\":\"0\",\r
+
+      \   \"SifatAgunan\":\"1\",\r
+
+      \   \"NilaiPengikatan\":\"0\",\r
+
+      \   \"NilaiBank\":\"0\",\r
+
+      \   \"TanggalPenilaianBank\":\"22/08/2021\",\r
+
+      \   \"TanggalPengikatan\":\"22/08/2021\",\r
+
+      \   \"TanggalJatuhTempoPengikatan\":\"22/08/2026\",\r
+
+      \   \"KodePengikatan\":\"99\",\r
+
+      \   \"BagianDijamin\":\"0100\",\r
+
+      \   \"Asuransi\":\"Y\",\r
+
+      \   \"LembagaPemeringkat\":\"00\",\r
+
+      \   \"Peringkat\":\"0\",\r
+
+      \   \"TanggalPemeringkatan\":\"\"\r
+
+      }"
+  auth:
+    type: basic
+    username: pinang-mikro
+    password: "0"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

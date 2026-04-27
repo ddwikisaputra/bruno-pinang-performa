@@ -1,0 +1,43 @@
+info:
+  name: disbursement
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{URL}}/transaction/disburse"
+  body:
+    type: json
+    data: "{\r
+
+      \    \r
+
+      \    \"KodeCabang\": \"0010\",\r
+
+      \    \"NomorFasilitas\": \"0020/0000149512/PK2/001\", //nomor fasilitas pinjaman 23 digit\r
+
+      \    \"RekeningDebet\": \"001001119485105\", //harus 15 digit\r
+
+      \    \"TipeRekeningDebet\": \"L\", //Rekening L\r
+
+      \    \"RekeningKredit\": \"001001014313314\", //harus 15 digit\r
+
+      \    \"TipeRekeningKredit\": \"S\",//Rekenig S,D\r
+
+      \    \"Nominal\": \"30000000.00\",\r
+
+      \    \"MataUang\": \"IDR\",\r
+
+      \    \"KeteranganTransaksi\": \"PENCAIRAN CASHLOAN\"\r
+
+      }"
+  auth:
+    type: basic
+    username: pinang-mikro
+    password: "0"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

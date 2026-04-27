@@ -1,0 +1,22 @@
+info:
+  name: inq by no rek (DD)
+  type: http
+  seq: 19
+
+http:
+  method: POST
+  url: http://172.31.1.93:8888/api/account/dd/inquiry
+  body:
+    type: form-urlencoded
+    data:
+      - name: noRekening
+        value: "001001004145315"
+  auth:
+    type: bearer
+    token: 5tqwcA1d56pjQ40_desG4HA5atQBDDlT5C6cpIwsp5b2ocFpUZAM0uNqZHIaLLEWrSBX6OYCCncTzWckNdPLWUwRuT94aUZOU8sWNzV8Gtjbbua3NhUSn7ucPVg1bFoTtjazikRmQxoD9iGvUXD9QtcPowKd8dxWT7UHJRpVCNMG1OGmEjjlqwCoD5Af-2vMvap500ceT-R_UOW4mms3KSgzeBf0U1U_3XKtAQbMCem9KcXBx5oeJ8cbZD0sDaK8zlu9OIaqaNTgLps5quc6Y6094y4CrQwVK3UAUOS_4l7i0wl9oxaFYnwcz61y0gB7
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -1,0 +1,59 @@
+info:
+  name: MOCK - List Cicilan Aktif
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: https://pinang-performa.free.mockoapp.net/v/1/monitoring/cashloan/list-cicilan-aktif/200-empty-cicilan-selanjutnya
+  headers:
+    - name: x-key
+      value: performa
+  params:
+    - name: "503"
+      value: ""
+      type: query
+      disabled: true
+    - name: "401"
+      value: ""
+      type: query
+      disabled: true
+    - name: "403"
+      value: ""
+      type: query
+      disabled: true
+    - name: "400"
+      value: ""
+      type: query
+      disabled: true
+    - name: 400-token-empty
+      value: ""
+      type: query
+      disabled: true
+    - name: 500-unregist-wl
+      value: ""
+      type: query
+      disabled: true
+    - name: 200-empty-cicilan-aktif-selanjutnya
+      value: ""
+      type: query
+      disabled: true
+    - name: 200-empty-cicilan-selanjutnya
+      value: ""
+      type: query
+      disabled: true
+    - name: 200-empty-cicilan-aktif
+      value: ""
+      type: query
+      disabled: true
+    - name: "200"
+      value: ""
+      type: query
+      disabled: true
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

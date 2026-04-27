@@ -1,0 +1,40 @@
+info:
+  name: MOCK - Data Aktivasi
+  type: http
+  seq: 7
+
+http:
+  method: POST
+  url: https://pinang-performa.free.mockoapp.net/v/1/aktivasi/data/200-data-cl-found
+  body:
+    type: form-urlencoded
+    data:
+      - name: 200-data-cl-found
+        value: ""
+      - name: 500-unregistered-WL
+        value: ""
+      - name: 500-general
+        value: ""
+      - name: 400-param-not
+        value: ""
+      - name: 403-unactivated
+        value: ""
+      - name: "503"
+        value: ""
+      - name: 400-token-empty
+        value: ""
+      - name: "401"
+        value: ""
+      - name: 401-token-empty
+        value: ""
+      - name: "403"
+        value: ""
+      - name: 403-invalid-status
+        value: ""
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
