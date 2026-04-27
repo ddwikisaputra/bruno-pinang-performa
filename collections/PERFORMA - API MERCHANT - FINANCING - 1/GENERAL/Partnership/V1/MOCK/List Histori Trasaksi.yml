@@ -1,0 +1,62 @@
+info:
+  name: List Histori Trasaksi
+  type: http
+  seq: 5
+
+http:
+  method: POST
+  url: https://pinang-performa.free.mockoapp.net/v/1/partnership/list-histori-transaksi/200-success
+  headers:
+    - name: x-key
+      value: performa
+  params:
+    - name: "401"
+      value: ""
+      type: query
+      disabled: true
+    - name: 401-token-empty
+      value: ""
+      type: query
+      disabled: true
+    - name: "403"
+      value: ""
+      type: query
+      disabled: true
+    - name: 400-error-param
+      value: ""
+      type: query
+      disabled: true
+    - name: 200-data-kosong
+      value: ""
+      type: query
+      disabled: true
+    - name: 200-success
+      value: ""
+      type: query
+      disabled: true
+  body:
+    type: form-urlencoded
+    data:
+      - name: textSearch
+        value: dwiki
+        description: OPTIONAL
+        disabled: true
+      - name: startIndex
+        value: "0"
+        description: OPTIONAL | Default 0
+        disabled: true
+      - name: recordCount
+        value: "10"
+        description: OPTIONAL | Default 10
+        disabled: true
+      - name: sortBy
+        value: name ASC
+        description: OPTIONAL | Default name ASC | ['ktp_number', 'name', 'transaction_history_status'] [ASC | DESC]
+        disabled: true
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

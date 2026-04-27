@@ -1,0 +1,497 @@
+info:
+  name: Detail Monitoring
+  type: http
+  seq: 12
+
+http:
+  method: POST
+  url: "{{base-url-local}}/v/1/partnership/monitoring-detail"
+  headers:
+    - name: Api-Key
+      value: VW1GNVlWQnBVR1Z5Vkc5d25UZ0FnR0w4a2RiMExaL0s3TEQwajY5WUxBRUorYWc9
+  body:
+    type: form-urlencoded
+    data:
+      - name: kodePrakarsa
+        value: RVgtUFVNLTYxNS1VbUY1WVZCcFVHVnlWRzl3L2w5Nm1HVDBrazFyTDIrS0hPNDcySmRmRkpqamFLODdpZENZbkVuYUZ3MDFtN0pXa1l4NGxFT3hSdUREOVQ0PQ==
+        description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+      - name: kodePartnership
+        value: UFVNLTYxNQ==
+        description: Kode Partnership [MANDATORY][BASE64 STRING]
+      - name: kodePencairan
+        value: VFJYMjAyNTQxOQ==
+        description: Kode Pencairan [MANDATORY][BASE64 STRING]
+      - name: isBankInfo
+        value: "-1"
+        description: Show Info Bank [MANDATORY] [1 = SHOW | -1 = HIDE]
+  auth:
+    type: bearer
+    token: "{{accessTokenPartner}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 503 - Service Unavailable
+    request:
+      url: "{{base-url-local}}/v/1/partnership/montiroing-detail"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: ""
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: ""
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: kodePencairan
+            value: ""
+            description: Kode Pencairan [MANDATORY][BASE64 STRING]
+          - name: isBankInfo
+            value: ""
+            description: Show Info Bank [MANDATORY] [1 = SHOW | -1 = HIDE]
+    response:
+      status: 503
+      statusText: Service Unavailable
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 03 Apr 2024 10:28:45 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Jam operasional Pinang Performa dari jam XX.XX - XX.XX WIB setiap hari. Kembali lagi nanti, ya!",
+              "status": 503
+          }
+  - name: Error - Token Expired
+    request:
+      url: "{{base-url-local}}/v/1/partnership/montiroing-detail"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: ""
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: ""
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: kodePencairan
+            value: ""
+            description: Kode Pencairan [MANDATORY][BASE64 STRING]
+          - name: isBankInfo
+            value: ""
+            description: Show Info Bank [MANDATORY] [1 = SHOW | -1 = HIDE]
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 03 Apr 2024 10:28:45 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 401,
+              "message": "token has invalid claims: token is expired"
+          }
+  - name: Error - Parameter Token /  API Key Empty
+    request:
+      url: "{{base-url-local}}/v/1/partnership/monitoring-detail"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+          disabled: true
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmppYUtFNWpkQ2FuMG5kRnhYL1l1UkJoM044Zkh2N2RXT0Fab2M9
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: kodePencairan
+            value: VFJYMjAyNDQx
+            description: Kode Pencairan [MANDATORY][BASE64 STRING]
+          - name: isBankInfo
+            value: "1"
+            description: Show Info Bank [MANDATORY] [1 = SHOW | -1 = HIDE]
+            disabled: true
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 19 Sep 2024 06:42:59 GMT
+        - name: Content-Length
+          value: "51"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "parameter token is empty",
+              "status": 401
+          }
+  - name: Error - Access Forbidden
+    request:
+      url: "{{base-url-local}}/v/1/partnership/monitoring-detail"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmppYUtFNWpkQ2FuMG5kRnhYL1l1UkJoM044Zkh2N2RXT0Fab2M9
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: kodePencairan
+            value: VFJYMjAyNDQx
+            description: Kode Pencairan [MANDATORY][BASE64 STRING]
+          - name: isBankInfo
+            value: "1"
+            description: Show Info Bank [MANDATORY] [1 = SHOW | -1 = HIDE]
+            disabled: true
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 19 Sep 2024 06:43:39 GMT
+        - name: Content-Length
+          value: "76"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "you don't have permission to access this resource",
+              "status": 403
+          }
+  - name: Error - Access Forbidden (No Data Partnership)
+    request:
+      url: "{{base-url-local}}/v/1/partnership/monitoring-detail"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmppYUtFNWpkQ2FuMG5kRnhYL1l1UkJoM044Zkh2N2RXT0Fab2M9
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: kodePencairan
+            value: VFJYMjAyNDQx
+            description: Kode Pencairan [MANDATORY][BASE64 STRING]
+          - name: isBankInfo
+            value: "1"
+            description: Show Info Bank [MANDATORY] [1 = SHOW | -1 = HIDE]
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 19 Sep 2024 06:45:43 GMT
+        - name: Content-Length
+          value: "70"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "your access to this resource is unactivated",
+              "status": 403
+          }
+  - name: Error - Access Forbidden (Status Prakarsa Not Access)
+    request:
+      url: "{{base-url-local}}/v/1/partnership/monitoring-detail"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmppYUtFNWpkQ2FuMG5kRnhYL1l1UkJoM044Zkh2N2RXT0Fab2M9
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: kodePencairan
+            value: VFJYMjAyNDQx
+            description: Kode Pencairan [MANDATORY][BASE64 STRING]
+          - name: isBankInfo
+            value: "1"
+            description: Show Info Bank [MANDATORY] [1 = SHOW | -1 = HIDE]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 19 Sep 2024 06:46:17 GMT
+        - name: Content-Length
+          value: "62"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Data tidak dapat diakses.",
+              "status": 403
+          }
+  - name: Error - Parameter Validation (Total Mandatory Tidak Sesuai)
+    request:
+      url: "{{base-url-local}}/v/1/partnership/monitoring-detail"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmppYUtFNWpkQ2FuMG5kRnhYL1l1UkJoM044Zkh2N2RXT0Fab2M9
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: kodePencairan
+            value: VFJYMjAyNDQx
+            description: Kode Pencairan [MANDATORY][BASE64 STRING]
+          - name: isBankInfo
+            value: "1"
+            description: Show Info Bank [MANDATORY] [1 = SHOW | -1 = HIDE]
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 19 Sep 2024 06:47:09 GMT
+        - name: Content-Length
+          value: "63"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Parameter tidak terpenuhi.",
+              "status": 400
+          }
+  - name: Error - Parameter Validation (Tidak Sesuai)
+    request:
+      url: "{{base-url-local}}/v/1/partnership/monitoring-detail"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmppYUtFNWpkQ2FuMG5kRnhYL1l1UkJoM044Zkh2N2RXT0Fab2M9
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: kodePencairan
+            value: VFJYMjAyNDQx
+            description: Kode Pencairan [MANDATORY][BASE64 STRING]
+          - name: isBankInfo
+            value: "2"
+            description: Show Info Bank [MANDATORY] [1 = SHOW | -1 = HIDE]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 19 Sep 2024 06:47:27 GMT
+        - name: Content-Length
+          value: "63"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "... tidak sesuai.",
+              "status": 400
+          }
+  - name: Error - Unregistered Whitelist
+    request:
+      url: "{{base-url-local}}/v/1/partnership/monitoring-detail"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmppYUtFNWpkQ2FuMG5kRnhYL1l1UkJoM044Zkh2N2RXT0Fab2M9
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: kodePencairan
+            value: VFJYMjAyNDQx
+            description: Kode Pencairan [MANDATORY][BASE64 STRING]
+          - name: isBankInfo
+            value: "1"
+            description: Show Info Bank [MANDATORY] [1 = SHOW | -1 = HIDE]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 19 Sep 2024 07:58:06 GMT
+        - name: Content-Length
+          value: "79"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Maaf, anda tidak terdaftar pada whitelist.",
+              "status": 500
+          }
+  - name: Success - Tidak Tersedia
+    request:
+      url: "{{base-url-sandbox}}/v/1/partnership/montiroing-detail"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: ""
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: ""
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: kodePencairan
+            value: ""
+            description: Kode Pencairan [MANDATORY][BASE64 STRING]
+          - name: isBankInfo
+            value: ""
+            description: Show Info Bank [MANDATORY] [1 = SHOW | -1 = HIDE]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 03 Apr 2024 09:23:35 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "List Tidak Tersedia.",
+              "status": 200
+          }
+  - name: Success - Tersedia
+    request:
+      url: "{{base-url-local}}/v/1/partnership/monitoring-detail"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmppYUtFNWpkQ2FuMG5kRnhYL1l1UkJoM044Zkh2N2RXT0Fab2M9
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: kodePencairan
+            value: VFJYMjAyNDQx
+            description: Kode Pencairan [MANDATORY][BASE64 STRING]
+          - name: isBankInfo
+            value: "1"
+            description: Show Info Bank [MANDATORY] [1 = SHOW | -1 = HIDE]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 17 Sep 2024 09:45:15 GMT
+        - name: Content-Length
+          value: "599"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "adminPembayaran": "", // string base64
+                  "bungaPembayaran": "", // string base64 [pembulatan keatas (ex: 1001.13 -> 1002)]
+                  "dataBank": {
+                      "namaBank": "Bank Raya",
+                      "namaPemilikRekening": "", // string base64
+                      "nomorRekeningPembayaran": "", // string base64
+                      "saldo": "" // string base64
+                  },
+                  "dendaPembayaran": "", // string base64 [pembulatan keatas (ex: 1001.13 -> 1002)]
+                  "jangkaWaktu": "14 Hari",
+                  "kodePencairan": "", // string base64
+                  "nominalPinjaman": "", // string base64
+                  "nomorInvoice": "INV/MJ1/2024/2",
+                  "pokokPembayaran": "", // string base64
+                  "rincianPembayaran": "", // string base64
+                  "status": 1,
+                  "statusPinjaman": "Aktif",
+                  "tanggalJatuhTempo": "2026-10-22",
+                  "tanggalPencairan": "2026-10-08",
+                  "totalHari": "14 Hari",
+                  "totalPembayaran": "" // string base64 [pembulatan keatas (ex: 1001.13 -> 1002)]
+              },
+              "message": "List Tersedia.",
+              "status": 200
+          }

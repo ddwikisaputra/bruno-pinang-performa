@@ -1,0 +1,71 @@
+info:
+  name: MOCK - Pengajuan
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: https://pinang-performa.free.mockoapp.net/v/1/pencairan/pengajuan
+  headers:
+    - name: x-key
+      value: performa
+  params:
+    - name: "503"
+      value: ""
+      type: query
+      disabled: true
+    - name: 400-apikey-empty
+      value: ""
+      type: query
+      disabled: true
+    - name: "401"
+      value: ""
+      type: query
+      disabled: true
+    - name: "403"
+      value: ""
+      type: query
+      disabled: true
+    - name: 403-invalid-status
+      value: ""
+      type: query
+      disabled: true
+    - name: 403-unactivated
+      value: ""
+      type: query
+      disabled: true
+    - name: 400-param-not
+      value: ""
+      type: query
+      disabled: true
+    - name: 500-others
+      value: ""
+      type: query
+      disabled: true
+    - name: 500-unregistered-WL
+      value: ""
+      type: query
+      disabled: true
+    - name: 500-block-otp
+      value: ""
+      type: query
+      disabled: true
+    - name: 500-quota-otp-habis
+      value: ""
+      type: query
+      disabled: true
+    - name: 200-success-verify-invoice
+      value: ""
+      type: query
+      disabled: true
+    - name: 200-success
+      value: ""
+      type: query
+      disabled: true
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

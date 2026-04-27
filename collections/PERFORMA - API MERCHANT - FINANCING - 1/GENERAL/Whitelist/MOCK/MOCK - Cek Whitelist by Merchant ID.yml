@@ -1,0 +1,53 @@
+info:
+  name: MOCK - Cek Whitelist by Merchant ID
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: https://pinang-performa.free.mockoapp.net/v/1/aktivasi/cek-whitelist-by-merchant-id/500-unregistered-WL
+  headers:
+    - name: x-key
+      value: performa
+  body:
+    type: form-urlencoded
+    data:
+      - name: 500-unregistered-WL
+        value: ""
+        disabled: true
+      - name: 200-wl-found
+        value: ""
+        disabled: true
+      - name: 200-wl-no-ktp
+        value: ""
+        disabled: true
+      - name: "503"
+        value: ""
+        disabled: true
+      - name: 400-token-empty
+        value: ""
+        disabled: true
+      - name: "401"
+        value: ""
+        disabled: true
+      - name: 401-token-empty
+        value: ""
+        disabled: true
+      - name: "403"
+        value: ""
+        disabled: true
+      - name: 403-unactivated
+        value: ""
+        disabled: true
+      - name: 400-param-not
+        value: ""
+        disabled: true
+      - name: 500-general
+        value: ""
+        disabled: true
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

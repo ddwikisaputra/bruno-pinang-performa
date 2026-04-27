@@ -1,0 +1,565 @@
+info:
+  name: List Histori Transaksi
+  type: http
+  seq: 8
+
+http:
+  method: POST
+  url: "{{base-url-local}}/v/1/partnership/list-histori-transaksi"
+  body:
+    type: form-urlencoded
+    data:
+      - name: textSearch
+        value: "3209122003940006"
+        description: "Text Search [Alphanumeric, comma, period, single quote] [OPTIONAL] "
+      - name: startIndex
+        value: "0"
+        description: "Start Index [Default: 0] [OPTIONAL] "
+      - name: recordCount
+        value: "10"
+        description: "Record Count [Default: 10] [OPTIONAL] "
+      - name: sortBy
+        value: name ASC
+        description: "Sort By [ktp_number, name, transaction_history_status] [ASC, DESC] [Default: name ASC] [OPTIONAL] "
+  auth:
+    type: bearer
+    token: UmF5YVBpUGVyVG9wtk843jG/7RB5In2MDvIpg9UKTcSXLLozmNOcnE7FF/LDhwSUpslSRy+efvlGYJL0DqP8fbgSm5ul2vDNvWAJkN8T97L0qxOhK73xTDM4A0RfNQDfZ1x9G+iDJIV83sd5K07I8J6Zj0c=
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Error - Token Expired
+    request:
+      url: "{{base-url-local}}/v/1/partnership/list-histori-transaksi"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: textSearch
+            value: 3209122003940006a
+            description: "Text Search [Alphanumeric, comma, period, single quote] [OPTIONAL] "
+          - name: startIndex
+            value: "0"
+            description: "Start Index [Default: 0] [OPTIONAL] "
+          - name: recordCount
+            value: "10"
+            description: "Record Count [Default: 10] [OPTIONAL] "
+          - name: sortBy
+            value: name ASC
+            description: "Sort By [ktp_number, name, transaction_history_status] [ASC, DESC] [Default: name ASC] [OPTIONAL] "
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Tue, 26 Aug 2025 09:02:49 GMT
+        - name: Content-Length
+          value: "50"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Unauthorized / Expired.",
+              "status": 401
+          }
+  - name: Error - Parameter Token Empty
+    request:
+      url: "{{base-url-local}}/v/1/partnership/list-histori-transaksi"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: textSearch
+            value: 3209122003940006a
+            description: "Text Search [Alphanumeric, comma, period, single quote] [OPTIONAL] "
+          - name: startIndex
+            value: "0"
+            description: "Start Index [Default: 0] [OPTIONAL] "
+          - name: recordCount
+            value: "10"
+            description: "Record Count [Default: 10] [OPTIONAL] "
+          - name: sortBy
+            value: name ASC
+            description: "Sort By [ktp_number, name, transaction_history_status] [ASC, DESC] [Default: name ASC] [OPTIONAL] "
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Tue, 26 Aug 2025 09:04:01 GMT
+        - name: Content-Length
+          value: "51"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "parameter token is empty",
+              "status": 401
+          }
+  - name: Error - Access Forbidden (No Data User Partnership)
+    request:
+      url: "{{base-url-local}}/v/1/partnership/list-histori-transaksi"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: textSearch
+            value: 3209122003940006a@
+            description: "Text Search [Alphanumeric, comma, period, single quote] [OPTIONAL] "
+          - name: startIndex
+            value: 0s
+            description: "Start Index [Default: 0] [OPTIONAL] "
+          - name: recordCount
+            value: 10a
+            description: "Record Count [Default: 10] [OPTIONAL] "
+          - name: sortBy
+            value: name ASCa
+            description: "Sort By [ktp_number, name, transaction_history_status] [ASC, DESC] [Default: name ASC] [OPTIONAL] "
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Tue, 26 Aug 2025 09:09:35 GMT
+        - name: Content-Length
+          value: "76"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "you don't have permission to access this resource",
+              "status": 403
+          }
+  - name: Error - Parameter Validation (Tidak Sesuai)
+    request:
+      url: "{{base-url-local}}/v/1/partnership/list-histori-transaksi"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: textSearch
+            value: 3209122003940006a@
+            description: "Text Search [Alphanumeric, comma, period, single quote] [OPTIONAL] "
+          - name: startIndex
+            value: 0s
+            description: "Start Index [Default: 0] [OPTIONAL] "
+          - name: recordCount
+            value: 10a
+            description: "Record Count [Default: 10] [OPTIONAL] "
+          - name: sortBy
+            value: name ASCa
+            description: "Sort By [ktp_number, name, transaction_history_status] [ASC, DESC] [Default: name ASC] [OPTIONAL] "
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Tue, 26 Aug 2025 09:06:21 GMT
+        - name: Content-Length
+          value: "266"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "validation": [
+                      "Parameter textSearch tidak sesuai.",
+                      "Format parameter startIndex tidak sesuai.",
+                      "Format parameter recordCount tidak sesuai.",
+                      "Parameter sortBy tidak terdaftar dalam list."
+                  ]
+              },
+              "message": "Maaf, Terdapat parameter yang tidak sesuai",
+              "status": 400
+          }
+  - name: Error - General
+    request:
+      url: "{{base-url-local}}/v/1/partnership/list-history-transaksi"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: textSearch
+            value: 3209122003940006a@
+          - name: startIndex
+            value: 0s
+          - name: recordCount
+            value: 10a
+          - name: sortBy
+            value: name ASCa
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 05 Sep 2024 01:15:51 GMT
+        - name: Content-Length
+          value: "107"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Maaf, Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 500
+          }
+  - name: Success - Data Tidak Ditemukan
+    request:
+      url: "{{base-url-local}}/v/1/partnership/list-histori-transaksi"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: textSearch
+            value: 3209122003940006a
+            description: "Text Search [Alphanumeric, comma, period, single quote] [OPTIONAL] "
+          - name: startIndex
+            value: "0"
+            description: "Start Index [Default: 0] [OPTIONAL] "
+          - name: recordCount
+            value: "10"
+            description: "Record Count [Default: 10] [OPTIONAL] "
+          - name: sortBy
+            value: name ASC
+            description: "Sort By [ktp_number, name, transaction_history_status] [ASC, DESC] [Default: name ASC] [OPTIONAL] "
+    response:
+      status: 201
+      statusText: Created
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Tue, 26 Aug 2025 09:01:24 GMT
+        - name: Content-Length
+          value: "424"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "listBulananTahun": [
+                      {
+                          "bulan": 7,
+                          "tahun": 2024
+                      },
+                      {
+                          "bulan": 8,
+                          "tahun": 2024
+                      },
+                      {
+                          "bulan": 9,
+                          "tahun": 2024
+                      },
+                      {
+                          "bulan": 10,
+                          "tahun": 2024
+                      },
+                      {
+                          "bulan": 11,
+                          "tahun": 2024
+                      },
+                      {
+                          "bulan": 12,
+                          "tahun": 2024
+                      },
+                      {
+                          "bulan": 1,
+                          "tahun": 2025
+                      },
+                      {
+                          "bulan": 2,
+                          "tahun": 2025
+                      },
+                      {
+                          "bulan": 3,
+                          "tahun": 2025
+                      },
+                      {
+                          "bulan": 4,
+                          "tahun": 2025
+                      },
+                      {
+                          "bulan": 5,
+                          "tahun": 2025
+                      },
+                      {
+                          "bulan": 6,
+                          "tahun": 2025
+                      }
+                  ],
+                  "listTransaksi": []
+              },
+              "message": "Maaf, Data histori transaksi tidak ditemukan.",
+              "status": 200
+          }
+  - name: Success - Data Ditemukan
+    request:
+      url: "{{base-url-local}}/v/1/partnership/list-histori-transaksi"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: textSearch
+            value: "3209122003940006"
+            description: "Text Search [Alphanumeric, comma, period, single quote] [OPTIONAL] "
+          - name: startIndex
+            value: "0"
+            description: "Start Index [Default: 0] [OPTIONAL] "
+          - name: recordCount
+            value: "10"
+            description: "Record Count [Default: 10] [OPTIONAL] "
+          - name: sortBy
+            value: name ASC
+            description: "Sort By [ktp_number, name, transaction_history_status] [ASC, DESC] [Default: name ASC] [OPTIONAL] "
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Tue, 26 Aug 2025 09:00:47 GMT
+        - name: Content-Length
+          value: "1006"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "listBulananTahun": [
+                      {
+                          "bulan": 7,
+                          "tahun": 2024
+                      },
+                      {
+                          "bulan": 8,
+                          "tahun": 2024
+                      },
+                      {
+                          "bulan": 9,
+                          "tahun": 2024
+                      },
+                      {
+                          "bulan": 10,
+                          "tahun": 2024
+                      },
+                      {
+                          "bulan": 11,
+                          "tahun": 2024
+                      },
+                      {
+                          "bulan": 12,
+                          "tahun": 2024
+                      },
+                      {
+                          "bulan": 1,
+                          "tahun": 2025
+                      },
+                      {
+                          "bulan": 2,
+                          "tahun": 2025
+                      },
+                      {
+                          "bulan": 3,
+                          "tahun": 2025
+                      },
+                      {
+                          "bulan": 4,
+                          "tahun": 2025
+                      },
+                      {
+                          "bulan": 5,
+                          "tahun": 2025
+                      },
+                      {
+                          "bulan": 6,
+                          "tahun": 2025
+                      }
+                  ],
+                  "listTransaksi": [
+                      {
+                          "nama": "U3VuYXJ0bw==",
+                          "nomorIdentitas": "MzIwOTEyMjAwMzk0MDAwNg==",
+                          "status": 1,
+                          "transaksi": [
+                              {
+                                  "bulan": 7,
+                                  "jumlah": "105",
+                                  "tahun": 2024
+                              },
+                              {
+                                  "bulan": 8,
+                                  "jumlah": "108",
+                                  "tahun": 2024
+                              },
+                              {
+                                  "bulan": 9,
+                                  "jumlah": "109",
+                                  "tahun": 2024
+                              },
+                              {
+                                  "bulan": 10,
+                                  "jumlah": "110",
+                                  "tahun": 2024
+                              },
+                              {
+                                  "bulan": 11,
+                                  "jumlah": "111",
+                                  "tahun": 2024
+                              },
+                              {
+                                  "bulan": 12,
+                                  "jumlah": "112",
+                                  "tahun": 2024
+                              },
+                              {
+                                  "bulan": 1,
+                                  "jumlah": "101",
+                                  "tahun": 2025
+                              },
+                              {
+                                  "bulan": 2,
+                                  "jumlah": "102",
+                                  "tahun": 2025
+                              },
+                              {
+                                  "bulan": 3,
+                                  "jumlah": "103",
+                                  "tahun": 2025
+                              },
+                              {
+                                  "bulan": 4,
+                                  "jumlah": "104",
+                                  "tahun": 2025
+                              },
+                              {
+                                  "bulan": 5,
+                                  "jumlah": "105",
+                                  "tahun": 2025
+                              },
+                              {
+                                  "bulan": 6,
+                                  "jumlah": "105",
+                                  "tahun": 2025
+                              }
+                          ]
+                      }
+                  ],
+                  "totalData": 1
+              },
+              "message": "Data list histori transaksi ditemukan.",
+              "status": 200
+          }

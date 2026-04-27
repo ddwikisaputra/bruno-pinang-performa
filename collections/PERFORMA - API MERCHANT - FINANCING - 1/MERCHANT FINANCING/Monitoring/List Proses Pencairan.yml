@@ -1,0 +1,438 @@
+info:
+  name: List Proses Pencairan
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{base-url-dev}}/v/1/monitoring/list-proses-pencairan"
+  headers:
+    - name: Api-Key
+      value: "{{apiKeyMerchant}}"
+  body:
+    type: form-urlencoded
+    data:
+      - name: kodePrakarsa
+        value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmppYUtFNWpkQ2FuMG5kRnhYL1l1UkJoM044Zkh2N2RXT0Fab2M9
+        description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+      - name: kodePartnership
+        value: TUox
+        description: Kode Partnership [MANDATORY][BASE64 STRING]
+  auth:
+    type: bearer
+    token: "{{tokenMerchant}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 503 - Service Unavailable
+    request:
+      url: "{{base-url-local}}/v/1/monitoring/list-proses-pencairan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbDk2bm1YMWxFTnFLbWFNSE80NzJKZGZGSmprYWFrN2lkR2NuRTdkRjlMRk4zd3FmalBpMTVwOXJyeEFjVEk9
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+    response:
+      status: 503
+      statusText: Service Unavailable
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 10 Sep 2024 08:08:25 GMT
+        - name: Content-Length
+          value: "69"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Jam operasional Pinang Performa dari jam XX.XX - XX.XX WIB setiap hari. Kembali lagi nanti, ya!",
+              "status": 503
+          }
+  - name: Error - Token Expired
+    request:
+      url: "{{base-url-local}}/v/1/monitoring/list-proses-pencairan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbDk2bm1YMWxFTnFLbWFNSE80NzJKZGZGSmprYWFrN2lkR2NuRTdkRjlMRk4zd3FmalBpMTVwOXJyeEFjVEk9
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 10 Sep 2024 08:08:25 GMT
+        - name: Content-Length
+          value: "69"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "token has invalid claims: token is expired",
+              "status": 401
+          }
+  - name: Error - Unauthorized / Expired
+    request:
+      url: "{{base-url-local}}/v/1/monitoring/list-proses-pencairan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbDk2bm1YMWxFTnFLbWFNSE80NzJKZGZGSmprYWFrN2lkR2NuRTdkRjlMRk4zd3FmalBpMTVwOXJyeEFjVEk9
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 10 Sep 2024 08:04:14 GMT
+        - name: Content-Length
+          value: "50"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Unauthorized / Expired.",
+              "status": 401
+          }
+  - name: Error - Parameter Token / API Key Empty
+    request:
+      url: "{{base-url-local}}/v/1/monitoring/list-proses-pencairan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+          disabled: true
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbDk2bm1YMWxFTnFLbWFNSE80NzJKZGZGSmprYWFrN2lkR2NuRTdkRjlMRk4zd3FmalBpMTVwOXJyeEFjVEk9
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 10 Sep 2024 08:12:20 GMT
+        - name: Content-Length
+          value: "51"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "parameter token is empty",
+              "status": 400
+          }
+  - name: Error - Access Forbidden
+    request:
+      url: "{{base-url-local}}/v/1/monitoring/list-proses-pencairan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbDk2bm1YMWxFTnFLbWFNSE80NzJKZGZGSmprYWFrN2lkR2NuRTdkRjlMRk4zd3FmalBpMTVwOXJyeEFjVEk9
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: filterText
+            value: Zulyano
+            disabled: true
+          - name: testparamrandom
+            value: ""
+            disabled: true
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 12 Sep 2024 06:37:48 GMT
+        - name: Content-Length
+          value: "76"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "you don't have permission to access this resource",
+              "status": 403
+          }
+  - name: Error - Access Forbidden (No Data Partnership)
+    request:
+      url: "{{base-url-dev}}/v/1/monitoring/list-proses-pencairan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmppYUtFNWpkQ2FuMG5kRnhYL1l1UkJoM044Zkh2N2RXT0Fab2M9
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Date
+          value: Thu, 19 Sep 2024 04:51:48 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "70"
+        - name: Connection
+          value: keep-alive
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "message": "your access to this resource is unactivated",
+              "status": 403
+          }
+  - name: Error - Access Forbidden (Status Not Access)
+    request:
+      url: "{{base-url-dev}}/v/1/monitoring/list-proses-pencairan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmppYUtFNWpkQ2FuMG5kRnhYL1l1UkJoM044Zkh2N2RXT0Fab2M9
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Thu, 19 Sep 2024 04:52:19 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "62"
+        - name: Connection
+          value: keep-alive
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Data tidak dapat diakses.",
+              "status": 403
+          }
+  - name: Error - Parameter Validation (Tidak Sesuai)
+    request:
+      url: "{{base-url-dev}}/v/1/monitoring/list-proses-pencairan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmppYUtFNWpkQ2FuMG5kRnhYL1l1UkJoM044Zkh2N2RXT0Fab2M9
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: TUoxa
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Thu, 19 Sep 2024 04:53:34 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "57"
+        - name: Connection
+          value: keep-alive
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Kode Partnership tidak sesuai.",
+              "status": 400
+          }
+  - name: Error - Unregistered Whitelist
+    request:
+      url: "{{base-url-local}}/v/1/monitoring/list-proses-pencairan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbDk2bm1YMWxFTnFLbWFNSE80NzJKZGZGSmprYWFrN2lkR2NuRTdkRjlMRk4zd3FmalBpMTVwOXJyeEFjVEk9
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: QkxBLTUwMQ==
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: filterText
+            value: Zulyano
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 12 Sep 2024 02:59:15 GMT
+        - name: Content-Length
+          value: "79"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Maaf, anda tidak terdaftar pada whitelist.",
+              "status": 500
+          }
+  - name: Success - List Kosong
+    request:
+      url: "{{base-url-sandbox}}/v/1/monitoring/list-proses-pencairan"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtQUdVMTkwLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrNGo5T2Rta2piRWo0c2NRb3BrVi9yRjlISGZybThLNk09
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: QUdVLTE5MA==
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: filterStatus
+            value: ""
+            description: Filter Status [MANDATORY][INT][-1 = All Kecuali Lunas | 1  = Aktif | 2 = Lunas | 3 = H- . . Jatuh Tempo | 4 = Jatuh Tempo | 5 = Telat . . Hari | Default = -1]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 03 Apr 2024 09:23:35 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "List Tidak Tersedia.",
+              "status": 200
+          }
+  - name: Success - List Tersedia
+    request:
+      url: "{{base-url-sandbox}}/v/1/monitoring/list-proses-pencairan"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtQUdVMTkwLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrNGo5T2Rta2piRWo0c2NRb3BrVi9yRjlISGZybThLNk09
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: QUdVLTE5MA==
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: filterStatus
+            value: ""
+            description: Filter Status [MANDATORY][INT][-1 = All Kecuali Lunas | 1  = Aktif | 2 = Lunas | 3 = H- . . Jatuh Tempo | 4 = Jatuh Tempo | 5 = Telat . . Hari | Default = -1]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 03 Apr 2024 09:23:35 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "list": [
+                      {
+                          "kodePencairan": "TRX-XXX-1", // --> base64
+                          "namaPartnership": "Majoo",
+                          "tipePencairan": "Merchant Financing",
+                          "nomorInvoice": "XXXXXXXXXX",
+                          "nama": "",// --> base64
+                          "tanggalUpdateTerakhir": "2022-12-05",
+                          "tanggalPencairan": "2022-12-05",
+                          "nominalPencairan": 20000, // --> base64
+                          "bungaPinjaman": 2431, // --> base64
+                          "adminPinjaman": 2431, // --> base64
+                          "totalPinjaman": 502431, // --> base64
+                          "statusPencairan": "Pinjaman Disetujui Mitra",
+                          "statusKonfirmasi": "Konfirmasi Persetujuan Pinjaman"
+                      }
+                  ]
+              },
+              "message": "List Tersedia.",
+              "status": 200
+          }

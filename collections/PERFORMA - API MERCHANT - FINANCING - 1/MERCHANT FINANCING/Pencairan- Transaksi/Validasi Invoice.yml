@@ -1,0 +1,902 @@
+info:
+  name: Validasi Invoice
+  type: http
+  seq: 7
+
+http:
+  method: POST
+  url: "{{base-url-local}}/v/1/pencairan/validasi-invoice"
+  headers:
+    - name: Api-Key
+      value: "{{apiKeyMerchant}}"
+    - name: Api-Key
+      value: VW1GNVlWQnBVR1Z5Vkc5d2p5a2JnR1g4blNvdSs1WW9CQVFpME9ueEpBOEF5STA9
+      disabled: true
+  body:
+    type: form-urlencoded
+    data:
+      - name: kodePrakarsa
+        value: RVgtQkRWLTExOS1VbUY1WVZCcFVHVnlWRzl3L2w5Nm0yVDBsVU5xS1crS0hPNDgyNWRmRkpqZ2FLbzVpZE9kbkVqWkU3WENUVXV6UVhEZXoxUUJCUk9zTjZVPQ==
+        description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+      - name: kodePartnership
+        value: QkRWLTExOQ==
+        description: Kode Partnership [MANDATORY][BASE64 STRING]
+      - name: kodeTransaksi
+        value: SU5WLTIwMjYtMDEtMDktMTY1ODIyOTAw
+        description: Kode Transaksi [MANDATORY][BASE64 STRING]
+      - name: nominalPencairan
+        value: MzAwMDAwMA==
+        description: Nominal Pencairan [MANDATORY][BASE64 DECIMAL]
+      - name: tenor
+        value: NA==
+        description: Tenor [Mandatory] [hari]
+      - name: blobTransaksi
+        value: "{{base64File}}"
+        description: Blob File [Mandatory] [base64]
+      - name: mimeTypeTransaksi
+        value: application/pdf
+        description: Mime Type File [Mandatory] [application/pdf]
+  auth:
+    type: bearer
+    token: "{{tokenMerchant}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 503 - Service Unavailable
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/validasi-invoice"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtQkRWLTExOS1VbUY1WVZCcFVHVnlWRzl3L2w5Nm0yVDBsVU5xS1crS0hPNDgyNWRmRkpqZ2FLbzVpZE9kbkVqWkU3WENUVXV6UVhEZXoxUUJCUk9zTjZVPQ==
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: QkRWLTExOQ==
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: kodeTransaksi
+            value: SU5WLTIwMjYtMDEtMDktMTY1ODIyOTAw
+          - name: nominalPencairan
+            value: MzAwMDAwMA==
+          - name: tenor
+            value: NA==
+          - name: blobTransaksi
+            value: "{{base64File}}"
+          - name: mimeTypeTransaksi
+            value: application/pdf
+    response:
+      status: 503
+      statusText: Service Unavailable
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 03 Sep 2024 01:27:07 GMT
+        - name: Content-Length
+          value: "69"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Jam operasional Pinang Performa dari jam XX.XX - XX.XX WIB setiap hari. Kembali lagi nanti, ya!",
+              "status": 503
+          }
+  - name: Error - Token Expired
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/validasi-invoice"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtQkRWLTExOS1VbUY1WVZCcFVHVnlWRzl3L2w5Nm0yVDBsVU5xS1crS0hPNDgyNWRmRkpqZ2FLbzVpZE9kbkVqWkU3WENUVXV6UVhEZXoxUUJCUk9zTjZVPQ==
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: QkRWLTExOQ==
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: kodeTransaksi
+            value: SU5WLTIwMjYtMDEtMDktMTY1ODIyOTAw
+          - name: nominalPencairan
+            value: MzAwMDAwMA==
+          - name: tenor
+            value: NA==
+          - name: blobTransaksi
+            value: "{{base64File}}"
+          - name: mimeTypeTransaksi
+            value: application/pdf
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 03 Sep 2024 01:27:07 GMT
+        - name: Content-Length
+          value: "69"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "token has invalid claims: token is expired",
+              "status": 401
+          }
+  - name: Error - Unauthorized / Expired
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/validasi-invoice"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtQkRWLTExOS1VbUY1WVZCcFVHVnlWRzl3L2w5Nm0yVDBsVU5xS1crS0hPNDgyNWRmRkpqZ2FLbzVpZE9kbkVqWkU3WENUVXV6UVhEZXoxUUJCUk9zTjZVPQ==
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: QkRWLTExOQ==
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: kodeTransaksi
+            value: SU5WLTIwMjYtMDEtMDktMTY1ODIyOTAw
+          - name: nominalPencairan
+            value: MzAwMDAwMA==
+          - name: tenor
+            value: NA==
+          - name: blobTransaksi
+            value: "{{base64File}}"
+          - name: mimeTypeTransaksi
+            value: application/pdf
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Sat, 31 Aug 2024 18:09:46 GMT
+        - name: Content-Length
+          value: "50"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Unauthorized / Expired.",
+              "status": 401
+          }
+  - name: Error - Parameter Token / API Key Empty
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/validasi-invoice"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+          disabled: true
+        - name: Api-Key
+          value: VW1GNVlWQnBVR1Z5Vkc5d2p5a2JnR1g4blNvdSs1WW9CQVFpME9ueEpBOEF5STA9
+          disabled: true
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtQkRWLTExOS1VbUY1WVZCcFVHVnlWRzl3L2w5Nm0yVDBsVU5xS1crS0hPNDgyNWRmRkpqZ2FLbzVpZE9kbkVqWkU3WENUVXV6UVhEZXoxUUJCUk9zTjZVPQ==
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: QkRWLTExOQ==
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: kodeTransaksi
+            value: SU5WLTIwMjYtMDEtMDktMTY1ODIyOTAw
+            description: Kode Transaksi [MANDATORY][BASE64 STRING]
+          - name: nominalPencairan
+            value: NDAwMDAwMA==
+            description: Nominal Pencairan [MANDATORY][BASE64 DECIMAL]
+          - name: tenor
+            value: NA==
+            description: Tenor [Mandatory] [hari]
+          - name: blobTransaksi
+            value: "{{base64File}}"
+            description: Blob File [Mandatory] [base64]
+          - name: mimeTypeTransaksi
+            value: application/pdf
+            description: Mime Type File [Mandatory] [application/pdf]
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Wed, 04 Feb 2026 05:46:29 GMT
+        - name: Content-Length
+          value: "51"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "parameter token is empty",
+              "status": 400
+          }
+  - name: Error - Access Forbidden
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/validasi-invoice"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+        - name: Api-Key
+          value: VW1GNVlWQnBVR1Z5Vkc5d2p5a2JnR1g4blNvdSs1WW9CQVFpME9ueEpBOEF5STA9
+          disabled: true
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUNBLTI0NC1VbUY1WVZCcFVHVnlWRzl3L2x4Nm1XVDFsa0ZySUdhQ0hlNDczWmRmRkpqZ2FLazdpZENabWtqYkZEcUZwUkVnY1llSVNmd3FvVEhrc3JRPQ==
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: QkRWLTExOQ==
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: kodeTransaksi
+            value: SU5WLTIwMjYtMDEtMDktMTY1ODIyOTAw
+            description: Kode Transaksi [MANDATORY][BASE64 STRING]
+          - name: nominalPencairan
+            value: NDAwMDAwMA==
+            description: Nominal Pencairan [MANDATORY][BASE64 DECIMAL]
+          - name: tenor
+            value: NA==
+            description: Tenor [Mandatory] [hari]
+          - name: blobTransaksi
+            value: "{{base64File}}"
+            description: Blob File [Mandatory] [base64]
+          - name: mimeTypeTransaksi
+            value: application/pdf
+            description: Mime Type File [Mandatory] [application/pdf]
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Wed, 04 Feb 2026 05:48:09 GMT
+        - name: Content-Length
+          value: "76"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "you don't have permission to access this resource",
+              "status": 403
+          }
+  - name: Error - Access Forbidden (No Data Partnership)
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/validasi-invoice"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+        - name: Api-Key
+          value: VW1GNVlWQnBVR1Z5Vkc5d2p5a2JnR1g4blNvdSs1WW9CQVFpME9ueEpBOEF5STA9
+          disabled: true
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtQkRWLTExOS1VbUY1WVZCcFVHVnlWRzl3L2w5Nm0yVDBsVU5xS1crS0hPNDgyNWRmRkpqZ2FLbzVpZE9kbkVqWkU3WENUVXV6UVhEZXoxUUJCUk9zTjZVPQ==
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: QkRWLTExOQ==
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: kodeTransaksi
+            value: SU5WLTIwMjYtMDEtMDktMTY1ODIyOTAw
+            description: Kode Transaksi [MANDATORY][BASE64 STRING]
+          - name: nominalPencairan
+            value: NDAwMDAwMA==
+            description: Nominal Pencairan [MANDATORY][BASE64 DECIMAL]
+          - name: tenor
+            value: NA==
+            description: Tenor [Mandatory] [hari]
+          - name: blobTransaksi
+            value: "{{base64File}}"
+            description: Blob File [Mandatory] [base64]
+          - name: mimeTypeTransaksi
+            value: application/pdf
+            description: Mime Type File [Mandatory] [application/pdf]
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Wed, 04 Feb 2026 05:49:53 GMT
+        - name: Content-Length
+          value: "70"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "your access to this resource is unactivated",
+              "status": 403
+          }
+  - name: Error - Access Forbidden (Status Not Access)
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/validasi-invoice"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+        - name: Api-Key
+          value: VW1GNVlWQnBVR1Z5Vkc5d2p5a2JnR1g4blNvdSs1WW9CQVFpME9ueEpBOEF5STA9
+          disabled: true
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtQkRWLTExOS1VbUY1WVZCcFVHVnlWRzl3L2w5Nm0yVDBsVU5xS1crS0hPNDgyNWRmRkpqZ2FLbzVpZE9kbkVqWkU3WENUVXV6UVhEZXoxUUJCUk9zTjZVPQ==
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: QkRWLTExOQ==
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: kodeTransaksi
+            value: SU5WLTIwMjYtMDEtMDktMTY1ODIyOTAw
+            description: Kode Transaksi [MANDATORY][BASE64 STRING]
+          - name: nominalPencairan
+            value: NDAwMDAwMA==
+            description: Nominal Pencairan [MANDATORY][BASE64 DECIMAL]
+          - name: tenor
+            value: NA==
+            description: Tenor [Mandatory] [hari]
+          - name: blobTransaksi
+            value: "{{base64File}}"
+            description: Blob File [Mandatory] [base64]
+          - name: mimeTypeTransaksi
+            value: application/pdf
+            description: Mime Type File [Mandatory] [application/pdf]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Wed, 04 Feb 2026 05:50:54 GMT
+        - name: Content-Length
+          value: "62"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Data tidak dapat diakses.",
+              "status": 403
+          }
+  - name: Error - Parameter Validation (Total Mandatory)
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/kirim-otp"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrN2lkR2NuRTdkRjB0WXIzTi9NQVV1eTZ1RWluM2JSRXc9
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 02 Sep 2024 10:23:37 GMT
+        - name: Content-Length
+          value: "63"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Parameter tidak terpenuhi.",
+              "status": 400
+          }
+  - name: Error - Parameter Validation (Tidak Sesuai)
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/kirim-otp"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHQ2bkdUNGxreHJLV2FDSE80NzNaZGZGSmprYWFrN2lkR2NuRTdkRnpTTzBDVEdMK3FSOGVKMUxYOElRN1k9
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: QkxBLTUwMQ=
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: ""
+            value: ""
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Sat, 31 Aug 2024 18:33:02 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "... tidak sesuai.",
+              "status": 400
+          }
+  - name: Error - Unregistered Whitelist
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/kirim-otp"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrN2lkR2NuRTdkRjB0WXIzTi9NQVV1eTZ1RWluM2JSRXc9
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 02 Sep 2024 10:25:04 GMT
+        - name: Content-Length
+          value: "79"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Maaf, anda tidak terdaftar pada whitelist.",
+              "status": 500
+          }
+  - name: Error - Rate Limit
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/validasi-invoice"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+        - name: Api-Key
+          value: VW1GNVlWQnBVR1Z5Vkc5d2p5a2JnR1g4blNvdSs1WW9CQVFpME9ueEpBOEF5STA9
+          disabled: true
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtQkRWLTExOS1VbUY1WVZCcFVHVnlWRzl3L2w5Nm0yVDBsVU5xS1crS0hPNDgyNWRmRkpqZ2FLbzVpZE9kbkVqWkU3WENUVXV6UVhEZXoxUUJCUk9zTjZVPQ==
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: QkRWLTExOQ==
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: kodeTransaksi
+            value: SU5WLTIwMjYtMDEtMDktMTY1ODIyOTAw
+            description: Kode Transaksi [MANDATORY][BASE64 STRING]
+          - name: nominalPencairan
+            value: NDAwMDAwMA==
+            description: Nominal Pencairan [MANDATORY][BASE64 DECIMAL]
+          - name: tenor
+            value: NA==
+            description: Tenor [Mandatory] [hari]
+          - name: blobTransaksi
+            value: "{{base64File}}"
+            description: Blob File [Mandatory] [base64]
+          - name: mimeTypeTransaksi
+            value: application/pdf
+            description: Mime Type File [Mandatory] [application/pdf]
+    response:
+      status: 429
+      statusText: Too Many Requests
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Wed, 04 Feb 2026 01:47:48 GMT
+        - name: Content-Length
+          value: "56"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Too many requests, please try again later."
+          }
+  - name: Error - Validasi Invoice Error
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/validasi-invoice"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+        - name: Api-Key
+          value: VW1GNVlWQnBVR1Z5Vkc5d2p5a2JnR1g4blNvdSs1WW9CQVFpME9ueEpBOEF5STA9
+          disabled: true
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtQkRWLTExOS1VbUY1WVZCcFVHVnlWRzl3L2w5Nm0yVDBsVU5xS1crS0hPNDgyNWRmRkpqZ2FLbzVpZE9kbkVqWkU3WENUVXV6UVhEZXoxUUJCUk9zTjZVPQ==
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: QkRWLTExOQ==
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: kodeTransaksi
+            value: SU5WLTIwMjYtMDEtMDktMTY1ODIyOTAw
+            description: Kode Transaksi [MANDATORY][BASE64 STRING]
+          - name: nominalPencairan
+            value: MzAwMDAwMA==
+            description: Nominal Pencairan [MANDATORY][BASE64 DECIMAL]
+          - name: tenor
+            value: NA==
+            description: Tenor [Mandatory] [hari]
+          - name: blobTransaksi
+            value: "{{base64File}}"
+            description: Blob File [Mandatory] [base64]
+          - name: mimeTypeTransaksi
+            value: application/pdf
+            description: Mime Type File [Mandatory] [application/pdf]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Wed, 04 Feb 2026 01:13:21 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "error",
+              },
+              "message": "Data Berhasil Disimpan",
+              "status": 500
+          }
+  - name: Error - Validasi Invoice Retry
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/validasi-invoice"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+        - name: Api-Key
+          value: VW1GNVlWQnBVR1Z5Vkc5d2p5a2JnR1g4blNvdSs1WW9CQVFpME9ueEpBOEF5STA9
+          disabled: true
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtQkRWLTExOS1VbUY1WVZCcFVHVnlWRzl3L2w5Nm0yVDBsVU5xS1crS0hPNDgyNWRmRkpqZ2FLbzVpZE9kbkVqWkU3WENUVXV6UVhEZXoxUUJCUk9zTjZVPQ==
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: QkRWLTExOQ==
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: kodeTransaksi
+            value: SU5WLTIwMjYtMDEtMDktMTY1ODIyOTAw
+            description: Kode Transaksi [MANDATORY][BASE64 STRING]
+          - name: nominalPencairan
+            value: MzIyODAwMA==
+            description: Nominal Pencairan [MANDATORY][BASE64 DECIMAL]
+          - name: tenor
+            value: Mg==
+            description: "Tenor [Mandatory] [Unit: hari]"
+          - name: blobTransaksi
+            value: "{{base64File}}"
+            description: Blob File [Mandatory] [base64] [Max file size 512kb]
+          - name: mimeTypeTransaksi
+            value: application/pdf
+            description: Mime Type File [Mandatory] [application/pdf]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Tue, 10 Feb 2026 09:23:40 GMT
+        - name: Content-Length
+          value: "168"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "retry"
+              },
+              "message": "Proses verifikasi invoice belum berhasil! Kamu masih memiliki kesempatan 2 kali lagi, silakan mencobanya kembali.",
+              "status": 500
+          }
+  - name: Error - Validasi Invoice Block
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/validasi-invoice"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+        - name: Api-Key
+          value: VW1GNVlWQnBVR1Z5Vkc5d2p5a2JnR1g4blNvdSs1WW9CQVFpME9ueEpBOEF5STA9
+          disabled: true
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtQkRWLTExOS1VbUY1WVZCcFVHVnlWRzl3L2w5Nm0yVDBsVU5xS1crS0hPNDgyNWRmRkpqZ2FLbzVpZE9kbkVqWkU3WENUVXV6UVhEZXoxUUJCUk9zTjZVPQ==
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: QkRWLTExOQ==
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: kodeTransaksi
+            value: SU5WLTIwMjYtMDEtMDktMTY1ODIyOTAw
+            description: Kode Transaksi [MANDATORY][BASE64 STRING]
+          - name: nominalPencairan
+            value: MzAwMDAwMA==
+            description: Nominal Pencairan [MANDATORY][BASE64 DECIMAL]
+          - name: tenor
+            value: NA==
+            description: Tenor [Mandatory] [hari]
+          - name: blobTransaksi
+            value: "{{base64File}}"
+            description: Blob File [Mandatory] [base64]
+          - name: mimeTypeTransaksi
+            value: application/pdf
+            description: Mime Type File [Mandatory] [application/pdf]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Wed, 04 Feb 2026 01:13:21 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "block",
+                  "tanggalKadalLuarsa": "2026-02-04 08:40:44",
+              },
+              "message": "Data Berhasil Disimpan",
+              "status": 500
+          }
+  - name: Success - Validasi Invoice
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/validasi-invoice"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+        - name: Api-Key
+          value: VW1GNVlWQnBVR1Z5Vkc5d2p5a2JnR1g4blNvdSs1WW9CQVFpME9ueEpBOEF5STA9
+          disabled: true
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtQkRWLTExOS1VbUY1WVZCcFVHVnlWRzl3L2w5Nm0yVDBsVU5xS1crS0hPNDgyNWRmRkpqZ2FLbzVpZE9kbkVqWkU3WENUVXV6UVhEZXoxUUJCUk9zTjZVPQ==
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: QkRWLTExOQ==
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: kodeTransaksi
+            value: SU5WLTIwMjYtMDEtMDktMTY1ODIyOTAw
+            description: Kode Transaksi [MANDATORY][BASE64 STRING]
+          - name: nominalPencairan
+            value: MzAwMDAwMA==
+            description: Nominal Pencairan [MANDATORY][BASE64 DECIMAL]
+          - name: tenor
+            value: NA==
+            description: Tenor [Mandatory] [hari]
+          - name: blobTransaksi
+            value: "{{base64File}}"
+            description: Blob File [Mandatory] [base64]
+          - name: mimeTypeTransaksi
+            value: application/pdf
+            description: Mime Type File [Mandatory] [application/pdf]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Wed, 04 Feb 2026 01:13:21 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "",
+                  "transaksi": "INV-2026-01-09-165822900"
+              },
+              "message": "Data Berhasil Disimpan",
+              "status": 200
+          }

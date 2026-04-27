@@ -1,0 +1,4100 @@
+info:
+  name: Pengajuan
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: "{{base-url-local}}/v/1/aktivasi/pengajuan"
+  headers:
+    - name: Api-Key
+      value: "{{apiKeyMerchant}}"
+  body:
+    type: form-urlencoded
+    data:
+      - name: nomorIdentitas
+        value: MzI3MzE4MDcxMjk2MDAwNw==
+        description: Nomor Identitas User [MANDATORY] [Base64]
+      - name: nama
+        value: QXlhbm9rb2ppIFNhdG9ydQ==
+        description: Nama [MANDATORY] [Base64]
+      - name: tanggalLahir
+        value: MTk4OS0xMC0xMA==
+        description: Tanggal Lahir [MANDATORY] [Base64] [YYYY-MM-DD]
+      - name: tempatLahir
+        value: SmFrYXJ0YQ==
+        description: Tempat Lahir [MANDATORY] [Base64]
+      - name: jenisKelamin
+        value: TGFraS1MYWtp
+        description: Jenis Kelamin[MANDATORY] [Base64] ["Perempuan", "Laki-Laki"]
+      - name: tanggalKtp
+        value: 2000-11-17
+        description: Tanggal Terbit KTP [MANDATORY]
+      - name: kodeArea
+        value: "7541"
+        description: Kode Area [MANDATORY]
+      - name: latitude
+        value: "-20"
+        description: Latitude [MANDATORY]
+      - name: longitude
+        value: "20"
+        description: Longitude [MANDATORY]
+      - name: alamat
+        value: Cempaka Putih Barat
+        description: Alamat [MANDATORY]
+      - name: rt
+        value: "010"
+        description: RT [MANDATORY]
+      - name: rw
+        value: "002"
+        description: RW [MANDATORY]
+      - name: kodeAgama
+        value: ISL
+        description: Kode Agama [MANDATORY] ["BUD", "HIN", "ISL", "KRI", "KHC"]
+      - name: statusPernikahan
+        value: Kawin
+        description: Status Pernikahan [MANDATORY] ["Kawin", "Belum Kawin", "Cerai Hidup", "Cerai Mati"]
+      - name: namaIbuKandung
+        value: UnVtaXlhdGk=
+        description: Nama Ibu Kandung [MANDATORY] [Base64]
+      - name: nomorIdentitasPasangan
+        value: MzE3MTA1MTIxMTk1MDAwMg==
+        description: Nomor Identitas Pasangan [MANDATORY] [Base64]
+      - name: namaPasangan
+        value: VGVzdGluZw==
+        description: Nama Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+      - name: tanggalLahirPasangan
+        value: MjAwMC0xMS0xNw==
+        description: Tanggal Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64] [YYYY-MM-DD]
+      - name: tempatLahirPasangan
+        value: SmFrYXJ0YQ==
+        description: Tempat Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+      - name: nomorTelepon
+        value: KzYyODc4NzcyNzg4MzA=
+        description: "Nomor Telepon [MANDATORY] [Base64] [Ex : +628xxx]"
+      - name: email
+        value: ZHdpa2kuc2FwdXRyYUBiYW5rcmF5YS5jby5pZA==
+        description: "Email [MANDATORY] [Base64] [Ex : abc@mail.com]"
+      - name: kodePendidikanTerakhir
+        value: S1
+        description: Pendidikan Terakhir [MANDATORY["SD", "SM", "SU", "D1", "D2", "D3", "S1", "S2", "S3", "TS", "BT"]
+      - name: jumlahTanggungan
+        value: "1"
+        description: Jumlah Tanggungan [MANDATORY]
+      - name: namaKontakDarurat
+        value: Darurat
+        description: Nama Kontak Darurat [OPTIONAL]
+      - name: nomorKontakDarurat
+        value: "+6287877278830"
+        description: Nomor Telepon Darurat [OPTIONAL]
+      - name: hubunganKontakDarurat
+        value: Istri
+        description: Nama Kontak Darurat [OPTIONAL] ["Kepala Keluarga", "Suami", "Istri", "Anak", "Menantu", "Cucu", "Orang Tua", "Mertua", "Famili Lain", "Pembantu"]
+      - name: kodeAreaUsaha
+        value: "7541"
+        description: Kode Area Usaha [MANDATORY]
+      - name: alamatUsaha
+        value: Jl. Joha Baru 09
+        description: Alamat Usaha [MANDATORY]
+      - name: latitudeUsaha
+        value: "-20"
+        description: Latitude Usaha [MANDATORY]
+      - name: longitudeUsaha
+        value: "20"
+        description: Longitude Usaha [MANDATORY]
+      - name: rtUsaha
+        value: "012"
+        description: RT Usaha [MANDATORY]
+      - name: rwUsaha
+        value: "002"
+        description: RW Usaha [MANDATORY]
+      - name: tanggalJoinPartner
+        value: 2000-11-17
+        description: Tanggal Join Partner [MANDATORY]
+      - name: kodeTipePinjaman
+        value: CHILD-ATM-38
+        description: Kode Loan Type [MANDATORY]
+      - name: kodePartnership
+        value: TUox
+        description: Kode Partnership [MANDATORY] [Base64]
+      - name: kodeReferensiTerakhir
+        value: EX-MJ1-UmF5YVBpUGVyVG9w/l59mWX1lENrKWaCHO473pdfFJjiaKo7itCYn0zdEzv+dkaYpenLi6dtldS4VYE=
+        description: Kode Referensi Terakhir [OPTIONAL] [MANDATORY ==> Jika Suplesi]
+        disabled: true
+  auth:
+    type: bearer
+    token: "{{tokenMerchant}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 503 - Service Unavailable
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: VW1GNVlWQnBVR1Z5Vkc5d2p5RU1nR0g5bFYrVEF2L3hDU1FIM25JVTl0M2Naam89
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3NjA5MTcxMTAwMDAwMQ==
+            description: Base64 [Mandatory]
+          - name: nama
+            value: SGFycnkgUGFtdW5na2Fz
+            description: Base64 [Mandatory]
+          - name: tanggalLahir
+            value: MjAwMC0xMS0xNw==
+            description: Base64 [Mandatory]
+          - name: tempatLahir
+            value: SmFrYXJ0YQ==
+            description: "[Mandatory]"
+          - name: jenisKelamin
+            value: TGFraS1MYWtp
+            description: "[Mandatory]"
+          - name: tanggalKtp
+            value: 2000-11-17
+            description: "[Mandatory]"
+          - name: kodeArea
+            value: "102"
+            description: "[Mandatory]"
+          - name: latitude
+            value: "111"
+            description: "[Mandatory]"
+          - name: longitude
+            value: "111"
+            description: "[Mandatory]"
+          - name: alamat
+            value: jl. Kedondong
+            description: "[Mandatory]"
+          - name: rt
+            value: "003"
+            description: "[Mandatory]"
+          - name: rw
+            value: "004"
+            description: "[Mandatory]"
+          - name: kodeAgama
+            value: ISL
+            description: "[Mandatory]"
+          - name: statusPernikahan
+            value: Kawin
+            description: "[Mandatory]"
+          - name: namaIbuKandung
+            value: V2luYXJuaQ==
+            description: Base64 [Mandatory]
+          - name: nomorIdentitasPasangan
+            value: MzI3NjA5MTcxMTAwMDAwMQ==
+            description: Base64 [Optional]
+          - name: namaPasangan
+            value: Tm9ib2R5
+            description: Base64 [Optional]
+          - name: tanggalLahirPasangan
+            value: MjAwMC0xMS0xNw==
+            description: Base64 [Optional]
+          - name: tempatLahirPasangan
+            value: SmFrYXJ0YQ==
+            description: "[Optional]"
+          - name: nomorTelepon
+            value: KzYyODk1NDIxNTgzNzIw
+            description: Base64 [Mandatory]
+          - name: email
+            value: YWFhQGdtYWlsLmNvbQ==
+            description: Base64 [Mandatory]
+          - name: pendidikanTerakhir
+            value: D3
+            description: "[Mandatory]"
+          - name: jumlahTanggungan
+            value: "10"
+            description: "[Mandatory]"
+          - name: namaKontakDarurat
+            value: Marisa
+            description: "[Mandatory]"
+          - name: nomorKontakDarurat
+            value: "+62895421583720"
+            description: "[Mandatory]"
+          - name: hubunganKontakDarurat
+            value: Keluarga
+            description: "[Mandatory]"
+          - name: kodeAreaUsaha
+            value: "102"
+            description: "[Mandatory]"
+          - name: alamatUsaha
+            value: jl watherv23
+            description: "[Mandatory]"
+          - name: latitudeUsaha
+            value: "112"
+            description: "[Mandatory]"
+          - name: longitudeUsaha
+            value: "101"
+            description: "[Mandatory]"
+          - name: rtUsaha
+            value: "003"
+            description: "[Mandatory]"
+          - name: rwUsaha
+            value: "004"
+            description: "[Mandatory]"
+          - name: tenorPinjaman
+            value: "6"
+            description: "[Mandatory]"
+          - name: batasEstimasiPinjaman
+            value: "10000000"
+            description: "[Mandatory]"
+          - name: partnerJoinDate
+            value: 2000-11-17
+            description: "[Mandatory]"
+          - name: loanTypeCode
+            value: CHILD-MMF-652
+            description: "[Mandatory]"
+          - name: kodePartnership
+            value: QkxBLTUwMQ==
+            description: "[Mandatory]"
+          - name: kodeReferensiTerakhir
+            value: EX-MJ1-UmF5YVBpUGVyVG9w/l59mWX1lENrKWaCHO473pdfFJjiaKo7itCYn0zdEzv+dkaYpenLi6dtldS4VYE=
+            description: "[Optional]"
+            disabled: true
+    response:
+      status: 503
+      statusText: Service Unavailable
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 01 Aug 2024 08:53:52 GMT
+        - name: Content-Length
+          value: "69"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Jam operasional Pinang Performa dari jam XX.XX - XX.XX WIB setiap hari. Kembali lagi nanti, ya!",
+              "status": 503
+          }
+  - name: Error - Token Expired
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: VW1GNVlWQnBVR1Z5Vkc5d2p5RU1nR0g5bFYrVEF2L3hDU1FIM25JVTl0M2Naam89
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3NjA5MTcxMTAwMDAwMQ==
+            description: Base64 [Mandatory]
+          - name: nama
+            value: SGFycnkgUGFtdW5na2Fz
+            description: Base64 [Mandatory]
+          - name: tanggalLahir
+            value: MjAwMC0xMS0xNw==
+            description: Base64 [Mandatory]
+          - name: tempatLahir
+            value: SmFrYXJ0YQ==
+            description: "[Mandatory]"
+          - name: jenisKelamin
+            value: TGFraS1MYWtp
+            description: "[Mandatory]"
+          - name: tanggalKtp
+            value: 2000-11-17
+            description: "[Mandatory]"
+          - name: kodeArea
+            value: "102"
+            description: "[Mandatory]"
+          - name: latitude
+            value: "111"
+            description: "[Mandatory]"
+          - name: longitude
+            value: "111"
+            description: "[Mandatory]"
+          - name: alamat
+            value: jl. Kedondong
+            description: "[Mandatory]"
+          - name: rt
+            value: "003"
+            description: "[Mandatory]"
+          - name: rw
+            value: "004"
+            description: "[Mandatory]"
+          - name: kodeAgama
+            value: ISL
+            description: "[Mandatory]"
+          - name: statusPernikahan
+            value: Kawin
+            description: "[Mandatory]"
+          - name: namaIbuKandung
+            value: V2luYXJuaQ==
+            description: Base64 [Mandatory]
+          - name: nomorIdentitasPasangan
+            value: MzI3NjA5MTcxMTAwMDAwMQ==
+            description: Base64 [Optional]
+          - name: namaPasangan
+            value: Tm9ib2R5
+            description: Base64 [Optional]
+          - name: tanggalLahirPasangan
+            value: MjAwMC0xMS0xNw==
+            description: Base64 [Optional]
+          - name: tempatLahirPasangan
+            value: SmFrYXJ0YQ==
+            description: "[Optional]"
+          - name: nomorTelepon
+            value: KzYyODk1NDIxNTgzNzIw
+            description: Base64 [Mandatory]
+          - name: email
+            value: YWFhQGdtYWlsLmNvbQ==
+            description: Base64 [Mandatory]
+          - name: pendidikanTerakhir
+            value: D3
+            description: "[Mandatory]"
+          - name: jumlahTanggungan
+            value: "10"
+            description: "[Mandatory]"
+          - name: namaKontakDarurat
+            value: Marisa
+            description: "[Mandatory]"
+          - name: nomorKontakDarurat
+            value: "+62895421583720"
+            description: "[Mandatory]"
+          - name: hubunganKontakDarurat
+            value: Keluarga
+            description: "[Mandatory]"
+          - name: kodeAreaUsaha
+            value: "102"
+            description: "[Mandatory]"
+          - name: alamatUsaha
+            value: jl watherv23
+            description: "[Mandatory]"
+          - name: latitudeUsaha
+            value: "112"
+            description: "[Mandatory]"
+          - name: longitudeUsaha
+            value: "101"
+            description: "[Mandatory]"
+          - name: rtUsaha
+            value: "003"
+            description: "[Mandatory]"
+          - name: rwUsaha
+            value: "004"
+            description: "[Mandatory]"
+          - name: tenorPinjaman
+            value: "6"
+            description: "[Mandatory]"
+          - name: batasEstimasiPinjaman
+            value: "10000000"
+            description: "[Mandatory]"
+          - name: partnerJoinDate
+            value: 2000-11-17
+            description: "[Mandatory]"
+          - name: loanTypeCode
+            value: CHILD-MMF-652
+            description: "[Mandatory]"
+          - name: kodePartnership
+            value: QkxBLTUwMQ==
+            description: "[Mandatory]"
+          - name: kodeReferensiTerakhir
+            value: EX-MJ1-UmF5YVBpUGVyVG9w/l59mWX1lENrKWaCHO473pdfFJjiaKo7itCYn0zdEzv+dkaYpenLi6dtldS4VYE=
+            description: "[Optional]"
+            disabled: true
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 01 Aug 2024 08:53:52 GMT
+        - name: Content-Length
+          value: "69"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "token has invalid claims: token is expired",
+              "status": 401
+          }
+  - name: Error - Unauthorized / Expired
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3NjA5MTcxMTAwMDAwMQ==
+            description: Base64 [Mandatory]
+          - name: nama
+            value: SGFycnkgUGFtdW5na2Fz
+            description: Base64 [Mandatory]
+          - name: tanggalLahir
+            value: MjAwMC0xMS0xNw==
+            description: Base64 [Mandatory]
+          - name: tempatLahir
+            value: SmFrYXJ0YQ==
+            description: "[Mandatory]"
+          - name: jenisKelamin
+            value: TGFraS1MYWtp
+            description: "[Mandatory]"
+          - name: tanggalKtp
+            value: 2000-11-17
+            description: "[Mandatory]"
+          - name: kodeArea
+            value: "102"
+            description: "[Mandatory]"
+          - name: latitude
+            value: "111"
+            description: "[Mandatory]"
+          - name: longitude
+            value: "111"
+            description: "[Mandatory]"
+          - name: alamat
+            value: jl. Kedondong
+            description: "[Mandatory]"
+          - name: rt
+            value: "003"
+            description: "[Mandatory]"
+          - name: rw
+            value: "004"
+            description: "[Mandatory]"
+          - name: kodeAgama
+            value: ISL
+            description: "[Mandatory]"
+          - name: statusPernikahan
+            value: Kawin
+            description: "[Mandatory]"
+          - name: namaIbuKandung
+            value: V2luYXJuaQ==
+            description: Base64 [Mandatory]
+          - name: nomorIdentitasPasangan
+            value: MzI3NjA5MTcxMTAwMDAwMQ==
+            description: Base64 [Optional]
+          - name: namaPasangan
+            value: Tm9ib2R5
+            description: Base64 [Optional]
+          - name: tanggalLahirPasangan
+            value: MjAwMC0xMS0xNw==
+            description: Base64 [Optional]
+          - name: tempatLahirPasangan
+            value: SmFrYXJ0YQ==
+            description: "[Optional]"
+          - name: nomorTelepon
+            value: KzYyODk1NDIxNTgzNzIw
+            description: Base64 [Mandatory]
+          - name: email
+            value: YWFhQGdtYWlsLmNvbQ==
+            description: Base64 [Mandatory]
+          - name: pendidikanTerakhir
+            value: D3
+            description: "[Mandatory]"
+          - name: jumlahTanggungan
+            value: "10"
+            description: "[Mandatory]"
+          - name: namaKontakDarurat
+            value: Marisa
+            description: "[Mandatory]"
+          - name: nomorKontakDarurat
+            value: "+62895421583720"
+            description: "[Mandatory]"
+          - name: hubunganKontakDarurat
+            value: Keluarga
+            description: "[Mandatory]"
+          - name: kodeAreaUsaha
+            value: "102"
+            description: "[Mandatory]"
+          - name: alamatUsaha
+            value: jl watherv23
+            description: "[Mandatory]"
+          - name: latitudeUsaha
+            value: "112"
+            description: "[Mandatory]"
+          - name: longitudeUsaha
+            value: "101"
+            description: "[Mandatory]"
+          - name: rtUsaha
+            value: "003"
+            description: "[Mandatory]"
+          - name: rwUsaha
+            value: "004"
+            description: "[Mandatory]"
+          - name: tenorPinjaman
+            value: "6"
+            description: "[Mandatory]"
+          - name: batasEstimasiPinjaman
+            value: "10000000"
+            description: "[Mandatory]"
+          - name: partnerJoinDate
+            value: 2000-11-17
+            description: "[Mandatory]"
+          - name: loanTypeCode
+            value: CHILD-MMF-652
+            description: "[Mandatory]"
+          - name: kodePartnership
+            value: QUdVLTE5MA==
+            description: "[Mandatory]"
+          - name: referensiTerakhir
+            value: abgu
+            description: "[Optional]"
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 31 Jul 2024 13:02:05 GMT
+        - name: Content-Length
+          value: "50"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Unauthorized / Expired.",
+              "status": 401
+          }
+  - name: Error - Parameter Token / API Key Empty
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+          disabled: true
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3NjA5MTcxMTAwMDAwMQ==
+            description: Base64 [Mandatory]
+          - name: nama
+            value: SGFycnkgUGFtdW5na2Fz
+            description: Base64 [Mandatory]
+          - name: tanggalLahir
+            value: MjAwMC0xMS0xNw==
+            description: Base64 [Mandatory]
+          - name: tempatLahir
+            value: SmFrYXJ0YQ==
+            description: "[Mandatory]"
+          - name: jenisKelamin
+            value: TGFraS1MYWtp
+            description: "[Mandatory]"
+          - name: tanggalKtp
+            value: 2000-11-17
+            description: "[Mandatory]"
+          - name: kodeArea
+            value: "102"
+            description: "[Mandatory]"
+          - name: latitude
+            value: "111"
+            description: "[Mandatory]"
+          - name: longitude
+            value: "111"
+            description: "[Mandatory]"
+          - name: alamat
+            value: jl. Kedondong
+            description: "[Mandatory]"
+          - name: rt
+            value: "003"
+            description: "[Mandatory]"
+          - name: rw
+            value: "004"
+            description: "[Mandatory]"
+          - name: kodeAgama
+            value: ISL
+            description: "[Mandatory]"
+          - name: statusPernikahan
+            value: Kawin
+            description: "[Mandatory]"
+          - name: namaIbuKandung
+            value: V2luYXJuaQ==
+            description: Base64 [Mandatory]
+          - name: nomorIdentitasPasangan
+            value: MzI3NjA5MTcxMTAwMDAwMQ==
+            description: Base64 [Optional]
+          - name: namaPasangan
+            value: Tm9ib2R5
+            description: Base64 [Optional]
+          - name: tanggalLahirPasangan
+            value: MjAwMC0xMS0xNw==
+            description: Base64 [Optional]
+          - name: tempatLahirPasangan
+            value: SmFrYXJ0YQ==
+            description: "[Optional]"
+          - name: nomorTelepon
+            value: KzYyODk1NDIxNTgzNzIw
+            description: Base64 [Mandatory]
+          - name: email
+            value: YWFhQGdtYWlsLmNvbQ==
+            description: Base64 [Mandatory]
+          - name: pendidikanTerakhir
+            value: D3
+            description: "[Mandatory]"
+          - name: jumlahTanggungan
+            value: "10"
+            description: "[Mandatory]"
+          - name: namaKontakDarurat
+            value: Marisa
+            description: "[Mandatory]"
+          - name: nomorKontakDarurat
+            value: "+62895421583720"
+            description: "[Mandatory]"
+          - name: hubunganKontakDarurat
+            value: Keluarga
+            description: "[Mandatory]"
+          - name: kodeAreaUsaha
+            value: "102"
+            description: "[Mandatory]"
+          - name: alamatUsaha
+            value: jl watherv23
+            description: "[Mandatory]"
+          - name: latitudeUsaha
+            value: "112"
+            description: "[Mandatory]"
+          - name: longitudeUsaha
+            value: "101"
+            description: "[Mandatory]"
+          - name: rtUsaha
+            value: "003"
+            description: "[Mandatory]"
+          - name: rwUsaha
+            value: "004"
+            description: "[Mandatory]"
+          - name: tenorPinjaman
+            value: "6"
+            description: "[Mandatory]"
+          - name: batasEstimasiPinjaman
+            value: "10000000"
+            description: "[Mandatory]"
+          - name: partnerJoinDate
+            value: 2000-11-17
+            description: "[Mandatory]"
+          - name: loanTypeCode
+            value: CHILD-MMF-652
+            description: "[Mandatory]"
+          - name: kodePartnership
+            value: QUdVLTE5MA==
+            description: "[Mandatory]"
+          - name: kodeReferensiTerakhir
+            value: EX-MJ1-UmF5YVBpUGVyVG9w/l59mWX1lENrKWaCHO473pdfFJjiaKo7itCYn0zdEzv+dkaYpenLi6dtldS4VYE=
+            description: "[Optional]"
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 01 Aug 2024 06:46:27 GMT
+        - name: Content-Length
+          value: "51"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "parameter token is empty",
+              "status": 400
+          }
+  - name: Error - Access Forbidden
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3NjA5MTcxMTAwMDAwMQ==
+            description: Base64 [Mandatory]
+          - name: nama
+            value: SGFycnkgUGFtdW5na2Fz
+            description: Base64 [Mandatory]
+          - name: tanggalLahir
+            value: MjAwMC0xMS0xNw==
+            description: Base64 [Mandatory]
+          - name: tempatLahir
+            value: SmFrYXJ0YQ==
+            description: "[Mandatory]"
+          - name: jenisKelamin
+            value: TGFraS1MYWtp
+            description: "[Mandatory]"
+          - name: tanggalKtp
+            value: 2000-11-17
+            description: "[Mandatory]"
+          - name: kodeArea
+            value: "102"
+            description: "[Mandatory]"
+          - name: latitude
+            value: "111"
+            description: "[Mandatory]"
+          - name: longitude
+            value: "111"
+            description: "[Mandatory]"
+          - name: alamat
+            value: jl. Kedondong
+            description: "[Mandatory]"
+          - name: rt
+            value: "003"
+            description: "[Mandatory]"
+          - name: rw
+            value: "004"
+            description: "[Mandatory]"
+          - name: kodeAgama
+            value: ISL
+            description: "[Mandatory]"
+          - name: statusPernikahan
+            value: Kawin
+            description: "[Mandatory]"
+          - name: namaIbuKandung
+            value: V2luYXJuaQ==
+            description: Base64 [Mandatory]
+          - name: nomorIdentitasPasangan
+            value: MzI3NjA5MTcxMTAwMDAwMQ==
+            description: Base64 [Optional]
+          - name: namaPasangan
+            value: Tm9ib2R5
+            description: Base64 [Optional]
+          - name: tanggalLahirPasangan
+            value: MjAwMC0xMS0xNw==
+            description: Base64 [Optional]
+          - name: tempatLahirPasangan
+            value: SmFrYXJ0YQ==
+            description: "[Optional]"
+          - name: nomorTelepon
+            value: KzYyODk1NDIxNTgzNzIw
+            description: Base64 [Mandatory]
+          - name: email
+            value: YWFhQGdtYWlsLmNvbQ==
+            description: Base64 [Mandatory]
+          - name: pendidikanTerakhir
+            value: D3
+            description: "[Mandatory]"
+          - name: jumlahTanggungan
+            value: "10"
+            description: "[Mandatory]"
+          - name: namaKontakDarurat
+            value: Marisa
+            description: "[Mandatory]"
+          - name: nomorKontakDarurat
+            value: "+62895421583720"
+            description: "[Mandatory]"
+          - name: hubunganKontakDarurat
+            value: Keluarga
+            description: "[Mandatory]"
+          - name: kodeAreaUsaha
+            value: "102"
+            description: "[Mandatory]"
+          - name: alamatUsaha
+            value: jl watherv23
+            description: "[Mandatory]"
+          - name: latitudeUsaha
+            value: "112"
+            description: "[Mandatory]"
+          - name: longitudeUsaha
+            value: "101"
+            description: "[Mandatory]"
+          - name: rtUsaha
+            value: "003"
+            description: "[Mandatory]"
+          - name: rwUsaha
+            value: "004"
+            description: "[Mandatory]"
+          - name: tenorPinjaman
+            value: "6"
+            description: "[Mandatory]"
+          - name: batasEstimasiPinjaman
+            value: "10000000"
+            description: "[Mandatory]"
+          - name: partnerJoinDate
+            value: 2000-11-17
+            description: "[Mandatory]"
+          - name: loanTypeCode
+            value: CHILD-MMF-652
+            description: "[Mandatory]"
+          - name: kodePartnership
+            value: QUdVLTE5MA==
+            description: "[Mandatory]"
+          - name: kodeReferensiTerakhir
+            value: EX-MJ1-UmF5YVBpUGVyVG9w/l59mWX1lENrKWaCHO473pdfFJjiaKo7itCYn0zdEzv+dkaYpenLi6dtldS4VYE=
+            description: "[Optional]"
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 01 Aug 2024 06:43:39 GMT
+        - name: Content-Length
+          value: "76"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "you don't have permission to access this resource",
+              "status": 403
+          }
+  - name: Error - Access Forbidden (No Data Partnership)
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3NjA5MTcxMTAwMDAwMQ==
+            description: Base64 [Mandatory]
+          - name: nama
+            value: SGFycnkgUGFtdW5na2Fz
+            description: Base64 [Mandatory]
+          - name: tanggalLahir
+            value: MjAwMC0xMS0xNw==
+            description: Base64 [Mandatory]
+          - name: tempatLahir
+            value: SmFrYXJ0YQ==
+            description: "[Mandatory]"
+          - name: jenisKelamin
+            value: TGFraS1MYWtp
+            description: "[Mandatory]"
+          - name: tanggalKtp
+            value: 2000-11-17
+            description: "[Mandatory]"
+          - name: kodeArea
+            value: "102"
+            description: "[Mandatory]"
+          - name: latitude
+            value: "111"
+            description: "[Mandatory]"
+          - name: longitude
+            value: "111"
+            description: "[Mandatory]"
+          - name: alamat
+            value: jl. Kedondong
+            description: "[Mandatory]"
+          - name: rt
+            value: "003"
+            description: "[Mandatory]"
+          - name: rw
+            value: "004"
+            description: "[Mandatory]"
+          - name: kodeAgama
+            value: ISL
+            description: "[Mandatory]"
+          - name: statusPernikahan
+            value: Kawin
+            description: "[Mandatory]"
+          - name: namaIbuKandung
+            value: V2luYXJuaQ==
+            description: Base64 [Mandatory]
+          - name: nomorIdentitasPasangan
+            value: MzI3NjA5MTcxMTAwMDAwMQ==
+            description: Base64 [Optional]
+          - name: namaPasangan
+            value: Tm9ib2R5
+            description: Base64 [Optional]
+          - name: tanggalLahirPasangan
+            value: MjAwMC0xMS0xNw==
+            description: Base64 [Optional]
+          - name: tempatLahirPasangan
+            value: SmFrYXJ0YQ==
+            description: "[Optional]"
+          - name: nomorTelepon
+            value: KzYyODk1NDIxNTgzNzIw
+            description: Base64 [Mandatory]
+          - name: email
+            value: YWFhQGdtYWlsLmNvbQ==
+            description: Base64 [Mandatory]
+          - name: kodePendidikanTerakhir
+            value: D3
+            description: "[Mandatory]"
+          - name: jumlahTanggungan
+            value: "10"
+            description: "[Mandatory]"
+          - name: namaKontakDarurat
+            value: Marisa
+            description: "[Mandatory]"
+          - name: nomorKontakDarurat
+            value: "+62895421583720"
+            description: "[Mandatory]"
+          - name: hubunganKontakDarurat
+            value: Keluarga
+            description: "[Mandatory]"
+          - name: kodeAreaUsaha
+            value: "102"
+            description: "[Mandatory]"
+          - name: alamatUsaha
+            value: jl watherv23
+            description: "[Mandatory]"
+          - name: latitudeUsaha
+            value: "112"
+            description: "[Mandatory]"
+          - name: longitudeUsaha
+            value: "101"
+            description: "[Mandatory]"
+          - name: rtUsaha
+            value: "003"
+            description: "[Mandatory]"
+          - name: rwUsaha
+            value: "004"
+            description: "[Mandatory]"
+          - name: tenorPinjaman
+            value: "6"
+            description: "[Mandatory]"
+          - name: batasEstimasiPinjaman
+            value: "10000000"
+            description: "[Mandatory]"
+          - name: partnerJoinDate
+            value: 2000-11-17
+            description: "[Mandatory]"
+          - name: loanTypeCode
+            value: CHILD-MMF-652
+            description: "[Mandatory]"
+          - name: kodePartnership
+            value: QkxBLTUwMQ==
+            description: "[Mandatory]"
+          - name: kodeReferensiTerakhir
+            value: EX-MJ1-UmF5YVBpUGVyVG9w/l59mWX1lENrKWaCHO473pdfFJjiaKo7itCYn0zdEzv+dkaYpenLi6dtldS4VYE=
+            description: "[Optional]"
+            disabled: true
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Sat, 03 Aug 2024 09:46:05 GMT
+        - name: Content-Length
+          value: "70"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "your access to this resource is unactivated",
+              "status": 403
+          }
+  - name: Error - Parameter Validation (Total Mandatory)
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3NjA5MTcxMTAwMDAwMQ==
+            description: Base64 [Mandatory]
+          - name: nama
+            value: SGFycnkgUGFtdW5na2Fz
+            description: Base64 [Mandatory]
+          - name: tanggalLahir
+            value: MjAwMC0xMS0xNw==
+            description: Base64 [Mandatory]
+          - name: tempatLahir
+            value: SmFrYXJ0YQ==
+            description: "[Mandatory]"
+          - name: jenisKelamin
+            value: TGFraS1MYWtp
+            description: "[Mandatory]"
+          - name: tanggalKtp
+            value: 2000-11-17
+            description: "[Mandatory]"
+          - name: kodeArea
+            value: "102"
+            description: "[Mandatory]"
+          - name: latitude
+            value: "111"
+            description: "[Mandatory]"
+          - name: longitude
+            value: "111"
+            description: "[Mandatory]"
+          - name: alamat
+            value: jl. Kedondong
+            description: "[Mandatory]"
+          - name: rt
+            value: "003"
+            description: "[Mandatory]"
+          - name: rw
+            value: "004"
+            description: "[Mandatory]"
+          - name: kodeAgama
+            value: ISL
+            description: "[Mandatory]"
+          - name: statusPernikahan
+            value: Kawin
+            description: "[Mandatory]"
+          - name: namaIbuKandung
+            value: V2luYXJuaQ==
+            description: Base64 [Mandatory]
+          - name: nomorIdentitasPasangan
+            value: MzI3NjA5MTcxMTAwMDAwMQ==
+            description: Base64 [Optional]
+          - name: namaPasangan
+            value: Tm9ib2R5
+            description: Base64 [Optional]
+          - name: tanggalLahirPasangan
+            value: MjAwMC0xMS0xNw==
+            description: Base64 [Optional]
+          - name: tempatLahirPasangan
+            value: SmFrYXJ0YQ==
+            description: "[Optional]"
+          - name: nomorTelepon
+            value: KzYyODk1NDIxNTgzNzIw
+            description: Base64 [Mandatory]
+          - name: email
+            value: YWFhQGdtYWlsLmNvbQ==
+            description: Base64 [Mandatory]
+          - name: pendidikanTerakhir
+            value: D3
+            description: "[Mandatory]"
+          - name: jumlahTanggungan
+            value: "10"
+            description: "[Mandatory]"
+          - name: namaKontakDarurat
+            value: Marisa
+            description: "[Mandatory]"
+          - name: nomorKontakDarurat
+            value: "+62895421583720"
+            description: "[Mandatory]"
+          - name: hubunganKontakDarurat
+            value: Keluarga
+            description: "[Mandatory]"
+          - name: kodeAreaUsaha
+            value: "102"
+            description: "[Mandatory]"
+          - name: alamatUsaha
+            value: jl watherv23
+            description: "[Mandatory]"
+          - name: latitudeUsaha
+            value: "112"
+            description: "[Mandatory]"
+          - name: longitudeUsaha
+            value: "101"
+            description: "[Mandatory]"
+          - name: rtUsaha
+            value: "003"
+            description: "[Mandatory]"
+          - name: rwUsaha
+            value: "004"
+            description: "[Mandatory]"
+            disabled: true
+          - name: tenorPinjaman
+            value: "6"
+            description: "[Mandatory]"
+          - name: batasEstimasiPinjaman
+            value: "10000000"
+            description: "[Mandatory]"
+          - name: partnerJoinDate
+            value: 2000-11-17
+            description: "[Mandatory]"
+          - name: loanTypeCode
+            value: CHILD-MMF-652
+            description: "[Mandatory]"
+          - name: kodePartnership
+            value: QUdVLTE5MA==
+            description: "[Mandatory]"
+          - name: kodeReferensiTerakhir
+            value: abgu
+            description: "[Optional]"
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 31 Jul 2024 15:39:47 GMT
+        - name: Content-Length
+          value: "63"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Parameter tidak terpenuhi.",
+              "status": 400
+          }
+  - name: Error - Parameter Validation (Tidak Sesuai)
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3NjA5MTcxMTAwMDAwMQ==
+            description: Base64 [Mandatory]
+          - name: nama
+            value: SGFycnkgUGFtdW5na2F
+            description: Base64 [Mandatory]
+          - name: tanggalLahir
+            value: MjAwMC0xMS0xNw==
+            description: Base64 [Mandatory]
+          - name: tempatLahir
+            value: SmFrYXJ0YQ==
+            description: "[Mandatory]"
+          - name: jenisKelamin
+            value: TGFraS1MYWtp
+            description: "[Mandatory]"
+          - name: tanggalKtp
+            value: 2000-11-17
+            description: "[Mandatory]"
+          - name: kodeArea
+            value: "102"
+            description: "[Mandatory]"
+          - name: latitude
+            value: "111"
+            description: "[Mandatory]"
+          - name: longitude
+            value: "111"
+            description: "[Mandatory]"
+          - name: alamat
+            value: jl. Kedondong
+            description: "[Mandatory]"
+          - name: rt
+            value: "003"
+            description: "[Mandatory]"
+          - name: rw
+            value: "004"
+            description: "[Mandatory]"
+          - name: kodeAgama
+            value: ISL
+            description: "[Mandatory]"
+          - name: statusPernikahan
+            value: Kawin
+            description: "[Mandatory]"
+          - name: namaIbuKandung
+            value: V2luYXJuaQ==
+            description: Base64 [Mandatory]
+          - name: nomorIdentitasPasangan
+            value: MzI3NjA5MTcxMTAwMDAwMQ==
+            description: Base64 [Optional]
+          - name: namaPasangan
+            value: Tm9ib2R5
+            description: Base64 [Optional]
+          - name: tanggalLahirPasangan
+            value: MjAwMC0xMS0xNw==
+            description: Base64 [Optional]
+          - name: tempatLahirPasangan
+            value: SmFrYXJ0YQ==
+            description: "[Optional]"
+          - name: nomorTelepon
+            value: KzYyODk1NDIxNTgzNzIw
+            description: Base64 [Mandatory]
+          - name: email
+            value: YWFhQGdtYWlsLmNvbQ==
+            description: Base64 [Mandatory]
+          - name: pendidikanTerakhir
+            value: D3
+            description: "[Mandatory]"
+          - name: jumlahTanggungan
+            value: "10"
+            description: "[Mandatory]"
+          - name: namaKontakDarurat
+            value: Marisa
+            description: "[Mandatory]"
+          - name: nomorKontakDarurat
+            value: "+62895421583720"
+            description: "[Mandatory]"
+          - name: hubunganKontakDarurat
+            value: Keluarga
+            description: "[Mandatory]"
+          - name: kodeAreaUsaha
+            value: "102"
+            description: "[Mandatory]"
+          - name: alamatUsaha
+            value: jl watherv23
+            description: "[Mandatory]"
+          - name: latitudeUsaha
+            value: "112"
+            description: "[Mandatory]"
+          - name: longitudeUsaha
+            value: "101"
+            description: "[Mandatory]"
+          - name: rtUsaha
+            value: "003"
+            description: "[Mandatory]"
+          - name: rwUsaha
+            value: "004"
+            description: "[Mandatory]"
+          - name: tenorPinjaman
+            value: "6"
+            description: "[Mandatory]"
+          - name: batasEstimasiPinjaman
+            value: "10000000"
+            description: "[Mandatory]"
+          - name: partnerJoinDate
+            value: 2000-11-17
+            description: "[Mandatory]"
+          - name: loanTypeCode
+            value: CHILD-MMF-652
+            description: "[Mandatory]"
+          - name: kodePartnership
+            value: QUdVLTE5MA==
+            description: "[Mandatory]"
+          - name: kodeReferensiTerakhir
+            value: abgu
+            description: "[Optional]"
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 31 Jul 2024 15:40:36 GMT
+        - name: Content-Length
+          value: "55"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "... tidak sesuai.",
+              "status": 400
+          }
+  - name: Error - General
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3NjA5MTcxMTAwMDAwMQ==
+            description: Base64 [Mandatory]
+          - name: nama
+            value: SGFycnkgUGFtdW5na2Fz
+            description: Base64 [Mandatory]
+          - name: tanggalLahir
+            value: MjAwMC0xMS0xNw==
+            description: Base64 [Mandatory]
+          - name: tempatLahir
+            value: SmFrYXJ0YQ==
+            description: "[Mandatory]"
+          - name: jenisKelamin
+            value: TGFraS1MYWtp
+            description: "[Mandatory]"
+          - name: tanggalKtp
+            value: 2000-11-17
+            description: "[Mandatory]"
+          - name: kodeArea
+            value: "102"
+            description: "[Mandatory]"
+          - name: latitude
+            value: "111"
+            description: "[Mandatory]"
+          - name: longitude
+            value: "111"
+            description: "[Mandatory]"
+          - name: alamat
+            value: jl. Kedondong
+            description: "[Mandatory]"
+          - name: rt
+            value: "003"
+            description: "[Mandatory]"
+          - name: rw
+            value: "004"
+            description: "[Mandatory]"
+          - name: kodeAgama
+            value: ISL
+            description: "[Mandatory]"
+          - name: statusPernikahan
+            value: Kawin
+            description: "[Mandatory]"
+          - name: namaIbuKandung
+            value: V2luYXJuaQ==
+            description: Base64 [Mandatory]
+          - name: nomorIdentitasPasangan
+            value: MzI3NjA5MTcxMTAwMDAwMQ==
+            description: Base64 [Optional]
+          - name: namaPasangan
+            value: Tm9ib2R5
+            description: Base64 [Optional]
+          - name: tanggalLahirPasangan
+            value: MjAwMC0xMS0xNw==
+            description: Base64 [Optional]
+          - name: tempatLahirPasangan
+            value: SmFrYXJ0YQ==
+            description: "[Optional]"
+          - name: nomorTelepon
+            value: KzYyODk1NDIxNTgzNzIw
+            description: Base64 [Mandatory]
+          - name: email
+            value: YWFhQGdtYWlsLmNvbQ==
+            description: Base64 [Mandatory]
+          - name: pendidikanTerakhir
+            value: D3
+            description: "[Mandatory]"
+          - name: jumlahTanggungan
+            value: "10"
+            description: "[Mandatory]"
+          - name: namaKontakDarurat
+            value: Marisa
+            description: "[Mandatory]"
+          - name: nomorKontakDarurat
+            value: "+62895421583720"
+            description: "[Mandatory]"
+          - name: hubunganKontakDarurat
+            value: Keluarga
+            description: "[Mandatory]"
+          - name: kodeAreaUsaha
+            value: "102"
+            description: "[Mandatory]"
+          - name: alamatUsaha
+            value: jl watherv23
+            description: "[Mandatory]"
+          - name: latitudeUsaha
+            value: "112"
+            description: "[Mandatory]"
+          - name: longitudeUsaha
+            value: "101"
+            description: "[Mandatory]"
+          - name: rtUsaha
+            value: "003"
+            description: "[Mandatory]"
+          - name: rwUsaha
+            value: "004"
+            description: "[Mandatory]"
+          - name: tenorPinjaman
+            value: "6"
+            description: "[Mandatory]"
+          - name: batasEstimasiPinjaman
+            value: "10000000"
+            description: "[Mandatory]"
+          - name: partnerJoinDate
+            value: 2000-11-17
+            description: "[Mandatory]"
+          - name: loanTypeCode
+            value: CHILD-MMF-652
+            description: "[Mandatory]"
+          - name: kodePartnership
+            value: QkxBLTUwMQ==
+            description: "[Mandatory]"
+          - name: kodeReferensiTerakhir
+            value: EX-MJ1-UmF5YVBpUGVyVG9w/l59mWX1lENrKWaCHO473pdfFJjiaKo7itCYn0zdEzv+dkaYpenLi6dtldS4VYE=
+            description: "[Optional]"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 01 Aug 2024 14:24:30 GMT
+        - name: Content-Length
+          value: "167"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": ""
+              },
+              "message": "Maaf, Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi..",
+              "status": 500
+          }
+  - name: Error - Unregistered Whitelist
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3NjA5MTcxMTAwMDAwMQ==
+            description: Base64 [Mandatory]
+          - name: nama
+            value: SGFycnkgUGFtdW5na2Fz
+            description: Base64 [Mandatory]
+          - name: tanggalLahir
+            value: MjAwMC0xMS0xNw==
+            description: Base64 [Mandatory]
+          - name: tempatLahir
+            value: SmFrYXJ0YQ==
+            description: "[Mandatory]"
+          - name: jenisKelamin
+            value: TGFraS1MYWtp
+            description: "[Mandatory]"
+          - name: tanggalKtp
+            value: 2000-11-17
+            description: "[Mandatory]"
+          - name: kodeArea
+            value: "102"
+            description: "[Mandatory]"
+          - name: latitude
+            value: "111"
+            description: "[Mandatory]"
+          - name: longitude
+            value: "111"
+            description: "[Mandatory]"
+          - name: alamat
+            value: jl. Kedondong
+            description: "[Mandatory]"
+          - name: rt
+            value: "003"
+            description: "[Mandatory]"
+          - name: rw
+            value: "004"
+            description: "[Mandatory]"
+          - name: kodeAgama
+            value: ISL
+            description: "[Mandatory]"
+          - name: statusPernikahan
+            value: Kawin
+            description: "[Mandatory]"
+          - name: namaIbuKandung
+            value: V2luYXJuaQ==
+            description: Base64 [Mandatory]
+          - name: nomorIdentitasPasangan
+            value: MzI3NjA5MTcxMTAwMDAwMQ==
+            description: Base64 [Optional]
+          - name: namaPasangan
+            value: Tm9ib2R5
+            description: Base64 [Optional]
+          - name: tanggalLahirPasangan
+            value: MjAwMC0xMS0xNw==
+            description: Base64 [Optional]
+          - name: tempatLahirPasangan
+            value: SmFrYXJ0YQ==
+            description: "[Optional]"
+          - name: nomorTelepon
+            value: KzYyODk1NDIxNTgzNzIw
+            description: Base64 [Mandatory]
+          - name: email
+            value: YWFhQGdtYWlsLmNvbQ==
+            description: Base64 [Mandatory]
+          - name: pendidikanTerakhir
+            value: D3
+            description: "[Mandatory]"
+          - name: jumlahTanggungan
+            value: "10"
+            description: "[Mandatory]"
+          - name: namaKontakDarurat
+            value: Marisa
+            description: "[Mandatory]"
+          - name: nomorKontakDarurat
+            value: "+62895421583720"
+            description: "[Mandatory]"
+          - name: hubunganKontakDarurat
+            value: Keluarga
+            description: "[Mandatory]"
+          - name: kodeAreaUsaha
+            value: "102"
+            description: "[Mandatory]"
+          - name: alamatUsaha
+            value: jl watherv23
+            description: "[Mandatory]"
+          - name: latitudeUsaha
+            value: "112"
+            description: "[Mandatory]"
+          - name: longitudeUsaha
+            value: "101"
+            description: "[Mandatory]"
+          - name: rtUsaha
+            value: "003"
+            description: "[Mandatory]"
+          - name: rwUsaha
+            value: "004"
+            description: "[Mandatory]"
+          - name: tenorPinjaman
+            value: "6"
+            description: "[Mandatory]"
+          - name: batasEstimasiPinjaman
+            value: "10000000"
+            description: "[Mandatory]"
+          - name: partnerJoinDate
+            value: 2000-11-17
+            description: "[Mandatory]"
+          - name: loanTypeCode
+            value: CHILD-MMF-652
+            description: "[Mandatory]"
+          - name: kodePartnership
+            value: QUdVLTE5MA==
+            description: "[Mandatory]"
+            disabled: true
+          - name: kodeReferensiTerakhir
+            value: abgu
+            description: "[Optional]"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 31 Jul 2024 15:51:14 GMT
+        - name: Content-Length
+          value: "79"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Maaf, anda tidak terdaftar pada whitelist.",
+              "status": 500
+          }
+  - name: Error - Prakarsa Rejected Found (7 days) [Prakarsa OR Express]
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3NjA5MTcxMTAwMDAwMQ==
+            description: Base64 [Mandatory]
+          - name: nama
+            value: SGFycnkgUGFtdW5na2Fz
+            description: Base64 [Mandatory]
+          - name: tanggalLahir
+            value: MjAwMC0xMS0xNw==
+            description: Base64 [Mandatory]
+          - name: tempatLahir
+            value: SmFrYXJ0YQ==
+            description: "[Mandatory]"
+          - name: jenisKelamin
+            value: TGFraS1MYWtp
+            description: "[Mandatory]"
+          - name: tanggalKtp
+            value: 2000-11-17
+            description: "[Mandatory]"
+          - name: kodeArea
+            value: "102"
+            description: "[Mandatory]"
+          - name: latitude
+            value: "111"
+            description: "[Mandatory]"
+          - name: longitude
+            value: "111"
+            description: "[Mandatory]"
+          - name: alamat
+            value: jl. Kedondong
+            description: "[Mandatory]"
+          - name: rt
+            value: "003"
+            description: "[Mandatory]"
+          - name: rw
+            value: "004"
+            description: "[Mandatory]"
+          - name: kodeAgama
+            value: ISL
+            description: "[Mandatory]"
+          - name: statusPernikahan
+            value: Kawin
+            description: "[Mandatory]"
+          - name: namaIbuKandung
+            value: V2luYXJuaQ==
+            description: Base64 [Mandatory]
+          - name: nomorIdentitasPasangan
+            value: MzI3NjA5MTcxMTAwMDAwMQ==
+            description: Base64 [Optional]
+          - name: namaPasangan
+            value: Tm9ib2R5
+            description: Base64 [Optional]
+          - name: tanggalLahirPasangan
+            value: MjAwMC0xMS0xNw==
+            description: Base64 [Optional]
+          - name: tempatLahirPasangan
+            value: SmFrYXJ0YQ==
+            description: "[Optional]"
+          - name: nomorTelepon
+            value: KzYyODk1NDIxNTgzNzIw
+            description: Base64 [Mandatory]
+          - name: email
+            value: YWFhQGdtYWlsLmNvbQ==
+            description: Base64 [Mandatory]
+          - name: pendidikanTerakhir
+            value: D3
+            description: "[Mandatory]"
+          - name: jumlahTanggungan
+            value: "10"
+            description: "[Mandatory]"
+          - name: namaKontakDarurat
+            value: Marisa
+            description: "[Mandatory]"
+          - name: nomorKontakDarurat
+            value: "+62895421583720"
+            description: "[Mandatory]"
+          - name: hubunganKontakDarurat
+            value: Keluarga
+            description: "[Mandatory]"
+          - name: kodeAreaUsaha
+            value: "102"
+            description: "[Mandatory]"
+          - name: alamatUsaha
+            value: jl watherv23
+            description: "[Mandatory]"
+          - name: latitudeUsaha
+            value: "112"
+            description: "[Mandatory]"
+          - name: longitudeUsaha
+            value: "101"
+            description: "[Mandatory]"
+          - name: rtUsaha
+            value: "003"
+            description: "[Mandatory]"
+          - name: rwUsaha
+            value: "004"
+            description: "[Mandatory]"
+          - name: tenorPinjaman
+            value: "6"
+            description: "[Mandatory]"
+          - name: batasEstimasiPinjaman
+            value: "10000000"
+            description: "[Mandatory]"
+          - name: partnerJoinDate
+            value: 2000-11-17
+            description: "[Mandatory]"
+          - name: loanTypeCode
+            value: CHILD-MMF-652
+            description: "[Mandatory]"
+          - name: kodePartnership
+            value: QUdVLTE5MA==
+            description: "[Mandatory]"
+          - name: kodeReferensiTerakhir
+            value: abgu
+            description: "[Optional]"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 31 Jul 2024 15:15:40 GMT
+        - name: Content-Length
+          value: "63"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Maaf, Anda belum bisa melakukan pengajuan karena belum 7 hari setelah pengajuan ditolak.",
+              "status": 500
+          }
+  - name: Error - Prakarsa On Process Found [Prakarsa]
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3NjA5MTcxMTAwMDAwMQ==
+            description: Base64 [Mandatory]
+          - name: nama
+            value: SGFycnkgUGFtdW5na2Fz
+            description: Base64 [Mandatory]
+          - name: tanggalLahir
+            value: MjAwMC0xMS0xNw==
+            description: Base64 [Mandatory]
+          - name: tempatLahir
+            value: SmFrYXJ0YQ==
+            description: "[Mandatory]"
+          - name: jenisKelamin
+            value: TGFraS1MYWtp
+            description: "[Mandatory]"
+          - name: tanggalKtp
+            value: 2000-11-17
+            description: "[Mandatory]"
+          - name: kodeArea
+            value: "102"
+            description: "[Mandatory]"
+          - name: latitude
+            value: "111"
+            description: "[Mandatory]"
+          - name: longitude
+            value: "111"
+            description: "[Mandatory]"
+          - name: alamat
+            value: jl. Kedondong
+            description: "[Mandatory]"
+          - name: rt
+            value: "003"
+            description: "[Mandatory]"
+          - name: rw
+            value: "004"
+            description: "[Mandatory]"
+          - name: kodeAgama
+            value: ISL
+            description: "[Mandatory]"
+          - name: statusPernikahan
+            value: Kawin
+            description: "[Mandatory]"
+          - name: namaIbuKandung
+            value: V2luYXJuaQ==
+            description: Base64 [Mandatory]
+          - name: nomorIdentitasPasangan
+            value: MzI3NjA5MTcxMTAwMDAwMQ==
+            description: Base64 [Optional]
+          - name: namaPasangan
+            value: Tm9ib2R5
+            description: Base64 [Optional]
+          - name: tanggalLahirPasangan
+            value: MjAwMC0xMS0xNw==
+            description: Base64 [Optional]
+          - name: tempatLahirPasangan
+            value: SmFrYXJ0YQ==
+            description: "[Optional]"
+          - name: nomorTelepon
+            value: KzYyODk1NDIxNTgzNzIw
+            description: Base64 [Mandatory]
+          - name: email
+            value: YWFhQGdtYWlsLmNvbQ==
+            description: Base64 [Mandatory]
+          - name: pendidikanTerakhir
+            value: D3
+            description: "[Mandatory]"
+          - name: jumlahTanggungan
+            value: "10"
+            description: "[Mandatory]"
+          - name: namaKontakDarurat
+            value: Marisa
+            description: "[Mandatory]"
+          - name: nomorKontakDarurat
+            value: "+62895421583720"
+            description: "[Mandatory]"
+          - name: hubunganKontakDarurat
+            value: Keluarga
+            description: "[Mandatory]"
+          - name: kodeAreaUsaha
+            value: "102"
+            description: "[Mandatory]"
+          - name: alamatUsaha
+            value: jl watherv23
+            description: "[Mandatory]"
+          - name: latitudeUsaha
+            value: "112"
+            description: "[Mandatory]"
+          - name: longitudeUsaha
+            value: "101"
+            description: "[Mandatory]"
+          - name: rtUsaha
+            value: "003"
+            description: "[Mandatory]"
+          - name: rwUsaha
+            value: "004"
+            description: "[Mandatory]"
+          - name: tenorPinjaman
+            value: "6"
+            description: "[Mandatory]"
+          - name: batasEstimasiPinjaman
+            value: "10000000"
+            description: "[Mandatory]"
+          - name: partnerJoinDate
+            value: 2000-11-17
+            description: "[Mandatory]"
+          - name: loanTypeCode
+            value: CHILD-MMF-652
+            description: "[Mandatory]"
+          - name: kodePartnership
+            value: QUdVLTE5MA==
+            description: "[Mandatory]"
+          - name: kodeReferensiTerakhir
+            value: abgu
+            description: "[Optional]"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 31 Jul 2024 15:20:54 GMT
+        - name: Content-Length
+          value: "99"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Maaf, Anda sedang dalam proses pengajuan pada aplikasi Pinang Performa.",
+              "status": 500
+          }
+  - name: Error - Prakarsa On Process Found [Express]
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3NjA5MTcxMTAwMDAwMQ==
+            description: Base64 [Mandatory]
+          - name: nama
+            value: SGFycnkgUGFtdW5na2Fz
+            description: Base64 [Mandatory]
+          - name: tanggalLahir
+            value: MjAwMC0xMS0xNw==
+            description: Base64 [Mandatory]
+          - name: tempatLahir
+            value: SmFrYXJ0YQ==
+            description: "[Mandatory]"
+          - name: jenisKelamin
+            value: TGFraS1MYWtp
+            description: "[Mandatory]"
+          - name: tanggalKtp
+            value: 2000-11-17
+            description: "[Mandatory]"
+          - name: kodeArea
+            value: "102"
+            description: "[Mandatory]"
+          - name: latitude
+            value: "111"
+            description: "[Mandatory]"
+          - name: longitude
+            value: "111"
+            description: "[Mandatory]"
+          - name: alamat
+            value: jl. Kedondong
+            description: "[Mandatory]"
+          - name: rt
+            value: "003"
+            description: "[Mandatory]"
+          - name: rw
+            value: "004"
+            description: "[Mandatory]"
+          - name: kodeAgama
+            value: ISL
+            description: "[Mandatory]"
+          - name: statusPernikahan
+            value: Kawin
+            description: "[Mandatory]"
+          - name: namaIbuKandung
+            value: V2luYXJuaQ==
+            description: Base64 [Mandatory]
+          - name: nomorIdentitasPasangan
+            value: MzI3NjA5MTcxMTAwMDAwMQ==
+            description: Base64 [Optional]
+          - name: namaPasangan
+            value: Tm9ib2R5
+            description: Base64 [Optional]
+          - name: tanggalLahirPasangan
+            value: MjAwMC0xMS0xNw==
+            description: Base64 [Optional]
+          - name: tempatLahirPasangan
+            value: SmFrYXJ0YQ==
+            description: "[Optional]"
+          - name: nomorTelepon
+            value: KzYyODk1NDIxNTgzNzIw
+            description: Base64 [Mandatory]
+          - name: email
+            value: YWFhQGdtYWlsLmNvbQ==
+            description: Base64 [Mandatory]
+          - name: pendidikanTerakhir
+            value: D3
+            description: "[Mandatory]"
+          - name: jumlahTanggungan
+            value: "10"
+            description: "[Mandatory]"
+          - name: namaKontakDarurat
+            value: Marisa
+            description: "[Mandatory]"
+          - name: nomorKontakDarurat
+            value: "+62895421583720"
+            description: "[Mandatory]"
+          - name: hubunganKontakDarurat
+            value: Keluarga
+            description: "[Mandatory]"
+          - name: kodeAreaUsaha
+            value: "102"
+            description: "[Mandatory]"
+          - name: alamatUsaha
+            value: jl watherv23
+            description: "[Mandatory]"
+          - name: latitudeUsaha
+            value: "112"
+            description: "[Mandatory]"
+          - name: longitudeUsaha
+            value: "101"
+            description: "[Mandatory]"
+          - name: rtUsaha
+            value: "003"
+            description: "[Mandatory]"
+          - name: rwUsaha
+            value: "004"
+            description: "[Mandatory]"
+          - name: tenorPinjaman
+            value: "6"
+            description: "[Mandatory]"
+          - name: batasEstimasiPinjaman
+            value: "10000000"
+            description: "[Mandatory]"
+          - name: partnerJoinDate
+            value: 2000-11-17
+            description: "[Mandatory]"
+          - name: loanTypeCode
+            value: CHILD-MMF-652
+            description: "[Mandatory]"
+          - name: kodePartnership
+            value: QUdVLTE5MA==
+            description: "[Mandatory]"
+          - name: kodeReferensiTerakhir
+            value: abgu
+            description: "[Optional]"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 31 Jul 2024 15:20:54 GMT
+        - name: Content-Length
+          value: "99"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Maaf, Calon Debitur sedang dalam proses Prakarsa di Bank Raya.",
+              "status": 500
+          }
+  - name: Error - Validation Screening Dukcapil [Debitur Tidak Lolos | Pasangan Lolos]
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3NjA5MTcxMTAwMDAwMQ==
+            description: Base64 [Mandatory]
+          - name: nama
+            value: SGFycnkgUGFtdW5na2Fz
+            description: Base64 [Mandatory]
+          - name: tanggalLahir
+            value: MjAwMC0xMS0xNw==
+            description: Base64 [Mandatory]
+          - name: tempatLahir
+            value: SmFrYXJ0YQ==
+            description: "[Mandatory]"
+          - name: jenisKelamin
+            value: TGFraS1MYWtp
+            description: "[Mandatory]"
+          - name: tanggalKtp
+            value: 2000-11-17
+            description: "[Mandatory]"
+          - name: kodeArea
+            value: "102"
+            description: "[Mandatory]"
+          - name: latitude
+            value: "111"
+            description: "[Mandatory]"
+          - name: longitude
+            value: "111"
+            description: "[Mandatory]"
+          - name: alamat
+            value: jl. Kedondong
+            description: "[Mandatory]"
+          - name: rt
+            value: "003"
+            description: "[Mandatory]"
+          - name: rw
+            value: "004"
+            description: "[Mandatory]"
+          - name: kodeAgama
+            value: ISL
+            description: "[Mandatory]"
+          - name: statusPernikahan
+            value: Kawin
+            description: "[Mandatory]"
+          - name: namaIbuKandung
+            value: V2luYXJuaQ==
+            description: Base64 [Mandatory]
+          - name: nomorIdentitasPasangan
+            value: MzI3NjA5MTcxMTAwMDAwMQ==
+            description: Base64 [Optional]
+          - name: namaPasangan
+            value: Tm9ib2R5
+            description: Base64 [Optional]
+          - name: tanggalLahirPasangan
+            value: MjAwMC0xMS0xNw==
+            description: Base64 [Optional]
+          - name: tempatLahirPasangan
+            value: SmFrYXJ0YQ==
+            description: "[Optional]"
+          - name: nomorTelepon
+            value: KzYyODk1NDIxNTgzNzIw
+            description: Base64 [Mandatory]
+          - name: email
+            value: YWFhQGdtYWlsLmNvbQ==
+            description: Base64 [Mandatory]
+          - name: pendidikanTerakhir
+            value: D3
+            description: "[Mandatory]"
+          - name: jumlahTanggungan
+            value: "10"
+            description: "[Mandatory]"
+          - name: namaKontakDarurat
+            value: Marisa
+            description: "[Mandatory]"
+          - name: nomorKontakDarurat
+            value: "+62895421583720"
+            description: "[Mandatory]"
+          - name: hubunganKontakDarurat
+            value: Keluarga
+            description: "[Mandatory]"
+          - name: kodeAreaUsaha
+            value: "102"
+            description: "[Mandatory]"
+          - name: alamatUsaha
+            value: jl watherv23
+            description: "[Mandatory]"
+          - name: latitudeUsaha
+            value: "112"
+            description: "[Mandatory]"
+          - name: longitudeUsaha
+            value: "101"
+            description: "[Mandatory]"
+          - name: rtUsaha
+            value: "003"
+            description: "[Mandatory]"
+          - name: rwUsaha
+            value: "004"
+            description: "[Mandatory]"
+          - name: tenorPinjaman
+            value: "6"
+            description: "[Mandatory]"
+          - name: batasEstimasiPinjaman
+            value: "10000000"
+            description: "[Mandatory]"
+          - name: partnerJoinDate
+            value: 2000-11-17
+            description: "[Mandatory]"
+          - name: loanTypeCode
+            value: CHILD-MMF-652
+            description: "[Mandatory]"
+          - name: kodePartnership
+            value: QUdVLTE5MA==
+            description: "[Mandatory]"
+          - name: kodeReferensiTerakhir
+            value: abgu
+            description: "[Optional]"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 31 Jul 2024 15:32:50 GMT
+        - name: Content-Length
+          value: "457"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "dukcapilDebitur": {
+                      "flagNamaDebitur": "0",
+                      "flagNamaIbuKandung": "0",
+                      "flagNikDebitur": "0",
+                      "flagTanggalLahir": "0",
+                      "flagTempatLahir": "0"
+                  },
+                  "dukcapilPasangan": {
+                      "flagNamaDebitur": "1",
+                      "flagNikDebitur": "1",
+                      "flagTanggalLahir": "1",
+                      "flagTempatLahir": "1"
+                  },
+                  "kodePrakarsa": "",
+                  "nextStep": "retry-dukcapil"
+              },
+              "message": "Data dukcapil belum sesuai! Kamu masih memiliki kesempatan x kali lagi, silakan mencobanya kembali.",
+              "status": 200
+          }
+  - name: Error - Validation Screening Dukcapil [Debitur Lolos | Pasangan Tidak Lolos]
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: nama
+            value: RHdpa2kgU2FwdXRyYQ==
+            description: Nama [MANDATORY] [Base64]
+          - name: tanggalLahir
+            value: MTk5NS0xMS0xMg==
+            description: Tanggal Lahir [MANDATORY] [Base64] [YYYY-MM-DD]
+          - name: tempatLahir
+            value: SmFrYXJ0YQ==
+            description: Tempat Lahir [MANDATORY] [Base64]
+          - name: jenisKelamin
+            value: TGFraS1MYWtp
+            description: Jenis Kelamin[MANDATORY] [Base64] ["Perempuan", "Laki-Laki"]
+          - name: tanggalKtp
+            value: 2000-11-17
+            description: Tanggal Terbit KTP [MANDATORY]
+          - name: kodeArea
+            value: "7541"
+            description: Kode Area [MANDATORY]
+          - name: latitude
+            value: "111"
+            description: Latitude [MANDATORY]
+          - name: longitude
+            value: "111"
+            description: Longitude [MANDATORY]
+          - name: alamat
+            value: jl. Cempaka Puth
+            description: Alamat [MANDATORY]
+          - name: rt
+            value: "010"
+            description: RT [MANDATORY]
+          - name: rw
+            value: "002"
+            description: RW [MANDATORY]
+          - name: kodeAgama
+            value: ISL
+            description: Kode Agama [MANDATORY] ["BUD", "HIN", "ISL", "KRI", "KHC"]
+          - name: statusPernikahan
+            value: Kawin
+            description: Status Pernikahan [MANDATORY] ["Kawin", "Belum Kawin", "Cerai Hidup", "Cerai Mati"]
+          - name: namaIbuKandung
+            value: UnVtaXlhdGk=
+            description: Nama Ibu Kandung [MANDATORY] [Base64]
+          - name: nomorIdentitasPasangan
+            value: MzE3MTA1MTIxMTk1MDAwMg==
+            description: Nomor Identitas Pasangan [MANDATORY] [Base64]
+          - name: namaPasangan
+            value: UGFzYW5nYW4gRHdpa2k=
+            description: Nama Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: tanggalLahirPasangan
+            value: MjAwMC0xMS0xNw==
+            description: Tanggal Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64] [YYYY-MM-DD]
+          - name: tempatLahirPasangan
+            value: SmFrYXJ0YQ==
+            description: Tempat Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: nomorTelepon
+            value: KzYyODc4NzcyNzg4MzA=
+            description: "Nomor Telepon [MANDATORY] [Base64] [Ex : +628xxx]"
+          - name: email
+            value: ZHdpa2kuc2FwdXRyYUBiYW5rcmF5YS5jby5pZA==
+            description: "Email [MANDATORY] [Base64] [Ex : abc@mail.com]"
+          - name: pendidikanTerakhir
+            value: D3
+            description: Pendidikan Terakhir [MANDATORY["SD", "SM", "SU", "D1", "D2", "D3", "S1", "S2", "S3", "TS", "BT"]
+          - name: jumlahTanggungan
+            value: "1"
+            description: Jumlah Tanggungan [MANDATORY]
+          - name: namaKontakDarurat
+            value: Darurat
+            description: Nama Kontak Darurat [MANDATORY]
+          - name: nomorKontakDarurat
+            value: "+62895421583720"
+            description: "Nomor Telepon Kontak Darurat [MANDATORY] [Ex : +628xxx]"
+          - name: hubunganKontakDarurat
+            value: Kepala Keluarga
+            description: Nama Kontak Darurat [MANDATORY] ["Kepala Keluarga", "Suami", "Istri", "Anak", "Menantu", "Cucu", "Orang Tua", "Mertua", "Famili Lain", "Pembantu"]
+          - name: kodeAreaUsaha
+            value: "7541"
+            description: Kode Area Usaha [MANDATORY]
+          - name: alamatUsaha
+            value: Jl Joha Baru
+            description: Alamat Usaha [MANDATORY]
+          - name: latitudeUsaha
+            value: "112"
+            description: Latitude Usaha [MANDATORY]
+          - name: longitudeUsaha
+            value: "101"
+            description: Longitude Usaha [MANDATORY]
+          - name: rtUsaha
+            value: "012"
+            description: RT Usaha [MANDATORY]
+          - name: rwUsaha
+            value: "002"
+            description: RW Usaha [MANDATORY]
+          - name: partnerJoinDate
+            value: 2000-11-17
+            description: Tanggal Join Partner [MANDATORY]
+          - name: loanTypeCode
+            value: CHILD-MMF-652
+            description: Kode Loan Type [MANDATORY]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: kodeReferensiTerakhir
+            value: EX-MJ1-UmF5YVBpUGVyVG9w/l59mWX1lENrKWaCHO473pdfFJjiaKo7itCYn0zdEzv+dkaYpenLi6dtldS4VYE=
+            description: Kode Referensi Terakhir [OPTIONAL] [MANDATORY ==> Jika Suplesi]
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 05 Aug 2024 09:52:44 GMT
+        - name: Content-Length
+          value: "425"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "dukcapilDebitur": {
+                      "flagNamaDebitur": "1",
+                      "flagNamaIbuKandung": "1",
+                      "flagNikDebitur": "1",
+                      "flagTanggalLahir": "1",
+                      "flagTempatLahir": "1"
+                  },
+                  "dukcapilPasangan": {
+                      "flagNamaDebitur": "0",
+                      "flagNikDebitur": "0",
+                      "flagTanggalLahir": "0",
+                      "flagTempatLahir": "0"
+                  },
+                  "kodePrakarsa": "",
+                  "nextStep": "retry-dukcapil"
+              },
+              "message": "Data dukcapil belum sesuai! Kamu masih memiliki kesempatan x kali lagi, silakan mencobanya kembali.",
+              "status": 200
+          }
+  - name: Error - Validation Screening Dukcapil [Debitur Tidak Lolos]
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: nama
+            value: RHdpa2kgU2FwdXRyYQ==
+            description: Nama [MANDATORY] [Base64]
+          - name: tanggalLahir
+            value: MTk5NS0xMS0xMg==
+            description: Tanggal Lahir [MANDATORY] [Base64] [YYYY-MM-DD]
+          - name: tempatLahir
+            value: SmFrYXJ0YQ==
+            description: Tempat Lahir [MANDATORY] [Base64]
+          - name: jenisKelamin
+            value: TGFraS1MYWtp
+            description: Jenis Kelamin[MANDATORY] [Base64] ["Perempuan", "Laki-Laki"]
+          - name: tanggalKtp
+            value: 2000-11-17
+            description: Tanggal Terbit KTP [MANDATORY]
+          - name: kodeArea
+            value: "7541"
+            description: Kode Area [MANDATORY]
+          - name: latitude
+            value: "111"
+            description: Latitude [MANDATORY]
+          - name: longitude
+            value: "111"
+            description: Longitude [MANDATORY]
+          - name: alamat
+            value: jl. Cempaka Puth
+            description: Alamat [MANDATORY]
+          - name: rt
+            value: "010"
+            description: RT [MANDATORY]
+          - name: rw
+            value: "002"
+            description: RW [MANDATORY]
+          - name: kodeAgama
+            value: ISL
+            description: Kode Agama [MANDATORY] ["BUD", "HIN", "ISL", "KRI", "KHC"]
+          - name: statusPernikahan
+            value: Belum Kawin
+            description: Status Pernikahan [MANDATORY] ["Kawin", "Belum Kawin", "Cerai Hidup", "Cerai Mati"]
+          - name: namaIbuKandung
+            value: UnVtaXlhdGk=
+            description: Nama Ibu Kandung [MANDATORY] [Base64]
+          - name: nomorIdentitasPasangan
+            value: MzE3MTA1MTIxMTk1MDAwMg==
+            description: Nomor Identitas Pasangan [MANDATORY] [Base64]
+            disabled: true
+          - name: namaPasangan
+            value: UGFzYW5nYW4gRHdpa2k=
+            description: Nama Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+            disabled: true
+          - name: tanggalLahirPasangan
+            value: MjAwMC0xMS0xNw==
+            description: Tanggal Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64] [YYYY-MM-DD]
+            disabled: true
+          - name: tempatLahirPasangan
+            value: SmFrYXJ0YQ==
+            description: Tempat Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+            disabled: true
+          - name: nomorTelepon
+            value: KzYyODc4NzcyNzg4MzA=
+            description: "Nomor Telepon [MANDATORY] [Base64] [Ex : +628xxx]"
+          - name: email
+            value: ZHdpa2kuc2FwdXRyYUBiYW5rcmF5YS5jby5pZA==
+            description: "Email [MANDATORY] [Base64] [Ex : abc@mail.com]"
+          - name: pendidikanTerakhir
+            value: D3
+            description: Pendidikan Terakhir [MANDATORY["SD", "SM", "SU", "D1", "D2", "D3", "S1", "S2", "S3", "TS", "BT"]
+          - name: jumlahTanggungan
+            value: "1"
+            description: Jumlah Tanggungan [MANDATORY]
+          - name: namaKontakDarurat
+            value: Darurat
+            description: Nama Kontak Darurat [MANDATORY]
+          - name: nomorKontakDarurat
+            value: "+62895421583720"
+            description: "Nomor Telepon Kontak Darurat [MANDATORY] [Ex : +628xxx]"
+          - name: hubunganKontakDarurat
+            value: Kepala Keluarga
+            description: Nama Kontak Darurat [MANDATORY] ["Kepala Keluarga", "Suami", "Istri", "Anak", "Menantu", "Cucu", "Orang Tua", "Mertua", "Famili Lain", "Pembantu"]
+          - name: kodeAreaUsaha
+            value: "7541"
+            description: Kode Area Usaha [MANDATORY]
+          - name: alamatUsaha
+            value: Jl Joha Baru
+            description: Alamat Usaha [MANDATORY]
+          - name: latitudeUsaha
+            value: "112"
+            description: Latitude Usaha [MANDATORY]
+          - name: longitudeUsaha
+            value: "101"
+            description: Longitude Usaha [MANDATORY]
+          - name: rtUsaha
+            value: "012"
+            description: RT Usaha [MANDATORY]
+          - name: rwUsaha
+            value: "002"
+            description: RW Usaha [MANDATORY]
+          - name: partnerJoinDate
+            value: 2000-11-17
+            description: Tanggal Join Partner [MANDATORY]
+          - name: loanTypeCode
+            value: CHILD-MMF-652
+            description: Kode Loan Type [MANDATORY]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: kodeReferensiTerakhir
+            value: EX-MJ1-UmF5YVBpUGVyVG9w/l59mWX1lENrKWaCHO473pdfFJjiaKo7itCYn0zdEzv+dkaYpenLi6dtldS4VYE=
+            description: Kode Referensi Terakhir [OPTIONAL] [MANDATORY ==> Jika Suplesi]
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 05 Aug 2024 10:06:25 GMT
+        - name: Content-Length
+          value: "340"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "dukcapilDebitur": {
+                      "flagNamaDebitur": "0",
+                      "flagNamaIbuKandung": "0",
+                      "flagNikDebitur": "0",
+                      "flagTanggalLahir": "0",
+                      "flagTempatLahir": "0"
+                  },
+                  "dukcapilPasangan": null,
+                  "kodePrakarsa": "",
+                  "nextStep": "retry-dukcapil"
+              },
+              "message": "Data dukcapil belum sesuai! Kamu masih memiliki kesempatan x kali lagi, silakan mencobanya kembali.",
+              "status": 200
+          }
+  - name: Error - Validation Screening Dukcapil (Out of Quota) [Debitur Tidak Lolos | Pasangan Lolos]
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3NjA5MTcxMTAwMDAwMQ==
+            description: Base64 [Mandatory]
+          - name: nama
+            value: SGFycnkgUGFtdW5na2Fz
+            description: Base64 [Mandatory]
+          - name: tanggalLahir
+            value: MjAwMC0xMS0xNw==
+            description: Base64 [Mandatory]
+          - name: tempatLahir
+            value: SmFrYXJ0YQ==
+            description: "[Mandatory]"
+          - name: jenisKelamin
+            value: TGFraS1MYWtp
+            description: "[Mandatory]"
+          - name: tanggalKtp
+            value: 2000-11-17
+            description: "[Mandatory]"
+          - name: kodeArea
+            value: "102"
+            description: "[Mandatory]"
+          - name: latitude
+            value: "111"
+            description: "[Mandatory]"
+          - name: longitude
+            value: "111"
+            description: "[Mandatory]"
+          - name: alamat
+            value: jl. Kedondong
+            description: "[Mandatory]"
+          - name: rt
+            value: "003"
+            description: "[Mandatory]"
+          - name: rw
+            value: "004"
+            description: "[Mandatory]"
+          - name: kodeAgama
+            value: ISL
+            description: "[Mandatory]"
+          - name: statusPernikahan
+            value: Kawin
+            description: "[Mandatory]"
+          - name: namaIbuKandung
+            value: V2luYXJuaQ==
+            description: Base64 [Mandatory]
+          - name: nomorIdentitasPasangan
+            value: MzI3NjA5MTcxMTAwMDAwMQ==
+            description: Base64 [Optional]
+          - name: namaPasangan
+            value: Tm9ib2R5
+            description: Base64 [Optional]
+          - name: tanggalLahirPasangan
+            value: MjAwMC0xMS0xNw==
+            description: Base64 [Optional]
+          - name: tempatLahirPasangan
+            value: SmFrYXJ0YQ==
+            description: "[Optional]"
+          - name: nomorTelepon
+            value: KzYyODk1NDIxNTgzNzIw
+            description: Base64 [Mandatory]
+          - name: email
+            value: YWFhQGdtYWlsLmNvbQ==
+            description: Base64 [Mandatory]
+          - name: pendidikanTerakhir
+            value: D3
+            description: "[Mandatory]"
+          - name: jumlahTanggungan
+            value: "10"
+            description: "[Mandatory]"
+          - name: namaKontakDarurat
+            value: Marisa
+            description: "[Mandatory]"
+          - name: nomorKontakDarurat
+            value: "+62895421583720"
+            description: "[Mandatory]"
+          - name: hubunganKontakDarurat
+            value: Keluarga
+            description: "[Mandatory]"
+          - name: kodeAreaUsaha
+            value: "102"
+            description: "[Mandatory]"
+          - name: alamatUsaha
+            value: jl watherv23
+            description: "[Mandatory]"
+          - name: latitudeUsaha
+            value: "112"
+            description: "[Mandatory]"
+          - name: longitudeUsaha
+            value: "101"
+            description: "[Mandatory]"
+          - name: rtUsaha
+            value: "003"
+            description: "[Mandatory]"
+          - name: rwUsaha
+            value: "004"
+            description: "[Mandatory]"
+          - name: tenorPinjaman
+            value: "6"
+            description: "[Mandatory]"
+          - name: batasEstimasiPinjaman
+            value: "10000000"
+            description: "[Mandatory]"
+          - name: partnerJoinDate
+            value: 2000-11-17
+            description: "[Mandatory]"
+          - name: loanTypeCode
+            value: CHILD-MMF-652
+            description: "[Mandatory]"
+          - name: kodePartnership
+            value: QUdVLTE5MA==
+            description: "[Mandatory]"
+          - name: kodeReferensiTerakhir
+            value: EX-MJ1-UmF5YVBpUGVyVG9w/l59mWX1lENrKWaCHO473pdfFJjiaKo7itCYn0zdEzv+dkaYpenLi6dtldS4VYE=
+            description: "[Optional]"
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 01 Aug 2024 07:47:24 GMT
+        - name: Content-Length
+          value: "575"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "dukcapilDebitur": {
+                      "flagNamaDebitur": "0",
+                      "flagNamaIbuKandung": "0",
+                      "flagNikDebitur": "0",
+                      "flagTanggalLahir": "0",
+                      "flagTempatLahir": "0"
+                  },
+                  "dukcapilPasangan": {
+                      "flagNamaDebitur": "1",
+                      "flagNikDebitur": "1",
+                      "flagTanggalLahir": "1",
+                      "flagTempatLahir": "1"
+                  },
+                  "kodePrakarsa": "EX-MJ1-UmF5YVBpUGVyVG9w/lx6nGT4lUZqKWaPHO473pdfFJjiaKA5j9CamkjZEiwo9ntjcvxMpwNUACQBFho=",
+                  "nextStep": "ubah-pengajuan"
+              },
+              "message": "Data Dukcapil belum sesuai! Kesempatan kamu sudah habis karena sudah mencobanya sebanyak x kali. Namun tidak perlu khawatir, kamu dapat menunggu x Menit kedepan untuk mencobanya kembali.",
+              "status": 500
+          }
+  - name: Error - Validation Screening Dukcapil (Out of Quota) [Debitur Lolos | Pasangan Tidak Lolos]
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: nama
+            value: RHdpa2kgU2FwdXRyYQ==
+            description: Nama [MANDATORY] [Base64]
+          - name: tanggalLahir
+            value: MTk5NS0xMS0xMg==
+            description: Tanggal Lahir [MANDATORY] [Base64] [YYYY-MM-DD]
+          - name: tempatLahir
+            value: SmFrYXJ0YQ==
+            description: Tempat Lahir [MANDATORY] [Base64]
+          - name: jenisKelamin
+            value: TGFraS1MYWtp
+            description: Jenis Kelamin[MANDATORY] [Base64] ["Perempuan", "Laki-Laki"]
+          - name: tanggalKtp
+            value: 2000-11-17
+            description: Tanggal Terbit KTP [MANDATORY]
+          - name: kodeArea
+            value: "7541"
+            description: Kode Area [MANDATORY]
+          - name: latitude
+            value: "111"
+            description: Latitude [MANDATORY]
+          - name: longitude
+            value: "111"
+            description: Longitude [MANDATORY]
+          - name: alamat
+            value: jl. Cempaka Puth
+            description: Alamat [MANDATORY]
+          - name: rt
+            value: "010"
+            description: RT [MANDATORY]
+          - name: rw
+            value: "002"
+            description: RW [MANDATORY]
+          - name: kodeAgama
+            value: ISL
+            description: Kode Agama [MANDATORY] ["BUD", "HIN", "ISL", "KRI", "KHC"]
+          - name: statusPernikahan
+            value: Kawin
+            description: Status Pernikahan [MANDATORY] ["Kawin", "Belum Kawin", "Cerai Hidup", "Cerai Mati"]
+          - name: namaIbuKandung
+            value: UnVtaXlhdGk=
+            description: Nama Ibu Kandung [MANDATORY] [Base64]
+          - name: nomorIdentitasPasangan
+            value: MzE3MTA1MTIxMTk1MDAwMg==
+            description: Nomor Identitas Pasangan [MANDATORY] [Base64]
+          - name: namaPasangan
+            value: UGFzYW5nYW4gRHdpa2k=
+            description: Nama Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: tanggalLahirPasangan
+            value: MjAwMC0xMS0xNw==
+            description: Tanggal Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64] [YYYY-MM-DD]
+          - name: tempatLahirPasangan
+            value: SmFrYXJ0YQ==
+            description: Tempat Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: nomorTelepon
+            value: KzYyODc4NzcyNzg4MzA=
+            description: "Nomor Telepon [MANDATORY] [Base64] [Ex : +628xxx]"
+          - name: email
+            value: ZHdpa2kuc2FwdXRyYUBiYW5rcmF5YS5jby5pZA==
+            description: "Email [MANDATORY] [Base64] [Ex : abc@mail.com]"
+          - name: pendidikanTerakhir
+            value: D3
+            description: Pendidikan Terakhir [MANDATORY["SD", "SM", "SU", "D1", "D2", "D3", "S1", "S2", "S3", "TS", "BT"]
+          - name: jumlahTanggungan
+            value: "1"
+            description: Jumlah Tanggungan [MANDATORY]
+          - name: namaKontakDarurat
+            value: Darurat
+            description: Nama Kontak Darurat [MANDATORY]
+          - name: nomorKontakDarurat
+            value: "+62895421583720"
+            description: "Nomor Telepon Kontak Darurat [MANDATORY] [Ex : +628xxx]"
+          - name: hubunganKontakDarurat
+            value: Kepala Keluarga
+            description: Nama Kontak Darurat [MANDATORY] ["Kepala Keluarga", "Suami", "Istri", "Anak", "Menantu", "Cucu", "Orang Tua", "Mertua", "Famili Lain", "Pembantu"]
+          - name: kodeAreaUsaha
+            value: "7541"
+            description: Kode Area Usaha [MANDATORY]
+          - name: alamatUsaha
+            value: Jl Joha Baru
+            description: Alamat Usaha [MANDATORY]
+          - name: latitudeUsaha
+            value: "112"
+            description: Latitude Usaha [MANDATORY]
+          - name: longitudeUsaha
+            value: "101"
+            description: Longitude Usaha [MANDATORY]
+          - name: rtUsaha
+            value: "012"
+            description: RT Usaha [MANDATORY]
+          - name: rwUsaha
+            value: "002"
+            description: RW Usaha [MANDATORY]
+          - name: partnerJoinDate
+            value: 2000-11-17
+            description: Tanggal Join Partner [MANDATORY]
+          - name: loanTypeCode
+            value: CHILD-MMF-652
+            description: Kode Loan Type [MANDATORY]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: kodeReferensiTerakhir
+            value: EX-MJ1-UmF5YVBpUGVyVG9w/l59mWX1lENrKWaCHO473pdfFJjiaKo7itCYn0zdEzv+dkaYpenLi6dtldS4VYE=
+            description: Kode Referensi Terakhir [OPTIONAL] [MANDATORY ==> Jika Suplesi]
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 05 Aug 2024 09:53:36 GMT
+        - name: Content-Length
+          value: "600"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "dukcapilDebitur": {
+                      "flagNamaDebitur": "1",
+                      "flagNamaIbuKandung": "1",
+                      "flagNikDebitur": "1",
+                      "flagTanggalLahir": "1",
+                      "flagTempatLahir": "1"
+                  },
+                  "dukcapilPasangan": {
+                      "flagNamaDebitur": "0",
+                      "flagNikDebitur": "0",
+                      "flagTanggalLahir": "0",
+                      "flagTempatLahir": "0"
+                  },
+                  "kodePrakarsa": "EX-MJ1-UmF5YVBpUGVyVG9w/lx6nGT4lUZqKWaPHO473pdfFJjiaKA5j9Cam0jbEdZHFBSC7g7VBhK6ulw3xwE=",
+                  "nextStep": "ubah-pengajuan"
+              },
+              "message": "Data Dukcapil belum sesuai! Kesempatan kamu sudah habis karena sudah mencobanya sebanyak x kali. Namun tidak perlu khawatir, kamu dapat menunggu x Menit kedepan untuk mencobanya kembali.",
+              "status": 500
+          }
+  - name: Error - Validation Screening Dukcapil (Out of Quota) [Debitur Tidak Lolos]
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: nama
+            value: RHdpa2kgU2FwdXRyYQ==
+            description: Nama [MANDATORY] [Base64]
+          - name: tanggalLahir
+            value: MTk5NS0xMS0xMg==
+            description: Tanggal Lahir [MANDATORY] [Base64] [YYYY-MM-DD]
+          - name: tempatLahir
+            value: SmFrYXJ0YQ==
+            description: Tempat Lahir [MANDATORY] [Base64]
+          - name: jenisKelamin
+            value: TGFraS1MYWtp
+            description: Jenis Kelamin[MANDATORY] [Base64] ["Perempuan", "Laki-Laki"]
+          - name: tanggalKtp
+            value: 2000-11-17
+            description: Tanggal Terbit KTP [MANDATORY]
+          - name: kodeArea
+            value: "7541"
+            description: Kode Area [MANDATORY]
+          - name: latitude
+            value: "111"
+            description: Latitude [MANDATORY]
+          - name: longitude
+            value: "111"
+            description: Longitude [MANDATORY]
+          - name: alamat
+            value: jl. Cempaka Puth
+            description: Alamat [MANDATORY]
+          - name: rt
+            value: "010"
+            description: RT [MANDATORY]
+          - name: rw
+            value: "002"
+            description: RW [MANDATORY]
+          - name: kodeAgama
+            value: ISL
+            description: Kode Agama [MANDATORY] ["BUD", "HIN", "ISL", "KRI", "KHC"]
+          - name: statusPernikahan
+            value: Belum Kawin
+            description: Status Pernikahan [MANDATORY] ["Kawin", "Belum Kawin", "Cerai Hidup", "Cerai Mati"]
+          - name: namaIbuKandung
+            value: UnVtaXlhdGk=
+            description: Nama Ibu Kandung [MANDATORY] [Base64]
+          - name: nomorIdentitasPasangan
+            value: MzE3MTA1MTIxMTk1MDAwMg==
+            description: Nomor Identitas Pasangan [MANDATORY] [Base64]
+            disabled: true
+          - name: namaPasangan
+            value: UGFzYW5nYW4gRHdpa2k=
+            description: Nama Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+            disabled: true
+          - name: tanggalLahirPasangan
+            value: MjAwMC0xMS0xNw==
+            description: Tanggal Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64] [YYYY-MM-DD]
+            disabled: true
+          - name: tempatLahirPasangan
+            value: SmFrYXJ0YQ==
+            description: Tempat Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+            disabled: true
+          - name: nomorTelepon
+            value: KzYyODc4NzcyNzg4MzA=
+            description: "Nomor Telepon [MANDATORY] [Base64] [Ex : +628xxx]"
+          - name: email
+            value: ZHdpa2kuc2FwdXRyYUBiYW5rcmF5YS5jby5pZA==
+            description: "Email [MANDATORY] [Base64] [Ex : abc@mail.com]"
+          - name: pendidikanTerakhir
+            value: D3
+            description: Pendidikan Terakhir [MANDATORY["SD", "SM", "SU", "D1", "D2", "D3", "S1", "S2", "S3", "TS", "BT"]
+          - name: jumlahTanggungan
+            value: "1"
+            description: Jumlah Tanggungan [MANDATORY]
+          - name: namaKontakDarurat
+            value: Darurat
+            description: Nama Kontak Darurat [MANDATORY]
+          - name: nomorKontakDarurat
+            value: "+62895421583720"
+            description: "Nomor Telepon Kontak Darurat [MANDATORY] [Ex : +628xxx]"
+          - name: hubunganKontakDarurat
+            value: Kepala Keluarga
+            description: Nama Kontak Darurat [MANDATORY] ["Kepala Keluarga", "Suami", "Istri", "Anak", "Menantu", "Cucu", "Orang Tua", "Mertua", "Famili Lain", "Pembantu"]
+          - name: kodeAreaUsaha
+            value: "7541"
+            description: Kode Area Usaha [MANDATORY]
+          - name: alamatUsaha
+            value: Jl Joha Baru
+            description: Alamat Usaha [MANDATORY]
+          - name: latitudeUsaha
+            value: "112"
+            description: Latitude Usaha [MANDATORY]
+          - name: longitudeUsaha
+            value: "101"
+            description: Longitude Usaha [MANDATORY]
+          - name: rtUsaha
+            value: "012"
+            description: RT Usaha [MANDATORY]
+          - name: rwUsaha
+            value: "002"
+            description: RW Usaha [MANDATORY]
+          - name: partnerJoinDate
+            value: 2000-11-17
+            description: Tanggal Join Partner [MANDATORY]
+          - name: loanTypeCode
+            value: CHILD-MMF-652
+            description: Kode Loan Type [MANDATORY]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: kodeReferensiTerakhir
+            value: EX-MJ1-UmF5YVBpUGVyVG9w/l59mWX1lENrKWaCHO473pdfFJjiaKo7itCYn0zdEzv+dkaYpenLi6dtldS4VYE=
+            description: Kode Referensi Terakhir [OPTIONAL] [MANDATORY ==> Jika Suplesi]
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 05 Aug 2024 10:07:05 GMT
+        - name: Content-Length
+          value: "515"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "dukcapilDebitur": {
+                      "flagNamaDebitur": "0",
+                      "flagNamaIbuKandung": "0",
+                      "flagNikDebitur": "0",
+                      "flagTanggalLahir": "0",
+                      "flagTempatLahir": "0"
+                  },
+                  "dukcapilPasangan": null,
+                  "kodePrakarsa": "EX-MJ1-UmF5YVBpUGVyVG9w/lx6nGT4lUZqKWaPHO473pdfFJjiaKA5j9CbnkzYEn3mu7ftVXQA3reV2augn0E=",
+                  "nextStep": "ubah-pengajuan"
+              },
+              "message": "Data Dukcapil belum sesuai! Kesempatan kamu sudah habis karena sudah mencobanya sebanyak x kali. Namun tidak perlu khawatir, kamu dapat menunggu x Menit kedepan untuk mencobanya kembali.",
+              "status": 500
+          }
+  - name: Error - Terdapat Pinjaman Telat
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3NjA5MTcxMTAwMDAwMQ==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: nama
+            value: SGFycnkgUGFtdW5na2Fz
+            description: Nama [MANDATORY] [Base64]
+          - name: tanggalLahir
+            value: MTk5NS0xMS0xMg==
+            description: Tanggal Lahir [MANDATORY] [Base64] [YYYY-MM-DD]
+          - name: tempatLahir
+            value: SmFrYXJ0YQ==
+            description: Tempat Lahir [MANDATORY] [Base64]
+          - name: jenisKelamin
+            value: TGFraS1MYWtp
+            description: Jenis Kelamin[MANDATORY] [Base64] ["Perempuan", "Laki-Laki"]
+          - name: tanggalKtp
+            value: 2000-11-17
+            description: Tanggal Terbit KTP [MANDATORY]
+          - name: kodeArea
+            value: "7541"
+            description: Kode Area [MANDATORY]
+          - name: latitude
+            value: "-20"
+            description: Latitude [MANDATORY]
+          - name: longitude
+            value: "20"
+            description: Longitude [MANDATORY]
+          - name: alamat
+            value: Cempaka Putih Barat
+            description: Alamat [MANDATORY]
+          - name: rt
+            value: "010"
+            description: RT [MANDATORY]
+          - name: rw
+            value: "002"
+            description: RW [MANDATORY]
+          - name: kodeAgama
+            value: ISL
+            description: Kode Agama [MANDATORY] ["BUD", "HIN", "ISL", "KRI", "KHC"]
+          - name: statusPernikahan
+            value: Kawin
+            description: Status Pernikahan [MANDATORY] ["Kawin", "Belum Kawin", "Cerai Hidup", "Cerai Mati"]
+          - name: namaIbuKandung
+            value: UnVtaXlhdGk=
+            description: Nama Ibu Kandung [MANDATORY] [Base64]
+          - name: nomorIdentitasPasangan
+            value: MzE3MTA1MTIxMTk1MDAwMg==
+            description: Nomor Identitas Pasangan [MANDATORY] [Base64]
+          - name: namaPasangan
+            value: VGVzdGluZw==
+            description: Nama Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: tanggalLahirPasangan
+            value: MjAwMC0xMS0xNw==
+            description: Tanggal Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64] [YYYY-MM-DD]
+          - name: tempatLahirPasangan
+            value: SmFrYXJ0YQ==
+            description: Tempat Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: nomorTelepon
+            value: KzYyODc4NzcyNzg4MzA=
+            description: "Nomor Telepon [MANDATORY] [Base64] [Ex : +628xxx]"
+          - name: email
+            value: ZHdpa2kuc2FwdXRyYUBiYW5rcmF5YS5jby5pZA==
+            description: "Email [MANDATORY] [Base64] [Ex : abc@mail.com]"
+          - name: kodePendidikanTerakhir
+            value: S1
+            description: Pendidikan Terakhir [MANDATORY["SD", "SM", "SU", "D1", "D2", "D3", "S1", "S2", "S3", "TS", "BT"]
+          - name: jumlahTanggungan
+            value: "1"
+            description: Jumlah Tanggungan [MANDATORY]
+          - name: namaKontakDarurat
+            value: Darurat
+            description: Nama Kontak Darurat [MANDATORY]
+          - name: nomorKontakDarurat
+            value: "+6287877278830"
+            description: Nomor Telepon Darurat [Mandatory]
+          - name: hubunganKontakDarurat
+            value: Istri
+            description: Nama Kontak Darurat [MANDATORY] ["Kepala Keluarga", "Suami", "Istri", "Anak", "Menantu", "Cucu", "Orang Tua", "Mertua", "Famili Lain", "Pembantu"]
+          - name: kodeAreaUsaha
+            value: "7541"
+            description: Kode Area Usaha [MANDATORY]
+          - name: alamatUsaha
+            value: Jl Joha Baru
+            description: Alamat Usaha [MANDATORY]
+          - name: latitudeUsaha
+            value: "-20"
+            description: Latitude Usaha [MANDATORY]
+          - name: longitudeUsaha
+            value: "20"
+            description: Longitude Usaha [MANDATORY]
+          - name: rtUsaha
+            value: "012"
+            description: RT Usaha [MANDATORY]
+          - name: rwUsaha
+            value: "002"
+            description: RW Usaha [MANDATORY]
+          - name: tanggalJoinPartner
+            value: 2000-11-17
+            description: Tanggal Join Partner [MANDATORY]
+          - name: kodeTipePinjaman
+            value: CHILD-MMF-652
+            description: Kode Loan Type [MANDATORY]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: kodeReferensiTerakhir
+            value: EX-MJ1-UmF5YVBpUGVyVG9w/l59mWX1lENrKWaCHO473pdfFJjiaKo7itCYn0zdEzv+dkaYpenLi6dtldS4VYE=
+            description: Kode Referensi Terakhir [OPTIONAL] [MANDATORY ==> Jika Suplesi]
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 02 Oct 2024 12:00:57 GMT
+        - name: Content-Length
+          value: "132"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Maaf, Anda belum bisa mengajukan karena masih ada pinjaman aktif.",
+              "status": 500
+          }
+  - name: Error - Exist Limit Aktif
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3NjA5MTcxMTAwMDAwMQ==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: nama
+            value: SGFycnkgUGFtdW5na2Fz
+            description: Nama [MANDATORY] [Base64]
+          - name: tanggalLahir
+            value: MTk5NS0xMS0xMg==
+            description: Tanggal Lahir [MANDATORY] [Base64] [YYYY-MM-DD]
+          - name: tempatLahir
+            value: SmFrYXJ0YQ==
+            description: Tempat Lahir [MANDATORY] [Base64]
+          - name: jenisKelamin
+            value: TGFraS1MYWtp
+            description: Jenis Kelamin[MANDATORY] [Base64] ["Perempuan", "Laki-Laki"]
+          - name: tanggalKtp
+            value: 2000-11-17
+            description: Tanggal Terbit KTP [MANDATORY]
+          - name: kodeArea
+            value: "7541"
+            description: Kode Area [MANDATORY]
+          - name: latitude
+            value: "-20"
+            description: Latitude [MANDATORY]
+          - name: longitude
+            value: "20"
+            description: Longitude [MANDATORY]
+          - name: alamat
+            value: Cempaka Putih Barat
+            description: Alamat [MANDATORY]
+          - name: rt
+            value: "010"
+            description: RT [MANDATORY]
+          - name: rw
+            value: "002"
+            description: RW [MANDATORY]
+          - name: kodeAgama
+            value: ISL
+            description: Kode Agama [MANDATORY] ["BUD", "HIN", "ISL", "KRI", "KHC"]
+          - name: statusPernikahan
+            value: Kawin
+            description: Status Pernikahan [MANDATORY] ["Kawin", "Belum Kawin", "Cerai Hidup", "Cerai Mati"]
+          - name: namaIbuKandung
+            value: UnVtaXlhdGk=
+            description: Nama Ibu Kandung [MANDATORY] [Base64]
+          - name: nomorIdentitasPasangan
+            value: MzE3MTA1MTIxMTk1MDAwMg==
+            description: Nomor Identitas Pasangan [MANDATORY] [Base64]
+          - name: namaPasangan
+            value: VGVzdGluZw==
+            description: Nama Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: tanggalLahirPasangan
+            value: MjAwMC0xMS0xNw==
+            description: Tanggal Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64] [YYYY-MM-DD]
+          - name: tempatLahirPasangan
+            value: SmFrYXJ0YQ==
+            description: Tempat Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: nomorTelepon
+            value: KzYyODc4NzcyNzg4MzA=
+            description: "Nomor Telepon [MANDATORY] [Base64] [Ex : +628xxx]"
+          - name: email
+            value: ZHdpa2kuc2FwdXRyYUBiYW5rcmF5YS5jby5pZA==
+            description: "Email [MANDATORY] [Base64] [Ex : abc@mail.com]"
+          - name: kodePendidikanTerakhir
+            value: S1
+            description: Pendidikan Terakhir [MANDATORY["SD", "SM", "SU", "D1", "D2", "D3", "S1", "S2", "S3", "TS", "BT"]
+          - name: jumlahTanggungan
+            value: "1"
+            description: Jumlah Tanggungan [MANDATORY]
+          - name: namaKontakDarurat
+            value: Darurat
+            description: Nama Kontak Darurat [MANDATORY]
+          - name: nomorKontakDarurat
+            value: "+6287877278830"
+            description: Nomor Telepon Darurat [Mandatory]
+          - name: hubunganKontakDarurat
+            value: Istri
+            description: Nama Kontak Darurat [MANDATORY] ["Kepala Keluarga", "Suami", "Istri", "Anak", "Menantu", "Cucu", "Orang Tua", "Mertua", "Famili Lain", "Pembantu"]
+          - name: kodeAreaUsaha
+            value: "7541"
+            description: Kode Area Usaha [MANDATORY]
+          - name: alamatUsaha
+            value: Jl Joha Baru
+            description: Alamat Usaha [MANDATORY]
+          - name: latitudeUsaha
+            value: "-20"
+            description: Latitude Usaha [MANDATORY]
+          - name: longitudeUsaha
+            value: "20"
+            description: Longitude Usaha [MANDATORY]
+          - name: rtUsaha
+            value: "012"
+            description: RT Usaha [MANDATORY]
+          - name: rwUsaha
+            value: "002"
+            description: RW Usaha [MANDATORY]
+          - name: tanggalJoinPartner
+            value: 2000-11-17
+            description: Tanggal Join Partner [MANDATORY]
+          - name: kodeTipePinjaman
+            value: CHILD-MMF-652
+            description: Kode Loan Type [MANDATORY]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: kodeReferensiTerakhir
+            value: EX-MJ1-UmF5YVBpUGVyVG9w/l59mWX1lENrKWaCHO473pdfFJjiaKo7itCYn0zdEzv+dkaYpenLi6dtldS4VYE=
+            description: Kode Referensi Terakhir [OPTIONAL] [MANDATORY ==> Jika Suplesi]
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 18 Oct 2024 07:10:23 GMT
+        - name: Content-Length
+          value: "89"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Maaf, anda sedang memiliki limit aktif.",
+              "status": 500
+          }
+  - name: Error - Is Renewal 0
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3NjA5MTcxMTAwMDAwMQ==
+            description: Base64 [Mandatory]
+          - name: nama
+            value: SGFycnkgUGFtdW5na2Fz
+            description: Base64 [Mandatory]
+          - name: tanggalLahir
+            value: MjAwMC0xMS0xNw==
+            description: Base64 [Mandatory]
+          - name: tempatLahir
+            value: SmFrYXJ0YQ==
+            description: "[Mandatory]"
+          - name: jenisKelamin
+            value: TGFraS1MYWtp
+            description: "[Mandatory]"
+          - name: tanggalKtp
+            value: 2000-11-17
+            description: "[Mandatory]"
+          - name: kodeArea
+            value: "102"
+            description: "[Mandatory]"
+          - name: latitude
+            value: "111"
+            description: "[Mandatory]"
+          - name: longitude
+            value: "111"
+            description: "[Mandatory]"
+          - name: alamat
+            value: jl. Kedondong
+            description: "[Mandatory]"
+          - name: rt
+            value: "003"
+            description: "[Mandatory]"
+          - name: rw
+            value: "004"
+            description: "[Mandatory]"
+          - name: kodeAgama
+            value: ISL
+            description: "[Mandatory]"
+          - name: statusPernikahan
+            value: Kawin
+            description: "[Mandatory]"
+          - name: namaIbuKandung
+            value: V2luYXJuaQ==
+            description: Base64 [Mandatory]
+          - name: nomorIdentitasPasangan
+            value: MzI3NjA5MTcxMTAwMDAwMQ==
+            description: Base64 [Optional]
+          - name: namaPasangan
+            value: Tm9ib2R5
+            description: Base64 [Optional]
+          - name: tanggalLahirPasangan
+            value: MjAwMC0xMS0xNw==
+            description: Base64 [Optional]
+          - name: tempatLahirPasangan
+            value: SmFrYXJ0YQ==
+            description: "[Optional]"
+          - name: nomorTelepon
+            value: KzYyODk1NDIxNTgzNzIw
+            description: Base64 [Mandatory]
+          - name: email
+            value: YWFhQGdtYWlsLmNvbQ==
+            description: Base64 [Mandatory]
+          - name: pendidikanTerakhir
+            value: D3
+            description: "[Mandatory]"
+          - name: jumlahTanggungan
+            value: "10"
+            description: "[Mandatory]"
+          - name: namaKontakDarurat
+            value: Marisa
+            description: "[Mandatory]"
+          - name: nomorKontakDarurat
+            value: "+62895421583720"
+            description: "[Mandatory]"
+          - name: hubunganKontakDarurat
+            value: Keluarga
+            description: "[Mandatory]"
+          - name: kodeAreaUsaha
+            value: "102"
+            description: "[Mandatory]"
+          - name: alamatUsaha
+            value: jl watherv23
+            description: "[Mandatory]"
+          - name: latitudeUsaha
+            value: "112"
+            description: "[Mandatory]"
+          - name: longitudeUsaha
+            value: "101"
+            description: "[Mandatory]"
+          - name: rtUsaha
+            value: "003"
+            description: "[Mandatory]"
+          - name: rwUsaha
+            value: "004"
+            description: "[Mandatory]"
+          - name: tenorPinjaman
+            value: "6"
+            description: "[Mandatory]"
+          - name: batasEstimasiPinjaman
+            value: "10000000"
+            description: "[Mandatory]"
+          - name: partnerJoinDate
+            value: 2000-11-17
+            description: "[Mandatory]"
+          - name: loanTypeCode
+            value: CHILD-MMF-652
+            description: "[Mandatory]"
+          - name: kodePartnership
+            value: QUdVLTE5MA==
+            description: "[Mandatory]"
+          - name: referensiTerakhir
+            value: abgu
+            description: "[Optional]"
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 31 Jul 2024 13:02:05 GMT
+        - name: Content-Length
+          value: "50"
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Maaf, anda tidak terdaftar pada whitelist.",
+            "status": 500
+          }
+  - name: Error - Validation Age
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzIwOTEyMjAwMzk0MDAwNg==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: nama
+            value: RHdpa2kgU2FwdXRyYQ==
+            description: Nama [MANDATORY] [Base64]
+          - name: tanggalLahir
+            value: MTk2OS0xMC0xMA==
+            description: Tanggal Lahir [MANDATORY] [Base64] [YYYY-MM-DD]
+          - name: tempatLahir
+            value: SmFrYXJ0YQ==
+            description: Tempat Lahir [MANDATORY] [Base64]
+          - name: jenisKelamin
+            value: TGFraS1MYWtp
+            description: Jenis Kelamin[MANDATORY] [Base64] ["Perempuan", "Laki-Laki"]
+          - name: tanggalKtp
+            value: 2000-11-17
+            description: Tanggal Terbit KTP [MANDATORY]
+          - name: kodeArea
+            value: "7541"
+            description: Kode Area [MANDATORY]
+          - name: latitude
+            value: "-20"
+            description: Latitude [MANDATORY]
+          - name: longitude
+            value: "20"
+            description: Longitude [MANDATORY]
+          - name: alamat
+            value: Cempaka Putih Barat
+            description: Alamat [MANDATORY]
+          - name: rt
+            value: "010"
+            description: RT [MANDATORY]
+          - name: rw
+            value: "002"
+            description: RW [MANDATORY]
+          - name: kodeAgama
+            value: ISL
+            description: Kode Agama [MANDATORY] ["BUD", "HIN", "ISL", "KRI", "KHC"]
+          - name: statusPernikahan
+            value: Belum Kawin
+            description: Status Pernikahan [MANDATORY] ["Kawin", "Belum Kawin", "Cerai Hidup", "Cerai Mati"]
+          - name: namaIbuKandung
+            value: UnVtaXlhdGk=
+            description: Nama Ibu Kandung [MANDATORY] [Base64]
+          - name: nomorIdentitasPasangan
+            value: MzE3MTA1MTIxMTk1MDAwMg==
+            description: Nomor Identitas Pasangan [MANDATORY] [Base64]
+          - name: namaPasangan
+            value: VGVzdGluZw==
+            description: Nama Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: tanggalLahirPasangan
+            value: MjAwMC0xMS0xNw==
+            description: Tanggal Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64] [YYYY-MM-DD]
+          - name: tempatLahirPasangan
+            value: SmFrYXJ0YQ==
+            description: Tempat Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: nomorTelepon
+            value: KzYyODc4NzcyNzg4MzA=
+            description: "Nomor Telepon [MANDATORY] [Base64] [Ex : +628xxx]"
+          - name: email
+            value: ZHdpa2kuc2FwdXRyYUBiYW5rcmF5YS5jby5pZA==
+            description: "Email [MANDATORY] [Base64] [Ex : abc@mail.com]"
+          - name: kodePendidikanTerakhir
+            value: S1
+            description: Pendidikan Terakhir [MANDATORY["SD", "SM", "SU", "D1", "D2", "D3", "S1", "S2", "S3", "TS", "BT"]
+          - name: jumlahTanggungan
+            value: "1"
+            description: Jumlah Tanggungan [MANDATORY]
+          - name: namaKontakDarurat
+            value: Darurat
+            description: Nama Kontak Darurat [OPTIONAL]
+          - name: nomorKontakDarurat
+            value: "+6287877278830"
+            description: Nomor Telepon Darurat [OPTIONAL]
+          - name: hubunganKontakDarurat
+            value: Istri
+            description: Nama Kontak Darurat [OPTIONAL] ["Kepala Keluarga", "Suami", "Istri", "Anak", "Menantu", "Cucu", "Orang Tua", "Mertua", "Famili Lain", "Pembantu"]
+          - name: kodeAreaUsaha
+            value: "7541"
+            description: Kode Area Usaha [MANDATORY]
+          - name: alamatUsaha
+            value: Jl. Joha Baru 09
+            description: Alamat Usaha [MANDATORY]
+          - name: latitudeUsaha
+            value: "-20"
+            description: Latitude Usaha [MANDATORY]
+          - name: longitudeUsaha
+            value: "20"
+            description: Longitude Usaha [MANDATORY]
+          - name: rtUsaha
+            value: "012"
+            description: RT Usaha [MANDATORY]
+          - name: rwUsaha
+            value: "002"
+            description: RW Usaha [MANDATORY]
+          - name: tanggalJoinPartner
+            value: 2000-11-17
+            description: Tanggal Join Partner [MANDATORY]
+          - name: kodeTipePinjaman
+            value: CHILD-ATM-38
+            description: Kode Loan Type [MANDATORY]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: kodeReferensiTerakhir
+            value: EX-MJ1-UmF5YVBpUGVyVG9w/l59mWX1lENrKWaCHO473pdfFJjiaKo7itCYn0zdEzv+dkaYpenLi6dtldS4VYE=
+            description: Kode Referensi Terakhir [OPTIONAL] [MANDATORY ==> Jika Suplesi]
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Wed, 15 Oct 2025 09:03:40 GMT
+        - name: Content-Length
+          value: "77"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Pinjaman hanya untuk usia 21 - 55 Tahun.",
+              "status": 400
+          }
+  - name: Error - Exist Cashloan Aktif
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3MzE4MDcxMjk2MDAwNw==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: nama
+            value: RHdpa2kgU2FwdXRyYQ==
+            description: Nama [MANDATORY] [Base64]
+          - name: tanggalLahir
+            value: MTk2OS0xMC0xMA==
+            description: Tanggal Lahir [MANDATORY] [Base64] [YYYY-MM-DD]
+          - name: tempatLahir
+            value: SmFrYXJ0YQ==
+            description: Tempat Lahir [MANDATORY] [Base64]
+          - name: jenisKelamin
+            value: TGFraS1MYWtp
+            description: Jenis Kelamin[MANDATORY] [Base64] ["Perempuan", "Laki-Laki"]
+          - name: tanggalKtp
+            value: 2000-11-17
+            description: Tanggal Terbit KTP [MANDATORY]
+          - name: kodeArea
+            value: "7541"
+            description: Kode Area [MANDATORY]
+          - name: latitude
+            value: "-20"
+            description: Latitude [MANDATORY]
+          - name: longitude
+            value: "20"
+            description: Longitude [MANDATORY]
+          - name: alamat
+            value: Cempaka Putih Barat
+            description: Alamat [MANDATORY]
+          - name: rt
+            value: "010"
+            description: RT [MANDATORY]
+          - name: rw
+            value: "002"
+            description: RW [MANDATORY]
+          - name: kodeAgama
+            value: ISL
+            description: Kode Agama [MANDATORY] ["BUD", "HIN", "ISL", "KRI", "KHC"]
+          - name: statusPernikahan
+            value: Kawin
+            description: Status Pernikahan [MANDATORY] ["Kawin", "Belum Kawin", "Cerai Hidup", "Cerai Mati"]
+          - name: namaIbuKandung
+            value: UnVtaXlhdGk=
+            description: Nama Ibu Kandung [MANDATORY] [Base64]
+          - name: nomorIdentitasPasangan
+            value: MzE3MTA1MTIxMTk1MDAwMg==
+            description: Nomor Identitas Pasangan [MANDATORY] [Base64]
+          - name: namaPasangan
+            value: VGVzdGluZw==
+            description: Nama Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: tanggalLahirPasangan
+            value: MjAwMC0xMS0xNw==
+            description: Tanggal Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64] [YYYY-MM-DD]
+          - name: tempatLahirPasangan
+            value: SmFrYXJ0YQ==
+            description: Tempat Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: nomorTelepon
+            value: KzYyODc4NzcyNzg4MzA=
+            description: "Nomor Telepon [MANDATORY] [Base64] [Ex : +628xxx]"
+          - name: email
+            value: ZHdpa2kuc2FwdXRyYUBiYW5rcmF5YS5jby5pZA==
+            description: "Email [MANDATORY] [Base64] [Ex : abc@mail.com]"
+          - name: kodePendidikanTerakhir
+            value: S1
+            description: Pendidikan Terakhir [MANDATORY["SD", "SM", "SU", "D1", "D2", "D3", "S1", "S2", "S3", "TS", "BT"]
+          - name: jumlahTanggungan
+            value: "1"
+            description: Jumlah Tanggungan [MANDATORY]
+          - name: namaKontakDarurat
+            value: Darurat
+            description: Nama Kontak Darurat [OPTIONAL]
+          - name: nomorKontakDarurat
+            value: "+6287877278830"
+            description: Nomor Telepon Darurat [OPTIONAL]
+          - name: hubunganKontakDarurat
+            value: Istri
+            description: Nama Kontak Darurat [OPTIONAL] ["Kepala Keluarga", "Suami", "Istri", "Anak", "Menantu", "Cucu", "Orang Tua", "Mertua", "Famili Lain", "Pembantu"]
+          - name: kodeAreaUsaha
+            value: "7541"
+            description: Kode Area Usaha [MANDATORY]
+          - name: alamatUsaha
+            value: Jl. Joha Baru 09
+            description: Alamat Usaha [MANDATORY]
+          - name: latitudeUsaha
+            value: "-20"
+            description: Latitude Usaha [MANDATORY]
+          - name: longitudeUsaha
+            value: "20"
+            description: Longitude Usaha [MANDATORY]
+          - name: rtUsaha
+            value: "012"
+            description: RT Usaha [MANDATORY]
+          - name: rwUsaha
+            value: "002"
+            description: RW Usaha [MANDATORY]
+          - name: tanggalJoinPartner
+            value: 2000-11-17
+            description: Tanggal Join Partner [MANDATORY]
+          - name: kodeTipePinjaman
+            value: CHILD-MMF-652
+            description: Kode Loan Type [MANDATORY]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: kodeReferensiTerakhir
+            value: EX-MJ1-UmF5YVBpUGVyVG9w/l59mWX1lENrKWaCHO473pdfFJjiaKo7itCYn0zdEzv+dkaYpenLi6dtldS4VYE=
+            description: Kode Referensi Terakhir [OPTIONAL] [MANDATORY ==> Jika Suplesi]
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Fri, 28 Nov 2025 09:11:24 GMT
+        - name: Content-Length
+          value: "124"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "block-mf-aktif"
+              },
+              "message": "Maaf, anda sedang memiliki limit aktif pada produk Cashloan.",
+              "status": 500
+          }
+  - name: Error - Exist Cashloan Process
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3MzE4MDcxMjk2MDAwNw==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: nama
+            value: RHdpa2kgU2FwdXRyYQ==
+            description: Nama [MANDATORY] [Base64]
+          - name: tanggalLahir
+            value: MTk2OS0xMC0xMA==
+            description: Tanggal Lahir [MANDATORY] [Base64] [YYYY-MM-DD]
+          - name: tempatLahir
+            value: SmFrYXJ0YQ==
+            description: Tempat Lahir [MANDATORY] [Base64]
+          - name: jenisKelamin
+            value: TGFraS1MYWtp
+            description: Jenis Kelamin[MANDATORY] [Base64] ["Perempuan", "Laki-Laki"]
+          - name: tanggalKtp
+            value: 2000-11-17
+            description: Tanggal Terbit KTP [MANDATORY]
+          - name: kodeArea
+            value: "7541"
+            description: Kode Area [MANDATORY]
+          - name: latitude
+            value: "-20"
+            description: Latitude [MANDATORY]
+          - name: longitude
+            value: "20"
+            description: Longitude [MANDATORY]
+          - name: alamat
+            value: Cempaka Putih Barat
+            description: Alamat [MANDATORY]
+          - name: rt
+            value: "010"
+            description: RT [MANDATORY]
+          - name: rw
+            value: "002"
+            description: RW [MANDATORY]
+          - name: kodeAgama
+            value: ISL
+            description: Kode Agama [MANDATORY] ["BUD", "HIN", "ISL", "KRI", "KHC"]
+          - name: statusPernikahan
+            value: Kawin
+            description: Status Pernikahan [MANDATORY] ["Kawin", "Belum Kawin", "Cerai Hidup", "Cerai Mati"]
+          - name: namaIbuKandung
+            value: UnVtaXlhdGk=
+            description: Nama Ibu Kandung [MANDATORY] [Base64]
+          - name: nomorIdentitasPasangan
+            value: MzE3MTA1MTIxMTk1MDAwMg==
+            description: Nomor Identitas Pasangan [MANDATORY] [Base64]
+          - name: namaPasangan
+            value: VGVzdGluZw==
+            description: Nama Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: tanggalLahirPasangan
+            value: MjAwMC0xMS0xNw==
+            description: Tanggal Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64] [YYYY-MM-DD]
+          - name: tempatLahirPasangan
+            value: SmFrYXJ0YQ==
+            description: Tempat Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+          - name: nomorTelepon
+            value: KzYyODc4NzcyNzg4MzA=
+            description: "Nomor Telepon [MANDATORY] [Base64] [Ex : +628xxx]"
+          - name: email
+            value: ZHdpa2kuc2FwdXRyYUBiYW5rcmF5YS5jby5pZA==
+            description: "Email [MANDATORY] [Base64] [Ex : abc@mail.com]"
+          - name: kodePendidikanTerakhir
+            value: S1
+            description: Pendidikan Terakhir [MANDATORY["SD", "SM", "SU", "D1", "D2", "D3", "S1", "S2", "S3", "TS", "BT"]
+          - name: jumlahTanggungan
+            value: "1"
+            description: Jumlah Tanggungan [MANDATORY]
+          - name: namaKontakDarurat
+            value: Darurat
+            description: Nama Kontak Darurat [OPTIONAL]
+          - name: nomorKontakDarurat
+            value: "+6287877278830"
+            description: Nomor Telepon Darurat [OPTIONAL]
+          - name: hubunganKontakDarurat
+            value: Istri
+            description: Nama Kontak Darurat [OPTIONAL] ["Kepala Keluarga", "Suami", "Istri", "Anak", "Menantu", "Cucu", "Orang Tua", "Mertua", "Famili Lain", "Pembantu"]
+          - name: kodeAreaUsaha
+            value: "7541"
+            description: Kode Area Usaha [MANDATORY]
+          - name: alamatUsaha
+            value: Jl. Joha Baru 09
+            description: Alamat Usaha [MANDATORY]
+          - name: latitudeUsaha
+            value: "-20"
+            description: Latitude Usaha [MANDATORY]
+          - name: longitudeUsaha
+            value: "20"
+            description: Longitude Usaha [MANDATORY]
+          - name: rtUsaha
+            value: "012"
+            description: RT Usaha [MANDATORY]
+          - name: rwUsaha
+            value: "002"
+            description: RW Usaha [MANDATORY]
+          - name: tanggalJoinPartner
+            value: 2000-11-17
+            description: Tanggal Join Partner [MANDATORY]
+          - name: kodeTipePinjaman
+            value: CHILD-MMF-652
+            description: Kode Loan Type [MANDATORY]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: kodeReferensiTerakhir
+            value: EX-MJ1-UmF5YVBpUGVyVG9w/l59mWX1lENrKWaCHO473pdfFJjiaKo7itCYn0zdEzv+dkaYpenLi6dtldS4VYE=
+            description: Kode Referensi Terakhir [OPTIONAL] [MANDATORY ==> Jika Suplesi]
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Fri, 28 Nov 2025 09:15:53 GMT
+        - name: Content-Length
+          value: "127"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "block-mf-process"
+              },
+              "message": "Maaf, anda sedang dalam proses aktivasi pada produk Cashloan.",
+              "status": 500
+          }
+  - name: Success - Submission [Debitur & Pasangan]
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3NjA5MTcxMTAwMDAwMQ==
+            description: Base64 [Mandatory]
+          - name: nama
+            value: SGFycnkgUGFtdW5na2Fz
+            description: Base64 [Mandatory]
+          - name: tanggalLahir
+            value: MjAwMC0xMS0xNw==
+            description: Base64 [Mandatory]
+          - name: tempatLahir
+            value: SmFrYXJ0YQ==
+            description: "[Mandatory]"
+          - name: jenisKelamin
+            value: TGFraS1MYWtp
+            description: "[Mandatory]"
+          - name: tanggalKtp
+            value: 2000-11-17
+            description: "[Mandatory]"
+          - name: kodeArea
+            value: "102"
+            description: "[Mandatory]"
+          - name: latitude
+            value: "111"
+            description: "[Mandatory]"
+          - name: longitude
+            value: "111"
+            description: "[Mandatory]"
+          - name: alamat
+            value: jl. Kedondong
+            description: "[Mandatory]"
+          - name: rt
+            value: "003"
+            description: "[Mandatory]"
+          - name: rw
+            value: "004"
+            description: "[Mandatory]"
+          - name: kodeAgama
+            value: ISL
+            description: "[Mandatory]"
+          - name: statusPernikahan
+            value: Kawin
+            description: "[Mandatory]"
+          - name: namaIbuKandung
+            value: V2luYXJuaQ==
+            description: Base64 [Mandatory]
+          - name: nomorIdentitasPasangan
+            value: MzI3NjA5MTcxMTAwMDAwMQ==
+            description: Base64 [Optional]
+          - name: namaPasangan
+            value: Tm9ib2R5
+            description: Base64 [Optional]
+          - name: tanggalLahirPasangan
+            value: MjAwMC0xMS0xNw==
+            description: Base64 [Optional]
+          - name: tempatLahirPasangan
+            value: SmFrYXJ0YQ==
+            description: "[Optional]"
+          - name: nomorTelepon
+            value: KzYyODk1NDIxNTgzNzIw
+            description: Base64 [Mandatory]
+          - name: email
+            value: YWFhQGdtYWlsLmNvbQ==
+            description: Base64 [Mandatory]
+          - name: pendidikanTerakhir
+            value: D3
+            description: "[Mandatory]"
+          - name: jumlahTanggungan
+            value: "10"
+            description: "[Mandatory]"
+          - name: namaKontakDarurat
+            value: Marisa
+            description: "[Mandatory]"
+          - name: nomorKontakDarurat
+            value: "+62895421583720"
+            description: "[Mandatory]"
+          - name: hubunganKontakDarurat
+            value: Keluarga
+            description: "[Mandatory]"
+          - name: kodeAreaUsaha
+            value: "102"
+            description: "[Mandatory]"
+          - name: alamatUsaha
+            value: jl watherv23
+            description: "[Mandatory]"
+          - name: latitudeUsaha
+            value: "112"
+            description: "[Mandatory]"
+          - name: longitudeUsaha
+            value: "101"
+            description: "[Mandatory]"
+          - name: rtUsaha
+            value: "003"
+            description: "[Mandatory]"
+          - name: rwUsaha
+            value: "004"
+            description: "[Mandatory]"
+          - name: tenorPinjaman
+            value: "6"
+            description: "[Mandatory]"
+          - name: batasEstimasiPinjaman
+            value: "10000000"
+            description: "[Mandatory]"
+          - name: partnerJoinDate
+            value: 2000-11-17
+            description: "[Mandatory]"
+          - name: loanTypeCode
+            value: CHILD-MMF-652
+            description: "[Mandatory]"
+          - name: kodePartnership
+            value: QUdVLTE5MA==
+            description: "[Mandatory]"
+          - name: kodeReferensiTerakhir
+            value: EX-MJ1-UmF5YVBpUGVyVG9w/l59mWX1lENrKWaCHO473pdfFJjiaKo7itCYn0zdEzv+dkaYpenLi6dtldS4VYE=
+            description: "[Optional]"
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 01 Aug 2024 08:13:20 GMT
+        - name: Content-Length
+          value: "421"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "dukcapilDebitur": {
+                      "flagNamaDebitur": "1",
+                      "flagNamaIbuKandung": "1",
+                      "flagNikDebitur": "1",
+                      "flagTanggalLahir": "1",
+                      "flagTempatLahir": "1"
+                  },
+                  "dukcapilPasangan": {
+                      "flagNamaDebitur": "1",
+                      "flagNikDebitur": "1",
+                      "flagTanggalLahir": "1",
+                      "flagTempatLahir": "1"
+                  },
+                  "kodePrakarsa": "EX-MJ1-UmF5YVBpUGVyVG9w/lx6nGT4lUZqKWaPHO473pdfFJjiaKA5j9CanU/dF6aZpgbi3ySQbp8lrsCbKDU=",
+                  "nextStep": ""
+              },
+              "message": "Data Pengajuan Berhasil Disimpan.",
+              "status": 200
+          }
+  - name: Success - Submission [Debitur]
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: nama
+            value: RHdpa2kgU2FwdXRyYQ==
+            description: Nama [MANDATORY] [Base64]
+          - name: tanggalLahir
+            value: MTk5NS0xMS0xMg==
+            description: Tanggal Lahir [MANDATORY] [Base64] [YYYY-MM-DD]
+          - name: tempatLahir
+            value: SmFrYXJ0YQ==
+            description: Tempat Lahir [MANDATORY] [Base64]
+          - name: jenisKelamin
+            value: TGFraS1MYWtp
+            description: Jenis Kelamin[MANDATORY] [Base64] ["Perempuan", "Laki-Laki"]
+          - name: tanggalKtp
+            value: 2000-11-17
+            description: Tanggal Terbit KTP [MANDATORY]
+          - name: kodeArea
+            value: "7541"
+            description: Kode Area [MANDATORY]
+          - name: latitude
+            value: "111"
+            description: Latitude [MANDATORY]
+          - name: longitude
+            value: "111"
+            description: Longitude [MANDATORY]
+          - name: alamat
+            value: jl. Cempaka Puth
+            description: Alamat [MANDATORY]
+          - name: rt
+            value: "010"
+            description: RT [MANDATORY]
+          - name: rw
+            value: "002"
+            description: RW [MANDATORY]
+          - name: kodeAgama
+            value: ISL
+            description: Kode Agama [MANDATORY] ["BUD", "HIN", "ISL", "KRI", "KHC"]
+          - name: statusPernikahan
+            value: Belum Kawin
+            description: Status Pernikahan [MANDATORY] ["Kawin", "Belum Kawin", "Cerai Hidup", "Cerai Mati"]
+          - name: namaIbuKandung
+            value: UnVtaXlhdGk=
+            description: Nama Ibu Kandung [MANDATORY] [Base64]
+          - name: nomorIdentitasPasangan
+            value: MzE3MTA1MTIxMTk1MDAwMg==
+            description: Nomor Identitas Pasangan [MANDATORY] [Base64]
+            disabled: true
+          - name: namaPasangan
+            value: UGFzYW5nYW4gRHdpa2k=
+            description: Nama Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+            disabled: true
+          - name: tanggalLahirPasangan
+            value: MjAwMC0xMS0xNw==
+            description: Tanggal Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64] [YYYY-MM-DD]
+            disabled: true
+          - name: tempatLahirPasangan
+            value: SmFrYXJ0YQ==
+            description: Tempat Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+            disabled: true
+          - name: nomorTelepon
+            value: KzYyODc4NzcyNzg4MzA=
+            description: "Nomor Telepon [MANDATORY] [Base64] [Ex : +628xxx]"
+          - name: email
+            value: ZHdpa2kuc2FwdXRyYUBiYW5rcmF5YS5jby5pZA==
+            description: "Email [MANDATORY] [Base64] [Ex : abc@mail.com]"
+          - name: pendidikanTerakhir
+            value: D3
+            description: Pendidikan Terakhir [MANDATORY["SD", "SM", "SU", "D1", "D2", "D3", "S1", "S2", "S3", "TS", "BT"]
+          - name: jumlahTanggungan
+            value: "1"
+            description: Jumlah Tanggungan [MANDATORY]
+          - name: namaKontakDarurat
+            value: Darurat
+            description: Nama Kontak Darurat [MANDATORY]
+          - name: nomorKontakDarurat
+            value: "+62895421583720"
+            description: "Nomor Telepon Kontak Darurat [MANDATORY] [Ex : +628xxx]"
+          - name: hubunganKontakDarurat
+            value: Kepala Keluarga
+            description: Nama Kontak Darurat [MANDATORY] ["Kepala Keluarga", "Suami", "Istri", "Anak", "Menantu", "Cucu", "Orang Tua", "Mertua", "Famili Lain", "Pembantu"]
+          - name: kodeAreaUsaha
+            value: "7541"
+            description: Kode Area Usaha [MANDATORY]
+          - name: alamatUsaha
+            value: Jl Joha Baru
+            description: Alamat Usaha [MANDATORY]
+          - name: latitudeUsaha
+            value: "112"
+            description: Latitude Usaha [MANDATORY]
+          - name: longitudeUsaha
+            value: "101"
+            description: Longitude Usaha [MANDATORY]
+          - name: rtUsaha
+            value: "012"
+            description: RT Usaha [MANDATORY]
+          - name: rwUsaha
+            value: "002"
+            description: RW Usaha [MANDATORY]
+          - name: partnerJoinDate
+            value: 2000-11-17
+            description: Tanggal Join Partner [MANDATORY]
+          - name: loanTypeCode
+            value: CHILD-MMF-652
+            description: Kode Loan Type [MANDATORY]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: kodeReferensiTerakhir
+            value: EX-MJ1-UmF5YVBpUGVyVG9w/l59mWX1lENrKWaCHO473pdfFJjiaKo7itCYn0zdEzv+dkaYpenLi6dtldS4VYE=
+            description: Kode Referensi Terakhir [OPTIONAL] [MANDATORY ==> Jika Suplesi]
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 05 Aug 2024 10:04:59 GMT
+        - name: Content-Length
+          value: "347"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "dukcapilDebitur": {
+                      "flagNamaDebitur": "1",
+                      "flagNamaIbuKandung": "1",
+                      "flagNikDebitur": "1",
+                      "flagTanggalLahir": "1",
+                      "flagTempatLahir": "1"
+                  },
+                  "dukcapilPasangan": null,
+                  "kodePrakarsa": "EX-MJ1-UmF5YVBpUGVyVG9w/lx6nGT4lUZqKWaPHO473pdfFJjiaKA5j9Cbnk/dHtDUv06pwvSQYVXnNDr4cvw=",
+                  "nextStep": ""
+              },
+              "message": "Data Pengajuan Berhasil Disimpan.",
+              "status": 200
+          }

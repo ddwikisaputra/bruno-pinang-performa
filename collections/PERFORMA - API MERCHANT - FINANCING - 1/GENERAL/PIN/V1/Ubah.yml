@@ -1,0 +1,432 @@
+info:
+  name: Ubah
+  type: http
+  seq: 7
+
+http:
+  method: POST
+  url: "{{base-url-local}}/v/1/pin/ubah"
+  headers:
+    - name: Api-Key
+      value: "{{apiKeyDev}}"
+  body:
+    type: form-urlencoded
+    data:
+      - name: nomorIdentitas
+        value: MzE3MTA1MTIxMTk1MDAwMQ==
+        description: Nomor Identitas User [MANDATORY] [Base64]
+      - name: pin
+        value: MTIwMzkz
+        description: PIN [MANDATORY] [Base64]
+      - name: kodePartnership
+        value: TUox
+        description: Kode Partnership [MANDATORY] [Base64]
+  auth:
+    type: bearer
+    token: "{{accessTokenPartner}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 503 - Service Unavailable
+    request:
+      url: "{{base-url-local}}/v/1/pin/ubah"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTAzNTIwMzkzMDAwMQ==
+            description: "3173022310780004"
+          - name: pin
+            value: MDk4NzY1
+            description: MTIzNDU2 = 123456, 123457 = MTIzNDU3
+          - name: kodePartnership
+            value: TUox
+            description: BLA-501
+    response:
+      status: 503
+      statusText: Service Unavailable
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 31 Jul 2024 10:25:45 GMT
+        - name: Content-Length
+          value: "69"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Jam operasional Pinang Performa dari jam XX.XX - XX.XX WIB setiap hari. Kembali lagi nanti, ya!",
+              "status": 503
+          }
+  - name: Error - Token Expired
+    request:
+      url: "{{base-url-local}}/v/1/pin/ubah"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTAzNTIwMzkzMDAwMQ==
+            description: "3173022310780004"
+          - name: pin
+            value: MDk4NzY1
+            description: MTIzNDU2 = 123456, 123457 = MTIzNDU3
+          - name: kodePartnership
+            value: TUox
+            description: BLA-501
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 31 Jul 2024 10:25:45 GMT
+        - name: Content-Length
+          value: "69"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "token has invalid claims: token is expired",
+              "status": 401
+          }
+  - name: Error - Unauthorized / Expired
+    request:
+      url: "{{base-url-local}}/v/1/pin/ubah"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTAzNTIwMzkzMDAwMQ==
+            description: "3173022310780004"
+          - name: pin
+            value: MTIzNDU2
+            description: MTIzNDU2 = 123456, 123457 = MTIzNDU3
+          - name: kodePartnership
+            value: TUox
+            description: BLA-501
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 11 Oct 2024 07:49:30 GMT
+        - name: Content-Length
+          value: "50"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Unauthorized / Expired.",
+              "status": 401
+          }
+  - name: Error - Paremeter Token / Api Key Empty
+    request:
+      url: "{{base-url-local}}/v/1/pin/ubah"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTAzNTIwMzkzMDAwMQ==
+            description: "3173022310780004"
+          - name: pin
+            value: MTIzNDU2
+            description: MTIzNDU2 = 123456, 123457 = MTIzNDU3
+          - name: kodePartnership
+            value: TUox
+            description: BLA-501
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 14 Oct 2024 08:25:04 GMT
+        - name: Content-Length
+          value: "51"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "parameter token is empty",
+              "status": 401
+          }
+  - name: Error - Access Forbidden
+    request:
+      url: "{{base-url-local}}/v/1/pin/ubah"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTAzNTIwMzkzMDAwMQ==
+            description: "3173022310780004"
+          - name: pin
+            value: MTIzNDU2
+            description: MTIzNDU2 = 123456, 123457 = MTIzNDU3
+          - name: kodePartnership
+            value: TUoy
+            description: BLA-501
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 14 Oct 2024 08:26:37 GMT
+        - name: Content-Length
+          value: "76"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "you don't have permission to access this resource",
+              "status": 403
+          }
+  - name: Error - Access Forbidden (No Data Partnership)
+    request:
+      url: "{{base-url-local}}/v/1/pin/ubah"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTAzNTIwMzkzMDAwMQ==
+            description: "3173022310780004"
+          - name: pin
+            value: MTIzNDU2
+            description: MTIzNDU2 = 123456, 123457 = MTIzNDU3
+          - name: kodePartnership
+            value: TUox
+            description: BLA-501
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 14 Oct 2024 08:53:09 GMT
+        - name: Content-Length
+          value: "70"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "your access to this resource is unactivated",
+              "status": 403
+          }
+  - name: Error - Parameter Validation (Total Mandatory)
+    request:
+      url: "{{base-url-local}}/v/1/pin/ubah"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTAzNTIwMzkzMDAwMQ==
+            description: "3173022310780004"
+            disabled: true
+          - name: pin
+            value: MTIzNDU2
+            description: MTIzNDU2 = 123456, 123457 = MTIzNDU3
+          - name: kodePartnership
+            value: TUox
+            description: BLA-501
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 14 Oct 2024 08:36:59 GMT
+        - name: Content-Length
+          value: "53"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Parameter tidak terpenuhi.",
+              "status": 400
+          }
+  - name: Error - Parameter Validation (Tidak Sesuai)
+    request:
+      url: "{{base-url-local}}/v/1/pin/ubah"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: qweqeq
+            description: "3173022310780004"
+          - name: pin
+            value: MTIzNDU2
+            description: MTIzNDU2 = 123456, 123457 = MTIzNDU3
+          - name: kodePartnership
+            value: TUox
+            description: BLA-501
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 14 Oct 2024 08:38:34 GMT
+        - name: Content-Length
+          value: "56"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "... tidak sesuai.",
+              "status": 400
+          }
+  - name: Error - Not Registered Whitelist
+    request:
+      url: "{{base-url-local}}/v/1/pin/ubah"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTAzNTIwMzkzMDAwMQ==
+            description: "3173022310780004"
+          - name: pin
+            value: MTIzNDU2
+            description: MTIzNDU2 = 123456, 123457 = MTIzNDU3
+          - name: kodePartnership
+            value: TUox
+            description: BLA-501
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 14 Oct 2024 08:55:26 GMT
+        - name: Content-Length
+          value: "69"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Maaf, anda tidak terdaftar pada whitelist.",
+              "status": 500
+          }
+  - name: Error - Gagal Pembuatan PIN (PIN not exist)
+    request:
+      url: "{{base-url-local}}/v/1/pin/ubah"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTAzNTIwMzkzMDAwMQ==
+            description: "3173022310780004"
+          - name: pin
+            value: MTIzNDU2
+            description: MTIzNDU2 = 123456, 123457 = MTIzNDU3
+          - name: kodePartnership
+            value: TUox
+            description: BLA-501
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 14 Oct 2024 10:16:23 GMT
+        - name: Content-Length
+          value: "93"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Maaf, Anda belum memiliki PIN. Silahkan buat PIN anda.",
+              "status": "500"
+          }
+  - name: Success - Berhasil
+    request:
+      url: "{{base-url-local}}/v/1/pin/ubah"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTAzNTIwMzkzMDAwMQ==
+            description: "3173022310780004"
+          - name: pin
+            value: MTIzNDU2
+            description: MTIzNDU2 = 123456, 123457 = MTIzNDU3
+          - name: kodePartnership
+            value: TUox
+            description: BLA-501
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 11 Oct 2024 03:21:20 GMT
+        - name: Content-Length
+          value: "96"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "PIN berhasil diubah. Silahkan mencoba untuk menggunakan PIN tersebut.",
+              "status": 200
+          }

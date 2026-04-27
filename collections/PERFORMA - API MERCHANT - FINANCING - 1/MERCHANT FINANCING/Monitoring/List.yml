@@ -1,0 +1,650 @@
+info:
+  name: List
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{base-url-local}}/v/1/monitoring/list"
+  headers:
+    - name: Api-Key
+      value: "{{apiKeyMerchant}}"
+  body:
+    type: form-urlencoded
+    data:
+      - name: kodePrakarsa
+        value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmppYUtFNWpkQ2FuMG5kRnhYL1l1UkJoM044Zkh2N2RXT0Fab2M9
+        description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+      - name: kodePartnership
+        value: TUox
+        description: Kode Partnership [MANDATORY][BASE64 STRING]
+      - name: filterStatus
+        value: "5"
+        description: Filter Status [MANDATORY][INT][-1 = All Kecuali Lunas | 1  = Aktif | 2 = Lunas | 3 = H- . . Jatuh Tempo | 4 = Jatuh Tempo | 5 = Telat . . Hari | Default = -1]
+      - name: filterText
+        value: INV/MJ1/2024/2
+        description: Filter Text [OPTIONAL][STRING]
+        disabled: true
+      - name: startIndex
+        value: "0"
+        description: "[Default = 0][OPTIONAL][INT]"
+      - name: recordCount
+        value: "10"
+        description: Record Count [Default = 10, IF > 10 THEN ALL DATA][OPTIONAL][INT]
+      - name: filterDate
+        value: "1"
+        description: Filter Date [0 = non aktif | 1 = aktif] [OPTIONAL][INT]
+        disabled: true
+      - name: startDate
+        value: 2024-08-20
+        description: Start Date [YYYY-MM-DD] [OPTIONAL][STRING]
+        disabled: true
+      - name: endDate
+        value: 2024-08-23
+        description: End Date [YYYY-MM-DD] [OPTIONAL][STRING]
+        disabled: true
+  auth:
+    type: bearer
+    token: "{{tokenMerchant}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 503 - Service Unavailable
+    request:
+      url: "{{base-url-local}}/v/1/monitoring/list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtQUdVMTkwLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrNGo5T2Rta2piRWo0c2NRb3BrVi9yRjlISGZybThLNk09
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: QUdVLTE5MA==
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: filterStatus
+            value: ""
+            description: Filter Status [MANDATORY][INT][-1 = All Kecuali Lunas | 1  = Aktif | 2 = Lunas | 3 = H- . . Jatuh Tempo | 4 = Jatuh Tempo | 5 = Telat . . Hari | Default = -1]
+    response:
+      status: 503
+      statusText: Service Unavailable
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 03 Apr 2024 10:28:45 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Jam operasional Pinang Performa dari jam XX.XX - XX.XX WIB setiap hari. Kembali lagi nanti, ya!",
+              "status": 503
+          }
+  - name: Error - Token Expired
+    request:
+      url: "{{base-url-local}}/v/1/monitoring/list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtQUdVMTkwLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrNGo5T2Rta2piRWo0c2NRb3BrVi9yRjlISGZybThLNk09
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: QUdVLTE5MA==
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: filterStatus
+            value: ""
+            description: Filter Status [MANDATORY][INT][-1 = All Kecuali Lunas | 1  = Aktif | 2 = Lunas | 3 = H- . . Jatuh Tempo | 4 = Jatuh Tempo | 5 = Telat . . Hari | Default = -1]
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 03 Apr 2024 10:28:45 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 401,
+              "message": "token has invalid claims: token is expired"
+          }
+  - name: Error - Unauthorized / Expired
+    request:
+      url: "{{base-url-local}}/v/1/monitoring/list"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmppYUtFNWpkQ2FuMG5kRnhYL1l1UkJoM044Zkh2N2RXT0Fab2M9
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: filterStatus
+            value: "-1"
+            description: Filter Status [MANDATORY][INT][-1 = All Kecuali Lunas | 1  = Aktif | 2 = Lunas | 3 = H- . . Jatuh Tempo | 4 = Jatuh Tempo | 5 = Telat . . Hari | Default = -1]
+          - name: filterText
+            value: "3276091711000004"
+            description: Filter Text [OPTIONAL][STRING]
+            disabled: true
+          - name: startIndex
+            value: "0"
+            description: "[Default = 0][OPTIONAL][INT]"
+          - name: recordCount
+            value: "10"
+            description: Record Count [Default = 10, IF > 10 THEN ALL DATA][OPTIONAL][INT]
+          - name: filterDate
+            value: "1"
+            description: Filter Date [0 = non aktif | 1 = aktif] [OPTIONAL][INT]
+            disabled: true
+          - name: startDate
+            value: 2024-08-20
+            description: Start Date [YYYY-MM-DD] [OPTIONAL][STRING]
+            disabled: true
+          - name: endDate
+            value: 2024-08-23
+            description: End Date [YYYY-MM-DD] [OPTIONAL][STRING]
+            disabled: true
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Date
+          value: Thu, 19 Sep 2024 05:00:43 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "50"
+        - name: Connection
+          value: keep-alive
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Unauthorized / Expired.",
+              "status": 401
+          }
+  - name: Error - Parameter Token /  API Key Empty
+    request:
+      url: "{{base-url-local}}/v/1/monitoring/list"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+          disabled: true
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmppYUtFNWpkQ2FuMG5kRnhYL1l1UkJoM044Zkh2N2RXT0Fab2M9
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: filterStatus
+            value: "-1"
+            description: Filter Status [MANDATORY][INT][-1 = All Kecuali Lunas | 1  = Aktif | 2 = Lunas | 3 = H- . . Jatuh Tempo | 4 = Jatuh Tempo | 5 = Telat . . Hari | Default = -1]
+          - name: filterText
+            value: "3276091711000004"
+            description: Filter Text [OPTIONAL][STRING]
+            disabled: true
+          - name: startIndex
+            value: "0"
+            description: "[Default = 0][OPTIONAL][INT]"
+          - name: recordCount
+            value: "10"
+            description: Record Count [Default = 10, IF > 10 THEN ALL DATA][OPTIONAL][INT]
+          - name: filterDate
+            value: "1"
+            description: Filter Date [0 = non aktif | 1 = aktif] [OPTIONAL][INT]
+            disabled: true
+          - name: startDate
+            value: 2024-08-20
+            description: Start Date [YYYY-MM-DD] [OPTIONAL][STRING]
+            disabled: true
+          - name: endDate
+            value: 2024-08-23
+            description: End Date [YYYY-MM-DD] [OPTIONAL][STRING]
+            disabled: true
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Date
+          value: Thu, 19 Sep 2024 05:01:10 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "51"
+        - name: Connection
+          value: keep-alive
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "message": "parameter token is empty",
+              "status": 400
+          }
+  - name: Error - Access Forbidden
+    request:
+      url: "{{base-url-dev}}/v/1/monitoring/list"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: VW1GNVlWQnBVR1Z5Vkc5d2p5RU1nR0g5bFYrVEF2L3hDU1FIM25JVTl0M2Naam89
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmppYUtFNWpkQ2FuMG5kRnhYL1l1UkJoM044Zkh2N2RXT0Fab2M9
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: filterStatus
+            value: "-1"
+            description: Filter Status [MANDATORY][INT][-1 = All Kecuali Lunas | 1  = Aktif | 2 = Lunas | 3 = H- . . Jatuh Tempo | 4 = Jatuh Tempo | 5 = Telat . . Hari | Default = -1]
+          - name: filterText
+            value: "3276091711000004"
+            description: Filter Text [OPTIONAL][STRING]
+            disabled: true
+          - name: startIndex
+            value: "0"
+            description: "[Default = 0][OPTIONAL][INT]"
+          - name: recordCount
+            value: "10"
+            description: Record Count [Default = 10, IF > 10 THEN ALL DATA][OPTIONAL][INT]
+          - name: filterDate
+            value: "1"
+            description: Filter Date [0 = non aktif | 1 = aktif] [OPTIONAL][INT]
+            disabled: true
+          - name: startDate
+            value: 2024-08-20
+            description: Start Date [YYYY-MM-DD] [OPTIONAL][STRING]
+            disabled: true
+          - name: endDate
+            value: 2024-08-23
+            description: End Date [YYYY-MM-DD] [OPTIONAL][STRING]
+            disabled: true
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Date
+          value: Thu, 19 Sep 2024 05:01:45 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "76"
+        - name: Connection
+          value: keep-alive
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "message": "you don't have permission to access this resource",
+              "status": 403
+          }
+  - name: Error - Access Forbidden (No Data Partnership)
+    request:
+      url: "{{base-url-local}}/v/1/monitoring/list"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmppYUtFNWpkQ2FuMG5kRnhYL1l1UkJoM044Zkh2N2RXT0Fab2M9
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: filterStatus
+            value: "-1"
+            description: Filter Status [MANDATORY][INT][-1 = All Kecuali Lunas | 1  = Aktif | 2 = Lunas | 3 = H- . . Jatuh Tempo | 4 = Jatuh Tempo | 5 = Telat . . Hari | Default = -1]
+          - name: filterText
+            value: "3276091711000004"
+            description: Filter Text [OPTIONAL][STRING]
+            disabled: true
+          - name: startIndex
+            value: "0"
+            description: "[Default = 0][OPTIONAL][INT]"
+          - name: recordCount
+            value: "10"
+            description: Record Count [Default = 10, IF > 10 THEN ALL DATA][OPTIONAL][INT]
+          - name: filterDate
+            value: "1"
+            description: Filter Date [0 = non aktif | 1 = aktif] [OPTIONAL][INT]
+            disabled: true
+          - name: startDate
+            value: 2024-08-20
+            description: Start Date [YYYY-MM-DD] [OPTIONAL][STRING]
+            disabled: true
+          - name: endDate
+            value: 2024-08-23
+            description: End Date [YYYY-MM-DD] [OPTIONAL][STRING]
+            disabled: true
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Date
+          value: Thu, 19 Sep 2024 05:02:09 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "70"
+        - name: Connection
+          value: keep-alive
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "message": "your access to this resource is unactivated",
+              "status": 403
+          }
+  - name: Error - Access Forbidden (Status Not Access)
+    request:
+      url: "{{base-url-local}}/v/1/monitoring/list"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmppYUtFNWpkQ2FuMG5kRnhYL1l1UkJoM044Zkh2N2RXT0Fab2M9
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: filterStatus
+            value: "-1"
+            description: Filter Status [MANDATORY][INT][-1 = All Kecuali Lunas | 1  = Aktif | 2 = Lunas | 3 = H- . . Jatuh Tempo | 4 = Jatuh Tempo | 5 = Telat . . Hari | Default = -1]
+          - name: filterText
+            value: "3276091711000004"
+            description: Filter Text [OPTIONAL][STRING]
+            disabled: true
+          - name: startIndex
+            value: "0"
+            description: "[Default = 0][OPTIONAL][INT]"
+          - name: recordCount
+            value: "10"
+            description: Record Count [Default = 10, IF > 10 THEN ALL DATA][OPTIONAL][INT]
+          - name: filterDate
+            value: "1"
+            description: Filter Date [0 = non aktif | 1 = aktif] [OPTIONAL][INT]
+            disabled: true
+          - name: startDate
+            value: 2024-08-20
+            description: Start Date [YYYY-MM-DD] [OPTIONAL][STRING]
+            disabled: true
+          - name: endDate
+            value: 2024-08-23
+            description: End Date [YYYY-MM-DD] [OPTIONAL][STRING]
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Thu, 19 Sep 2024 05:02:40 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "62"
+        - name: Connection
+          value: keep-alive
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Data tidak dapat diakses.",
+              "status": 403
+          }
+  - name: Error - Parameter Validation (Tidak Sesuai)
+    request:
+      url: "{{base-url-local}}/v/1/monitoring/list"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmppYUtFNWpkQ2FuMG5kRnhYL1l1UkJoM044Zkh2N2RXT0Fab2M9
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: TUoxa
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: filterStatus
+            value: "-1"
+            description: Filter Status [MANDATORY][INT][-1 = All Kecuali Lunas | 1  = Aktif | 2 = Lunas | 3 = H- . . Jatuh Tempo | 4 = Jatuh Tempo | 5 = Telat . . Hari | Default = -1]
+          - name: filterText
+            value: "3276091711000004"
+            description: Filter Text [OPTIONAL][STRING]
+            disabled: true
+          - name: startIndex
+            value: "0"
+            description: "[Default = 0][OPTIONAL][INT]"
+          - name: recordCount
+            value: "10"
+            description: Record Count [Default = 10, IF > 10 THEN ALL DATA][OPTIONAL][INT]
+          - name: filterDate
+            value: "1"
+            description: Filter Date [0 = non aktif | 1 = aktif] [OPTIONAL][INT]
+            disabled: true
+          - name: startDate
+            value: 2024-08-20
+            description: Start Date [YYYY-MM-DD] [OPTIONAL][STRING]
+            disabled: true
+          - name: endDate
+            value: 2024-08-23
+            description: End Date [YYYY-MM-DD] [OPTIONAL][STRING]
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Thu, 19 Sep 2024 05:03:33 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "57"
+        - name: Connection
+          value: keep-alive
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "message": "... tidak sesuai.",
+              "status": 400
+          }
+  - name: Error - Unregistered Whitelist
+    request:
+      url: "{{base-url-local}}/v/1/monitoring/list"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmppYUtFNWpkQ2FuMG5kRnhYL1l1UkJoM044Zkh2N2RXT0Fab2M9
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: filterStatus
+            value: "-1"
+            description: Filter Status [MANDATORY][INT][-1 = All Kecuali Lunas | 1  = Aktif | 2 = Lunas | 3 = H- . . Jatuh Tempo | 4 = Jatuh Tempo | 5 = Telat . . Hari | Default = -1]
+          - name: filterText
+            value: "3276091711000004"
+            description: Filter Text [OPTIONAL][STRING]
+            disabled: true
+          - name: startIndex
+            value: "0"
+            description: "[Default = 0][OPTIONAL][INT]"
+          - name: recordCount
+            value: "10"
+            description: Record Count [Default = 10, IF > 10 THEN ALL DATA][OPTIONAL][INT]
+          - name: filterDate
+            value: "1"
+            description: Filter Date [0 = non aktif | 1 = aktif] [OPTIONAL][INT]
+            disabled: true
+          - name: startDate
+            value: 2024-08-20
+            description: Start Date [YYYY-MM-DD] [OPTIONAL][STRING]
+            disabled: true
+          - name: endDate
+            value: 2024-08-23
+            description: End Date [YYYY-MM-DD] [OPTIONAL][STRING]
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Thu, 19 Sep 2024 05:04:49 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "79"
+        - name: Connection
+          value: keep-alive
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Maaf, anda tidak terdaftar pada whitelist.",
+              "status": 500
+          }
+  - name: Success - List Kosong
+    request:
+      url: "{{base-url-sandbox}}/v/1/monitoring/list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtQUdVMTkwLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrNGo5T2Rta2piRWo0c2NRb3BrVi9yRjlISGZybThLNk09
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: QUdVLTE5MA==
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: filterStatus
+            value: ""
+            description: Filter Status [MANDATORY][INT][-1 = All Kecuali Lunas | 1  = Aktif | 2 = Lunas | 3 = H- . . Jatuh Tempo | 4 = Jatuh Tempo | 5 = Telat . . Hari | Default = -1]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 03 Apr 2024 09:23:35 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "list": [],
+                  "noaDisbursment": 0
+              },
+              "message": "List Tidak Tersedia.",
+              "status": 200
+          }
+  - name: Success - List Tersedia
+    request:
+      url: "{{base-url-sandbox}}/v/1/monitoring/list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtQUdVMTkwLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrNGo5T2Rta2piRWo0c2NRb3BrVi9yRjlISGZybThLNk09
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: QUdVLTE5MA==
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: filterStatus
+            value: ""
+            description: Filter Status [MANDATORY][INT][-1 = All Kecuali Lunas | 1  = Aktif | 2 = Lunas | 3 = H- . . Jatuh Tempo | 4 = Jatuh Tempo | 5 = Telat . . Hari | Default = -1]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 03 Apr 2024 09:23:35 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "list": [
+                      {
+                          "adminPembayaran": "", // base64
+                          "bungaPembayaran": "", // base64
+                          "dendaPembayaran": "", // base64
+                          "jangkaWaktu": 14,
+                          "kodePencairan": "", // base64
+                          "nominalPinjaman": "", // base64
+                          "nomorInvoice": "INV/MJ1/2024/2",
+                          "pokokPembayaran": "", // base64
+                          "status": 1,
+                          "statusPinjaman": "Aktif",
+                          "tanggalJatuhTempo": "2026-10-22",
+                          "tanggalPencairan": "2026-10-08",
+                          "totalHari": "14 Hari",
+                          "totalPembayaran": "" // base64
+                      }
+                  ],
+                  "noaDisbursement": 3
+              },
+              "message": "List tersedia.",
+              "status": 200
+          }

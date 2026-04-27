@@ -1,0 +1,435 @@
+info:
+  name: Daftar Distributor
+  type: http
+  seq: 5
+
+http:
+  method: POST
+  url: "{{base-url-local}}/v/1/partnership/daftar-distributor"
+  headers:
+    - name: Api-Key
+      value: "{{apiKeyDev}}"
+  body:
+    type: multipart-form
+    data:
+      - name: kodePartnership
+        type: text
+        value: ""
+        description: MANDATORY | Bae64
+      - name: kodeDistributor
+        type: text
+        value: ""
+        description: MANDATORY | Base64
+      - name: namaRekening
+        type: text
+        value: ""
+        description: MANDATORY | Base64
+      - name: nomorRekening
+        type: text
+        value: ""
+        description: MANDATORY | Base64 | Numeric | 15 Digit
+      - name: namaBank
+        type: text
+        value: ""
+        description: MANDATORY | Base64 | Value(BRI, RAYA)
+      - name: namaDistributor
+        type: text
+        value: ""
+        description: MANDATORY | Base64
+  auth:
+    type: bearer
+    token: "{{accessTokenPartner}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Error - Service Unavailable
+    request:
+      url: "{{base-url-local}}/v/1/partnership/daftar-distributor"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: multipart-form
+        data:
+          - name: kodePartnership
+            type: text
+            value: TUox
+            description: MANDATORY | Bae64
+          - name: kodeDistributor
+            type: text
+            value: VEVTVC1TVU4tMQ==
+            description: MANDATORY | Base64
+          - name: namaRekening
+            type: text
+            value: c3VuYXJ0bw==
+            description: MANDATORY | Base64
+          - name: nomorRekening
+            type: text
+            value: MTIzNDU2Nzg5MTIzNDU2
+            description: MANDATORY | Base64 | Numeric | 15 Digit
+          - name: namaBank
+            type: text
+            value: QlJJ
+            description: MANDATORY | Base64 | Value(BRI, RAYA)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Mon, 10 Nov 2025 03:35:04 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Jam operasional Pinang Performa dari jam XX.XX - XX.XX WIB setiap hari. Kembali lagi nanti, ya!",
+              "status": 503
+          }
+  - name: Error - Unauthorized / Expired
+    request:
+      url: "{{base-url-local}}/v/1/partnership/daftar-distributor"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: multipart-form
+        data:
+          - name: kodePartnership
+            type: text
+            value: TUox
+            description: MANDATORY | Bae64
+          - name: kodeDistributor
+            type: text
+            value: VEVTVC1TVU4tMQ==
+            description: MANDATORY | Base64
+          - name: namaRekening
+            type: text
+            value: c3VuYXJ0bw==
+            description: MANDATORY | Base64
+          - name: nomorRekening
+            type: text
+            value: MTIzNDU2Nzg5MTIzNDU2
+            description: MANDATORY | Base64 | Numeric | 15 Digit
+          - name: namaBank
+            type: text
+            value: QlJJ
+            description: MANDATORY | Base64 | Value(BRI, RAYA)
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Mon, 10 Nov 2025 03:41:38 GMT
+        - name: Content-Length
+          value: "50"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Unauthorized / Expired.",
+              "status": 401
+          }
+  - name: Error - Parameter Token Empty
+    request:
+      url: "{{base-url-local}}/v/1/partnership/daftar-distributor"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+          disabled: true
+      body:
+        type: multipart-form
+        data:
+          - name: kodePartnership
+            type: text
+            value: TUox
+            description: MANDATORY | Bae64
+          - name: kodeDistributor
+            type: text
+            value: VEVTVC1TVU4tMQ==
+            description: MANDATORY | Base64
+          - name: namaRekening
+            type: text
+            value: c3VuYXJ0bw==
+            description: MANDATORY | Base64
+          - name: nomorRekening
+            type: text
+            value: MTIzNDU2Nzg5MTIzNDU2
+            description: MANDATORY | Base64 | Numeric | 15 Digit
+          - name: namaBank
+            type: text
+            value: QlJJ
+            description: MANDATORY | Base64 | Value(BRI, RAYA)
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Mon, 10 Nov 2025 03:39:22 GMT
+        - name: Content-Length
+          value: "51"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "parameter token is empty",
+              "status": 401
+          }
+  - name: Error - Parameter Validation (Total Mandatory Tidak Sesuai)
+    request:
+      url: "{{base-url-local}}/v/1/partnership/daftar-distributor"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: multipart-form
+        data:
+          - name: kodePartnership
+            type: text
+            value: TUox
+            description: MANDATORY | Bae64
+          - name: kodeDistributor
+            type: text
+            value: VEVTVC1TVU4tMQ==
+            description: MANDATORY | Base64
+          - name: namaRekening
+            type: text
+            value: c3VuYXJ0bw==
+            description: MANDATORY | Base64
+          - name: nomorRekening
+            type: text
+            value: MTIzNDU2Nzg5MTIzNDU2
+            description: MANDATORY | Base64 | Numeric | 15 Digit
+            disabled: true
+          - name: namaBank
+            type: text
+            value: QlJJ
+            description: MANDATORY | Base64 | Value(BRI, RAYA)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Mon, 10 Nov 2025 03:44:39 GMT
+        - name: Content-Length
+          value: "63"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Parameter tidak terpenuhi.",
+              "status": 400
+          }
+  - name: Error - Parameter Validation (Tidak Sesuai)
+    request:
+      url: "{{base-url-local}}/v/1/partnership/daftar-distributor"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: multipart-form
+        data:
+          - name: kodePartnership
+            type: text
+            value: TUox
+            description: MANDATORY | Bae64
+          - name: kodeDistributor
+            type: text
+            value: VEVTVC1TVU4tMQ==
+            description: MANDATORY | Base64
+          - name: namaRekening
+            type: text
+            value: c3VuYXJ0bw==
+            description: MANDATORY | Base64
+          - name: nomorRekening
+            type: text
+            value: MTIzNDU2Nzg5MTIzNDU2
+            description: MANDATORY | Base64 | Numeric | 15 Digit
+          - name: namaBank
+            type: text
+            value: BRI
+            description: MANDATORY | Base64 | Value(BRI, RAYA)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Mon, 10 Nov 2025 03:46:00 GMT
+        - name: Content-Length
+          value: "60"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "...tidak sesuai.",
+              "status": 400
+          }
+  - name: Success - Daftar Berhasil
+    request:
+      url: "{{base-url-local}}/v/1/partnership/daftar-distributor"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: multipart-form
+        data:
+          - name: kodePartnership
+            type: text
+            value: TUox
+            description: MANDATORY | Bae64
+          - name: kodeDistributor
+            type: text
+            value: VEVTLVNVSy1TVU4tMQ==
+            description: MANDATORY | Base64
+          - name: namaRekening
+            type: text
+            value: c3VuYXJ0bw==
+            description: MANDATORY | Base64
+          - name: nomorRekening
+            type: text
+            value: MTIzNDU2Nzg5MTIzNDU2
+            description: MANDATORY | Base64 | Numeric | 15 Digit
+          - name: namaBank
+            type: text
+            value: UkFZQQ==
+            description: MANDATORY | Base64 | Value(BRI, RAYA)
+          - name: namaDistributor
+            type: text
+            value: VGVzIE5hbSBEaXN0cmlidXRvcg==
+            description: MANDATORY | Base64
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Tue, 11 Nov 2025 02:22:44 GMT
+        - name: Content-Length
+          value: "60"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Berhasil mendaftarkan distributor",
+              "status": 200
+          }

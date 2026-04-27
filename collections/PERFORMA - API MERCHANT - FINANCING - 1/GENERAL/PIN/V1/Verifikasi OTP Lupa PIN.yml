@@ -1,0 +1,498 @@
+info:
+  name: Verifikasi OTP Lupa PIN
+  type: http
+  seq: 6
+
+http:
+  method: POST
+  url: "{{base-url-local}}/v/1/pin/verifikasi-otp-lupa"
+  headers:
+    - name: Api-Key
+      value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
+  body:
+    type: form-urlencoded
+    data:
+      - name: nomorIdentitas
+        value: MzI3MzE4MDcxMjk2MDAwNw==
+        description: Nomor Identitas User [MANDATORY] [Base64]
+      - name: kodePartnership
+        value: TUox
+        description: Kode Partnership [MANDATORY] [Base64]
+      - name: otpKey
+        value: UkFZQTgzMDY5Mzg0MTA=
+        description: OTP Key [MANDATORY] [Base64]
+      - name: otp
+        value: NTYyNTE=
+        description: OTP [MANDATORY] [Base64]
+  auth:
+    type: bearer
+    token: "{{accessTokenPartner}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 503 - Service Unavailable
+    request:
+      url: "{{base-url-dev}}/v/1/pin/verifikasi-otp-lupa"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+          - name: kodePartnership
+            value: TUox
+          - name: otpKey
+            value: UkFZQTE1NTI0ODQ4MDU=
+          - name: otp
+            value: NjQyMjY=
+    response:
+      status: 503
+      statusText: Service Unavailable
+      headers:
+        - name: Date
+          value: Wed, 31 Jul 2024 10:28:24 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "69"
+        - name: Connection
+          value: keep-alive
+        - name: Strict-Transport-Security
+          value: max-age=15724800; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Jam operasional Pinang Performa dari jam XX.XX - XX.XX WIB setiap hari. Kembali lagi nanti, ya!",
+              "status": 503
+          }
+  - name: Error - Token Expired
+    request:
+      url: "{{base-url-local}}/v/1/pin/verifikasi-otp-lupa"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3MzE4MDcxMjk2MDAwNw==
+          - name: kodePartnership
+            value: TUox
+          - name: otpKey
+            value: UkFZQTc4MTU3NTM4MzM=
+          - name: otp
+            value: NTg1NDA=
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 11 Oct 2024 00:44:47 GMT
+        - name: Content-Length
+          value: "69"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "token has invalid claims: token is expired",
+              "status": 401
+          }
+  - name: Error - Unauthorized / Expired
+    request:
+      url: "{{base-url-local}}/v/1/pin/verifikasi-otp-lupa"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3MzE4MDcxMjk2MDAwNw==
+          - name: kodePartnership
+            value: TUox
+          - name: otpKey
+            value: UkFZQTc4MTU3NTM4MzM=
+          - name: otp
+            value: NTg1NDA=
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 11 Oct 2024 00:46:15 GMT
+        - name: Content-Length
+          value: "50"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Unauthorized / Expired.",
+              "status": 401
+          }
+  - name: Error - Paremeter Token / Api Key Empty
+    request:
+      url: "{{base-url-local}}/v/1/pin/verifikasi-otp-lupa"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
+          disabled: true
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3MzE4MDcxMjk2MDAwNw==
+          - name: kodePartnership
+            value: TUox
+          - name: otpKey
+            value: UkFZQTc4MTU3NTM4MzM=
+          - name: otp
+            value: NTg1NDA=
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 11 Oct 2024 00:49:20 GMT
+        - name: Content-Length
+          value: "51"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "parameter token is empty",
+              "status": 401
+          }
+  - name: Error - Access Forbidden
+    request:
+      url: "{{base-url-local}}/v/1/pin/verifikasi-otp-lupa"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+          - name: kodePartnership
+            value: UkVMLTYxMg==
+          - name: otpKey
+            value: UkFZQTQ0ODEzNzc4NTM=
+          - name: otp
+            value: NDg2MDg=
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 30 Jul 2024 09:20:12 GMT
+        - name: Content-Length
+          value: "76"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "you don't have permission to access this resource",
+              "status": 403
+          }
+  - name: Error - Access Forbidden (No Data Partnership)
+    request:
+      url: "{{base-url-local}}/v/1/pin/verifikasi-otp-lupa"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3MzE4MDcxMjk2MDAwNw==
+          - name: kodePartnership
+            value: TUox
+          - name: otpKey
+            value: UkFZQTc4MTU3NTM4MzM=
+          - name: otp
+            value: NTg1NDA=
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 11 Oct 2024 00:58:15 GMT
+        - name: Content-Length
+          value: "70"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "your access to this resource is unactivated",
+              "status": 403
+          }
+  - name: Error - Parameter Validation (Total Mandatory)
+    request:
+      url: "{{base-url-local}}/v/1/pin/verifikasi-otp-lupa"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3MzE4MDcxMjk2MDAwNw==
+            disabled: true
+          - name: kodePartnership
+            value: TUox
+          - name: otpKey
+            value: UkFZQTgzMDY5Mzg0MTA=
+          - name: otp
+            value: NTYyNTE=
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 11 Oct 2024 01:04:34 GMT
+        - name: Content-Length
+          value: "53"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Parameter tidak terpenuhi.",
+              "status": 400
+          }
+  - name: Error - Parameter Validation (Tidak Sesuai)
+    request:
+      url: "{{base-url-local}}/v/1/pin/verifikasi-otp-lupa"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3MzE4MDcxMjk2MDAwNw==
+          - name: kodePartnership
+            value: TUoxa
+          - name: otpKey
+            value: UkFZQTc4MTU3NTM4MzM=
+          - name: otp
+            value: NTg1NDA=
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 11 Oct 2024 00:59:24 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "... tidak sesuai.",
+              "status": 400
+          }
+  - name: Error - Not Registered Whitelist
+    request:
+      url: "{{base-url-local}}/v/1/pin/verifikasi-otp-lupa"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3MzE4MDcxMjk2MDAwNw==
+          - name: kodePartnership
+            value: TUox
+          - name: otpKey
+            value: UkFZQTc4MTU3NTM4MzM=
+          - name: otp
+            value: NTg1NDA=
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 11 Oct 2024 00:56:57 GMT
+        - name: Content-Length
+          value: "69"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Maaf, anda tidak terdaftar pada whitelist.",
+              "status": 500
+          }
+  - name: Error - Validasi Kuota OTP Habis
+    request:
+      url: "{{base-url-local}}/v/1/pin/verifikasi-otp-lupa"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3MzE4MDcxMjk2MDAwNw==
+          - name: kodePartnership
+            value: TUox
+          - name: otpKey
+            value: UkFZQTgzMDY5Mzg0MTA=
+          - name: otp
+            value: NTYyNTE=
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 11 Oct 2024 01:03:27 GMT
+        - name: Content-Length
+          value: "152"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Maaf, Proses OTP tidak dapat dilakukan karena sudah melebihi batas maksimal, silahkan coba kembali pada DD MM YY hh:mm",
+              "status": 500
+          }
+  - name: Error - Gagal Verifikasi OTP
+    request:
+      url: "{{base-url-local}}/v/1/pin/verifikasi-otp-lupa"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3MzE4MDcxMjk2MDAwNw==
+          - name: kodePartnership
+            value: TUox
+          - name: otpKey
+            value: UkFZQTc4MTU3NTM4MzM=
+          - name: otp
+            value: NTg1NDA=
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 10 Oct 2024 02:59:45 GMT
+        - name: Content-Length
+          value: "96"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Maaf, Proses verifikasi OTP tidak berhasil. Silahkan kirim ulang OTP.",
+              "status": 500
+          }
+  - name: Success - Berhasil Verifikasi
+    request:
+      url: "{{base-url-local}}/v/1/pin/verifikasi-otp-lupa"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3MzE4MDcxMjk2MDAwNw==
+          - name: kodePartnership
+            value: TUox
+          - name: otpKey
+            value: UkFZQTQ5MzE2MDY5MzM=
+          - name: otp
+            value: MTQ2NjI=
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 09 Oct 2024 02:19:01 GMT
+        - name: Content-Length
+          value: "61"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Verifikasi OTP berhasil dilakukan.",
+              "status": 200
+          }
+  - name: Success - Berhasil Verifikasi
+    request:
+      url: "{{base-url-local}}/v/1/pin/verifikasi-otp-lupa"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3MzE4MDcxMjk2MDAwNw==
+          - name: kodePartnership
+            value: TUox
+          - name: otpKey
+            value: UkFZQTQ5MzE2MDY5MzM=
+          - name: otp
+            value: MTQ2NjI=
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 09 Oct 2024 02:19:01 GMT
+        - name: Content-Length
+          value: "61"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Verifikasi OTP berhasil dilakukan.",
+              "status": 200
+          }

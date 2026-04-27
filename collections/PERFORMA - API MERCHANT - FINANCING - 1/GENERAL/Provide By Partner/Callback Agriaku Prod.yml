@@ -1,0 +1,24 @@
+info:
+  name: Callback Agriaku Prod
+  type: http
+  seq: 8
+
+http:
+  method: POST
+  url: https://payment-service.agriaku.com/pinang-performa/callback-pencairan
+  body:
+    type: form-urlencoded
+    data:
+      - name: nomorInvoice
+        value: TRX/16102024/00032929/01028404
+        description: Nomor Invoice Pencairan { MANDATORY }
+      - name: kodePengajuanPencairan
+        value: TRX20243
+        description: Kode Pencairan { MANDATORY }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

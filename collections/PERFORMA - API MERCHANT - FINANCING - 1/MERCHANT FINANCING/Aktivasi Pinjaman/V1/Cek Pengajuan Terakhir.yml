@@ -1,0 +1,2272 @@
+info:
+  name: Cek Pengajuan Terakhir
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{base-url-local}}/v/1/aktivasi/cek-pengajuan-terakhir"
+  headers:
+    - name: Api-Key
+      value: "{{apiKeyMerchant}}"
+      disabled: true
+    - name: Api-Key
+      value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
+      description: PROD
+  body:
+    type: form-urlencoded
+    data:
+      - name: nomorIdentitas
+        value: MzE3MTA1MTIxMTk1MDAwMQ==
+        description: Nomor Identitas User [MANDATORY] [Base64]
+      - name: kodePartnership
+        value: TUox
+        description: Kode Partnership [MANDATORY] [Base64]
+  auth:
+    type: bearer
+    token: "{{tokenMerchant}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 503 - Service Unavailable
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 503
+      statusText: Service Unavailable
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 17 Jul 2024 08:57:28 GMT
+        - name: Content-Length
+          value: "43"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Jam operasional Pinang Performa dari jam XX.XX - XX.XX WIB setiap hari. Kembali lagi nanti, ya!",
+              "status": 503
+          }
+  - name: Error - Token Expired
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 17 Jul 2024 08:57:28 GMT
+        - name: Content-Length
+          value: "43"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "token is expired",
+              "status": 401
+          }
+  - name: Error - Unauthorized / Expired
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: QkxBLTUwMQ==
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 17 Jul 2024 08:58:33 GMT
+        - name: Content-Length
+          value: "76"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Unauthorized / Expired.",
+              "status": 401
+          }
+  - name: Error - Paremeter Token / Api Key Empty
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+          disabled: true
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 17 Jul 2024 08:59:27 GMT
+        - name: Content-Length
+          value: "51"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "parameter token is empty",
+              "status": 400
+          }
+  - name: Error - Access Forbidden
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 17 Jul 2024 09:04:58 GMT
+        - name: Content-Length
+          value: "76"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "you don't have permission to access this resource",
+              "status": 403
+          }
+  - name: Error - Access Forbidden (No Data Partnership)
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUoy
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 17 Jul 2024 09:00:30 GMT
+        - name: Content-Length
+          value: "70"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "your access to this resource is unactivated",
+              "status": 403
+          }
+  - name: Error - Parameter Validation (Total Mandatory)
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+            disabled: true
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 17 Jul 2024 09:01:11 GMT
+        - name: Content-Length
+          value: "63"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Parameter tidak terpenuhi.",
+              "status": 400
+          }
+  - name: Error - Parameter Validation (Tidak Sesuai)
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUoxa
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 17 Jul 2024 09:02:03 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "... tidak sesuai.",
+              "status": 400
+          }
+  - name: Error - Not Registered Whitelist
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 17 Jul 2024 08:28:39 GMT
+        - name: Content-Length
+          value: "79"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Maaf, anda tidak terdaftar pada whitelist.",
+              "status": 500
+          }
+  - name: Success - Data Pengajuan Tidak Ditemukan
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 29 Jul 2024 08:24:24 GMT
+        - name: Content-Length
+          value: "99"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "pengajuan"
+              },
+              "message": "Data pengajuan terakhir tidak ditemukan.",
+              "status": 200
+          }
+  - name: Success - Data Ditemukan (Status 1 && IsDukcapilManual = 0 / NULL) ==> DALAM PROSES PENGAJUAN (LOLOS DUKCAPIL)
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Date
+          value: Mon, 22 Jul 2024 06:17:25 GMT
+        - name: Content-Length
+          value: "1730"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "",
+                  "kodePrakarsa": "EX-MJ1-UmF5YVBpUGVyVG9w/lx6nGT4lUZqKWaPHO473pdfFJjiaKE5jNCfnEnaF6LFKali879Hq4opHCJZWQQ=",
+                  "nomorIdentitas": "", // --> base64 
+                  "nama": "", // --> base64 
+                  "tempatLahir": "Jakarta",
+                  "tanggalLahir": "", // --> base64 
+                  "jenisKelamin": "Laki-Laki",
+                  "tanggalKtp": "2024-09-06",
+                  "kodeArea": 7541,
+                  "deskripsiArea": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "longitude": "",
+                  "latitude": "",
+                  "alamat": "Cempaka Putih Barat",
+                  "rt": "010",
+                  "rw": "002",
+                  "kodeAgama": "ISL",
+                  "deskripsiAgama": "Islam",
+                  "statusPernikahan": "Kawin",
+                  "namaIbuKandung": "", // --> base64 
+                  "nomorIdentitasPasangan": "", // --> base64 
+                  "namaPasangan": "", // --> base64 
+                  "tempatLahirPasangan": "", // --> base64 
+                  "tanggalLahirPasangan": "", // --> base64 
+                  "nomorTelepon": "", // --> base64 
+                  "email": "", // --> base64 
+                  "kodePendidikanTerakhir": "S1",
+                  "deskripsiPendidikanTerakhir": "S1 / Diploma 4",
+                  "jumlahTanggungan": 1,
+                  "namaKontakDarurat": "Testing",
+                  "hubunganKontakDarurat": "Istri",
+                  "deskripsiHubunganDarurat": "Istri",
+                  "nomorKontakDarurat": "", // --> base64 
+                  "kodeAreaUsaha": 7555,
+                  "deskripsiAreaUsaha": "10560, Johar Baru, Johar Baru, Jakarta Pusat, DKI Jakarta",
+                  "alamatUsaha": "Cempaka Putih Barat",
+                  "latitudeUsaha": "",
+                  "longitudeUsaha": "",
+                  "rtUsaha": "010",
+                  "rwUsaha": "002",
+                  "tanggalJoinPartner": "2023-09-12",
+                  "kodeTipePinjaman": "CHILD-MMF-652",
+                  "kodePartnership": "MJ1",
+                  "namaPartnership": "Majoo",
+                  "tenorPinjaman": 12,
+                  "estimasiPinjaman": 100000000,
+                  "limitPinjaman": 0,
+                  "statusPrakarsa": 1,
+                  "deskripsiStatus": "Dalam Proses Pengajuan",
+                  "tanggalUpdate": "2024-09-06 15:15:39.023",
+                  "tanggaKadaluarsaBlock": "",
+                  "dukcapilDebitur": null,
+                  "dukcapilPasangan": null
+              },
+              "message": "Data pengajuan terakhir ditemukan.",
+              "status": 200
+          }
+  - name: Success - Data Ditemukan (Status 1 && IsDukcapilManual = 1) ==> DALAM PROSES PENGAJUAN (LOLOS DUKCAPIL)
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+          disabled: true
+        - name: Api-Key
+          value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
+          description: PROD
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' rayain.net
+        - name: Content-Type
+          value: application/json
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=31536000
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Thu, 11 Dec 2025 06:02:56 GMT
+        - name: Content-Length
+          value: "1731"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "dukcapil-manual",
+                  "kodePrakarsa": "EX-MJ1-UmF5YVBpUGVyVG9w/lx6nGT4lUZqKWaPHO473pdfFJjiaao5g9OenEzcFMq+h2ZHdFpmduirhzG0aqg=",
+                  "nomorIdentitas": "MzE3MTA1MTIxMTk1MDAwMQ==",
+                  "nama": "RHdpa2kgU2FwdXRyYQ==",
+                  "tempatLahir": "Jakarta",
+                  "tanggalLahir": "MTk5NS0xMS0xMg==",
+                  "jenisKelamin": "Laki-Laki",
+                  "tanggalKtp": "2024-12-09",
+                  "kodeArea": 7555,
+                  "deskripsiArea": "10560, Johar Baru, Johar Baru, Jakarta Pusat, DKI Jakarta",
+                  "longitude": "",
+                  "latitude": "",
+                  "alamat": "Cempaka Putih Barat",
+                  "rt": "010",
+                  "rw": "002",
+                  "kodeAgama": "ISL",
+                  "deskripsiAgama": "Islam",
+                  "statusPernikahan": "Kawin",
+                  "namaIbuKandung": "UnVtaXlhdGk=",
+                  "nomorIdentitasPasangan": "MzE3MTA1NDIwODk3MDAwMg==",
+                  "namaPasangan": "TXV0aWE=",
+                  "tempatLahirPasangan": "TXV0aWE=",
+                  "tanggalLahirPasangan": "MTk5Ny0wOC0wMg==",
+                  "nomorTelepon": "KzYyODc4NzcyNzg4MzA=",
+                  "email": "ZHdpa2kuc2FwdXRyYUBiYW5rcmF5YS5jby5pZA==",
+                  "kodePendidikanTerakhir": "D3",
+                  "deskripsiPendidikanTerakhir": "Diploma 3",
+                  "jumlahTanggungan": 1,
+                  "namaKontakDarurat": "Jaelani",
+                  "hubunganKontakDarurat": "Famili Lain",
+                  "deskripsiHubunganDarurat": "Famili Lain",
+                  "nomorKontakDarurat": "KzYyODE3NzY1MjczNzE=",
+                  "kodeAreaUsaha": 7526,
+                  "deskripsiAreaUsaha": "10620, Kemayoran, Kemayoran, Jakarta Pusat, DKI Jakarta",
+                  "alamatUsaha": "UKM",
+                  "latitudeUsaha": "",
+                  "longitudeUsaha": "",
+                  "rtUsaha": "008",
+                  "rwUsaha": "005",
+                  "tanggalJoinPartner": "2024-01-01",
+                  "kodeTipePinjaman": "CHILD-MMF-652",
+                  "kodePartnership": "MJ1",
+                  "namaPartnership": "Majoo",
+                  "tenorPinjaman": 12,
+                  "estimasiPinjaman": 40000000,
+                  "limitPinjaman": 40000000,
+                  "statusPrakarsa": 1,
+                  "deskripsiStatus": "Dalam Proses Pengajuan",
+                  "tanggalUpdate": "2024-12-19 23:08:28.537",
+                  "tanggalKadaluarsaBlock": "",
+                  "tncDigitsave": 1,
+                  "dukcapilDebitur": null,
+                  "dukcapilPasangan": null
+              },
+              "message": "Data pengajuan terakhir ditemukan.",
+              "status": 200
+          }
+  - name: Success - Data Ditemukan (Status 2) ==> DALAM PROSES PENGAJUAN (SETUJU PENAWARAN)
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Date
+          value: Mon, 22 Jul 2024 06:17:25 GMT
+        - name: Content-Length
+          value: "1730"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "",
+                  "kodePrakarsa": "EX-MJ1-UmF5YVBpUGVyVG9w/lx6nGT4lUZqKWaPHO473pdfFJjiaKE5jNCfnEnaF6LFKali879Hq4opHCJZWQQ=",
+                  "nomorIdentitas": "",  // --> base64
+                  "nama": "",  // --> base64
+                  "tempatLahir": "Jakarta",
+                  "tanggalLahir": "",  // --> base64
+                  "jenisKelamin": "Laki-Laki",
+                  "tanggalKtp": "2024-09-06",
+                  "kodeArea": 7541,
+                  "deskripsiArea": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "longitude": "",
+                  "latitude": "",
+                  "alamat": "Cempaka Putih Barat",
+                  "rt": "010",
+                  "rw": "002",
+                  "kodeAgama": "ISL",
+                  "deskripsiAgama": "Islam",
+                  "statusPernikahan": "Kawin",
+                  "namaIbuKandung": "",  // --> base64
+                  "nomorIdentitasPasangan": "",  // --> base64
+                  "namaPasangan": "",  // --> base64
+                  "tempatLahirPasangan": "",  // --> base64
+                  "tanggalLahirPasangan": "",  // --> base64
+                  "nomorTelepon": "",  // --> base64
+                  "email": "",  // --> base64
+                  "kodePendidikanTerakhir": "S1",
+                  "deskripsiPendidikanTerakhir": "S1 / Diploma 4",
+                  "jumlahTanggungan": 1,
+                  "namaKontakDarurat": "Testing",
+                  "hubunganKontakDarurat": "Istri",
+                  "deskripsiHubunganDarurat": "Istri",
+                  "nomorKontakDarurat": "",  // --> base64
+                  "kodeAreaUsaha": 7555,
+                  "deskripsiAreaUsaha": "10560, Johar Baru, Johar Baru, Jakarta Pusat, DKI Jakarta",
+                  "alamatUsaha": "Cempaka Putih Barat",
+                  "latitudeUsaha": "",
+                  "longitudeUsaha": "",
+                  "rtUsaha": "010",
+                  "rwUsaha": "002",
+                  "tanggalJoinPartner": "2023-09-12",
+                  "kodeTipePinjaman": "CHILD-MMF-652",
+                  "kodePartnership": "MJ1",
+                  "namaPartnership": "Majoo",
+                  "tenorPinjaman": 12,
+                  "estimasiPinjaman": 100000000,
+                  "limitPinjaman": 0,
+                  "statusPrakarsa": 2,
+                  "deskripsiStatus": "Dalam Proses Pengajuan",
+                  "tanggalUpdate": "2024-09-06 15:38:01.800",
+                  "tanggalKadaluarsaBlock": "",
+                  "dukcapilDebitur": null,
+                  "dukcapilPasangan": null
+              },
+              "message": "Data pengajuan terakhir ditemukan.",
+              "status": 200
+          }
+  - name: Success - Data Ditemukan (Status 99) ==> DALAM PROSES PENGAJUAN (RESET BY SISTEM)
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 30 Aug 2024 03:41:10 GMT
+        - name: Content-Length
+          value: "1723"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "",
+                  "kodePrakarsa": "EX-MJ1-UmF5YVBpUGVyVG9w/lx6nGT4lUZqKWaPHO473pdfFJjkaak7idGcnE7dF0tYr3N/MAUuy6uEin3bREw=",
+                  "nomorIdentitas": "MzE3MTA1MTIxMTk1MDAwMQ==",
+                  "nama": "RHdpa2kgU2FwdXRyYQ==",
+                  "tempatLahir": "Jakarta",
+                  "tanggalLahir": "MTk5NS0xMS0xMg==",
+                  "jenisKelamin": "Laki-Laki",
+                  "tanggalKtp": "2008-09-10",
+                  "kodeArea": 7541,
+                  "deskripsiArea": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "longitude": "",
+                  "latitude": "",
+                  "alamat": "Jalan Cempaka Putih",
+                  "rt": "010",
+                  "rw": "012",
+                  "kodeAgama": "ISL",
+                  "deskripsiAgama": "Islam",
+                  "statusPernikahan": "Kawin",
+                  "namaIbuKandung": "UnVtaXlhdGk=",
+                  "nomorIdentitasPasangan": "MzE3MTA1MTIxMTk1MDAwMg==",
+                  "namaPasangan": "SnVtaWF0aQ==",
+                  "tempatLahirPasangan": "SnVtaWF0aQ==",
+                  "tanggalLahirPasangan": "MTk5Ny0wMi0wMg==",
+                  "nomorTelepon": "KzYyODc4NzcyNzg4MzA=",
+                  "email": "ZC5kd2lraXNhcHV0cmFAZ21haWwuY29t",
+                  "kodePendidikanTerakhir": "S1",
+                  "deskripsiPendidikanTerakhir": "S1 / Diploma 4",
+                  "jumlahTanggungan": 0,
+                  "namaKontakDarurat": "Joni",
+                  "hubunganKontakDarurat": "Famili Lain",
+                  "deskripsiHubunganDarurat": "Famili Lain",
+                  "nomorKontakDarurat": "KzYyODE3NzY1MjczNzg=",
+                  "kodeAreaUsaha": 80,
+                  "deskripsiAreaUsaha": "16820, Cileungsi Kidul, Cileungsi, Kab. Bogor, Jawa Barat",
+                  "alamatUsaha": "Jalan Cempaka Putih",
+                  "latitudeUsaha": "",
+                  "longitudeUsaha": "",
+                  "rtUsaha": "010",
+                  "rwUsaha": "012",
+                  "tanggalJoinPartner": "2020-05-06",
+                  "kodeTipePinjaman": "CHILD-MMF-652",
+                  "kodePartnership": "MJ1",
+                  "namaPartnership": "Majoo",
+                  "tenorPinjaman": 12,
+                  "estimasiPinjaman": 100000000,
+                  "limitPinjaman": 0,
+                  "statusPrakarsa": 99,
+                  "deskripsiStatus": "Dalam Proses Pengajuan",
+                  "tanggalUpdate": "2024-08-29 15:35:10.633",
+                  "tanggaKadaluarsaBlock": "",
+                  "dukcapilDebitur": null,
+                  "dukcapilPasangan": null
+              },
+              "message": "Data pengajuan terakhir ditemukan.",
+              "status": 200
+          }
+  - name: Success - Data Ditemukan (Status 3) ==> DALAM PROSES PERSETUJUAN & TTE
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 22 Jul 2024 06:25:06 GMT
+        - name: Content-Length
+          value: "1686"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "",
+                  "kodePrakarsa": "EX-MJ1-UmF5YVBpUGVyVG9w/lx6nGT4lUZqKWaPHO473pdfFJjiaKE5jNCfnEnaF6LFKali879Hq4opHCJZWQQ=",
+                  "nomorIdentitas": "", // --> base64
+                  "nama": "", // --> base64
+                  "tempatLahir": "Jakarta",
+                  "tanggalLahir": "", // --> base64
+                  "jenisKelamin": "Laki-Laki",
+                  "tanggalKtp": "2024-09-06",
+                  "kodeArea": 7541,
+                  "deskripsiArea": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "longitude": "",
+                  "latitude": "",
+                  "alamat": "Cempaka Putih Barat",
+                  "rt": "010",
+                  "rw": "002",
+                  "kodeAgama": "ISL",
+                  "deskripsiAgama": "Islam",
+                  "statusPernikahan": "Kawin",
+                  "namaIbuKandung": "", // --> base64
+                  "nomorIdentitasPasangan": "", // --> base64
+                  "namaPasangan": "", // --> base64
+                  "tempatLahirPasangan": "",  // --> base64
+                  "tanggalLahirPasangan": "", // --> base64
+                  "nomorTelepon": "", // --> base64
+                  "email": "", // --> base64
+                  "kodePendidikanTerakhir": "S1",
+                  "deskripsiPendidikanTerakhir": "S1 / Diploma 4",
+                  "jumlahTanggungan": 1,
+                  "namaKontakDarurat": "Testing",
+                  "hubunganKontakDarurat": "Istri",
+                  "deskripsiHubunganDarurat": "Istri",
+                  "nomorKontakDarurat": "", // --> base64
+                  "kodeAreaUsaha": 7555,
+                  "deskripsiAreaUsaha": "10560, Johar Baru, Johar Baru, Jakarta Pusat, DKI Jakarta",
+                  "alamatUsaha": "Cempaka Putih Barat",
+                  "latitudeUsaha": "",
+                  "longitudeUsaha": "",
+                  "rtUsaha": "010",
+                  "rwUsaha": "002",
+                  "tanggalJoinPartner": "2023-09-12",
+                  "kodeTipePinjaman": "CHILD-MMF-652",
+                  "kodePartnership": "MJ1",
+                  "namaPartnership": "Majoo",
+                  "tenorPinjaman": 12,
+                  "estimasiPinjaman": 100000000,
+                  "limitPinjaman": 0,
+                  "statusPrakarsa": 3,
+                  "deskripsiStatus": "Dalam Proses Persetujuan & Tanda Tangan Elektronik",
+                  "tanggalUpdate": "2024-09-06 16:10:17.163",
+                  "tanggaKadaluarsaBlock": "",
+                  "dukcapilDebitur": null,
+                  "dukcapilPasangan": null
+              },
+              "message": "Data pengajuan terakhir ditemukan.",
+              "status": 200
+          }
+  - name: Success - Data Ditemukan (Status 3) ==> DALAM PROSES PERSETUJUAN & TTE (BLOCK KIRIM OTP)
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 22 Jul 2024 06:25:06 GMT
+        - name: Content-Length
+          value: "1686"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "block",
+                  "kodePrakarsa": "EX-MJ1-UmF5YVBpUGVyVG9w/lx6nGT4lUZqKWaPHO473pdfFJjiaKE5jNCfnEnaF6LFKali879Hq4opHCJZWQQ=",
+                  "nomorIdentitas": "", // --> base64
+                  "nama": "", // --> base64
+                  "tempatLahir": "Jakarta",
+                  "tanggalLahir": "", // --> base64
+                  "jenisKelamin": "Laki-Laki",
+                  "tanggalKtp": "2024-09-06",
+                  "kodeArea": 7541,
+                  "deskripsiArea": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "longitude": "",
+                  "latitude": "",
+                  "alamat": "Cempaka Putih Barat",
+                  "rt": "010",
+                  "rw": "002",
+                  "kodeAgama": "ISL",
+                  "deskripsiAgama": "Islam",
+                  "statusPernikahan": "Kawin",
+                  "namaIbuKandung": "", // --> base64
+                  "nomorIdentitasPasangan": "", // --> base64
+                  "namaPasangan": "", // --> base64
+                  "tempatLahirPasangan": "",  // --> base64
+                  "tanggalLahirPasangan": "", // --> base64
+                  "nomorTelepon": "", // --> base64
+                  "email": "", // --> base64
+                  "kodePendidikanTerakhir": "S1",
+                  "deskripsiPendidikanTerakhir": "S1 / Diploma 4",
+                  "jumlahTanggungan": 1,
+                  "namaKontakDarurat": "Testing",
+                  "hubunganKontakDarurat": "Istri",
+                  "deskripsiHubunganDarurat": "Istri",
+                  "nomorKontakDarurat": "", // --> base64
+                  "kodeAreaUsaha": 7555,
+                  "deskripsiAreaUsaha": "10560, Johar Baru, Johar Baru, Jakarta Pusat, DKI Jakarta",
+                  "alamatUsaha": "Cempaka Putih Barat",
+                  "latitudeUsaha": "",
+                  "longitudeUsaha": "",
+                  "rtUsaha": "010",
+                  "rwUsaha": "002",
+                  "tanggalJoinPartner": "2023-09-12",
+                  "kodeTipePinjaman": "CHILD-MMF-652",
+                  "kodePartnership": "MJ1",
+                  "namaPartnership": "Majoo",
+                  "tenorPinjaman": 12,
+                  "estimasiPinjaman": 100000000,
+                  "limitPinjaman": 0,
+                  "statusPrakarsa": 3,
+                  "deskripsiStatus": "Dalam Proses Persetujuan & Tanda Tangan Elektronik",
+                  "tanggalUpdate": "2024-09-06 16:10:17.163",
+                  "tanggalKadaluarsaBlock": "2024-09-12 15:20:53.417",
+                  "dukcapilDebitur": null,
+                  "dukcapilPasangan": null
+              },
+              "message": "Data pengajuan terakhir ditemukan.",
+              "status": 200
+          }
+  - name: Success - Data Ditemukan (Status 4, 5, 6) ==> DALAM PROSES AKTIVASI LIMIT --> PRESCREENING
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 22 Jul 2024 06:26:32 GMT
+        - name: Content-Length
+          value: "1658"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "",
+                  "kodePrakarsa": "EX-MJ1-UmF5YVBpUGVyVG9w/lx6nGT4lUZqKWaPHO473pdfFJjiaKE5jNCfnEnaF6LFKali879Hq4opHCJZWQQ=",
+                  "nomorIdentitas": "", // --> base64
+                  "nama": "", // --> base64
+                  "tempatLahir": "Jakarta",
+                  "tanggalLahir": "", // --> base64
+                  "jenisKelamin": "Laki-Laki",
+                  "tanggalKtp": "2024-09-06",
+                  "kodeArea": 7541,
+                  "deskripsiArea": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "longitude": "",
+                  "latitude": "",
+                  "alamat": "Cempaka Putih Barat",
+                  "rt": "010",
+                  "rw": "002",
+                  "kodeAgama": "ISL",
+                  "deskripsiAgama": "Islam",
+                  "statusPernikahan": "Kawin",
+                  "namaIbuKandung": "", // --> base64
+                  "nomorIdentitasPasangan": "",  // --> base64
+                  "namaPasangan": "",  // --> base64
+                  "tempatLahirPasangan": "",  // --> base64
+                  "tanggalLahirPasangan": "",  // --> base64
+                  "nomorTelepon": "",  // --> base64
+                  "email": "",  // --> base64
+                  "kodePendidikanTerakhir": "S1",
+                  "deskripsiPendidikanTerakhir": "S1 / Diploma 4",
+                  "jumlahTanggungan": 1,
+                  "namaKontakDarurat": "Testing",
+                  "hubunganKontakDarurat": "Istri",
+                  "deskripsiHubunganDarurat": "Istri",
+                  "nomorKontakDarurat": "KzYyODc4NzcyNzg4MzE=",
+                  "kodeAreaUsaha": 7555,
+                  "deskripsiAreaUsaha": "10560, Johar Baru, Johar Baru, Jakarta Pusat, DKI Jakarta",
+                  "alamatUsaha": "Cempaka Putih Barat",
+                  "latitudeUsaha": "",
+                  "longitudeUsaha": "",
+                  "rtUsaha": "010",
+                  "rwUsaha": "002",
+                  "tanggalJoinPartner": "2023-09-12",
+                  "kodeTipePinjaman": "CHILD-MMF-652",
+                  "kodePartnership": "MJ1",
+                  "namaPartnership": "Majoo",
+                  "tenorPinjaman": 12,
+                  "estimasiPinjaman": 100000000,
+                  "limitPinjaman": 0,
+                  "statusPrakarsa": 4,
+                  "deskripsiStatus": "Dalam Proses Aktivasi Limit",
+                  "tanggalUpdate": "2024-09-06 16:17:51.390",
+                  "tanggaKadaluarsaBlock": "",
+                  "dukcapilDebitur": null,
+                  "dukcapilPasangan": null
+              },
+              "message": "Data pengajuan terakhir ditemukan.",
+              "status": 200
+          }
+  - name: Success - Data Ditemukan (Status 7, 8) ==> DALAM PROSES AKTIVASI LIMIT --> SCORING
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 22 Jul 2024 06:26:32 GMT
+        - name: Content-Length
+          value: "1658"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "",
+                  "kodePrakarsa": "EX-MJ1-UmF5YVBpUGVyVG9w/lx6nGT4lUZqKWaPHO473pdfFJjiaKE5jdCZnEPYEEzLf1Flye/+V7OSRryft+Y=",
+                  "nomorIdentitas": "", // --> base64
+                  "nama": "", // --> base64
+                  "tempatLahir": "Jakarta",
+                  "tanggalLahir": "", // --> base64
+                  "jenisKelamin": "Laki-Laki",
+                  "tanggalKtp": "2000-11-17",
+                  "kodeArea": 7541,
+                  "deskripsiArea": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "longitude": "20",
+                  "latitude": "-20",
+                  "alamat": "Cempaka Putih Barat",
+                  "rt": "010",
+                  "rw": "002",
+                  "kodeAgama": "ISL",
+                  "deskripsiAgama": "Islam",
+                  "statusPernikahan": "Kawin",
+                  "namaIbuKandung": "", // --> base64
+                  "nomorIdentitasPasangan": "", // --> base64
+                  "namaPasangan": "", // --> base64
+                  "tempatLahirPasangan": "", // --> base64
+                  "tanggalLahirPasangan": "", // --> base64
+                  "nomorTelepon": "", // --> base64
+                  "email": "", // --> base64
+                  "kodePendidikanTerakhir": "S1",
+                  "deskripsiPendidikanTerakhir": "S1 / Diploma 4",
+                  "jumlahTanggungan": 1,
+                  "namaKontakDarurat": "Darurat",
+                  "hubunganKontakDarurat": "Istri",
+                  "deskripsiHubunganDarurat": "Istri",
+                  "nomorKontakDarurat": "", // --> base64
+                  "kodeAreaUsaha": 7541,
+                  "deskripsiAreaUsaha": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "alamatUsaha": "Cempaka Putih Barat",
+                  "latitudeUsaha": "20",
+                  "longitudeUsaha": "20",
+                  "rtUsaha": "010",
+                  "rwUsaha": "002",
+                  "tanggalJoinPartner": "2000-11-17",
+                  "kodeTipePinjaman": "CHILD-MMF-652",
+                  "kodePartnership": "MJ1",
+                  "namaPartnership": "Majoo",
+                  "tenorPinjaman": 12,
+                  "estimasiPinjaman": 100000000,
+                  "limitPinjaman": 100000000,
+                  "statusPrakarsa": 7,
+                  "deskripsiStatus": "Dalam Proses Aktivasi Limit",
+                  "tanggalUpdate": "2024-09-07 15:51:07.810",
+                  "tanggaKadaluarsaBlock": "",
+                  "dukcapilDebitur": null,
+                  "dukcapilPasangan": null
+              },
+              "message": "Data pengajuan terakhir ditemukan.",
+              "status": 200
+          }
+  - name: Success - Data Ditemukan (Status 9, 10) ==> DALAM PROSES AKTIVASI LIMIT --> CREATE AUTOMATION
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 22 Jul 2024 06:26:32 GMT
+        - name: Content-Length
+          value: "1658"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "",
+                  "kodePrakarsa": "EX-MJ1-UmF5YVBpUGVyVG9w/lx6nGT4lUZqKWaPHO473pdfFJjiaKE5jdCZnEPYEEzLf1Flye/+V7OSRryft+Y=",
+                  "nomorIdentitas": "", // --> base64
+                  "nama": "", // --> base64
+                  "tempatLahir": "Jakarta",
+                  "tanggalLahir": "", // --> base64
+                  "jenisKelamin": "Laki-Laki",
+                  "tanggalKtp": "2000-11-17",
+                  "kodeArea": 7541,
+                  "deskripsiArea": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "longitude": "20",
+                  "latitude": "-20",
+                  "alamat": "Cempaka Putih Barat",
+                  "rt": "010",
+                  "rw": "002",
+                  "kodeAgama": "ISL",
+                  "deskripsiAgama": "Islam",
+                  "statusPernikahan": "Kawin",
+                  "namaIbuKandung": "", // --> base64
+                  "nomorIdentitasPasangan": "", // --> base64
+                  "namaPasangan": "", // --> base64
+                  "tempatLahirPasangan": "", // --> base64
+                  "tanggalLahirPasangan": "", // --> base64
+                  "nomorTelepon": "", // --> base64
+                  "email": "", // --> base64
+                  "kodePendidikanTerakhir": "S1",
+                  "deskripsiPendidikanTerakhir": "S1 / Diploma 4",
+                  "jumlahTanggungan": 1,
+                  "namaKontakDarurat": "Darurat",
+                  "hubunganKontakDarurat": "Istri",
+                  "deskripsiHubunganDarurat": "Istri",
+                  "nomorKontakDarurat": "", // --> base64
+                  "kodeAreaUsaha": 7541,
+                  "deskripsiAreaUsaha": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "alamatUsaha": "Cempaka Putih Barat",
+                  "latitudeUsaha": "20",
+                  "longitudeUsaha": "20",
+                  "rtUsaha": "010",
+                  "rwUsaha": "002",
+                  "tanggalJoinPartner": "2000-11-17",
+                  "kodeTipePinjaman": "CHILD-MMF-652",
+                  "kodePartnership": "MJ1",
+                  "namaPartnership": "Majoo",
+                  "tenorPinjaman": 12,
+                  "estimasiPinjaman": 100000000,
+                  "limitPinjaman": 100000000,
+                  "statusPrakarsa": 7,
+                  "deskripsiStatus": "Dalam Proses Aktivasi Limit",
+                  "tanggalUpdate": "2024-09-07 15:51:07.810",
+                  "tanggaKadaluarsaBlock": "",
+                  "dukcapilDebitur": null,
+                  "dukcapilPasangan": null
+              },
+              "message": "Data pengajuan terakhir ditemukan.",
+              "status": 200
+          }
+  - name: Success - Data Ditemukan (Status 9) ==> DALAM PROSES AKTIVASI LIMIT --> LINK BUKA SAVING
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+          disabled: true
+        - name: Api-Key
+          value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
+          description: PROD
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzIwOTEyMjAwMzk0MDAwNg==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Wed, 17 Dec 2025 07:56:17 GMT
+        - name: Content-Length
+          value: "1714"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "",
+                  "kodePrakarsa": "EX-MJ1-UmF5YVBpUGVyVG9w/l99lGX/lkRrK2aOHO472ZdfFJjjaKk5jdCenkjZEhL3ItOCvPlXZI8RuvFjKok=",
+                  "nomorIdentitas": "MzIwOTEyMjAwMzk0MDAwNg==",
+                  "nama": "U3VuYXJ0bw==",
+                  "tempatLahir": "Cirebon",
+                  "tanggalLahir": "MTk5Ni0wMy0yMA==",
+                  "jenisKelamin": "Laki-Laki",
+                  "tanggalKtp": "2022-06-08",
+                  "kodeArea": 5728,
+                  "deskripsiArea": "45133, Drajat, Kesambi, Kota Cirebon, Jawa Barat",
+                  "longitude": "",
+                  "latitude": "",
+                  "alamat": "Jl. Harapan Gg. Bakt Iii No.38",
+                  "rt": "007",
+                  "rw": "006",
+                  "kodeAgama": "ISL",
+                  "deskripsiAgama": "Islam",
+                  "statusPernikahan": "Kawin",
+                  "namaIbuKandung": "TnVyeWF0aQ==",
+                  "nomorIdentitasPasangan": "MzI3ODQ1Nzg0NTc4Nzk0Nw==",
+                  "namaPasangan": "QWxhbGE=",
+                  "tempatLahirPasangan": "QWxhbGE=",
+                  "tanggalLahirPasangan": "MTk5Mi0wMi0wOQ==",
+                  "nomorTelepon": "KzYyODM4MjM3MTM0MjE=",
+                  "email": "c3VuYXJ0b0BiYW5rcmF5YS5jby5pZA==",
+                  "kodePendidikanTerakhir": "S1",
+                  "deskripsiPendidikanTerakhir": "S1 / Diploma 4",
+                  "jumlahTanggungan": 1,
+                  "namaKontakDarurat": "Kerabat",
+                  "hubunganKontakDarurat": "Istri",
+                  "deskripsiHubunganDarurat": "Istri",
+                  "nomorKontakDarurat": "KzYyODMyMzE3MzE2MjE=",
+                  "kodeAreaUsaha": 5728,
+                  "deskripsiAreaUsaha": "45133, Drajat, Kesambi, Kota Cirebon, Jawa Barat",
+                  "alamatUsaha": "Lengkap",
+                  "latitudeUsaha": "",
+                  "longitudeUsaha": "",
+                  "rtUsaha": "010",
+                  "rwUsaha": "002",
+                  "tanggalJoinPartner": "2024-10-06",
+                  "kodeTipePinjaman": "CHILD-MMF-652",
+                  "kodePartnership": "MJ1",
+                  "namaPartnership": "Majoo",
+                  "tenorPinjaman": 90,
+                  "estimasiPinjaman": 100000000,
+                  "limitPinjaman": 100000000,
+                  "statusPrakarsa": 9,
+                  "deskripsiStatus": "Dalam Proses Aktivasi Limit",
+                  "tanggalUpdate": "2025-12-15 14:33:47.503",
+                  "tanggalKadaluarsaBlock": "",
+                  "tncDigitsave": 1,
+                  "bukaSaving": 1,
+                  "dukcapilDebitur": null,
+                  "dukcapilPasangan": null
+              },
+              "message": "Data pengajuan terakhir ditemukan.",
+              "status": 200
+          }
+  - name: Success - Data Ditemukan (Status -1) ==> DUKCAPIL TIDAK LOLOS
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 06 Aug 2024 11:04:33 GMT
+        - name: Content-Length
+          value: "1947"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "",
+                  "kodePrakarsa": "EX-MJ1-UmF5YVBpUGVyVG9w/lx6nGT4lUZqKWaPHO473pdfFJjiaKE5jNCfnEnaF6LFKali879Hq4opHCJZWQQ=",
+                  "nomorIdentitas": "", // --> base64 
+                  "nama": "", // --> base64 
+                  "tempatLahir": "Jakarta",
+                  "tanggalLahir": "", // --> base64 
+                  "jenisKelamin": "Laki-Laki",
+                  "tanggalKtp": "2024-09-06",
+                  "kodeArea": 7541,
+                  "deskripsiArea": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "longitude": "",
+                  "latitude": "",
+                  "alamat": "Cempaka Putih Barat",
+                  "rt": "010",
+                  "rw": "002",
+                  "kodeAgama": "ISL",
+                  "deskripsiAgama": "Islam",
+                  "statusPernikahan": "Kawin",
+                  "namaIbuKandung": "", // --> base64 
+                  "nomorIdentitasPasangan": "", // --> base64 
+                  "namaPasangan": "", // --> base64 
+                  "tempatLahirPasangan": "", // --> base64 
+                  "tanggalLahirPasangan": "", // --> base64 
+                  "nomorTelepon": "", // --> base64 
+                  "email": "", // --> base64 
+                  "kodePendidikanTerakhir": "S1",
+                  "deskripsiPendidikanTerakhir": "S1 / Diploma 4",
+                  "jumlahTanggungan": 1,
+                  "namaKontakDarurat": "Testing",
+                  "hubunganKontakDarurat": "Istri",
+                  "deskripsiHubunganDarurat": "Istri",
+                  "nomorKontakDarurat": "", // --> base64 
+                  "kodeAreaUsaha": 7555,
+                  "deskripsiAreaUsaha": "10560, Johar Baru, Johar Baru, Jakarta Pusat, DKI Jakarta",
+                  "alamatUsaha": "Cempaka Putih Barat",
+                  "latitudeUsaha": "",
+                  "longitudeUsaha": "",
+                  "rtUsaha": "010",
+                  "rwUsaha": "002",
+                  "tanggalJoinPartner": "2023-09-12",
+                  "kodeTipePinjaman": "CHILD-MMF-652",
+                  "kodePartnership": "MJ1",
+                  "namaPartnership": "Majoo",
+                  "tenorPinjaman": 12,
+                  "estimasiPinjaman": 100000000,
+                  "limitPinjaman": 0,
+                  "statusPrakarsa": -1,
+                  "deskripsiStatus": "Dukcapil Tidak Lolos",
+                  "tanggalUpdate": "2024-09-06 13:22:20.720",
+                  "tanggalKadaluarsaBlock": "",
+                  "dukcapilDebitur": {
+                      "flagNikDebitur": "0",
+                      "flagNamaDebitur": "0",
+                      "flagTempatLahirDebitur": "0",
+                      "flagTanggalLahirDebitur": "0",
+                      "flagNamaIbuKandungDebitur": "0"
+                  },
+                  "dukcapilPasangan": {
+                      "flagNikPasangan": "1",
+                      "flagNamaPasangan": "1",
+                      "flagTempatLahirPasangan": "1",
+                      "flagTanggalLahirPasangan": "1"
+                  }
+              },
+              "message": "Data pengajuan terakhir ditemukan.",
+              "status": 200
+          }
+  - name: Success - Data Ditemukan (Status -2) ==> PENGAJUAN DITOLAK --> Belum Kadaluarsa
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 26 Jul 2024 04:01:23 GMT
+        - name: Content-Length
+          value: "1691"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "block",
+                  "kodePrakarsa": "EX-MJ1-UmF5YVBpUGVyVG9w/lx6nGT4lUZqKWaPHO473pdfFJjiaKE5jdCan0ndFxX/YuRBh3N8fHv7dWOAZoc=",
+                  "nomorIdentitas": "", // --> base64
+                  "nama": "", // --> base64
+                  "tempatLahir": "Jakarta",
+                  "tanggalLahir": "", // --> base64
+                  "jenisKelamin": "Laki-Laki",
+                  "tanggalKtp": "2000-11-17",
+                  "kodeArea": 7541,
+                  "deskripsiArea": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "longitude": "20",
+                  "latitude": "-20",
+                  "alamat": "Cempaka Putih Barat",
+                  "rt": "010",
+                  "rw": "002",
+                  "kodeAgama": "ISL",
+                  "deskripsiAgama": "Islam",
+                  "statusPernikahan": "Kawin",
+                  "namaIbuKandung": "", // --> base64
+                  "nomorIdentitasPasangan": "", // --> base64
+                  "namaPasangan": "", // --> base64
+                  "tempatLahirPasangan": "", // --> base64
+                  "tanggalLahirPasangan": "", // --> base64
+                  "nomorTelepon": "", // --> base64
+                  "email": "", // --> base64
+                  "kodePendidikanTerakhir": "S1",
+                  "deskripsiPendidikanTerakhir": "S1 / Diploma 4",
+                  "jumlahTanggungan": 1,
+                  "namaKontakDarurat": "Darurat",
+                  "hubunganKontakDarurat": "Istri",
+                  "deskripsiHubunganDarurat": "Istri",
+                  "nomorKontakDarurat": "", // --> base64
+                  "kodeAreaUsaha": 7541,
+                  "deskripsiAreaUsaha": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "alamatUsaha": "Cempaka Putih Barat",
+                  "latitudeUsaha": "20",
+                  "longitudeUsaha": "20",
+                  "rtUsaha": "010",
+                  "rwUsaha": "002",
+                  "tanggalJoinPartner": "2000-11-17",
+                  "kodeTipePinjaman": "CHILD-MMF-652",
+                  "kodePartnership": "MJ1",
+                  "namaPartnership": "Majoo",
+                  "tenorPinjaman": 12,
+                  "estimasiPinjaman": 100000000,
+                  "limitPinjaman": 0,
+                  "statusPrakarsa": -2,
+                  "deskripsiStatus": "Pengajuan Ditolak",
+                  "tanggalUpdate": "2024-09-07 16:17:59.273",
+                  "tanggaKadaluarsaBlock": "2024-09-14 23:59:59.000",
+                  "dukcapilDebitur": null,
+                  "dukcapilPasangan": null
+              },
+              "message": "Data pengajuan terakhir ditemukan.",
+              "status": 200
+          }
+  - name: Success - Data Ditemukan (Status -2) ==> PENGAJUAN DITOLAK --> Sudah Kadaluarsa
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 26 Jul 2024 03:58:08 GMT
+        - name: Content-Length
+          value: "1686"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "",
+                  "kodePrakarsa": "EX-MJ1-UmF5YVBpUGVyVG9w/lx6nGT4lUZqKWaPHO473pdfFJjiaKE5jdCan0ndFxX/YuRBh3N8fHv7dWOAZoc=",
+                  "nomorIdentitas": "", // --> base64
+                  "nama": "", // --> base64
+                  "tempatLahir": "Jakarta",
+                  "tanggalLahir": "", // --> base64
+                  "jenisKelamin": "Laki-Laki",
+                  "tanggalKtp": "2000-11-17",
+                  "kodeArea": 7541,
+                  "deskripsiArea": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "longitude": "20",
+                  "latitude": "-20",
+                  "alamat": "Cempaka Putih Barat",
+                  "rt": "010",
+                  "rw": "002",
+                  "kodeAgama": "ISL",
+                  "deskripsiAgama": "Islam",
+                  "statusPernikahan": "Kawin",
+                  "namaIbuKandung": "", // --> base64
+                  "nomorIdentitasPasangan": "", // --> base64
+                  "namaPasangan": "", // --> base64
+                  "tempatLahirPasangan": "", // --> base64
+                  "tanggalLahirPasangan": "", // --> base64
+                  "nomorTelepon": "", // --> base64
+                  "email": "", // --> base64
+                  "kodePendidikanTerakhir": "S1",
+                  "deskripsiPendidikanTerakhir": "S1 / Diploma 4",
+                  "jumlahTanggungan": 1,
+                  "namaKontakDarurat": "Darurat",
+                  "hubunganKontakDarurat": "Istri",
+                  "deskripsiHubunganDarurat": "Istri",
+                  "nomorKontakDarurat": "", // --> base64
+                  "kodeAreaUsaha": 7541,
+                  "deskripsiAreaUsaha": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "alamatUsaha": "Cempaka Putih Barat",
+                  "latitudeUsaha": "20",
+                  "longitudeUsaha": "20",
+                  "rtUsaha": "010",
+                  "rwUsaha": "002",
+                  "tanggalJoinPartner": "2000-11-17",
+                  "kodeTipePinjaman": "CHILD-MMF-652",
+                  "kodePartnership": "MJ1",
+                  "namaPartnership": "Majoo",
+                  "tenorPinjaman": 12,
+                  "estimasiPinjaman": 100000000,
+                  "limitPinjaman": 0,
+                  "statusPrakarsa": -2,
+                  "deskripsiStatus": "Pengajuan Ditolak",
+                  "tanggalUpdate": "2024-09-07 16:17:59.273",
+                  "tanggaKadaluarsaBlock": "",
+                  "dukcapilDebitur": null,
+                  "dukcapilPasangan": null
+              },
+              "message": "Data pengajuan terakhir ditemukan.",
+              "status": 200
+          }
+  - name: Success - Data Ditemukan (Status -3) ==> PENGAJUAN DITOLAK (LIVENESS BLOCK --> BELUM KADALUARSA)
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Sat, 24 Aug 2024 03:40:49 GMT
+        - name: Content-Length
+          value: "1746"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "block",
+                  "kodePrakarsa": "EX-MJ1-UmF5YVBpUGVyVG9w/lx6nGT4lUZqKWaPHO473pdfFJjiaKE5jNCfnEnaF6LFKali879Hq4opHCJZWQQ=",
+                  "nomorIdentitas": "", // --> base64
+                  "nama": "", // --> base64
+                  "tempatLahir": "Jakarta",
+                  "tanggalLahir": "", // --> base64
+                  "jenisKelamin": "Laki-Laki",
+                  "tanggalKtp": "2024-09-06",
+                  "kodeArea": 7541,
+                  "deskripsiArea": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "longitude": "",
+                  "latitude": "",
+                  "alamat": "Cempaka Putih Barat",
+                  "rt": "010",
+                  "rw": "002",
+                  "kodeAgama": "ISL",
+                  "deskripsiAgama": "Islam",
+                  "statusPernikahan": "Kawin",
+                  "namaIbuKandung": "", // --> base64
+                  "nomorIdentitasPasangan": "", // --> base64
+                  "namaPasangan": "", // --> base64
+                  "tempatLahirPasangan": "", // --> base64
+                  "tanggalLahirPasangan": "", // --> base64
+                  "nomorTelepon": "", // --> base64
+                  "email": "", // --> base64
+                  "kodePendidikanTerakhir": "S1",
+                  "deskripsiPendidikanTerakhir": "S1 / Diploma 4",
+                  "jumlahTanggungan": 1,
+                  "namaKontakDarurat": "Testing",
+                  "hubunganKontakDarurat": "Istri",
+                  "deskripsiHubunganDarurat": "Istri",
+                  "nomorKontakDarurat": "", // --> base64
+                  "kodeAreaUsaha": 7555,
+                  "deskripsiAreaUsaha": "10560, Johar Baru, Johar Baru, Jakarta Pusat, DKI Jakarta",
+                  "alamatUsaha": "Cempaka Putih Barat",
+                  "latitudeUsaha": "",
+                  "longitudeUsaha": "",
+                  "rtUsaha": "010",
+                  "rwUsaha": "002",
+                  "tanggalJoinPartner": "2023-09-12",
+                  "kodeTipePinjaman": "CHILD-MMF-652",
+                  "kodePartnership": "MJ1",
+                  "namaPartnership": "Majoo",
+                  "tenorPinjaman": 12,
+                  "estimasiPinjaman": 100000000,
+                  "limitPinjaman": 0,
+                  "statusPrakarsa": -3,
+                  "deskripsiStatus": "Pengajuan Ditolak",
+                  "tanggalUpdate": "2024-09-06 15:54:36.417",
+                  "tanggaKadaluarsaBlock": "2024-09-07 15:54:36.423",
+                  "dukcapilDebitur": null,
+                  "dukcapilPasangan": null
+              },
+              "message": "Data pengajuan terakhir ditemukan.",
+              "status": 200
+          }
+  - name: Success - Data Ditemukan (Status -3) ==> PENGAJUAN DITOLAK (LIVENESS BLOCK --> SUDAH KADALUARSA)
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Sat, 24 Aug 2024 03:45:25 GMT
+        - name: Content-Length
+          value: "1718"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "",
+                  "kodePrakarsa": "EX-MJ1-UmF5YVBpUGVyVG9w/lx6nGT4lUZqKWaPHO473pdfFJjiaKE5jNCfnEnaF6LFKali879Hq4opHCJZWQQ=",
+                  "nomorIdentitas": "", // --> base64
+                  "nama": "", // --> base64
+                  "tempatLahir": "Jakarta",
+                  "tanggalLahir": "", // --> base64
+                  "jenisKelamin": "Laki-Laki",
+                  "tanggalKtp": "2024-09-06",
+                  "kodeArea": 7541,
+                  "deskripsiArea": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "longitude": "",
+                  "latitude": "",
+                  "alamat": "Cempaka Putih Barat",
+                  "rt": "010",
+                  "rw": "002",
+                  "kodeAgama": "ISL",
+                  "deskripsiAgama": "Islam",
+                  "statusPernikahan": "Kawin",
+                  "namaIbuKandung": "", // --> base64
+                  "nomorIdentitasPasangan": "", // --> base64
+                  "namaPasangan": "", // --> base64
+                  "tempatLahirPasangan": "", // --> base64
+                  "tanggalLahirPasangan": "",  // --> base64
+                  "nomorTelepon": "",  // --> base64
+                  "email": "",  // --> base64
+                  "kodePendidikanTerakhir": "S1",
+                  "deskripsiPendidikanTerakhir": "S1 / Diploma 4",
+                  "jumlahTanggungan": 1,
+                  "namaKontakDarurat": "Testing",
+                  "hubunganKontakDarurat": "Istri",
+                  "deskripsiHubunganDarurat": "Istri",
+                  "nomorKontakDarurat": "",  // --> base64
+                  "kodeAreaUsaha": 7555,
+                  "deskripsiAreaUsaha": "10560, Johar Baru, Johar Baru, Jakarta Pusat, DKI Jakarta",
+                  "alamatUsaha": "Cempaka Putih Barat",
+                  "latitudeUsaha": "",
+                  "longitudeUsaha": "",
+                  "rtUsaha": "010",
+                  "rwUsaha": "002",
+                  "tanggalJoinPartner": "2023-09-12",
+                  "kodeTipePinjaman": "CHILD-MMF-652",
+                  "kodePartnership": "MJ1",
+                  "namaPartnership": "Majoo",
+                  "tenorPinjaman": 12,
+                  "estimasiPinjaman": 100000000,
+                  "limitPinjaman": 0,
+                  "statusPrakarsa": -3,
+                  "deskripsiStatus": "Pengajuan Ditolak",
+                  "tanggalUpdate": "2024-09-06 15:54:36.417",
+                  "tanggaKadaluarsaBlock": "",
+                  "dukcapilDebitur": null,
+                  "dukcapilPasangan": null
+              },
+              "message": "Data pengajuan terakhir ditemukan.",
+              "status": 200
+          }
+  - name: Success - Data Ditemukan (Status -4) ==> GAGAL TTE (OTP BLOCK --> BELUM KADALUARSA)
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Sat, 24 Aug 2024 03:45:25 GMT
+        - name: Content-Length
+          value: "1718"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "block",
+                  "kodePrakarsa": "EX-ATE-90-UmF5YVBpUGVyVG9w/l99nGX+kExqKWaNHO473JdfFJjiaKE5iNCcnknaEnJTelGHSoltfNSMIJMNqwg=",
+                  "nomorIdentitas": "", // --> base64
+                  "nama": "", // --> base64
+                  "tempatLahir": "Jakarta",
+                  "tanggalLahir": "", // --> base64
+                  "jenisKelamin": "Perempuan",
+                  "tanggalKtp": "2016-09-02",
+                  "kodeArea": 142,
+                  "deskripsiArea": "16922, Bojonggede, Bojong Gede, Kab. Bogor, Jawa Barat",
+                  "longitude": "",
+                  "latitude": "",
+                  "alamat": "Kp. Sawah Poncol",
+                  "rt": "004",
+                  "rw": "007",
+                  "kodeAgama": "ISL",
+                  "deskripsiAgama": "Islam",
+                  "statusPernikahan": "Belum Kawin",
+                  "namaIbuKandung": "QW5h",
+                  "nomorIdentitasPasangan": "",
+                  "namaPasangan": "",
+                  "tempatLahirPasangan": "",
+                  "tanggalLahirPasangan": "",
+                  "nomorTelepon": "", // --> base64
+                  "email": "", // --> base64
+                  "kodePendidikanTerakhir": "D2",
+                  "deskripsiPendidikanTerakhir": "Diploma 2",
+                  "jumlahTanggungan": 0,
+                  "namaKontakDarurat": "Rizka",
+                  "hubunganKontakDarurat": "Famili Lain",
+                  "deskripsiHubunganDarurat": "Famili Lain",
+                  "nomorKontakDarurat": "", // --> base64
+                  "kodeAreaUsaha": 139,
+                  "deskripsiAreaUsaha": "16923, Kedungwaringin, Bojong Gede, Kab. Bogor, Jawa Barat",
+                  "alamatUsaha": "Kp. Sawah Poncol",
+                  "latitudeUsaha": "",
+                  "longitudeUsaha": "",
+                  "rtUsaha": "004",
+                  "rwUsaha": "007",
+                  "tanggalJoinPartner": "2023-09-08",
+                  "kodeTipePinjaman": "CHILD-ATM-38",
+                  "kodePartnership": "ATE-90",
+                  "namaPartnership": "AGRIAKU TESTING",
+                  "tenorPinjaman": 5,
+                  "estimasiPinjaman": 45000000,
+                  "limitPinjaman": 0,
+                  "statusPrakarsa": -4,
+                  "deskripsiStatus": "Gagal Tanda Tangan Elektronik",
+                  "tanggalUpdate": "2024-09-10 09:53:30.657",
+                  "tanggalKadaluarsaBlock": "2024-09-10 11:15:00.000",
+                  "dukcapilDebitur": null,
+                  "dukcapilPasangan": null
+              },
+              "message": "Data pengajuan terakhir ditemukan.",
+              "status": 200
+          }
+  - name: Success - Data Ditemukan (Status -4) ==> GAGAL TTE (OTP BLOCK --> SUDAH KADALUARSA)
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Sat, 24 Aug 2024 03:45:25 GMT
+        - name: Content-Length
+          value: "1718"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "",
+                  "kodePrakarsa": "EX-ATE-90-UmF5YVBpUGVyVG9w/l99nGX+kExqKWaNHO473JdfFJjiaKE5iNCcnknaEnJTelGHSoltfNSMIJMNqwg=",
+                  "nomorIdentitas": "", // --> base64
+                  "nama": "", // --> base64
+                  "tempatLahir": "Jakarta",
+                  "tanggalLahir": "", // --> base64
+                  "jenisKelamin": "Perempuan",
+                  "tanggalKtp": "2016-09-02",
+                  "kodeArea": 142,
+                  "deskripsiArea": "16922, Bojonggede, Bojong Gede, Kab. Bogor, Jawa Barat",
+                  "longitude": "",
+                  "latitude": "",
+                  "alamat": "Kp. Sawah Poncol",
+                  "rt": "004",
+                  "rw": "007",
+                  "kodeAgama": "ISL",
+                  "deskripsiAgama": "Islam",
+                  "statusPernikahan": "Belum Kawin",
+                  "namaIbuKandung": "QW5h",
+                  "nomorIdentitasPasangan": "",
+                  "namaPasangan": "",
+                  "tempatLahirPasangan": "",
+                  "tanggalLahirPasangan": "",
+                  "nomorTelepon": "", // --> base64
+                  "email": "", // --> base64
+                  "kodePendidikanTerakhir": "D2",
+                  "deskripsiPendidikanTerakhir": "Diploma 2",
+                  "jumlahTanggungan": 0,
+                  "namaKontakDarurat": "Rizka",
+                  "hubunganKontakDarurat": "Famili Lain",
+                  "deskripsiHubunganDarurat": "Famili Lain",
+                  "nomorKontakDarurat": "", // --> base64
+                  "kodeAreaUsaha": 139,
+                  "deskripsiAreaUsaha": "16923, Kedungwaringin, Bojong Gede, Kab. Bogor, Jawa Barat",
+                  "alamatUsaha": "Kp. Sawah Poncol",
+                  "latitudeUsaha": "",
+                  "longitudeUsaha": "",
+                  "rtUsaha": "004",
+                  "rwUsaha": "007",
+                  "tanggalJoinPartner": "2023-09-08",
+                  "kodeTipePinjaman": "CHILD-ATM-38",
+                  "kodePartnership": "ATE-90",
+                  "namaPartnership": "AGRIAKU TESTING",
+                  "tenorPinjaman": 5,
+                  "estimasiPinjaman": 45000000,
+                  "limitPinjaman": 0,
+                  "statusPrakarsa": -4,
+                  "deskripsiStatus": "Gagal Tanda Tangan Elektronik",
+                  "tanggalUpdate": "2024-09-10 09:53:30.657",
+                  "tanggalKadaluarsaBlock": "",
+                  "dukcapilDebitur": null,
+                  "dukcapilPasangan": null
+              },
+              "message": "Data pengajuan terakhir ditemukan.",
+              "status": 200
+          }
+  - name: Success - Data Ditemukan (Status -5) ==> PRESCREENING DITOLAK --> Belum Kadaluarsa
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 30 Aug 2024 03:39:05 GMT
+        - name: Content-Length
+          value: "1718"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "block",
+                  "kodePrakarsa": "EX-MJ1-UmF5YVBpUGVyVG9w/lx6nGT4lUZqKWaPHO473pdfFJjiaKE5jdCan0ndFxX/YuRBh3N8fHv7dWOAZoc=",
+                  "nomorIdentitas": "",  // --> base64
+                  "nama": "", // --> base64
+                  "tempatLahir": "Jakarta",
+                  "tanggalLahir": "", // --> base64
+                  "jenisKelamin": "Laki-Laki",
+                  "tanggalKtp": "2000-11-17",
+                  "kodeArea": 7541,
+                  "deskripsiArea": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "longitude": "20",
+                  "latitude": "-20",
+                  "alamat": "Cempaka Putih Barat",
+                  "rt": "010",
+                  "rw": "002",
+                  "kodeAgama": "ISL",
+                  "deskripsiAgama": "Islam",
+                  "statusPernikahan": "Kawin",
+                  "namaIbuKandung": "", // --> base64
+                  "nomorIdentitasPasangan": "", // --> base64
+                  "namaPasangan": "", // --> base64
+                  "tempatLahirPasangan": "", // --> base64
+                  "tanggalLahirPasangan": "", // --> base64
+                  "nomorTelepon": "", // --> base64
+                  "email": "", // --> base64
+                  "kodePendidikanTerakhir": "S1",
+                  "deskripsiPendidikanTerakhir": "S1 / Diploma 4",
+                  "jumlahTanggungan": 1,
+                  "namaKontakDarurat": "Darurat",
+                  "hubunganKontakDarurat": "Istri",
+                  "deskripsiHubunganDarurat": "Istri",
+                  "nomorKontakDarurat": "", // --> base64
+                  "kodeAreaUsaha": 7541,
+                  "deskripsiAreaUsaha": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "alamatUsaha": "Cempaka Putih Barat",
+                  "latitudeUsaha": "20",
+                  "longitudeUsaha": "20",
+                  "rtUsaha": "010",
+                  "rwUsaha": "002",
+                  "tanggalJoinPartner": "2000-11-17",
+                  "kodeTipePinjaman": "CHILD-MMF-652",
+                  "kodePartnership": "MJ1",
+                  "namaPartnership": "Majoo",
+                  "tenorPinjaman": 12,
+                  "estimasiPinjaman": 100000000,
+                  "limitPinjaman": 0,
+                  "statusPrakarsa": -5,
+                  "deskripsiStatus": "Pengajuan Ditolak",
+                  "tanggalUpdate": "2024-09-07 16:38:35.907",
+                  "tanggaKadaluarsaBlock": "2024-10-07 23:59:59.000",
+                  "dukcapilDebitur": null,
+                  "dukcapilPasangan": null
+              },
+              "message": "Data pengajuan terakhir ditemukan.",
+              "status": 200
+          }
+  - name: Success - Data Ditemukan (Status -5) ==> PRESCREENING DITOLAK --> Sudah Kadaluarsa
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 30 Aug 2024 03:40:22 GMT
+        - name: Content-Length
+          value: "1746"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "",
+                  "kodePrakarsa": "EX-MJ1-UmF5YVBpUGVyVG9w/lx6nGT4lUZqKWaPHO473pdfFJjiaKE5jdCan0ndFxX/YuRBh3N8fHv7dWOAZoc=",
+                  "nomorIdentitas": "",  // --> base64
+                  "nama": "", // --> base64
+                  "tempatLahir": "Jakarta",
+                  "tanggalLahir": "", // --> base64
+                  "jenisKelamin": "Laki-Laki",
+                  "tanggalKtp": "2000-11-17",
+                  "kodeArea": 7541,
+                  "deskripsiArea": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "longitude": "20",
+                  "latitude": "-20",
+                  "alamat": "Cempaka Putih Barat",
+                  "rt": "010",
+                  "rw": "002",
+                  "kodeAgama": "ISL",
+                  "deskripsiAgama": "Islam",
+                  "statusPernikahan": "Kawin",
+                  "namaIbuKandung": "", // --> base64
+                  "nomorIdentitasPasangan": "", // --> base64
+                  "namaPasangan": "", // --> base64
+                  "tempatLahirPasangan": "", // --> base64
+                  "tanggalLahirPasangan": "", // --> base64
+                  "nomorTelepon": "", // --> base64
+                  "email": "", // --> base64
+                  "kodePendidikanTerakhir": "S1",
+                  "deskripsiPendidikanTerakhir": "S1 / Diploma 4",
+                  "jumlahTanggungan": 1,
+                  "namaKontakDarurat": "Darurat",
+                  "hubunganKontakDarurat": "Istri",
+                  "deskripsiHubunganDarurat": "Istri",
+                  "nomorKontakDarurat": "", // --> base64
+                  "kodeAreaUsaha": 7541,
+                  "deskripsiAreaUsaha": "10520, Cempaka Putih Barat, Cempaka Putih, Jakarta Pusat, DKI Jakarta",
+                  "alamatUsaha": "Cempaka Putih Barat",
+                  "latitudeUsaha": "20",
+                  "longitudeUsaha": "20",
+                  "rtUsaha": "010",
+                  "rwUsaha": "002",
+                  "tanggalJoinPartner": "2000-11-17",
+                  "kodeTipePinjaman": "CHILD-MMF-652",
+                  "kodePartnership": "MJ1",
+                  "namaPartnership": "Majoo",
+                  "tenorPinjaman": 12,
+                  "estimasiPinjaman": 100000000,
+                  "limitPinjaman": 0,
+                  "statusPrakarsa": -5,
+                  "deskripsiStatus": "Pengajuan Ditolak",
+                  "tanggalUpdate": "2024-09-07 16:38:35.907",
+                  "tanggaKadaluarsaBlock": "",
+                  "dukcapilDebitur": null,
+                  "dukcapilPasangan": null
+              },
+              "message": "Data pengajuan terakhir ditemukan.",
+              "status": 200
+          }
+  - name: Success - Data Ditemukan (Status 11) ==> OPEN SUPLESI
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Fri, 17 Jan 2025 08:51:16 GMT
+        - name: Content-Length
+          value: "1683"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "open-suplesi",
+                  "kodePrakarsa": "EX-MJ1-UmF5YVBpUGVyVG9w/lx6nGT4lUZqKWaPHO473pdfFJjiaao4itCfmkrcEFvveImuzWlgCHZaJq1aEEw=",
+                  "nomorIdentitas": "MzE3MTA1MTIxMTk1MDAwMQ==",
+                  "nama": "RHdpa2kgU2FwdXRyYQ==",
+                  "tempatLahir": "Jakarta",
+                  "tanggalLahir": "MTk5NS0xMS0xMg==",
+                  "jenisKelamin": "Laki-Laki",
+                  "tanggalKtp": "2024-12-10",
+                  "kodeArea": 7646,
+                  "deskripsiArea": "12820, Tebet Timur, Tebet, Jakarta Selatan, DKI Jakarta",
+                  "longitude": "",
+                  "latitude": "",
+                  "alamat": "Cempaka Putih Barat",
+                  "rt": "010",
+                  "rw": "002",
+                  "kodeAgama": "ISL",
+                  "deskripsiAgama": "Islam",
+                  "statusPernikahan": "Belum Kawin",
+                  "namaIbuKandung": "UnVtaXlhdGk=",
+                  "nomorIdentitasPasangan": "",
+                  "namaPasangan": "",
+                  "tempatLahirPasangan": "",
+                  "tanggalLahirPasangan": "",
+                  "nomorTelepon": "KzYyODE3NzY1MjczNzE=",
+                  "email": "ZHdpa2kuc2FwdXRyYUBiYW5rcmF5YS5jby5pZA==",
+                  "kodePendidikanTerakhir": "D3",
+                  "deskripsiPendidikanTerakhir": "Diploma 3",
+                  "jumlahTanggungan": 0,
+                  "namaKontakDarurat": "Joni",
+                  "hubunganKontakDarurat": "Famili Lain",
+                  "deskripsiHubunganDarurat": "Famili Lain",
+                  "nomorKontakDarurat": "KzYyODE3NzY1MjczNzE=",
+                  "kodeAreaUsaha": 7555,
+                  "deskripsiAreaUsaha": "10560, Johar Baru, Johar Baru, Jakarta Pusat, DKI Jakarta",
+                  "alamatUsaha": "Cempaka Putih Barat",
+                  "latitudeUsaha": "",
+                  "longitudeUsaha": "",
+                  "rtUsaha": "010",
+                  "rwUsaha": "002",
+                  "tanggalJoinPartner": "2024-01-01",
+                  "kodeTipePinjaman": "CHILD-MMF-652",
+                  "kodePartnership": "MJ1",
+                  "namaPartnership": "Majoo",
+                  "tenorPinjaman": 12,
+                  "estimasiPinjaman": 100000000,
+                  "limitPinjaman": 100000000,
+                  "statusPrakarsa": 11,
+                  "deskripsiStatus": "Limit Aktif",
+                  "tanggalUpdate": "2024-12-10 15:38:18.933",
+                  "tanggalKadaluarsaBlock": "",
+                  "tncDigitsave": 1,
+                  "dukcapilDebitur": null,
+                  "dukcapilPasangan": null
+              },
+              "message": "Data pengajuan terakhir ditemukan.",
+              "status": 200
+          }
+  - name: Success - Data Ditemukan (Status 11) ==> LIMIT AKTIF
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cek-pengajuan-terakhir"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 27 Sep 2024 00:11:24 GMT
+        - name: Content-Length
+          value: "1761"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "",
+                  "kodePrakarsa": "EX-MJ1-UmF5YVBpUGVyVG9w/lx6nGT4lUZqKWaPHO473pdfFJjiaao5g9OenEzcFMq+h2ZHdFpmduirhzG0aqg=",
+                  "nomorIdentitas": "MzE3MTA1MTIxMTk1MDAwMQ==",
+                  "nama": "RHdpa2kgU2FwdXRyYQ==",
+                  "tempatLahir": "Jakarta",
+                  "tanggalLahir": "MTk5NS0xMS0xMg==",
+                  "jenisKelamin": "Laki-Laki",
+                  "tanggalKtp": "2024-12-09",
+                  "kodeArea": 7555,
+                  "deskripsiArea": "10560, Johar Baru, Johar Baru, Jakarta Pusat, DKI Jakarta",
+                  "longitude": "",
+                  "latitude": "",
+                  "alamat": "Cempaka Putih Barat",
+                  "rt": "010",
+                  "rw": "002",
+                  "kodeAgama": "ISL",
+                  "deskripsiAgama": "Islam",
+                  "statusPernikahan": "Kawin",
+                  "namaIbuKandung": "UnVtaXlhdGk=",
+                  "nomorIdentitasPasangan": "MzE3MTA1NDIwODk3MDAwMg==",
+                  "namaPasangan": "TXV0aWE=",
+                  "tempatLahirPasangan": "TXV0aWE=",
+                  "tanggalLahirPasangan": "MTk5Ny0wOC0wMg==",
+                  "nomorTelepon": "KzYyODc4NzcyNzg4MzA=",
+                  "email": "ZHdpa2kuc2FwdXRyYUBiYW5rcmF5YS5jby5pZA==",
+                  "kodePendidikanTerakhir": "D3",
+                  "deskripsiPendidikanTerakhir": "Diploma 3",
+                  "jumlahTanggungan": 1,
+                  "namaKontakDarurat": "Jaelani",
+                  "hubunganKontakDarurat": "Famili Lain",
+                  "deskripsiHubunganDarurat": "Famili Lain",
+                  "nomorKontakDarurat": "KzYyODE3NzY1MjczNzE=",
+                  "kodeAreaUsaha": 7526,
+                  "deskripsiAreaUsaha": "10620, Kemayoran, Kemayoran, Jakarta Pusat, DKI Jakarta",
+                  "alamatUsaha": "UKM",
+                  "latitudeUsaha": "",
+                  "longitudeUsaha": "",
+                  "rtUsaha": "008",
+                  "rwUsaha": "005",
+                  "tanggalJoinPartner": "2024-01-01",
+                  "kodeTipePinjaman": "CHILD-MMF-652",
+                  "kodePartnership": "MJ1",
+                  "namaPartnership": "Majoo",
+                  "tenorPinjaman": 12,
+                  "estimasiPinjaman": 40000000,
+                  "limitPinjaman": 40000000,
+                  "statusPrakarsa": 11,
+                  "deskripsiStatus": "Limit Aktif",
+                  "tanggalUpdate": "2025-09-11 15:19:34.293",
+                  "tanggalKadaluarsaBlock": "",
+                  "tncDigitsave": 1,
+                  "dukcapilDebitur": null,
+                  "dukcapilPasangan": null
+              },
+              "message": "Data pengajuan terakhir ditemukan.",
+              "status": 200
+          }

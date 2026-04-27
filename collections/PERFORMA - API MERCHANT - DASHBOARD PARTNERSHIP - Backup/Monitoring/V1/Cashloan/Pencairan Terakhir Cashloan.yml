@@ -1,0 +1,339 @@
+info:
+  name: Pencairan Terakhir Cashloan
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{base-url-local}}/v/1/partnership/cl/pencairan-terakhir"
+  body:
+    type: form-urlencoded
+    data:
+      - name: recordCount
+        value: "2"
+      - name: startIndex
+        value: "2"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Error - Parameter Validation (Total Mandatory Tidak Sesuai)
+    request:
+      url: "{{base-url-local}}/v/1/partnership/cl/pencairan-terakhir"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: recordCount
+            value: "2"
+            disabled: true
+          - name: startIndex
+            value: "0"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Thu, 29 Jan 2026 09:10:58 GMT
+        - name: Content-Length
+          value: "63"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Parameter tidak terpenuhi.",
+              "status": 400
+          }
+  - name: Error - Parameter Validation (Tidak Sesuai)
+    request:
+      url: "{{base-url-local}}/v/1/partnership/cl/pencairan-terakhir"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: recordCount
+            value: a
+          - name: startIndex
+            value: "0"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Thu, 29 Jan 2026 09:11:44 GMT
+        - name: Content-Length
+          value: "80"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Record Count hanya boleh menggunakan angka.",
+              "status": 400
+          }
+  - name: Error - Parameter Token /  API Key Empty
+    request:
+      url: "{{base-url-local}}/v/1/partnership/cl/pencairan-terakhir"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: recordCount
+            value: "2"
+          - name: startIndex
+            value: "0"
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Fri, 30 Jan 2026 01:44:17 GMT
+        - name: Content-Length
+          value: "51"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "parameter token is empty",
+              "status": 401
+          }
+  - name: Error - Unauthorized / Expired
+    request:
+      url: "{{base-url-local}}/v/1/partnership/cl/pencairan-terakhir"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: recordCount
+            value: "2"
+          - name: startIndex
+            value: "0"
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Fri, 30 Jan 2026 01:42:58 GMT
+        - name: Content-Length
+          value: "50"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Unauthorized / Expired.",
+              "status": 401
+          }
+  - name: Success
+    request:
+      url: "{{base-url-local}}/v/1/partnership/cl/pencairan-terakhir"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: recordCount
+            value: "10"
+          - name: startIndex
+            value: "0"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Thu, 05 Feb 2026 07:07:54 GMT
+        - name: Content-Length
+          value: "1766"
+      body:
+        type: json
+        data: |-
+          {
+              "data": [
+                  {
+                      "id": 82,
+                      "namaMerchant": "U29rYSBBZHphaGFyYSBBcmlla2E=",
+                      "nominalPencairan": "MTAwMDAwMDA=",
+                      "status": 4,
+                      "statusText": "Aktif",
+                      "tanggalJatuhTempo": "2034-09-08",
+                      "tanggalPencairan": "2034-06-08"
+                  },
+                  {
+                      "id": 76,
+                      "namaMerchant": "SGFycnkgUGFtdW5na2Fz",
+                      "nominalPencairan": "MTAwMDAw",
+                      "status": 6,
+                      "statusText": "Aktif",
+                      "tanggalJatuhTempo": "2034-01-30",
+                      "tanggalPencairan": "2033-10-30"
+                  },
+                  {
+                      "id": 75,
+                      "namaMerchant": "U3lhaGJhbmkgRmFyaGFu",
+                      "nominalPencairan": "MjAwMDAwMDA=",
+                      "status": 2,
+                      "statusText": "Aktif",
+                      "tanggalJatuhTempo": "2034-01-04",
+                      "tanggalPencairan": "2033-10-04"
+                  },
+                  {
+                      "id": 73,
+                      "namaMerchant": "",
+                      "nominalPencairan": "MTAwMDAwMDA=",
+                      "status": 2,
+                      "statusText": "Aktif",
+                      "tanggalJatuhTempo": "2032-11-13",
+                      "tanggalPencairan": "2032-08-13"
+                  },
+                  {
+                      "id": 60,
+                      "namaMerchant": "",
+                      "nominalPencairan": "MzAwMDAwMDA=",
+                      "status": 1,
+                      "statusText": "Aktif",
+                      "tanggalJatuhTempo": "2032-06-29",
+                      "tanggalPencairan": "2031-12-29"
+                  },
+                  {
+                      "id": 59,
+                      "namaMerchant": "",
+                      "nominalPencairan": "MzAwMDAwMDA=",
+                      "status": 2,
+                      "statusText": "Aktif",
+                      "tanggalJatuhTempo": "2032-06-10",
+                      "tanggalPencairan": "2031-12-10"
+                  },
+                  {
+                      "id": 57,
+                      "namaMerchant": "",
+                      "nominalPencairan": "MTAwMDAw",
+                      "status": 1,
+                      "statusText": "Aktif",
+                      "tanggalJatuhTempo": "2032-08-14",
+                      "tanggalPencairan": "2031-09-26"
+                  },
+                  {
+                      "id": 46,
+                      "namaMerchant": "",
+                      "nominalPencairan": "MzAwMDAwMDA=",
+                      "status": 2,
+                      "statusText": "Aktif",
+                      "tanggalJatuhTempo": "2031-07-29",
+                      "tanggalPencairan": "2031-07-29"
+                  },
+                  {
+                      "id": 42,
+                      "namaMerchant": "RHdpa2kgU2FwdXRyYQ==",
+                      "nominalPencairan": "MTUwMDAw",
+                      "status": 1,
+                      "statusText": "Aktif",
+                      "tanggalJatuhTempo": "2032-01-13",
+                      "tanggalPencairan": "2031-07-13"
+                  },
+                  {
+                      "id": 35,
+                      "namaMerchant": "RHdpa2kgU2FwdXRyYQ==",
+                      "nominalPencairan": "MTUwMDAw",
+                      "status": 1,
+                      "statusText": "Aktif",
+                      "tanggalJatuhTempo": "2032-01-13",
+                      "tanggalPencairan": "2031-07-13"
+                  }
+              ],
+              "message": "Informasi pencairan terakhir cashloan ditemukan.",
+              "status": 200
+          }

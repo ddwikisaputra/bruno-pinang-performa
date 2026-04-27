@@ -1,0 +1,1045 @@
+info:
+  name: Daftar Whitelist
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: https://pinang-performa.free.mockoapp.net/v/1/partnership/daftar-whitelist/200-ok
+  headers:
+    - name: x-key
+      value: performa
+  params:
+    - name: "401"
+      value: ""
+      type: query
+      disabled: true
+    - name: "503"
+      value: ""
+      type: query
+      disabled: true
+    - name: "403"
+      value: ""
+      type: query
+      disabled: true
+    - name: 400-error-param
+      value: ""
+      type: query
+      disabled: true
+    - name: 400-token-empty
+      value: ""
+      type: query
+      disabled: true
+    - name: 500-general
+      value: ""
+      type: query
+      disabled: true
+    - name: 200-fail
+      value: ""
+      type: query
+      disabled: true
+    - name: 200-ok
+      value: ""
+      type: query
+      disabled: true
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 503 - Service Unavailable
+    request:
+      url: https://pinang-performa-padiumkm.free.mockoapp.net/v/1/partnership/konfirmasi-pencairan/503
+      method: POST
+    response:
+      status: 503
+      statusText: Service Unavailable
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Tue, 01 Jul 2025 03:01:02 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "158"
+        - name: Connection
+          value: keep-alive
+        - name: access-control-allow-origin
+          value: "*"
+        - name: access-control-expose-headers
+          value: "*"
+        - name: cache-control
+          value: no-cache
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Jam operasional Pinang Performa dari jam XX.XX - XX.XX WIB setiap hari. Kembali lagi nanti, ya!",
+              "status": 503
+          }
+  - name: 401-token-expired
+    request:
+      url: https://pinang-performa-padiumkm.free.mockoapp.net/v/1/partnership/konfirmasi-pencairan/401-token-expired
+      method: POST
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Tue, 01 Jul 2025 03:01:32 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "105"
+        - name: Connection
+          value: keep-alive
+        - name: access-control-allow-origin
+          value: "*"
+        - name: access-control-expose-headers
+          value: "*"
+        - name: cache-control
+          value: no-cache
+      body:
+        type: json
+        data: |-
+          {
+              "message": "token has invalid claims: token is expired",
+              "status": 401
+          }
+  - name: 401-unauthorized
+    request:
+      url: https://pinang-performa-padiumkm.free.mockoapp.net/v/1/partnership/konfirmasi-pencairan/401-unauthorized
+      method: POST
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Tue, 01 Jul 2025 03:01:55 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "86"
+        - name: Connection
+          value: keep-alive
+        - name: access-control-allow-origin
+          value: "*"
+        - name: access-control-expose-headers
+          value: "*"
+        - name: cache-control
+          value: no-cache
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Unauthorized / Expired.",
+              "status": 401
+          }
+  - name: 401-token-empty
+    request:
+      url: https://pinang-performa-padiumkm.free.mockoapp.net/v/1/partnership/konfirmasi-pencairan/401-token-empty
+      method: POST
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Tue, 01 Jul 2025 03:02:14 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "87"
+        - name: Connection
+          value: keep-alive
+        - name: access-control-allow-origin
+          value: "*"
+        - name: access-control-expose-headers
+          value: "*"
+        - name: cache-control
+          value: no-cache
+      body:
+        type: json
+        data: |-
+          {
+              "message": "parameter token is empty",
+              "status": 401
+          }
+  - name: 401-access-forbidden
+    request:
+      url: https://pinang-performa-padiumkm.free.mockoapp.net/v/1/partnership/konfirmasi-pencairan/401-access-forbidden
+      method: POST
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Tue, 01 Jul 2025 03:02:29 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "112"
+        - name: Connection
+          value: keep-alive
+        - name: access-control-allow-origin
+          value: "*"
+        - name: access-control-expose-headers
+          value: "*"
+        - name: cache-control
+          value: no-cache
+      body:
+        type: json
+        data: |-
+          {
+              "message": "you don't have permission to access this resource",
+              "status": 403
+          }
+  - name: 401-unactivated
+    request:
+      url: https://pinang-performa-padiumkm.free.mockoapp.net/v/1/partnership/konfirmasi-pencairan/401-unactivated
+      method: POST
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Tue, 01 Jul 2025 03:02:47 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "106"
+        - name: Connection
+          value: keep-alive
+        - name: access-control-allow-origin
+          value: "*"
+        - name: access-control-expose-headers
+          value: "*"
+        - name: cache-control
+          value: no-cache
+      body:
+        type: json
+        data: |-
+          {
+              "message": "your access to this resource is unactivated",
+              "status": 403
+          }
+  - name: 200-cant-access
+    request:
+      url: https://pinang-performa-padiumkm.free.mockoapp.net/v/1/partnership/konfirmasi-pencairan/200-cant-access
+      method: POST
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Tue, 01 Jul 2025 03:03:02 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "88"
+        - name: Connection
+          value: keep-alive
+        - name: access-control-allow-origin
+          value: "*"
+        - name: access-control-expose-headers
+          value: "*"
+        - name: cache-control
+          value: no-cache
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Data tidak dapat diakses.",
+              "status": 403
+          }
+  - name: 200-pencairan-not-access
+    request:
+      url: https://pinang-performa-padiumkm.free.mockoapp.net/v/1/partnership/konfirmasi-pencairan/200-pencairan-not-access
+      method: POST
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Tue, 01 Jul 2025 03:03:20 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "117"
+        - name: Connection
+          value: keep-alive
+        - name: access-control-allow-origin
+          value: "*"
+        - name: access-control-expose-headers
+          value: "*"
+        - name: cache-control
+          value: no-cache
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Maaf, Proses pencairan pinjaman tidak dapat dilakukan.",
+              "status": 500
+          }
+  - name: 200-parameter-not-accordance
+    request:
+      url: https://pinang-performa-padiumkm.free.mockoapp.net/v/1/partnership/konfirmasi-pencairan/200-parameter-not-accordance
+      method: POST
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Tue, 01 Jul 2025 03:03:35 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "80"
+        - name: Connection
+          value: keep-alive
+        - name: access-control-allow-origin
+          value: "*"
+        - name: access-control-expose-headers
+          value: "*"
+        - name: cache-control
+          value: no-cache
+      body:
+        type: json
+        data: |-
+          {
+              "message": "... tidak sesuai.",
+              "status": 400
+          }
+  - name: 200-unregistered-whitelist
+    request:
+      url: https://pinang-performa-padiumkm.free.mockoapp.net/v/1/partnership/konfirmasi-pencairan/200-unregistered-whitelist
+      method: POST
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Tue, 01 Jul 2025 03:03:49 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "105"
+        - name: Connection
+          value: keep-alive
+        - name: access-control-allow-origin
+          value: "*"
+        - name: access-control-expose-headers
+          value: "*"
+        - name: cache-control
+          value: no-cache
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Maaf, anda tidak terdaftar pada whitelist.",
+              "status": 500
+          }
+  - name: 200-pencairan-tidak-bisa-dilakukan
+    request:
+      url: https://pinang-performa-padiumkm.free.mockoapp.net/v/1/partnership/konfirmasi-pencairan/200-pencairan-tidak-bisa-dilakukan
+      method: POST
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Tue, 01 Jul 2025 03:04:05 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "117"
+        - name: Connection
+          value: keep-alive
+        - name: access-control-allow-origin
+          value: "*"
+        - name: access-control-expose-headers
+          value: "*"
+        - name: cache-control
+          value: no-cache
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Maaf, Proses pencairan pinjaman tidak dapat dilakukan.",
+              "status": 500
+          }
+  - name: 200-fasil-tidak-bisa-dilakukan
+    request:
+      url: https://pinang-performa-padiumkm.free.mockoapp.net/v/1/partnership/konfirmasi-pencairan/200-fasil-tidak-bisa-dilakukan
+      method: POST
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Tue, 01 Jul 2025 03:04:22 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "150"
+        - name: Connection
+          value: keep-alive
+        - name: access-control-allow-origin
+          value: "*"
+        - name: access-control-expose-headers
+          value: "*"
+        - name: cache-control
+          value: no-cache
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Maaf, Fasilitas pinjaman belum bisa digunakan karena masih dalam proses pengajuan.",
+              "status": 500
+          }
+  - name: 200-tenor-tidak-cukup
+    request:
+      url: https://pinang-performa-padiumkm.free.mockoapp.net/v/1/partnership/konfirmasi-pencairan/200-tenor-tidak-cukup
+      method: POST
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Tue, 01 Jul 2025 03:04:37 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "137"
+        - name: Connection
+          value: keep-alive
+        - name: access-control-allow-origin
+          value: "*"
+        - name: access-control-expose-headers
+          value: "*"
+        - name: cache-control
+          value: no-cache
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Maaf, Transaksi tidak dapat dilakukan karena jangka waktu tidak mencukupi.",
+              "status": 500
+          }
+  - name: 200-lewat-jatuh-tempo
+    request:
+      url: https://pinang-performa-padiumkm.free.mockoapp.net/v/1/partnership/konfirmasi-pencairan/200-lewat-jatuh-tempo
+      method: POST
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Tue, 01 Jul 2025 03:04:51 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "156"
+        - name: Connection
+          value: keep-alive
+        - name: access-control-allow-origin
+          value: "*"
+        - name: access-control-expose-headers
+          value: "*"
+        - name: cache-control
+          value: no-cache
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Maaf, Pinjaman sebelumnya masih berjalan dan belum lunas maka pencairan belum bisa dilakukan.",
+              "status": 500
+          }
+  - name: 200-limit-tidak-cukup
+    request:
+      url: https://pinang-performa-padiumkm.free.mockoapp.net/v/1/partnership/konfirmasi-pencairan/200-limit-tidak-cukup
+      method: POST
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Tue, 01 Jul 2025 03:05:06 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "100"
+        - name: Connection
+          value: keep-alive
+        - name: access-control-allow-origin
+          value: "*"
+        - name: access-control-expose-headers
+          value: "*"
+        - name: cache-control
+          value: no-cache
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Maaf, Limit pinjaman tidak mencukupi.",
+              "status": 500
+          }
+  - name: 200-success
+    request:
+      url: https://pinang-performa-padiumkm.free.mockoapp.net/v/1/partnership/konfirmasi-pencairan/200-success
+      method: POST
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Tue, 01 Jul 2025 03:05:22 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "108"
+        - name: Connection
+          value: keep-alive
+        - name: access-control-allow-origin
+          value: "*"
+        - name: access-control-expose-headers
+          value: "*"
+        - name: cache-control
+          value: no-cache
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Proses pencairan pinjaman berhasil dilakukan.",
+              "status": 200
+          }
+  - name: 200-unregistered-whitelist
+    request:
+      url: https://pinang-performa-padiumkm.free.mockoapp.net/v/1/partnership/konfirmasi-pencairan/200-unregistered-whitelist
+      method: POST
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Tue, 01 Jul 2025 03:03:49 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "105"
+        - name: Connection
+          value: keep-alive
+        - name: access-control-allow-origin
+          value: "*"
+        - name: access-control-expose-headers
+          value: "*"
+        - name: cache-control
+          value: no-cache
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Maaf, anda tidak terdaftar pada whitelist.",
+              "status": 500
+          }
+  - name: 200-pencairan-tidak-bisa-dilakukan
+    request:
+      url: https://pinang-performa-padiumkm.free.mockoapp.net/v/1/partnership/konfirmasi-pencairan/200-pencairan-tidak-bisa-dilakukan
+      method: POST
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Tue, 01 Jul 2025 03:04:05 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "117"
+        - name: Connection
+          value: keep-alive
+        - name: access-control-allow-origin
+          value: "*"
+        - name: access-control-expose-headers
+          value: "*"
+        - name: cache-control
+          value: no-cache
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Maaf, Proses pencairan pinjaman tidak dapat dilakukan.",
+              "status": 500
+          }
+  - name: 401-unauthorized
+    request:
+      url: https://pinang-performa-padiumkm.free.mockoapp.net/v/1/partnership/konfirmasi-pencairan/401-unauthorized
+      method: POST
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Tue, 01 Jul 2025 03:01:55 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "86"
+        - name: Connection
+          value: keep-alive
+        - name: access-control-allow-origin
+          value: "*"
+        - name: access-control-expose-headers
+          value: "*"
+        - name: cache-control
+          value: no-cache
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Unauthorized / Expired.",
+              "status": 401
+          }
+  - name: 200-success
+    request:
+      url: https://pinang-performa-padiumkm.free.mockoapp.net/v/1/partnership/konfirmasi-pencairan/200-success
+      method: POST
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Tue, 01 Jul 2025 03:05:22 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "108"
+        - name: Connection
+          value: keep-alive
+        - name: access-control-allow-origin
+          value: "*"
+        - name: access-control-expose-headers
+          value: "*"
+        - name: cache-control
+          value: no-cache
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Proses pencairan pinjaman berhasil dilakukan.",
+              "status": 200
+          }
+  - name: 200-lewat-jatuh-tempo
+    request:
+      url: https://pinang-performa-padiumkm.free.mockoapp.net/v/1/partnership/konfirmasi-pencairan/200-lewat-jatuh-tempo
+      method: POST
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Tue, 01 Jul 2025 03:04:51 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "156"
+        - name: Connection
+          value: keep-alive
+        - name: access-control-allow-origin
+          value: "*"
+        - name: access-control-expose-headers
+          value: "*"
+        - name: cache-control
+          value: no-cache
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Maaf, Pinjaman sebelumnya masih berjalan dan belum lunas maka pencairan belum bisa dilakukan.",
+              "status": 500
+          }
+  - name: 401-access-forbidden
+    request:
+      url: https://pinang-performa-padiumkm.free.mockoapp.net/v/1/partnership/konfirmasi-pencairan/401-access-forbidden
+      method: POST
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Tue, 01 Jul 2025 03:02:29 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "112"
+        - name: Connection
+          value: keep-alive
+        - name: access-control-allow-origin
+          value: "*"
+        - name: access-control-expose-headers
+          value: "*"
+        - name: cache-control
+          value: no-cache
+      body:
+        type: json
+        data: |-
+          {
+              "message": "you don't have permission to access this resource",
+              "status": 403
+          }
+  - name: 401-token-empty
+    request:
+      url: https://pinang-performa-padiumkm.free.mockoapp.net/v/1/partnership/konfirmasi-pencairan/401-token-empty
+      method: POST
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Tue, 01 Jul 2025 03:02:14 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "87"
+        - name: Connection
+          value: keep-alive
+        - name: access-control-allow-origin
+          value: "*"
+        - name: access-control-expose-headers
+          value: "*"
+        - name: cache-control
+          value: no-cache
+      body:
+        type: json
+        data: |-
+          {
+              "message": "parameter token is empty",
+              "status": 401
+          }
+  - name: 200-tenor-tidak-cukup
+    request:
+      url: https://pinang-performa-padiumkm.free.mockoapp.net/v/1/partnership/konfirmasi-pencairan/200-tenor-tidak-cukup
+      method: POST
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Tue, 01 Jul 2025 03:04:37 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "137"
+        - name: Connection
+          value: keep-alive
+        - name: access-control-allow-origin
+          value: "*"
+        - name: access-control-expose-headers
+          value: "*"
+        - name: cache-control
+          value: no-cache
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Maaf, Transaksi tidak dapat dilakukan karena jangka waktu tidak mencukupi.",
+              "status": 500
+          }
+  - name: 200-pencairan-not-access
+    request:
+      url: https://pinang-performa-padiumkm.free.mockoapp.net/v/1/partnership/konfirmasi-pencairan/200-pencairan-not-access
+      method: POST
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Tue, 01 Jul 2025 03:03:20 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "117"
+        - name: Connection
+          value: keep-alive
+        - name: access-control-allow-origin
+          value: "*"
+        - name: access-control-expose-headers
+          value: "*"
+        - name: cache-control
+          value: no-cache
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Maaf, Proses pencairan pinjaman tidak dapat dilakukan.",
+              "status": 500
+          }
+  - name: 401-unactivated
+    request:
+      url: https://pinang-performa-padiumkm.free.mockoapp.net/v/1/partnership/konfirmasi-pencairan/401-unactivated
+      method: POST
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Tue, 01 Jul 2025 03:02:47 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "106"
+        - name: Connection
+          value: keep-alive
+        - name: access-control-allow-origin
+          value: "*"
+        - name: access-control-expose-headers
+          value: "*"
+        - name: cache-control
+          value: no-cache
+      body:
+        type: json
+        data: |-
+          {
+              "message": "your access to this resource is unactivated",
+              "status": 403
+          }
+  - name: 200-limit-tidak-cukup
+    request:
+      url: https://pinang-performa-padiumkm.free.mockoapp.net/v/1/partnership/konfirmasi-pencairan/200-limit-tidak-cukup
+      method: POST
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Tue, 01 Jul 2025 03:05:06 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "100"
+        - name: Connection
+          value: keep-alive
+        - name: access-control-allow-origin
+          value: "*"
+        - name: access-control-expose-headers
+          value: "*"
+        - name: cache-control
+          value: no-cache
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Maaf, Limit pinjaman tidak mencukupi.",
+              "status": 500
+          }
+  - name: 200-parameter-not-accordance
+    request:
+      url: https://pinang-performa-padiumkm.free.mockoapp.net/v/1/partnership/konfirmasi-pencairan/200-parameter-not-accordance
+      method: POST
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Tue, 01 Jul 2025 03:03:35 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "80"
+        - name: Connection
+          value: keep-alive
+        - name: access-control-allow-origin
+          value: "*"
+        - name: access-control-expose-headers
+          value: "*"
+        - name: cache-control
+          value: no-cache
+      body:
+        type: json
+        data: |-
+          {
+              "message": "... tidak sesuai.",
+              "status": 400
+          }
+  - name: 503 - Service Unavailable
+    request:
+      url: https://pinang-performa-padiumkm.free.mockoapp.net/v/1/partnership/konfirmasi-pencairan/503
+      method: POST
+    response:
+      status: 503
+      statusText: Service Unavailable
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Tue, 01 Jul 2025 03:01:02 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "158"
+        - name: Connection
+          value: keep-alive
+        - name: access-control-allow-origin
+          value: "*"
+        - name: access-control-expose-headers
+          value: "*"
+        - name: cache-control
+          value: no-cache
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Jam operasional Pinang Performa dari jam XX.XX - XX.XX WIB setiap hari. Kembali lagi nanti, ya!",
+              "status": 503
+          }
+  - name: 401-token-expired
+    request:
+      url: https://pinang-performa-padiumkm.free.mockoapp.net/v/1/partnership/konfirmasi-pencairan/401-token-expired
+      method: POST
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Tue, 01 Jul 2025 03:01:32 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "105"
+        - name: Connection
+          value: keep-alive
+        - name: access-control-allow-origin
+          value: "*"
+        - name: access-control-expose-headers
+          value: "*"
+        - name: cache-control
+          value: no-cache
+      body:
+        type: json
+        data: |-
+          {
+              "message": "token has invalid claims: token is expired",
+              "status": 401
+          }
+  - name: 200-fasil-tidak-bisa-dilakukan
+    request:
+      url: https://pinang-performa-padiumkm.free.mockoapp.net/v/1/partnership/konfirmasi-pencairan/200-fasil-tidak-bisa-dilakukan
+      method: POST
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Tue, 01 Jul 2025 03:04:22 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "150"
+        - name: Connection
+          value: keep-alive
+        - name: access-control-allow-origin
+          value: "*"
+        - name: access-control-expose-headers
+          value: "*"
+        - name: cache-control
+          value: no-cache
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Maaf, Fasilitas pinjaman belum bisa digunakan karena masih dalam proses pengajuan.",
+              "status": 500
+          }
+  - name: 200-cant-access
+    request:
+      url: https://pinang-performa-padiumkm.free.mockoapp.net/v/1/partnership/konfirmasi-pencairan/200-cant-access
+      method: POST
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Tue, 01 Jul 2025 03:03:02 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "88"
+        - name: Connection
+          value: keep-alive
+        - name: access-control-allow-origin
+          value: "*"
+        - name: access-control-expose-headers
+          value: "*"
+        - name: cache-control
+          value: no-cache
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Data tidak dapat diakses.",
+              "status": 403
+          }

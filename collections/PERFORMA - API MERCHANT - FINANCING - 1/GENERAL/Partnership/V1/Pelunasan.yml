@@ -1,0 +1,569 @@
+info:
+  name: Pelunasan
+  type: http
+  seq: 13
+
+http:
+  method: POST
+  url: "{{base-url-dev}}/v/1/partnership/pelunasan"
+  headers:
+    - name: Api-Key
+      value: "{{apiKeyDev}}"
+  body:
+    type: form-urlencoded
+    data:
+      - name: kodePrakarsa
+        value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmppYWFvNGl0Q2Zta3JjRUZ2dmVJbXV6V2xnQ0haYUpxMWFFRXc9
+        description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+      - name: kodePartnership
+        value: TUox
+        description: Kode Partnership [MANDATORY][BASE64 STRING]
+      - name: kodePencairan
+        value: VFJYMjAyNTE4Mg==
+        description: Kode Pencairan [MANDATORY][BASE64 STRING]
+      - name: nominal
+        value: NTAwMDA=
+        description: Nominal Pembayaran [MANDATORY][BASE64 STRING]
+  auth:
+    type: bearer
+    token: "{{accessTokenPartner}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 503 - Service Unavailable
+    request:
+      url: "{{base-url-sandbox}}/v/1/partnership/pelunasan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: ""
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: ""
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePencairan
+            value: ""
+            description: Kode Pencairan [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: ""
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: nominal
+            value: ""
+            description: Nominal Pembayaran [MANDATORY][BASE64 STRING]
+    response:
+      status: 503
+      statusText: Service Unavailable
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 03 Apr 2024 10:28:45 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Jam operasional Pinang Performa dari jam XX.XX - XX.XX WIB setiap hari. Kembali lagi nanti, ya!",
+              "status": 503
+          }
+  - name: Error - Token Expired
+    request:
+      url: "{{base-url-sandbox}}/v/1/partnership/pelunasan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: ""
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: ""
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePencairan
+            value: ""
+            description: Kode Pencairan [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: ""
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: nominal
+            value: ""
+            description: Nominal Pembayaran [MANDATORY][BASE64 STRING]
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 03 Apr 2024 10:28:45 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 401,
+              "message": "token has invalid claims: token is expired"
+          }
+  - name: Error - Access Forbidden (ACL)
+    request:
+      url: "{{base-url-sandbox}}/v/1/partnership/pelunasan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: ""
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: ""
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePencairan
+            value: ""
+            description: Kode Pencairan [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: ""
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: nominal
+            value: ""
+            description: Nominal Pembayaran [MANDATORY][BASE64 STRING]
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 28 Mar 2024 01:32:15 GMT
+        - name: Content-Length
+          value: "74"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 403,
+              "message": "you don't have permission to access this resource"
+          }
+  - name: Error - Parameter Validation (Total Mandatory Tidak Sesuai)
+    request:
+      url: "{{base-url-sandbox}}/v/1/partnership/pelunasan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: ""
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: ""
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePencairan
+            value: ""
+            description: Kode Pencairan [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: ""
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: nominal
+            value: ""
+            description: Nominal Pembayaran [MANDATORY][BASE64 STRING]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 28 Mar 2024 08:23:45 GMT
+        - name: Content-Length
+          value: "92"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Parameter tidak terpenuhi.",
+              "status": 400
+          }
+  - name: Error - Parameter Validation (Tidak Sesuai)
+    request:
+      url: "{{base-url-sandbox}}/v/1/partnership/pelunasan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: ""
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: ""
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePencairan
+            value: ""
+            description: Kode Pencairan [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: ""
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: nominal
+            value: ""
+            description: Nominal Pembayaran [MANDATORY][BASE64 STRING]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 28 Mar 2024 08:24:40 GMT
+        - name: Content-Length
+          value: "100"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "... tidak sesuai.",
+              "status": 400
+          }
+  - name: Error - Data TIdak Bisa DIakses
+    request:
+      url: "{{base-url-sandbox}}/v/1/partnership/pelunasan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: ""
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: ""
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePencairan
+            value: ""
+            description: Kode Pencairan [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: ""
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: nominal
+            value: ""
+            description: Nominal Pembayaran [MANDATORY][BASE64 STRING]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 01 Apr 2024 10:38:56 GMT
+        - name: Content-Length
+          value: "85"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Data tidak dapat diakses.",
+              "status": 403
+          }
+  - name: Error - General
+    request:
+      url: "{{base-url-sandbox}}/v/1/partnership/pelunasan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: ""
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: ""
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePencairan
+            value: ""
+            description: Kode Pencairan [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: ""
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: nominal
+            value: ""
+            description: Nominal Pembayaran [MANDATORY][BASE64 STRING]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 01 Apr 2024 10:38:56 GMT
+        - name: Content-Length
+          value: "85"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Maaf, Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 500
+          }
+  - name: Error - Terdapat Pinjaman Telat
+    request:
+      url: "{{base-url-sandbox}}/v/1/partnership/pelunasan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: ""
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: ""
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: ""
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: kodePencairan
+            value: ""
+            description: Kode Pencairan [MANDATORY][BASE64 STRING]
+          - name: nominal
+            value: ""
+            description: Nominal Pembayaran [MANDATORY][BASE64 STRING]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Tue, 31 Dec 2024 09:20:11 GMT
+        - name: Content-Length
+          value: "86"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Ada pinjaman aktif yang melewati jatuh tempo, segera lunasi untuk bisa melanjutkan transaksi.",
+              "status": 500
+          }
+  - name: Error - Saldo Tidak Mencukupi
+    request:
+      url: "{{base-url-sandbox}}/v/1/partnership/pelunasan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: ""
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: ""
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: ""
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: kodePencairan
+            value: ""
+            description: Kode Pencairan [MANDATORY][BASE64 STRING]
+          - name: nominal
+            value: ""
+            description: Nominal Pembayaran [MANDATORY][BASE64 STRING]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Tue, 31 Dec 2024 09:20:11 GMT
+        - name: Content-Length
+          value: "86"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Maaf, Saldo anda tidak mencukupi untuk melakukan pelunasan.",
+              "status": 500
+          }
+  - name: Error - Status Pinjaman Lunas
+    request:
+      url: "{{base-url-sandbox}}/v/1/partnership/pelunasan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: ""
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: ""
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: ""
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: kodePencairan
+            value: ""
+            description: Kode Pencairan [MANDATORY][BASE64 STRING]
+          - name: nominal
+            value: ""
+            description: Nominal Pembayaran [MANDATORY][BASE64 STRING]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Mon, 23 Dec 2024 04:48:49 GMT
+        - name: Content-Length
+          value: "59"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Maaf, Pinjaman anda sudah lunas.",
+              "status": 500
+          }
+  - name: Error - Nominal Kurang dari Minimal Repayment
+    request:
+      url: "{{base-url-local}}/v/1/partnership/pelunasan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbDk2bm1YMWxFTnFLbWFNSE80NzJKZGZGSmpqYUtzNGpkR2JuVWpZRmcvL1k0dng0eGp1bkVQNGJ3d0d4MHc9
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: kodePencairan
+            value: VFJYMjAyNTE4MQ==
+            description: Kode Pencairan [MANDATORY][BASE64 STRING]
+          - name: nominal
+            value: MQ==
+            description: Nominal Pembayaran [MANDATORY][BASE64 STRING]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Wed, 16 Apr 2025 09:16:12 GMT
+        - name: Content-Length
+          value: "49"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Nominal minimal 10000.",
+              "status": 500
+          }
+  - name: Success - Pelunasan Berhasil
+    request:
+      url: "{{base-url-sandbox}}/v/1/partnership/pelunasan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: ""
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: ""
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: ""
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: kodePencairan
+            value: ""
+            description: Kode Pencairan [MANDATORY][BASE64 STRING]
+          - name: nominal
+            value: ""
+            description: Nominal Pembayaran [MANDATORY][BASE64 STRING]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 03 Apr 2024 09:23:35 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Pelunasan Berhasil Dilakukan.",
+              "status": 200
+          }
