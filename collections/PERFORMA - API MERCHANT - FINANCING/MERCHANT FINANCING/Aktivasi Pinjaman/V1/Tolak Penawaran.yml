@@ -1,0 +1,510 @@
+info:
+  name: Tolak Penawaran
+  type: http
+  seq: 6
+
+http:
+  method: POST
+  url: "{{base-url-local}}/v/1/aktivasi/tolak-penawaran"
+  headers:
+    - name: Api-Key
+      value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
+  body:
+    type: form-urlencoded
+    data:
+      - name: kodePrakarsa
+        value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmppYWFvNWc5T2VuRXpjRk1xK2gyWkhkRnBtZHVpcmh6RzBhcWc9
+        description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+      - name: kodePartnership
+        value: TUox
+        description: Kode Partnership [MANDATORY][BASE64 STRING]
+  auth:
+    type: bearer
+    token: "{{tokenMerchant}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 503 - Service Unavailable
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/tolak-penawaran"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrN2lkR2NuRTdkRjB0WXIzTi9NQVV1eTZ1RWluM2JSRXc9
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+    response:
+      status: 503
+      statusText: Service Unavailable
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 15 Aug 2024 03:46:42 GMT
+        - name: Content-Length
+          value: "69"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Jam operasional Pinang Performa dari jam XX.XX - XX.XX WIB setiap hari. Kembali lagi nanti, ya!",
+              "status": 503
+          }
+  - name: Errror - Token Expired
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/tolak-penawaran"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrN2lkR2NuRTdkRjB0WXIzTi9NQVV1eTZ1RWluM2JSRXc9
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 15 Aug 2024 03:46:42 GMT
+        - name: Content-Length
+          value: "69"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "token has invalid claims: token is expired",
+              "status": 401
+          }
+  - name: Error - Unauthorized / Expired
+    request:
+      url: "{{base_url_merchant}}/v/1/aktivasi/tolak-penawaran"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{api_key_merchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvRlY5bjJUNmxrUnFLR2FNSE80NzNaZGZGSmprYWFrN2lkR2NuRTdkRjJndVlwOHNHRGRnc3oxUG41Q2RHU1U9
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Aug 2024 03:02:46 GMT
+        - name: Content-Length
+          value: "50"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Unauthorized / Expired.",
+              "status": 401
+          }
+  - name: Error - Parameter Token /  API Key Empty
+    request:
+      url: "{{base_url_merchant}}/v/1/aktivasi/tolak-penawaran"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{api_key_merchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvRlY5bjJUNmxrUnFLR2FNSE80NzNaZGZGSmprYWFrN2lkR2NuRTdkRjJndVlwOHNHRGRnc3oxUG41Q2RHU1U9
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Aug 2024 01:10:41 GMT
+        - name: Content-Length
+          value: "51"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "parameter token is empty",
+              "status": 400
+          }
+  - name: Error - Access Forbidden
+    request:
+      url: "{{base_url_merchant}}/v/1/aktivasi/tolak-penawaran"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: ""
+            description: Kode Unik Prakarsa [MANDATORY]
+          - name: kodePartnership
+            value: ""
+            description: Kode Partnership [MANDATORY]
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 28 Mar 2024 01:32:15 GMT
+        - name: Content-Length
+          value: "74"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 403,
+              "message": "you don't have permission to access this resource"
+          }
+  - name: Error - Access Forbidden (No Data Partnership)
+    request:
+      url: "{{base_url_merchant}}/v/1/aktivasi/tolak-penawaran"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 17 Jul 2024 09:00:30 GMT
+        - name: Content-Length
+          value: "70"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "your access to this resource is unactivated",
+              "status": 403
+          }
+  - name: Error - Access Forbidden (Status Not Access)
+    request:
+      url: "{{base_url_merchant}}/v/1/aktivasi/tolak-penawaran"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{api_key_merchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvRlY5bjJUNmxrUnFLR2FNSE80NzNaZGZGSmprYWFrN2lkR2NuRTdkRjJndVlwOHNHRGRnc3oxUG41Q2RHU1U9
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Aug 2024 03:11:48 GMT
+        - name: Content-Length
+          value: "52"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Data tidak dapat diakses.",
+              "status": 403
+          }
+  - name: Error - Access Forbidden (IsDukcapilManual = 1)
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/tolak-penawaran"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmppYWFvNWc5T2VuRXpjRk1xK2gyWkhkRnBtZHVpcmh6RzBhcWc9
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' rayain.net
+        - name: Content-Type
+          value: application/json
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=31536000
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Thu, 11 Dec 2025 07:43:10 GMT
+        - name: Content-Length
+          value: "86"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "you don't have permission to access this resource",
+              "status": 403
+          }
+  - name: Error - Parameter Validation (Total Mandatory)
+    request:
+      url: "{{base_url_merchant}}/v/1/aktivasi/tolak-penawaran"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{api_key_merchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvRlY5bjJUNmxrUnFLR2FNSE80NzNaZGZGSmprYWFrN2lkR2NuRTdkRjJndVlwOHNHRGRnc3oxUG41Q2RHU1U9
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Aug 2024 01:09:32 GMT
+        - name: Content-Length
+          value: "53"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Parameter tidak terpenuhi.",
+              "status": 400
+          }
+  - name: Error - Parameter Validation (Tidak Sesuai)
+    request:
+      url: "{{base_url_merchant}}/v/1/aktivasi/tolak-penawaran"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{api_key_merchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvRlY5bjJUNmxrUnFLR2FNSE80NzNaZGZGSmprYWFrN2lkR2NuRTdkRjJndVlwOHNHRGRnc3oxUG41Q2RHU1U9
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+            disabled: true
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Aug 2024 01:08:51 GMT
+        - name: Content-Length
+          value: "59"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "... tidak boleh kosong.",
+              "status": 400
+          }
+  - name: Error - General
+    request:
+      url: "{{base_url_merchant}}/v/1/aktivasi/tolak-penawaran"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{api_key_merchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvRlY5bjJUNmxrUnFLR2FNSE80NzNaZGZGSmprYWFrN2lkR2NuRTdkRjJndVlwOHNHRGRnc3oxUG41Q2RHU1U9
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Aug 2024 01:02:54 GMT
+        - name: Content-Length
+          value: "97"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Maaf, Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 500
+          }
+  - name: Error - Unregistered Whitelist
+    request:
+      url: "{{base_url_merchant}}/v/1/aktivasi/tolak-penawaran"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{api_key_merchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvRlY5bjJUNmxrUnFLR2FNSE80NzNaZGZGSmprYWFrN2lkR2NuRTdkRjJndVlwOHNHRGRnc3oxUG41Q2RHU1U9
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Aug 2024 07:53:45 GMT
+        - name: Content-Length
+          value: "69"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Maaf, anda tidak terdaftar pada whitelist.",
+              "status": 500
+          }
+  - name: Error - Tolak Penawaran
+    request:
+      url: "{{base_url_merchant}}/v/1/aktivasi/tolak-penawaran"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{api_key_merchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvRlY5bjJUNmxrUnFLR2FNSE80NzNaZGZGSmprYWFrN2lkR2NuRTdkRjJndVlwOHNHRGRnc3oxUG41Q2RHU1U9
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Aug 2024 07:30:56 GMT
+        - name: Content-Length
+          value: "119"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Maaf, Proses penolakan penawaran tidak berhasil. Silahkan coba beberapa saat lagi.",
+              "status": 500
+          }
+  - name: Success - Tolak Penawaran
+    request:
+      url: "{{base_url_merchant}}/v/1/aktivasi/tolak-penawaran"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{api_key_merchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvRlY5bjJUNmxrUnFLR2FNSE80NzNaZGZGSmprYWFrN2lkR2NuRTdkRjJndVlwOHNHRGRnc3oxUG41Q2RHU1U9
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Aug 2024 03:03:57 GMT
+        - name: Content-Length
+          value: "62"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Tolak penawaran berhasil dilakukan.",
+              "status": 200
+          }

@@ -1,0 +1,769 @@
+info:
+  name: Tambah Member For PADI
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{base-url-prod}}/v/1/partnership/padiumkm/tambah-member"
+  headers:
+    - name: Api-Key
+      value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
+  body:
+    type: form-urlencoded
+    data:
+      - name: kodePartnership
+        value: TUoxa
+        description: Kode Partnership [MANDATORY] [Base64]
+      - name: nomorIdentitas
+        value: MzE3MTA1MTIxMTk1MDAwMQ==
+        description: Nomor Identitas User [MANDATORY] [Base64]
+      - name: nama
+        value: RHdpa2k=
+        description: Nama [MANDATORY] [Base64]
+      - name: nomorTelepon
+        value: KzYyODE3NzY1NzM3MQ==
+        description: "Nomor Telepon [MANDATORY] [Base64] [Ex : +628xxx]"
+      - name: email
+        value: ZC5kd2lraXNhcHV0cmFAZ21haWwuY29t
+        description: "Email [MANDATORY] [Base64] [Ex : abc@mail.com]"
+      - name: jumlahTransaksi12BulanBUMN
+        value: NTYwMDAwMA==
+        description: Jumlah Transaksi Dalam 12 Bulan Terakhir  [MANDATORY] [Base64]
+      - name: jumlahVolume12BulanBUMN
+        value: MTI=
+        description: Jumlah Volume Transaksi Dalam 12 Bulan Terakhir  [MANDATORY] [Base64]
+      - name: jumlahTransaksi6BulanBUMN
+        value: NTUwMDAwMA==
+        description: Jumlah Transaksi Dalam 6 Bulan Terakhir  [MANDATORY] [Base64]
+      - name: jumlahVolume6BulanBUMN
+        value: Ng==
+        description: Jumlah Volume Transaksi Dalam 6 Bulan Terakhir  [MANDATORY] [Base64]
+      - name: jumlahTransaksi3BulanBUMN
+        value: NTQwMDAwMA==
+        description: Jumlah Transaksi Dalam 3 Bulan Terakhir  [MANDATORY] [Base64]
+      - name: jumlahVolume3BulanBUMN
+        value: Mw==
+        description: Jumlah Volume Transaksi Dalam 3 Bulan Terakhir  [MANDATORY] [Base64]
+  auth:
+    type: bearer
+    token: "{{accessTokenPartner}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 503 - Service Unavailable
+    request:
+      url: "{{base-url-local}}/v/1/partnership/padiumkm/tambah-member"
+      method: POST
+    response:
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Jam operasional Pinang Performa dari jam XX.XX - XX.XX WIB setiap hari. Kembali lagi nanti, ya!",
+              "status": 503
+          }
+  - name: Error - Token Expired
+    request:
+      url: "{{base-url-local}}/v/1/partnership/padiumkm/tambah-member"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMw==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: nama
+            value: RHdpa2kgU2FwdXRyYQ==
+            description: Nama [MANDATORY] [Base64]
+          - name: nomorTelepon
+            value: ODE3NzY1MjczNzE=
+            description: "Nomor Telepon [MANDATORY] [Base64] [Ex : +628xxx]"
+          - name: email
+            value: ZC5kd2lraXNhcHV0cmFAZ21haWwuY29t
+            description: "Email [MANDATORY] [Base64] [Ex : abc@mail.com]"
+          - name: jumlahTransaksi12BulanBUMN
+            value: NTYwMDAwMA==
+            description: Jumlah Transaksi Dalam 12 Bulan Terakhir  [MANDATORY] [Base64]
+          - name: jumlahVolume12BulanBUMN
+            value: MTI=
+            description: Jumlah Volume Transaksi Dalam 12 Bulan Terakhir  [MANDATORY] [Base64]
+          - name: jumlahTransaksi6BulanBUMN
+            value: NTUwMDAwMA==
+            description: Jumlah Transaksi Dalam 6 Bulan Terakhir  [MANDATORY] [Base64]
+          - name: jumlahVolume6BulanBUMN
+            value: Ng==
+            description: Jumlah Volume Transaksi Dalam 6 Bulan Terakhir  [MANDATORY] [Base64]
+          - name: jumlahTransaksi3BulanBUMN
+            value: NTQwMDAwMA==
+            description: Jumlah Transaksi Dalam 3 Bulan Terakhir  [MANDATORY] [Base64]
+          - name: jumlahVolume3BulanBUMN
+            value: Mw==
+            description: Jumlah Volume Transaksi Dalam 3 Bulan Terakhir  [MANDATORY] [Base64]
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Mon, 25 Nov 2024 07:05:18 GMT
+        - name: Content-Length
+          value: "69"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "token has invalid claims: token is expired",
+              "status": 401
+          }
+  - name: Error - Unauthorized / Expired
+    request:
+      url: "{{base-url-local}}/v/1/partnership/padiumkm/tambah-member"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}a"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePartnership
+            value: VEgx
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: nomorIdentitas
+            value: MDk4NzY1NDMyMTEyMzQ1Ng==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: nama
+            value: dWJhaCBuYW1h
+            description: Nama [MANDATORY] [Base64]
+          - name: nomorTelepon
+            value: KzYyODg3MjMxMjMx
+            description: "Nomor Telepon [MANDATORY] [Base64] [Ex : +628xxx]"
+          - name: email
+            value: c3VuYXJ0b0BiYW5rcmF5YS5jby5pZA==
+            description: "Email [MANDATORY] [Base64] [Ex : abc@mail.com]"
+          - name: jumlahTransaksi12BulanBUMN
+            value: MTIwMDE=
+            description: Jumlah Transaksi Dalam 12 Bulan Terakhir  [MANDATORY] [Base64]
+          - name: jumlahVolume12BulanBUMN
+            value: MTIwMDI=
+            description: Jumlah Volume Transaksi Dalam 12 Bulan Terakhir  [MANDATORY] [Base64]
+          - name: jumlahTransaksi6BulanBUMN
+            value: NjAwMQ==
+            description: Jumlah Transaksi Dalam 6 Bulan Terakhir  [MANDATORY] [Base64]
+          - name: jumlahVolume6BulanBUMN
+            value: NjAwMg==
+            description: Jumlah Volume Transaksi Dalam 6 Bulan Terakhir  [MANDATORY] [Base64]
+          - name: jumlahTransaksi3BulanBUMN
+            value: MzAwMQ==
+            description: Jumlah Transaksi Dalam 3 Bulan Terakhir  [MANDATORY] [Base64]
+          - name: jumlahVolume3BulanBUMN
+            value: MzAwMg==
+            description: Jumlah Volume Transaksi Dalam 3 Bulan Terakhir  [MANDATORY] [Base64]
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Tue, 05 Nov 2024 06:31:20 GMT
+        - name: Content-Length
+          value: "50"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Unauthorized / Expired.",
+              "status": 401
+          }
+  - name: Error - Parameter Token /  API Key Empty
+    request:
+      url: "{{base-url-local}}/v/1/partnership/padiumkm/tambah-member"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+          disabled: true
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePartnership
+            value: VEgx
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: nomorIdentitas
+            value: MDk4NzY1NDMyMTEyMzQ1Ng==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: nama
+            value: dWJhaCBuYW1h
+            description: Nama [MANDATORY] [Base64]
+          - name: nomorTelepon
+            value: KzYyODg3MjMxMjMx
+            description: "Nomor Telepon [MANDATORY] [Base64] [Ex : +628xxx]"
+          - name: email
+            value: c3VuYXJ0b0BiYW5rcmF5YS5jby5pZA==
+            description: "Email [MANDATORY] [Base64] [Ex : abc@mail.com]"
+          - name: jumlahTransaksi12BulanBUMN
+            value: MTIwMDE=
+            description: Jumlah Transaksi Dalam 12 Bulan Terakhir  [MANDATORY] [Base64]
+          - name: jumlahVolume12BulanBUMN
+            value: MTIwMDI=
+            description: Jumlah Volume Transaksi Dalam 12 Bulan Terakhir  [MANDATORY] [Base64]
+          - name: jumlahTransaksi6BulanBUMN
+            value: NjAwMQ==
+            description: Jumlah Transaksi Dalam 6 Bulan Terakhir  [MANDATORY] [Base64]
+          - name: jumlahVolume6BulanBUMN
+            value: NjAwMg==
+            description: Jumlah Volume Transaksi Dalam 6 Bulan Terakhir  [MANDATORY] [Base64]
+          - name: jumlahTransaksi3BulanBUMN
+            value: MzAwMQ==
+            description: Jumlah Transaksi Dalam 3 Bulan Terakhir  [MANDATORY] [Base64]
+          - name: jumlahVolume3BulanBUMN
+            value: MzAwMg==
+            description: Jumlah Volume Transaksi Dalam 3 Bulan Terakhir  [MANDATORY] [Base64]
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Tue, 05 Nov 2024 06:30:07 GMT
+        - name: Content-Length
+          value: "51"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "parameter token is empty",
+              "status": 401
+          }
+  - name: Error - Access Forbidden
+    request:
+      url: "{{base-url-local}}/v/1/partnership/padiumkm/tambah-member"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePartnership
+            value: QkxBLTUwMQ==
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMw==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: nama
+            value: RHdpa2kgU2FwdXRyYQ==
+            description: Nama [MANDATORY] [Base64]
+          - name: nomorTelepon
+            value: ODE3NzY1MjczNzE=
+            description: "Nomor Telepon [MANDATORY] [Base64] [Ex : +628xxx]"
+          - name: email
+            value: ZC5kd2lraXNhcHV0cmFAZ21haWwuY29t
+            description: "Email [MANDATORY] [Base64] [Ex : abc@mail.com]"
+          - name: jumlahTransaksi12BulanBUMN
+            value: NTYwMDAwMA==
+            description: Jumlah Transaksi Dalam 12 Bulan Terakhir  [MANDATORY] [Base64]
+          - name: jumlahVolume12BulanBUMN
+            value: MTI=
+            description: Jumlah Volume Transaksi Dalam 12 Bulan Terakhir  [MANDATORY] [Base64]
+          - name: jumlahTransaksi6BulanBUMN
+            value: NTUwMDAwMA==
+            description: Jumlah Transaksi Dalam 6 Bulan Terakhir  [MANDATORY] [Base64]
+          - name: jumlahVolume6BulanBUMN
+            value: Ng==
+            description: Jumlah Volume Transaksi Dalam 6 Bulan Terakhir  [MANDATORY] [Base64]
+          - name: jumlahTransaksi3BulanBUMN
+            value: NTQwMDAwMA==
+            description: Jumlah Transaksi Dalam 3 Bulan Terakhir  [MANDATORY] [Base64]
+          - name: jumlahVolume3BulanBUMN
+            value: Mw==
+            description: Jumlah Volume Transaksi Dalam 3 Bulan Terakhir  [MANDATORY] [Base64]
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Mon, 25 Nov 2024 07:07:41 GMT
+        - name: Content-Length
+          value: "76"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "you don't have permission to access this resource",
+              "status": 403
+          }
+  - name: Error - Access Forbidden (No Data Partnership)
+    request:
+      url: "{{base-url-local}}/v/1/partnership/padiumkm/tambah-member"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMw==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: nama
+            value: RHdpa2kgU2FwdXRyYQ==
+            description: Nama [MANDATORY] [Base64]
+          - name: nomorTelepon
+            value: KzYyODE3NzY1MjczNzE=
+            description: "Nomor Telepon [MANDATORY] [Base64] [Ex : +628xxx]"
+          - name: email
+            value: ZC5kd2lraXNhcHV0cmFAZ21haWwuY29t
+            description: "Email [MANDATORY] [Base64] [Ex : abc@mail.com]"
+          - name: jumlahTransaksi12BulanBUMN
+            value: NTYwMDAwMA==
+            description: Jumlah Transaksi Dalam 12 Bulan Terakhir  [MANDATORY] [Base64]
+          - name: jumlahVolume12BulanBUMN
+            value: MTI=
+            description: Jumlah Volume Transaksi Dalam 12 Bulan Terakhir  [MANDATORY] [Base64]
+          - name: jumlahTransaksi6BulanBUMN
+            value: NTUwMDAwMA==
+            description: Jumlah Transaksi Dalam 6 Bulan Terakhir  [MANDATORY] [Base64]
+          - name: jumlahVolume6BulanBUMN
+            value: Ng==
+            description: Jumlah Volume Transaksi Dalam 6 Bulan Terakhir  [MANDATORY] [Base64]
+          - name: jumlahTransaksi3BulanBUMN
+            value: NTQwMDAwMA==
+            description: Jumlah Transaksi Dalam 3 Bulan Terakhir  [MANDATORY] [Base64]
+          - name: jumlahVolume3BulanBUMN
+            value: Mw==
+            description: Jumlah Volume Transaksi Dalam 3 Bulan Terakhir  [MANDATORY] [Base64]
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Mon, 25 Nov 2024 07:09:14 GMT
+        - name: Content-Length
+          value: "70"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "your access to this resource is unactivated",
+              "status": 403
+          }
+  - name: Error - Parameter Validation (Total Mandatory Tidak Sesuai)
+    request:
+      url: "{{base-url-local}}/v/1/partnership/padiumkm/tambah-member"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMw==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+            disabled: true
+          - name: nama
+            value: RHdpa2kgU2FwdXRyYQ==
+            description: Nama [MANDATORY] [Base64]
+          - name: nomorTelepon
+            value: KzYyODE3NzY1MjczNzE=
+            description: "Nomor Telepon [MANDATORY] [Base64] [Ex : +628xxx]"
+          - name: email
+            value: ZC5kd2lraXNhcHV0cmFAZ21haWwuY29t
+            description: "Email [MANDATORY] [Base64] [Ex : abc@mail.com]"
+          - name: jumlahTransaksi12BulanBUMN
+            value: NTYwMDAwMA==
+            description: Jumlah Transaksi Dalam 12 Bulan Terakhir  [MANDATORY] [Base64]
+          - name: jumlahVolume12BulanBUMN
+            value: MTI=
+            description: Jumlah Volume Transaksi Dalam 12 Bulan Terakhir  [MANDATORY] [Base64]
+          - name: jumlahTransaksi6BulanBUMN
+            value: NTUwMDAwMA==
+            description: Jumlah Transaksi Dalam 6 Bulan Terakhir  [MANDATORY] [Base64]
+          - name: jumlahVolume6BulanBUMN
+            value: Ng==
+            description: Jumlah Volume Transaksi Dalam 6 Bulan Terakhir  [MANDATORY] [Base64]
+          - name: jumlahTransaksi3BulanBUMN
+            value: NTQwMDAwMA==
+            description: Jumlah Transaksi Dalam 3 Bulan Terakhir  [MANDATORY] [Base64]
+          - name: jumlahVolume3BulanBUMN
+            value: Mw==
+            description: Jumlah Volume Transaksi Dalam 3 Bulan Terakhir  [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Mon, 25 Nov 2024 07:09:54 GMT
+        - name: Content-Length
+          value: "63"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Parameter tidak terpenuhi.",
+              "status": 400
+          }
+  - name: Error - Parameter Validation (Tidak Sesuai)
+    request:
+      url: "{{base-url-local}}/v/1/partnership/padiumkm/tambah-member"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMw==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: nama
+            value: RHdpa2kgU2FwdXRyYQ==1
+            description: Nama [MANDATORY] [Base64]
+          - name: nomorTelepon
+            value: KzYyODE3NzY1MjczNzE=
+            description: "Nomor Telepon [MANDATORY] [Base64] [Ex : +628xxx]"
+          - name: email
+            value: ZC5kd2lraXNhcHV0cmFAZ21haWwuY29t
+            description: "Email [MANDATORY] [Base64] [Ex : abc@mail.com]"
+          - name: jumlahTransaksi12BulanBUMN
+            value: NTYwMDAwMA==
+            description: Jumlah Transaksi Dalam 12 Bulan Terakhir  [MANDATORY] [Base64]
+          - name: jumlahVolume12BulanBUMN
+            value: MTI=
+            description: Jumlah Volume Transaksi Dalam 12 Bulan Terakhir  [MANDATORY] [Base64]
+          - name: jumlahTransaksi6BulanBUMN
+            value: NTUwMDAwMA==
+            description: Jumlah Transaksi Dalam 6 Bulan Terakhir  [MANDATORY] [Base64]
+          - name: jumlahVolume6BulanBUMN
+            value: Ng==
+            description: Jumlah Volume Transaksi Dalam 6 Bulan Terakhir  [MANDATORY] [Base64]
+          - name: jumlahTransaksi3BulanBUMN
+            value: NTQwMDAwMA==
+            description: Jumlah Transaksi Dalam 3 Bulan Terakhir  [MANDATORY] [Base64]
+          - name: jumlahVolume3BulanBUMN
+            value: Mw==
+            description: Jumlah Volume Transaksi Dalam 3 Bulan Terakhir  [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Mon, 25 Nov 2024 07:10:18 GMT
+        - name: Content-Length
+          value: "55"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "... tidak sesuai.",
+              "status": 400
+          }
+  - name: Success - Lolos Scoring & Tambah Member
+    request:
+      url: "{{base-url-local}}/v/1/partnership/padiumkm/tambah-member"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMw==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: nama
+            value: RHdpa2kgU2FwdXRyYQ==
+            description: Nama [MANDATORY] [Base64]
+          - name: nomorTelepon
+            value: KzYyODE3NzY1MjczNzE=
+            description: "Nomor Telepon [MANDATORY] [Base64] [Ex : +628xxx]"
+          - name: email
+            value: ZC5kd2lraXNhcHV0cmFAZ21haWwuY29t
+            description: "Email [MANDATORY] [Base64] [Ex : abc@mail.com]"
+          - name: jumlahTransaksi12BulanBUMN
+            value: NTYwMDAwMA==
+            description: Jumlah Transaksi Dalam 12 Bulan Terakhir  [MANDATORY] [Base64]
+          - name: jumlahVolume12BulanBUMN
+            value: MTI=
+            description: Jumlah Volume Transaksi Dalam 12 Bulan Terakhir  [MANDATORY] [Base64]
+          - name: jumlahTransaksi6BulanBUMN
+            value: NTUwMDAwMA==
+            description: Jumlah Transaksi Dalam 6 Bulan Terakhir  [MANDATORY] [Base64]
+          - name: jumlahVolume6BulanBUMN
+            value: Ng==
+            description: Jumlah Volume Transaksi Dalam 6 Bulan Terakhir  [MANDATORY] [Base64]
+          - name: jumlahTransaksi3BulanBUMN
+            value: NTQwMDAwMA==
+            description: Jumlah Transaksi Dalam 3 Bulan Terakhir  [MANDATORY] [Base64]
+          - name: jumlahVolume3BulanBUMN
+            value: Mw==
+            description: Jumlah Volume Transaksi Dalam 3 Bulan Terakhir  [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Mon, 25 Nov 2024 07:11:26 GMT
+        - name: Content-Length
+          value: "109"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "limit": 0,
+                  "status": 1
+              },
+              "message": "Data member masuk kriteria & berhasil disimpan.",
+              "status": 200
+          }
+  - name: Success - Tidak Lolos Scoring & Tambah Member (Belum Ada)
+    request:
+      url: "{{base-url-local}}/v/1/partnership/padiumkm/tambah-member"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePartnership
+            value: TUox
+            description: MANDATORY => BASE64
+          - name: nomorIdentitas
+            value: MDk4NzY1NDMyMTEyMzQ1Ng==
+            description: MANDATORY => BASE64
+          - name: nama
+            value: dWJhaCBuYW1h
+            description: MANDATORY => BASE64
+          - name: nomorTelepon
+            value: KzYyODg3MjMxMjMx
+            description: MANDATORY => BASE64
+          - name: email
+            value: c3VuYXJ0b0BiYW5rcmF5YS5jby5pZA==
+            description: MANDATORY => BASE64
+          - name: jumlahTransaksi12BulanBUMN
+            value: MTIwMDE=
+            description: MANDATORY => BASE64
+          - name: jumlahVolume12BulanBUMN
+            value: MTIwMDI=
+            description: MANDATORY => BASE64
+          - name: jumlahTransaksi6BulanBUMN
+            value: NjAwMQ==
+            description: MANDATORY => BASE64
+          - name: jumlahVolume6BulanBUMN
+            value: NjAwMg==
+            description: MANDATORY => BASE64
+          - name: jumlahTransaksi3BulanBUMN
+            value: MzAwMQ==
+            description: MANDATORY => BASE64
+          - name: jumlahVolume3BulanBUMN
+            value: MzAwMg==
+            description: MANDATORY => BASE64
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Tue, 05 Nov 2024 06:36:37 GMT
+        - name: Content-Length
+          value: "91"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "limit": 0,
+                  "status": -1
+              },
+              "message": "Data member tidak masuk kriteria.",
+              "status": 200
+          }

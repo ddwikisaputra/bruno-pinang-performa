@@ -1,0 +1,656 @@
+info:
+  name: Buat
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{base-url-local}}/v/1/pin/buat"
+  headers:
+    - name: Api-Key
+      value: "{{apiKeyDev}}"
+  body:
+    type: form-urlencoded
+    data:
+      - name: nomorIdentitas
+        value: MzE3MTA1MTIxMTk1MDAwMQ==
+        description: "3173022310780004"
+      - name: pin
+        value: MTcyNTM0
+        description: MTIzNDU2 = 123456, 123457 = MTIzNDU3
+      - name: kodePartnership
+        value: TUox
+        description: BLA-501
+  auth:
+    type: bearer
+    token: "{{accessTokenPartner}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 503 - Service Unavailable
+    request:
+      url: "{{base-url-local}}/v/1/pin/buat"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: "3173022310780004"
+          - name: pin
+            value: MDk4NzY1
+            description: MTIzNDU2 = 123456, 123457 = MTIzNDU3
+          - name: kodePartnership
+            value: TUox
+            description: BLA-501
+    response:
+      status: 503
+      statusText: Service Unavailable
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 31 Jul 2024 10:25:45 GMT
+        - name: Content-Length
+          value: "69"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Jam operasional Pinang Performa dari jam XX.XX - XX.XX WIB setiap hari. Kembali lagi nanti, ya!",
+              "status": 503
+          }
+  - name: Error - Token Expired
+    request:
+      url: "{{base-url-local}}/v/1/pin/buat"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: "3173022310780004"
+          - name: pin
+            value: MDk4NzY1
+            description: MTIzNDU2 = 123456, 123457 = MTIzNDU3
+          - name: kodePartnership
+            value: TUox
+            description: BLA-501
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 31 Jul 2024 10:25:45 GMT
+        - name: Content-Length
+          value: "69"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "token has invalid claims: token is expired",
+              "status": 401
+          }
+  - name: Error - Unauthorized / Expired
+    request:
+      url: "{{base-url-local}}/v/1/pin/buat"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: "3173022310780004"
+          - name: pin
+            value: MTEyMjMz
+            description: MTIzNDU2 = 123456, 123457 = MTIzNDU3
+          - name: kodePartnership
+            value: TUox
+            description: BLA-501
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 30 Jul 2024 04:05:02 GMT
+        - name: Content-Length
+          value: "50"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Unauthorized / Expired.",
+              "status": 401
+          }
+  - name: Error - Paremeter Token / Api Key Empty
+    request:
+      url: "{{base-url-local}}/v/1/pin/buat"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+          disabled: true
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwQQ==
+            description: "3173022310780004"
+          - name: pin
+            value: MTEyMjMz
+            description: MTIzNDU2 = 123456, 123457 = MTIzNDU3
+          - name: kodePartnership
+            value: TUox
+            description: BLA-501
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 30 Jul 2024 03:51:41 GMT
+        - name: Content-Length
+          value: "51"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "parameter token is empty",
+              "status": 401
+          }
+  - name: Error - Access Forbidden
+    request:
+      url: "{{base-url-local}}/v/1/pin/buat"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: "3173022310780004"
+          - name: pin
+            value: MTEyMjMz
+            description: MTIzNDU2 = 123456, 123457 = MTIzNDU3
+          - name: kodePartnership
+            value: TUoy
+            description: BLA-501
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 30 Jul 2024 03:53:43 GMT
+        - name: Content-Length
+          value: "76"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "you don't have permission to access this resource",
+              "status": 403
+          }
+  - name: Error - Access Forbidden (No Data Partnership)
+    request:
+      url: "{{base-url-local}}/v/1/pin/buat"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: "3173022310780004"
+          - name: pin
+            value: MTEyMjMz
+            description: MTIzNDU2 = 123456, 123457 = MTIzNDU3
+          - name: kodePartnership
+            value: TUox
+            description: BLA-501
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 30 Jul 2024 03:55:26 GMT
+        - name: Content-Length
+          value: "70"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "your access to this resource is unactivated",
+              "status": 403
+          }
+  - name: Error - Parameter Validation (Total Mandatory)
+    request:
+      url: "{{base-url-local}}/v/1/pin/buat"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: "3173022310780004"
+            disabled: true
+          - name: pin
+            value: MTEyMjMz
+            description: MTIzNDU2 = 123456, 123457 = MTIzNDU3
+          - name: kodePartnership
+            value: TUox
+            description: BLA-501
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 30 Jul 2024 03:49:59 GMT
+        - name: Content-Length
+          value: "63"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Parameter tidak terpenuhi.",
+              "status": 400
+          }
+  - name: Error - Parameter Validation (Tidak Sesuai)
+    request:
+      url: "{{base-url-local}}/v/1/pin/buat"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwQQ==
+            description: "3173022310780004"
+          - name: pin
+            value: MTEyMjMz
+            description: MTIzNDU2 = 123456, 123457 = MTIzNDU3
+          - name: kodePartnership
+            value: TUox
+            description: BLA-501
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 30 Jul 2024 03:50:59 GMT
+        - name: Content-Length
+          value: "83"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "... hanya boleh menggunakan angka.",
+              "status": 400
+          }
+  - name: Error - Rate Limited
+    request:
+      url: "{{base-url-staging}}/v/1/pin/buat"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzY3MTA0MjcxMjAwMDAwMw==
+            description: "3173022310780004"
+          - name: pin
+            value: MTIzNDU3
+            description: MTIzNDU2 = 123456, 123457 = MTIzNDU3
+          - name: kodePartnership
+            value: TUox
+            description: BLA-501
+    response:
+      status: 429
+      statusText: Too Many Requests
+      headers:
+        - name: Date
+          value: Tue, 19 Nov 2024 02:22:48 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "56"
+        - name: Connection
+          value: keep-alive
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' rayain.net
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: X-Different-Name
+          value: "true"
+        - name: X-Request-Start
+          value: t=1731982968.978
+        - name: X-Using-Nginx-Controller
+          value: "true"
+        - name: Access-Control-Allow-Origin
+          value: "*"
+        - name: Access-Control-Allow-Credentials
+          value: "true"
+        - name: Access-Control-Allow-Methods
+          value: PUT, GET, POST, OPTIONS, DELETE, PATCH
+        - name: Access-Control-Allow-Headers
+          value: Authorization, Content-Type, Origin, Accept-Encoding, Accept-Language, Host, Api-Key
+        - name: Access-Control-Max-Age
+          value: "1728000"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Too many requests, please try again later."
+          }
+  - name: Error - PIN Urut
+    request:
+      url: "{{base-url-local}}/v/1/pin/buat"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3MzE4MDcxMjk2MDAwNw==
+            description: "3173022310780004"
+          - name: pin
+            value: MTIzNDU2
+            description: MTIzNDU2 = 123456, 123457 = MTIzNDU3, 111111 = MTExMTEx
+          - name: kodePartnership
+            value: TUox
+            description: BLA-501
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 15 Oct 2024 07:04:27 GMT
+        - name: Content-Length
+          value: "105"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "PIN terlalu lemah. Hindari menggunakan angka berurut seperti 123456.",
+              "status": 400
+          }
+  - name: Error - PIN Angka Berulang
+    request:
+      url: "{{base-url-local}}/v/1/pin/buat"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3MzE4MDcxMjk2MDAwNw==
+            description: "3173022310780004"
+          - name: pin
+            value: MTExMTEx
+            description: "111111 = MTExMTEx MTIzNDU2 = 123456, 123457 = MTIzNDU3, "
+          - name: kodePartnership
+            value: TUox
+            description: BLA-501
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 15 Oct 2024 07:05:02 GMT
+        - name: Content-Length
+          value: "102"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "PIN terlalu lemah. Hindari menggunakan angka sama seperti 111111.",
+              "status": 400
+          }
+  - name: Error - PIN Tanggal Lahir
+    request:
+      url: "{{base-url-local}}/v/1/pin/buat"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3MzE4MDcxMjk2MDAwNw==
+            description: "3173022310780004"
+          - name: pin
+            value: MjcwMjk3
+            description: MTIzNDU2 = 123456, 123457 = MTIzNDU3, 111111 = MTExMTEx
+          - name: kodePartnership
+            value: TUox
+            description: BLA-501
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 16 Oct 2024 02:04:07 GMT
+        - name: Content-Length
+          value: "89"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "PIN terlalu lemah. Hindari menggunakan tanggal lahir",
+              "status": 400
+          }
+  - name: Error - Not Registered Whitelist
+    request:
+      url: "{{base-url-local}}/v/1/pin/buat"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: "3173022310780004"
+          - name: pin
+            value: MTEyMjMz
+            description: MTIzNDU2 = 123456, 123457 = MTIzNDU3
+          - name: kodePartnership
+            value: TUox
+            description: BLA-501
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 30 Jul 2024 03:52:50 GMT
+        - name: Content-Length
+          value: "79"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Maaf, anda tidak terdaftar pada whitelist.",
+              "status": 500
+          }
+  - name: Error - Validasi Kuota OTP Habis
+    request:
+      url: "{{base-url-local}}/v/1/pin/buat"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MzAyMjMxMDc4MDAwNA==
+            description: "3173022310780004"
+          - name: pin
+            value: MTIzNDU2
+            description: MTIzNDU2 = 123456, 123457 = MTIzNDU3
+          - name: kodePartnership
+            value: QkxBLTUwMQ==
+            description: BLA-501
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 29 Jul 2024 01:28:47 GMT
+        - name: Content-Length
+          value: "159"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Maaf, Proses OTP tidak dapat dilakukan karena sudah melebihi batas maksimal, silahkan coba kembali pada DD MM YY HH:MM",
+              "status": 500
+          }
+  - name: Error - Gagal Pembuatan PIN (PIN already exist)
+    request:
+      url: "{{base-url-local}}/v/1/pin/buat"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: "3173022310780004"
+          - name: pin
+            value: MTEyMjMz
+            description: MTIzNDU2 = 123456, 123457 = MTIzNDU3
+          - name: kodePartnership
+            value: TUox
+            description: BLA-501
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 30 Jul 2024 08:02:08 GMT
+        - name: Content-Length
+          value: "109"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Maaf, PIN sudah terdaftar. Silahkan mencoba untuk menggunakan PIN tersebut.",
+              "status": 500
+          }
+  - name: Success - Berhasil
+    request:
+      url: "{{base-url-local}}/v/1/pin/buat"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MzAyMjMxMDc4MDAwNA==
+            description: "3173022310780004"
+          - name: pin
+            value: MTIzNDU2
+            description: MTIzNDU2 = 123456, 123457 = MTIzNDU3
+          - name: kodePartnership
+            value: QkxBLTUwMQ==
+            description: BLA-501
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 29 Jul 2024 01:05:29 GMT
+        - name: Content-Length
+          value: "151"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "otpKey": "RAYAXXXXXXXXXX"
+              },
+              "message": "Pembuatan PIN berhasil. Silahkan cek inbox message anda untuk mendapatkan OTP verifikasi.",
+              "status": 200
+          }

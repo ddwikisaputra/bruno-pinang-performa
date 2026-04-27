@@ -1,0 +1,912 @@
+info:
+  name: Simpan Histori Transaksi
+  type: http
+  seq: 9
+
+http:
+  method: POST
+  url: "{{base-url-local}}/v/1/partnership/simpan-histori-transaksi"
+  headers:
+    - name: Api-Key
+      value: "{{apiKeyDev}}"
+  body:
+    type: form-urlencoded
+    data:
+      - name: nomorIdentitas
+        value: MzIwOTEyMjAwMzk0MDAwNg==
+        description: "3209122003940006"
+      - name: dataHistoriBulan[]
+        value: OA==
+        description: "8"
+      - name: dataHistoriBulan[]
+        value: OQ==
+        description: "9"
+      - name: dataHistoriBulan[]
+        value: MTA=
+        description: "10"
+      - name: dataHistoriBulan[]
+        value: MTE=
+        description: "11"
+      - name: dataHistoriBulan[]
+        value: MTI=
+        description: "12"
+      - name: dataHistoriBulan[]
+        value: MQ==
+        description: "1"
+      - name: dataHistoriBulan[]
+        value: Mg==
+        description: "2"
+      - name: dataHistoriBulan[]
+        value: Mw==
+        description: "3"
+      - name: dataHistoriBulan[]
+        value: NA==
+        description: "4"
+      - name: dataHistoriBulan[]
+        value: NQ==
+        description: "5"
+      - name: dataHistoriBulan[]
+        value: Ng==
+        description: "6"
+      - name: dataHistoriBulan[]
+        value: Nw==
+        description: "7"
+      - name: dataHistoriTahun[]
+        value: MjAyMw==
+        description: "2023"
+      - name: dataHistoriTahun[]
+        value: MjAyMw==
+        description: "2023"
+      - name: dataHistoriTahun[]
+        value: MjAyMw==
+        description: "2023"
+      - name: dataHistoriTahun[]
+        value: MjAyMw==
+        description: "2023"
+      - name: dataHistoriTahun[]
+        value: MjAyMw==
+        description: "2023"
+      - name: dataHistoriTahun[]
+        value: MjAyMw==
+        description: "2023"
+      - name: dataHistoriTahun[]
+        value: MjAyMw==
+        description: "2023"
+      - name: dataHistoriTahun[]
+        value: MjAyMw==
+        description: "2023"
+      - name: dataHistoriTahun[]
+        value: MjAyMw==
+        description: "2023"
+      - name: dataHistoriTahun[]
+        value: MjAyMw==
+        description: "2023"
+      - name: dataHistoriTahun[]
+        value: MjAyMw==
+        description: "2023"
+      - name: dataHistoriTahun[]
+        value: MjAyMw==
+        description: "2023"
+      - name: dataHistoriJumlah[]
+        value: MTA4
+        description: "108"
+      - name: dataHistoriJumlah[]
+        value: MTA5
+        description: "109"
+      - name: dataHistoriJumlah[]
+        value: MTEw
+        description: "110"
+      - name: dataHistoriJumlah[]
+        value: MTEx
+        description: "111"
+      - name: dataHistoriJumlah[]
+        value: MTEy
+        description: "112"
+      - name: dataHistoriJumlah[]
+        value: MTAx
+        description: "101"
+      - name: dataHistoriJumlah[]
+        value: MTAy
+        description: "102"
+      - name: dataHistoriJumlah[]
+        value: MTAz
+        description: "103"
+      - name: dataHistoriJumlah[]
+        value: MTA0
+        description: "104"
+      - name: dataHistoriJumlah[]
+        value: MTA1
+        description: "105"
+      - name: dataHistoriJumlah[]
+        value: MTA2
+        description: "106"
+      - name: dataHistoriJumlah[]
+        value: YnVrYW5hbmdrYQ==
+        description: YnVrYW5hbmdrYQ==
+  auth:
+    type: bearer
+    token: "{{tokenPartnership}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Error - Token Expired
+    request:
+      url: "{{base-url-local}}/v/1/partnership/simpan-histori-transaksi"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzIwOTEyMjAwMzk0MDAwNg==
+          - name: dataHistoriBulan[]
+            value: OA==
+            description: "8"
+          - name: dataHistoriBulan[]
+            value: OQ==
+            description: "9"
+          - name: dataHistoriBulan[]
+            value: MTA=
+            description: "10"
+          - name: dataHistoriBulan[]
+            value: MTE=
+            description: "11"
+          - name: dataHistoriBulan[]
+            value: MTI=
+            description: "12"
+          - name: dataHistoriBulan[]
+            value: MQ==
+            description: "1"
+          - name: dataHistoriBulan[]
+            value: Mg==
+            description: "2"
+          - name: dataHistoriBulan[]
+            value: Mw==
+            description: "3"
+          - name: dataHistoriBulan[]
+            value: NA==
+            description: "4"
+          - name: dataHistoriBulan[]
+            value: NQ==
+            description: "5"
+          - name: dataHistoriBulan[]
+            value: Ng==
+            description: "6"
+          - name: dataHistoriBulan[]
+            value: Nw==
+            description: "7"
+          - name: dataHistoriTahun[]
+            value: MjAyMw==
+            description: "2023"
+          - name: dataHistoriTahun[]
+            value: MjAyMw==
+            description: "2023"
+          - name: dataHistoriTahun[]
+            value: MjAyMw==
+            description: "2023"
+          - name: dataHistoriTahun[]
+            value: MjAyMw==
+            description: "2023"
+          - name: dataHistoriTahun[]
+            value: MjAyMw==
+            description: "2023"
+          - name: dataHistoriTahun[]
+            value: MjAyMw==
+            description: "2023"
+          - name: dataHistoriTahun[]
+            value: MjAyMw==
+            description: "2023"
+          - name: dataHistoriTahun[]
+            value: MjAyMw==
+            description: "2023"
+          - name: dataHistoriTahun[]
+            value: MjAyMw==
+            description: "2023"
+          - name: dataHistoriTahun[]
+            value: MjAyMw==
+            description: "2023"
+          - name: dataHistoriTahun[]
+            value: MjAyMw==
+            description: "2023"
+          - name: dataHistoriTahun[]
+            value: MjAyMw==
+            description: "2023"
+          - name: dataHistoriJumlah[]
+            value: MTA4
+            description: "108"
+          - name: dataHistoriJumlah[]
+            value: MTA5
+            description: "109"
+          - name: dataHistoriJumlah[]
+            value: MTEw
+            description: "110"
+          - name: dataHistoriJumlah[]
+            value: MTEx
+            description: "111"
+          - name: dataHistoriJumlah[]
+            value: MTEy
+            description: "112"
+          - name: dataHistoriJumlah[]
+            value: MTAx
+            description: "101"
+          - name: dataHistoriJumlah[]
+            value: MTAy
+            description: "102"
+          - name: dataHistoriJumlah[]
+            value: MTAz
+            description: "103"
+          - name: dataHistoriJumlah[]
+            value: MTA0
+            description: "104"
+          - name: dataHistoriJumlah[]
+            value: MTA1
+            description: "105"
+          - name: dataHistoriJumlah[]
+            value: MTA2
+            description: "106"
+          - name: dataHistoriJumlah[]
+            value: MTA2
+            description: "106"
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Tue, 26 Aug 2025 03:38:03 GMT
+        - name: Content-Length
+          value: "50"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Unauthorized / Expired.",
+              "status": 401
+          }
+  - name: Error - Parameter Token Empty
+    request:
+      url: "{{base-url-local}}/v/1/partnership/simpan-histori-transaksi"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzIwOTEyMjAwMzk0MDAwNg==
+          - name: dataHistoriBulan[]
+            value: OA==
+            description: "8"
+          - name: dataHistoriBulan[]
+            value: OQ==
+            description: "9"
+          - name: dataHistoriBulan[]
+            value: MTA=
+            description: "10"
+          - name: dataHistoriBulan[]
+            value: MTE=
+            description: "11"
+          - name: dataHistoriBulan[]
+            value: MTI=
+            description: "12"
+          - name: dataHistoriBulan[]
+            value: MQ==
+            description: "1"
+          - name: dataHistoriBulan[]
+            value: Mg==
+            description: "2"
+          - name: dataHistoriBulan[]
+            value: Mw==
+            description: "3"
+          - name: dataHistoriBulan[]
+            value: NA==
+            description: "4"
+          - name: dataHistoriBulan[]
+            value: NQ==
+            description: "5"
+          - name: dataHistoriBulan[]
+            value: Ng==
+            description: "6"
+          - name: dataHistoriBulan[]
+            value: Nw==
+            description: "7"
+          - name: dataHistoriTahun[]
+            value: MjAyMw==
+            description: "2023"
+          - name: dataHistoriTahun[]
+            value: MjAyMw==
+            description: "2023"
+          - name: dataHistoriTahun[]
+            value: MjAyMw==
+            description: "2023"
+          - name: dataHistoriTahun[]
+            value: MjAyMw==
+            description: "2023"
+          - name: dataHistoriTahun[]
+            value: MjAyMw==
+            description: "2023"
+          - name: dataHistoriTahun[]
+            value: MjAyMw==
+            description: "2023"
+          - name: dataHistoriTahun[]
+            value: MjAyMw==
+            description: "2023"
+          - name: dataHistoriTahun[]
+            value: MjAyMw==
+            description: "2023"
+          - name: dataHistoriTahun[]
+            value: MjAyMw==
+            description: "2023"
+          - name: dataHistoriTahun[]
+            value: MjAyMw==
+            description: "2023"
+          - name: dataHistoriTahun[]
+            value: MjAyMw==
+            description: "2023"
+          - name: dataHistoriTahun[]
+            value: MjAyMw==
+            description: "2023"
+          - name: dataHistoriJumlah[]
+            value: MTA4
+            description: "108"
+          - name: dataHistoriJumlah[]
+            value: MTA5
+            description: "109"
+          - name: dataHistoriJumlah[]
+            value: MTEw
+            description: "110"
+          - name: dataHistoriJumlah[]
+            value: MTEx
+            description: "111"
+          - name: dataHistoriJumlah[]
+            value: MTEy
+            description: "112"
+          - name: dataHistoriJumlah[]
+            value: MTAx
+            description: "101"
+          - name: dataHistoriJumlah[]
+            value: MTAy
+            description: "102"
+          - name: dataHistoriJumlah[]
+            value: MTAz
+            description: "103"
+          - name: dataHistoriJumlah[]
+            value: MTA0
+            description: "104"
+          - name: dataHistoriJumlah[]
+            value: MTA1
+            description: "105"
+          - name: dataHistoriJumlah[]
+            value: MTA2
+            description: "106"
+          - name: dataHistoriJumlah[]
+            value: MTA2
+            description: "106"
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Tue, 26 Aug 2025 03:44:44 GMT
+        - name: Content-Length
+          value: "51"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "parameter token is empty",
+              "status": 401
+          }
+  - name: Error - Parameter Validation (Tidak Sesuai)
+    request:
+      url: "{{base-url-local}}/v/1/partnership/simpan-histori-transaksi"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzIwOTEyMjAwMzk0
+            description: "320912200394"
+          - name: dataHistoriBulan[]
+            value: YnVrYW4=
+            description: bukan
+          - name: dataHistoriBulan[]
+            value: OQ==
+            description: "9"
+          - name: dataHistoriBulan[]
+            value: MTA=
+            description: "10"
+          - name: dataHistoriBulan[]
+            value: MTE=
+            description: "11"
+          - name: dataHistoriBulan[]
+            value: MTI=
+            description: "12"
+          - name: dataHistoriBulan[]
+            value: MQ==
+            description: "1"
+          - name: dataHistoriBulan[]
+            value: Mg==
+            description: "2"
+          - name: dataHistoriBulan[]
+            value: Mw==
+            description: "3"
+          - name: dataHistoriBulan[]
+            value: NA==
+            description: "4"
+          - name: dataHistoriBulan[]
+            value: NQ==
+            description: "5"
+          - name: dataHistoriBulan[]
+            value: Ng==
+            description: "6"
+          - name: dataHistoriBulan[]
+            value: Nw==
+            description: "7"
+          - name: dataHistoriTahun[]
+            value: MjAyMw==
+            description: "2023"
+          - name: dataHistoriTahun[]
+            value: MjAyMw==
+            description: "2023"
+          - name: dataHistoriTahun[]
+            value: YnVrYW4=
+            description: bukan
+          - name: dataHistoriTahun[]
+            value: MjAyMw==
+            description: "2023"
+          - name: dataHistoriTahun[]
+            value: MjAyMw==
+            description: "2023"
+          - name: dataHistoriTahun[]
+            value: MjAyMw==
+            description: "2023"
+          - name: dataHistoriTahun[]
+            value: MjAyMw==
+            description: "2023"
+          - name: dataHistoriTahun[]
+            value: MjAyMw==
+            description: "2023"
+          - name: dataHistoriTahun[]
+            value: MjAyMw==
+            description: "2023"
+          - name: dataHistoriTahun[]
+            value: MjAyMw==
+            description: "2023"
+          - name: dataHistoriTahun[]
+            value: MjAyMw==
+            description: "2023"
+          - name: dataHistoriTahun[]
+            value: MjAyMw==
+            description: "2023"
+          - name: dataHistoriJumlah[]
+            value: MTA4
+            description: "108"
+          - name: dataHistoriJumlah[]
+            value: MTA5
+            description: "109"
+          - name: dataHistoriJumlah[]
+            value: MTEw
+            description: "110"
+          - name: dataHistoriJumlah[]
+            value: MTEx
+            description: "111"
+          - name: dataHistoriJumlah[]
+            value: MTEy
+            description: "112"
+          - name: dataHistoriJumlah[]
+            value: MTAx
+            description: "101"
+          - name: dataHistoriJumlah[]
+            value: MTAy
+            description: "102"
+          - name: dataHistoriJumlah[]
+            value: MTAz
+            description: "103"
+          - name: dataHistoriJumlah[]
+            value: MTA0
+            description: "104"
+          - name: dataHistoriJumlah[]
+            value: MTA1
+            description: "105"
+          - name: dataHistoriJumlah[]
+            value: MTA2
+            description: "106"
+          - name: dataHistoriJumlah[]
+            value: YnVrYW4=
+            description: bukan
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Tue, 26 Aug 2025 04:18:13 GMT
+        - name: Content-Length
+          value: "204"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "validation": [
+                      "Ktp Number tidak 16 digit",
+                      "Bulan ke-1 bukan integer",
+                      "Tahun ke-3 bukan integer",
+                      "Jumlah ke-12 bukan integer"
+                  ]
+              },
+              "message": "Maaf, Terdapat parameter yang tidak sesuai",
+              "status": 400
+          }
+  - name: Error - Data Gagal Disimpan
+    request:
+      url: "{{base-url-local}}/v/1/partnership/simpan-histori-transaksi"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzIwOTEyMjAwMzk0MDAwNg==
+          - name: dataHistoriBulan[]
+            value: OA==
+            description: "8"
+          - name: dataHistoriBulan[]
+            value: OQ==
+            description: "9"
+          - name: dataHistoriBulan[]
+            value: MTA=
+            description: "10"
+          - name: dataHistoriBulan[]
+            value: MTE=
+            description: "11"
+          - name: dataHistoriBulan[]
+            value: MTI=
+            description: "12"
+          - name: dataHistoriBulan[]
+            value: MQ==
+            description: "1"
+          - name: dataHistoriBulan[]
+            value: Mg==
+            description: "2"
+          - name: dataHistoriBulan[]
+            value: Mw==
+            description: "3"
+          - name: dataHistoriBulan[]
+            value: NA==
+            description: "4"
+          - name: dataHistoriBulan[]
+            value: NQ==
+            description: "5"
+          - name: dataHistoriBulan[]
+            value: Ng==
+            description: "6"
+          - name: dataHistoriBulan[]
+            value: Nw==
+            description: "7"
+          - name: dataHistoriTahun[]
+            value: MjAyNA==
+            description: "2024"
+          - name: dataHistoriTahun[]
+            value: MjAyNA==
+            description: "2024"
+          - name: dataHistoriTahun[]
+            value: MjAyNA==
+            description: "2024"
+          - name: dataHistoriTahun[]
+            value: MjAyNA==
+            description: "2024"
+          - name: dataHistoriTahun[]
+            value: MjAyNA==
+            description: "2024"
+          - name: dataHistoriTahun[]
+            value: MjAyNQ==
+            description: "2025"
+          - name: dataHistoriTahun[]
+            value: MjAyNQ==
+            description: "2025"
+          - name: dataHistoriTahun[]
+            value: MjAyNQ==
+            description: "2025"
+          - name: dataHistoriTahun[]
+            value: MjAyNQ==
+            description: "2025"
+          - name: dataHistoriTahun[]
+            value: MjAyNQ==
+            description: "2025"
+          - name: dataHistoriTahun[]
+            value: MjAyNQ==
+            description: "2025"
+          - name: dataHistoriTahun[]
+            value: MjAyNQ==
+            description: "2025"
+          - name: dataHistoriJumlah[]
+            value: MTA4
+            description: "108"
+          - name: dataHistoriJumlah[]
+            value: MTA5
+            description: "109"
+          - name: dataHistoriJumlah[]
+            value: MTEw
+            description: "110"
+          - name: dataHistoriJumlah[]
+            value: MTEx
+            description: "111"
+          - name: dataHistoriJumlah[]
+            value: MTEy
+            description: "112"
+          - name: dataHistoriJumlah[]
+            value: MTAx
+            description: "101"
+          - name: dataHistoriJumlah[]
+            value: MTAy
+            description: "102"
+          - name: dataHistoriJumlah[]
+            value: MTAz
+            description: "103"
+          - name: dataHistoriJumlah[]
+            value: MTA0
+            description: "104"
+          - name: dataHistoriJumlah[]
+            value: MTA1
+            description: "105"
+          - name: dataHistoriJumlah[]
+            value: MTA2
+            description: "106"
+          - name: dataHistoriJumlah[]
+            value: MTA3
+            description: "107"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Mon, 25 Aug 2025 08:51:33 GMT
+        - name: Content-Length
+          value: "78"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Maaf, Gagal menyimpan data histori transaksi. Silahkan coba beberapa saat lagi.",
+              "status": 500
+          }
+  - name: Success - Data Berhasil Disimpan
+    request:
+      url: "{{base-url-local}}/v/1/partnership/simpan-histori-transaksi"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzIwOTEyMjAwMzk0MDAwNg==
+          - name: dataHistoriBulan[]
+            value: OA==
+            description: "8"
+          - name: dataHistoriBulan[]
+            value: OQ==
+            description: "9"
+          - name: dataHistoriBulan[]
+            value: MTA=
+            description: "10"
+          - name: dataHistoriBulan[]
+            value: MTE=
+            description: "11"
+          - name: dataHistoriBulan[]
+            value: MTI=
+            description: "12"
+          - name: dataHistoriBulan[]
+            value: MQ==
+            description: "1"
+          - name: dataHistoriBulan[]
+            value: Mg==
+            description: "2"
+          - name: dataHistoriBulan[]
+            value: Mw==
+            description: "3"
+          - name: dataHistoriBulan[]
+            value: NA==
+            description: "4"
+          - name: dataHistoriBulan[]
+            value: NQ==
+            description: "5"
+          - name: dataHistoriBulan[]
+            value: Ng==
+            description: "6"
+          - name: dataHistoriBulan[]
+            value: Nw==
+            description: "7"
+          - name: dataHistoriTahun[]
+            value: MjAyNA==
+            description: "2024"
+          - name: dataHistoriTahun[]
+            value: MjAyNA==
+            description: "2024"
+          - name: dataHistoriTahun[]
+            value: MjAyNA==
+            description: "2024"
+          - name: dataHistoriTahun[]
+            value: MjAyNA==
+            description: "2024"
+          - name: dataHistoriTahun[]
+            value: MjAyNA==
+            description: "2024"
+          - name: dataHistoriTahun[]
+            value: MjAyNQ==
+            description: "2025"
+          - name: dataHistoriTahun[]
+            value: MjAyNQ==
+            description: "2025"
+          - name: dataHistoriTahun[]
+            value: MjAyNQ==
+            description: "2025"
+          - name: dataHistoriTahun[]
+            value: MjAyNQ==
+            description: "2025"
+          - name: dataHistoriTahun[]
+            value: MjAyNQ==
+            description: "2025"
+          - name: dataHistoriTahun[]
+            value: MjAyNQ==
+            description: "2025"
+          - name: dataHistoriTahun[]
+            value: MjAyNQ==
+            description: "2025"
+          - name: dataHistoriJumlah[]
+            value: MTA4
+            description: "108"
+          - name: dataHistoriJumlah[]
+            value: MTA5
+            description: "109"
+          - name: dataHistoriJumlah[]
+            value: MTEw
+            description: "110"
+          - name: dataHistoriJumlah[]
+            value: MTEx
+            description: "111"
+          - name: dataHistoriJumlah[]
+            value: MTEy
+            description: "112"
+          - name: dataHistoriJumlah[]
+            value: MTAx
+            description: "101"
+          - name: dataHistoriJumlah[]
+            value: MTAy
+            description: "102"
+          - name: dataHistoriJumlah[]
+            value: MTAz
+            description: "103"
+          - name: dataHistoriJumlah[]
+            value: MTA0
+            description: "104"
+          - name: dataHistoriJumlah[]
+            value: MTA1
+            description: "105"
+          - name: dataHistoriJumlah[]
+            value: MTA2
+            description: "106"
+          - name: dataHistoriJumlah[]
+            value: MTA3
+            description: "107"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Mon, 25 Aug 2025 08:51:33 GMT
+        - name: Content-Length
+          value: "78"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Data histori transaksi berhasil disimpan.",
+              "status": 200
+          }

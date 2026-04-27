@@ -1,0 +1,221 @@
+info:
+  name: Slik Callback
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{base-url-dev}}/v/1/internal/screening/slik-callback/490"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: MER-490
+      - name: statusCode
+        value: "1"
+      - name: statusDescription
+        value: Good
+      - name: data
+        value: '{"pdfFile":"http://172.16.31.95:4343/api/digiagri/slik/pdf/490"}'
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Error - Parameter Validation (Total Mandatory)
+    request:
+      url: "{{base-url-local}}/v/1/internal/screening/slik-callback/7"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: MER-1
+            disabled: true
+          - name: statusCode
+            value: "1"
+          - name: statusDescription
+            value: Good
+          - name: data
+            value: '{"pdfFile":"http://172.16.31.95:4343/api/digiagri/slik/pdf/279"}'
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 27 Aug 2024 04:01:47 GMT
+        - name: Content-Length
+          value: "53"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Parameter tidak terpenuhi.",
+              "status": 400
+          }
+  - name: Error - Parameter Validation (Tidak Sesuai)
+    request:
+      url: "{{base-url-local}}/v/1/internal/screening/slik-callback/7"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: MER-1
+          - name: statusCode
+            value: "3"
+          - name: statusDescription
+            value: Good
+          - name: data
+            value: '{"pdfFile":"http://172.16.31.95:4343/api/digiagri/slik/pdf/279"}'
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 27 Aug 2024 04:02:11 GMT
+        - name: Content-Length
+          value: "52"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "... tidak sesuai.",
+              "status": 400
+          }
+  - name: Error - Flag Masih Dalam Proses / Flag Slik Tidak 0
+    request:
+      url: "{{base-url-local}}/v/1/internal/screening/slik-callback/7"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: MER-1
+          - name: statusCode
+            value: "1"
+          - name: statusDescription
+            value: Good
+          - name: data
+            value: '{"pdfFile":"http://172.16.31.95:4343/api/digiagri/slik/pdf/279"}'
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 27 Aug 2024 03:53:19 GMT
+        - name: Content-Length
+          value: "114"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Maaf, Data Prakarsa Belum Selesai Prescreening. Ada salah satu prescreening status = -1",
+              "status": 500
+          }
+  - name: Error - Bukan Status Callback
+    request:
+      url: "{{base-url-local}}/v/1/internal/screening/slik-callback/7"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: MER-1
+          - name: statusCode
+            value: "1"
+          - name: statusDescription
+            value: Good
+          - name: data
+            value: '{"pdfFile":"http://172.16.31.95:4343/api/digiagri/slik/pdf/279"}'
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 27 Aug 2024 03:53:19 GMT
+        - name: Content-Length
+          value: "114"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Maaf, Data Prakarsa Bukan Status Menunggu Callback Slik.",
+              "status": 500
+          }
+  - name: Error - Gagal Callback
+    request:
+      url: "{{base-url-local}}/v/1/internal/screening/slik-callback/7"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: MER-1
+          - name: statusCode
+            value: "1"
+          - name: statusDescription
+            value: Good
+          - name: data
+            value: '{"pdfFile":"http://172.16.31.95:4343/api/digiagri/slik/pdf/279"}'
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 27 Aug 2024 03:53:19 GMT
+        - name: Content-Length
+          value: "114"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Maaf, Data pre screening tidak berhasil disimpan. Silahkan coba beberapa saat lagi.",
+              "status": 500
+          }
+  - name: Success - Berhasil
+    request:
+      url: "{{base-url-local}}/v/1/internal/screening/slik-callback/7"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: MER-1
+          - name: statusCode
+            value: "1"
+          - name: statusDescription
+            value: Good
+          - name: data
+            value: '{"pdfFile":"http://172.16.31.95:4343/api/digiagri/slik/pdf/279"}'
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 27 Aug 2024 04:01:26 GMT
+        - name: Content-Length
+          value: "64"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Data pre screening berhasil disimpan.",
+              "status": 200
+          }

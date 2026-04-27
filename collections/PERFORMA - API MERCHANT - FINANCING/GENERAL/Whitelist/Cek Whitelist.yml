@@ -1,0 +1,498 @@
+info:
+  name: Cek Whitelist
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{base-url-prod}}/v/1/aktivasi/cek-whitelist"
+  headers:
+    - name: Api-Key
+      value: VW1GNVlWQnBVR1Z5Vkc5d2pDa0VnR3o1a2ZkRHdnNjVJL3R4cDNqOUZPSXJoQT09
+  body:
+    type: form-urlencoded
+    data:
+      - name: nomorIdentitas
+        value: MzIwMTE1MTQxMDAwMDAwMQ==
+        description: Nomor Identitas User [MANDATORY] [Base64]
+      - name: kodePartnership
+        value: QURJLTg0
+        description: Kode Partnership [MANDATORY] [Base64]
+  auth:
+    type: bearer
+    token: "{{accessTokenPartner}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 503 - Service Unavailable
+    request:
+      url: "{{base-url-mock}}/v/1/aktivasi/cek-whitelist"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+        - name: x-mock-response-code
+          value: 503-service-unavailable
+          description: enable when use mock api
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 503
+      statusText: Service Unavailable
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 24 Sep 2024 03:40:35 GMT
+        - name: Content-Length
+          value: "202"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Jam operasional Pinang Performa dari jam XX.XX - XX.XX WIB setiap hari. Kembali lagi nanti, ya!",
+              "status": 503
+          }
+  - name: Error - Token Expired
+    request:
+      url: "{{base-url-mock}}/v/1/aktivasi/cek-whitelist"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+        - name: x-mock-response-code
+          value: 401-token-expired
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 17 Jul 2024 08:57:28 GMT
+        - name: Content-Length
+          value: "43"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "token has invalid claims: token is expired",
+              "status": 401
+          }
+  - name: Error - Unauthorized / Expired
+    request:
+      url: "{{base-url-mock}}/v/1/aktivasi/cek-whitelist"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+        - name: x-mock-response-code
+          value: 401-unauthorized
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: QkxBLTUwMQ==
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 17 Jul 2024 08:58:33 GMT
+        - name: Content-Length
+          value: "76"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Unauthorized / Expired.",
+              "status": 401
+          }
+  - name: Error - Paremeter Token / Api Key Empty
+    request:
+      url: "{{base-url-mock}}/v/1/aktivasi/cek-whitelist"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+          disabled: true
+        - name: x-mock-response-code
+          value: 401-parameter-token-empty
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 17 Jul 2024 08:59:27 GMT
+        - name: Content-Length
+          value: "51"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "parameter token is empty",
+              "status": 401
+          }
+  - name: Error - Access Forbidden
+    request:
+      url: "{{base-url-mock}}/v/1/aktivasi/cek-whitelist"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+        - name: x-mock-response-code
+          value: 403-forbidden
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 17 Jul 2024 09:04:58 GMT
+        - name: Content-Length
+          value: "76"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "you don't have permission to access this resource",
+              "status": 403
+          }
+  - name: Error - Access Forbidden (No Data Partnership)
+    request:
+      url: "{{base-url-mock}}/v/1/aktivasi/cek-whitelist"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+        - name: x-mock-response-code
+          value: 403-forbidden-no-data-partnership
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 17 Jul 2024 09:00:30 GMT
+        - name: Content-Length
+          value: "70"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "your access to this resource is unactivated",
+              "status": 403
+          }
+  - name: Error - Parameter Validation (Total Mandatory)
+    request:
+      url: "{{base-url-mock}}/v/1/aktivasi/cek-whitelist"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+        - name: x-mock-response-code
+          value: params-vali-total-mandatory-400
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+            disabled: true
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 17 Jul 2024 09:01:11 GMT
+        - name: Content-Length
+          value: "63"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Parameter tidak terpenuhi.",
+              "status": 400
+          }
+  - name: Error - Parameter Validation (Tidak Sesuai)
+    request:
+      url: "{{base-url-mock}}/v/1/aktivasi/cek-whitelist"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+        - name: x-mock-response-code
+          value: params-vali-not-match-400
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUoxa
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 17 Jul 2024 09:02:03 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "... tidak sesuai.",
+              "status": 400
+          }
+  - name: Error - Not Registered Whitelist
+    request:
+      url: "{{base-url-mock}}/v/1/aktivasi/cek-whitelist"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+        - name: x-mock-response-code
+          value: not-registered-whitelist-500
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 17 Jul 2024 08:28:39 GMT
+        - name: Content-Length
+          value: "79"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Maaf, anda tidak terdaftar pada whitelist.",
+              "status": 500
+          }
+  - name: Success - Whitelist Ditemukan (Exist PIN) (==> sudah kadaluarsa block pin)
+    request:
+      url: "{{base-url-mock}}/v/1/aktivasi/cek-whitelist"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+        - name: x-mock-response-code
+          value: 200-whitelist-exist-pin-no-block
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 17 Jul 2024 09:03:20 GMT
+        - name: Content-Length
+          value: "498"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "",
+                  "existPin": true,
+                  "tanggalKadaluarsaBlockPin": ""
+              },
+              "message": "Terdaftar pada whitelist.",
+              "status": 200
+          }
+  - name: Success - Whitelist Ditemukan (Exist PIN) (==> block pin)
+    request:
+      url: "{{base-url-mock}}/v/1/aktivasi/cek-whitelist"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+        - name: x-mock-response-code
+          value: 200-exists-pin
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 17 Jul 2024 09:03:20 GMT
+        - name: Content-Length
+          value: "498"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "block-pin",
+                  "existPin": true,
+                  "tanggalKadaluarsaBlockPin": "2024-10-16 17:33:22.538"
+              },
+              "message": "Terdaftar pada whitelist.",
+              "status": 200
+          }
+  - name: Success - Whitelist Ditemukan (Not Exist PIN)
+    request:
+      url: localhost:8080/v/1/aktivasi/cek-whitelist
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+        - name: X-Forwarded-For
+          value: 127.0.0.2
+        - name: X-Forwarded-For
+          value: 127.0.0.3
+        - name: X-Forwarded-For
+          value: 127.0.0.4
+        - name: X-Real-IP
+          value: 127.0.0.99
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzEyNTU2MjYyNzI3NzI1NQ==
+            description: Nomor Identitas User [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: UFVNLTYxNQ==
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx/1.18.0 (Ubuntu)
+        - name: Date
+          value: Wed, 22 Jan 2025 08:34:18 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "131"
+        - name: Connection
+          value: keep-alive
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "create-pin",
+                  "existPin": false,
+                  "tanggalKadaluarsaBlockPin": ""
+              },
+              "message": "Terdaftar pada whitelist.",
+              "status": 200
+          }

@@ -1,0 +1,465 @@
+info:
+  name: Daftar Distributor
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: https://pinang-performa.free.mockoapp.net/v/1/partnership/daftar-distributor/400-error-param
+  headers:
+    - name: x-key
+      value: performa
+  params:
+    - name: 400-token-empty
+      value: ""
+      type: query
+      disabled: true
+    - name: "503"
+      value: ""
+      type: query
+      disabled: true
+    - name: "401"
+      value: ""
+      type: query
+      disabled: true
+    - name: "403"
+      value: ""
+      type: query
+      disabled: true
+    - name: 400-error-param
+      value: ""
+      type: query
+      disabled: true
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: "503"
+    request:
+      url: https://pinang-performa.free.mockoapp.net/v/1/partnership/daftar-distributor/503
+      method: POST
+      headers:
+        - name: x-key
+          value: performa
+      params:
+        - name: "503"
+          value: ""
+          type: query
+          disabled: true
+    response:
+      status: 503
+      statusText: Service Unavailable
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Thu, 13 Nov 2025 03:27:45 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "180"
+        - name: Connection
+          value: keep-alive
+        - name: access-control-allow-origin
+          value: "*"
+        - name: access-control-expose-headers
+          value: "*"
+        - name: cache-control
+          value: no-cache
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Jam operasional Pinang Performa dari jam XX.XX - XX.XX WIB setiap hari. Kembali lagi nanti, ya!",
+              "status": 503
+          }
+  - name: 400-token-empty
+    request:
+      url: https://pinang-performa.free.mockoapp.net/v/1/partnership/daftar-distributor/400-token-empty
+      method: POST
+      headers:
+        - name: x-key
+          value: performa
+      params:
+        - name: 400-token-empty
+          value: ""
+          type: query
+          disabled: true
+        - name: "503"
+          value: ""
+          type: query
+          disabled: true
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Thu, 13 Nov 2025 03:28:53 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "109"
+        - name: Connection
+          value: keep-alive
+        - name: access-control-allow-origin
+          value: "*"
+        - name: access-control-expose-headers
+          value: "*"
+        - name: cache-control
+          value: no-cache
+      body:
+        type: json
+        data: |-
+          {
+              "message": "parameter token is empty",
+              "status": 400
+          }
+  - name: 401 - Unauthorized
+    request:
+      url: https://pinang-performa.free.mockoapp.net/v/1/partnership/daftar-distributor/401
+      method: POST
+      headers:
+        - name: x-key
+          value: performa
+      params:
+        - name: 400-token-empty
+          value: ""
+          type: query
+          disabled: true
+        - name: "503"
+          value: ""
+          type: query
+          disabled: true
+        - name: "401"
+          value: ""
+          type: query
+          disabled: true
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Thu, 13 Nov 2025 03:30:06 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "108"
+        - name: Connection
+          value: keep-alive
+        - name: access-control-allow-origin
+          value: "*"
+        - name: access-control-expose-headers
+          value: "*"
+        - name: cache-control
+          value: no-cache
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Unauthorized / Expired.",
+              "status": 401
+          }
+  - name: "403"
+    request:
+      url: https://pinang-performa.free.mockoapp.net/v/1/partnership/daftar-distributor/403
+      method: POST
+      headers:
+        - name: x-key
+          value: performa
+      params:
+        - name: 400-token-empty
+          value: ""
+          type: query
+          disabled: true
+        - name: "503"
+          value: ""
+          type: query
+          disabled: true
+        - name: "401"
+          value: ""
+          type: query
+          disabled: true
+        - name: "403"
+          value: ""
+          type: query
+          disabled: true
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Thu, 13 Nov 2025 03:30:37 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "130"
+        - name: Connection
+          value: keep-alive
+        - name: access-control-allow-origin
+          value: "*"
+        - name: access-control-expose-headers
+          value: "*"
+        - name: cache-control
+          value: no-cache
+      body:
+        type: json
+        data: |-
+          {
+              "message": "you don't have permission to access this resource",
+              "status": 403
+          }
+  - name: 400 - error param
+    request:
+      url: https://pinang-performa.free.mockoapp.net/v/1/partnership/daftar-distributor/400-error-param
+      method: POST
+      headers:
+        - name: x-key
+          value: performa
+      params:
+        - name: 400-token-empty
+          value: ""
+          type: query
+          disabled: true
+        - name: "503"
+          value: ""
+          type: query
+          disabled: true
+        - name: "401"
+          value: ""
+          type: query
+          disabled: true
+        - name: "403"
+          value: ""
+          type: query
+          disabled: true
+        - name: 400-error-param
+          value: ""
+          type: query
+          disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Thu, 13 Nov 2025 03:31:04 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "102"
+        - name: Connection
+          value: keep-alive
+        - name: access-control-allow-origin
+          value: "*"
+        - name: access-control-expose-headers
+          value: "*"
+        - name: cache-control
+          value: no-cache
+      body:
+        type: json
+        data: |-
+          {
+              "message": "... tidak sesuai.",
+              "status": 400
+          }
+  - name: 500 - general
+    request:
+      url: https://pinang-performa.free.mockoapp.net/v/1/partnership/daftar-distributor/500-general
+      method: POST
+      headers:
+        - name: x-key
+          value: performa
+      params:
+        - name: 400-token-empty
+          value: ""
+          type: query
+          disabled: true
+        - name: "503"
+          value: ""
+          type: query
+          disabled: true
+        - name: "401"
+          value: ""
+          type: query
+          disabled: true
+        - name: "403"
+          value: ""
+          type: query
+          disabled: true
+        - name: 400-error-param
+          value: ""
+          type: query
+          disabled: true
+        - name: 500-general
+          value: ""
+          type: query
+          disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Thu, 13 Nov 2025 03:32:12 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "155"
+        - name: Connection
+          value: keep-alive
+        - name: access-control-allow-origin
+          value: "*"
+        - name: access-control-expose-headers
+          value: "*"
+        - name: cache-control
+          value: no-cache
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Maaf, Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 500
+          }
+  - name: 200-fail
+    request:
+      url: https://pinang-performa.free.mockoapp.net/v/1/partnership/daftar-distributor/200-fail
+      method: POST
+      headers:
+        - name: x-key
+          value: performa
+      params:
+        - name: 400-token-empty
+          value: ""
+          type: query
+          disabled: true
+        - name: "503"
+          value: ""
+          type: query
+          disabled: true
+        - name: "401"
+          value: ""
+          type: query
+          disabled: true
+        - name: "403"
+          value: ""
+          type: query
+          disabled: true
+        - name: 400-error-param
+          value: ""
+          type: query
+          disabled: true
+        - name: 500-general
+          value: ""
+          type: query
+          disabled: true
+        - name: 200-fail
+          value: ""
+          type: query
+          disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Thu, 13 Nov 2025 03:32:59 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "162"
+        - name: Connection
+          value: keep-alive
+        - name: access-control-allow-origin
+          value: "*"
+        - name: access-control-expose-headers
+          value: "*"
+        - name: cache-control
+          value: no-cache
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Maaf, Proses pendaftaran distributor gagal. Silahkan coba beberapa saat lagi.",
+              "status": 500
+          }
+  - name: 200-ok
+    request:
+      url: https://pinang-performa.free.mockoapp.net/v/1/partnership/daftar-distributor/200-ok
+      method: POST
+      headers:
+        - name: x-key
+          value: performa
+      params:
+        - name: 400-token-empty
+          value: ""
+          type: query
+          disabled: true
+        - name: "503"
+          value: ""
+          type: query
+          disabled: true
+        - name: "401"
+          value: ""
+          type: query
+          disabled: true
+        - name: "403"
+          value: ""
+          type: query
+          disabled: true
+        - name: 400-error-param
+          value: ""
+          type: query
+          disabled: true
+        - name: 500-general
+          value: ""
+          type: query
+          disabled: true
+        - name: 200-fail
+          value: ""
+          type: query
+          disabled: true
+        - name: 200-ok
+          value: ""
+          type: query
+          disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Thu, 13 Nov 2025 03:33:39 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "113"
+        - name: Connection
+          value: keep-alive
+        - name: access-control-allow-origin
+          value: "*"
+        - name: access-control-expose-headers
+          value: "*"
+        - name: cache-control
+          value: no-cache
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Data distributor berhasil disimpan.",
+              "status": 200
+          }

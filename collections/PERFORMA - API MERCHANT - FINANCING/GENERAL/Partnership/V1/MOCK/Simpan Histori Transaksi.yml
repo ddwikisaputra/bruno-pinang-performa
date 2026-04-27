@@ -1,0 +1,62 @@
+info:
+  name: Simpan Histori Transaksi
+  type: http
+  seq: 4
+
+http:
+  method: POST
+  url: https://pinang-performa.free.mockoapp.net/v/1/partnership/simpan-histori-transaksi/400-error-param
+  headers:
+    - name: x-key
+      value: performa
+  params:
+    - name: "401"
+      value: ""
+      type: query
+      disabled: true
+    - name: 401-token-empty
+      value: ""
+      type: query
+      disabled: true
+    - name: "403"
+      value: ""
+      type: query
+      disabled: true
+    - name: 400-error-param
+      value: ""
+      type: query
+      disabled: true
+    - name: 500-general
+      value: ""
+      type: query
+      disabled: true
+    - name: 200-fail
+      value: ""
+      type: query
+      disabled: true
+    - name: 200-success
+      value: ""
+      type: query
+      disabled: true
+  body:
+    type: form-urlencoded
+    data:
+      - name: nomorIdentittas
+        value: ""
+        disabled: true
+      - name: dataHistoriBulan[]
+        value: ""
+        disabled: true
+      - name: dataHistoriTahun[]
+        value: ""
+        disabled: true
+      - name: dataHisitoriJumlah[]
+        value: ""
+        disabled: true
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

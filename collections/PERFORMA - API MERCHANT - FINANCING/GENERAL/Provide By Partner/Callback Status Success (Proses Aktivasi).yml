@@ -1,0 +1,99 @@
+info:
+  name: Callback Status Success (Proses Aktivasi)
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{base-url-staging}}/pinang-performa/callback-status/proses-aktivasi/success"
+  body:
+    type: form-urlencoded
+    data:
+      - name: kode_prakarsa
+        value: ""
+        description: Kode Prakarsa { MANDATORY }
+      - name: ktp_number
+        value: ""
+        description: Nomor Identitas { MANDATORY }
+      - name: status
+        value: ""
+        description: Status [proses-aktivasi | limit-aktif] { MANDATORY }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Success
+    request:
+      url: "{{base-url-dev}}/pinang-performa/callback-status/proses-aktivasi/success"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorInvoice
+            value: ""
+            description: Nomor Invoice Pencairan { MANDATORY }
+          - name: kodePengajuanPencairan
+            value: ""
+            description: Kode Pencairan { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Tue, 10 Jun 2025 06:53:10 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "71"
+        - name: Connection
+          value: keep-alive
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Data Berhasil Dikonfirmasi",
+              "message": "Berhasil",
+              "status": 200
+          }
+  - name: Success
+    request:
+      url: "{{base-url-dev}}/pinang-performa/callback-status/proses-aktivasi/success"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorInvoice
+            value: ""
+            description: Nomor Invoice Pencairan { MANDATORY }
+          - name: kodePengajuanPencairan
+            value: ""
+            description: Kode Pencairan { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Tue, 10 Jun 2025 06:53:10 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "71"
+        - name: Connection
+          value: keep-alive
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Data Berhasil Dikonfirmasi",
+              "message": "Berhasil",
+              "status": 200
+          }

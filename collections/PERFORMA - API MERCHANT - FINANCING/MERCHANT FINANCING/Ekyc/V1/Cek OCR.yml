@@ -1,0 +1,843 @@
+info:
+  name: Cek OCR
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{base-url-local}}/v/1/ekyc/cek-ocr"
+  headers:
+    - name: Api-Key
+      value: "{{apiKeyMerchant}}"
+  body:
+    type: form-urlencoded
+    data:
+      - name: nomorIdentitas
+        value: MzE3MTA1MTIxMTk1MDAwMg==
+        description: Nomor Identitas User [MANDATORY] [Base64]
+      - name: kodePartnership
+        value: QUdVLTE5MA==
+        description: Kode Partnership [MANDATORY] [Base64]
+  auth:
+    type: bearer
+    token: "{{tokenMerchant}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 503 - Service Unavailable
+    request:
+      url: "{{base-url-local}}/v/1/ekyc/cek-ocr"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE0MzY=
+            description: Base64
+          - name: kodePartnership
+            value: QUdVLTE5MA==
+            description: Base64
+    response:
+      status: 503
+      statusText: Service Unavailable
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 03 Jul 2024 13:19:08 GMT
+        - name: Content-Length
+          value: "69"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Jam operasional Pinang Performa dari jam XX.XX - XX.XX WIB setiap hari. Kembali lagi nanti, ya!",
+              "status": 503
+          }
+  - name: Error - Token Expired
+    request:
+      url: "{{base-url-local}}/v/1/ekyc/cek-ocr"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE0MzY=
+            description: Base64
+          - name: kodePartnership
+            value: QUdVLTE5MA==
+            description: Base64
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 03 Jul 2024 13:19:08 GMT
+        - name: Content-Length
+          value: "69"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "token is expired",
+              "status": 401
+          }
+  - name: Error - Unauthorized / Expired
+    request:
+      url: "{{base-url-local}}/v/1/ekyc/cek-ocr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Base64 [MANDATORY]
+          - name: kodePartnership
+            value: QUdVLTE5MA==
+            description: Base64 [MANDATORY]
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 16 Jul 2024 05:13:36 GMT
+        - name: Content-Length
+          value: "76"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Unauthorized / Expired.",
+              "status": 401
+          }
+  - name: Error - Paremeter Token / Api Key Empty
+    request:
+      url: "{{base-url-local}}/v/1/ekyc/cek-ocr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+          disabled: true
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Base64 [MANDATORY]
+          - name: kodePartnership
+            value: QUdVLTE5MA==
+            description: Base64 [MANDATORY]
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 16 Jul 2024 05:12:43 GMT
+        - name: Content-Length
+          value: "51"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "parameter token is empty",
+              "status": 400
+          }
+  - name: Error - Access Forbidden
+    request:
+      url: "{{base-url-local}}/v/1/ekyc/cek-ocr"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzIwNDMyMTEwNjk3MDAwOA==
+            description: Base64 [MANDATORY]
+          - name: kodePartnership
+            value: TUox
+            description: Base64 [MANDATORY]
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 10 Jul 2024 03:05:28 GMT
+        - name: Content-Length
+          value: "76"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "you don't have permission to access this resource",
+              "status": 403
+          }
+  - name: Error - Access Forbidden (No Data Partnership)
+    request:
+      url: "{{base-url-local}}/v/1/ekyc/cek-ocr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Base64 [MANDATORY]
+          - name: kodePartnership
+            value: QUdVLTE5MA==
+            description: Base64 [MANDATORY]
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 17 Jul 2024 05:17:37 GMT
+        - name: Content-Length
+          value: "70"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "your access to this resource is unactivated",
+              "status": 403
+          }
+  - name: Error - Not Registered Whitelist
+    request:
+      url: "{{base-url-local}}/v/1/ekyc/cek-ocr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Base64 [MANDATORY]
+          - name: kodePartnership
+            value: QUdVLTE5MA==
+            description: Base64 [MANDATORY]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 17 Jul 2024 05:26:30 GMT
+        - name: Content-Length
+          value: "79"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Maaf, anda tidak terdaftar pada whitelist.",
+              "status": 500
+          }
+  - name: Error - Parameter Validation (Total Mandatory)
+    request:
+      url: "{{base-url-local}}/v/1/ekyc/cek-ocr"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzIwNDMyMTEwNjk3MDk5OQ==
+            description: Base64
+            disabled: true
+          - name: kodePartnership
+            value: QUdVLTE5MA==
+            description: Base64
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 03 Jul 2024 13:17:51 GMT
+        - name: Content-Length
+          value: "63"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Parameter tidak terpenuhi.",
+              "status": 400
+          }
+  - name: Error - Parameter Validation (Tidak Sesuai)
+    request:
+      url: "{{base-url-local}}/v/1/ekyc/cek-ocr"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzIwNDMyMTEwNjk3MDAwOA==
+            description: Base64
+          - name: kodePartnership
+            value: QUdVLTE5MA=
+            description: Base64
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 03 Jul 2024 13:22:48 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "... tidak sesuai.",
+              "status": 400
+          }
+  - name: Error - General
+    request:
+      url: "{{base-url-local}}/v/1/ekyc/cek-ocr"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzIwNDMyMTEwNjk3MDAwOA==
+            description: Base64
+          - name: kodePartnership
+            value: QUdVLTE5MA==
+            description: Base64
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 03 Jul 2024 13:11:45 GMT
+        - name: Content-Length
+          value: "107"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Maaf, Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 500
+          }
+  - name: Error - Data OCR Not Found
+    request:
+      url: "{{base-url-local}}/v/1/ekyc/cek-ocr"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzIwNDMyMTEwNjk3MDk5OQ==
+            description: Base64
+          - name: kodePartnership
+            value: QUdVLTE5MA==
+            description: Base64
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 03 Jul 2024 13:16:23 GMT
+        - name: Content-Length
+          value: "107"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "proses-ocr"
+              },
+              "message": "Maaf, Silahkan melakukan OCR terlebih dahulu.",
+              "status": 500
+          }
+  - name: Success - Data OCR Found
+    request:
+      url: "{{base-url-local}}/v/1/ekyc/cek-ocr"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzIwNDMyMTEwNjk3MDAwOA==
+            description: Base64
+          - name: kodePartnership
+            value: QUdVLTE5MA==
+            description: Base64
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 03 Jul 2024 14:22:53 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "agama": "ISLAM",
+                  "alamat": "CEMPAKA PUTII BARAT",
+                  "golonganDarah": "",
+                  "jenisKelamin": "Laki-Laki",
+                  "kecamatan": "CEMPAKA PUIII",
+                  "kelurahan": "CEMPAKA PULII BARAT",
+                  "kewarganegaraan": "WNI",
+                  "kodeAgama": "ISL",
+                  "kota": "JAKARTA PUSAT",
+                  "ktpBase64": "base64 string",
+                  "ktpMimeType": "image/png",
+                  "masaBerlaku": "2018-11-12",
+                  "masaTerbit": "2013-12-18",
+                  "nama": "DWIKK SAPUTRA",
+                  "nextStep": "",
+                  "nomorIdentitas": "MzE3MTA1MTIxMTk1MDAwMQ==",
+                  "pekerjaan": "PELAJAR/MAHASISWA",
+                  "provinsi": "PROVINSI DKI JAKARTA",
+                  "rt": "010",
+                  "rw": "002",
+                  "statusPerkawinan": "Belum Kawin",
+                  "tanggalLahir": "MTk5NS0xMS0xMg==",
+                  "tempatLahir": "JAKARTA"
+              },
+              "message": "Data OCR Ditemukan.",
+              "status": 200
+          }
+  - name: 503 - Service Unavailable
+    request:
+      url: "{{base-url-local}}/v/1/ekyc/cek-ocr"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE0MzY=
+            description: Base64
+          - name: kodePartnership
+            value: QUdVLTE5MA==
+            description: Base64
+    response:
+      status: 503
+      statusText: Service Unavailable
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 03 Jul 2024 13:19:08 GMT
+        - name: Content-Length
+          value: "69"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Jam operasional Pinang Performa dari jam XX.XX - XX.XX WIB setiap hari. Kembali lagi nanti, ya!",
+              "status": 503
+          }
+  - name: Error - Parameter Validation (Total Mandatory)
+    request:
+      url: "{{base-url-local}}/v/1/ekyc/cek-ocr"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzIwNDMyMTEwNjk3MDk5OQ==
+            description: Base64
+            disabled: true
+          - name: kodePartnership
+            value: QUdVLTE5MA==
+            description: Base64
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 03 Jul 2024 13:17:51 GMT
+        - name: Content-Length
+          value: "63"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Parameter tidak terpenuhi.",
+              "status": 400
+          }
+  - name: Error - Parameter Validation (Tidak Sesuai)
+    request:
+      url: "{{base-url-local}}/v/1/ekyc/cek-ocr"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzIwNDMyMTEwNjk3MDAwOA==
+            description: Base64
+          - name: kodePartnership
+            value: QUdVLTE5MA=
+            description: Base64
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 03 Jul 2024 13:22:48 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "... tidak sesuai.",
+              "status": 400
+          }
+  - name: Error - Token Expired
+    request:
+      url: "{{base-url-local}}/v/1/ekyc/cek-ocr"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE0MzY=
+            description: Base64
+          - name: kodePartnership
+            value: QUdVLTE5MA==
+            description: Base64
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 03 Jul 2024 13:19:08 GMT
+        - name: Content-Length
+          value: "69"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "token is expired",
+              "status": 401
+          }
+  - name: Error - General
+    request:
+      url: "{{base-url-local}}/v/1/ekyc/cek-ocr"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzIwNDMyMTEwNjk3MDAwOA==
+            description: Base64
+          - name: kodePartnership
+            value: QUdVLTE5MA==
+            description: Base64
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 03 Jul 2024 13:11:45 GMT
+        - name: Content-Length
+          value: "107"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Maaf, Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 500
+          }
+  - name: Error - Access Forbidden (No Data Partnership)
+    request:
+      url: "{{base-url-local}}/v/1/ekyc/cek-ocr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Base64 [MANDATORY]
+          - name: kodePartnership
+            value: QUdVLTE5MA==
+            description: Base64 [MANDATORY]
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 17 Jul 2024 05:17:37 GMT
+        - name: Content-Length
+          value: "70"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "your access to this resource is unactivated",
+              "status": 403
+          }
+  - name: Error - Unauthorized / Expired
+    request:
+      url: "{{base-url-local}}/v/1/ekyc/cek-ocr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Base64 [MANDATORY]
+          - name: kodePartnership
+            value: QUdVLTE5MA==
+            description: Base64 [MANDATORY]
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 16 Jul 2024 05:13:36 GMT
+        - name: Content-Length
+          value: "76"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Unauthorized / Expired.",
+              "status": 401
+          }
+  - name: Error - Paremeter Token / Api Key Empty
+    request:
+      url: "{{base-url-local}}/v/1/ekyc/cek-ocr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+          disabled: true
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Base64 [MANDATORY]
+          - name: kodePartnership
+            value: QUdVLTE5MA==
+            description: Base64 [MANDATORY]
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 16 Jul 2024 05:12:43 GMT
+        - name: Content-Length
+          value: "51"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "parameter token is empty",
+              "status": 400
+          }
+  - name: Error - Data OCR Not Found
+    request:
+      url: "{{base-url-local}}/v/1/ekyc/cek-ocr"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzIwNDMyMTEwNjk3MDk5OQ==
+            description: Base64
+          - name: kodePartnership
+            value: QUdVLTE5MA==
+            description: Base64
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 03 Jul 2024 13:16:23 GMT
+        - name: Content-Length
+          value: "107"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "proses-ocr"
+              },
+              "message": "Maaf, Silahkan melakukan OCR terlebih dahulu.",
+              "status": 500
+          }
+  - name: Success - Data OCR Found
+    request:
+      url: "{{base-url-local}}/v/1/ekyc/cek-ocr"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzIwNDMyMTEwNjk3MDAwOA==
+            description: Base64
+          - name: kodePartnership
+            value: QUdVLTE5MA==
+            description: Base64
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 03 Jul 2024 14:22:53 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "agama": "ISLAM",
+                  "alamat": "CEMPAKA PUTII BARAT",
+                  "golonganDarah": "",
+                  "jenisKelamin": "Laki-Laki",
+                  "kecamatan": "CEMPAKA PUIII",
+                  "kelurahan": "CEMPAKA PULII BARAT",
+                  "kewarganegaraan": "WNI",
+                  "kodeAgama": "ISL",
+                  "kota": "JAKARTA PUSAT",
+                  "ktpBase64": "base64 string",
+                  "ktpMimeType": "image/png",
+                  "masaBerlaku": "2018-11-12",
+                  "masaTerbit": "2013-12-18",
+                  "nama": "DWIKK SAPUTRA",
+                  "nextStep": "",
+                  "nomorIdentitas": "MzE3MTA1MTIxMTk1MDAwMQ==",
+                  "pekerjaan": "PELAJAR/MAHASISWA",
+                  "provinsi": "PROVINSI DKI JAKARTA",
+                  "rt": "010",
+                  "rw": "002",
+                  "statusPerkawinan": "Belum Kawin",
+                  "tanggalLahir": "MTk5NS0xMS0xMg==",
+                  "tempatLahir": "JAKARTA"
+              },
+              "message": "Data OCR Ditemukan.",
+              "status": 200
+          }
+  - name: Error - Not Registered Whitelist
+    request:
+      url: "{{base-url-local}}/v/1/ekyc/cek-ocr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Base64 [MANDATORY]
+          - name: kodePartnership
+            value: QUdVLTE5MA==
+            description: Base64 [MANDATORY]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 17 Jul 2024 05:26:30 GMT
+        - name: Content-Length
+          value: "79"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Maaf, anda tidak terdaftar pada whitelist.",
+              "status": 500
+          }
+  - name: Error - Access Forbidden
+    request:
+      url: "{{base-url-local}}/v/1/ekyc/cek-ocr"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzIwNDMyMTEwNjk3MDAwOA==
+            description: Base64 [MANDATORY]
+          - name: kodePartnership
+            value: TUox
+            description: Base64 [MANDATORY]
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 10 Jul 2024 03:05:28 GMT
+        - name: Content-Length
+          value: "76"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "you don't have permission to access this resource",
+              "status": 403
+          }

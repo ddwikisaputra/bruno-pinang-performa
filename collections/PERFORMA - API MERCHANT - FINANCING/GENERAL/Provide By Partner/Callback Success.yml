@@ -1,0 +1,24 @@
+info:
+  name: Callback Success
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{base-url-dev}}/pinang-performa/callback-pencairan/success"
+  body:
+    type: form-urlencoded
+    data:
+      - name: nomorInvoice
+        value: ""
+        description: Nomor Invoice Pencairan { MANDATORY }
+      - name: kodePengajuanPencairan
+        value: ""
+        description: Kode Pencairan { MANDATORY }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

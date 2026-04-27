@@ -1,0 +1,62 @@
+info:
+  name: MOCK - Cek Pengajuan Terakhir
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: https://pinang-performa.free.mockoapp.net/v/1/aktivasi/cek-pengajuan-terakhir/200-sts-1-manual-dukcapil
+  headers:
+    - name: x-key
+      value: performa
+  params:
+    - name: "503"
+      value: ""
+      type: query
+      disabled: true
+    - name: 400-apikey-empty
+      value: ""
+      type: query
+      disabled: true
+    - name: "401"
+      value: ""
+      type: query
+      disabled: true
+    - name: 401-token-empty
+      value: ""
+      type: query
+      disabled: true
+    - name: "403"
+      value: ""
+      type: query
+      disabled: true
+    - name: 403-invalid-status
+      value: ""
+      type: query
+      disabled: true
+    - name: 403-unactivated
+      value: ""
+      type: query
+      disabled: true
+    - name: 400-param-not
+      value: ""
+      type: query
+      disabled: true
+    - name: 500-unregistered-WL
+      value: ""
+      type: query
+      disabled: true
+    - name: 200-sts-1-manual-dukcapil
+      value: ""
+      type: query
+      disabled: true
+    - name: 200-sts-1
+      value: ""
+      type: query
+      disabled: true
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

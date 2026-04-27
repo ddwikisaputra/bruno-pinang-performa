@@ -1,0 +1,1208 @@
+info:
+  name: Pengajuan
+  type: http
+  seq: 7
+
+http:
+  method: POST
+  url: "{{base-url-local}}/v/1/pencairan/pengajuan"
+  headers:
+    - name: Api-Key
+      value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
+      description: API KEY PARTNERSHIP_CODE -> GCM -> BASE64
+    - name: Api-Key
+      value: VW1GNVlWQnBVR1Z5Vkc5d2p5a2JnR1g4blNvdSs1WW9CQVFpME9ueEpBOEF5STA9
+      description: BRIMOLA DEV
+      disabled: true
+  body:
+    type: form-urlencoded
+    data:
+      - name: kodePrakarsa
+        value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmppYWFvNGl0Q2Zta3JjRUZ2dmVJbXV6V2xnQ0haYUpxMWFFRXc9
+        description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+      - name: kodePartnership
+        value: TUox
+        description: Kode Partnership [MANDATORY][BASE64 STRING]
+      - name: otp
+        value: MTI4NTc=
+        description: OTP [MANDATORY][BASE64 STRING]
+      - name: otpKey
+        value: UkFZQTE1OTU3MjU3MTE=
+        description: Kunci OTP [MANDATORY][BASE64 STRING]
+      - name: orderID
+        value: TUYvRFdJL05PVi8x
+        description: Order ID [MANDATORY][BASE64 STRING]
+      - name: kodeTransaksi[]
+        value: TUYvRFdJL05PVi8x
+        description: Kode Transaksi [MANDATORY][BASE64 STRING]
+      - name: jangkaWaktu[]
+        value: Mg==
+        description: Jangka Waktu [MANDATORY][BASE64 INT]
+      - name: nominalPencairan[]
+        value: MjAwMDAw
+        description: Nominal Pencairan [MANDATORY][BASE64 INT]
+      - name: kodeDistributor[]
+        value: ""
+        description: Kode Distributor [MANDATORY][BASE64 STRING]
+      - name: kodeTransaksi[]
+        value: TUYvRFdJL05PVi8y
+      - name: jangkaWaktu[]
+        value: Mw==
+      - name: nominalPencairan[]
+        value: OTAwMDAw
+      - name: kodeDistributor[]
+        value: ""
+  auth:
+    type: bearer
+    token: "{{tokenMerchant}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 503 - Service Unavailable
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrN2lkR2NuRTdkRjB0WXIzTi9NQVV1eTZ1RWluM2JSRXc9
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: orderID
+            value: SU5WL0FHUklBS1UvMDYvMjAyNC8x
+            description: Order ID [MANDATORY][BASE64 STRING]
+          - name: kodeTransaksi[]
+            value: SU5WL0FHUklBS1UvMDYvMjAyNC8x
+            description: Kode Transaksi [MANDATORY][BASE64 STRING]
+          - name: jangkaWaktu[]
+            value: MTQ=
+            description: Jangka Waktu [MANDATORY][BASE64 INT]
+          - name: nominalPencairan[]
+            value: NTAwMDAw
+            description: Nominal Pencairan [MANDATORY][BASE64 INT]
+          - name: kodeTransaksi[]
+            value: SU5WL0FHUklBS1UvMDYvMjAyNC8y
+          - name: jangkaWaktu[]
+            value: MTQ=
+          - name: nominalPencairan[]
+            value: MTAwMDAwMA==
+    response:
+      status: 503
+      statusText: Service Unavailable
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 29 Aug 2024 10:45:27 GMT
+        - name: Content-Length
+          value: "69"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Jam operasional Pinang Performa dari jam XX.XX - XX.XX WIB setiap hari. Kembali lagi nanti, ya!",
+              "status": 503
+          }
+  - name: Errror - Token Expired
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrN2lkR2NuRTdkRjB0WXIzTi9NQVV1eTZ1RWluM2JSRXc9
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: orderID
+            value: SU5WL0FHUklBS1UvMDYvMjAyNC8x
+            description: Order ID [MANDATORY][BASE64 STRING]
+          - name: kodeTransaksi[]
+            value: SU5WL0FHUklBS1UvMDYvMjAyNC8x
+            description: Kode Transaksi [MANDATORY][BASE64 STRING]
+          - name: jangkaWaktu[]
+            value: MTQ=
+            description: Jangka Waktu [MANDATORY][BASE64 INT]
+          - name: nominalPencairan[]
+            value: NTAwMDAw
+            description: Nominal Pencairan [MANDATORY][BASE64 INT]
+          - name: kodeTransaksi[]
+            value: SU5WL0FHUklBS1UvMDYvMjAyNC8y
+          - name: jangkaWaktu[]
+            value: MTQ=
+          - name: nominalPencairan[]
+            value: MTAwMDAwMA==
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 29 Aug 2024 10:45:27 GMT
+        - name: Content-Length
+          value: "69"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "token has invalid claims: token is expired",
+              "status": 401
+          }
+  - name: Error - Unauthorized / Expired
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrN2lkR2NuRTdkRjB0WXIzTi9NQVV1eTZ1RWluM2JSRXc9
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: orderID
+            value: SU5WL0FHUklBS1UvMDYvMjAyNC8x
+            description: Order ID [MANDATORY][BASE64 STRING]
+          - name: kodeTransaksi[]
+            value: SU5WL0FHUklBS1UvMDYvMjAyNC8x
+            description: Kode Transaksi [MANDATORY][BASE64 STRING]
+          - name: jangkaWaktu[]
+            value: MTQ=
+            description: Jangka Waktu [MANDATORY][BASE64 INT]
+          - name: nominalPencairan[]
+            value: NTAwMDAw
+            description: Nominal Pencairan [MANDATORY][BASE64 INT]
+          - name: kodeTransaksi[]
+            value: SU5WL0FHUklBS1UvMDYvMjAyNC8y
+          - name: jangkaWaktu[]
+            value: MTQ=
+          - name: nominalPencairan[]
+            value: MTAwMDAwMA==
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 29 Aug 2024 08:53:14 GMT
+        - name: Content-Length
+          value: "50"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Unauthorized / Expired.",
+              "status": 401
+          }
+  - name: Error - Parameter Token /  API Key Empty
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+          disabled: true
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrN2lkR2NuRTdkRjB0WXIzTi9NQVV1eTZ1RWluM2JSRXc9
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: orderID
+            value: SU5WL0FHUklBS1UvMDYvMjAyNC8x
+            description: Order ID [MANDATORY][BASE64 STRING]
+          - name: kodeTransaksi[]
+            value: SU5WL0FHUklBS1UvMDYvMjAyNC8x
+            description: Kode Transaksi [MANDATORY][BASE64 STRING]
+          - name: jangkaWaktu[]
+            value: MTQ=
+            description: Jangka Waktu [MANDATORY][BASE64 INT]
+          - name: nominalPencairan[]
+            value: NTAwMDAw
+            description: Nominal Pencairan [MANDATORY][BASE64 INT]
+          - name: kodeTransaksi[]
+            value: SU5WL0FHUklBS1UvMDYvMjAyNC8y
+          - name: jangkaWaktu[]
+            value: MTQ=
+          - name: nominalPencairan[]
+            value: MTAwMDAwMA==
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 29 Aug 2024 09:24:58 GMT
+        - name: Content-Length
+          value: "51"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "parameter token is empty",
+              "status": 400
+          }
+  - name: Error - Access Forbidden
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: VW1GNVlWQnBVR1Z5Vkc5d2p5RU1nR0g5bFYrVEF2L3hDU1FIM25JVTl0M2Naam89
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrN2lkR2NuRTdkRjB0WXIzTi9NQVV1eTZ1RWluM2JSRXc9
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: orderID
+            value: SU5WL0FHUklBS1UvMDYvMjAyNC8x
+            description: Order ID [MANDATORY][BASE64 STRING]
+          - name: kodeTransaksi[]
+            value: SU5WL0FHUklBS1UvMDYvMjAyNC8x
+            description: Kode Transaksi [MANDATORY][BASE64 STRING]
+          - name: jangkaWaktu[]
+            value: MTQ=
+            description: Jangka Waktu [MANDATORY][BASE64 INT]
+          - name: nominalPencairan[]
+            value: NTAwMDAw
+            description: Nominal Pencairan [MANDATORY][BASE64 INT]
+          - name: kodeTransaksi[]
+            value: SU5WL0FHUklBS1UvMDYvMjAyNC8y
+          - name: jangkaWaktu[]
+            value: MTQ=
+          - name: nominalPencairan[]
+            value: MTAwMDAwMA==
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 29 Aug 2024 09:25:39 GMT
+        - name: Content-Length
+          value: "76"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "you don't have permission to access this resource",
+              "status": 403
+          }
+  - name: Error - Access Forbidden (No Data Partnership)
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrN2lkR2NuRTdkRjB0WXIzTi9NQVV1eTZ1RWluM2JSRXc9
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: orderID
+            value: SU5WL0FHUklBS1UvMDYvMjAyNC8x
+            description: Order ID [MANDATORY][BASE64 STRING]
+          - name: kodeTransaksi[]
+            value: SU5WL0FHUklBS1UvMDYvMjAyNC8x
+            description: Kode Transaksi [MANDATORY][BASE64 STRING]
+          - name: jangkaWaktu[]
+            value: MTQ=
+            description: Jangka Waktu [MANDATORY][BASE64 INT]
+          - name: nominalPencairan[]
+            value: NTAwMDAw
+            description: Nominal Pencairan [MANDATORY][BASE64 INT]
+          - name: kodeTransaksi[]
+            value: SU5WL0FHUklBS1UvMDYvMjAyNC8y
+          - name: jangkaWaktu[]
+            value: MTQ=
+          - name: nominalPencairan[]
+            value: MTAwMDAwMA==
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 29 Aug 2024 10:46:16 GMT
+        - name: Content-Length
+          value: "70"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "your access to this resource is unactivated",
+              "status": 403
+          }
+  - name: Error - Access Forbidden (Status Not Access)
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrN2lkR2NuRTdkRjB0WXIzTi9NQVV1eTZ1RWluM2JSRXc9
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: orderID
+            value: SU5WL0FHUklBS1UvMDYvMjAyNC8x
+            description: Order ID [MANDATORY][BASE64 STRING]
+          - name: kodeTransaksi[]
+            value: SU5WL0FHUklBS1UvMDYvMjAyNC8x
+            description: Kode Transaksi [MANDATORY][BASE64 STRING]
+          - name: jangkaWaktu[]
+            value: MTQ=
+            description: Jangka Waktu [MANDATORY][BASE64 INT]
+          - name: nominalPencairan[]
+            value: NTAwMDAw
+            description: Nominal Pencairan [MANDATORY][BASE64 INT]
+          - name: kodeTransaksi[]
+            value: SU5WL0FHUklBS1UvMDYvMjAyNC8y
+          - name: jangkaWaktu[]
+            value: MTQ=
+          - name: nominalPencairan[]
+            value: MTAwMDAwMA==
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 29 Aug 2024 10:47:48 GMT
+        - name: Content-Length
+          value: "52"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Data tidak dapat diakses.",
+              "status": 403
+          }
+  - name: Error - Parameter Validation (Total Mandatory)
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrN2lkR2NuRTdkRjB0WXIzTi9NQVV1eTZ1RWluM2JSRXc9
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+            disabled: true
+          - name: orderID
+            value: SU5WL0FHUklBS1UvMDYvMjAyNC8x
+            description: Order ID [MANDATORY][BASE64 STRING]
+          - name: kodeTransaksi[]
+            value: SU5WL0FHUklBS1UvMDYvMjAyNC8x
+            description: Kode Transaksi [MANDATORY][BASE64 STRING]
+          - name: jangkaWaktu[]
+            value: MTQ=
+            description: Jangka Waktu [MANDATORY][BASE64 INT]
+          - name: nominalPencairan[]
+            value: NTAwMDAw
+            description: Nominal Pencairan [MANDATORY][BASE64 INT]
+          - name: kodeTransaksi[]
+            value: SU5WL0FHUklBS1UvMDYvMjAyNC8y
+          - name: jangkaWaktu[]
+            value: MTQ=
+          - name: nominalPencairan[]
+            value: MTAwMDAwMA==
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 29 Aug 2024 10:49:13 GMT
+        - name: Content-Length
+          value: "53"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Parameter tidak terpenuhi.",
+              "status": 400
+          }
+  - name: Error - Parameter Validation (Tidak Sesuai)
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrN2lkR2NuRTdkRjB0WXIzTi9NQVV1eTZ1RWluM2JSRXc9
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: TUoxa
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: orderID
+            value: SU5WL0FHUklBS1UvMDYvMjAyNC8x
+            description: Order ID [MANDATORY][BASE64 STRING]
+          - name: kodeTransaksi[]
+            value: SU5WL0FHUklBS1UvMDYvMjAyNC8x
+            description: Kode Transaksi [MANDATORY][BASE64 STRING]
+          - name: jangkaWaktu[]
+            value: MTQ=
+            description: Jangka Waktu [MANDATORY][BASE64 INT]
+          - name: nominalPencairan[]
+            value: NTAwMDAw
+            description: Nominal Pencairan [MANDATORY][BASE64 INT]
+          - name: kodeTransaksi[]
+            value: SU5WL0FHUklBS1UvMDYvMjAyNC8y
+          - name: jangkaWaktu[]
+            value: MTQ=
+          - name: nominalPencairan[]
+            value: MTAwMDAwMA==
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 29 Aug 2024 10:48:52 GMT
+        - name: Content-Length
+          value: "57"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "... tidak sesuai.",
+              "status": 400
+          }
+  - name: Error - Unregistered Whitelist
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrN2lkR2NuRTdkRjB0WXIzTi9NQVV1eTZ1RWluM2JSRXc9
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: orderID
+            value: SU5WL0FHUklBS1UvMDYvMjAyNC8x
+            description: Order ID [MANDATORY][BASE64 STRING]
+          - name: kodeTransaksi[]
+            value: SU5WL0FHUklBS1UvMDYvMjAyNC8x
+            description: Kode Transaksi [MANDATORY][BASE64 STRING]
+          - name: jangkaWaktu[]
+            value: MTQ=
+            description: Jangka Waktu [MANDATORY][BASE64 INT]
+          - name: nominalPencairan[]
+            value: NTAwMDAw
+            description: Nominal Pencairan [MANDATORY][BASE64 INT]
+          - name: kodeTransaksi[]
+            value: SU5WL0FHUklBS1UvMDYvMjAyNC8y
+          - name: jangkaWaktu[]
+            value: MTQ=
+          - name: nominalPencairan[]
+            value: MTAwMDAwMA==
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 29 Aug 2024 10:50:39 GMT
+        - name: Content-Length
+          value: "69"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Maaf, anda tidak terdaftar pada whitelist.",
+              "status": 500
+          }
+  - name: Error - Gagal Verifikasi OTP
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmppYUtFNWpkQ2FuMG5kRnhYL1l1UkJoM044Zkh2N2RXT0Fab2M9
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: otp
+            value: MTU4NDU=
+            description: OTP [MANDATORY][BASE64 STRING]
+          - name: otpKey
+            value: UkFZQTY2ODM0MjY4NDM=
+            description: Kunci OTP [MANDATORY][BASE64 STRING]
+          - name: orderID
+            value: SU5WL01KMS8yMDI0LzU=
+            description: Order ID [MANDATORY][BASE64 STRING]
+          - name: kodeTransaksi[]
+            value: SU5WL01KMS8yMDI0LzU=
+            description: Kode Transaksi [MANDATORY][BASE64 STRING]
+          - name: jangkaWaktu[]
+            value: Nw==
+            description: Jangka Waktu [MANDATORY][BASE64 INT]
+          - name: nominalPencairan[]
+            value: MTAwMDA=
+            description: Nominal Pencairan [MANDATORY][BASE64 INT]
+          - name: kodeTransaksi[]
+            value: SU5WL0FHUklBS1UvMDYvMjAyNC8y
+            disabled: true
+          - name: jangkaWaktu[]
+            value: MTQ=
+            disabled: true
+          - name: nominalPencairan[]
+            value: MTAwMDAwMA==
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Fri, 18 Oct 2024 09:20:01 GMT
+        - name: Content-Length
+          value: "96"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep" : "block-otp"
+              },
+              "message": "Maaf, Proses verifikasi OTP tidak berhasil. Silahkan kirim ulang OTP.",
+              "status": 500
+          }
+  - name: Error - Validasi Kuota OTP Habis
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmppYUtFNWpkQ2FuMG5kRnhYL1l1UkJoM044Zkh2N2RXT0Fab2M9
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: otp
+            value: MTU4NDU=
+            description: OTP [MANDATORY][BASE64 STRING]
+          - name: otpKey
+            value: UkFZQTY2ODM0MjY4NDM=
+            description: Kunci OTP [MANDATORY][BASE64 STRING]
+          - name: orderID
+            value: SU5WL01KMS8yMDI0LzU=
+            description: Order ID [MANDATORY][BASE64 STRING]
+          - name: kodeTransaksi[]
+            value: SU5WL01KMS8yMDI0LzU=
+            description: Kode Transaksi [MANDATORY][BASE64 STRING]
+          - name: jangkaWaktu[]
+            value: Nw==
+            description: Jangka Waktu [MANDATORY][BASE64 INT]
+          - name: nominalPencairan[]
+            value: MTAwMDA=
+            description: Nominal Pencairan [MANDATORY][BASE64 INT]
+          - name: kodeTransaksi[]
+            value: SU5WL0FHUklBS1UvMDYvMjAyNC8y
+            disabled: true
+          - name: jangkaWaktu[]
+            value: MTQ=
+            disabled: true
+          - name: nominalPencairan[]
+            value: MTAwMDAwMA==
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Fri, 18 Oct 2024 09:22:30 GMT
+        - name: Content-Length
+          value: "152"
+      body:
+        type: json
+        data: |-
+          {
+             "data": {
+                  "nextStep" : "block-otp"
+              },
+              "message": "Maaf, Proses OTP tidak dapat dilakukan karena sudah melebihi batas maksimal, silahkan coba kembali pada DD MM YYYY HH:II",
+              "status": 500
+          }
+  - name: Error - Kode Transaksi Sedang Dalam Proses Pencairan
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrN2lkR2NuRTdkRjB0WXIzTi9NQVV1eTZ1RWluM2JSRXc9
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: orderID
+            value: SU5WL0FHUklBS1UvMDYvMjAyNC8x
+            description: Order ID [MANDATORY][BASE64 STRING]
+          - name: kodeTransaksi[]
+            value: SU5WL0FHUklBS1UvMDYvMjAyNC8x
+            description: Kode Transaksi [MANDATORY][BASE64 STRING]
+          - name: jangkaWaktu[]
+            value: MTQ=
+            description: Jangka Waktu [MANDATORY][BASE64 INT]
+          - name: nominalPencairan[]
+            value: NTAwMDAw
+            description: Nominal Pencairan [MANDATORY][BASE64 INT]
+          - name: kodeTransaksi[]
+            value: SU5WL0FHUklBS1UvMDYvMjAyNC8y
+          - name: jangkaWaktu[]
+            value: MTQ=
+          - name: nominalPencairan[]
+            value: MTAwMDAwMA==
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 29 Aug 2024 10:52:59 GMT
+        - name: Content-Length
+          value: "73"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Maaf, Transaksi sedang dalam proses pencairan.",
+              "status": 500
+          }
+  - name: Error - Fasilitas Expired
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrN2lkR2NuRTdkRjB0WXIzTi9NQVV1eTZ1RWluM2JSRXc9
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: orderID
+            value: SU5WL0FHUklBS1UvMDYvMjAyNC8x
+            description: Order ID [MANDATORY][BASE64 STRING]
+          - name: kodeTransaksi[]
+            value: SU5WL0FHUklBS1UvMDYvMjAyNC8x
+            description: Kode Transaksi [MANDATORY][BASE64 STRING]
+          - name: jangkaWaktu[]
+            value: MTQ=
+            description: Jangka Waktu [MANDATORY][BASE64 INT]
+          - name: nominalPencairan[]
+            value: NTAwMDAw
+            description: Nominal Pencairan [MANDATORY][BASE64 INT]
+          - name: kodeTransaksi[]
+            value: SU5WL0FHUklBS1UvMDYvMjAyNC8y
+          - name: jangkaWaktu[]
+            value: MTQ=
+          - name: nominalPencairan[]
+            value: MTAwMDAwMA==
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 29 Aug 2024 10:57:31 GMT
+        - name: Content-Length
+          value: "110"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Maaf, Transaksi tidak dapat dilakukan, karena fasilitas pinjaman sudah kadaluarsa.",
+              "status": 500
+          }
+  - name: Error - Tenor Tidak Mencukupi (Cek Max Tenor)
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrN2lkR2NuRTdkRjB0WXIzTi9NQVV1eTZ1RWluM2JSRXc9
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: orderID
+            value: SU5WL0FHUklBS1UvMDYvMjAyNC8x
+            description: Order ID [MANDATORY][BASE64 STRING]
+          - name: kodeTransaksi[]
+            value: SU5WL0FHUklBS1UvMDYvMjAyNC8x
+            description: Kode Transaksi [MANDATORY][BASE64 STRING]
+          - name: jangkaWaktu[]
+            value: MTQ=
+            description: Jangka Waktu [MANDATORY][BASE64 INT]
+          - name: nominalPencairan[]
+            value: NTAwMDAw
+            description: Nominal Pencairan [MANDATORY][BASE64 INT]
+          - name: kodeTransaksi[]
+            value: SU5WL0FHUklBS1UvMDYvMjAyNC8y
+          - name: jangkaWaktu[]
+            value: MTQ=
+          - name: nominalPencairan[]
+            value: MTAwMDAwMA==
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 29 Aug 2024 11:01:16 GMT
+        - name: Content-Length
+          value: "101"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Maaf, Transaksi tidak dapat dilakukan karena jangka waktu tidak mencukupi.",
+              "status": 500
+          }
+  - name: Error - Limit Tidak Mencukupi
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrN2lkR2NuRTdkRjB0WXIzTi9NQVV1eTZ1RWluM2JSRXc9
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: orderID
+            value: SU5WL0FHUklBS1UvMDYvMjAyNC8x
+            description: Order ID [MANDATORY][BASE64 STRING]
+          - name: kodeTransaksi[]
+            value: SU5WL0FHUklBS1UvMDYvMjAyNC8x
+            description: Kode Transaksi [MANDATORY][BASE64 STRING]
+          - name: jangkaWaktu[]
+            value: MTQ=
+            description: Jangka Waktu [MANDATORY][BASE64 INT]
+          - name: nominalPencairan[]
+            value: NTAwMDAw
+            description: Nominal Pencairan [MANDATORY][BASE64 INT]
+          - name: kodeTransaksi[]
+            value: SU5WL0FHUklBS1UvMDYvMjAyNC8y
+          - name: jangkaWaktu[]
+            value: MTQ=
+          - name: nominalPencairan[]
+            value: MTAwMDAwMA==
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 29 Aug 2024 11:05:28 GMT
+        - name: Content-Length
+          value: "64"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Maaf, Limit pinjaman tidak mencukupi.",
+              "status": 500
+          }
+  - name: Error - Masih Terdapat Pinjaman yang Belum Lunas (Lewat Jatuh Tempo)
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrN2lkR2NuRTdkRjB0WXIzTi9NQVV1eTZ1RWluM2JSRXc9
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: orderID
+            value: SU5WL0FHUklBS1UvMDYvMjAyNC8x
+            description: Order ID [MANDATORY][BASE64 STRING]
+          - name: kodeTransaksi[]
+            value: SU5WL0FHUklBS1UvMDYvMjAyNC8x
+            description: Kode Transaksi [MANDATORY][BASE64 STRING]
+          - name: jangkaWaktu[]
+            value: MTQ=
+            description: Jangka Waktu [MANDATORY][BASE64 INT]
+          - name: nominalPencairan[]
+            value: NTAwMDAw
+            description: Nominal Pencairan [MANDATORY][BASE64 INT]
+          - name: kodeTransaksi[]
+            value: SU5WL0FHUklBS1UvMDYvMjAyNC8y
+          - name: jangkaWaktu[]
+            value: MTQ=
+          - name: nominalPencairan[]
+            value: MTAwMDAwMA==
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 29 Aug 2024 11:07:58 GMT
+        - name: Content-Length
+          value: "120"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Maaf, Pinjaman sebelumnya masih berjalan dan belum lunas maka pencairan belum bisa dilakukan.",
+              "status": 500
+          }
+  - name: Error - Distributor Kode Tidak Terdaftar
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbDk2bTJUMGxVTnFLVytLSE80NTNwZGZGSmpqYUtzN2k5Q1luVTNjRUJKU09HUnNkSzFCZnhxaEY5d0Nza289
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: otp
+            value: MDg3MDM=
+            description: OTP [MANDATORY][BASE64 STRING]
+          - name: otpKey
+            value: UkFZQTM3MzUxMDY4MzI=
+            description: Kunci OTP [MANDATORY][BASE64 STRING]
+          - name: orderID
+            value: SU5WL01KMS8yMDI0LzEw
+            description: Order ID [MANDATORY][BASE64 STRING]
+          - name: kodeTransaksi[]
+            value: SU5WL01KMS8yMDI1L0NPREVESQ==
+            description: Kode Transaksi [MANDATORY][BASE64 STRING]
+          - name: jangkaWaktu[]
+            value: Nw==
+            description: Jangka Waktu [MANDATORY][BASE64 INT]
+          - name: nominalPencairan[]
+            value: MTAwMDA=
+            description: Nominal Pencairan [MANDATORY][BASE64 INT]
+          - name: kodeDistributor[]
+            value: VFNULTE=
+          - name: kodeTransaksi[]
+            value: SU5WL0FHUklBS1UvMDYvMjAyNC8y
+            disabled: true
+          - name: jangkaWaktu[]
+            value: MTQ=
+            disabled: true
+          - name: nominalPencairan[]
+            value: MTAwMDAwMA==
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Mon, 14 Apr 2025 01:23:35 GMT
+        - name: Content-Length
+          value: "90"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Maaf, Terdapat kode distributor yang tidak terdaftar.",
+              "status": 500
+          }
+  - name: Error - No Data Admin Fee
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: VW1GNVlWQnBVR1Z5Vkc5d2p5a2JnR1g4blNvdSs1WW9CQVFpME9ueEpBOEF5STA9
+          description: BRIMOLA DEV
+          disabled: true
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbDk2bTJUMGxVTnFLVytLSE80KzFwZGZGSmpqYUtFNGd0Q2NuRVBaRkxqUy9FaEdTZGloSm83M3dGNmlxMzQ9
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: otp
+            value: MzA4Nzg=
+            description: OTP [MANDATORY][BASE64 STRING]
+          - name: otpKey
+            value: UkFZQTQzNDEwOTAzNzA=
+            description: Kunci OTP [MANDATORY][BASE64 STRING]
+          - name: orderID
+            value: SU5WLURFVi1NSi1BRE0tRkVF
+            description: Order ID [MANDATORY][BASE64 STRING]
+          - name: kodeTransaksi[]
+            value: SU5WLURFVi1NSi1BRE0tRkVF
+            description: Kode Transaksi [MANDATORY][BASE64 STRING]
+          - name: jangkaWaktu[]
+            value: MQ==
+            description: Jangka Waktu [MANDATORY][BASE64 INT]
+          - name: nominalPencairan[]
+            value: MTUwMDAw
+            description: Nominal Pencairan [MANDATORY][BASE64 INT]
+          - name: kodeDistributor[]
+            value: UEFORy1DUEI=
+            description: Kode Distributor [MANDATORY][BASE64 STRING]
+          - name: kodeTransaksi[]
+            value: SU5WL01KMS9GUzIvMzUyLzIwMjUvOA==
+            disabled: true
+          - name: jangkaWaktu[]
+            value: MTQ=
+            disabled: true
+          - name: nominalPencairan[]
+            value: MTAwMDAwMA==
+            disabled: true
+          - name: kodeDistributor[]
+            value: VFNULTM=
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Tue, 23 Sep 2025 01:23:51 GMT
+        - name: Content-Length
+          value: "89"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Maaf, Proses pencairan sedang tidak dapat dilakukan.",
+              "status": 500
+          }
+  - name: Success - Berhasil
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/pengajuan"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrN2lkR2NuRTdkRjB0WXIzTi9NQVV1eTZ1RWluM2JSRXc9
+            description: Kode Prakarsa [MANDATORY][BASE64 STRING]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY][BASE64 STRING]
+          - name: orderID
+            value: SU5WL0FHUklBS1UvMDYvMjAyNC8x
+            description: Order ID [MANDATORY][BASE64 STRING]
+          - name: kodeTransaksi[]
+            value: SU5WL0FHUklBS1UvMDYvMjAyNC8x
+            description: Kode Transaksi [MANDATORY][BASE64 STRING]
+          - name: jangkaWaktu[]
+            value: MTQ=
+            description: Jangka Waktu [MANDATORY][BASE64 INT]
+          - name: nominalPencairan[]
+            value: NTAwMDAw
+            description: Nominal Pencairan [MANDATORY][BASE64 INT]
+          - name: kodeTransaksi[]
+            value: SU5WL0FHUklBS1UvMDYvMjAyNC8y
+          - name: jangkaWaktu[]
+            value: MTQ=
+          - name: nominalPencairan[]
+            value: MTAwMDAwMA==
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 29 Aug 2024 10:52:30 GMT
+        - name: Content-Length
+          value: "53"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Proses pencairan berhasil.",
+              "status": 200
+          }

@@ -1,0 +1,1133 @@
+info:
+  name: Tambah Member (For Internal)
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{base-url-local}}/v/1/partnership/tambah-member"
+  headers:
+    - name: Api-Key
+      value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
+  body:
+    type: form-urlencoded
+    data:
+      - name: nomorIdentitas
+        value: MzE3MTA1MTIxMTk1MDAxMg==
+        description: (string → base64) [MANDATORY]
+      - name: merchantId
+        value: QlJJTU9MQS0x
+        description: (string → base64) [MANDATORY]
+      - name: nomorTelepon
+        value: KzYyODE3NzY1NzM3MQ==
+        description: "[+62xxx](string → base64) [MANDATORY]"
+      - name: nama
+        value: RHdpa2k=
+        description: (string → base64) [OPTIONAL]
+      - name: tanggalLahir
+        value: MTk5NS0xMS0xMw==
+        description: "[yyyy-mm-dd](string → base64) [OPTIONAL]"
+      - name: tempatLahir
+        value: Y2lhbmp1cg==
+        description: (string → base64) [OPTIONAL]
+      - name: jenisKelamin
+        value: UGVyZW1wdWFu
+        description: (string → base64) [OPTIONAL]
+      - name: statusPernikahan
+        value: Belum Kawin
+        description: "[OPTIONAL]"
+      - name: pendidikanTerakhir
+        value: S1 / Diploma 4
+        description: "[OPTIONAL]"
+      - name: agama
+        value: Islam
+        description: "[OPTIONAL]"
+      - name: alamat
+        value: Belka Residence Jl Binawan XII Blok b3 no 14
+        description: "[OPTIONAL]"
+      - name: kodePos
+        value: "10520"
+        description: "[OPTIONAL]"
+      - name: alamatUsaha
+        value: Belka Residence Jl Binawan XII Blok b3 no 14
+        description: "[OPTIONAL]"
+      - name: kodePosUsaha
+        value: "43215"
+        description: "[OPTIONAL]"
+      - name: plafondPinjaman
+        value: "500000"
+        description: "[MANDATORY]"
+      - name: tenorPinjaman
+        value: "4"
+        description: "[MANDATORY]"
+      - name: namaTempatUsaha
+        value: Whatber2A
+        description: "[MANDATORY]"
+      - name: namaIbuKandung
+        value: eWVzIGkgZG8=
+        description: (string → base64) [OPTIONAL]
+      - name: email
+        value: eWVzQGdtYWlsLmNvbQ==
+        description: (string → base64) [OPTIONAL]
+      - name: nomorIdentitasPasangan
+        value: ""
+        description: "[OPTIONAL] -> [MANDATORY] -> Kawin"
+        disabled: true
+      - name: namaPasangan
+        value: ""
+        description: "[OPTIONAL]  -> [MANDATORY] -> Kawin"
+        disabled: true
+      - name: tanggalLahirPasangan
+        value: ""
+        description: "[OPTIONAL]"
+        disabled: true
+      - name: tempatLahirPasangan
+        value: ""
+        description: "[OPTIONAL]"
+        disabled: true
+      - name: jenisKelaminPasangan
+        value: ""
+        description: "[OPTIONAL]"
+        disabled: true
+      - name: jumlahTanggungan
+        value: "2"
+        description: "[OPTIONAL]"
+      - name: rt
+        value: "001"
+        description: "[OPTIONAL]"
+      - name: rw
+        value: "001"
+        description: "[OPTIONAL]"
+      - name: rtUsaha
+        value: "001"
+        description: "[OPTIONAL]"
+      - name: rwUsaha
+        value: "001"
+        description: "[OPTIONAL]"
+      - name: hubunganDalamKeluarga
+        value: Anak
+        description: "[OPTIONAL]"
+        disabled: true
+      - name: ktpFileBase64
+        value: ""
+        description: "[OPTIONAL]"
+        disabled: true
+      - name: ktpFileMimeType
+        value: ""
+        description: "[OPTIONAL]"
+        disabled: true
+      - name: ktpSelfieBase64
+        value: ""
+        description: "[OPTIONAL]"
+        disabled: true
+      - name: ktpSelfieMimeType
+        value: ""
+        description: "[OPTIONAL]"
+        disabled: true
+      - name: ktpPartnerFileBase64
+        value: ""
+        description: "[OPTIONAL]"
+        disabled: true
+      - name: ktpPartnerFileMimeType
+        value: ""
+        description: "[OPTIONAL]"
+        disabled: true
+      - name: npwp
+        value: "317105121195000"
+        description: "[OPTIONAL]"
+      - name: transactionType
+        value: cGVyaW9k
+        description: "[MANDATORY string -> Base64] [month | period]"
+      - name: transactionMonth[]
+        value: Mw==
+        description: "[MANDATORY if type = month] string -> Base64"
+        disabled: true
+      - name: transactionPeriod[]
+        value: Mw==
+        description: "[MANDATORY if type = period] string -> Base64"
+      - name: transactionAmount[]
+        value: MjAwMDAwMA==
+        description: (string → base64) [MANDATORY]
+      - name: transactionVolume[]
+        value: Mw==
+        description: (string → base64) [MANDATORY]
+  auth:
+    type: bearer
+    token: UmF5YVBpUGVyVG9wtk843jG/7RB5In2MDvIpg9UKTcSXLLozmNOcnE7FFvrDhwaUpslSRi2effhGYJf3DqP8fbgSm5ul2vDNvWAJkN8T97L1oxOhKb3xTDM5AURcNADfYl99G/TnZUwC3MNUf+uxI/BjnSo=
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Error - Token Expired
+    request:
+      url: "{{base-url-local}}/v/1/partnership/add-member"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3NjA5MTcxMTAwMDAwMQ==
+            description: (string → base64) [MANDATORY]
+          - name: nama
+            value: SGFycnkgUGFtdW5na2Fz
+            description: (string → base64) [MANDATORY]
+          - name: tanggalLahir
+            value: MTk5MC0wMy0yNA==
+            description: "[yyyy-mm-dd](string → base64) [MANDATORY]"
+          - name: tempatLahir
+            value: SmFrYXJ0YQ==
+            description: (string → base64) [MANDATORY]
+          - name: jenisKelamin
+            value: TGFraS1MYWtp
+            description: (string → base64) [MANDATORY]
+          - name: namaIbuKandung
+            value: V2luYXJuaQ==
+            description: (string → base64) [MANDATORY]
+          - name: nomorTelepon
+            value: KzYyODk1NDIxOTg5MTMy
+            description: "[8xxx](string → base64) [MANDATORY]"
+          - name: email
+            value: aGFoYUBtYWlsLmNvbQ==
+            description: (string → base64) [MANDATORY]
+          - name: statusPernikahan
+            value: Kawin
+            description: "[MANDATORY]"
+          - name: nomorIdentitasPasangan
+            value: MzI3NjA5MTcxMTAwMDAwMg==
+            description: "[MANDATORY]"
+          - name: namaPasangan
+            value: TWFuZGF0b3J5
+            description: "[MANDATORY]"
+          - name: tanggalLahirPasangan
+            value: MjAwMC0xMS0xNw==
+            description: "[MANDATORY]"
+          - name: tempatLahirPasangan
+            value: TWFuZGF0b3J5
+            description: "[MANDATORY]"
+          - name: jenisKelaminPasangan
+            value: UGVyZW1wdWFu
+            description: "[MANDATORY]"
+          - name: pendidikanTerakhir
+            value: Tidak Sekolah
+            description: "[MANDATORY]"
+          - name: agama
+            value: Islam
+            description: "[MANDATORY]"
+          - name: jumlahTanggungan
+            value: "1"
+            description: "[MANDATORY]"
+          - name: alamat
+            value: Jl. Whatever 1
+            description: "[MANDATORY]"
+          - name: kodePos
+            value: "16514"
+            description: "[MANDATORY]"
+          - name: rt
+            value: "004"
+            description: "[MANDATORY]"
+          - name: rw
+            value: "001"
+            description: "[MANDATORY]"
+          - name: namaTempatUsaha
+            value: Whatever
+            description: "[MANDATORY]"
+          - name: kodePosUsaha
+            value: "16514"
+            description: "[MANDATORY]"
+          - name: rtUsaha
+            value: "004"
+            description: "[MANDATORY]"
+          - name: rwUsaha
+            value: "001"
+            description: "[MANDATORY]"
+          - name: hubunganDalamKeluarga
+            value: Suami
+            description: "[MANDATORY]"
+          - name: plafondPinjaman
+            value: "50000000"
+            description: "[MANDATORY]"
+          - name: tenorPinjaman
+            value: "12"
+            description: "[MANDATORY]"
+          - name: sektorEkonomiPinjaman
+            value: "361000"
+            description: "[MANDATORY] Base64"
+          - name: ktpFileBase64
+            value: "{{ktpBase64JPG}}"
+            description: "[OPTIONAL]"
+          - name: ktpFileMimeType
+            value: image/jpeg
+            description: "[OPTIONAL]"
+          - name: ktpSelfieBase64
+            value: "{{ktpBase64JPG}}"
+            description: "[OPTIONAL]"
+          - name: ktpSelfieMimeType
+            value: image/jpeg
+            description: "[OPTIONAL]"
+          - name: ktpPartnerFileBase64
+            value: "{{ktpBase64JPG}}"
+            description: "[OPTIONAL]"
+          - name: ktpPartnerFileMimeType
+            value: image/jpeg
+            description: "[OPTIONAL]"
+          - name: alamatUsaha
+            value: Jl. Keong no 22
+            description: "[MANDATORY]"
+          - name: npwp
+            value: 54.321.444.8-123.222
+            description: "[MANDATORY]"
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 24 Jul 2024 07:38:46 GMT
+        - name: Content-Length
+          value: "43"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Unauthorized / Expired.",
+              "status": 401
+          }
+  - name: Error - Parameter Token Empty
+    request:
+      url: "{{base-url-local}}/v/1/partnership/tambah-member"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3NjA5MTcxMTAwMDAwMQ==
+            description: (string → base64) [MANDATORY]
+          - name: nama
+            value: SGFycnkgUGFtdW5na2Fz
+            description: (string → base64) [MANDATORY]
+          - name: tanggalLahir
+            value: MTk5MC0wMy0yNA==
+            description: "[yyyy-mm-dd](string → base64) [MANDATORY]"
+          - name: tempatLahir
+            value: SmFrYXJ0YQ==
+            description: (string → base64) [MANDATORY]
+          - name: jenisKelamin
+            value: TGFraS1MYWtp
+            description: (string → base64) [MANDATORY]
+          - name: namaIbuKandung
+            value: V2luYXJuaQ==
+            description: (string → base64) [MANDATORY]
+          - name: nomorTelepon
+            value: KzYyODk1NDIxOTg5MTMy
+            description: "[8xxx](string → base64) [MANDATORY]"
+          - name: email
+            value: aGFoYUBtYWlsLmNvbQ==
+            description: (string → base64) [MANDATORY]
+          - name: statusPernikahan
+            value: Kawin
+            description: "[MANDATORY]"
+          - name: nomorIdentitasPasangan
+            value: MzI3NjA5MTcxMTAwMDAwMg==
+            description: "[MANDATORY]"
+          - name: namaPasangan
+            value: TWFuZGF0b3J5
+            description: "[MANDATORY]"
+          - name: tanggalLahirPasangan
+            value: MjAwMC0xMS0xNw==
+            description: "[MANDATORY]"
+          - name: tempatLahirPasangan
+            value: TWFuZGF0b3J5
+            description: "[MANDATORY]"
+          - name: jenisKelaminPasangan
+            value: UGVyZW1wdWFu
+            description: "[MANDATORY]"
+          - name: pendidikanTerakhir
+            value: Tidak Sekolah
+            description: "[MANDATORY]"
+          - name: agama
+            value: Islam
+            description: "[MANDATORY]"
+          - name: jumlahTanggungan
+            value: "1"
+            description: "[MANDATORY]"
+          - name: alamat
+            value: Jl. Whatever 1
+            description: "[MANDATORY]"
+          - name: kodePos
+            value: "16514"
+            description: "[MANDATORY]"
+          - name: rt
+            value: "004"
+            description: "[MANDATORY]"
+          - name: rw
+            value: "001"
+            description: "[MANDATORY]"
+          - name: namaTempatUsaha
+            value: Whatever
+            description: "[MANDATORY]"
+          - name: kodePosUsaha
+            value: "16514"
+            description: "[MANDATORY]"
+          - name: rtUsaha
+            value: "004"
+            description: "[MANDATORY]"
+          - name: rwUsaha
+            value: "001"
+            description: "[MANDATORY]"
+          - name: hubunganDalamKeluarga
+            value: Suami
+            description: "[MANDATORY]"
+          - name: plafondPinjaman
+            value: "50000000"
+            description: "[MANDATORY]"
+          - name: tenorPinjaman
+            value: "12"
+            description: "[MANDATORY]"
+          - name: ktpFileBase64
+            value: "{{ktpBase64JPG}}"
+            description: "[OPTIONAL]"
+          - name: ktpFileMimeType
+            value: image/jpeg
+            description: "[OPTIONAL]"
+          - name: ktpSelfieBase64
+            value: "{{ktpBase64JPG}}"
+            description: "[OPTIONAL]"
+          - name: ktpSelfieMimeType
+            value: image/jpeg
+            description: "[OPTIONAL]"
+          - name: ktpPartnerFileBase64
+            value: "{{ktpBase64JPG}}"
+            description: "[OPTIONAL]"
+          - name: ktpPartnerFileMimeType
+            value: image/jpeg
+            description: "[OPTIONAL]"
+          - name: alamatUsaha
+            value: Jl. Keong no 22
+            description: "[MANDATORY]"
+          - name: npwp
+            value: 54.321.444.8-123.222
+            description: "[OPTIONAL]"
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 29 Jul 2024 04:11:52 GMT
+        - name: Content-Length
+          value: "51"
+        - name: Connection
+          value: close
+      body:
+        type: json
+        data: |-
+          {
+              "message": "parameter token is empty",
+              "status": 401
+          }
+  - name: Error - Access Forbidden (No Data User Partnership)
+    request:
+      url: "{{base-url-local}}/v/1/partnership/tambah-member"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3NjA5MTcxMTAwMDAwMQ==
+            description: (string → base64) [MANDATORY]
+          - name: nama
+            value: SGFycnkgUGFtdW5na2Fz
+            description: (string → base64) [MANDATORY]
+          - name: tanggalLahir
+            value: MTk5MC0wMy0yNA==
+            description: "[yyyy-mm-dd](string → base64) [MANDATORY]"
+          - name: tempatLahir
+            value: SmFrYXJ0YQ==
+            description: (string → base64) [MANDATORY]
+          - name: jenisKelamin
+            value: TGFraS1MYWtp
+            description: (string → base64) [MANDATORY]
+          - name: namaIbuKandung
+            value: V2luYXJuaQ==
+            description: (string → base64) [MANDATORY]
+          - name: nomorTelepon
+            value: KzYyODk1NDIxOTg5MTMy
+            description: "[8xxx](string → base64) [MANDATORY]"
+          - name: email
+            value: aGFoYUBtYWlsLmNvbQ==
+            description: (string → base64) [MANDATORY]
+          - name: statusPernikahan
+            value: Kawin
+            description: "[MANDATORY]"
+          - name: nomorIdentitasPasangan
+            value: MzI3NjA5MTcxMTAwMDAwMg==
+            description: "[MANDATORY]"
+          - name: namaPasangan
+            value: TWFuZGF0b3J5
+            description: "[MANDATORY]"
+          - name: tanggalLahirPasangan
+            value: MjAwMC0xMS0xNw==
+            description: "[MANDATORY]"
+          - name: tempatLahirPasangan
+            value: TWFuZGF0b3J5
+            description: "[MANDATORY]"
+          - name: jenisKelaminPasangan
+            value: UGVyZW1wdWFu
+            description: "[MANDATORY]"
+          - name: pendidikanTerakhir
+            value: Tidak Sekolah
+            description: "[MANDATORY]"
+          - name: agama
+            value: Islam
+            description: "[MANDATORY]"
+          - name: jumlahTanggungan
+            value: "1"
+            description: "[MANDATORY]"
+          - name: alamat
+            value: Jl. Whatever 1
+            description: "[MANDATORY]"
+          - name: kodePos
+            value: "16514"
+            description: "[MANDATORY]"
+          - name: rt
+            value: "004"
+            description: "[MANDATORY]"
+          - name: rw
+            value: "001"
+            description: "[MANDATORY]"
+          - name: namaTempatUsaha
+            value: Whatever
+            description: "[MANDATORY]"
+          - name: kodePosUsaha
+            value: "16514"
+            description: "[MANDATORY]"
+          - name: rtUsaha
+            value: "004"
+            description: "[MANDATORY]"
+          - name: rwUsaha
+            value: "001"
+            description: "[MANDATORY]"
+          - name: hubunganDalamKeluarga
+            value: Suami
+            description: "[MANDATORY]"
+          - name: plafondPinjaman
+            value: "50000000"
+            description: "[MANDATORY]"
+          - name: tenorPinjaman
+            value: "12"
+            description: "[MANDATORY]"
+          - name: ktpFileBase64
+            value: "{{ktpBase64JPG}}"
+            description: "[OPTIONAL]"
+          - name: ktpFileMimeType
+            value: image/jpeg
+            description: "[OPTIONAL]"
+          - name: ktpSelfieBase64
+            value: "{{ktpBase64JPG}}"
+            description: "[OPTIONAL]"
+          - name: ktpSelfieMimeType
+            value: image/jpeg
+            description: "[OPTIONAL]"
+          - name: ktpPartnerFileBase64
+            value: "{{ktpBase64JPG}}"
+            description: "[OPTIONAL]"
+          - name: ktpPartnerFileMimeType
+            value: image/jpeg
+            description: "[OPTIONAL]"
+          - name: alamatUsaha
+            value: Jl. Keong no 22
+            description: "[MANDATORY]"
+          - name: npwp
+            value: 54.321.444.8-123.222
+            description: "[OPTIONAL]"
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 29 Jul 2024 07:54:42 GMT
+        - name: Content-Length
+          value: "76"
+        - name: Connection
+          value: close
+      body:
+        type: json
+        data: |-
+          {
+              "message": "you don't have permission to access this resource",
+              "status": 403
+          }
+  - name: Error - Parameter Validation (Tidak Sesuai)
+    request:
+      url: "{{base-url-local}}/v/1/partnership/tambah-member"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3NjA5MTcxMTAwMDAwMQ==
+            description: (string → base64) [MANDATORY]
+          - name: nama
+            value: ""
+            description: (string → base64) [MANDATORY]
+          - name: tanggalLahir
+            value: MTk5MC0wMy0yNA==
+            description: "[yyyy-mm-dd](string → base64) [MANDATORY]"
+          - name: tempatLahir
+            value: SmFrYXJ0YQ==
+            description: (string → base64) [MANDATORY]
+          - name: jenisKelamin
+            value: TGFraS1MYWtp
+            description: (string → base64) [MANDATORY]
+          - name: namaIbuKandung
+            value: V2luYXJuaQ==
+            description: (string → base64) [MANDATORY]
+          - name: nomorTelepon
+            value: KzYyODk1NDIxOTg5MTMy
+            description: "[8xxx](string → base64) [MANDATORY]"
+          - name: email
+            value: aGFoYUBtYWlsLmNvbQ==
+            description: (string → base64) [MANDATORY]
+          - name: statusPernikahan
+            value: Kawin
+            description: "[MANDATORY]"
+          - name: nomorIdentitasPasangan
+            value: MzI3NjA5MTcxMTAwMDAwMg==
+            description: "[MANDATORY]"
+          - name: namaPasangan
+            value: TWFuZGF0b3J5
+            description: "[MANDATORY]"
+          - name: tanggalLahirPasangan
+            value: MjAwMC0xMS0xNw==
+            description: "[MANDATORY]"
+          - name: tempatLahirPasangan
+            value: TWFuZGF0b3J5
+            description: "[MANDATORY]"
+          - name: jenisKelaminPasangan
+            value: UGVyZW1wdWFu
+            description: "[MANDATORY]"
+          - name: pendidikanTerakhir
+            value: Tidak Sekolah
+            description: "[MANDATORY]"
+          - name: agama
+            value: Islam
+            description: "[MANDATORY]"
+          - name: jumlahTanggungan
+            value: "1"
+            description: "[MANDATORY]"
+          - name: alamat
+            value: Jl. Whatever 1
+            description: "[MANDATORY]"
+          - name: kodePos
+            value: "16514"
+            description: "[MANDATORY]"
+          - name: rt
+            value: "004"
+            description: "[MANDATORY]"
+          - name: rw
+            value: "001"
+            description: "[MANDATORY]"
+          - name: namaTempatUsaha
+            value: Whatever
+            description: "[MANDATORY]"
+          - name: kodePosUsaha
+            value: "16514"
+            description: "[MANDATORY]"
+          - name: rtUsaha
+            value: "004"
+            description: "[MANDATORY]"
+          - name: rwUsaha
+            value: "001"
+            description: "[MANDATORY]"
+          - name: hubunganDalamKeluarga
+            value: Suami
+            description: "[MANDATORY]"
+          - name: plafondPinjaman
+            value: "50000000"
+            description: "[MANDATORY]"
+          - name: tenorPinjaman
+            value: "12"
+            description: "[MANDATORY]"
+          - name: ktpFileBase64
+            value: "{{ktpBase64JPG}}"
+            description: "[OPTIONAL]"
+          - name: ktpFileMimeType
+            value: image/jpeg
+            description: "[OPTIONAL]"
+          - name: ktpSelfieBase64
+            value: "{{ktpBase64JPG}}"
+            description: "[OPTIONAL]"
+          - name: ktpSelfieMimeType
+            value: image/jpeg
+            description: "[OPTIONAL]"
+          - name: ktpPartnerFileBase64
+            value: "{{ktpBase64JPG}}"
+            description: "[OPTIONAL]"
+          - name: ktpPartnerFileMimeType
+            value: image/jpeg
+            description: "[OPTIONAL]"
+          - name: alamatUsaha
+            value: Jl. Keong no 22
+            description: "[MANDATORY]"
+          - name: npwp
+            value: 54.321.444.8-123.222
+            description: "[OPTIONAL]"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 29 Jul 2024 06:35:55 GMT
+        - name: Content-Length
+          value: "61"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "... tidak boleh kosong.",
+              "status": 400
+          }
+  - name: Error - Parameter Validation (Total Mandatory)
+    request:
+      url: "{{base-url-local}}/v/1/partnership/tambah-member"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3NjA5MTcxMTAwMDAwMQ==
+            description: (string → base64) [MANDATORY]
+          - name: nama
+            value: SGFycnkgUGFtdW5na2Fz
+            description: (string → base64) [MANDATORY]
+            disabled: true
+          - name: tanggalLahir
+            value: MTk5MC0wMy0yNA==
+            description: "[yyyy-mm-dd](string → base64) [MANDATORY]"
+            disabled: true
+          - name: tempatLahir
+            value: SmFrYXJ0YQ==
+            description: (string → base64) [MANDATORY]
+            disabled: true
+          - name: jenisKelamin
+            value: TGFraS1MYWtp
+            description: (string → base64) [MANDATORY]
+            disabled: true
+          - name: namaIbuKandung
+            value: V2luYXJuaQ==
+            description: (string → base64) [MANDATORY]
+            disabled: true
+          - name: nomorTelepon
+            value: KzYyODk1NDIxOTg5MTMy
+            description: "[8xxx](string → base64) [MANDATORY]"
+            disabled: true
+          - name: email
+            value: aGFoYUBtYWlsLmNvbQ==
+            description: (string → base64) [MANDATORY]
+            disabled: true
+          - name: statusPernikahan
+            value: Kawin
+            description: "[MANDATORY]"
+            disabled: true
+          - name: nomorIdentitasPasangan
+            value: MzI3NjA5MTcxMTAwMDAwMg==
+            description: "[MANDATORY]"
+            disabled: true
+          - name: namaPasangan
+            value: TWFuZGF0b3J5
+            description: "[MANDATORY]"
+            disabled: true
+          - name: tanggalLahirPasangan
+            value: MjAwMC0xMS0xNw==
+            description: "[MANDATORY]"
+            disabled: true
+          - name: tempatLahirPasangan
+            value: TWFuZGF0b3J5
+            description: "[MANDATORY]"
+            disabled: true
+          - name: jenisKelaminPasangan
+            value: UGVyZW1wdWFu
+            description: "[MANDATORY]"
+            disabled: true
+          - name: pendidikanTerakhir
+            value: Tidak Sekolah
+            description: "[MANDATORY]"
+            disabled: true
+          - name: agama
+            value: Islam
+            description: "[MANDATORY]"
+            disabled: true
+          - name: jumlahTanggungan
+            value: "1"
+            description: "[MANDATORY]"
+            disabled: true
+          - name: alamat
+            value: Jl. Whatever 1
+            description: "[MANDATORY]"
+            disabled: true
+          - name: kodePos
+            value: "16514"
+            description: "[MANDATORY]"
+          - name: rt
+            value: "004"
+            description: "[MANDATORY]"
+          - name: rw
+            value: "001"
+            description: "[MANDATORY]"
+          - name: namaTempatUsaha
+            value: Whatever
+            description: "[MANDATORY]"
+          - name: kodePosUsaha
+            value: "16514"
+            description: "[MANDATORY]"
+          - name: rtUsaha
+            value: "004"
+            description: "[MANDATORY]"
+          - name: rwUsaha
+            value: "001"
+            description: "[MANDATORY]"
+          - name: hubunganDalamKeluarga
+            value: Suami
+            description: "[MANDATORY]"
+          - name: plafondPinjaman
+            value: "50000000"
+            description: "[MANDATORY]"
+          - name: tenorPinjaman
+            value: "12"
+            description: "[MANDATORY]"
+          - name: ktpFileBase64
+            value: "{{ktpBase64JPG}}"
+            description: "[OPTIONAL]"
+          - name: ktpFileMimeType
+            value: image/jpeg
+            description: "[OPTIONAL]"
+          - name: ktpSelfieBase64
+            value: "{{ktpBase64JPG}}"
+            description: "[OPTIONAL]"
+          - name: ktpSelfieMimeType
+            value: image/jpeg
+            description: "[OPTIONAL]"
+          - name: ktpPartnerFileBase64
+            value: "{{ktpBase64JPG}}"
+            description: "[OPTIONAL]"
+          - name: ktpPartnerFileMimeType
+            value: image/jpeg
+            description: "[OPTIONAL]"
+          - name: alamatUsaha
+            value: Jl. Keong no 22
+            description: "[MANDATORY]"
+          - name: npwp
+            value: 54.321.444.8-123.222
+            description: "[OPTIONAL]"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 29 Jul 2024 06:39:16 GMT
+        - name: Content-Length
+          value: "63"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Parameter tidak terpenuhi.",
+              "status": 400
+          }
+  - name: Error - Fail Add Member
+    request:
+      url: "{{base-url-local}}/v/1/partnership/add-member"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3NjA5MTcxMTAwMDAwMQ==
+            description: (string → base64) [MANDATORY]
+          - name: nama
+            value: SGFycnkgUGFtdW5na2Fz
+            description: (string → base64) [MANDATORY]
+          - name: tanggalLahir
+            value: MTk5MC0wMy0yNA==
+            description: "[yyyy-mm-dd](string → base64) [MANDATORY]"
+          - name: tempatLahir
+            value: SmFrYXJ0YQ==
+            description: (string → base64) [MANDATORY]
+          - name: jenisKelamin
+            value: TGFraS1MYWtp
+            description: (string → base64) [MANDATORY]
+          - name: namaIbuKandung
+            value: V2luYXJuaQ==
+            description: (string → base64) [MANDATORY]
+          - name: nomorTelepon
+            value: KzYyODk1NDIxOTg5MTMy
+            description: "[8xxx](string → base64) [MANDATORY]"
+          - name: email
+            value: aGFoYUBtYWlsLmNvbQ==
+            description: (string → base64) [MANDATORY]
+          - name: statusPernikahan
+            value: Kawin
+            description: "[MANDATORY]"
+          - name: nomorIdentitasPasangan
+            value: MzI3NjA5MTcxMTAwMDAwMg==
+            description: "[MANDATORY]"
+          - name: namaPasangan
+            value: TWFuZGF0b3J5
+            description: "[MANDATORY]"
+          - name: tanggalLahirPasangan
+            value: MjAwMC0xMS0xNw==
+            description: "[MANDATORY]"
+          - name: tempatLahirPasangan
+            value: TWFuZGF0b3J5
+            description: "[MANDATORY]"
+          - name: jenisKelaminPasangan
+            value: UGVyZW1wdWFu
+            description: "[MANDATORY]"
+          - name: pendidikanTerakhir
+            value: D3
+            description: "[MANDATORY]"
+          - name: agama
+            value: Islam
+            description: "[MANDATORY]"
+          - name: jumlahTanggungan
+            value: "1"
+            description: "[MANDATORY]"
+          - name: alamat
+            value: Jl. Whatever 1
+            description: "[MANDATORY]"
+          - name: kodePos
+            value: "16514"
+            description: "[MANDATORY]"
+          - name: rt
+            value: "004"
+            description: "[MANDATORY]"
+          - name: rw
+            value: "001"
+            description: "[MANDATORY]"
+          - name: namaTempatUsaha
+            value: Whatever
+            description: "[MANDATORY]"
+          - name: alamatUsaha
+            value: Jl. Whatever 1
+            description: "[MANDATORY]"
+            disabled: true
+          - name: kodePosUsaha
+            value: "16514"
+            description: "[MANDATORY]"
+          - name: rtUsaha
+            value: "004"
+            description: "[MANDATORY]"
+          - name: rwUsaha
+            value: "001"
+            description: "[MANDATORY]"
+          - name: hubunganDalamKeluarga
+            value: Suami
+            description: "[MANDATORY]"
+          - name: plafondPinjaman
+            value: "50000000"
+            description: "[MANDATORY]"
+          - name: tenorPinjaman
+            value: "12"
+            description: "[MANDATORY]"
+          - name: sektorEkonomiPinjaman
+            value: "361000"
+            description: "[MANDATORY] Base64"
+          - name: kodePartnership
+            value: QUdVLTE5MA==
+          - name: ktpFileBase64
+            value: "{{ktpBase64JPG}}"
+            disabled: true
+          - name: ktpFileMimeType
+            value: image/jpeg
+            disabled: true
+          - name: ktpSelfieBase64
+            value: "{{ktpBase64JPG}}"
+            disabled: true
+          - name: ktpSelfieMimeType
+            value: image/jpeg
+            disabled: true
+          - name: ktpPartnerFileBase64
+            value: "{{ktpBase64JPG}}"
+            disabled: true
+          - name: ktpPartnerFileMimeType
+            value: image/jpeg
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 22 Jul 2024 04:36:54 GMT
+        - name: Content-Length
+          value: "104"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Maaf, Proses penyimpanan data member gagal. Silahkan coba beberapa saat lagi.",
+              "status": 500
+          }
+  - name: Success - Add Member
+    request:
+      url: "{{base-url-local}}/v/1/partnership/add-member"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: nomorIdentitas
+            value: MzI3NjA5MTcxMTAwMDAwMQ==
+            description: (string → base64) [MANDATORY]
+          - name: nama
+            value: SGFycnkgUGFtdW5na2Fz
+            description: (string → base64) [MANDATORY]
+          - name: tanggalLahir
+            value: MTk5MC0wMy0yNA==
+            description: "[yyyy-mm-dd](string → base64) [MANDATORY]"
+          - name: tempatLahir
+            value: SmFrYXJ0YQ==
+            description: (string → base64) [MANDATORY]
+          - name: jenisKelamin
+            value: TGFraS1MYWtp
+            description: (string → base64) [MANDATORY]
+          - name: namaIbuKandung
+            value: V2luYXJuaQ==
+            description: (string → base64) [MANDATORY]
+          - name: nomorTelepon
+            value: KzYyODk1NDIxOTg5MTMy
+            description: "[+62xxx](string → base64) [MANDATORY]"
+          - name: email
+            value: aGFoYUBtYWlsLmNvbQ==
+            description: (string → base64) [MANDATORY]
+          - name: statusPernikahan
+            value: Kawin
+            description: "[MANDATORY]"
+          - name: nomorIdentitasPasangan
+            value: MzI3NjA5MTcxMTAwMDAwMg==
+            description: "[MANDATORY]"
+          - name: namaPasangan
+            value: TWFuZGF0b3J5
+            description: "[MANDATORY]"
+          - name: tanggalLahirPasangan
+            value: MjAwMC0xMS0xNw==
+            description: "[MANDATORY]"
+          - name: tempatLahirPasangan
+            value: TWFuZGF0b3J5
+            description: "[MANDATORY]"
+          - name: jenisKelaminPasangan
+            value: UGVyZW1wdWFu
+            description: "[MANDATORY]"
+          - name: pendidikanTerakhir
+            value: D3
+            description: "[MANDATORY]"
+          - name: agama
+            value: Islam
+            description: "[MANDATORY]"
+          - name: jumlahTanggungan
+            value: "1"
+            description: "[MANDATORY]"
+          - name: alamat
+            value: Jl. Whatever 1
+            description: "[MANDATORY]"
+          - name: kodePos
+            value: "16514"
+            description: "[MANDATORY]"
+          - name: rt
+            value: "004"
+            description: "[MANDATORY]"
+          - name: rw
+            value: "001"
+            description: "[MANDATORY]"
+          - name: namaTempatUsaha
+            value: Whatever
+            description: "[MANDATORY]"
+          - name: alamatUsaha
+            value: Jl. Whatever 1
+            description: "[MANDATORY]"
+            disabled: true
+          - name: kodePosUsaha
+            value: "16514"
+            description: "[MANDATORY]"
+          - name: rtUsaha
+            value: "004"
+            description: "[MANDATORY]"
+          - name: rwUsaha
+            value: "001"
+            description: "[MANDATORY]"
+          - name: hubunganDalamKeluarga
+            value: Suami
+            description: "[MANDATORY]"
+          - name: plafondPinjaman
+            value: "50000000"
+            description: "[MANDATORY]"
+          - name: tenorPinjaman
+            value: "12"
+            description: "[MANDATORY]"
+          - name: sektorEkonomiPinjaman
+            value: "361000"
+            description: "[MANDATORY] Base64"
+          - name: kodePartnership
+            value: QUdVLTE5MA==
+          - name: ktpFileBase64
+            value: "{{ktpBase64JPG}}"
+            disabled: true
+          - name: ktpFileMimeType
+            value: image/jpeg
+            disabled: true
+          - name: ktpSelfieBase64
+            value: "{{ktpBase64JPG}}"
+            disabled: true
+          - name: ktpSelfieMimeType
+            value: image/jpeg
+            disabled: true
+          - name: ktpPartnerFileBase64
+            value: "{{ktpBase64JPG}}"
+            disabled: true
+          - name: ktpPartnerFileMimeType
+            value: image/jpeg
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 22 Jul 2024 04:18:38 GMT
+        - name: Content-Length
+          value: "57"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Data member berhasil disimpan.",
+              "status": 200
+          }

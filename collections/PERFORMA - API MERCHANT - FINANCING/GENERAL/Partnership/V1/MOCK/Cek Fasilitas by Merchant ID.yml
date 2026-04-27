@@ -1,0 +1,83 @@
+info:
+  name: Cek Fasilitas by Merchant ID
+  type: http
+  seq: 6
+
+http:
+  method: POST
+  url: https://pinang-performa.free.mockoapp.net/v/1/partnership/cek-fasilitas-by-merchant-id/200-belum-aktivasi-suplesi
+  headers:
+    - name: x-key
+      value: performa
+  params:
+    - name: "503"
+      value: ""
+      type: query
+      disabled: true
+    - name: "401"
+      value: ""
+      type: query
+      disabled: true
+    - name: 401-token-empty
+      value: ""
+      type: query
+      disabled: true
+    - name: "403"
+      value: ""
+      type: query
+      disabled: true
+    - name: 403-unactivated
+      value: ""
+      type: query
+      disabled: true
+    - name: 400-param-not
+      value: ""
+      type: query
+      disabled: true
+    - name: 500-unregistered-WL
+      value: ""
+      type: query
+      disabled: true
+    - name: 500-general
+      value: ""
+      type: query
+      disabled: true
+    - name: 200-limit-aktif-no-suplesi
+      value: ""
+      type: query
+      disabled: true
+    - name: 200-limit-aktif-suplesi
+      value: ""
+      type: query
+      disabled: true
+    - name: 200-limit-expired-ada-tunggakan
+      value: ""
+      type: query
+      disabled: true
+    - name: 200-aktivasi-ditolak-no-suplesi
+      value: ""
+      type: query
+      disabled: true
+    - name: 200-belum-aktivasi-no-suplesi
+      value: ""
+      type: query
+      disabled: true
+    - name: 200-belum-aktivasi-suplesi
+      value: ""
+      type: query
+      disabled: true
+  body:
+    type: form-urlencoded
+    data:
+      - name: merchantID
+        value: ""
+        description: ID Merchant [MANDATORY] [BASE64 STRING]
+      - name: kodePartnership
+        value: ""
+        description: Kode Partnership [MANDATORY][BASE64 STRING]
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

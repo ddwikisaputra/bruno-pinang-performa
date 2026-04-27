@@ -1,0 +1,572 @@
+info:
+  name: Cek Whitelist By Merchant ID
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: "{{base-url-staging}}/v/1/aktivasi/cek-whitelist-by-merchant-id"
+  headers:
+    - name: Api-Key
+      value: VW1GNVlWQnBVR1Z5Vkc5d2p5QUNnR0QvbERZbWNFeHNicWNZWEpNN0taNmxzeFk9
+  body:
+    type: form-urlencoded
+    data:
+      - name: merchantID
+        value: QUJD
+        description: MerchantID [MANDATORY] [Base64]
+      - name: kodePartnership
+        value: Qk1PLTQyMA==
+        description: Kode Partnership [MANDATORY] [Base64]
+  auth:
+    type: bearer
+    token: "{{accessTokenPartner}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 503 - Service Unavailable
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cek-whitelist-by-merchant-id"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+        - name: x-mock-response-code
+          value: 503-service-unavailable
+          description: enable when use mock api
+      body:
+        type: form-urlencoded
+        data:
+          - name: merchantID
+            value: dGVzdGh1aGE=
+            description: Merchant ID [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUNBLTI0NA==
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 503
+      statusText: Service Unavailable
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 24 Sep 2024 03:40:35 GMT
+        - name: Content-Length
+          value: "202"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Jam operasional Pinang Performa dari jam XX.XX - XX.XX WIB setiap hari. Kembali lagi nanti, ya!",
+              "status": 503
+          }
+  - name: Error - Token Expired
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cek-whitelist-by-merchant-id"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: merchantID
+            value: dGVzdGh1aGE=
+            description: Merchant ID [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUNBLTI0NA==
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Tue, 09 Sep 2025 04:26:21 GMT
+        - name: Content-Length
+          value: "69"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "token has invalid claims: token is expired",
+              "status": 401
+          }
+  - name: Error - Unauthorized / Expired
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cek-whitelist-by-merchant-id"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: merchantID
+            value: dGVzdGh1aGE=
+            description: Merchant ID [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUNBLTI0NA==
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Tue, 09 Sep 2025 04:28:03 GMT
+        - name: Content-Length
+          value: "50"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Unauthorized / Expired.",
+              "status": 401
+          }
+  - name: Error - Paremeter Token / Api Key Empty
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cek-whitelist-by-merchant-id"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: merchantID
+            value: dGVzdGh1aGE=
+            description: Merchant ID [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUNBLTI0NA==
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Tue, 09 Sep 2025 04:24:25 GMT
+        - name: Content-Length
+          value: "51"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "parameter token is empty",
+              "status": 401
+          }
+  - name: Error - Access Forbidden
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cek-whitelist-by-merchant-id"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: merchantID
+            value: dGVzdGh1aGE=
+            description: Merchant ID [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Tue, 16 Sep 2025 08:55:46 GMT
+        - name: Content-Length
+          value: "76"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "you don't have permission to access this resource",
+              "status": 403
+          }
+  - name: Error -  Access Forbidden (No Data Partnership)
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cek-whitelist-by-merchant-id"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: merchantID
+            value: dGVzdGh1aGE=
+            description: Merchant ID [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUNBLTI0NA==
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Tue, 09 Sep 2025 04:23:11 GMT
+        - name: Content-Length
+          value: "70"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "your access to this resource is unactivated",
+              "status": 403
+          }
+  - name: Error - Parameter Validation (Total Mandatory)
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cek-whitelist-by-merchant-id"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: merchantID
+            value: dGVzdGh1aGE=
+            description: Merchant ID [MANDATORY] [Base64]
+            disabled: true
+          - name: kodePartnership
+            value: TUNBLTI0NA==
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Tue, 09 Sep 2025 04:34:46 GMT
+        - name: Content-Length
+          value: "63"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Parameter tidak terpenuhi.",
+              "status": 400
+          }
+  - name: Error - Parameter Validation (Tidak Sesuai)
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cek-whitelist-by-merchant-id"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: merchantID
+            value: dGVzdGh1aGE=a
+            description: Merchant ID [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUNBLTI0NA==
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: Date
+          value: Tue, 09 Sep 2025 04:35:43 GMT
+        - name: Content-Length
+          value: "62"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "... tidak sesuai.",
+              "status": 400
+          }
+  - name: Error - Not Registered Whitelist / Not Found
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cek-whitelist-by-merchant-id"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: merchantID
+            value: dGVzdGh1aGE=
+            description: Merchant ID [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUNBLTI0NA==
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Access-Control-Expose-Headers
+          value: X-Response-Tag
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: X-Response-Tag
+          value: UmF5YVBpUGVyVG9w+1t5y2b/lUw5LmqDHOw9iY0OFZznbfw/2NOcykKNHvnahAKDrs1dQCGUdqZdYpOhGOm/efEGw4v4j9Dc/T4ew7HvVVGQVw9CB0pT5heWY1o=
+        - name: Date
+          value: Tue, 09 Sep 2025 04:19:34 GMT
+        - name: Content-Length
+          value: "155"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "UmF5YVBpUGVyVG9wtk8pzCCshk55OnOYQbt4nNsKQYjsetVo24eAjhqGQ6vOwVvQ9pdIBn3WKqEOIca3DP+/fKFChYGpytTV9ilfjM0N4Oyw8krmbr/6Tzk9STNeogv6DqlAr5FcBLEVSx4=",
+              "verify": 1
+          }
+  - name: Success - Data Whitelist Found (No KTP)
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cek-whitelist-by-merchant-id"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: merchantID
+            value: dGVzdGh1aGE=
+            description: Merchant ID [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUNBLTI0NA==
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Access-Control-Expose-Headers
+          value: X-Response-Tag
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: X-Response-Tag
+          value: UmF5YVBpUGVyVG9w+1soyWP4xxU6Lj2PGbo62YwMF5q1aPtrg9mazE7bFfnd0wTVpJ1aECuWdqFZYsGnGO3pL6UGw4/wiYLfpzxIwU/mOn0fYHXLPriaMDD3sOs=
+        - name: Date
+          value: Tue, 09 Sep 2025 04:12:55 GMT
+        - name: Content-Length
+          value: "155"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "UmF5YVBpUGVyVG9wtk8pzCCshk4gOjHfVKpYm98dBpD0PvFl1sPRglmFQrmd1FXRtcZKJn3WKqEOIca3DP+/fKFChYGpytTV9ilfjM0N4Oyw8krmbr/6SDk9Sdy02nZXOx7Ip4ZyCkNVYWY=",
+              "verify": 1
+          }
+  - name: Success - Data Whitelist Found
+    request:
+      url: "{{base-url-local}}/v/1/aktivasi/cek-whitelist-by-merchant-id"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: merchantID
+            value: dGVzdGh1aGE=
+            description: Merchant ID [MANDATORY] [Base64]
+          - name: kodePartnership
+            value: TUNBLTI0NA==
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Access-Control-Expose-Headers
+          value: X-Response-Tag
+        - name: Cache-Control
+          value: none
+        - name: Content-Security-Policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Permissions-Policy
+          value: geolocation=()
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=16070400; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-Permitted-Cross-Domain-Policies
+          value: none
+        - name: X-Response-Tag
+          value: UmF5YVBpUGVyVG9wqQ4onWD1wkZtejmMGLs53IpeEs6wYa89iIeYy0mNQa/c1wqHps0ORHnGfKYON5D2HuvtevMGk9qihojarGhKml4AxzRBuY/yOzb2xtqcbV4=
+        - name: Date
+          value: Mon, 08 Sep 2025 14:40:04 GMT
+        - name: Content-Length
+          value: "215"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "UmF5YVBpUGVyVG9wtk8pzCCshk4gOjHfVKpYm98dBpD0KPl6ycOAjBWHSqWc/FbR+YgBBnnXbPpKGN2MH8G0WfUvpoq48+X46Bdv495vk6L5sUO/P/ClCXpsUxtNNgy+Nx87B25YZfnkDUrLizjWlZo5sI0LCcvLyYOqJ/1gdcNnO4EcYHy5lwTaDSM9pmzOVhwNOn6jJg==",
+              "verify": 1
+          }
