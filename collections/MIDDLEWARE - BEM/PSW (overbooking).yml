@@ -1,0 +1,60 @@
+info:
+  name: PSW (overbooking)
+  type: http
+  seq: 10
+
+http:
+  method: POST
+  url: "{{url-gcp}}/bem/v1/psw"
+  headers:
+    - name: Content-Type
+      value: application/x-www-form-urlencoded
+  body:
+    type: form-urlencoded
+    data:
+      - name: data
+        value: '[{"channelID":"DCE","productID":"TRFBRI","subProduct":"402020","sequenceTrx":"TRX960","totalAmount":"5000000","data1":"20601000005569","data2":"20601121736506","remark":"PIKRO DB 001001008421103 TO 001001000338990 5000000 00001965","key":"DCE1234567890"}]'
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: success
+    request:
+      url: "{{url-gcp}}/bem/v1/psw"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: data
+            value: '[{"channelID":"DCE","productID":"TRFBRI","subProduct":"402020","sequenceTrx":"TRX700","totalAmount":"4910000","data1":"20601000005535","data2":"20601121736506","remark":"DISBURSEMENT_1","key":"DCE1234567890","bankCode":"002","productCode":"002"}]'
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Thu, 27 Jul 2023 02:31:38 GMT
+        - name: Content-Type
+          value: text/html; charset=utf-8
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: X-Powered-By
+          value: Express
+        - name: Access-Control-Allow-Origin
+          value: "*"
+        - name: ETag
+          value: W/"47-X78xyJ2KCR2/11fs2vS+ixI0XsE"
+        - name: Content-Encoding
+          value: gzip
+      body:
+        type: html
+        data: '{"rc":"00","description":"Transaksi Anda Sukses","jurnalSeq":"1210835"}'

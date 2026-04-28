@@ -1,0 +1,23 @@
+info:
+  name: Cams
+  type: http
+  seq: 9
+
+http:
+  method: POST
+  url: "{{url}}/bem/v1/cams"
+  headers:
+    - name: Content-Type
+      value: text/plain
+  body:
+    type: form-urlencoded
+    data:
+      - name: data
+        value: ' {"channelID":"PINANGCERIA","password":"PinCer0511","action":"InquiryByIdCardNo","idNumber":"1671041210580004","cardNo":"0108","bankCode":"002","productCode":"002"}'
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

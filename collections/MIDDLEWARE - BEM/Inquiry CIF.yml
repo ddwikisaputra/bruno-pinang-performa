@@ -1,0 +1,262 @@
+info:
+  name: Inquiry CIF
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{url-gcp}}/api/bem/v1/cbs/inquiryCIFNew"
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+      	"branch":"0010",
+      	"cifNo":"0000149404",
+      	"requestBy":"PINANG",
+      	"userId":"9997891",
+      	"bankCode": "494",
+      	"productCode": "002"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Inquiry CIF (Success Cif Found)
+    request:
+      url: "{{url-gcp}}/api/bem/v1/cbs/inquiryCIFNew"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+          	"branch":"0010",
+          	"cifNo":"0000149404",
+          	"requestBy":"PINANG",
+          	"userId":"9997891",
+          	"bankCode": "494",
+          	"productCode": "002"
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Wed, 31 May 2023 06:42:16 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "1288"
+        - name: Connection
+          value: keep-alive
+        - name: Grpc-Metadata-Content-Type
+          value: application/grpc
+      body:
+        type: json
+        data: |-
+          {
+              "body": {
+                  "address": "DESA RAHASIA",
+                  "address2": "KEC BALONGBENDO",
+                  "address3": "DESA",
+                  "address4": "JABARAN",
+                  "addressRT": "3",
+                  "addressRW": "5",
+                  "agama": "ISL",
+                  "alamatSuratMenyurat": 4040,
+                  "birthDate": "12031995",
+                  "ccCode": "N",
+                  "cifNo": "0000149404",
+                  "city": "SIDOARJO KOT.",
+                  "dailyTrx": "N1",
+                  "education": "SU",
+                  "educationDesc": "SMU/SMK",
+                  "email": "",
+                  "hobby": "",
+                  "hobbyDesc": "",
+                  "idNo": "3315603204940004",
+                  "idType": "KT",
+                  "jabatan": 99,
+                  "jabatanDesc": "STAFF",
+                  "kecamatan": "BUDURAN",
+                  "kelurahan": "BANJARSARI",
+                  "maritalStatus": "",
+                  "motherName": "DILA",
+                  "nama": "BAGAS SURYONO",
+                  "noHP": "081234123212",
+                  "noTelp": "081234123212",
+                  "officeAddress": "JL. GATOT SUBROTO 45 KOTA JAKARTA SELATAN",
+                  "officeCity": "JAKARTA SELATAN",
+                  "officeKecamatan": "PANCORAN",
+                  "officeKelurahan": "MENTENG DALAM",
+                  "officeName": "PT. ITCULTURE",
+                  "officeNoTelp": "",
+                  "officeZipCode": "14235",
+                  "pekerjaan": "TECH",
+                  "pekerjaanDesc": "WIRASWASTA",
+                  "penghasilanPerbulan": "G1",
+                  "pepFlag": "Tidak",
+                  "pepFlagKeluarga": "Tidak",
+                  "pepStatusKeluarga": "Tidak",
+                  "placeOfBirth": "SUMEDANG",
+                  "province": "JAWA BARAT",
+                  "responseCode": 12,
+                  "responseDesc": "Inquiry Success",
+                  "sex": "M",
+                  "sumberUtama": "00011",
+                  "sumberUtamaDesc": "Gaji",
+                  "tujuanPembukaanRekening": "T1",
+                  "typeOfWork": "KERJA",
+                  "zipCode": "42313",
+                  "namaPasangan": "",
+                  "idNoPasangan": "",
+                  "birthDatePasangan": "",
+                  "flagPisahHarta": "",
+                  "hubunganDenganPelapor": ""
+              }
+          }
+  - name: Inquiry CIF (Success, Cif Not found)
+    request:
+      url: "{{url-gcp}}/api/bem/v1/cbs/inquiryCIFNew"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+          	"branch":"0010",
+          	"cifNo":"000014404",
+          	"requestBy":"PINANG",
+          	"userId":"9997891",
+          	"bankCode": "494",
+          	"productCode": "002"
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Wed, 31 May 2023 06:43:59 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "987"
+        - name: Connection
+          value: keep-alive
+        - name: Grpc-Metadata-Content-Type
+          value: application/grpc
+      body:
+        type: json
+        data: |-
+          {
+              "body": {
+                  "address": "",
+                  "address2": "",
+                  "address3": "",
+                  "address4": "",
+                  "addressRT": "",
+                  "addressRW": "",
+                  "agama": "",
+                  "alamatSuratMenyurat": 0,
+                  "birthDate": "",
+                  "ccCode": "",
+                  "cifNo": "",
+                  "city": "",
+                  "dailyTrx": "",
+                  "education": "",
+                  "educationDesc": "",
+                  "email": "",
+                  "hobby": "",
+                  "hobbyDesc": "",
+                  "idNo": "0",
+                  "idType": "",
+                  "jabatan": 0,
+                  "jabatanDesc": "",
+                  "kecamatan": "",
+                  "kelurahan": "",
+                  "maritalStatus": "",
+                  "motherName": "",
+                  "nama": "",
+                  "noHP": "",
+                  "noTelp": "",
+                  "officeAddress": "",
+                  "officeCity": "",
+                  "officeKecamatan": "",
+                  "officeKelurahan": "",
+                  "officeName": "",
+                  "officeNoTelp": "",
+                  "officeZipCode": "",
+                  "pekerjaan": "",
+                  "pekerjaanDesc": "",
+                  "penghasilanPerbulan": "",
+                  "pepFlag": "",
+                  "pepFlagKeluarga": "",
+                  "pepStatusKeluarga": "",
+                  "placeOfBirth": "",
+                  "province": "",
+                  "responseCode": 99,
+                  "responseDesc": "CIF TIDAK DITEMUKAN PADA MASTER FILE .            ",
+                  "sex": "",
+                  "sumberUtama": "",
+                  "sumberUtamaDesc": "",
+                  "tujuanPembukaanRekening": "",
+                  "typeOfWork": "",
+                  "zipCode": "",
+                  "namaPasangan": "",
+                  "idNoPasangan": "",
+                  "birthDatePasangan": "",
+                  "flagPisahHarta": "",
+                  "hubunganDenganPelapor": ""
+              }
+          }
+  - name: Inquiry CIF (Invalid Request)
+    request:
+      url: "{{url-gcp}}/api/bem/v1/cbs/inquiryCIFNew"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+          	"branch":"",
+          	"cifNo":"0000149404",
+          	"requestBy":"PINANG",
+          	"userId":"9997891",
+          	"bankCode": "494",
+          	"productCode": "002"
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Date
+          value: Wed, 31 May 2023 06:44:38 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "80"
+        - name: Connection
+          value: keep-alive
+      body:
+        type: json
+        data: |-
+          {
+              "body": {
+                  "responseCode": "99",
+                  "responseDesc": "invalid request: missing branch"
+              }
+          }

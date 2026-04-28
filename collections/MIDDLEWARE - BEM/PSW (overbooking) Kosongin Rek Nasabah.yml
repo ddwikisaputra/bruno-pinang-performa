@@ -1,0 +1,23 @@
+info:
+  name: PSW (overbooking) Kosongin Rek Nasabah
+  type: http
+  seq: 11
+
+http:
+  method: POST
+  url: "{{url-gcp}}/psw/ori/method=post&data=json"
+  headers:
+    - name: Content-Type
+      value: application/x-www-form-urlencoded
+  body:
+    type: form-urlencoded
+    data:
+      - name: data
+        value: '[{"channelID":"DCE","productID":"TRFBRI","subProduct":"402020","sequenceTrx":"700","totalAmount":"2000000","data1":"20601121736506","data2":"20601000005535","remark":"TOPUP_20230621","key":"DCE1234567890","bankCode":"002","productCode":"002"}]'
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

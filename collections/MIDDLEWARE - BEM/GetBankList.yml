@@ -1,0 +1,77 @@
+info:
+  name: GetBankList
+  type: http
+  seq: 2
+
+http:
+  method: GET
+  url: "{{url-gcp}}/api/bem/v1/bank-codes/002"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: GetBankList (Success)
+    request:
+      url: "{{url-gcp}}/api/bem/v1/bank-codes/002"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Wed, 31 May 2023 06:46:20 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "133"
+        - name: Connection
+          value: keep-alive
+        - name: Grpc-Metadata-Content-Type
+          value: application/grpc
+      body:
+        type: json
+        data: |-
+          {
+              "data": [
+                  {
+                      "bankCode": "494",
+                      "bankName": "BANK RAYA"
+                  },
+                  {
+                      "bankCode": "002",
+                      "bankName": "BRI"
+                  }
+              ],
+              "responseCode": "00",
+              "responseDesc": "Success"
+          }
+  - name: GetBankList (Success but error invalid product)
+    request:
+      url: "{{url-gcp}}/api/bem/v1/bank-codes/494"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Wed, 31 May 2023 06:46:45 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "63"
+        - name: Connection
+          value: keep-alive
+        - name: Grpc-Metadata-Content-Type
+          value: application/grpc
+      body:
+        type: json
+        data: |-
+          {
+              "responseCode": "01",
+              "responseDesc": "Invalid product code 494"
+          }

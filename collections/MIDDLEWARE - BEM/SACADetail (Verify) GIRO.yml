@@ -1,0 +1,170 @@
+info:
+  name: SACADetail (Verify) GIRO
+  type: http
+  seq: 4
+
+http:
+  method: POST
+  url: "{{url-gcp}}/ori/cbs/inquirySACADetail"
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |
+      {
+      	"branch" : "0010",  // -> default
+      	"accountNumber" : "20601000005569", // -> mandatory
+      	"requestBy" : "PINANG",  // -> default (PROD KONFIRMASI)
+      	"userId" : "9997891",  // -> default
+      	"bankCode": "002", // -> mandatory 002 (bri) 494 (raya)
+      	"productCode":"002" // -> default
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: SACADetail (Success found)
+    request:
+      url: "{{url-gcp}}/api/bem/v1/cbs/inquirySACADetail"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |
+          {
+          	"branch" : "7957",
+          	"accountNumber" : "049401000020204",
+          	"requestBy" : "SAHABAT",
+          	"userId" : "9997891",
+          	"bankCode": "494",
+          	"productCode":"002"
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Wed, 31 May 2023 06:48:28 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "250"
+        - name: Connection
+          value: keep-alive
+        - name: Grpc-Metadata-Content-Type
+          value: application/grpc
+      body:
+        type: json
+        data: |-
+          {
+              "body": {
+                  "avaliableBalance": 500000,
+                  "cifNo": "0000149404",
+                  "idNo": "3315603204940004",
+                  "idType": "KT",
+                  "ledgerBalance": 500000,
+                  "minimumBalance": 500000,
+                  "name": "BAGAS SURYONO",
+                  "responseCode": "00",
+                  "responseDesc": "Success",
+                  "sccode": "TA",
+                  "statusRekening": "Open"
+              }
+          }
+  - name: SACADetail (Success but not found)
+    request:
+      url: "{{url-gcp}}/api/bem/v1/cbs/inquirySACADetail"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |
+          {
+          	"branch" : "7957",
+          	"accountNumber" : "04940100020204",
+          	"requestBy" : "SAHABAT",
+          	"userId" : "9997891",
+          	"bankCode": "494",
+          	"productCode":"002"
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Wed, 31 May 2023 06:50:15 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "197"
+        - name: Connection
+          value: keep-alive
+        - name: Grpc-Metadata-Content-Type
+          value: application/grpc
+      body:
+        type: json
+        data: |-
+          {
+              "body": {
+                  "avaliableBalance": 0,
+                  "cifNo": "",
+                  "idNo": "0",
+                  "idType": "",
+                  "ledgerBalance": 0,
+                  "minimumBalance": 0,
+                  "name": "",
+                  "responseCode": "01",
+                  "responseDesc": "No Record Found",
+                  "sccode": "",
+                  "statusRekening": ""
+              }
+          }
+  - name: SACADetail (Invalid Request)
+    request:
+      url: "{{url-gcp}}/api/bem/v1/cbs/inquirySACADetail"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |
+          {
+          	"branch" : "7957",
+          	"accountNumber" : "049401000020204",
+          	"requestBy" : "SAHABAT",
+          	"userId" : "9997891",
+          	"bankCode": "",
+          	"productCode":"002"
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Date
+          value: Wed, 31 May 2023 06:50:54 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "82"
+        - name: Connection
+          value: keep-alive
+      body:
+        type: json
+        data: |-
+          {
+              "body": {
+                  "responseCode": "01",
+                  "responseDesc": "invalid request: missing bankCode"
+              }
+          }
