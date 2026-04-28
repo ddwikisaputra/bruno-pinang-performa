@@ -1,0 +1,42 @@
+name: VIDA
+variables:
+  - name: base-url-sandbox
+    value: https://qa-sso.vida.id
+  - name: grant-type-sandbox
+    value: client_credentials
+  - name: scope-sandbox
+    value: roles
+  - name: client-id-sandbox
+    value: partner-pinangperforma-sso-sandbox
+  - name: client-secret-sandbox
+    value: nPm0Nr2S9zGBxByykBrtOm6jWjnYW41v
+  - name: vida-token
+    value: ""
+  - name: base-url-service-sandbox
+    value: https://services-sandbox.vida.id
+  - name: govId-lolos-sandbox
+    value: "3511000101806300"
+  - name: fullname-lolos-sandbox
+    value: UserGDAA
+  - name: dob-lolos-sandbox
+    value: 1980-01-01
+  - name: govId-tdklolos-sandbox
+    value: "3511000101806300"
+  - name: fullname-tdklolos-sandbox
+    value: UserGDP
+  - name: dob-tdklolos-sandbox
+    value: 1980-01-01
+  - name: base-url-prod
+    value: https://sso.vida.id/auth/realms/vida/protocol/openid-connect/token
+  - name: base-url-do-verif-sandbox
+    value: https://my-services-sandbox.np.vida.id
+  - name: client-id-doc-verif-sandbox
+    value: partner-pinang-sso-new-sandbox
+  - name: client-secret-doc-verif-sandbox
+    value: KJmkkmC7eNeSFqnG35teDakYqtno9agq
+  - name: auth
+    value: ""
+  - name: client-id-poa-sandbox
+    value: partner-pinangflexi-poa-sandbox
+  - name: client-secret-poa-sandbox
+    value: 4GNzIKGVSdKRMlUa5wOai26geOomPsJ1

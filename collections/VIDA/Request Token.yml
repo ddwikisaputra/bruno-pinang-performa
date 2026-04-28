@@ -1,0 +1,239 @@
+info:
+  name: Request Token
+  type: http
+  seq: 8
+
+http:
+  method: POST
+  url: "{{base-url-sandbox}}/auth/realms/vida/protocol/openid-connect/token"
+  body:
+    type: form-urlencoded
+    data:
+      - name: grant_type
+        value: "{{grant-type-sandbox}}"
+      - name: scope
+        value: "{{scope-sandbox}}"
+      - name: client_id
+        value: "{{client-id-poa-sandbox}}"
+      - name: client_secret
+        value: "{{client-secret-poa-sandbox}}"
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        var jsonData = res.getBody();
+        bru.setEnvVar("vida-token", jsonData.access_token)
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Success
+    request:
+      url: https://qa-sso.vida.id/auth/realms/vida/protocol/openid-connect/token
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: grant_type
+            value: client_credentials
+          - name: scope
+            value: roles
+          - name: client_id
+            value: partner-pinangperforma-sso-sandbox
+          - name: client_secret
+            value: nPm0Nr2S9zGBxByykBrtOm6jWjnYW41v
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Fri, 28 Jun 2024 05:50:55 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "1514"
+        - name: Connection
+          value: keep-alive
+        - name: Cache-Control
+          value: no-store
+        - name: Set-Cookie
+          value: KC_RESTART=; Version=1; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Max-Age=0; Path=/auth/realms/vida/; Secure; HttpOnly
+        - name: X-XSS-Protection
+          value: 1; mode=block
+        - name: Pragma
+          value: no-cache
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+      body:
+        type: json
+        data: |-
+          {
+              "access_token": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJjU2w2LS1GWjE3MGJkZE1nU3NlMEhiTG10cWREYVI5aWdsNldRdkdhZVVrIn0.eyJleHAiOjE3MTk1NzE4NTUsImlhdCI6MTcxOTU1Mzg1NSwianRpIjoiYmFkZjM2NzYtNzAzZC00MDUxLWIzMjUtNzA0YjBhZmQ5NzE3IiwiaXNzIjoiaHR0cHM6Ly9xYS1zc28udmlkYS5pZC9hdXRoL3JlYWxtcy92aWRhIiwiYXVkIjpbInZpZGEtYmlvbWV0cmljcy1zZXJ2aWNlIiwidmlkYS1pZGktbWFpbi1zZXJ2aWNlIiwidmlkYS1pZHZlcmlmeS1zZXJ2aWNlIl0sInN1YiI6ImI1NzJjZmNlLTk0MmQtNGUyZC1hZGE0LWQ2MWNmMmU4Nzg2YyIsInR5cCI6IkJlYXJlciIsImF6cCI6InBhcnRuZXItcGluYW5ncGVyZm9ybWEtc3NvLXNhbmRib3giLCJhY3IiOiIxIiwicmVzb3VyY2VfYWNjZXNzIjp7InZpZGEtYmlvbWV0cmljcy1zZXJ2aWNlIjp7InJvbGVzIjpbInZlcmlmeV9oYWNrbmVzcyJdfSwidmlkYS1pZGktbWFpbi1zZXJ2aWNlIjp7InJvbGVzIjpbInNlcnZpY2VfdXNlcl9la3ljX2xpdGUiXX0sInZpZGEtaWR2ZXJpZnktc2VydmljZSI6eyJyb2xlcyI6WyJkZW1vZy12MiIsIm9jci1rdHAiLCJrdHAtZmFjZS1tYXRjaCJdfX0sInNjb3BlIjoiIiwiY2xpZW50SWQiOiJwYXJ0bmVyLXBpbmFuZ3BlcmZvcm1hLXNzby1zYW5kYm94IiwiY2xpZW50SG9zdCI6IjM2LjkzLjYyLjIwMiIsInByb2RJZCI6IjEzMTQ5Nzc4LTEyNzYtNGI2Ny04ZTMxLTU3MTNiYjI5NTA3MyIsImNsaWVudEFkZHJlc3MiOiIzNi45My42Mi4yMDIifQ.VPozX3vvrBKZMjFTKp4mB2-0F8TTTL_Zcw4-42s4YEDPzoHp3gd79DaeyfRMi6HSfHntHCebpq53gj8aJbaCanVAQq43tRkB3IqqemvYuOAH69LnN8hAeD6R6gDpI-wHqgNp5aNdGObPwz2PFL2xd1CyrZIiHEKGV_jUfeSbdgNbrxyFEbnqYgZS_iJgrSc-oIMYJfYhc_qbNwt9o_aFE31caAcqOMQKRIPFH-FB1E7bq1ILSC9-zdWad9ZqiTSEpQI1oPycvY-0zVwfod9v4vmujT7tuh9N-wpiBQ3Gl1b0wQNTEz_nbUiTElBesa1v8zdx8lM34uRyERWUzX3E7g",
+              "expires_in": 18000,
+              "refresh_expires_in": 0,
+              "token_type": "Bearer",
+              "not-before-policy": 1669717583,
+              "scope": ""
+          }
+  - name: Error
+    request:
+      url: https://qa-sso.vida.id/auth/realms/vida/protocol/openid-connect/token
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: grant_type
+            value: client_credentials
+          - name: scope
+            value: roles
+          - name: client_id
+            value: partner-pinangperforma-sso-sandboxa
+          - name: client_secret
+            value: nPm0Nr2S9zGBxByykBrtOm6jWjnYW41v
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Date
+          value: Fri, 28 Jun 2024 05:51:15 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "75"
+        - name: Connection
+          value: keep-alive
+        - name: Cache-Control
+          value: no-store
+        - name: X-XSS-Protection
+          value: 1; mode=block
+        - name: Pragma
+          value: no-cache
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+      body:
+        type: json
+        data: |-
+          {
+              "error": "invalid_client",
+              "error_description": "Invalid client credentials"
+          }
+  - name: Success
+    request:
+      url: https://qa-sso.vida.id/auth/realms/vida/protocol/openid-connect/token
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: grant_type
+            value: client_credentials
+          - name: scope
+            value: roles
+          - name: client_id
+            value: partner-pinangperforma-sso-sandbox
+          - name: client_secret
+            value: nPm0Nr2S9zGBxByykBrtOm6jWjnYW41v
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Fri, 28 Jun 2024 05:50:55 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "1514"
+        - name: Connection
+          value: keep-alive
+        - name: Cache-Control
+          value: no-store
+        - name: Set-Cookie
+          value: KC_RESTART=; Version=1; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Max-Age=0; Path=/auth/realms/vida/; Secure; HttpOnly
+        - name: X-XSS-Protection
+          value: 1; mode=block
+        - name: Pragma
+          value: no-cache
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+      body:
+        type: json
+        data: |-
+          {
+              "access_token": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJjU2w2LS1GWjE3MGJkZE1nU3NlMEhiTG10cWREYVI5aWdsNldRdkdhZVVrIn0.eyJleHAiOjE3MTk1NzE4NTUsImlhdCI6MTcxOTU1Mzg1NSwianRpIjoiYmFkZjM2NzYtNzAzZC00MDUxLWIzMjUtNzA0YjBhZmQ5NzE3IiwiaXNzIjoiaHR0cHM6Ly9xYS1zc28udmlkYS5pZC9hdXRoL3JlYWxtcy92aWRhIiwiYXVkIjpbInZpZGEtYmlvbWV0cmljcy1zZXJ2aWNlIiwidmlkYS1pZGktbWFpbi1zZXJ2aWNlIiwidmlkYS1pZHZlcmlmeS1zZXJ2aWNlIl0sInN1YiI6ImI1NzJjZmNlLTk0MmQtNGUyZC1hZGE0LWQ2MWNmMmU4Nzg2YyIsInR5cCI6IkJlYXJlciIsImF6cCI6InBhcnRuZXItcGluYW5ncGVyZm9ybWEtc3NvLXNhbmRib3giLCJhY3IiOiIxIiwicmVzb3VyY2VfYWNjZXNzIjp7InZpZGEtYmlvbWV0cmljcy1zZXJ2aWNlIjp7InJvbGVzIjpbInZlcmlmeV9oYWNrbmVzcyJdfSwidmlkYS1pZGktbWFpbi1zZXJ2aWNlIjp7InJvbGVzIjpbInNlcnZpY2VfdXNlcl9la3ljX2xpdGUiXX0sInZpZGEtaWR2ZXJpZnktc2VydmljZSI6eyJyb2xlcyI6WyJkZW1vZy12MiIsIm9jci1rdHAiLCJrdHAtZmFjZS1tYXRjaCJdfX0sInNjb3BlIjoiIiwiY2xpZW50SWQiOiJwYXJ0bmVyLXBpbmFuZ3BlcmZvcm1hLXNzby1zYW5kYm94IiwiY2xpZW50SG9zdCI6IjM2LjkzLjYyLjIwMiIsInByb2RJZCI6IjEzMTQ5Nzc4LTEyNzYtNGI2Ny04ZTMxLTU3MTNiYjI5NTA3MyIsImNsaWVudEFkZHJlc3MiOiIzNi45My42Mi4yMDIifQ.VPozX3vvrBKZMjFTKp4mB2-0F8TTTL_Zcw4-42s4YEDPzoHp3gd79DaeyfRMi6HSfHntHCebpq53gj8aJbaCanVAQq43tRkB3IqqemvYuOAH69LnN8hAeD6R6gDpI-wHqgNp5aNdGObPwz2PFL2xd1CyrZIiHEKGV_jUfeSbdgNbrxyFEbnqYgZS_iJgrSc-oIMYJfYhc_qbNwt9o_aFE31caAcqOMQKRIPFH-FB1E7bq1ILSC9-zdWad9ZqiTSEpQI1oPycvY-0zVwfod9v4vmujT7tuh9N-wpiBQ3Gl1b0wQNTEz_nbUiTElBesa1v8zdx8lM34uRyERWUzX3E7g",
+              "expires_in": 18000,
+              "refresh_expires_in": 0,
+              "token_type": "Bearer",
+              "not-before-policy": 1669717583,
+              "scope": ""
+          }
+  - name: Error
+    request:
+      url: https://qa-sso.vida.id/auth/realms/vida/protocol/openid-connect/token
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: grant_type
+            value: client_credentials
+          - name: scope
+            value: roles
+          - name: client_id
+            value: partner-pinangperforma-sso-sandboxa
+          - name: client_secret
+            value: nPm0Nr2S9zGBxByykBrtOm6jWjnYW41v
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Date
+          value: Fri, 28 Jun 2024 05:51:15 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "75"
+        - name: Connection
+          value: keep-alive
+        - name: Cache-Control
+          value: no-store
+        - name: X-XSS-Protection
+          value: 1; mode=block
+        - name: Pragma
+          value: no-cache
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+      body:
+        type: json
+        data: |-
+          {
+              "error": "invalid_client",
+              "error_description": "Invalid client credentials"
+          }

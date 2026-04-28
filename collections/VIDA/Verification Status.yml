@@ -1,0 +1,139 @@
+info:
+  name: Verification Status
+  type: http
+  seq: 2
+
+http:
+  method: GET
+  url: "{{base-url-service-sandbox}}/main/v3/services/kyc/8def95f6-16b7-4a6a-a84a-f07be91bf56b/status"
+  auth:
+    type: bearer
+    token: "{{vida-token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: success
+    request:
+      url: "{{base-url-service-sandbox}}/main/v3/services/kyc/8def95f6-16b7-4a6a-a84a-f07be91bf56b/status"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Tue, 20 Aug 2024 11:16:19 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Origin
+        - name: Vary
+          value: Access-Control-Request-Method
+        - name: Vary
+          value: Access-Control-Request-Headers
+        - name: X-VIDA-EVENT-ID
+          value: 8def95f6-16b7-4a6a-a84a-f07be91bf56b
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-XSS-Protection
+          value: 1; mode=block
+        - name: Cache-Control
+          value: no-cache, no-store, max-age=0, must-revalidate
+        - name: Pragma
+          value: no-cache
+        - name: Expires
+          value: "0"
+        - name: Strict-Transport-Security
+          value: max-age=31536000 ; includeSubDomains
+        - name: Strict-Transport-Security
+          value: max-age=63072000
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Access-Control-Allow-Origin
+          value: "*"
+        - name: Access-Control-Allow-Credentials
+          value: "true"
+        - name: Access-Control-Allow-Methods
+          value: GET, PUT, POST, DELETE, PATCH, OPTIONS
+        - name: Access-Control-Allow-Headers
+          value: DNT, User-Agent, X-Requested-With, If-Modified-Since, Cache-Control, Content-Type, Range, Authorization
+        - name: Access-Control-Max-Age
+          value: "43200"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "certificateIssued": 200
+              }
+          }
+  - name: success
+    request:
+      url: "{{base-url-service-sandbox}}/main/v3/services/kyc/8def95f6-16b7-4a6a-a84a-f07be91bf56b/status"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Tue, 20 Aug 2024 11:16:19 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Origin
+        - name: Vary
+          value: Access-Control-Request-Method
+        - name: Vary
+          value: Access-Control-Request-Headers
+        - name: X-VIDA-EVENT-ID
+          value: 8def95f6-16b7-4a6a-a84a-f07be91bf56b
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-XSS-Protection
+          value: 1; mode=block
+        - name: Cache-Control
+          value: no-cache, no-store, max-age=0, must-revalidate
+        - name: Pragma
+          value: no-cache
+        - name: Expires
+          value: "0"
+        - name: Strict-Transport-Security
+          value: max-age=31536000 ; includeSubDomains
+        - name: Strict-Transport-Security
+          value: max-age=63072000
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Access-Control-Allow-Origin
+          value: "*"
+        - name: Access-Control-Allow-Credentials
+          value: "true"
+        - name: Access-Control-Allow-Methods
+          value: GET, PUT, POST, DELETE, PATCH, OPTIONS
+        - name: Access-Control-Allow-Headers
+          value: DNT, User-Agent, X-Requested-With, If-Modified-Since, Cache-Control, Content-Type, Range, Authorization
+        - name: Access-Control-Max-Age
+          value: "43200"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "certificateIssued": 200
+              }
+          }

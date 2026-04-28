@@ -1,0 +1,527 @@
+info:
+  name: Sign Inline Status
+  type: http
+  seq: 7
+
+http:
+  method: GET
+  url: "{{base-url-service-sandbox}}/signer/v2/services/esign/6e560524-e5c3-4f5b-a4f4-adffba97c11b"
+  auth:
+    type: bearer
+    token: "{{vida-token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: error - 401
+    request:
+      url: "{{base-url-service-sandbox}}/signer/v2/services/esign"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            // ... other fields remain constant
+            "user": {
+              "vidaEkycEventId": "8def95f6-16b7-4a6a-a84a-f07be91bf56b"
+            },
+            "signingInfo": [
+              {
+                  "pdfFile": "{{sphPDFBase64}}",
+                  "pageNo": "27",
+                  "xPoint": "0",
+                  "yPoint": "0",
+                  "height": "0",
+                  "width": "0",
+                  "clientFilename": "dokumen_pinjaman_20240820144439.pdf",
+                  "qrEnable": true,
+                  "appearance": {
+                      "type": "standard"
+                      // "signImage": ""
+                  }
+              }
+            ],
+            "requestInfo": {
+              "userAgent": "Staging",
+              "srcIp": "Staging",
+              "consentTimestamp": "1702362951"
+            },
+            "device": {
+          		"os": "Android",
+          		"model": "Staging",
+          		"uniqueId": "Staging+O+2QE",
+          		"networkProvider": "IND idea"
+            }
+            // ... other fields remain constant
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Tue, 20 Aug 2024 11:02:49 GMT
+        - name: Content-Length
+          value: "0"
+        - name: Connection
+          value: keep-alive
+        - name: WWW-Authenticate
+          value: 'Bearer error="invalid_token", error_description="An error occurred while attempting to decode the Jwt: Jwt expired at 2024-08-14T11:59:21Z", error_uri="https://tools.ietf.org/html/rfc6750#section-3.1"'
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-XSS-Protection
+          value: 1; mode=block
+        - name: Cache-Control
+          value: no-cache, no-store, max-age=0, must-revalidate
+        - name: Pragma
+          value: no-cache
+        - name: Expires
+          value: "0"
+        - name: Strict-Transport-Security
+          value: max-age=31536000 ; includeSubDomains
+        - name: Strict-Transport-Security
+          value: max-age=63072000
+        - name: Access-Control-Allow-Origin
+          value: "*"
+        - name: Access-Control-Allow-Credentials
+          value: "true"
+        - name: Access-Control-Allow-Methods
+          value: GET, PUT, POST, DELETE, PATCH, OPTIONS
+        - name: Access-Control-Allow-Headers
+          value: DNT,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization
+        - name: Access-Control-Max-Age
+          value: "43200"
+      body:
+        type: text
+        data: ""
+  - name: error - tte failed
+    request:
+      url: "{{base-url-service-sandbox}}/signer/v2/services/esign/9aea20af-4cbb-4f84-98b7-c194e1dc8328"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Wed, 21 Aug 2024 04:38:36 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-XSS-Protection
+          value: 1; mode=block
+        - name: Cache-Control
+          value: no-cache, no-store, max-age=0, must-revalidate
+        - name: Pragma
+          value: no-cache
+        - name: Expires
+          value: "0"
+        - name: Strict-Transport-Security
+          value: max-age=31536000 ; includeSubDomains
+        - name: Strict-Transport-Security
+          value: max-age=63072000
+        - name: Access-Control-Allow-Origin
+          value: "*"
+        - name: Access-Control-Allow-Credentials
+          value: "true"
+        - name: Access-Control-Allow-Methods
+          value: GET, PUT, POST, DELETE, PATCH, OPTIONS
+        - name: Access-Control-Allow-Headers
+          value: DNT,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization
+        - name: Access-Control-Max-Age
+          value: "43200"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "partnerTrxId": "PERFORMA-1",
+                  "code": 3,
+                  "signedDocs": [],
+                  "lastUpdateAt": "2024-08-21T04:37:48Z",
+                  "failureReason": "Document signing failed"
+              }
+          }
+  - name: success
+    request:
+      url: "{{base-url-service-sandbox}}/signer/v2/services/esign/407d842a-8708-40f9-9876-1c3936b4045a"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Wed, 21 Aug 2024 04:45:11 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-XSS-Protection
+          value: 1; mode=block
+        - name: Cache-Control
+          value: no-cache, no-store, max-age=0, must-revalidate
+        - name: Pragma
+          value: no-cache
+        - name: Expires
+          value: "0"
+        - name: Strict-Transport-Security
+          value: max-age=31536000 ; includeSubDomains
+        - name: Strict-Transport-Security
+          value: max-age=63072000
+        - name: Access-Control-Allow-Origin
+          value: "*"
+        - name: Access-Control-Allow-Credentials
+          value: "true"
+        - name: Access-Control-Allow-Methods
+          value: GET, PUT, POST, DELETE, PATCH, OPTIONS
+        - name: Access-Control-Allow-Headers
+          value: DNT,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization
+        - name: Access-Control-Max-Age
+          value: "43200"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "partnerTrxId": "PERFORMA-1",
+                  "code": 2,
+                  "signedDocs": [
+                      {
+                          "pdfTemplateId": "0",
+                          "documentUrl": "https://vida-cloudstore.s3.ap-southeast-1.amazonaws.com/104/407d842a-8708-40f9-9876-1c3936b4045a0f4113871-5a83-4212-83e0-70a631b8dd3c?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20240821T044501Z&X-Amz-SignedHeaders=host&X-Amz-Expires=259200&X-Amz-Credential=AKIA4UULD5E6TSYHT34S%2F20240821%2Fap-southeast-1%2Fs3%2Faws4_request&X-Amz-Signature=017d6041b59a02bc6ba7cbaf5b3547972a59992683949904f99a4e01d577d688",
+                          "code": 0
+                      }
+                  ],
+                  "lastUpdateAt": "2024-08-21T04:45:02Z"
+              }
+          }
+  - name: success POA
+    request:
+      url: "{{base-url-service-sandbox}}/signer/v2/services/esign/6e560524-e5c3-4f5b-a4f4-adffba97c11b"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Thu, 12 Jun 2025 06:25:50 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-XSS-Protection
+          value: 1; mode=block
+        - name: Cache-Control
+          value: no-cache, no-store, max-age=0, must-revalidate
+        - name: Pragma
+          value: no-cache
+        - name: Expires
+          value: "0"
+        - name: Strict-Transport-Security
+          value: max-age=31536000 ; includeSubDomains
+        - name: Strict-Transport-Security
+          value: max-age=63072000
+        - name: Access-Control-Allow-Origin
+          value: "*"
+        - name: Access-Control-Allow-Credentials
+          value: "true"
+        - name: Access-Control-Allow-Methods
+          value: GET, PUT, POST, DELETE, PATCH, OPTIONS
+        - name: Access-Control-Allow-Headers
+          value: DNT,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization
+        - name: Access-Control-Max-Age
+          value: "43200"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "partnerTrxId": "PERFORMA-1",
+                  "code": 2,
+                  "signedDocs": [
+                      {
+                          "pdfTemplateId": "0",
+                          "documentUrl": "https://vida-sign.s3.ap-southeast-3.amazonaws.com/959/6e560524-e5c3-4f5b-a4f4-adffba97c11b0c48366f8-e832-4a51-a3fe-84bb6a9b8973?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20250612T062507Z&X-Amz-SignedHeaders=host&X-Amz-Expires=259200&X-Amz-Credential=AKIA4UULD5E6VI4SGBCZ%2F20250612%2Fap-southeast-3%2Fs3%2Faws4_request&X-Amz-Signature=6b505d14e05ab345afaec3fab82de9b608cd9c7b2aa17acfbd3f3f8c095aa348",
+                          "code": 0
+                      }
+                  ],
+                  "lastUpdateAt": "2025-06-11T23:25:07Z"
+              }
+          }
+  - name: error - tte failed
+    request:
+      url: "{{base-url-service-sandbox}}/signer/v2/services/esign/9aea20af-4cbb-4f84-98b7-c194e1dc8328"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Wed, 21 Aug 2024 04:38:36 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-XSS-Protection
+          value: 1; mode=block
+        - name: Cache-Control
+          value: no-cache, no-store, max-age=0, must-revalidate
+        - name: Pragma
+          value: no-cache
+        - name: Expires
+          value: "0"
+        - name: Strict-Transport-Security
+          value: max-age=31536000 ; includeSubDomains
+        - name: Strict-Transport-Security
+          value: max-age=63072000
+        - name: Access-Control-Allow-Origin
+          value: "*"
+        - name: Access-Control-Allow-Credentials
+          value: "true"
+        - name: Access-Control-Allow-Methods
+          value: GET, PUT, POST, DELETE, PATCH, OPTIONS
+        - name: Access-Control-Allow-Headers
+          value: DNT,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization
+        - name: Access-Control-Max-Age
+          value: "43200"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "partnerTrxId": "PERFORMA-1",
+                  "code": 3,
+                  "signedDocs": [],
+                  "lastUpdateAt": "2024-08-21T04:37:48Z",
+                  "failureReason": "Document signing failed"
+              }
+          }
+  - name: success
+    request:
+      url: "{{base-url-service-sandbox}}/signer/v2/services/esign/407d842a-8708-40f9-9876-1c3936b4045a"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Wed, 21 Aug 2024 04:45:11 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-XSS-Protection
+          value: 1; mode=block
+        - name: Cache-Control
+          value: no-cache, no-store, max-age=0, must-revalidate
+        - name: Pragma
+          value: no-cache
+        - name: Expires
+          value: "0"
+        - name: Strict-Transport-Security
+          value: max-age=31536000 ; includeSubDomains
+        - name: Strict-Transport-Security
+          value: max-age=63072000
+        - name: Access-Control-Allow-Origin
+          value: "*"
+        - name: Access-Control-Allow-Credentials
+          value: "true"
+        - name: Access-Control-Allow-Methods
+          value: GET, PUT, POST, DELETE, PATCH, OPTIONS
+        - name: Access-Control-Allow-Headers
+          value: DNT,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization
+        - name: Access-Control-Max-Age
+          value: "43200"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "partnerTrxId": "PERFORMA-1",
+                  "code": 2,
+                  "signedDocs": [
+                      {
+                          "pdfTemplateId": "0",
+                          "documentUrl": "https://vida-cloudstore.s3.ap-southeast-1.amazonaws.com/104/407d842a-8708-40f9-9876-1c3936b4045a0f4113871-5a83-4212-83e0-70a631b8dd3c?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20240821T044501Z&X-Amz-SignedHeaders=host&X-Amz-Expires=259200&X-Amz-Credential=AKIA4UULD5E6TSYHT34S%2F20240821%2Fap-southeast-1%2Fs3%2Faws4_request&X-Amz-Signature=017d6041b59a02bc6ba7cbaf5b3547972a59992683949904f99a4e01d577d688",
+                          "code": 0
+                      }
+                  ],
+                  "lastUpdateAt": "2024-08-21T04:45:02Z"
+              }
+          }
+  - name: success POA
+    request:
+      url: "{{base-url-service-sandbox}}/signer/v2/services/esign/6e560524-e5c3-4f5b-a4f4-adffba97c11b"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Thu, 12 Jun 2025 06:25:50 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-XSS-Protection
+          value: 1; mode=block
+        - name: Cache-Control
+          value: no-cache, no-store, max-age=0, must-revalidate
+        - name: Pragma
+          value: no-cache
+        - name: Expires
+          value: "0"
+        - name: Strict-Transport-Security
+          value: max-age=31536000 ; includeSubDomains
+        - name: Strict-Transport-Security
+          value: max-age=63072000
+        - name: Access-Control-Allow-Origin
+          value: "*"
+        - name: Access-Control-Allow-Credentials
+          value: "true"
+        - name: Access-Control-Allow-Methods
+          value: GET, PUT, POST, DELETE, PATCH, OPTIONS
+        - name: Access-Control-Allow-Headers
+          value: DNT,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization
+        - name: Access-Control-Max-Age
+          value: "43200"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "partnerTrxId": "PERFORMA-1",
+                  "code": 2,
+                  "signedDocs": [
+                      {
+                          "pdfTemplateId": "0",
+                          "documentUrl": "https://vida-sign.s3.ap-southeast-3.amazonaws.com/959/6e560524-e5c3-4f5b-a4f4-adffba97c11b0c48366f8-e832-4a51-a3fe-84bb6a9b8973?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20250612T062507Z&X-Amz-SignedHeaders=host&X-Amz-Expires=259200&X-Amz-Credential=AKIA4UULD5E6VI4SGBCZ%2F20250612%2Fap-southeast-3%2Fs3%2Faws4_request&X-Amz-Signature=6b505d14e05ab345afaec3fab82de9b608cd9c7b2aa17acfbd3f3f8c095aa348",
+                          "code": 0
+                      }
+                  ],
+                  "lastUpdateAt": "2025-06-11T23:25:07Z"
+              }
+          }
+  - name: error - 401
+    request:
+      url: "{{base-url-service-sandbox}}/signer/v2/services/esign"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            // ... other fields remain constant
+            "user": {
+              "vidaEkycEventId": "8def95f6-16b7-4a6a-a84a-f07be91bf56b"
+            },
+            "signingInfo": [
+              {
+                  "pdfFile": "{{sphPDFBase64}}",
+                  "pageNo": "27",
+                  "xPoint": "0",
+                  "yPoint": "0",
+                  "height": "0",
+                  "width": "0",
+                  "clientFilename": "dokumen_pinjaman_20240820144439.pdf",
+                  "qrEnable": true,
+                  "appearance": {
+                      "type": "standard"
+                      // "signImage": ""
+                  }
+              }
+            ],
+            "requestInfo": {
+              "userAgent": "Staging",
+              "srcIp": "Staging",
+              "consentTimestamp": "1702362951"
+            },
+            "device": {
+          		"os": "Android",
+          		"model": "Staging",
+          		"uniqueId": "Staging+O+2QE",
+          		"networkProvider": "IND idea"
+            }
+            // ... other fields remain constant
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Tue, 20 Aug 2024 11:02:49 GMT
+        - name: Content-Length
+          value: "0"
+        - name: Connection
+          value: keep-alive
+        - name: WWW-Authenticate
+          value: 'Bearer error="invalid_token", error_description="An error occurred while attempting to decode the Jwt: Jwt expired at 2024-08-14T11:59:21Z", error_uri="https://tools.ietf.org/html/rfc6750#section-3.1"'
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-XSS-Protection
+          value: 1; mode=block
+        - name: Cache-Control
+          value: no-cache, no-store, max-age=0, must-revalidate
+        - name: Pragma
+          value: no-cache
+        - name: Expires
+          value: "0"
+        - name: Strict-Transport-Security
+          value: max-age=31536000 ; includeSubDomains
+        - name: Strict-Transport-Security
+          value: max-age=63072000
+        - name: Access-Control-Allow-Origin
+          value: "*"
+        - name: Access-Control-Allow-Credentials
+          value: "true"
+        - name: Access-Control-Allow-Methods
+          value: GET, PUT, POST, DELETE, PATCH, OPTIONS
+        - name: Access-Control-Allow-Headers
+          value: DNT,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization
+        - name: Access-Control-Max-Age
+          value: "43200"
+      body:
+        type: text
+        data: ""

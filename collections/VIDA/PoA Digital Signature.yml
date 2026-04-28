@@ -1,0 +1,252 @@
+info:
+  name: PoA Digital Signature
+  type: http
+  seq: 9
+
+http:
+  method: POST
+  url: "{{base-url-service-sandbox}}/signer/v2/services/esign/poa?raType=int&docType=nontemplate"
+  params:
+    - name: raType
+      value: int
+      type: query
+    - name: docType
+      value: nontemplate
+      type: query
+  body:
+    type: json
+    data: |-
+      {
+      	"partnerTrxId": "PERFORMA-1",
+      	"signer": {
+      		"email": "pinangflexi-poa-sandbox@yopmail.com",
+      		"keyId": "3eb3bb2f903587a41da9dacd9ae8caf06317b074",
+      		"apiKey": "0dlypyZwEQcO0llN",
+      		"encCVV": "5_td0TotIT5UkJeycg"
+      	},
+      	"requestInfo": {
+      		"userAgent": "Mozilla/5.0 (X11;Linux x86_64) AppleWebKit / 537.36",
+      		"srcIp": "172.217.22.14",
+      		"consentTimestamp": "1702362951"		
+      	},
+      	"device": {
+      		"os": "R",
+      		"model": "KB2001",
+      		"uniqueId": "AF7KI0bly3aPIsYJ4+O+2QE",
+      		"networkProvider": "IND idea"
+      	},
+        	"signingInfo": [{
+      	        "pdfFile": "{{sphPDFBase64}}",
+            		"pageNo": "1", // hardcode
+                  "xPoint": "0", // hardcode
+                  "yPoint": "0", // hardcode
+                  "height": "0", // hardcode
+                  "width": "0", // hardcode
+      	      	"clientFilename": "File Name 123",
+      	      	"qrEnable": true,
+      	      	"appearance": {
+      	        	"type": "non_visual" // hardcode
+      	        }
+      	}]
+      }
+  auth:
+    type: bearer
+    token: "{{vida-token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: success
+    request:
+      url: "{{base-url-service-sandbox}}/signer/v2/services/esign/poa?raType=int&docType=nontemplate"
+      method: POST
+      params:
+        - name: raType
+          value: int
+          type: query
+        - name: docType
+          value: nontemplate
+          type: query
+      body:
+        type: json
+        data: |-
+          {
+          	"partnerTrxId": "PERFORMA-1",
+          	"signer": {
+          		"email": "pinangflexi-poa-sandbox@yopmail.com",
+          		"keyId": "3eb3bb2f903587a41da9dacd9ae8caf06317b074",
+          		"apiKey": "0dlypyZwEQcO0llN",
+          		"encCVV": "5_td0TotIT5VmZWxcw=="
+          	},
+          	"requestInfo": {
+          		"userAgent": "Mozilla/5.0 (X11;Linux x86_64) AppleWebKit / 537.36",
+          		"srcIp": "172.217.22.14",
+          		"consentTimestamp": "1702362951"		
+          	},
+          	"device": {
+          		"os": "R",
+          		"model": "KB2001",
+          		"uniqueId": "AF7KI0bly3aPIsYJ4+O+2QE",
+          		"networkProvider": "IND idea"
+          	},
+            	"signingInfo": [{
+          	        "pdfFile": "{{sphPDFBase64}}",
+                		"pageNo": "1", // hardcode
+                      "xPoint": "0", // hardcode
+                      "yPoint": "0", // hardcode
+                      "height": "0", // hardcode
+                      "width": "0", // hardcode
+          	      	"clientFilename": "File Name 123",
+          	      	"qrEnable": true,
+          	      	"appearance": {
+          	        	"type": "non_visual" // hardcode
+          	        }
+          	}]
+          }
+    response:
+      status: 201
+      statusText: Created
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Thu, 12 Jun 2025 06:25:06 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Location
+          value: https://services-sandbox.vida.id/signer/v2/services/esign/poa/6e560524-e5c3-4f5b-a4f4-adffba97c11b?raType=int&docType=nontemplate
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-XSS-Protection
+          value: 1; mode=block
+        - name: Cache-Control
+          value: no-cache, no-store, max-age=0, must-revalidate
+        - name: Pragma
+          value: no-cache
+        - name: Expires
+          value: "0"
+        - name: Strict-Transport-Security
+          value: max-age=31536000 ; includeSubDomains
+        - name: Strict-Transport-Security
+          value: max-age=63072000
+        - name: Access-Control-Allow-Origin
+          value: "*"
+        - name: Access-Control-Allow-Credentials
+          value: "true"
+        - name: Access-Control-Allow-Methods
+          value: GET, PUT, POST, DELETE, PATCH, OPTIONS
+        - name: Access-Control-Allow-Headers
+          value: DNT,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization
+        - name: Access-Control-Max-Age
+          value: "43200"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "id": "6e560524-e5c3-4f5b-a4f4-adffba97c11b"
+              }
+          }
+  - name: success
+    request:
+      url: "{{base-url-service-sandbox}}/signer/v2/services/esign/poa?raType=int&docType=nontemplate"
+      method: POST
+      params:
+        - name: raType
+          value: int
+          type: query
+        - name: docType
+          value: nontemplate
+          type: query
+      body:
+        type: json
+        data: |-
+          {
+          	"partnerTrxId": "PERFORMA-1",
+          	"signer": {
+          		"email": "pinangflexi-poa-sandbox@yopmail.com",
+          		"keyId": "3eb3bb2f903587a41da9dacd9ae8caf06317b074",
+          		"apiKey": "0dlypyZwEQcO0llN",
+          		"encCVV": "5_td0TotIT5VmZWxcw=="
+          	},
+          	"requestInfo": {
+          		"userAgent": "Mozilla/5.0 (X11;Linux x86_64) AppleWebKit / 537.36",
+          		"srcIp": "172.217.22.14",
+          		"consentTimestamp": "1702362951"		
+          	},
+          	"device": {
+          		"os": "R",
+          		"model": "KB2001",
+          		"uniqueId": "AF7KI0bly3aPIsYJ4+O+2QE",
+          		"networkProvider": "IND idea"
+          	},
+            	"signingInfo": [{
+          	        "pdfFile": "{{sphPDFBase64}}",
+                		"pageNo": "1", // hardcode
+                      "xPoint": "0", // hardcode
+                      "yPoint": "0", // hardcode
+                      "height": "0", // hardcode
+                      "width": "0", // hardcode
+          	      	"clientFilename": "File Name 123",
+          	      	"qrEnable": true,
+          	      	"appearance": {
+          	        	"type": "non_visual" // hardcode
+          	        }
+          	}]
+          }
+    response:
+      status: 201
+      statusText: Created
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Thu, 12 Jun 2025 06:25:06 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Location
+          value: https://services-sandbox.vida.id/signer/v2/services/esign/poa/6e560524-e5c3-4f5b-a4f4-adffba97c11b?raType=int&docType=nontemplate
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-XSS-Protection
+          value: 1; mode=block
+        - name: Cache-Control
+          value: no-cache, no-store, max-age=0, must-revalidate
+        - name: Pragma
+          value: no-cache
+        - name: Expires
+          value: "0"
+        - name: Strict-Transport-Security
+          value: max-age=31536000 ; includeSubDomains
+        - name: Strict-Transport-Security
+          value: max-age=63072000
+        - name: Access-Control-Allow-Origin
+          value: "*"
+        - name: Access-Control-Allow-Credentials
+          value: "true"
+        - name: Access-Control-Allow-Methods
+          value: GET, PUT, POST, DELETE, PATCH, OPTIONS
+        - name: Access-Control-Allow-Headers
+          value: DNT,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization
+        - name: Access-Control-Max-Age
+          value: "43200"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "id": "6e560524-e5c3-4f5b-a4f4-adffba97c11b"
+              }
+          }

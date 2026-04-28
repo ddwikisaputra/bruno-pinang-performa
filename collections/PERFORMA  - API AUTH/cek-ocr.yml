@@ -1,0 +1,19 @@
+meta:
+  name: cek-ocr
+  type: http
+  seq: 1
+
+request:
+  method: POST
+  url: http://localhost:7007/v/1/ekyc/cek-ocr
+
+headers:
+  Api-Key: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
+  Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+  Content-Type: application/x-www-form-urlencoded
+
+body:
+  type: form-urlencoded
+  form:
+    nomorIdentitas: MzE3MTA1MTIxMTk1MDAwMg==
+    kodePartnership: QUdVLTE5MA==
