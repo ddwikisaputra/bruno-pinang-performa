@@ -1,0 +1,34 @@
+info:
+  name: Demographic & Biometric Verification
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: https://services-sandbox.vida.id/main/v2/services/fraud
+  body:
+    type: json
+    data: |-
+      {
+        "partnerTrxId": "1000073-c00f-4008-8005-d2ec4d9be975",
+        "transactionType": "FULL_FRAUD_ASSESSMENT",
+        "govId": "3511000101806300",
+        "govIdType": "KTP",
+        "fullName": "UserGDAA",
+        "dob": "1980-01-01",
+        "mobile": "+6281293671234",
+        "email": "user@gmail.com",
+        "consent": {
+          "consentedAt": "1614089870",
+          "consentGiven": true
+        },
+        "selfiePhoto": "{{selfieBlob }}",
+        "idCardPhoto": "{{ktpBlob }}"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
