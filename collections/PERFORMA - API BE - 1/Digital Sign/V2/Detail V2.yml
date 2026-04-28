@@ -1,0 +1,903 @@
+info:
+  name: Detail V2
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{base_url_dev}}/v/2/digitalsign/detail"
+  body:
+    type: form-urlencoded
+    data:
+      - name: id
+        value: UmF5YVBpUGVyVG9w/lx6nGT4lUZqKWaPHO473n2U6FWtyCIygSantUHgOoc=
+        description: KTP Number (Encode AES) {MANDATORY}
+  auth:
+    type: bearer
+    token: "{{tokenJWT}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/2/digitalsign/detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: MzEzMjg=
+            description: Nomor KTP Debitur (Encode Base64) {MANDATORY}
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Sat, 22 May 2021 06:53:21 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Accept-Encoding
+        - name: Content-Encoding
+          value: gzip
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "message": "signature is invalid || Token is expired"
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/2/digitalsign/detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: MzEzMjg=
+            description: Nomor KTP Debitur (Encode Base64) {MANDATORY}
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{base_url}}/v/2/digitalsign/detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: MzEzMjg=
+            description: Nomor KTP Debitur (Encode Base64) {MANDATORY}
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 18 Jul 2022 07:35:20 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/2/digitalsign/detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: MzEzMjg=
+            description: Nomor KTP Debitur (Encode Base64) {MANDATORY}
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Sat, 22 May 2021 06:53:21 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Accept-Encoding
+        - name: Content-Encoding
+          value: gzip
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data" : null
+          }
+  - name: empty data
+    request:
+      url: "{{base_url}}/v/2/digitalsign/detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: MzEzMjg=
+            description: Nomor KTP Debitur (Encode Base64) {MANDATORY}
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Sat, 22 May 2021 06:53:21 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Accept-Encoding
+        - name: Content-Encoding
+          value: gzip
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Error Record Not Found",
+              "message": "Data Tidak Ditemukan",
+              "status": 404
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/2/digitalsign/detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: UmF5YVBpUGVyVG9w/l59mWX1lENrKWaCHO473kZM1HNaxWQHyWtuDkSVBLM=
+            description: Nomor KTP Debitur (Encode Base64) {MANDATORY}
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 03 Jan 2023 04:16:23 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "kodeProses": "UmF5YVBpUGVyVG9wgBcInRm36UkyTBfFy6oX2zMd3im2i4D0",
+                  "ktpNumber": "UmF5YVBpUGVyVG9wgBcA2hqJ4UAWXDzNYYpg2/cpZd2bCaU0NvSEJdjHkm5bGg1S8w64FA==",
+                  "name": "UmF5YVBpUGVyVG9wigQhzDqqhCY0dT7eRLFlz/QYVsW+Nfln35kqWUvB53ocud/TPQJMgw==",
+                  "email": "UmF5YVBpUGVyVG9wl18h3g2akRoXdWqLT7MygNg6Yt+HH9Jh2IzY1yKwS6Ki2HzC25EEGejsmby4lDkMLQy7XD9/Ndg=",
+                  "maritalStatus": "Belum Kawin",
+                  "mobileNumber": "UmF5YVBpUGVyVG9wgikYnhq35QMWXBKOYaRa0rf/1vPmW+io9P+gZ+qO2JY=",
+                  "partnerKtpNumber": "UmF5YVBpUGVyVG9wKnG7Rp5D6MKFawa0c57EJw==",
+                  "partnerEmail": "UmF5YVBpUGVyVG9wKnG7Rp5D6MKFawa0c57EJw==",
+                  "partnerMobileNumber": "UmF5YVBpUGVyVG9wKnG7Rp5D6MKFawa0c57EJw==",
+                  "partnerName": "",
+                  "loanAmount": "UmF5YVBpUGVyVG9wKnG7Rp5D6MKFawa0c57EJw==",
+                  "loanTerm": 0,
+                  "installmentAmount": 0,
+                  "insuranceAmount": 0,
+                  "insuranceDebitur": 0,
+                  "insuranceBank": 0,
+                  "provisionFee": 0,
+                  "administrationFee": 0,
+                  "status": 1,
+                  "statusText": "Pengajuan Pinjaman",
+                  "statusPrakarsa": 3,
+                  "expiredDate": "",
+                  "isBypassDigitalsign": 0,
+                  "statusDocument": -1
+              },
+              "desc": "Data Valid",
+              "message": "Data Ditemukan",
+              "status": 200
+          }
+  - name: status prakarsa ditolak nasabah (digitalsign0 [-1]
+    request:
+      url: "{{base_url}}/v/2/digitalsign/detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: MTM3MTA2MjUwMTk1MDAwOQ==
+            description: KTP Number (Encode base64) {MANDATORY}
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 25 Jul 2023 08:09:13 GMT
+        - name: Content-Length
+          value: "457"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "kodeProses": "MjA5NDI=",
+                  "ktpNumber": "MTM3MTA2MjUwMTk1MDAwOQ==",
+                  "name": "Yoga Wahyudi",
+                  "email": "eW9nYXdhaHl1ZGlAZ21haWwuY29t",
+                  "maritalStatus": "Belum Kawin",
+                  "mobileNumber": "ODIyODgxOTQwNDc=",
+                  "partnerKtpNumber": "",
+                  "partnerEmail": "",
+                  "partnerMobileNumber": "",
+                  "loanAmount": 150000000,
+                  "loanTerm": 12,
+                  "installmentAmount": 89463,
+                  "insuranceAmount": 100000,
+                  "provisionFee": 150000,
+                  "administrationFee": 50000,
+                  "status": -2,
+                  "statusText": "Prakarsa Ditolak Nasabah",
+                  "statusPrakarsa": 8,
+                  "expiredDate": "",
+                  "isBypassDigitalsign": 1
+              },
+              "desc": "Data Valid",
+              "message": "Data Ditemukan",
+              "status": 200
+          }
+  - name: status prakarsa sedang dalam pengajuan [1-7 & 10]
+    request:
+      url: "{{base_url}}/v/2/digitalsign/detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: MTM3MTA2MjUwMTk1MDAwOQ==
+            description: KTP Number (Encode base64) {MANDATORY}
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 25 Jul 2023 08:09:52 GMT
+        - name: Content-Length
+          value: "450"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "kodeProses": "MjA5NDI=",
+                  "ktpNumber": "MTM3MTA2MjUwMTk1MDAwOQ==",
+                  "name": "Yoga Wahyudi",
+                  "email": "eW9nYXdhaHl1ZGlAZ21haWwuY29t",
+                  "maritalStatus": "Belum Kawin",
+                  "mobileNumber": "ODIyODgxOTQwNDc=",
+                  "partnerKtpNumber": "",
+                  "partnerEmail": "",
+                  "partnerMobileNumber": "",
+                  "loanAmount": 150000000,
+                  "loanTerm": 12,
+                  "installmentAmount": 89463,
+                  "insuranceAmount": 100000,
+                  "provisionFee": 150000,
+                  "administrationFee": 50000,
+                  "status": 1,
+                  "statusText": "Pengajuan Pinjaman",
+                  "statusPrakarsa": 8,
+                  "expiredDate": ""
+              },
+              "desc": "Data Valid",
+              "message": "Data Ditemukan",
+              "status": 200
+          }
+  - name: status prakarsa pencairan berhasil [9]
+    request:
+      url: "{{base_url}}/v/2/digitalsign/detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: MTM3MTA2MjUwMTk1MDAwOQ==
+            description: KTP Number (Encode base64) {MANDATORY}
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 25 Jul 2023 08:11:07 GMT
+        - name: Content-Length
+          value: "451"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "kodeProses": "MjA5NDI=",
+                  "ktpNumber": "MTM3MTA2MjUwMTk1MDAwOQ==",
+                  "name": "Yoga Wahyudi",
+                  "email": "eW9nYXdhaHl1ZGlAZ21haWwuY29t",
+                  "maritalStatus": "Belum Kawin",
+                  "mobileNumber": "ODIyODgxOTQwNDc=",
+                  "partnerKtpNumber": "",
+                  "partnerEmail": "",
+                  "partnerMobileNumber": "",
+                  "loanAmount": 150000000,
+                  "loanTerm": 12,
+                  "installmentAmount": 89463,
+                  "insuranceAmount": 100000,
+                  "provisionFee": 150000,
+                  "administrationFee": 50000,
+                  "status": 1,
+                  "statusText": "Monitoring Pinjaman",
+                  "statusPrakarsa": 9,
+                  "expiredDate": ""
+              },
+              "desc": "Data Valid",
+              "message": "Data Ditemukan",
+              "status": 200
+          }
+  - name: status prakarsa semua ditolak
+    request:
+      url: "{{base_url}}/v/2/digitalsign/detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: MTM3MTA2MjUwMTk1MDAwOQ==
+            description: KTP Number (Encode base64) {MANDATORY}
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 25 Jul 2023 08:11:47 GMT
+        - name: Content-Length
+          value: "450"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "kodeProses": "MjA5NDI=",
+                  "ktpNumber": "MTM3MTA2MjUwMTk1MDAwOQ==",
+                  "name": "Yoga Wahyudi",
+                  "email": "eW9nYXdhaHl1ZGlAZ21haWwuY29t",
+                  "maritalStatus": "Belum Kawin",
+                  "mobileNumber": "ODIyODgxOTQwNDc=",
+                  "partnerKtpNumber": "",
+                  "partnerEmail": "",
+                  "partnerMobileNumber": "",
+                  "loanAmount": 150000000,
+                  "loanTerm": 12,
+                  "installmentAmount": 89463,
+                  "insuranceAmount": 100000,
+                  "provisionFee": 150000,
+                  "administrationFee": 50000,
+                  "status": -1,
+                  "statusText": "Prakarsa Ditolak",
+                  "statusPrakarsa": -3,
+                  "expiredDate": ""
+              },
+              "desc": "Data Valid",
+              "message": "Data Ditemukan",
+              "status": 200
+          }
+  - name: status ada di prakarsa tapi tidak ada di whitelist
+    request:
+      url: "{{base_url}}/v/2/digitalsign/detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: MTM3MTA2MjUwMTk1MDAwOQ==
+            description: KTP Number (Encode base64) {MANDATORY}
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 25 Jul 2023 08:31:14 GMT
+        - name: Content-Length
+          value: "143"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Maaf, Anda tidak terdaftar pada whitelist kami.",
+              "message": "Maaf, Anda tidak terdaftar pada whitelist kami.",
+              "status": 500
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/2/digitalsign/detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: UmF5YVBpUGVyVG9w/l59mWX1lENrKWaCHO473kZM1HNaxWQHyWtuDkSVBLM=
+            description: Nomor KTP Debitur (Encode Base64) {MANDATORY}
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 03 Jan 2023 04:16:23 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "kodeProses": "UmF5YVBpUGVyVG9wgBcInRm36UkyTBfFy6oX2zMd3im2i4D0",
+                  "ktpNumber": "UmF5YVBpUGVyVG9wgBcA2hqJ4UAWXDzNYYpg2/cpZd2bCaU0NvSEJdjHkm5bGg1S8w64FA==",
+                  "name": "UmF5YVBpUGVyVG9wigQhzDqqhCY0dT7eRLFlz/QYVsW+Nfln35kqWUvB53ocud/TPQJMgw==",
+                  "email": "UmF5YVBpUGVyVG9wl18h3g2akRoXdWqLT7MygNg6Yt+HH9Jh2IzY1yKwS6Ki2HzC25EEGejsmby4lDkMLQy7XD9/Ndg=",
+                  "maritalStatus": "Belum Kawin",
+                  "mobileNumber": "UmF5YVBpUGVyVG9wgikYnhq35QMWXBKOYaRa0rf/1vPmW+io9P+gZ+qO2JY=",
+                  "partnerKtpNumber": "UmF5YVBpUGVyVG9wKnG7Rp5D6MKFawa0c57EJw==",
+                  "partnerEmail": "UmF5YVBpUGVyVG9wKnG7Rp5D6MKFawa0c57EJw==",
+                  "partnerMobileNumber": "UmF5YVBpUGVyVG9wKnG7Rp5D6MKFawa0c57EJw==",
+                  "partnerName": "",
+                  "loanAmount": "UmF5YVBpUGVyVG9wKnG7Rp5D6MKFawa0c57EJw==",
+                  "loanTerm": 0,
+                  "installmentAmount": 0,
+                  "insuranceAmount": 0,
+                  "insuranceDebitur": 0,
+                  "insuranceBank": 0,
+                  "provisionFee": 0,
+                  "administrationFee": 0,
+                  "status": 1,
+                  "statusText": "Pengajuan Pinjaman",
+                  "statusPrakarsa": 3,
+                  "expiredDate": "",
+                  "isBypassDigitalsign": 0,
+                  "statusDocument": -1
+              },
+              "desc": "Data Valid",
+              "message": "Data Ditemukan",
+              "status": 200
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{base_url}}/v/2/digitalsign/detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: MzEzMjg=
+            description: Nomor KTP Debitur (Encode Base64) {MANDATORY}
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 18 Jul 2022 07:35:20 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/2/digitalsign/detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: MzEzMjg=
+            description: Nomor KTP Debitur (Encode Base64) {MANDATORY}
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Sat, 22 May 2021 06:53:21 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Accept-Encoding
+        - name: Content-Encoding
+          value: gzip
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "message": "signature is invalid || Token is expired"
+          }
+  - name: status ada di prakarsa tapi tidak ada di whitelist
+    request:
+      url: "{{base_url}}/v/2/digitalsign/detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: MTM3MTA2MjUwMTk1MDAwOQ==
+            description: KTP Number (Encode base64) {MANDATORY}
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 25 Jul 2023 08:31:14 GMT
+        - name: Content-Length
+          value: "143"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Maaf, Anda tidak terdaftar pada whitelist kami.",
+              "message": "Maaf, Anda tidak terdaftar pada whitelist kami.",
+              "status": 500
+          }
+  - name: status prakarsa pencairan berhasil [9]
+    request:
+      url: "{{base_url}}/v/2/digitalsign/detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: MTM3MTA2MjUwMTk1MDAwOQ==
+            description: KTP Number (Encode base64) {MANDATORY}
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 25 Jul 2023 08:11:07 GMT
+        - name: Content-Length
+          value: "451"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "kodeProses": "MjA5NDI=",
+                  "ktpNumber": "MTM3MTA2MjUwMTk1MDAwOQ==",
+                  "name": "Yoga Wahyudi",
+                  "email": "eW9nYXdhaHl1ZGlAZ21haWwuY29t",
+                  "maritalStatus": "Belum Kawin",
+                  "mobileNumber": "ODIyODgxOTQwNDc=",
+                  "partnerKtpNumber": "",
+                  "partnerEmail": "",
+                  "partnerMobileNumber": "",
+                  "loanAmount": 150000000,
+                  "loanTerm": 12,
+                  "installmentAmount": 89463,
+                  "insuranceAmount": 100000,
+                  "provisionFee": 150000,
+                  "administrationFee": 50000,
+                  "status": 1,
+                  "statusText": "Monitoring Pinjaman",
+                  "statusPrakarsa": 9,
+                  "expiredDate": ""
+              },
+              "desc": "Data Valid",
+              "message": "Data Ditemukan",
+              "status": 200
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/2/digitalsign/detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: MzEzMjg=
+            description: Nomor KTP Debitur (Encode Base64) {MANDATORY}
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Sat, 22 May 2021 06:53:21 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Accept-Encoding
+        - name: Content-Encoding
+          value: gzip
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data" : null
+          }
+  - name: status prakarsa semua ditolak
+    request:
+      url: "{{base_url}}/v/2/digitalsign/detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: MTM3MTA2MjUwMTk1MDAwOQ==
+            description: KTP Number (Encode base64) {MANDATORY}
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 25 Jul 2023 08:11:47 GMT
+        - name: Content-Length
+          value: "450"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "kodeProses": "MjA5NDI=",
+                  "ktpNumber": "MTM3MTA2MjUwMTk1MDAwOQ==",
+                  "name": "Yoga Wahyudi",
+                  "email": "eW9nYXdhaHl1ZGlAZ21haWwuY29t",
+                  "maritalStatus": "Belum Kawin",
+                  "mobileNumber": "ODIyODgxOTQwNDc=",
+                  "partnerKtpNumber": "",
+                  "partnerEmail": "",
+                  "partnerMobileNumber": "",
+                  "loanAmount": 150000000,
+                  "loanTerm": 12,
+                  "installmentAmount": 89463,
+                  "insuranceAmount": 100000,
+                  "provisionFee": 150000,
+                  "administrationFee": 50000,
+                  "status": -1,
+                  "statusText": "Prakarsa Ditolak",
+                  "statusPrakarsa": -3,
+                  "expiredDate": ""
+              },
+              "desc": "Data Valid",
+              "message": "Data Ditemukan",
+              "status": 200
+          }
+  - name: status prakarsa ditolak nasabah (digitalsign0 [-1]
+    request:
+      url: "{{base_url}}/v/2/digitalsign/detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: MTM3MTA2MjUwMTk1MDAwOQ==
+            description: KTP Number (Encode base64) {MANDATORY}
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 25 Jul 2023 08:09:13 GMT
+        - name: Content-Length
+          value: "457"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "kodeProses": "MjA5NDI=",
+                  "ktpNumber": "MTM3MTA2MjUwMTk1MDAwOQ==",
+                  "name": "Yoga Wahyudi",
+                  "email": "eW9nYXdhaHl1ZGlAZ21haWwuY29t",
+                  "maritalStatus": "Belum Kawin",
+                  "mobileNumber": "ODIyODgxOTQwNDc=",
+                  "partnerKtpNumber": "",
+                  "partnerEmail": "",
+                  "partnerMobileNumber": "",
+                  "loanAmount": 150000000,
+                  "loanTerm": 12,
+                  "installmentAmount": 89463,
+                  "insuranceAmount": 100000,
+                  "provisionFee": 150000,
+                  "administrationFee": 50000,
+                  "status": -2,
+                  "statusText": "Prakarsa Ditolak Nasabah",
+                  "statusPrakarsa": 8,
+                  "expiredDate": "",
+                  "isBypassDigitalsign": 1
+              },
+              "desc": "Data Valid",
+              "message": "Data Ditemukan",
+              "status": 200
+          }
+  - name: empty data
+    request:
+      url: "{{base_url}}/v/2/digitalsign/detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: MzEzMjg=
+            description: Nomor KTP Debitur (Encode Base64) {MANDATORY}
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Sat, 22 May 2021 06:53:21 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Accept-Encoding
+        - name: Content-Encoding
+          value: gzip
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Error Record Not Found",
+              "message": "Data Tidak Ditemukan",
+              "status": 404
+          }
+  - name: status prakarsa sedang dalam pengajuan [1-7 & 10]
+    request:
+      url: "{{base_url}}/v/2/digitalsign/detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: MTM3MTA2MjUwMTk1MDAwOQ==
+            description: KTP Number (Encode base64) {MANDATORY}
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 25 Jul 2023 08:09:52 GMT
+        - name: Content-Length
+          value: "450"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "kodeProses": "MjA5NDI=",
+                  "ktpNumber": "MTM3MTA2MjUwMTk1MDAwOQ==",
+                  "name": "Yoga Wahyudi",
+                  "email": "eW9nYXdhaHl1ZGlAZ21haWwuY29t",
+                  "maritalStatus": "Belum Kawin",
+                  "mobileNumber": "ODIyODgxOTQwNDc=",
+                  "partnerKtpNumber": "",
+                  "partnerEmail": "",
+                  "partnerMobileNumber": "",
+                  "loanAmount": 150000000,
+                  "loanTerm": 12,
+                  "installmentAmount": 89463,
+                  "insuranceAmount": 100000,
+                  "provisionFee": 150000,
+                  "administrationFee": 50000,
+                  "status": 1,
+                  "statusText": "Pengajuan Pinjaman",
+                  "statusPrakarsa": 8,
+                  "expiredDate": ""
+              },
+              "desc": "Data Valid",
+              "message": "Data Ditemukan",
+              "status": 200
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/2/digitalsign/detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: MzEzMjg=
+            description: Nomor KTP Debitur (Encode Base64) {MANDATORY}
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }

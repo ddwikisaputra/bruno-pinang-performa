@@ -1,0 +1,601 @@
+info:
+  name: Verify Account BRI V1 (v)
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{base_url}}/v/1/prakarsa/verifikasi-bri-account"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "999946"
+        description: Personal Number BRI Agro (UserID Login)
+      - name: prakarsaId
+        value: "1015"
+        description: Prakarsa ID { MANDATORY }
+      - name: accountNumberBRI
+        value: "20601121736506"
+        description: Nomor Rekening Nasabah { MANDATORY }
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/prakarsa/verifikasi-bri-account"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999900"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: prakarsaId
+            value: "700"
+            description: Prakarsa ID { MANDATORY }
+          - name: accountNumberBRI
+            value: "20601121736506"
+            description: Nomor Rekening Nasabah { MANDATORY }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 25 Jun 2021 08:43:58 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Tidak Memliki Akses",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/prakarsa/verifikasi-bri-account"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999900"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: prakarsaId
+            value: "700"
+            description: Prakarsa ID { MANDATORY }
+          - name: accountNumberBRI
+            value: "20601121736506"
+            description: Nomor Rekening Nasabah { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 25 Jun 2021 08:43:58 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect ....."
+          }
+  - name: error parameter validation
+    request:
+      url: "{{base_url}}/v/1/prakarsa/verifikasi-bri-account"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999900"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: prakarsaId
+            value: "700"
+            description: Prakarsa ID { MANDATORY }
+          - name: accountNumberBRI
+            value: "20601121736506"
+            description: Nomor Rekening Nasabah { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Sun, 18 Jun 2023 02:59:00 GMT
+        - name: Content-Length
+          value: "141"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "...",
+              "message": "...",
+              "status": 400
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/prakarsa/verifikasi-bri-account"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999900"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: prakarsaId
+            value: "700"
+            description: Prakarsa ID { MANDATORY }
+          - name: accountNumberBRI
+            value: "20601121736506"
+            description: Nomor Rekening Nasabah { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 25 Jun 2021 08:43:58 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{base_url}}/v/1/prakarsa/verifikasi-bri-account"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999900"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: prakarsaId
+            value: "700"
+            description: Prakarsa ID { MANDATORY }
+          - name: accountNumberBRI
+            value: "20601121736506"
+            description: Nomor Rekening Nasabah { MANDATORY }
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 19 Jul 2022 08:06:26 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: error validasi status
+    request:
+      url: "{{base_url}}/v/1/prakarsa/verifikasi-bri-account"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999900"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: prakarsaId
+            value: "700"
+            description: Prakarsa ID { MANDATORY }
+          - name: accountNumberBRI
+            value: "20601121736506"
+            description: Nomor Rekening Nasabah { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 25 Jun 2021 08:43:58 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Status != 7 (bukan Proses Akad Kredit)",
+              "message": "Maaf, Proses verifikasi rekening simpanan tidak dapat dilakukan. Silahkan monitor status terakhir Prakarsa.",
+              "status": 500
+          }
+  - name: error validasi ktp debitur != ktp pemilik rekening
+    request:
+      url: "{{base_url}}/v/1/prakarsa/verifikasi-bri-account"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999900"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: prakarsaId
+            value: "700"
+            description: Nomor Rekening Simpanan Digital Nasabah
+          - name: accountNumberBRI
+            value: "20601121736506"
+            description: Nama Rekening Simpanan Digital Nasabah
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Sun, 18 Jun 2023 05:46:13 GMT
+        - name: Content-Length
+          value: "196"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "isMatch": 0,
+                  "namaPemilikRekening": "",
+                  "tipeRekening": ""
+              },
+              "desc": "Verifikasi BRI Account Gagal",
+              "message": "Maaf, Pemilik rekening tidak sesuai dengan debitur yang sedang diprakarsai, silahkan coba dengan rekening lain.",
+              "status": 200
+          }
+  - name: success verifikasi account bri
+    request:
+      url: "{{base_url}}/v/1/prakarsa/verifikasi-bri-account"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999900"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: prakarsaId
+            value: "700"
+            description: Prakarsa ID { MANDATORY }
+          - name: accountNumberBRI
+            value: "20601121736506"
+            description: Nomor Rekening Nasabah { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Sun, 18 Jun 2023 05:47:37 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "isMatch": 1,
+                  "namaPemilikRekening": "JOHN DOE",
+                  "tipeRekening": "TABUNGAN BRI"
+              },
+              "desc": "Verifikasi BRI Account Berhasil",
+              "message": "Verifikasi Berhasil",
+              "status": 200
+          }
+  - name: success verifikasi account bri
+    request:
+      url: "{{base_url}}/v/1/prakarsa/verifikasi-bri-account"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999900"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: prakarsaId
+            value: "700"
+            description: Prakarsa ID { MANDATORY }
+          - name: accountNumberBRI
+            value: "20601121736506"
+            description: Nomor Rekening Nasabah { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Sun, 18 Jun 2023 05:47:37 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "isMatch": 1,
+                  "namaPemilikRekening": "JOHN DOE",
+                  "tipeRekening": "TABUNGAN BRI"
+              },
+              "desc": "Verifikasi BRI Account Berhasil",
+              "message": "Verifikasi Berhasil",
+              "status": 200
+          }
+  - name: error parameter validation
+    request:
+      url: "{{base_url}}/v/1/prakarsa/verifikasi-bri-account"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999900"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: prakarsaId
+            value: "700"
+            description: Prakarsa ID { MANDATORY }
+          - name: accountNumberBRI
+            value: "20601121736506"
+            description: Nomor Rekening Nasabah { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Sun, 18 Jun 2023 02:59:00 GMT
+        - name: Content-Length
+          value: "141"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "...",
+              "message": "...",
+              "status": 400
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{base_url}}/v/1/prakarsa/verifikasi-bri-account"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999900"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: prakarsaId
+            value: "700"
+            description: Prakarsa ID { MANDATORY }
+          - name: accountNumberBRI
+            value: "20601121736506"
+            description: Nomor Rekening Nasabah { MANDATORY }
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 19 Jul 2022 08:06:26 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: error validasi status
+    request:
+      url: "{{base_url}}/v/1/prakarsa/verifikasi-bri-account"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999900"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: prakarsaId
+            value: "700"
+            description: Prakarsa ID { MANDATORY }
+          - name: accountNumberBRI
+            value: "20601121736506"
+            description: Nomor Rekening Nasabah { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 25 Jun 2021 08:43:58 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Status != 7 (bukan Proses Akad Kredit)",
+              "message": "Maaf, Proses verifikasi rekening simpanan tidak dapat dilakukan. Silahkan monitor status terakhir Prakarsa.",
+              "status": 500
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/prakarsa/verifikasi-bri-account"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999900"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: prakarsaId
+            value: "700"
+            description: Prakarsa ID { MANDATORY }
+          - name: accountNumberBRI
+            value: "20601121736506"
+            description: Nomor Rekening Nasabah { MANDATORY }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 25 Jun 2021 08:43:58 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Tidak Memliki Akses",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/prakarsa/verifikasi-bri-account"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999900"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: prakarsaId
+            value: "700"
+            description: Prakarsa ID { MANDATORY }
+          - name: accountNumberBRI
+            value: "20601121736506"
+            description: Nomor Rekening Nasabah { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 25 Jun 2021 08:43:58 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/prakarsa/verifikasi-bri-account"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999900"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: prakarsaId
+            value: "700"
+            description: Prakarsa ID { MANDATORY }
+          - name: accountNumberBRI
+            value: "20601121736506"
+            description: Nomor Rekening Nasabah { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 25 Jun 2021 08:43:58 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect ....."
+          }
+  - name: error validasi ktp debitur != ktp pemilik rekening
+    request:
+      url: "{{base_url}}/v/1/prakarsa/verifikasi-bri-account"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999900"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: prakarsaId
+            value: "700"
+            description: Nomor Rekening Simpanan Digital Nasabah
+          - name: accountNumberBRI
+            value: "20601121736506"
+            description: Nama Rekening Simpanan Digital Nasabah
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Sun, 18 Jun 2023 05:46:13 GMT
+        - name: Content-Length
+          value: "196"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "isMatch": 0,
+                  "namaPemilikRekening": "",
+                  "tipeRekening": ""
+              },
+              "desc": "Verifikasi BRI Account Gagal",
+              "message": "Maaf, Pemilik rekening tidak sesuai dengan debitur yang sedang diprakarsai, silahkan coba dengan rekening lain.",
+              "status": 200
+          }

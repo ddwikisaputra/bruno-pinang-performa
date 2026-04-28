@@ -1,0 +1,44 @@
+meta {
+  name: Detail
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{BASE_URL}}/v1/risk-awareness/batch/question/detail
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: 
+}
+
+body:json {
+  {
+      "payload": "{{REQUEST_BODY}}"
+  }
+}
+
+script:pre-request {
+  const payload = {
+      "question_id": "d7bed8c4-20fe-425a-9497-e895522ccb9c",
+  }
+  
+  const result = _.encrypt(JSON.stringify(payload))
+  bru.setEnvVar("REQUEST_BODY", result);
+}
+
+script:post-response {
+  const responseJSON = res.getBody()
+  if (responseJSON.status) {
+      const data = _.decrypt(responseJSON.data)
+      const parseData = JSON.parse(data)
+      const parseData2 = JSON.parse(parseData)
+      console.log('/v1/risk-awareness/batch/detail', parseData2)
+  }
+}
+
+settings {
+  encodeUrl: true
+}

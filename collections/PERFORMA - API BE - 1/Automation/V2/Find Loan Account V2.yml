@@ -1,0 +1,336 @@
+info:
+  name: Find Loan Account V2
+  type: http
+  seq: 6
+
+http:
+  method: POST
+  url: "{{base_url}}/v/2/automation/find-loan-account"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: UmF5YVBpUGVyVG9w/V18nmX6nMisgijrD99BpD4bLL8U3g==
+        description: "[Encode]Personal Number BRI Agro (UserID Login) { MANDATORY }"
+      - name: prakarsaId
+        value: "31328"
+        description: ID PRAKARSA {MANDATORY}
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/automation/find-loan-account/{{prakarsaId}}"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Sun, 23 May 2021 04:47:59 GMT
+        - name: Content-Length
+          value: "907"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data": null
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/automation/find-loan-account/{{prakarsaId}}"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Sun, 23 May 2021 04:53:55 GMT
+        - name: Content-Length
+          value: "907"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "id": 4,
+                  "prakarsaId": 595,
+                  "loanAccountNumber": "001001008045101",
+                  "updatedAt": "21-10-2021"
+              },
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: empty data
+    request:
+      url: "{{base_url}}/v/1/automation/find-loan-account/-1"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Sun, 23 May 2021 04:49:55 GMT
+        - name: Content-Length
+          value: "95"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Error record not found",
+              "message": "Rekening Pinjaman Tidak Ditemukan",
+              "status": 404
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/automation/find-loan-account/{{prakarsaId}}"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Sun, 23 May 2021 17:14:00 GMT
+        - name: Content-Length
+          value: "230"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/automation/find-loan-account/{{prakarsaId}}"
+      method: GET
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Sun, 23 May 2021 04:47:59 GMT
+        - name: Content-Length
+          value: "907"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Tidak Memliki Akses",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: success v2
+    request:
+      url: "{{base_url}}/v/2/automation/find-loan-account"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: UmF5YVBpUGVyVG9w9FR0lGf/X53F2Tzm25VqShsrhmuQHg==
+          - name: prakarsaId
+            value: "31171"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 04 Jan 2023 12:59:16 GMT
+        - name: Content-Length
+          value: "160"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "id": 76,
+                  "prakarsaId": 31171,
+                  "loanAccountNumber": "002001002928100",
+                  "updatedAt": "03-01-2023"
+              },
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/automation/find-loan-account/{{prakarsaId}}"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Sun, 23 May 2021 04:53:55 GMT
+        - name: Content-Length
+          value: "907"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "id": 4,
+                  "prakarsaId": 595,
+                  "loanAccountNumber": "001001008045101",
+                  "updatedAt": "21-10-2021"
+              },
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: success v2
+    request:
+      url: "{{base_url}}/v/2/automation/find-loan-account"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: UmF5YVBpUGVyVG9w9FR0lGf/X53F2Tzm25VqShsrhmuQHg==
+          - name: prakarsaId
+            value: "31171"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 04 Jan 2023 12:59:16 GMT
+        - name: Content-Length
+          value: "160"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "id": 76,
+                  "prakarsaId": 31171,
+                  "loanAccountNumber": "002001002928100",
+                  "updatedAt": "03-01-2023"
+              },
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: empty data
+    request:
+      url: "{{base_url}}/v/1/automation/find-loan-account/-1"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Sun, 23 May 2021 04:49:55 GMT
+        - name: Content-Length
+          value: "95"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Error record not found",
+              "message": "Rekening Pinjaman Tidak Ditemukan",
+              "status": 404
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/automation/find-loan-account/{{prakarsaId}}"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Sun, 23 May 2021 04:47:59 GMT
+        - name: Content-Length
+          value: "907"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data": null
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/automation/find-loan-account/{{prakarsaId}}"
+      method: GET
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Sun, 23 May 2021 04:47:59 GMT
+        - name: Content-Length
+          value: "907"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Tidak Memliki Akses",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/automation/find-loan-account/{{prakarsaId}}"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Sun, 23 May 2021 17:14:00 GMT
+        - name: Content-Length
+          value: "230"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }

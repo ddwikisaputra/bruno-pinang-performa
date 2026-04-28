@@ -1,0 +1,1107 @@
+info:
+  name: Update Usaha V2
+  type: http
+  seq: 18
+
+http:
+  method: POST
+  url: "{{base_url}}/v/2/prakarsa/update-usaha/1"
+  body:
+    type: form-urlencoded
+    data:
+      - name: economicSector
+        value: "4"
+        description: ID Sektor Ekonomi
+      - name: subEconomicSector
+        value: "279"
+        description: ID Sub Sektor Ekonomi
+      - name: businessType
+        value: "57"
+        description: ID Jenis Usaha
+      - name: jobDuration
+        value: "5"
+        description: Lama Usaha dalam Tahun
+      - name: homeAddressFlag
+        value: "0"
+        description: Flag Sama dengan Alamat Rumah
+      - name: businessAddress
+        value: Sama Dengan Alamat Rumah
+        description: Alamat Tempat Usaha
+      - name: postalCode
+        value: "10530"
+        description: Kode Pos Alamat
+      - name: provinceCode
+        value: "03"
+        description: Kode Provinsi Alamat
+      - name: cityCode
+        value: "0391"
+        description: Kode Kota Alamat
+      - name: districtCode
+        value: "317105"
+        description: Kode Kecamatan Alamat
+      - name: villageCode
+        value: "3171051002"
+        description: Kode Kelurahan Alamat
+      - name: rt
+        value: "010"
+        description: RT Alamat
+      - name: rw
+        value: "002"
+        description: RW Alamat
+      - name: businessDescription
+        value: bisnis orang kaya
+        description: Deskripsi Prakarsa Usaha
+      - name: locationTravelTime
+        value: "45"
+        description: Waktu Tempuh Nasabah
+      - name: partnershipId
+        value: "1"
+        description: ID Partnership {OPTIONAL}
+      - name: longitude
+        value: "8800"
+        description: Pin Berdasarkan Maps {OPTIONAL}
+        disabled: true
+      - name: latitude
+        value: "0099"
+        description: Pin Berdasarkan Maps {OPTIONAL}
+        disabled: true
+      - name: userId
+        value: UmF5YVBpUGVyVG9w9FR0lGD8PJZ01laNFpB91ptV5mkFfw==
+        description: "[Encode]Personal Number BRI Agro (UserID Login)"
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/prakarsa/update-usaha/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: economicSector
+            value: pertanian
+            description: Sektor Ekonomi
+          - name: subEconomicSector
+            value: tanaman bahan makanan
+            description: Sub Sektor Ekonomi
+          - name: businessType
+            value: CV
+            description: Jenis Usaha
+          - name: jobDuration
+            value: "10"
+            description: Lama Usaha dalam Tahun
+          - name: businessAddress
+            value: Jl. Testing
+            description: Alamat Tempat Usaha
+          - name: postalCode
+            value: "10520"
+            description: Kode Pos Alamat
+          - name: provinceCode
+            value: "3"
+            description: Kode Provinsi Alamat
+          - name: cityCode
+            value: "0391"
+            description: Kode Kota Alamat
+          - name: districtCode
+            value: "317105"
+            description: Kode Kecamatan Alamat
+          - name: villageCode
+            value: "3171051002"
+            description: Kode Kelurahan Alamat
+          - name: rt
+            value: "10"
+            description: RT Alamat
+          - name: rw
+            value: "02"
+            description: RW Alamat
+          - name: locationTravelTime
+            value: "150"
+            description: Waktu Tempuh Nasabah
+          - name: longitude
+            value: "8800"
+            description: Pin Berdasarkan Maps {OPTIONAL}
+            disabled: true
+          - name: latitude
+            value: "0099"
+            description: Pin Berdasarkan Maps {OPTIONAL}
+            disabled: true
+          - name: userId
+            value: "223"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Mon, 24 May 2021 07:47:44 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "97"
+        - name: Connection
+          value: keep-alive
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "id": 1
+              },
+              "desc": "Data Tersimpan",
+              "message": "Data prakarsa usaha berhasil disimpan",
+              "status": 200
+          }
+  - name: missing params
+    request:
+      url: "{{base_url}}/v/1/prakarsa/update-usaha/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: economicSector
+            value: pertanian
+            description: Sektor Ekonomi
+          - name: subEconomicSector
+            value: tanaman bahan makanan
+            description: Sub Sektor Ekonomi
+          - name: businessType
+            value: CV
+            description: Jenis Usaha
+          - name: jobDuration
+            value: "10"
+            description: Lama Usaha dalam Tahun
+          - name: businessAddress
+            value: Jl. Testing
+            description: Alamat Tempat Usaha
+          - name: postalCode
+            value: "10520"
+            description: Kode Pos Alamat
+          - name: provinceCode
+            value: "3"
+            description: Kode Provinsi Alamat
+          - name: cityCode
+            value: "0391"
+            description: Kode Kota Alamat
+          - name: districtCode
+            value: "317105"
+            description: Kode Kecamatan Alamat
+          - name: villageCode
+            value: "3171051002"
+            description: Kode Kelurahan Alamat
+          - name: rt
+            value: "10"
+            description: RT Alamat
+          - name: rw
+            value: "02"
+            description: RW Alamat
+          - name: locationTravelTime
+            value: "150"
+            description: Waktu Tempuh Nasabah
+          - name: longitude
+            value: "8800"
+            description: Pin Berdasarkan Maps {OPTIONAL}
+            disabled: true
+          - name: latitude
+            value: "0099"
+            description: Pin Berdasarkan Maps {OPTIONAL}
+            disabled: true
+          - name: userId
+            value: "223"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "status": 400,
+              "message": "Sektor ekonomi belum dipilih",
+              "desc": "Parameter economicSector kosong",
+              "data": null
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/prakarsa/update-usaha/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: economicSector
+            value: pertanian
+            description: Sektor Ekonomi
+          - name: subEconomicSector
+            value: tanaman bahan makanan
+            description: Sub Sektor Ekonomi
+          - name: businessType
+            value: CV
+            description: Jenis Usaha
+          - name: jobDuration
+            value: "10"
+            description: Lama Usaha dalam Tahun
+          - name: businessAddress
+            value: Jl. Testing
+            description: Alamat Tempat Usaha
+          - name: postalCode
+            value: "10520"
+            description: Kode Pos Alamat
+          - name: provinceCode
+            value: "3"
+            description: Kode Provinsi Alamat
+          - name: cityCode
+            value: "0391"
+            description: Kode Kota Alamat
+          - name: districtCode
+            value: "317105"
+            description: Kode Kecamatan Alamat
+          - name: villageCode
+            value: "3171051002"
+            description: Kode Kelurahan Alamat
+          - name: rt
+            value: "10"
+            description: RT Alamat
+          - name: rw
+            value: "02"
+            description: RW Alamat
+          - name: locationTravelTime
+            value: "150"
+            description: Waktu Tempuh Nasabah
+          - name: longitude
+            value: "8800"
+            description: Pin Berdasarkan Maps {OPTIONAL}
+            disabled: true
+          - name: latitude
+            value: "0099"
+            description: Pin Berdasarkan Maps {OPTIONAL}
+            disabled: true
+          - name: userId
+            value: "223"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: validasi data existing
+    request:
+      url: "{{base_url}}/v/1/prakarsa/update-usaha/-1"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: economicSector
+            value: pertanian
+            description: Sektor Ekonomi
+          - name: subEconomicSector
+            value: tanaman bahan makanan
+            description: Sub Sektor Ekonomi
+          - name: businessType
+            value: CV
+            description: Jenis Usaha
+          - name: jobDuration
+            value: "10"
+            description: Lama Usaha dalam Tahun
+          - name: businessAddress
+            value: Jl. Testing
+            description: Alamat Tempat Usaha
+          - name: postalCode
+            value: "10520"
+            description: Kode Pos Alamat
+          - name: provinceCode
+            value: "3"
+            description: Kode Provinsi Alamat
+          - name: cityCode
+            value: "0391"
+            description: Kode Kota Alamat
+          - name: districtCode
+            value: "317105"
+            description: Kode Kecamatan Alamat
+          - name: villageCode
+            value: "3171051002"
+            description: Kode Kelurahan Alamat
+          - name: rt
+            value: "10"
+            description: RT Alamat
+          - name: rw
+            value: "02"
+            description: RW Alamat
+          - name: locationTravelTime
+            value: "150"
+            description: Waktu Tempuh Nasabah
+          - name: longitude
+            value: "8800"
+            description: Pin Berdasarkan Maps {OPTIONAL}
+            disabled: true
+          - name: latitude
+            value: "0099"
+            description: Pin Berdasarkan Maps {OPTIONAL}
+            disabled: true
+          - name: userId
+            value: "223"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "status": 500,
+              "message": "Prakarsa tidak ditemukan",
+              "desc": "Error record not found",
+              "data": null
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{base_url}}/v/1/prakarsa/update-usaha/31031"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: economicSector
+            value: "1"
+            description: ID Sektor Ekonomi
+          - name: subEconomicSector
+            value: "2"
+            description: ID Sub Sektor Ekonomi
+          - name: businessType
+            value: "2"
+            description: ID Jenis Usaha
+          - name: jobDuration
+            value: "10"
+            description: Lama Usaha dalam Tahun
+          - name: homeAddressFlag
+            value: "1"
+            description: Flag Sama dengan Alamat Rumah
+          - name: businessAddress
+            value: Jl. Testing aaa
+            description: Alamat Tempat Usaha
+          - name: postalCode
+            value: "10520"
+            description: Kode Pos Alamat
+          - name: provinceCode
+            value: "3"
+            description: Kode Provinsi Alamat
+          - name: cityCode
+            value: "0391"
+            description: Kode Kota Alamat
+          - name: districtCode
+            value: "317105"
+            description: Kode Kecamatan Alamat
+          - name: villageCode
+            value: "3171051002"
+            description: Kode Kelurahan Alamat
+          - name: rt
+            value: "10"
+            description: RT Alamat
+          - name: rw
+            value: "02"
+            description: RW Alamat
+          - name: locationTravelTime
+            value: "150"
+            description: Waktu Tempuh Nasabah
+          - name: partnershipId
+            value: "4"
+            description: ID Partnership {OPTIONAL}
+          - name: longitude
+            value: "8800"
+            description: Pin Berdasarkan Maps {OPTIONAL}
+            disabled: true
+          - name: latitude
+            value: "0099"
+            description: Pin Berdasarkan Maps {OPTIONAL}
+            disabled: true
+          - name: userId
+            value: "999951"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 18 Jul 2022 13:50:11 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/prakarsa/update-usaha/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: economicSector
+            value: pertanian
+            description: Sektor Ekonomi
+          - name: subEconomicSector
+            value: tanaman bahan makanan
+            description: Sub Sektor Ekonomi
+          - name: businessType
+            value: CV
+            description: Jenis Usaha
+          - name: jobDuration
+            value: "10"
+            description: Lama Usaha dalam Tahun
+          - name: businessAddress
+            value: Jl. Testing
+            description: Alamat Tempat Usaha
+          - name: postalCode
+            value: "10520"
+            description: Kode Pos Alamat
+          - name: provinceCode
+            value: "3"
+            description: Kode Provinsi Alamat
+          - name: cityCode
+            value: "0391"
+            description: Kode Kota Alamat
+          - name: districtCode
+            value: "317105"
+            description: Kode Kecamatan Alamat
+          - name: villageCode
+            value: "3171051002"
+            description: Kode Kelurahan Alamat
+          - name: rt
+            value: "10"
+            description: RT Alamat
+          - name: rw
+            value: "02"
+            description: RW Alamat
+          - name: locationTravelTime
+            value: "150"
+            description: Waktu Tempuh Nasabah
+          - name: longitude
+            value: "8800"
+            description: Pin Berdasarkan Maps {OPTIONAL}
+            disabled: true
+          - name: latitude
+            value: "0099"
+            description: Pin Berdasarkan Maps {OPTIONAL}
+            disabled: true
+          - name: userId
+            value: "223"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 401
+      statusText: Unauthorized
+      body:
+        type: text
+        data: |-
+          {
+              "code": 401,
+              "desc": "Tidak Memliki Akses",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: success v2
+    request:
+      url: "{{base_url}}/v/2/prakarsa/update-usaha/31031"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: economicSector
+            value: "1"
+            description: ID Sektor Ekonomi
+          - name: subEconomicSector
+            value: "2"
+            description: ID Sub Sektor Ekonomi
+          - name: businessType
+            value: "2"
+            description: ID Jenis Usaha
+          - name: jobDuration
+            value: "10"
+            description: Lama Usaha dalam Tahun
+          - name: homeAddressFlag
+            value: "1"
+            description: Flag Sama dengan Alamat Rumah
+          - name: businessAddress
+            value: Jl. Testing aaa
+            description: Alamat Tempat Usaha
+          - name: postalCode
+            value: "10520"
+            description: Kode Pos Alamat
+          - name: provinceCode
+            value: "3"
+            description: Kode Provinsi Alamat
+          - name: cityCode
+            value: "0391"
+            description: Kode Kota Alamat
+          - name: districtCode
+            value: "317105"
+            description: Kode Kecamatan Alamat
+          - name: villageCode
+            value: "3171051002"
+            description: Kode Kelurahan Alamat
+          - name: rt
+            value: "10"
+            description: RT Alamat
+          - name: rw
+            value: "02"
+            description: RW Alamat
+          - name: locationTravelTime
+            value: "150"
+            description: Waktu Tempuh Nasabah
+          - name: partnershipId
+            value: "4"
+            description: ID Partnership {OPTIONAL}
+          - name: longitude
+            value: "8800"
+            description: Pin Berdasarkan Maps {OPTIONAL}
+            disabled: true
+          - name: latitude
+            value: "0099"
+            description: Pin Berdasarkan Maps {OPTIONAL}
+            disabled: true
+          - name: userId
+            value: UmF5YVBpUGVyVG9w9FR0lGD8PJZ01laNFpB91ptV5mkFfw==
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "data": {
+                  "id": 1
+              },
+              "desc": "Data Tersimpan",
+              "message": "Data prakarsa usaha berhasil disimpan",
+              "status": 200
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/prakarsa/update-usaha/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: economicSector
+            value: pertanian
+            description: Sektor Ekonomi
+          - name: subEconomicSector
+            value: tanaman bahan makanan
+            description: Sub Sektor Ekonomi
+          - name: businessType
+            value: CV
+            description: Jenis Usaha
+          - name: jobDuration
+            value: "10"
+            description: Lama Usaha dalam Tahun
+          - name: businessAddress
+            value: Jl. Testing
+            description: Alamat Tempat Usaha
+          - name: postalCode
+            value: "10520"
+            description: Kode Pos Alamat
+          - name: provinceCode
+            value: "3"
+            description: Kode Provinsi Alamat
+          - name: cityCode
+            value: "0391"
+            description: Kode Kota Alamat
+          - name: districtCode
+            value: "317105"
+            description: Kode Kecamatan Alamat
+          - name: villageCode
+            value: "3171051002"
+            description: Kode Kelurahan Alamat
+          - name: rt
+            value: "10"
+            description: RT Alamat
+          - name: rw
+            value: "02"
+            description: RW Alamat
+          - name: locationTravelTime
+            value: "150"
+            description: Waktu Tempuh Nasabah
+          - name: longitude
+            value: "8800"
+            description: Pin Berdasarkan Maps {OPTIONAL}
+            disabled: true
+          - name: latitude
+            value: "0099"
+            description: Pin Berdasarkan Maps {OPTIONAL}
+            disabled: true
+          - name: userId
+            value: "223"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{base_url}}/v/1/prakarsa/update-usaha/31031"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: economicSector
+            value: "1"
+            description: ID Sektor Ekonomi
+          - name: subEconomicSector
+            value: "2"
+            description: ID Sub Sektor Ekonomi
+          - name: businessType
+            value: "2"
+            description: ID Jenis Usaha
+          - name: jobDuration
+            value: "10"
+            description: Lama Usaha dalam Tahun
+          - name: homeAddressFlag
+            value: "1"
+            description: Flag Sama dengan Alamat Rumah
+          - name: businessAddress
+            value: Jl. Testing aaa
+            description: Alamat Tempat Usaha
+          - name: postalCode
+            value: "10520"
+            description: Kode Pos Alamat
+          - name: provinceCode
+            value: "3"
+            description: Kode Provinsi Alamat
+          - name: cityCode
+            value: "0391"
+            description: Kode Kota Alamat
+          - name: districtCode
+            value: "317105"
+            description: Kode Kecamatan Alamat
+          - name: villageCode
+            value: "3171051002"
+            description: Kode Kelurahan Alamat
+          - name: rt
+            value: "10"
+            description: RT Alamat
+          - name: rw
+            value: "02"
+            description: RW Alamat
+          - name: locationTravelTime
+            value: "150"
+            description: Waktu Tempuh Nasabah
+          - name: partnershipId
+            value: "4"
+            description: ID Partnership {OPTIONAL}
+          - name: longitude
+            value: "8800"
+            description: Pin Berdasarkan Maps {OPTIONAL}
+            disabled: true
+          - name: latitude
+            value: "0099"
+            description: Pin Berdasarkan Maps {OPTIONAL}
+            disabled: true
+          - name: userId
+            value: "999951"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 18 Jul 2022 13:50:11 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/prakarsa/update-usaha/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: economicSector
+            value: pertanian
+            description: Sektor Ekonomi
+          - name: subEconomicSector
+            value: tanaman bahan makanan
+            description: Sub Sektor Ekonomi
+          - name: businessType
+            value: CV
+            description: Jenis Usaha
+          - name: jobDuration
+            value: "10"
+            description: Lama Usaha dalam Tahun
+          - name: businessAddress
+            value: Jl. Testing
+            description: Alamat Tempat Usaha
+          - name: postalCode
+            value: "10520"
+            description: Kode Pos Alamat
+          - name: provinceCode
+            value: "3"
+            description: Kode Provinsi Alamat
+          - name: cityCode
+            value: "0391"
+            description: Kode Kota Alamat
+          - name: districtCode
+            value: "317105"
+            description: Kode Kecamatan Alamat
+          - name: villageCode
+            value: "3171051002"
+            description: Kode Kelurahan Alamat
+          - name: rt
+            value: "10"
+            description: RT Alamat
+          - name: rw
+            value: "02"
+            description: RW Alamat
+          - name: locationTravelTime
+            value: "150"
+            description: Waktu Tempuh Nasabah
+          - name: longitude
+            value: "8800"
+            description: Pin Berdasarkan Maps {OPTIONAL}
+            disabled: true
+          - name: latitude
+            value: "0099"
+            description: Pin Berdasarkan Maps {OPTIONAL}
+            disabled: true
+          - name: userId
+            value: "223"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 401
+      statusText: Unauthorized
+      body:
+        type: text
+        data: |-
+          {
+              "code": 401,
+              "desc": "Tidak Memliki Akses",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/prakarsa/update-usaha/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: economicSector
+            value: pertanian
+            description: Sektor Ekonomi
+          - name: subEconomicSector
+            value: tanaman bahan makanan
+            description: Sub Sektor Ekonomi
+          - name: businessType
+            value: CV
+            description: Jenis Usaha
+          - name: jobDuration
+            value: "10"
+            description: Lama Usaha dalam Tahun
+          - name: businessAddress
+            value: Jl. Testing
+            description: Alamat Tempat Usaha
+          - name: postalCode
+            value: "10520"
+            description: Kode Pos Alamat
+          - name: provinceCode
+            value: "3"
+            description: Kode Provinsi Alamat
+          - name: cityCode
+            value: "0391"
+            description: Kode Kota Alamat
+          - name: districtCode
+            value: "317105"
+            description: Kode Kecamatan Alamat
+          - name: villageCode
+            value: "3171051002"
+            description: Kode Kelurahan Alamat
+          - name: rt
+            value: "10"
+            description: RT Alamat
+          - name: rw
+            value: "02"
+            description: RW Alamat
+          - name: locationTravelTime
+            value: "150"
+            description: Waktu Tempuh Nasabah
+          - name: longitude
+            value: "8800"
+            description: Pin Berdasarkan Maps {OPTIONAL}
+            disabled: true
+          - name: latitude
+            value: "0099"
+            description: Pin Berdasarkan Maps {OPTIONAL}
+            disabled: true
+          - name: userId
+            value: "223"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Mon, 24 May 2021 07:47:44 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "97"
+        - name: Connection
+          value: keep-alive
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "id": 1
+              },
+              "desc": "Data Tersimpan",
+              "message": "Data prakarsa usaha berhasil disimpan",
+              "status": 200
+          }
+  - name: success v2
+    request:
+      url: "{{base_url}}/v/2/prakarsa/update-usaha/31031"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: economicSector
+            value: "1"
+            description: ID Sektor Ekonomi
+          - name: subEconomicSector
+            value: "2"
+            description: ID Sub Sektor Ekonomi
+          - name: businessType
+            value: "2"
+            description: ID Jenis Usaha
+          - name: jobDuration
+            value: "10"
+            description: Lama Usaha dalam Tahun
+          - name: homeAddressFlag
+            value: "1"
+            description: Flag Sama dengan Alamat Rumah
+          - name: businessAddress
+            value: Jl. Testing aaa
+            description: Alamat Tempat Usaha
+          - name: postalCode
+            value: "10520"
+            description: Kode Pos Alamat
+          - name: provinceCode
+            value: "3"
+            description: Kode Provinsi Alamat
+          - name: cityCode
+            value: "0391"
+            description: Kode Kota Alamat
+          - name: districtCode
+            value: "317105"
+            description: Kode Kecamatan Alamat
+          - name: villageCode
+            value: "3171051002"
+            description: Kode Kelurahan Alamat
+          - name: rt
+            value: "10"
+            description: RT Alamat
+          - name: rw
+            value: "02"
+            description: RW Alamat
+          - name: locationTravelTime
+            value: "150"
+            description: Waktu Tempuh Nasabah
+          - name: partnershipId
+            value: "4"
+            description: ID Partnership {OPTIONAL}
+          - name: longitude
+            value: "8800"
+            description: Pin Berdasarkan Maps {OPTIONAL}
+            disabled: true
+          - name: latitude
+            value: "0099"
+            description: Pin Berdasarkan Maps {OPTIONAL}
+            disabled: true
+          - name: userId
+            value: UmF5YVBpUGVyVG9w9FR0lGD8PJZ01laNFpB91ptV5mkFfw==
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "data": {
+                  "id": 1
+              },
+              "desc": "Data Tersimpan",
+              "message": "Data prakarsa usaha berhasil disimpan",
+              "status": 200
+          }
+  - name: validasi data existing
+    request:
+      url: "{{base_url}}/v/1/prakarsa/update-usaha/-1"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: economicSector
+            value: pertanian
+            description: Sektor Ekonomi
+          - name: subEconomicSector
+            value: tanaman bahan makanan
+            description: Sub Sektor Ekonomi
+          - name: businessType
+            value: CV
+            description: Jenis Usaha
+          - name: jobDuration
+            value: "10"
+            description: Lama Usaha dalam Tahun
+          - name: businessAddress
+            value: Jl. Testing
+            description: Alamat Tempat Usaha
+          - name: postalCode
+            value: "10520"
+            description: Kode Pos Alamat
+          - name: provinceCode
+            value: "3"
+            description: Kode Provinsi Alamat
+          - name: cityCode
+            value: "0391"
+            description: Kode Kota Alamat
+          - name: districtCode
+            value: "317105"
+            description: Kode Kecamatan Alamat
+          - name: villageCode
+            value: "3171051002"
+            description: Kode Kelurahan Alamat
+          - name: rt
+            value: "10"
+            description: RT Alamat
+          - name: rw
+            value: "02"
+            description: RW Alamat
+          - name: locationTravelTime
+            value: "150"
+            description: Waktu Tempuh Nasabah
+          - name: longitude
+            value: "8800"
+            description: Pin Berdasarkan Maps {OPTIONAL}
+            disabled: true
+          - name: latitude
+            value: "0099"
+            description: Pin Berdasarkan Maps {OPTIONAL}
+            disabled: true
+          - name: userId
+            value: "223"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "status": 500,
+              "message": "Prakarsa tidak ditemukan",
+              "desc": "Error record not found",
+              "data": null
+          }
+  - name: missing params
+    request:
+      url: "{{base_url}}/v/1/prakarsa/update-usaha/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: economicSector
+            value: pertanian
+            description: Sektor Ekonomi
+          - name: subEconomicSector
+            value: tanaman bahan makanan
+            description: Sub Sektor Ekonomi
+          - name: businessType
+            value: CV
+            description: Jenis Usaha
+          - name: jobDuration
+            value: "10"
+            description: Lama Usaha dalam Tahun
+          - name: businessAddress
+            value: Jl. Testing
+            description: Alamat Tempat Usaha
+          - name: postalCode
+            value: "10520"
+            description: Kode Pos Alamat
+          - name: provinceCode
+            value: "3"
+            description: Kode Provinsi Alamat
+          - name: cityCode
+            value: "0391"
+            description: Kode Kota Alamat
+          - name: districtCode
+            value: "317105"
+            description: Kode Kecamatan Alamat
+          - name: villageCode
+            value: "3171051002"
+            description: Kode Kelurahan Alamat
+          - name: rt
+            value: "10"
+            description: RT Alamat
+          - name: rw
+            value: "02"
+            description: RW Alamat
+          - name: locationTravelTime
+            value: "150"
+            description: Waktu Tempuh Nasabah
+          - name: longitude
+            value: "8800"
+            description: Pin Berdasarkan Maps {OPTIONAL}
+            disabled: true
+          - name: latitude
+            value: "0099"
+            description: Pin Berdasarkan Maps {OPTIONAL}
+            disabled: true
+          - name: userId
+            value: "223"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "status": 400,
+              "message": "Sektor ekonomi belum dipilih",
+              "desc": "Parameter economicSector kosong",
+              "data": null
+          }

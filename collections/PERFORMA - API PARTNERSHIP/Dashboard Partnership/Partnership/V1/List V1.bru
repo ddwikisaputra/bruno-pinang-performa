@@ -1,0 +1,555 @@
+meta {
+  name: List V1
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{url}}/v/1/partnerships/list
+  body: formUrlEncoded
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+body:form-urlencoded {
+  type: partner
+  startIndex: 0
+  recordCount: 5
+  userId: 001371
+  ~textSearch: oms
+}
+
+settings {
+  encodeUrl: true
+}
+
+example {
+  name: success
+  
+  request: {
+    url: {{url}}/v/1/partnerships/list
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      type: partner
+      startIndex: 0
+      recordCount: 5
+      userId: 999941
+      ~textSearch: tes
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Mon, 31 May 2021 06:35:05 GMT
+      Content-Length: 141
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": [
+                {
+                    "id": 12,
+                    "type": "partner",
+                    "code": "AGJ1",
+                    "name": "Agriaku-Japfa",
+                    "approvedBy": "",
+                    "status": 0,
+                    "totalMember": 3,
+                    "createdAt": "23-02-2022 14:57:47",
+                    "updatedAt": "23-02-2022 14:57:47"
+                },
+                {
+                    "id": 20,
+                    "type": "partner",
+                    "code": "BST1",
+                    "name": "Barista Tools Solo",
+                    "approvedBy": "",
+                    "status": 0,
+                    "totalMember": 1,
+                    "createdAt": "23-02-2022 14:57:47",
+                    "updatedAt": "23-02-2022 14:57:47"
+                },
+                {
+                    "id": 18,
+                    "type": "partner",
+                    "code": "DTG1",
+                    "name": "Dontogo",
+                    "approvedBy": "",
+                    "status": 0,
+                    "totalMember": 0,
+                    "createdAt": "23-02-2022 14:57:47",
+                    "updatedAt": "23-02-2022 14:57:47"
+                },
+                {
+                    "id": 17,
+                    "type": "partner",
+                    "code": "IMK1",
+                    "name": "Inamikro",
+                    "approvedBy": "",
+                    "status": 0,
+                    "totalMember": 1,
+                    "createdAt": "23-02-2022 14:57:47",
+                    "updatedAt": "23-02-2022 14:57:47"
+                },
+                {
+                    "id": 19,
+                    "type": "partner",
+                    "code": "JPG1",
+                    "name": "Japang",
+                    "approvedBy": "",
+                    "status": 0,
+                    "totalMember": 1,
+                    "createdAt": "23-02-2022 14:57:47",
+                    "updatedAt": "23-02-2022 14:57:47"
+                }
+            ],
+            "desc": "Data Valid",
+            "message": "Data ditemukan",
+            "status": 200
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: unautorized
+  
+  request: {
+    url: {{url}}/v/1/partnerships/list
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      type: partner
+      startIndex: 0
+      recordCount: 5
+      userId: 999941
+      ~textSearch: tes
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Mon, 31 May 2021 06:32:34 GMT
+      Content-Length: 108
+    }
+  
+    status: {
+      code: 401
+      text: Unauthorized
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "code": 401,
+            "desc": "Expired",
+            "message": "Invalid Token || Token Is Expired"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: general error
+  
+  request: {
+    url: {{base_url}}/v/1/partnerships/list
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      type: partner
+      startIndex: 0
+      recordCount: 5
+      ~textSearch: tes
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Mon, 31 May 2021 06:32:34 GMT
+      Content-Length: 108
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "status": 500,
+            "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+            "desc": "Could not connect .....",
+            "data": null
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: error database connection
+  
+  request: {
+    url: {{url}}/v/1/partnerships/list
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      type: partner
+      startIndex: 0
+      recordCount: 5
+      userId: 999941
+      ~textSearch: tes
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Mon, 31 May 2021 06:32:34 GMT
+      Content-Length: 108
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+            "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+            "status": 400
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: empty data
+  
+  request: {
+    url: {{url}}/v/1/partnerships/list
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      type: partner
+      startIndex: 0
+      recordCount: 5
+      textSearch: tes1
+      userId: 999941
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Mon, 31 May 2021 06:32:34 GMT
+      Content-Length: 108
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "desc": "Data Partnership tidak ditemukan",
+            "message": "Partnership Tidak Ditemukan",
+            "status": 404
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: success
+  
+  request: {
+    url: {{url}}/v/1/partnerships/list
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      type: partner
+      startIndex: 0
+      recordCount: 5
+      userId: 999941
+      ~textSearch: tes
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Mon, 31 May 2021 06:35:05 GMT
+      Content-Length: 141
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": [
+                {
+                    "id": 12,
+                    "type": "partner",
+                    "code": "AGJ1",
+                    "name": "Agriaku-Japfa",
+                    "approvedBy": "",
+                    "status": 0,
+                    "totalMember": 3,
+                    "createdAt": "23-02-2022 14:57:47",
+                    "updatedAt": "23-02-2022 14:57:47"
+                },
+                {
+                    "id": 20,
+                    "type": "partner",
+                    "code": "BST1",
+                    "name": "Barista Tools Solo",
+                    "approvedBy": "",
+                    "status": 0,
+                    "totalMember": 1,
+                    "createdAt": "23-02-2022 14:57:47",
+                    "updatedAt": "23-02-2022 14:57:47"
+                },
+                {
+                    "id": 18,
+                    "type": "partner",
+                    "code": "DTG1",
+                    "name": "Dontogo",
+                    "approvedBy": "",
+                    "status": 0,
+                    "totalMember": 0,
+                    "createdAt": "23-02-2022 14:57:47",
+                    "updatedAt": "23-02-2022 14:57:47"
+                },
+                {
+                    "id": 17,
+                    "type": "partner",
+                    "code": "IMK1",
+                    "name": "Inamikro",
+                    "approvedBy": "",
+                    "status": 0,
+                    "totalMember": 1,
+                    "createdAt": "23-02-2022 14:57:47",
+                    "updatedAt": "23-02-2022 14:57:47"
+                },
+                {
+                    "id": 19,
+                    "type": "partner",
+                    "code": "JPG1",
+                    "name": "Japang",
+                    "approvedBy": "",
+                    "status": 0,
+                    "totalMember": 1,
+                    "createdAt": "23-02-2022 14:57:47",
+                    "updatedAt": "23-02-2022 14:57:47"
+                }
+            ],
+            "desc": "Data Valid",
+            "message": "Data ditemukan",
+            "status": 200
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: unautorized
+  
+  request: {
+    url: {{url}}/v/1/partnerships/list
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      type: partner
+      startIndex: 0
+      recordCount: 5
+      userId: 999941
+      ~textSearch: tes
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Mon, 31 May 2021 06:32:34 GMT
+      Content-Length: 108
+    }
+  
+    status: {
+      code: 401
+      text: Unauthorized
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "code": 401,
+            "desc": "Expired",
+            "message": "Invalid Token || Token Is Expired"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: general error
+  
+  request: {
+    url: {{base_url}}/v/1/partnerships/list
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      type: partner
+      startIndex: 0
+      recordCount: 5
+      ~textSearch: tes
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Mon, 31 May 2021 06:32:34 GMT
+      Content-Length: 108
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "status": 500,
+            "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+            "desc": "Could not connect .....",
+            "data": null
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: error database connection
+  
+  request: {
+    url: {{url}}/v/1/partnerships/list
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      type: partner
+      startIndex: 0
+      recordCount: 5
+      userId: 999941
+      ~textSearch: tes
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Mon, 31 May 2021 06:32:34 GMT
+      Content-Length: 108
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+            "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+            "status": 400
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: empty data
+  
+  request: {
+    url: {{url}}/v/1/partnerships/list
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      type: partner
+      startIndex: 0
+      recordCount: 5
+      textSearch: tes1
+      userId: 999941
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Mon, 31 May 2021 06:32:34 GMT
+      Content-Length: 108
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "desc": "Data Partnership tidak ditemukan",
+            "message": "Partnership Tidak Ditemukan",
+            "status": 404
+        }
+      '''
+    }
+  }
+}

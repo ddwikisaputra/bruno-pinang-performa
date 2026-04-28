@@ -1,0 +1,97 @@
+info:
+  name: Settlement Add
+  type: http
+  seq: 8
+
+http:
+  method: POST
+  url: "{{base_url}}/api/digiagri/loan/account/settlement"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "000426"
+        description: user ID AO
+      - name: kodeCabang
+        value: "0010"
+        description: Uker yang melakukan transaksi (Branch Code AO atau CBL)
+      - name: rekeningSumber
+        value: "001001000019318"
+        description: Nomor rekening yang akan di-debit (dikurangi) (Saving)
+      - name: rekeningTujuan
+        value: "001001008047103"
+        description: Nomor rekening yang akan di-kredit (ditambah) (Loan)
+      - name: jenisSettlement
+        value: AGF
+        description: jenis settlement (AGF / AFT)
+      - name: tanggalEfektif
+        value: 01/12/2021
+        description: Tanggal efektif mulai settlement
+      - name: tanggalExpired
+        value: 10/12/2021
+        description: Tanggal expired settlement
+      - name: nominal
+        value: "0"
+        description: Jumlah Transaksi
+      - name: keterangan
+        value: Test AGF
+        description: Keterangan Settlement
+      - name: type
+        value: tetap
+        description: transactional / tetap
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Success
+    request:
+      url: "{{base_url}}/api/digiagri/loan/account/settlement"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000426"
+            description: user ID AO
+          - name: kodeCabang
+            value: "0010"
+            description: Uker yang melakukan transaksi (Branch Code AO atau CBL)
+          - name: rekeningSumber
+            value: "001001000019318"
+            description: Nomor rekening yang akan di-debit (dikurangi) (Saving)
+          - name: rekeningTujuan
+            value: "001001008047103"
+            description: Nomor rekening yang akan di-kredit (ditambah) (Loan)
+          - name: jenisSettlement
+            value: AGF
+            description: jenis settlement (AGF / AFT)
+          - name: tanggalEfektif
+            value: 01/12/2021
+            description: Tanggal efektif mulai settlement
+          - name: tanggalExpired
+            value: 10/12/2021
+            description: Tanggal expired settlement
+          - name: nominal
+            value: "0"
+            description: Jumlah Transaksi
+          - name: keterangan
+            value: Test AGF
+            description: Keterangan Settlement
+          - name: type
+            value: transactional
+            description: transactional / tetap
+    response:
+      body:
+        type: text
+        data: "{\r
+
+          \    \"statusCode\": \"1\",\r
+
+          \    \"statusDescription\": \"Success\"\r
+
+          }"

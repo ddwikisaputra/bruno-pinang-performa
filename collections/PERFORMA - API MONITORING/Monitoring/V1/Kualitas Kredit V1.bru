@@ -1,0 +1,244 @@
+meta {
+  name: Kualitas Kredit V1
+  type: http
+  seq: 9
+}
+
+post {
+  url: {{url}}/v/1/monitoring/kualitas-kredit
+  body: formUrlEncoded
+  auth: bearer
+}
+
+auth:bearer {
+  token: UmF5YVBpUGVyVG9wtk843jG/7RB5In2DFecy3IhPCIi6N/9g1KDYjEHKFfrchh+Eo9FYRDiVe/paZJ32GKHqK/hA3sulxsHQ7T9P45sD+L32owygMK30Vzk7FE9ZNhzbaF5rSDwfPKm5EOmKD5hmeDCkfrilzW7BWg==
+}
+
+body:form-urlencoded {
+  userId: 999932
+  branchCode: 0020
+  ~: 
+}
+
+settings {
+  encodeUrl: true
+}
+
+example {
+  name: Success
+  
+  request: {
+    url: {{url}}/v/1/monitoring/kualitas-kredit
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 999951
+      tanggalPosisi: 2023-02-13
+      ~: 
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Thu, 23 Mar 2023 00:07:56 GMT
+      Content-Length: 340
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": {
+                "posisiHariIni": "2023-02-13",
+                "osHariIni": 31230623189.649998,
+                "kualitasKredit": [
+                    {
+                        "OsKolek": 1100596214.21,
+                        "noaKolek": 42,
+                        "categoryKolek": "DPK"
+                    },
+                    {
+                        "OsKolek": 28839744606.85,
+                        "noaKolek": 656,
+                        "categoryKolek": "LANCAR"
+                    },
+                    {
+                        "OsKolek": 1290282368.59,
+                        "noaKolek": 37,
+                        "categoryKolek": "NPL"
+                    }
+                ]
+            },
+            "desc": "Data Valid",
+            "message": "Data Ditemukan",
+            "status": 200
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: error parameter validation
+  
+  request: {
+    url: {{url}}/v/1/monitoring/kualitas-kredit
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 999951
+      tanggalPosisi: 
+      ~: 
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Thu, 23 Mar 2023 00:17:28 GMT
+      Content-Length: 155
+    }
+  
+    status: {
+      code: 400
+      text: Bad Request
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "desc": "Format Parameter filterDate tidak sesuai",
+            "message": "Tanggal tidak sesuai. Hanya boleh menggunakan angka. Ex:yyyy-mm-dd",
+            "status": 400
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: error database connection
+  
+  request: {
+    url: {{url}}/v/1/monitoring/loan-information
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 999951
+      tanggalPosisi: 2023-02-13
+      ~: 
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Wed, 25 May 2022 07:06:28 GMT
+      Content-Length: 106
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+            "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+            "status": 400
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: unautorized
+  
+  request: {
+    url: {{url}}/v/1/monitoring/kualitas-kredit
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 234
+      tanggalPosisi: 2023-02-13
+      ~: 
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Thu, 23 Mar 2023 00:19:58 GMT
+      Content-Length: 67
+    }
+  
+    status: {
+      code: 403
+      text: Forbidden
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "code": 403,
+            "desc": "Tidak Memliki Akses",
+            "message": "403 Forbidden"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: data not found
+  
+  request: {
+    url: {{url}}/v/1/monitoring/kualitas-kredit
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 999951
+      tanggalPosisi: 2023-03-13
+      ~: 
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Thu, 23 Mar 2023 02:11:21 GMT
+      Content-Length: 116
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "desc": "Data Kualitas Kredit tidak ditemukan",
+            "message": "Kualitas Kredit Tidak Ditemukan",
+            "status": 404
+        }
+      '''
+    }
+  }
+}

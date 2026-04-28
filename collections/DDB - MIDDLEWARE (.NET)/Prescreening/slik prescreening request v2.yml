@@ -1,0 +1,188 @@
+info:
+  name: slik prescreening request v2
+  type: http
+  seq: 10
+
+http:
+  method: POST
+  url: "{{dev_new}}/api/digiagri/v2/prescreening/request"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "999915"
+        description: User Id Aplikasi
+      - name: nik
+        value: "3273095508940001"
+        description: Nomor KTP nasabah
+      - name: name
+        value: ASTRID AGUSTINI
+        description: Nama Nasabah
+      - name: birthDate
+        value: 1994-08-15
+        description: "Tanggal Lahir Nasabah (Format : yyyy-MM-dd)"
+      - name: jenisKelamin
+        value: F
+        description: Jenis Kelamin Nasabah (M/F)
+      - name: prakarsaId
+        value: "1116"
+        description: Id Prakarsa
+      - name: callbackUrl
+        value: https://pinang-performa.staging.rayain.net/api-be/v/1/screening/slik-callback/1116
+        description: URL untuk callback access
+      - name: birthPlace
+        value: Bandung
+        description: Tempat Lahir
+      - name: npwp
+        value: ""
+        description: Nomor NPWP
+        disabled: true
+      - name: motherMaidenName
+        value: RR Dyah Agustin
+        description: Nama Ibu Kandung
+        disabled: true
+      - name: address
+        value: Pondok Pekayon Indah
+        description: Alamat
+        disabled: true
+      - name: city
+        value: Bekasi
+        description: Kota
+        disabled: true
+      - name: postalCode
+        value: "17148"
+        description: Kode Pos
+        disabled: true
+      - name: type
+        value: Debitur
+        description: Debitur / Pasangan
+      - name: lobType
+        value: MK
+        description: Default MK [MK | PPW]
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Gagal
+    request:
+      url: "{{base_url}}/api/digiagri/v2/prescreening/request"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000426"
+            description: User Id Aplikasi
+          - name: nik
+            value: "3524220106810002"
+            description: Nomor KTP nasabah
+          - name: name
+            value: Bayu Kori Prayogi
+            description: Nama Nasabah
+          - name: birthDate
+            value: 1981-08-01
+            description: "Tanggal Lahir Nasabah (Format : yyyy-MM-dd)"
+          - name: jenisKelamin
+            value: M
+            description: Jenis Kelamin Nasabah (M/F)
+          - name: prakarsaId
+            value: "2"
+            description: Id Prakarsa
+          - name: callbackUrl
+            value: http://34.87.76.52/v/1/screening/slik-callback/720
+            description: URL untuk callback access
+          - name: birthPlace
+            value: Lamongan
+            description: Tempat Lahir
+          - name: npwp
+            value: "966949497415000"
+            description: Nomor NPWP
+          - name: motherMaidenName
+            value: Suraningsih
+            description: Nama Ibu Kandung
+          - name: address
+            value: Rasuna Garden Food Street, Jl. Epicentrum Tengah No.3, RT.2/RW.5, Karet Kuningan, Kecamatan Setiabudi, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12940
+            description: Alamat
+          - name: city
+            value: Jakarta
+            description: Kota
+          - name: postalCode
+            value: "12940"
+            description: Kode Pos
+    response:
+      body:
+        type: text
+        data: "{\r
+
+          \    \"statusCode\": \"0\",\r
+
+          \    \"statusDescription\": \"request gagal\",\r
+
+          \    \"result\": {}\r
+
+          }"
+  - name: Success
+    request:
+      url: "{{base_url}}/api/digiagri/v2/prescreening/request"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000426"
+            description: User Id Aplikasi
+          - name: nik
+            value: "3524220106810002"
+            description: Nomor KTP nasabah
+          - name: name
+            value: Bayu Kori Prayogi
+            description: Nama Nasabah
+          - name: birthDate
+            value: 1981-08-01
+            description: "Tanggal Lahir Nasabah (Format : yyyy-MM-dd)"
+          - name: jenisKelamin
+            value: M
+            description: Jenis Kelamin Nasabah (M/F)
+          - name: prakarsaId
+            value: "2"
+            description: Id Prakarsa
+          - name: callbackUrl
+            value: http://34.87.76.52/v/1/screening/slik-callback/720
+            description: URL untuk callback access
+          - name: birthPlace
+            value: Lamongan
+            description: Tempat Lahir
+          - name: npwp
+            value: "966949497415000"
+            description: Nomor NPWP
+          - name: motherMaidenName
+            value: Suraningsih
+            description: Nama Ibu Kandung
+          - name: address
+            value: Rasuna Garden Food Street, Jl. Epicentrum Tengah No.3, RT.2/RW.5, Karet Kuningan, Kecamatan Setiabudi, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12940
+            description: Alamat
+          - name: city
+            value: Jakarta
+            description: Kota
+          - name: postalCode
+            value: "12940"
+            description: Kode Pos
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "statusCode": "1",
+              "statusDescription": "request success",
+              "result": {
+                  "status": "1",
+                  "uid": "MK2201100003",
+                  "respCode": "1",
+                  "desc": ""
+              }
+          }

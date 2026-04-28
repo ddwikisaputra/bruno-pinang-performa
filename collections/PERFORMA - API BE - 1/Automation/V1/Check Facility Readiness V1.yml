@@ -1,0 +1,478 @@
+info:
+  name: Check Facility Readiness V1
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{base_url}}/v/1/automation/check-facility-readiness"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "0000118826"
+        description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+      - name: facilityNumber
+        value: 0010/0000118826/PK3/003
+        description: Nomor Fasilitas { MANDATORY }
+  auth:
+    type: bearer
+    token: "{{tokenJWT}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/automation/check-facility-readiness"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: facilityNumber
+            value: 0020/0000119395/PK3/001
+            description: Nomor Fasilitas { MANDATORY }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Sat, 22 May 2021 06:53:21 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Accept-Encoding
+        - name: Content-Encoding
+          value: gzip
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "message": "signature is invalid || Token is expired"
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/automation/check-facility-readiness"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: facilityNumber
+            value: 0020/0000119395/PK3/001
+            description: Nomor Fasilitas { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Sat, 22 May 2021 06:57:05 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Accept-Encoding
+        - name: Content-Encoding
+          value: gzip
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "isReady": 1,
+                  "currentStatus": 9,
+                  "prakarsaId": 30944,
+                  "facilityNumber": "0020/0000119395/PK3/001"
+              },
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/automation/check-facility-readiness"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: facilityNumber
+            value: 0020/0000119395/PK3/001
+            description: Nomor Fasilitas { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: fasilitas belum bisa digunakan (prakarsa belum sampai status berhasil pencairan 9)
+    request:
+      url: "{{base_url}}/v/1/automation/check-facility-readiness"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: facilityNumber
+            value: 0020/0000119395/PK3/001
+            description: Nomor Fasilitas { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Sat, 22 May 2021 06:53:21 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Accept-Encoding
+        - name: Content-Encoding
+          value: gzip
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "isReady": 0,
+                  "currentStatus": 0,
+                  "prakarsaId": 0,
+                  "facilityNumber": "0020/0000119394/PK3/001"
+              },
+              "desc": "Status prakarsa belum 9 (Pencairan Berhasil)",
+              "message": "Maaf, Proses pencairan tidak dapat dilakukan. Silahkan menghubungi sales terkait.",
+              "status": 500
+          }
+  - name: parameter validation
+    request:
+      url: "{{base_url}}/v/1/automation/check-facility-readiness"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: facilityNumber
+            value: 0020/0000119395/PK3/001
+            description: Nomor Fasilitas { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 18 May 2022 09:33:04 GMT
+        - name: Content-Length
+          value: "117"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Parameter ... kosong",
+              "message": "Maaf, Nomor Failitas tidak ditemukan.",
+              "status": 500
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/automation/check-facility-readiness"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: facilityNumber
+            value: 0020/0000119395/PK3/001
+            description: Nomor Fasilitas { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Sat, 22 May 2021 06:53:21 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Accept-Encoding
+        - name: Content-Encoding
+          value: gzip
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data" : null
+          }
+  - name: parameter validation
+    request:
+      url: "{{base_url}}/v/1/automation/check-facility-readiness"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: facilityNumber
+            value: 0020/0000119395/PK3/001
+            description: Nomor Fasilitas { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 18 May 2022 09:33:04 GMT
+        - name: Content-Length
+          value: "117"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Parameter ... kosong",
+              "message": "Maaf, Nomor Failitas tidak ditemukan.",
+              "status": 500
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/automation/check-facility-readiness"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: facilityNumber
+            value: 0020/0000119395/PK3/001
+            description: Nomor Fasilitas { MANDATORY }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Sat, 22 May 2021 06:53:21 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Accept-Encoding
+        - name: Content-Encoding
+          value: gzip
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "message": "signature is invalid || Token is expired"
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/automation/check-facility-readiness"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: facilityNumber
+            value: 0020/0000119395/PK3/001
+            description: Nomor Fasilitas { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Sat, 22 May 2021 06:57:05 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Accept-Encoding
+        - name: Content-Encoding
+          value: gzip
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "isReady": 1,
+                  "currentStatus": 9,
+                  "prakarsaId": 30944,
+                  "facilityNumber": "0020/0000119395/PK3/001"
+              },
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/automation/check-facility-readiness"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: facilityNumber
+            value: 0020/0000119395/PK3/001
+            description: Nomor Fasilitas { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Sat, 22 May 2021 06:53:21 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Accept-Encoding
+        - name: Content-Encoding
+          value: gzip
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data" : null
+          }
+  - name: fasilitas belum bisa digunakan (prakarsa belum sampai status berhasil pencairan 9)
+    request:
+      url: "{{base_url}}/v/1/automation/check-facility-readiness"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: facilityNumber
+            value: 0020/0000119395/PK3/001
+            description: Nomor Fasilitas { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Sat, 22 May 2021 06:53:21 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Accept-Encoding
+        - name: Content-Encoding
+          value: gzip
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "isReady": 0,
+                  "currentStatus": 0,
+                  "prakarsaId": 0,
+                  "facilityNumber": "0020/0000119394/PK3/001"
+              },
+              "desc": "Status prakarsa belum 9 (Pencairan Berhasil)",
+              "message": "Maaf, Proses pencairan tidak dapat dilakukan. Silahkan menghubungi sales terkait.",
+              "status": 500
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/automation/check-facility-readiness"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: facilityNumber
+            value: 0020/0000119395/PK3/001
+            description: Nomor Fasilitas { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }

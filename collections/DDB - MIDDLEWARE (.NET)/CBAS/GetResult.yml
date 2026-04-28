@@ -1,0 +1,6078 @@
+info:
+  name: GetResult
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: http://34.101.32.222:8080/cbasrest/rest/GetResult
+  headers:
+    - name: API-KEY
+      value: BRIAGRO2021
+  body:
+    type: json
+    data: |-
+      {
+          "LOB":"PPW",
+          "Sequence":"240827" // tgl
+      }
+      // MK2309120004
+      // PPW2408120011
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: success
+    request:
+      url: http://10.99.48.6/cbasrest/rest/GetResult
+      method: POST
+      body:
+        type: json
+        data: "{\r
+
+          \    \"CbasId\":\"\",\r
+
+          \    \"LOB\":\"MK\",\r
+
+          \    \"Sequence\":\"220107\"\r
+
+          }"
+    response:
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: "{\r
+
+          \    \"Customers\": [\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201070001\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"1\",\r
+
+          \            \"Reason\": \" Tolak\",\r
+
+          \            \"ReffNumber\": \"00000125\",\r
+
+          \            \"Result\": \"9\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"42\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"6857470.59464973\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201100001\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"1\",\r
+
+          \            \"Reason\": \" Good\",\r
+
+          \            \"ReffNumber\": \"00000129\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"109\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"4000000\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201100002\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"1\",\r
+
+          \            \"Reason\": \" Good\",\r
+
+          \            \"ReffNumber\": \"00000130\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"109\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"4000000\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201100003\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"1\",\r
+
+          \            \"Reason\": \" Good\",\r
+
+          \            \"ReffNumber\": \"00000131\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"109\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"4000000\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201140001\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"1\",\r
+
+          \            \"Reason\": \" Good\",\r
+
+          \            \"ReffNumber\": \"00000138\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"109\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"4000000\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201140002\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"1\",\r
+
+          \            \"Reason\": \" Good\",\r
+
+          \            \"ReffNumber\": \"124\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"25\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"57169576.0588098\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201180001\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"1\",\r
+
+          \            \"Reason\": \" Good\",\r
+
+          \            \"ReffNumber\": \"124\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"25\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"57169576.0588098\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201180002\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"1\",\r
+
+          \            \"Reason\": \" Good\",\r
+
+          \            \"ReffNumber\": \"124\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"25\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"57169576.0588098\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201200001\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"1\",\r
+
+          \            \"Reason\": \" Good\",\r
+
+          \            \"ReffNumber\": \"00000147\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"109\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"4000000\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201210001\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"1\",\r
+
+          \            \"Reason\": \" Good\",\r
+
+          \            \"ReffNumber\": \"00000503\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"109\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"4000000\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201210002\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"4\",\r
+
+          \            \"Reason\": \"\",\r
+
+          \            \"ReffNumber\": \"00000148\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201210003\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"4\",\r
+
+          \            \"Reason\": \"\",\r
+
+          \            \"ReffNumber\": \"00000149\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201210004\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"4\",\r
+
+          \            \"Reason\": \"\",\r
+
+          \            \"ReffNumber\": \"00000150\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201210005\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"4\",\r
+
+          \            \"Reason\": \"\",\r
+
+          \            \"ReffNumber\": \"00000151\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201210006\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"4\",\r
+
+          \            \"Reason\": \"\",\r
+
+          \            \"ReffNumber\": \"00000153\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201210007\",\r
+
+          \            \"CustType\": \"S\",\r
+
+          \            \"Din\": \"0\",\r
+
+          \            \"Reason\": \"\",\r
+
+          \            \"ReffNumber\": \"00000155\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201210008\",\r
+
+          \            \"CustType\": \"S\",\r
+
+          \            \"Din\": \"0\",\r
+
+          \            \"Reason\": \"\",\r
+
+          \            \"ReffNumber\": \"00000156\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201210009\",\r
+
+          \            \"CustType\": \"S\",\r
+
+          \            \"Din\": \"0\",\r
+
+          \            \"Reason\": \"\",\r
+
+          \            \"ReffNumber\": \"00000157\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201210010\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"4\",\r
+
+          \            \"Reason\": \"\",\r
+
+          \            \"ReffNumber\": \"00000158\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201210011\",\r
+
+          \            \"CustType\": \"S\",\r
+
+          \            \"Din\": \"0\",\r
+
+          \            \"Reason\": \"\",\r
+
+          \            \"ReffNumber\": \"00000159\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201210012\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"4\",\r
+
+          \            \"Reason\": \"\",\r
+
+          \            \"ReffNumber\": \"00000160\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201210013\",\r
+
+          \            \"CustType\": \"S\",\r
+
+          \            \"Din\": \"0\",\r
+
+          \            \"Reason\": \"\",\r
+
+          \            \"ReffNumber\": \"00000161\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201210014\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"4\",\r
+
+          \            \"Reason\": \"\",\r
+
+          \            \"ReffNumber\": \"00000162\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201210015\",\r
+
+          \            \"CustType\": \"S\",\r
+
+          \            \"Din\": \"0\",\r
+
+          \            \"Reason\": \"\",\r
+
+          \            \"ReffNumber\": \"00000163\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201210016\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"4\",\r
+
+          \            \"Reason\": \"\",\r
+
+          \            \"ReffNumber\": \"00000164\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201210017\",\r
+
+          \            \"CustType\": \"S\",\r
+
+          \            \"Din\": \"0\",\r
+
+          \            \"Reason\": \"\",\r
+
+          \            \"ReffNumber\": \"00000165\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201250002\",\r
+
+          \            \"CustType\": \"S\",\r
+
+          \            \"Din\": \"0\",\r
+
+          \            \"Reason\": \"\",\r
+
+          \            \"ReffNumber\": \"00000167\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201250001\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"4\",\r
+
+          \            \"Reason\": \"\",\r
+
+          \            \"ReffNumber\": \"00000166\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201250003\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"4\",\r
+
+          \            \"Reason\": \" Good\",\r
+
+          \            \"ReffNumber\": \"00000168\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"52\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"9793069.53421848\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201250004\",\r
+
+          \            \"CustType\": \"S\",\r
+
+          \            \"Din\": \"1\",\r
+
+          \            \"Reason\": \"\",\r
+
+          \            \"ReffNumber\": \"00000169\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"47\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"0\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201250005\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"4\",\r
+
+          \            \"Reason\": \" Good\",\r
+
+          \            \"ReffNumber\": \"00000170\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"52\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"9793069.53421848\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201250006\",\r
+
+          \            \"CustType\": \"S\",\r
+
+          \            \"Din\": \"1\",\r
+
+          \            \"Reason\": \"\",\r
+
+          \            \"ReffNumber\": \"00000171\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"47\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"0\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201250007\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"4\",\r
+
+          \            \"Reason\": \" Good\",\r
+
+          \            \"ReffNumber\": \"00000172\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"52\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"9793069.53421848\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201250008\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"4\",\r
+
+          \            \"Reason\": \" Good\",\r
+
+          \            \"ReffNumber\": \"00000173\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"52\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"9793069.53421848\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201250009\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"4\",\r
+
+          \            \"Reason\": \" Good\",\r
+
+          \            \"ReffNumber\": \"00000174\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"52\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"9793069.53421848\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201250010\",\r
+
+          \            \"CustType\": \"S\",\r
+
+          \            \"Din\": \"4\",\r
+
+          \            \"Reason\": \"\",\r
+
+          \            \"ReffNumber\": \"00000175\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201260001\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"4\",\r
+
+          \            \"Reason\": \"\",\r
+
+          \            \"ReffNumber\": \"00000176\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201260002\",\r
+
+          \            \"CustType\": \"S\",\r
+
+          \            \"Din\": \"4\",\r
+
+          \            \"Reason\": \" Good\",\r
+
+          \            \"ReffNumber\": \"00000177\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"52\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"9793069.53421848\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201260003\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"1\",\r
+
+          \            \"Reason\": \" Good\",\r
+
+          \            \"ReffNumber\": \"00000178\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"58\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"6073162.40293903\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201270001\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"4\",\r
+
+          \            \"Reason\": \" Good\",\r
+
+          \            \"ReffNumber\": \"00000179\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"52\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"9793069.53421848\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201270002\",\r
+
+          \            \"CustType\": \"S\",\r
+
+          \            \"Din\": \"4\",\r
+
+          \            \"Reason\": \"\",\r
+
+          \            \"ReffNumber\": \"00000180\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201270003\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"4\",\r
+
+          \            \"Reason\": \" Good\",\r
+
+          \            \"ReffNumber\": \"00000181\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"52\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"9793069.53421848\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201270004\",\r
+
+          \            \"CustType\": \"S\",\r
+
+          \            \"Din\": \"4\",\r
+
+          \            \"Reason\": \"\",\r
+
+          \            \"ReffNumber\": \"00000182\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201270005\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"4\",\r
+
+          \            \"Reason\": \" Good\",\r
+
+          \            \"ReffNumber\": \"00000183\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"52\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"9793069.53421848\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201270006\",\r
+
+          \            \"CustType\": \"S\",\r
+
+          \            \"Din\": \"4\",\r
+
+          \            \"Reason\": \"\",\r
+
+          \            \"ReffNumber\": \"00000184\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201270007\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"2\",\r
+
+          \            \"Reason\": \" Good\",\r
+
+          \            \"ReffNumber\": \"00000185\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"220\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"21600000\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201280001\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"4\",\r
+
+          \            \"Reason\": \" Good\",\r
+
+          \            \"ReffNumber\": \"00000186\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"52\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"9793069.53421848\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201280002\",\r
+
+          \            \"CustType\": \"S\",\r
+
+          \            \"Din\": \"4\",\r
+
+          \            \"Reason\": \"\",\r
+
+          \            \"ReffNumber\": \"00000187\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201280003\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"4\",\r
+
+          \            \"Reason\": \" Good\",\r
+
+          \            \"ReffNumber\": \"00000188\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"52\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"9793069.53421848\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201280004\",\r
+
+          \            \"CustType\": \"S\",\r
+
+          \            \"Din\": \"4\",\r
+
+          \            \"Reason\": \"\",\r
+
+          \            \"ReffNumber\": \"00000189\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201280005\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"4\",\r
+
+          \            \"Reason\": \" Good\",\r
+
+          \            \"ReffNumber\": \"00000190\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"52\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"9793069.53421848\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201280006\",\r
+
+          \            \"CustType\": \"S\",\r
+
+          \            \"Din\": \"4\",\r
+
+          \            \"Reason\": \"\",\r
+
+          \            \"ReffNumber\": \"00000191\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201280007\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"4\",\r
+
+          \            \"Reason\": \" Good\",\r
+
+          \            \"ReffNumber\": \"00000192\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"52\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"9793069.53421848\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201280008\",\r
+
+          \            \"CustType\": \"S\",\r
+
+          \            \"Din\": \"1\",\r
+
+          \            \"Reason\": \"\",\r
+
+          \            \"ReffNumber\": \"00000194\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"47\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"0\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201290002\",\r
+
+          \            \"CustType\": \"S\",\r
+
+          \            \"Din\": \"0\",\r
+
+          \            \"Reason\": \"\",\r
+
+          \            \"ReffNumber\": \"00000198\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201280009\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"1\",\r
+
+          \            \"Reason\": \"\",\r
+
+          \            \"ReffNumber\": \"00000195\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"87\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"0\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201290001\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"4\",\r
+
+          \            \"Reason\": \"\",\r
+
+          \            \"ReffNumber\": \"00000196\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201310001\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"4\",\r
+
+          \            \"Reason\": \"\",\r
+
+          \            \"ReffNumber\": \"00000199\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"81\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"0\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201310002\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"1\",\r
+
+          \            \"Reason\": \" Good\",\r
+
+          \            \"ReffNumber\": \"00000200\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"38\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"1200034.21416862\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201310003\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"1\",\r
+
+          \            \"Reason\": \" Good\",\r
+
+          \            \"ReffNumber\": \"00000202\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"79\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"0\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201310004\",\r
+
+          \            \"CustType\": \"S\",\r
+
+          \            \"Din\": \"1\",\r
+
+          \            \"Reason\": \" Good\",\r
+
+          \            \"ReffNumber\": \"00000204\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"27\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"5905305.5353361\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201310005\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"1\",\r
+
+          \            \"Reason\": \" Good\",\r
+
+          \            \"ReffNumber\": \"00000205\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"110\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"0\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201310006\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"1\",\r
+
+          \            \"Reason\": \" Good\",\r
+
+          \            \"ReffNumber\": \"00000206\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"94\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"0\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201310007\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"1\",\r
+
+          \            \"Reason\": \" Tolak\",\r
+
+          \            \"ReffNumber\": \"00000207\",\r
+
+          \            \"Result\": \"9\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"49\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"18032971.1249752\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201310008\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"1\",\r
+
+          \            \"Reason\": \" Tolak\",\r
+
+          \            \"ReffNumber\": \"00000208\",\r
+
+          \            \"Result\": \"9\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"88\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"0\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201310009\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"1\",\r
+
+          \            \"Reason\": \" Good\",\r
+
+          \            \"ReffNumber\": \"00000209\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"57\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"0\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201310010\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"1\",\r
+
+          \            \"Reason\": \" Good\",\r
+
+          \            \"ReffNumber\": \"00000210\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"114\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"1966489.51080335\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201310011\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"2\",\r
+
+          \            \"Reason\": \" Good\",\r
+
+          \            \"ReffNumber\": \"00000211\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"15\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"2737974.37064002\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201310012\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"1\",\r
+
+          \            \"Reason\": \"\",\r
+
+          \            \"ReffNumber\": \"00000212\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201310013\",\r
+
+          \            \"CustType\": \"S\",\r
+
+          \            \"Din\": \"1\",\r
+
+          \            \"Reason\": \" Good\",\r
+
+          \            \"ReffNumber\": \"00000214\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"57\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"0\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201310014\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"1\",\r
+
+          \            \"Reason\": \"\",\r
+
+          \            \"ReffNumber\": \"00000215\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"107\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"0\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2201310015\",\r
+
+          \            \"CustType\": \"S\",\r
+
+          \            \"Din\": \"2\",\r
+
+          \            \"Reason\": \" Good\",\r
+
+          \            \"ReffNumber\": \"00000217\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"15\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"2737974.37064002\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2202010001\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"1\",\r
+
+          \            \"Reason\": \" Good\",\r
+
+          \            \"ReffNumber\": \"00000218\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"66\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"9473188.81039587\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2202020002\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"1\",\r
+
+          \            \"Reason\": \" Tolak\",\r
+
+          \            \"ReffNumber\": \"00000220\",\r
+
+          \            \"Result\": \"9\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"81\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"227451.607528095\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2202020004\",\r
+
+          \            \"CustType\": \"S\",\r
+
+          \            \"Din\": \"0\",\r
+
+          \            \"Reason\": \"\",\r
+
+          \            \"ReffNumber\": \"00000222\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2202020006\",\r
+
+          \            \"CustType\": \"S\",\r
+
+          \            \"Din\": \"0\",\r
+
+          \            \"Reason\": \"\",\r
+
+          \            \"ReffNumber\": \"00000224\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2202020008\",\r
+
+          \            \"CustType\": \"S\",\r
+
+          \            \"Din\": \"0\",\r
+
+          \            \"Reason\": \"\",\r
+
+          \            \"ReffNumber\": \"00000226\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2202020010\",\r
+
+          \            \"CustType\": \"S\",\r
+
+          \            \"Din\": \"0\",\r
+
+          \            \"Reason\": \"\",\r
+
+          \            \"ReffNumber\": \"00000228\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2202020012\",\r
+
+          \            \"CustType\": \"S\",\r
+
+          \            \"Din\": \"0\",\r
+
+          \            \"Reason\": \"\",\r
+
+          \            \"ReffNumber\": \"00000230\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2202020014\",\r
+
+          \            \"CustType\": \"S\",\r
+
+          \            \"Din\": \"0\",\r
+
+          \            \"Reason\": \"\",\r
+
+          \            \"ReffNumber\": \"00000232\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2202020016\",\r
+
+          \            \"CustType\": \"S\",\r
+
+          \            \"Din\": \"0\",\r
+
+          \            \"Reason\": \"\",\r
+
+          \            \"ReffNumber\": \"00000234\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2202020018\",\r
+
+          \            \"CustType\": \"S\",\r
+
+          \            \"Din\": \"0\",\r
+
+          \            \"Reason\": \"\",\r
+
+          \            \"ReffNumber\": \"00000236\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2202020001\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"2\",\r
+
+          \            \"Reason\": \" Good\",\r
+
+          \            \"ReffNumber\": \"00000219\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"93\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"0\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2202020003\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"1\",\r
+
+          \            \"Reason\": \"\",\r
+
+          \            \"ReffNumber\": \"00000221\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2202020007\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"1\",\r
+
+          \            \"Reason\": \"\",\r
+
+          \            \"ReffNumber\": \"00000225\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2202020009\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"1\",\r
+
+          \            \"Reason\": \"\",\r
+
+          \            \"ReffNumber\": \"00000227\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2202020011\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"1\",\r
+
+          \            \"Reason\": \"\",\r
+
+          \            \"ReffNumber\": \"00000229\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2202020013\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"1\",\r
+
+          \            \"Reason\": \"\",\r
+
+          \            \"ReffNumber\": \"00000231\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2202020015\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"1\",\r
+
+          \            \"Reason\": \"\",\r
+
+          \            \"ReffNumber\": \"00000233\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2202020019\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"1\",\r
+
+          \            \"Reason\": \"\",\r
+
+          \            \"ReffNumber\": \"00000237\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2202020005\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"1\",\r
+
+          \            \"Reason\": \"\",\r
+
+          \            \"ReffNumber\": \"00000223\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2202020017\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"1\",\r
+
+          \            \"Reason\": \"\",\r
+
+          \            \"ReffNumber\": \"00000235\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2202030001\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"4\",\r
+
+          \            \"Reason\": \"\",\r
+
+          \            \"ReffNumber\": \"00000238\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2202030002\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"1\",\r
+
+          \            \"Reason\": \"\",\r
+
+          \            \"ReffNumber\": \"00000239\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"77\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"0\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2202030003\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"4\",\r
+
+          \            \"Reason\": \"\",\r
+
+          \            \"ReffNumber\": \"00000240\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2202030004\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"2\",\r
+
+          \            \"Reason\": \"\",\r
+
+          \            \"ReffNumber\": \"00000241\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"86\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"0\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2202030005\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"1\",\r
+
+          \            \"Reason\": \" Good\",\r
+
+          \            \"ReffNumber\": \"00000242\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"26\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"57169576.0588098\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2202030006\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"2\",\r
+
+          \            \"Reason\": \" Good\",\r
+
+          \            \"ReffNumber\": \"00000243\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"112\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"0\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2202030007\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"1\",\r
+
+          \            \"Reason\": \"\",\r
+
+          \            \"ReffNumber\": \"00000244\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"96\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"0\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"CbasId\": \"MK2202030008\",\r
+
+          \            \"CustType\": \"A\",\r
+
+          \            \"Din\": \"3\",\r
+
+          \            \"Reason\": \" Good\",\r
+
+          \            \"ReffNumber\": \"00000245\",\r
+
+          \            \"Result\": \"1\",\r
+
+          \            \"ResultDesc\": \"\",\r
+
+          \            \"Value1\": \"85\",\r
+
+          \            \"Value10\": \"\",\r
+
+          \            \"Value2\": \"0\",\r
+
+          \            \"Value3\": \"\",\r
+
+          \            \"Value4\": \"\",\r
+
+          \            \"Value5\": \"\",\r
+
+          \            \"Value6\": \"\",\r
+
+          \            \"Value7\": \"\",\r
+
+          \            \"Value8\": \"\",\r
+
+          \            \"Value9\": \"\"\r
+
+          \        }\r
+
+          \    ],\r
+
+          \    \"ErrorMsg\": null,\r
+
+          \    \"Flag\": \"1\",\r
+
+          \    \"Sequence\": \"2022-02-03 08:12:28.573\"\r
+
+          }"
+  - name: success MK
+    request:
+      url: http://10.99.48.6/cbasrest/rest/GetResult
+      method: POST
+      body:
+        type: json
+        data: "{\r
+
+          \    \"CbasId\":\"\",\r
+
+          \    \"LOB\":\"MK\",\r
+
+          \    \"Sequence\":\"220107\"\r
+
+          }"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: private
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Server
+          value: Microsoft-IIS/8.5
+        - name: Access-Control-Allow-Origin
+          value: "*"
+        - name: Set-Cookie
+          value: ASP.NET_SessionId=htvwxvhpcj4fpwi31torx0ld; path=/; HttpOnly; SameSite=Lax
+        - name: X-AspNet-Version
+          value: 4.0.30319
+        - name: X-Powered-By
+          value: ASP.NET
+        - name: Date
+          value: Wed, 30 Nov 2022 23:53:39 GMT
+        - name: Content-Length
+          value: "24597"
+      body:
+        type: json
+        data: |-
+          {
+              "Customers": [
+                  {
+                      "CbasId": "MK2201070001",
+                      "CustType": "A",
+                      "Din": "1",
+                      "Reason": " Tolak",
+                      "ReffNumber": "00000125",
+                      "Result": "9",
+                      "ResultDesc": "",
+                      "Value1": "42",
+                      "Value10": "",
+                      "Value2": "6857470.59464973",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201100001",
+                      "CustType": "A",
+                      "Din": "1",
+                      "Reason": " Good",
+                      "ReffNumber": "00000129",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "109",
+                      "Value10": "",
+                      "Value2": "4000000",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201100002",
+                      "CustType": "A",
+                      "Din": "1",
+                      "Reason": " Good",
+                      "ReffNumber": "00000130",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "109",
+                      "Value10": "",
+                      "Value2": "4000000",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201100003",
+                      "CustType": "A",
+                      "Din": "1",
+                      "Reason": " Good",
+                      "ReffNumber": "00000131",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "109",
+                      "Value10": "",
+                      "Value2": "4000000",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201140001",
+                      "CustType": "A",
+                      "Din": "1",
+                      "Reason": " Good",
+                      "ReffNumber": "00000138",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "109",
+                      "Value10": "",
+                      "Value2": "4000000",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201140002",
+                      "CustType": "A",
+                      "Din": "1",
+                      "Reason": " Good",
+                      "ReffNumber": "124",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "25",
+                      "Value10": "",
+                      "Value2": "57169576.0588098",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201180001",
+                      "CustType": "A",
+                      "Din": "1",
+                      "Reason": " Good",
+                      "ReffNumber": "124",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "25",
+                      "Value10": "",
+                      "Value2": "57169576.0588098",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201180002",
+                      "CustType": "A",
+                      "Din": "1",
+                      "Reason": " Good",
+                      "ReffNumber": "124",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "25",
+                      "Value10": "",
+                      "Value2": "57169576.0588098",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201200001",
+                      "CustType": "A",
+                      "Din": "1",
+                      "Reason": " Good",
+                      "ReffNumber": "00000147",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "109",
+                      "Value10": "",
+                      "Value2": "4000000",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201210001",
+                      "CustType": "A",
+                      "Din": "1",
+                      "Reason": " Good",
+                      "ReffNumber": "00000503",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "109",
+                      "Value10": "",
+                      "Value2": "4000000",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201210002",
+                      "CustType": "A",
+                      "Din": "4",
+                      "Reason": "",
+                      "ReffNumber": "00000148",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "",
+                      "Value10": "",
+                      "Value2": "",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201210003",
+                      "CustType": "A",
+                      "Din": "4",
+                      "Reason": "",
+                      "ReffNumber": "00000149",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "",
+                      "Value10": "",
+                      "Value2": "",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201210004",
+                      "CustType": "A",
+                      "Din": "4",
+                      "Reason": "",
+                      "ReffNumber": "00000150",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "",
+                      "Value10": "",
+                      "Value2": "",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201210005",
+                      "CustType": "A",
+                      "Din": "4",
+                      "Reason": "",
+                      "ReffNumber": "00000151",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "",
+                      "Value10": "",
+                      "Value2": "",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201210006",
+                      "CustType": "A",
+                      "Din": "4",
+                      "Reason": "",
+                      "ReffNumber": "00000153",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "",
+                      "Value10": "",
+                      "Value2": "",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201210007",
+                      "CustType": "S",
+                      "Din": "0",
+                      "Reason": "",
+                      "ReffNumber": "00000155",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "",
+                      "Value10": "",
+                      "Value2": "",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201210008",
+                      "CustType": "S",
+                      "Din": "0",
+                      "Reason": "",
+                      "ReffNumber": "00000156",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "",
+                      "Value10": "",
+                      "Value2": "",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201210009",
+                      "CustType": "S",
+                      "Din": "0",
+                      "Reason": "",
+                      "ReffNumber": "00000157",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "",
+                      "Value10": "",
+                      "Value2": "",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201210010",
+                      "CustType": "A",
+                      "Din": "4",
+                      "Reason": "",
+                      "ReffNumber": "00000158",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "",
+                      "Value10": "",
+                      "Value2": "",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201210011",
+                      "CustType": "S",
+                      "Din": "0",
+                      "Reason": "",
+                      "ReffNumber": "00000159",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "",
+                      "Value10": "",
+                      "Value2": "",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201210012",
+                      "CustType": "A",
+                      "Din": "4",
+                      "Reason": "",
+                      "ReffNumber": "00000160",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "",
+                      "Value10": "",
+                      "Value2": "",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201210013",
+                      "CustType": "S",
+                      "Din": "0",
+                      "Reason": "",
+                      "ReffNumber": "00000161",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "",
+                      "Value10": "",
+                      "Value2": "",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201210014",
+                      "CustType": "A",
+                      "Din": "4",
+                      "Reason": "",
+                      "ReffNumber": "00000162",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "",
+                      "Value10": "",
+                      "Value2": "",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201210015",
+                      "CustType": "S",
+                      "Din": "0",
+                      "Reason": "",
+                      "ReffNumber": "00000163",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "",
+                      "Value10": "",
+                      "Value2": "",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201210016",
+                      "CustType": "A",
+                      "Din": "4",
+                      "Reason": "",
+                      "ReffNumber": "00000164",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "",
+                      "Value10": "",
+                      "Value2": "",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201210017",
+                      "CustType": "S",
+                      "Din": "0",
+                      "Reason": "",
+                      "ReffNumber": "00000165",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "",
+                      "Value10": "",
+                      "Value2": "",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201250002",
+                      "CustType": "S",
+                      "Din": "0",
+                      "Reason": "",
+                      "ReffNumber": "00000167",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "",
+                      "Value10": "",
+                      "Value2": "",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201250001",
+                      "CustType": "A",
+                      "Din": "4",
+                      "Reason": "",
+                      "ReffNumber": "00000166",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "",
+                      "Value10": "",
+                      "Value2": "",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201250003",
+                      "CustType": "A",
+                      "Din": "4",
+                      "Reason": " Good",
+                      "ReffNumber": "00000168",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "52",
+                      "Value10": "",
+                      "Value2": "9793069.53421848",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201250004",
+                      "CustType": "S",
+                      "Din": "1",
+                      "Reason": "",
+                      "ReffNumber": "00000169",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "47",
+                      "Value10": "",
+                      "Value2": "0",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201250005",
+                      "CustType": "A",
+                      "Din": "4",
+                      "Reason": " Good",
+                      "ReffNumber": "00000170",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "52",
+                      "Value10": "",
+                      "Value2": "9793069.53421848",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201250006",
+                      "CustType": "S",
+                      "Din": "1",
+                      "Reason": "",
+                      "ReffNumber": "00000171",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "47",
+                      "Value10": "",
+                      "Value2": "0",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201250007",
+                      "CustType": "A",
+                      "Din": "4",
+                      "Reason": " Good",
+                      "ReffNumber": "00000172",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "52",
+                      "Value10": "",
+                      "Value2": "9793069.53421848",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201250008",
+                      "CustType": "A",
+                      "Din": "4",
+                      "Reason": " Good",
+                      "ReffNumber": "00000173",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "52",
+                      "Value10": "",
+                      "Value2": "9793069.53421848",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201250009",
+                      "CustType": "A",
+                      "Din": "4",
+                      "Reason": " Good",
+                      "ReffNumber": "00000174",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "52",
+                      "Value10": "",
+                      "Value2": "9793069.53421848",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201250010",
+                      "CustType": "S",
+                      "Din": "4",
+                      "Reason": "",
+                      "ReffNumber": "00000175",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "",
+                      "Value10": "",
+                      "Value2": "",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201260001",
+                      "CustType": "A",
+                      "Din": "4",
+                      "Reason": "",
+                      "ReffNumber": "00000176",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "",
+                      "Value10": "",
+                      "Value2": "",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201260002",
+                      "CustType": "S",
+                      "Din": "4",
+                      "Reason": " Good",
+                      "ReffNumber": "00000177",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "52",
+                      "Value10": "",
+                      "Value2": "9793069.53421848",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201260003",
+                      "CustType": "A",
+                      "Din": "1",
+                      "Reason": " Good",
+                      "ReffNumber": "00000178",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "58",
+                      "Value10": "",
+                      "Value2": "6073162.40293903",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201270001",
+                      "CustType": "A",
+                      "Din": "4",
+                      "Reason": " Good",
+                      "ReffNumber": "00000179",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "52",
+                      "Value10": "",
+                      "Value2": "9793069.53421848",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201270002",
+                      "CustType": "S",
+                      "Din": "4",
+                      "Reason": "",
+                      "ReffNumber": "00000180",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "",
+                      "Value10": "",
+                      "Value2": "",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201270003",
+                      "CustType": "A",
+                      "Din": "4",
+                      "Reason": " Good",
+                      "ReffNumber": "00000181",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "52",
+                      "Value10": "",
+                      "Value2": "9793069.53421848",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201270004",
+                      "CustType": "S",
+                      "Din": "4",
+                      "Reason": "",
+                      "ReffNumber": "00000182",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "",
+                      "Value10": "",
+                      "Value2": "",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201270005",
+                      "CustType": "A",
+                      "Din": "4",
+                      "Reason": " Good",
+                      "ReffNumber": "00000183",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "52",
+                      "Value10": "",
+                      "Value2": "9793069.53421848",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201270006",
+                      "CustType": "S",
+                      "Din": "4",
+                      "Reason": "",
+                      "ReffNumber": "00000184",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "",
+                      "Value10": "",
+                      "Value2": "",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201270007",
+                      "CustType": "A",
+                      "Din": "2",
+                      "Reason": " Good",
+                      "ReffNumber": "00000185",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "220",
+                      "Value10": "",
+                      "Value2": "21600000",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201280001",
+                      "CustType": "A",
+                      "Din": "4",
+                      "Reason": " Good",
+                      "ReffNumber": "00000186",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "52",
+                      "Value10": "",
+                      "Value2": "9793069.53421848",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201280002",
+                      "CustType": "S",
+                      "Din": "4",
+                      "Reason": "",
+                      "ReffNumber": "00000187",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "",
+                      "Value10": "",
+                      "Value2": "",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201280003",
+                      "CustType": "A",
+                      "Din": "4",
+                      "Reason": " Good",
+                      "ReffNumber": "00000188",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "52",
+                      "Value10": "",
+                      "Value2": "9793069.53421848",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201280004",
+                      "CustType": "S",
+                      "Din": "4",
+                      "Reason": "",
+                      "ReffNumber": "00000189",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "",
+                      "Value10": "",
+                      "Value2": "",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201280005",
+                      "CustType": "A",
+                      "Din": "4",
+                      "Reason": " Good",
+                      "ReffNumber": "00000190",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "52",
+                      "Value10": "",
+                      "Value2": "9793069.53421848",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201280006",
+                      "CustType": "S",
+                      "Din": "4",
+                      "Reason": "",
+                      "ReffNumber": "00000191",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "",
+                      "Value10": "",
+                      "Value2": "",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201280007",
+                      "CustType": "A",
+                      "Din": "4",
+                      "Reason": " Good",
+                      "ReffNumber": "00000192",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "52",
+                      "Value10": "",
+                      "Value2": "9793069.53421848",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201280008",
+                      "CustType": "S",
+                      "Din": "1",
+                      "Reason": "",
+                      "ReffNumber": "00000194",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "47",
+                      "Value10": "",
+                      "Value2": "0",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201290002",
+                      "CustType": "S",
+                      "Din": "0",
+                      "Reason": "",
+                      "ReffNumber": "00000198",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "",
+                      "Value10": "",
+                      "Value2": "",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201280009",
+                      "CustType": "A",
+                      "Din": "1",
+                      "Reason": "",
+                      "ReffNumber": "00000195",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "87",
+                      "Value10": "",
+                      "Value2": "0",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201290001",
+                      "CustType": "A",
+                      "Din": "4",
+                      "Reason": "",
+                      "ReffNumber": "00000196",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "",
+                      "Value10": "",
+                      "Value2": "",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201310001",
+                      "CustType": "A",
+                      "Din": "4",
+                      "Reason": "",
+                      "ReffNumber": "00000199",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "81",
+                      "Value10": "",
+                      "Value2": "0",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201310002",
+                      "CustType": "A",
+                      "Din": "1",
+                      "Reason": " Good",
+                      "ReffNumber": "00000200",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "38",
+                      "Value10": "",
+                      "Value2": "1200034.21416862",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201310003",
+                      "CustType": "A",
+                      "Din": "1",
+                      "Reason": " Good",
+                      "ReffNumber": "00000202",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "79",
+                      "Value10": "",
+                      "Value2": "0",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201310004",
+                      "CustType": "S",
+                      "Din": "1",
+                      "Reason": " Good",
+                      "ReffNumber": "00000204",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "27",
+                      "Value10": "",
+                      "Value2": "5905305.5353361",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201310005",
+                      "CustType": "A",
+                      "Din": "1",
+                      "Reason": " Good",
+                      "ReffNumber": "00000205",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "110",
+                      "Value10": "",
+                      "Value2": "0",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201310006",
+                      "CustType": "A",
+                      "Din": "1",
+                      "Reason": " Good",
+                      "ReffNumber": "00000206",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "94",
+                      "Value10": "",
+                      "Value2": "0",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201310007",
+                      "CustType": "A",
+                      "Din": "1",
+                      "Reason": " Tolak",
+                      "ReffNumber": "00000207",
+                      "Result": "9",
+                      "ResultDesc": "",
+                      "Value1": "49",
+                      "Value10": "",
+                      "Value2": "18032971.1249752",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201310008",
+                      "CustType": "A",
+                      "Din": "1",
+                      "Reason": " Tolak",
+                      "ReffNumber": "00000208",
+                      "Result": "9",
+                      "ResultDesc": "",
+                      "Value1": "88",
+                      "Value10": "",
+                      "Value2": "0",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201310009",
+                      "CustType": "A",
+                      "Din": "1",
+                      "Reason": " Good",
+                      "ReffNumber": "00000209",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "57",
+                      "Value10": "",
+                      "Value2": "0",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201310010",
+                      "CustType": "A",
+                      "Din": "1",
+                      "Reason": " Good",
+                      "ReffNumber": "00000210",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "114",
+                      "Value10": "",
+                      "Value2": "1966489.51080335",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201310011",
+                      "CustType": "A",
+                      "Din": "2",
+                      "Reason": " Good",
+                      "ReffNumber": "00000211",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "15",
+                      "Value10": "",
+                      "Value2": "2737974.37064002",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201310012",
+                      "CustType": "A",
+                      "Din": "1",
+                      "Reason": "",
+                      "ReffNumber": "00000212",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "",
+                      "Value10": "",
+                      "Value2": "",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201310013",
+                      "CustType": "S",
+                      "Din": "1",
+                      "Reason": " Good",
+                      "ReffNumber": "00000214",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "57",
+                      "Value10": "",
+                      "Value2": "0",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201310014",
+                      "CustType": "A",
+                      "Din": "1",
+                      "Reason": "",
+                      "ReffNumber": "00000215",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "107",
+                      "Value10": "",
+                      "Value2": "0",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2201310015",
+                      "CustType": "S",
+                      "Din": "2",
+                      "Reason": " Good",
+                      "ReffNumber": "00000217",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "15",
+                      "Value10": "",
+                      "Value2": "2737974.37064002",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2202010001",
+                      "CustType": "A",
+                      "Din": "1",
+                      "Reason": " Good",
+                      "ReffNumber": "00000218",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "66",
+                      "Value10": "",
+                      "Value2": "9473188.81039587",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2202020002",
+                      "CustType": "A",
+                      "Din": "1",
+                      "Reason": " Tolak",
+                      "ReffNumber": "00000220",
+                      "Result": "9",
+                      "ResultDesc": "",
+                      "Value1": "81",
+                      "Value10": "",
+                      "Value2": "227451.607528095",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2202020004",
+                      "CustType": "S",
+                      "Din": "0",
+                      "Reason": "",
+                      "ReffNumber": "00000222",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "",
+                      "Value10": "",
+                      "Value2": "",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2202020006",
+                      "CustType": "S",
+                      "Din": "0",
+                      "Reason": "",
+                      "ReffNumber": "00000224",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "",
+                      "Value10": "",
+                      "Value2": "",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2202020008",
+                      "CustType": "S",
+                      "Din": "0",
+                      "Reason": "",
+                      "ReffNumber": "00000226",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "",
+                      "Value10": "",
+                      "Value2": "",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2202020010",
+                      "CustType": "S",
+                      "Din": "0",
+                      "Reason": "",
+                      "ReffNumber": "00000228",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "",
+                      "Value10": "",
+                      "Value2": "",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2202020012",
+                      "CustType": "S",
+                      "Din": "0",
+                      "Reason": "",
+                      "ReffNumber": "00000230",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "",
+                      "Value10": "",
+                      "Value2": "",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2202020014",
+                      "CustType": "S",
+                      "Din": "0",
+                      "Reason": "",
+                      "ReffNumber": "00000232",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "",
+                      "Value10": "",
+                      "Value2": "",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2202020016",
+                      "CustType": "S",
+                      "Din": "0",
+                      "Reason": "",
+                      "ReffNumber": "00000234",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "",
+                      "Value10": "",
+                      "Value2": "",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2202020018",
+                      "CustType": "S",
+                      "Din": "0",
+                      "Reason": "",
+                      "ReffNumber": "00000236",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "",
+                      "Value10": "",
+                      "Value2": "",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2202020001",
+                      "CustType": "A",
+                      "Din": "2",
+                      "Reason": " Good",
+                      "ReffNumber": "00000219",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "93",
+                      "Value10": "",
+                      "Value2": "0",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2202020003",
+                      "CustType": "A",
+                      "Din": "1",
+                      "Reason": "",
+                      "ReffNumber": "00000221",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "",
+                      "Value10": "",
+                      "Value2": "",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2202020007",
+                      "CustType": "A",
+                      "Din": "1",
+                      "Reason": "",
+                      "ReffNumber": "00000225",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "",
+                      "Value10": "",
+                      "Value2": "",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2202020009",
+                      "CustType": "A",
+                      "Din": "1",
+                      "Reason": "",
+                      "ReffNumber": "00000227",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "",
+                      "Value10": "",
+                      "Value2": "",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2202020011",
+                      "CustType": "A",
+                      "Din": "1",
+                      "Reason": "",
+                      "ReffNumber": "00000229",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "",
+                      "Value10": "",
+                      "Value2": "",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2202020013",
+                      "CustType": "A",
+                      "Din": "1",
+                      "Reason": "",
+                      "ReffNumber": "00000231",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "",
+                      "Value10": "",
+                      "Value2": "",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2202020015",
+                      "CustType": "A",
+                      "Din": "1",
+                      "Reason": "",
+                      "ReffNumber": "00000233",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "",
+                      "Value10": "",
+                      "Value2": "",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2202020019",
+                      "CustType": "A",
+                      "Din": "1",
+                      "Reason": "",
+                      "ReffNumber": "00000237",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "",
+                      "Value10": "",
+                      "Value2": "",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2202020005",
+                      "CustType": "A",
+                      "Din": "1",
+                      "Reason": "",
+                      "ReffNumber": "00000223",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "",
+                      "Value10": "",
+                      "Value2": "",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2202020017",
+                      "CustType": "A",
+                      "Din": "1",
+                      "Reason": "",
+                      "ReffNumber": "00000235",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "",
+                      "Value10": "",
+                      "Value2": "",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2202030001",
+                      "CustType": "A",
+                      "Din": "4",
+                      "Reason": "",
+                      "ReffNumber": "00000238",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "",
+                      "Value10": "",
+                      "Value2": "",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2202030002",
+                      "CustType": "A",
+                      "Din": "1",
+                      "Reason": "",
+                      "ReffNumber": "00000239",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "77",
+                      "Value10": "",
+                      "Value2": "0",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2202030003",
+                      "CustType": "A",
+                      "Din": "4",
+                      "Reason": "",
+                      "ReffNumber": "00000240",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "",
+                      "Value10": "",
+                      "Value2": "",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2202030004",
+                      "CustType": "A",
+                      "Din": "2",
+                      "Reason": "",
+                      "ReffNumber": "00000241",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "86",
+                      "Value10": "",
+                      "Value2": "0",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2202030005",
+                      "CustType": "A",
+                      "Din": "1",
+                      "Reason": " Good",
+                      "ReffNumber": "00000242",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "26",
+                      "Value10": "",
+                      "Value2": "57169576.0588098",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2202030006",
+                      "CustType": "A",
+                      "Din": "2",
+                      "Reason": " Good",
+                      "ReffNumber": "00000243",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "112",
+                      "Value10": "",
+                      "Value2": "0",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2202030007",
+                      "CustType": "A",
+                      "Din": "1",
+                      "Reason": "",
+                      "ReffNumber": "00000244",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "96",
+                      "Value10": "",
+                      "Value2": "0",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "MK2202030008",
+                      "CustType": "A",
+                      "Din": "3",
+                      "Reason": " Good",
+                      "ReffNumber": "00000245",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "85",
+                      "Value10": "",
+                      "Value2": "0",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  }
+              ],
+              "ErrorMsg": null,
+              "Flag": "1",
+              "Sequence": "2022-02-03 08:12:28.573"
+          }
+  - name: success PPW
+    request:
+      url: http://10.99.48.6/cbasrest/rest/GetResult
+      method: POST
+      body:
+        type: json
+        data: "{\r
+
+          \    \"CbasId\":\"\",\r
+
+          \    \"LOB\":\"PPW\",\r
+
+          \    \"Sequence\":\"221130\"\r
+
+          }"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: private
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Server
+          value: Microsoft-IIS/8.5
+        - name: X-AspNet-Version
+          value: 4.0.30319
+        - name: X-Powered-By
+          value: ASP.NET
+        - name: Date
+          value: Wed, 30 Nov 2022 23:55:11 GMT
+        - name: Content-Length
+          value: "793"
+      body:
+        type: json
+        data: |-
+          {
+              "Customers": [
+                  {
+                      "CbasId": "PPW2211300001",
+                      "CustType": "A",
+                      "Din": "4",
+                      "Reason": "",
+                      "ReffNumber": "00002493",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "",
+                      "Value10": "",
+                      "Value2": "",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "PPW2211300002",
+                      "CustType": "A",
+                      "Din": "4",
+                      "Reason": "",
+                      "ReffNumber": "00002494",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "",
+                      "Value10": "",
+                      "Value2": "",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  },
+                  {
+                      "CbasId": "PPW2211300003",
+                      "CustType": "A",
+                      "Din": "4",
+                      "Reason": "",
+                      "ReffNumber": "00002496",
+                      "Result": "1",
+                      "ResultDesc": "",
+                      "Value1": "",
+                      "Value10": "",
+                      "Value2": "",
+                      "Value3": "",
+                      "Value4": "",
+                      "Value5": "",
+                      "Value6": "",
+                      "Value7": "",
+                      "Value8": "",
+                      "Value9": ""
+                  }
+              ],
+              "ErrorMsg": null,
+              "Flag": "1",
+              "Sequence": "2022-11-30 10:22:51.950"
+          }
+  - name: "sequence tidak sesuai format yyMMdd (ex : 221130)"
+    request:
+      url: http://10.99.48.6/cbasrest/rest/GetResult
+      method: POST
+      body:
+        type: json
+        data: "{\r
+
+          \    \"CbasId\":\"\",\r
+
+          \    \"LOB\":\"PPW\",\r
+
+          \    \"Sequence\":\"2211301\"\r
+
+          }"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: private
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Server
+          value: Microsoft-IIS/8.5
+        - name: X-AspNet-Version
+          value: 4.0.30319
+        - name: X-Powered-By
+          value: ASP.NET
+        - name: Date
+          value: Wed, 30 Nov 2022 23:55:31 GMT
+        - name: Content-Length
+          value: "1215"
+      body:
+        type: json
+        data: |-
+          {
+              "Customers": null,
+              "ErrorMsg": "Conversion failed when converting date and/or time from character string., SQL : SELECT TOP 100 a.appid, a.reffnumber, a.status_app, convert(varchar, a.finishdate, 121) Sequence, r.Result1 Result,\r\na.jml_din din,\r\ngd.DetailDesc ResultDesc,\r\nREPLACE(REPLACE(STUFF((SELECT ', ' + CardDesc FROM DecisionResultDetail WHERE ResultId = r.ResultId FOR XML PATH ('')), 1, 1, ''), '&lt;', '<'), '&gt;', '>') Reason,\r\nav.Value1, \r\nav.Value2, \r\nav.Value3, \r\nav.Value4, \r\nav.Value5, \r\nav.Value6, \r\nav.Value7, \r\nav.Value8, \r\nav.Value9, \r\nav.Value10 \r\nFROM applicant a\r\nJOIN rfproduct p on a.productid = p.productid\r\nLEFT JOIN batch b on b.batchid = a.batchid\r\nLEFT JOIN DecisionResult r on r.DecisionId='POL' AND r.ResultId = a.appid\r\nLEFT JOIN mGeneralDetail gd on gd.GenId='POL' AND r.ResultId = gd.DetailId\r\nLEFT JOIN ApplicantValue av on av.appid = a.appid\r\nWHERE p.SEG_ID = 'PPW' AND a.finishdate > '2211301' AND b.batchid IS NULL\r\nORDER BY a.finishdate",
+              "Flag": "0",
+              "Sequence": null
+          }
+  - name: sequence melebihi tanggal yang ada
+    request:
+      url: http://10.99.48.6/cbasrest/rest/GetResult
+      method: POST
+      body:
+        type: json
+        data: "{\r
+
+          \    \"CbasId\":\"\",\r
+
+          \    \"LOB\":\"PPW\",\r
+
+          \    \"Sequence\":\"221131\"\r
+
+          }"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: private
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Server
+          value: Microsoft-IIS/8.5
+        - name: X-AspNet-Version
+          value: 4.0.30319
+        - name: X-Powered-By
+          value: ASP.NET
+        - name: Date
+          value: Wed, 30 Nov 2022 23:56:12 GMT
+        - name: Content-Length
+          value: "1236"
+      body:
+        type: json
+        data: |-
+          {
+              "Customers": null,
+              "ErrorMsg": "The conversion of a varchar data type to a datetime data type resulted in an out-of-range value., SQL : SELECT TOP 100 a.appid, a.reffnumber, a.status_app, convert(varchar, a.finishdate, 121) Sequence, r.Result1 Result,\r\na.jml_din din,\r\ngd.DetailDesc ResultDesc,\r\nREPLACE(REPLACE(STUFF((SELECT ', ' + CardDesc FROM DecisionResultDetail WHERE ResultId = r.ResultId FOR XML PATH ('')), 1, 1, ''), '&lt;', '<'), '&gt;', '>') Reason,\r\nav.Value1, \r\nav.Value2, \r\nav.Value3, \r\nav.Value4, \r\nav.Value5, \r\nav.Value6, \r\nav.Value7, \r\nav.Value8, \r\nav.Value9, \r\nav.Value10 \r\nFROM applicant a\r\nJOIN rfproduct p on a.productid = p.productid\r\nLEFT JOIN batch b on b.batchid = a.batchid\r\nLEFT JOIN DecisionResult r on r.DecisionId='POL' AND r.ResultId = a.appid\r\nLEFT JOIN mGeneralDetail gd on gd.GenId='POL' AND r.ResultId = gd.DetailId\r\nLEFT JOIN ApplicantValue av on av.appid = a.appid\r\nWHERE p.SEG_ID = 'PPW' AND a.finishdate > '221131' AND b.batchid IS NULL\r\nORDER BY a.finishdate",
+              "Flag": "0",
+              "Sequence": null
+          }
+  - name: lob not found
+    request:
+      url: http://10.99.48.6/cbasrest/rest/GetResult
+      method: POST
+      body:
+        type: json
+        data: "{\r
+
+          \    \"CbasId\":\"\",\r
+
+          \    \"LOB\":\"PPWA\",\r
+
+          \    \"Sequence\":\"221130\"\r
+
+          }"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: private
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Server
+          value: Microsoft-IIS/8.5
+        - name: X-AspNet-Version
+          value: 4.0.30319
+        - name: X-Powered-By
+          value: ASP.NET
+        - name: Date
+          value: Thu, 01 Dec 2022 00:00:30 GMT
+        - name: Content-Length
+          value: "78"
+      body:
+        type: json
+        data: |-
+          {
+              "Customers": null,
+              "ErrorMsg": "LOB tidak ditemukan",
+              "Flag": "0",
+              "Sequence": null
+          }
+  - name: data is null, melebihi tanggal terahir
+    request:
+      url: http://10.99.48.6/cbasrest/rest/GetResult
+      method: POST
+      body:
+        type: json
+        data: "{\r
+
+          \    \"CbasId\":\"\",\r
+
+          \    \"LOB\":\"PPW\",\r
+
+          \    \"Sequence\":\"221202\"\r
+
+          }"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: private
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Server
+          value: Microsoft-IIS/8.5
+        - name: X-AspNet-Version
+          value: 4.0.30319
+        - name: X-Powered-By
+          value: ASP.NET
+        - name: Date
+          value: Thu, 01 Dec 2022 00:08:56 GMT
+        - name: Content-Length
+          value: "63"
+      body:
+        type: json
+        data: |-
+          {
+              "Customers": [],
+              "ErrorMsg": null,
+              "Flag": "1",
+              "Sequence": "221202"
+          }

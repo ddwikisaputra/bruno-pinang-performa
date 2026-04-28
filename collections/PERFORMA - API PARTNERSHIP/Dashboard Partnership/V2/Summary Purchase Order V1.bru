@@ -1,0 +1,612 @@
+meta {
+  name: Summary Purchase Order V1
+  type: http
+  seq: 15
+}
+
+post {
+  url: {{url}}/v/1/partnerships/po-summary
+  body: formUrlEncoded
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{tokenPartnership}}
+}
+
+body:form-urlencoded {
+  userId: 4
+  partnershipCode: OMS1
+  ~startDate: 2021-12-02 00:00:00
+  ~endDate: 2021-12-02 23:59:59
+}
+
+settings {
+  encodeUrl: true
+}
+
+example {
+  name: empty data
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-summary
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      partnershipCode: OMS19
+      startDate: 2021-12-12 00:00:00
+      endDate: 2021-12-12 23:59:59
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Wed, 24 Nov 2021 18:18:31 GMT
+      Content-Length: 657
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": {
+                "totalRequestPO": 0,
+                "totalDisburstmentPO": 0
+            },
+            "desc": "Data Ditemukan",
+            "message": "Data Ditemukan",
+            "status": 200
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: general error
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-summary
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      partnershipCode: OMS19
+      startDate: 2021-12-12 00:00:00
+      endDate: 2021-12-12 23:59:59
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 02:53:38 GMT
+      Content-Length: 111
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "desc": "Could not connect .....",
+            "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+            "status": 500
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: unautorized
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-summary
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      partnershipCode: OMS19
+      startDate: 2021-12-12 00:00:00
+      endDate: 2021-12-12 23:59:59
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 02:44:34 GMT
+      Content-Length: 82
+    }
+  
+    status: {
+      code: 401
+      text: Unauthorized
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "code": 401,
+            "desc": "Expired",
+            "message": "Invalid Token || Token Is Expired"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: success
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-summary
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      partnershipCode: OMS19
+      startDate: 2021-12-12 00:00:00
+      endDate: 2021-12-12 23:59:59
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 03:03:58 GMT
+      Content-Length: 82
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": {
+                "totalRequestPO": 3,
+                "totalDisburstmentPO": 2000000
+            },
+            "desc": "Data Ditemukan",
+            "message": "Data Ditemukan",
+            "status": 200
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: error database connection
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-summary
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      partnershipCode: OMS19
+      startDate: 2021-12-12 00:00:00
+      endDate: 2021-12-12 23:59:59
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 02:53:38 GMT
+      Content-Length: 111
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+            "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+            "status": 400
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: error parameter validation
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-summary
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      partnershipCode: OMS19
+      startDate: 2021-12-12 00:00:00
+      endDate: 2021-12-12 23:59:59
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 02:53:38 GMT
+      Content-Length: 111
+    }
+  
+    status: {
+      code: 400
+      text: Bad Request
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "desc": "Parameter ... kosong",
+            "message": "Maaf, Parameter ... tidak boleh kosong",
+            "status": 500
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: access forbidden (403)
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-summary
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 4
+      partnershipCode: OMS1
+      ~startDate: 2021-12-02 00:00:00
+      ~endDate: 2021-12-02 23:59:59
+    }
+  }
+  
+  response: {
+    headers: {
+      Server: nginx/1.18.0 (Ubuntu)
+      Date: Mon, 25 Jul 2022 03:37:17 GMT
+      Content-Type: application/json; charset=utf-8
+      Content-Length: 67
+      Connection: keep-alive
+    }
+  
+    status: {
+      code: 403
+      text: Forbidden
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "code": 403,
+            "desc": "Tidak Memliki Akses",
+            "message": "403 Forbidden"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: empty data
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-summary
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      partnershipCode: OMS19
+      startDate: 2021-12-12 00:00:00
+      endDate: 2021-12-12 23:59:59
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Wed, 24 Nov 2021 18:18:31 GMT
+      Content-Length: 657
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": {
+                "totalRequestPO": 0,
+                "totalDisburstmentPO": 0
+            },
+            "desc": "Data Ditemukan",
+            "message": "Data Ditemukan",
+            "status": 200
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: success
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-summary
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      partnershipCode: OMS19
+      startDate: 2021-12-12 00:00:00
+      endDate: 2021-12-12 23:59:59
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 03:03:58 GMT
+      Content-Length: 82
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": {
+                "totalRequestPO": 3,
+                "totalDisburstmentPO": 2000000
+            },
+            "desc": "Data Ditemukan",
+            "message": "Data Ditemukan",
+            "status": 200
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: general error
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-summary
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      partnershipCode: OMS19
+      startDate: 2021-12-12 00:00:00
+      endDate: 2021-12-12 23:59:59
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 02:53:38 GMT
+      Content-Length: 111
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "desc": "Could not connect .....",
+            "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+            "status": 500
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: error parameter validation
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-summary
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      partnershipCode: OMS19
+      startDate: 2021-12-12 00:00:00
+      endDate: 2021-12-12 23:59:59
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 02:53:38 GMT
+      Content-Length: 111
+    }
+  
+    status: {
+      code: 400
+      text: Bad Request
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "desc": "Parameter ... kosong",
+            "message": "Maaf, Parameter ... tidak boleh kosong",
+            "status": 500
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: access forbidden (403)
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-summary
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 4
+      partnershipCode: OMS1
+      ~startDate: 2021-12-02 00:00:00
+      ~endDate: 2021-12-02 23:59:59
+    }
+  }
+  
+  response: {
+    headers: {
+      Server: nginx/1.18.0 (Ubuntu)
+      Date: Mon, 25 Jul 2022 03:37:17 GMT
+      Content-Type: application/json; charset=utf-8
+      Content-Length: 67
+      Connection: keep-alive
+    }
+  
+    status: {
+      code: 403
+      text: Forbidden
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "code": 403,
+            "desc": "Tidak Memliki Akses",
+            "message": "403 Forbidden"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: error database connection
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-summary
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      partnershipCode: OMS19
+      startDate: 2021-12-12 00:00:00
+      endDate: 2021-12-12 23:59:59
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 02:53:38 GMT
+      Content-Length: 111
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+            "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+            "status": 400
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: unautorized
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-summary
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      partnershipCode: OMS19
+      startDate: 2021-12-12 00:00:00
+      endDate: 2021-12-12 23:59:59
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 02:44:34 GMT
+      Content-Length: 82
+    }
+  
+    status: {
+      code: 401
+      text: Unauthorized
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "code": 401,
+            "desc": "Expired",
+            "message": "Invalid Token || Token Is Expired"
+        }
+      '''
+    }
+  }
+}

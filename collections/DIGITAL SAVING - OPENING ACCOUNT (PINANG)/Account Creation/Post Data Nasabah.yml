@@ -1,0 +1,737 @@
+info:
+  name: Post Data Nasabah
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{base_url}}/raya/opening-account/pinang/post-data-nasabah"
+  body:
+    type: json
+    data: "{\r
+
+      \    \"channelId\": \"PINANG-PERFORMA\",\r
+
+      \    \"mobileNo\": \"+6281776527375\",\r
+
+      \    \"nik\": \"3171051211950017\",\r
+
+      \    \"nama\": \"Joko Anwar\",\r
+
+      \    \"pob\": \"Jakarta\",\r
+
+      \    \"dob\": \"1995-12-11\",\r
+
+      \    \"email\": \"jokoanwar@gmail.com\",\r
+
+      \    \"namaIbuKandung\": \"Rohani\",\r
+
+      \    \"jenisKelamin\" : \"M\",\r
+
+      \    \"agama\" : \"ISL\",\r
+
+      \    \"statusPernikahan\" : \"K\",\r
+
+      \    \"kewarganegaraan\" : \"WNI\",\r
+
+      \    \"provinsi\" : \"DKI Jakarta\",\r
+
+      \    \"kota\" : \"Jakarta Pusat\",\r
+
+      \    \"kecamatan\" : \"Cempaka Putih\",\r
+
+      \    \"kelurahanDesa\" : \"Cempaka Putih Barat\",\r
+
+      \    \"kodePos\": \"10520\",\r
+
+      \    \"alamatLengkap\" : \"Jalan Irian No 3\",\r
+
+      \    \"pendidikanTerakhir\" : \"S1\",\r
+
+      \    \"jenisPekerjaan\": \"D88\",\r
+
+      \    \"bidangPekerjaan\": \"0001\",\r
+
+      \    \"jabatanPekerjaan\": \"09\",\r
+
+      \    \"sumberPenghasilan\": \"00012\",\r
+
+      \    \"penghasilanBulanan\": \"G3\",\r
+
+      \    \"transaksiNormalHarian\": \"N3\",\r
+
+      \    \"tujuanBukaRekening\": \"T2\",\r
+
+      \    \"namaTempatBekerja\": \"Bank Raya\",\r
+
+      \    \"noTlpTempatBekerja\": \"021123455\",\r
+
+      \    \"alamatTempatBekerja\": \"Menara BRILiaN\",\r
+
+      \    \"kelurahanTempatBekerja\": \"Menteng Dalam\",\r
+
+      \    \"kecamatanTempatBekerja\": \"Tebet\",\r
+
+      \    \"kotaTempatBekerja\": \"Jakarta Selatan\",\r
+
+      \    \"propinsiTempatBekerja\": \"DKI Jakarta\",\r
+
+      \    \"kodePosTempatBekerja\": \"12870\",\r
+
+      \    \"npwp\": \"3171051211950017\",\r
+
+      \    \"wajibPajakNonId\": \"T\",\r
+
+      \t\"wajibPajakUs\": \"T\",\r
+
+      \t\"tin\": \"\",\r
+
+      \t\"lahirDiUs\": \"T\",\r
+
+      \t\"adaSalinanSertifikat\": \"T\",\r
+
+      \t\"alasanTdkAdaSertifikat\": \"\",\r
+
+      \t\"wajibPajakSelainIdUs\": \"T\",\r
+
+      \t\"negaraFatca\": \"\",\r
+
+      \t\"punyaNpwpNonIdUs\": \"T\",\r
+
+      \t\"npwpNonUsId\": \"\",\r
+
+      \t\"alasanTdkAdaNpwpNonUsId\":\"\"\r
+
+      }"
+  auth:
+    type: basic
+    username: "{{username_dev}}"
+    password: "{{password_dev}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Error - Customer Already Exist
+    request:
+      url: "{{base_url_prod}}/raya/opening-account/pinang/post-data-nasabah"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+              "channelId": "PINANG-FLEXI",
+              "mobileNo": "+6282298392616",
+              "nik": "3275081610980019",
+              "nama": "M Ansari Qhisti Wicaksono",
+              "pob": "Jakarta",
+              "dob": "1998-10-16",
+              "email": "sony.maq.wicaksono@gmail.com",
+              "namaIbuKandung": "Novita Sari",
+              "jenisKelamin" : "M",
+              "agama" : "ISL",
+              "statusPernikahan" : "B",
+              "kewarganegaraan" : "WNI",
+              "provinsi" : "JAWA BARAT",
+              "kota" : "KOTA BEKASI",
+              "kecamatan" : "PONDOKGEDE",
+              "kelurahanDesa" : "JATIBENING",
+              "kodePos": "17412",
+              "alamatLengkap" : "JALAN TERNATE A20 KOMPLEKS AL",
+              "pendidikanTerakhir" : "S1",
+              "jenisPekerjaan": "D5",
+              "bidangPekerjaan": "0004",
+              "jabatanPekerjaan": "61",
+              "sumberPenghasilan": "00011",
+              "penghasilanBulanan": "G1",
+              "transaksiNormalHarian": "N1",
+              "tujuanBukaRekening": "T1",
+              "namaTempatBekerja": "BOGOR",
+              "noTlpTempatBekerja": "021899019191",
+              "alamatTempatBekerja": "BOGOR",
+              "kelurahanTempatBekerja": "DRAMAGA",
+              "kecamatanTempatBekerja": "DRAMAGA",
+              "kotaTempatBekerja": "KABUPATEN BOGOR",
+              "propinsiTempatBekerja": "JAWA BARAT",
+              "kodePosTempatBekerja": "17542",
+              "npwp": "",
+              "wajibPajakNonId": "T",
+          	"wajibPajakUs": "T",
+          	"tin": "",
+          	"lahirDiUs": "T",
+          	"adaSalinanSertifikat": "",
+          	"alasanTdkAdaSertifikat": "",
+          	"wajibPajakSelainIdUs": "T",
+          	"negaraFatca": "",
+          	"punyaNpwpNonIdUs": "T",
+          	"npwpNonUsId": "",
+          	"alasanTdkAdaNpwpNonUsId":""
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Fri, 15 Sep 2023 15:12:48 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: x-krakend
+          value: Version 2.4.3
+        - name: x-krakend-completed
+          value: "false"
+        - name: strict-transport-security
+          value: max-age=31536000; includeSubDomains; preload; always
+        - name: alt-svc
+          value: h3=":443"; ma=86400
+        - name: cf-cache-status
+          value: DYNAMIC
+        - name: set-cookie
+          value: __cf_bm=6e7qFO2_hr8ncEZKO18A5RnvbpPSXsLXG4x.OrU2fDk-1694790768-0-AaMb5WJFCtb+EP6QeFunYl8UfZfi+mngToWWCrB5TGXK6Llt4dW+99JYrufzUA820dCZaKcYAk98XgGUsD6y/9M=; path=/; expires=Fri, 15-Sep-23 15:42:48 GMT; domain=.bankraya.co.id; HttpOnly; Secure; SameSite=None
+        - name: Content-Encoding
+          value: gzip
+        - name: x-kong-upstream-latency
+          value: "3160"
+        - name: x-kong-proxy-latency
+          value: "1"
+        - name: via
+          value: kong/3.3.1, 1.1 google
+        - name: Report-To
+          value: '{"endpoints":[{"url":"https:\/\/csp-reporting.cloudflare.com\/cdn-cgi\/script_monitor\/report?m=WkBMUIT4dAWZVvETJSsc32Lo3p0XEns1TlXNQvXiT1s-1694790768-0-AVH7O2upOfYBHfCiSo75v2wb05khoHA3Togh5NNIzL0dhXWYmV1vf_ely5zwCj3s5CzWE-wcdHJU6NH6RAdwqXJT2gvKaq0OtCzon51qgxB1UhRCia9HZpZy4X9lK7XFlIn_TTRI2iQqm57x9MbYzcd8qFLreb_bQkf3CYLrcgYe"}],"group":"cf-csp-endpoint","max_age":86400}'
+        - name: Content-Security-Policy-Report-Only
+          value: script-src 'none'; report-uri https://csp-reporting.cloudflare.com/cdn-cgi/script_monitor/report?m=WkBMUIT4dAWZVvETJSsc32Lo3p0XEns1TlXNQvXiT1s-1694790768-0-AVH7O2upOfYBHfCiSo75v2wb05khoHA3Togh5NNIzL0dhXWYmV1vf_ely5zwCj3s5CzWE-wcdHJU6NH6RAdwqXJT2gvKaq0OtCzon51qgxB1UhRCia9HZpZy4X9lK7XFlIn_TTRI2iQqm57x9MbYzcd8qFLreb_bQkf3CYLrcgYe; report-to cf-csp-endpoint
+        - name: Server
+          value: cloudflare
+        - name: CF-RAY
+          value: 8071cf494d8d4abc-CGK
+      body:
+        type: json
+        data: |-
+          {
+              "responseCode": "2009001",
+              "responseMessage": "Customer Already Exist",
+              "additionalInfo": {
+                  "accNo": "001001018377302",
+                  "cifNo": "0000184022"
+              }
+          }
+  - name: Error - Customer On Opening Account Process
+    request:
+      url: "{{base_url}}/raya/opening-account/pinang/post-data-nasabah"
+      method: POST
+      body:
+        type: json
+        data: "{\r
+
+          \    \"channelId\": \"PINANG-PERFORMA\",\r
+
+          \    \"mobileNo\": \"+625921098001\",\r
+
+          \    \"nik\": \"3511001610870063\",\r
+
+          \    \"nama\": \"Rama Wicaksono\",\r
+
+          \    \"pob\": \"Jakarta\",\r
+
+          \    \"dob\": \"1987-12-11\",\r
+
+          \    \"email\": \"ini@email.com\",\r
+
+          \    \"namaIbuKandung\": \"Kartana\",\r
+
+          \    \"jenisKelamin\" : \"M\",\r
+
+          \    \"agama\" : \"ISL\",\r
+
+          \    \"statusPernikahan\" : \"K\",\r
+
+          \    \"kewarganegaraan\" : \"WNI\",\r
+
+          \    \"provinsi\" : \"DKI Jakarta\",\r
+
+          \    \"kota\" : \"Kota Hujan\",\r
+
+          \    \"kecamatan\" : \"kalimati\",\r
+
+          \    \"kelurahanDesa\" : \"jatisari\",\r
+
+          \    \"kodePos\": \"12345\",\r
+
+          \    \"alamatLengkap\" : \"Jalan Irian No 3\",\r
+
+          \    \"pendidikanTerakhir\" : \"S1\",\r
+
+          \    \"jenisPekerjaan\": \"D88\",\r
+
+          \    \"bidangPekerjaan\": \"0001\",\r
+
+          \    \"jabatanPekerjaan\": \"09\",\r
+
+          \    \"sumberPenghasilan\": \"00012\",\r
+
+          \    \"penghasilanBulanan\": \"G3\",\r
+
+          \    \"transaksiNormalHarian\": \"N3\",\r
+
+          \    \"tujuanBukaRekening\": \"T2\",\r
+
+          \    \"namaTempatBekerja\": \"Bank Raya\",\r
+
+          \    \"noTlpTempatBekerja\": \"021123455\",\r
+
+          \    \"alamatTempatBekerja\": \"Menara BRILiaN\",\r
+
+          \    \"kelurahanTempatBekerja\": \"Jakarta\",\r
+
+          \    \"kecamatanTempatBekerja\": \"Jakarta\",\r
+
+          \    \"kotaTempatBekerja\": \"Jakarta\",\r
+
+          \    \"propinsiTempatBekerja\": \"Dki Jakarta\",\r
+
+          \    \"kodePosTempatBekerja\": \"12346\",\r
+
+          \    \"npwp\": \"\",\r
+
+          \    \"wajibPajakNonId\": \"T\",\r
+
+          \t\"wajibPajakUs\": \"T\",\r
+
+          \t\"tin\": \"\",\r
+
+          \t\"lahirDiUs\": \"T\",\r
+
+          \t\"adaSalinanSertifikat\": \"T\",\r
+
+          \t\"alasanTdkAdaSertifikat\": \"\",\r
+
+          \t\"wajibPajakSelainIdUs\": \"T\",\r
+
+          \t\"negaraFatca\": \"\",\r
+
+          \t\"punyaNpwpNonIdUs\": \"T\",\r
+
+          \t\"npwpNonUsId\": \"\",\r
+
+          \t\"alasanTdkAdaNpwpNonUsId\":\"\"\r
+
+          }"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Mon, 02 Jun 2025 02:34:07 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "153"
+        - name: Connection
+          value: keep-alive
+        - name: X-Kong-Upstream-Latency
+          value: "22340"
+        - name: X-Kong-Proxy-Latency
+          value: "15"
+        - name: Via
+          value: kong/3.3.1
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "responseCode": "2009002",
+              "responseMessage": "Customer On Opening Account Process",
+              "additionalInfo": {
+                  "customerId": "2e148b4c-1007-4128-a1c4-019e76c120c0"
+              }
+          }
+  - name: Error - Internal Server Error
+    request:
+      url: "{{base_url}}/raya/opening-account/pinang/post-data-nasabah"
+      method: POST
+      body:
+        type: json
+        data: "{\r
+
+          \    \"channelId\": \"PINANG-PERFORMA\",\r
+
+          \    \"mobileNo\": \"+625921098002\",\r
+
+          \    \"nik\": \"3511001610870065\",\r
+
+          \    \"nama\": \"Rama Wicaksono\",\r
+
+          \    \"pob\": \"Jakarta\",\r
+
+          \    \"dob\": \"1987-12-11\",\r
+
+          \    \"email\": \"ini1@email.com\",\r
+
+          \    \"namaIbuKandung\": \"Kartana\",\r
+
+          \    \"jenisKelamin\" : \"M\",\r
+
+          \    \"agama\" : \"ISL\",\r
+
+          \    \"statusPernikahan\" : \"K\",\r
+
+          \    \"kewarganegaraan\" : \"WNI\",\r
+
+          \    \"provinsi\" : \"DKI Jakarta\",\r
+
+          \    \"kota\" : \"Kota Hujan\",\r
+
+          \    \"kecamatan\" : \"kalimati\",\r
+
+          \    \"kelurahanDesa\" : \"jatisari\",\r
+
+          \    \"kodePos\": \"12345\",\r
+
+          \    \"alamatLengkap\" : \"Jalan Irian No 3\",\r
+
+          \    \"pendidikanTerakhir\" : \"S1\",\r
+
+          \    \"jenisPekerjaan\": \"D88\",\r
+
+          \    \"bidangPekerjaan\": \"0001\",\r
+
+          \    \"jabatanPekerjaan\": \"09\",\r
+
+          \    \"sumberPenghasilan\": \"00012\",\r
+
+          \    \"penghasilanBulanan\": \"G3\",\r
+
+          \    \"transaksiNormalHarian\": \"N3\",\r
+
+          \    \"tujuanBukaRekening\": \"T2\",\r
+
+          \    \"namaTempatBekerja\": \"Bank Raya\",\r
+
+          \    \"noTlpTempatBekerja\": \"021123455\",\r
+
+          \    \"alamatTempatBekerja\": \"Menara BRILiaN\",\r
+
+          \    \"kelurahanTempatBekerja\": \"Jakarta\",\r
+
+          \    \"kecamatanTempatBekerja\": \"Jakarta\",\r
+
+          \    \"kotaTempatBekerja\": \"Jakarta\",\r
+
+          \    \"propinsiTempatBekerja\": \"Dki Jakarta\",\r
+
+          \    \"kodePosTempatBekerja\": \"10520\",\r
+
+          \    \"npwp\": \"\",\r
+
+          \    \"wajibPajakNonId\": \"T\",\r
+
+          \t\"wajibPajakUs\": \"T\",\r
+
+          \t\"tin\": \"\",\r
+
+          \t\"lahirDiUs\": \"T\",\r
+
+          \t\"adaSalinanSertifikat\": \"T\",\r
+
+          \t\"alasanTdkAdaSertifikat\": \"\",\r
+
+          \t\"wajibPajakSelainIdUs\": \"T\",\r
+
+          \t\"negaraFatca\": \"\",\r
+
+          \t\"punyaNpwpNonIdUs\": \"T\",\r
+
+          \t\"npwpNonUsId\": \"\",\r
+
+          \t\"alasanTdkAdaNpwpNonUsId\":\"\"\r
+
+          }"
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Date
+          value: Mon, 02 Jun 2025 02:35:20 GMT
+        - name: Content-Length
+          value: "0"
+        - name: Connection
+          value: close
+        - name: X-Kong-Upstream-Latency
+          value: "6205"
+        - name: X-Kong-Proxy-Latency
+          value: "1"
+        - name: Via
+          value: kong/3.3.1
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+      body:
+        type: text
+        data: ""
+  - name: Success
+    request:
+      url: "{{base_url}}/raya/opening-account/pinang/post-data-nasabah"
+      method: POST
+      body:
+        type: json
+        data: "{\r
+
+          \    \"channelId\": \"PINANG-PERFORMA\",\r
+
+          \    \"mobileNo\": \"+625921098002\",\r
+
+          \    \"nik\": \"3511001610870065\",\r
+
+          \    \"nama\": \"Rama Wicaksono\",\r
+
+          \    \"pob\": \"Jakarta\",\r
+
+          \    \"dob\": \"1987-12-11\",\r
+
+          \    \"email\": \"ini1@email.com\",\r
+
+          \    \"namaIbuKandung\": \"Kartana\",\r
+
+          \    \"jenisKelamin\" : \"M\",\r
+
+          \    \"agama\" : \"ISL\",\r
+
+          \    \"statusPernikahan\" : \"K\",\r
+
+          \    \"kewarganegaraan\" : \"WNI\",\r
+
+          \    \"provinsi\" : \"DKI Jakarta\",\r
+
+          \    \"kota\" : \"Kota Hujan\",\r
+
+          \    \"kecamatan\" : \"kalimati\",\r
+
+          \    \"kelurahanDesa\" : \"jatisari\",\r
+
+          \    \"kodePos\": \"10520\",\r
+
+          \    \"alamatLengkap\" : \"Jalan Irian No 3\",\r
+
+          \    \"pendidikanTerakhir\" : \"S1\",\r
+
+          \    \"jenisPekerjaan\": \"D88\",\r
+
+          \    \"bidangPekerjaan\": \"0001\",\r
+
+          \    \"jabatanPekerjaan\": \"09\",\r
+
+          \    \"sumberPenghasilan\": \"00012\",\r
+
+          \    \"penghasilanBulanan\": \"G3\",\r
+
+          \    \"transaksiNormalHarian\": \"N3\",\r
+
+          \    \"tujuanBukaRekening\": \"T2\",\r
+
+          \    \"namaTempatBekerja\": \"Bank Raya\",\r
+
+          \    \"noTlpTempatBekerja\": \"021123455\",\r
+
+          \    \"alamatTempatBekerja\": \"Menara BRILiaN\",\r
+
+          \    \"kelurahanTempatBekerja\": \"Jakarta\",\r
+
+          \    \"kecamatanTempatBekerja\": \"Jakarta\",\r
+
+          \    \"kotaTempatBekerja\": \"Jakarta\",\r
+
+          \    \"propinsiTempatBekerja\": \"Dki Jakarta\",\r
+
+          \    \"kodePosTempatBekerja\": \"10520\",\r
+
+          \    \"npwp\": \"\",\r
+
+          \    \"wajibPajakNonId\": \"T\",\r
+
+          \t\"wajibPajakUs\": \"T\",\r
+
+          \t\"tin\": \"\",\r
+
+          \t\"lahirDiUs\": \"T\",\r
+
+          \t\"adaSalinanSertifikat\": \"T\",\r
+
+          \t\"alasanTdkAdaSertifikat\": \"\",\r
+
+          \t\"wajibPajakSelainIdUs\": \"T\",\r
+
+          \t\"negaraFatca\": \"\",\r
+
+          \t\"punyaNpwpNonIdUs\": \"T\",\r
+
+          \t\"npwpNonUsId\": \"\",\r
+
+          \t\"alasanTdkAdaNpwpNonUsId\":\"\"\r
+
+          }"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Mon, 02 Jun 2025 02:36:25 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "128"
+        - name: Connection
+          value: keep-alive
+        - name: X-Kong-Upstream-Latency
+          value: "7569"
+        - name: X-Kong-Proxy-Latency
+          value: "19"
+        - name: Via
+          value: kong/3.3.1
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "responseCode": "2009000",
+              "responseMessage": "Successful",
+              "additionalInfo": {
+                  "customerId": "5e5f3289-6182-41c3-a21a-a7d81d05e1f1"
+              }
+          }
+  - name: Error Parameter
+    request:
+      url: "{{base_url}}/raya/opening-account/pinang/post-data-nasabah"
+      method: POST
+      body:
+        type: json
+        data: "{\r
+
+          \    \"channelId\": \"PINANG-PERFORMA\",\r
+
+          \    \"mobileNo\": \"+6281776527371\",\r
+
+          \    \"nik\": \"3171051211950001\",\r
+
+          \    \"nama\": \"Dwiki Saputra\",\r
+
+          \    \"pob\": \"Jakarta\",\r
+
+          \    \"dob\": \"1995-12-11\",\r
+
+          \    \"email\": \"dwiki@gmail.com\",\r
+
+          \    \"namaIbuKandung\": \"Rumiyati\",\r
+
+          \    \"jenisKelamin\" : \"M\",\r
+
+          \    \"agama\" : \"ISL\",\r
+
+          \    \"statusPernikahan\" : \"K\",\r
+
+          \    \"kewarganegaraan\" : \"WNI\",\r
+
+          \    \"provinsi\" : \"DKI Jakarta\",\r
+
+          \    \"kota\" : \"Jakarta Pusat\",\r
+
+          \    \"kecamatan\" : \"Cempaka Putih\",\r
+
+          \    \"kelurahanDesa\" : \"Cempaka Putih Barat\",\r
+
+          \    \"kodePos\": \"10520\",\r
+
+          \    \"alamatLengkap\" : \"Jalan Irian No 3\",\r
+
+          \    \"pendidikanTerakhir\" : \"S1\",\r
+
+          \    \"jenisPekerjaan\": \"D88\",\r
+
+          \    \"bidangPekerjaan\": \"0001\",\r
+
+          \    \"jabatanPekerjaan\": \"09\",\r
+
+          \    \"sumberPenghasilan\": \"00012\",\r
+
+          \    \"penghasilanBulanan\": \"G3\",\r
+
+          \    \"transaksiNormalHarian\": \"N3\",\r
+
+          \    \"tujuanBukaRekening\": \"T2\",\r
+
+          \    \"namaTempatBekerja\": \"Bank Raya\",\r
+
+          \    \"noTlpTempatBekerja\": \"021123455\",\r
+
+          \    \"alamatTempatBekerja\": \"Menara BRILiaN\",\r
+
+          \    \"kelurahanTempatBekerja\": \"Jakarta\",\r
+
+          \    \"kecamatanTempatBekerja\": \"Jakarta\",\r
+
+          \    \"kotaTempatBekerja\": \"Jakarta\",\r
+
+          \    \"propinsiTempatBekerja\": \"Dki Jakarta\",\r
+
+          \    \"kodePosTempatBekerja\": \"10520\",\r
+
+          \    \"npwp\": \"\",\r
+
+          \    \"wajibPajakNonId\": \"T\",\r
+
+          \t\"wajibPajakUs\": \"T\",\r
+
+          \t\"tin\": \"\",\r
+
+          \t\"lahirDiUs\": \"T\",\r
+
+          \t\"adaSalinanSertifikat\": \"T\",\r
+
+          \t\"alasanTdkAdaSertifikat\": \"\",\r
+
+          \t\"wajibPajakSelainIdUs\": \"T\",\r
+
+          \t\"negaraFatca\": \"\",\r
+
+          \t\"punyaNpwpNonIdUs\": \"T\",\r
+
+          \t\"npwpNonUsId\": \"\",\r
+
+          \t\"alasanTdkAdaNpwpNonUsId\":\"\"\r
+
+          }"
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Date
+          value: Tue, 12 Aug 2025 06:10:39 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "73"
+        - name: Request-Id
+          value: 6ad220ed4b7188deb54d969b725331dd
+        - name: X-Kong-Upstream-Latency
+          value: "2900"
+        - name: X-Kong-Proxy-Latency
+          value: "16"
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+        - name: Via
+          value: kong/3.3.1, 1.1 google
+        - name: Alt-Svc
+          value: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      body:
+        type: json
+        data: |-
+          {
+              "responseCode": "4009001",
+              "responseMessage": "Invalid Field Format {Nik}"
+          }

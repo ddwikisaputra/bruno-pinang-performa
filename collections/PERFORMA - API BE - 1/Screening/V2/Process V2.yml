@@ -1,0 +1,487 @@
+info:
+  name: Process V2
+  type: http
+  seq: 9
+
+http:
+  method: POST
+  url: "{{base_url}}/v/2/screening/process/20942"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "{{userId}}"
+        description: "[Encode]Personal Number BRI Agro (UserID Login)"
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: prakarsa not found
+    request:
+      url: "{{base_url}}/v/1/screening/process/-1"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "223"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 24 May 2021 08:08:02 GMT
+        - name: Content-Length
+          value: "79"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Prakarsa tidak ditemukan",
+              "desc": "Error record not found"
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/screening/process/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "223"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 24 May 2021 08:08:02 GMT
+        - name: Content-Length
+          value: "79"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/screening/process/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "223"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 24 May 2021 08:08:02 GMT
+        - name: Content-Length
+          value: "79"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect ....."
+          }
+  - name: pre-screening has been done
+    request:
+      url: "{{base_url}}/v/1/screening/process/28"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "223"
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "status": 500,
+              "message": "Maaf, Prakarsa sudah dilakukan. Silahkan untuk melanjutkan ke tahap selajutnya yaitu Pengisian CRS",
+              "desc": "Status > 2 Done Prescreening"
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{base_url}}/v/1/screening/process/30946"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999951"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 21 Jul 2022 07:32:49 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/screening/process/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "223"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 24 May 2021 08:08:02 GMT
+        - name: Content-Length
+          value: "79"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Data Tersimpan",
+              "message": "Prakarsa sedang dalam proses",
+              "status": 200
+          }
+  - name: pre-screening form is not finished yet
+    request:
+      url: "{{base_url}}/v/1/screening/process/28"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "223"
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "status": 500,
+              "message": "Maaf, Data prakarsa belum lengkap. Silahkan lengkapi data prakarsa seperti Infomasi Diri atau Informasi Usaha",
+              "desc": "Status 0, Form Informasi Usaha belum diisi"
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/screening/process/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "223"
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 24 May 2021 08:08:02 GMT
+        - name: Content-Length
+          value: "79"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: success v2
+    request:
+      url: "{{base_url}}/v/2/screening/process/31124"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: UmF5YVBpUGVyVG9w9FR0lGD8PJZ01laNFpB91ptV5mkFfw==
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 03 Jan 2023 08:17:50 GMT
+        - name: Content-Length
+          value: "168"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Data Tersimpan",
+              "message": "Prakarsa sedang dalam proses",
+              "status": 200
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/screening/process/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "223"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 24 May 2021 08:08:02 GMT
+        - name: Content-Length
+          value: "79"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Data Tersimpan",
+              "message": "Prakarsa sedang dalam proses",
+              "status": 200
+          }
+  - name: pre-screening form is not finished yet
+    request:
+      url: "{{base_url}}/v/1/screening/process/28"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "223"
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "status": 500,
+              "message": "Maaf, Data prakarsa belum lengkap. Silahkan lengkapi data prakarsa seperti Infomasi Diri atau Informasi Usaha",
+              "desc": "Status 0, Form Informasi Usaha belum diisi"
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/screening/process/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "223"
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 24 May 2021 08:08:02 GMT
+        - name: Content-Length
+          value: "79"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/screening/process/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "223"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 24 May 2021 08:08:02 GMT
+        - name: Content-Length
+          value: "79"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect ....."
+          }
+  - name: success v2
+    request:
+      url: "{{base_url}}/v/2/screening/process/31124"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: UmF5YVBpUGVyVG9w9FR0lGD8PJZ01laNFpB91ptV5mkFfw==
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 03 Jan 2023 08:17:50 GMT
+        - name: Content-Length
+          value: "168"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Data Tersimpan",
+              "message": "Prakarsa sedang dalam proses",
+              "status": 200
+          }
+  - name: pre-screening has been done
+    request:
+      url: "{{base_url}}/v/1/screening/process/28"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "223"
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "status": 500,
+              "message": "Maaf, Prakarsa sudah dilakukan. Silahkan untuk melanjutkan ke tahap selajutnya yaitu Pengisian CRS",
+              "desc": "Status > 2 Done Prescreening"
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{base_url}}/v/1/screening/process/30946"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999951"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 21 Jul 2022 07:32:49 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/screening/process/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "223"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 24 May 2021 08:08:02 GMT
+        - name: Content-Length
+          value: "79"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: prakarsa not found
+    request:
+      url: "{{base_url}}/v/1/screening/process/-1"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "223"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 24 May 2021 08:08:02 GMT
+        - name: Content-Length
+          value: "79"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Prakarsa tidak ditemukan",
+              "desc": "Error record not found"
+          }

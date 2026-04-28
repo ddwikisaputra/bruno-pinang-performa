@@ -1,0 +1,1364 @@
+info:
+  name: Detail V2
+  type: http
+  seq: 9
+
+http:
+  method: POST
+  url: "{{base_url_local}}/v/2/prakarsa/detail"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "{{userId}}"
+        description: "[Encode]Personal Number BRI Agro (UserID Login) { MANDATORY }"
+      - name: prakarsaId
+        value: "31480"
+        description: Prakarsa ID { MANDATORY }
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/2/prakarsa/detail"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: prakarsaId
+            value: "30946"
+            description: Prakarsa ID { MANDATORY }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 07 Jun 2021 07:11:49 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "message": "Invalid Token || Token Is Expired",
+              "desc": "Expired"
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{base_url_local}}/v/2/prakarsa/detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999952"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: prakarsaId
+            value: "30946"
+            description: Prakarsa ID { MANDATORY }
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 18 Jul 2022 11:00:58 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url_local}}/v/2/prakarsa/detail"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: prakarsaId
+            value: "30946"
+            description: Prakarsa ID { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 07 Jun 2021 07:11:49 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/2/prakarsa/detail"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: prakarsaId
+            value: "30946"
+            description: Prakarsa ID { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 07 Jun 2021 07:11:49 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data": null
+          }
+  - name: data tidak ditemukan
+    request:
+      url: "{{base_url}}/v/2/prakarsa/detail"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: prakarsaId
+            value: "-1"
+            description: Prakarsa ID { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 07 Jun 2021 07:11:49 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "crsBusiness": null,
+                  "crsCollateral": null,
+                  "crsFinancial": null,
+                  "crsLoan": null,
+                  "preScreening": null,
+                  "scoringAIForesee": null
+              },
+              "desc": "Error record not found",
+              "message": "Prakarsa Tidak Ditemukan",
+              "status": 404
+          }
+  - name: data ditemukan (success)
+    request:
+      url: "{{base_url}}/v/2/prakarsa/detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: UmF5YVBpUGVyVG9w9FR0lGD8PJZ01laNFpB91ptV5mkFfw==
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: prakarsaId
+            value: "1065"
+            description: Prakarsa ID { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 03 Jan 2023 03:59:49 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "crsBusiness": {
+                      "businessCategory": "Non-Pertanian",
+                      "landArea": 120,
+                      "ownershipStatus": "Milik Sendiri",
+                      "businessPermit": "SIUP",
+                      "permitNumber": "S.01/267/56",
+                      "flagNpwp": 1,
+                      "npwpNumber": "86.583.576.5-768.358",
+                      "npwpDate": null,
+                      "landPictureFrontPath": "prakarsa/crs/land/front/2023/9/22/IMG_20230922073821.jpg",
+                      "landPictureFrontBase64": "string base64",
+                      "landPictureFrontMimetype": "image/jpeg",
+                      "landPictureSidePath": "prakarsa/crs/land/side/2023/9/22/IMG_20230922073821.jpg",
+                      "landPictureSideBase64": "string base64",
+                      "landPictureSideMimetype": "image/jpeg",
+                      "landPictureBackPath": "prakarsa/crs/land/back/2023/9/22/IMG_20230922073821.jpg",
+                      "landPictureBackBase64": "string base64",
+                      "landPictureBackMimetype": "image/jpeg",
+                      "businessPictureFrontPath": "prakarsa/crs/business/front/2023/9/22/IMG_20230922073821.jpg",
+                      "businessPictureFrontBase64": "string base64",
+                      "businessPictureFrontMimetype": "image/jpeg",
+                      "businessPictureSidePath": "prakarsa/crs/business/side/2023/9/22/IMG_20230922073821.jpg",
+                      "businessPictureSidebase64": "string base64",
+                      "businessPictureSideMimetype": "image/jpeg",
+                      "businessPictureBackPath": "prakarsa/crs/business/back/2023/9/22/IMG_20230922073821.jpg",
+                      "businessPictureBackBase64": "string base64",
+                      "businessPictureBackMimetype": "image/jpeg",
+                      "businessPermitPicturePath": "prakarsa/crs/business/permit/2023/9/22/IMG_20230922073821.jpg",
+                      "businessPermitPictureBase64": "string base64",
+                      "businessPermitPictureMimetype": "image/jpeg",
+                      "support1Path": null,
+                      "support1Base64": null,
+                      "support1Mimetype": null,
+                      "support2Path": null,
+                      "support2Base64": null,
+                      "support2Mimetype": null,
+                      "support3Path": null,
+                      "support3Base64": null,
+                      "support3Mimetype": null,
+                      "dataQualitativeAnalysis": [
+                          {
+                              "questionOrderNumber": 1,
+                              "questionId": 1,
+                              "type": "",
+                              "question": "Seberapa besar tingkat kepercayaan Anda terhadap nasabah",
+                              "questionAnswerNumber": "a",
+                              "isScoring": 0,
+                              "answerList": [
+                                  {
+                                      "id": 1,
+                                      "orderNumber": "a",
+                                      "answer": "Informasi yang diberikan debitur sesuai dengan kondisi sebenarnya dapat dibuktikan dengan dokumen atau pengamatan langsung",
+                                      "flag": 1
+                                  },
+                                  {
+                                      "id": 2,
+                                      "orderNumber": "b",
+                                      "answer": "Informasi yang diberikan debitur sesuai dengan kondisi sebenarnya namun tidak dapat dibuktikan dengan dokumen pendukung atau pengamatan langsung",
+                                      "flag": 0
+                                  },
+                                  {
+                                      "id": 3,
+                                      "orderNumber": "c",
+                                      "answer": "Sebagian kecil informasi yang diberikan kurang sesuai dengan kondisi sebenarnya",
+                                      "flag": 0
+                                  },
+                                  {
+                                      "id": 4,
+                                      "orderNumber": "d",
+                                      "answer": "Sebagian besar atau seluruh informasi yang diberikan tidak sesuai dengan kondisi sebenarnya",
+                                      "flag": 0
+                                  }
+                              ]
+                          },
+                          {
+                              "questionOrderNumber": 2,
+                              "questionId": 2,
+                              "type": "",
+                              "question": "Seberapa sering nasabah berhubungan dengan bank",
+                              "questionAnswerNumber": "a",
+                              "isScoring": 0,
+                              "answerList": [
+                                  {
+                                      "id": 5,
+                                      "orderNumber": "a",
+                                      "answer": "Pernah/sedang memiliki pinjaman dalam 2 tahun terakhir dengan kolektabilitas seluruhnya selalu lancar",
+                                      "flag": 1
+                                  },
+                                  {
+                                      "id": 6,
+                                      "orderNumber": "b",
+                                      "answer": "Pernah/sedang memiliki pinjaman dalam 2 tahun terakhir dengan kolektabilitasnya pernah DPK (kolektabilitas terakhir lancar)",
+                                      "flag": 0
+                                  },
+                                  {
+                                      "id": 7,
+                                      "orderNumber": "c",
+                                      "answer": "Pernah/sedang memiliki pinjaman dalam 2 tahun terakhir dengan kolektabilitasnya pernah NPL (KL, D, M)",
+                                      "flag": 0
+                                  },
+                                  {
+                                      "id": 8,
+                                      "orderNumber": "d",
+                                      "answer": "Nasabah baru atau belum pernah meminjam di Bank/Lembaga keuangan (tidak terdaftar di SLIK)",
+                                      "flag": 0
+                                  },
+                                  {
+                                      "id": 9,
+                                      "orderNumber": "e",
+                                      "answer": "Memiliki tunggakan pinjaman posisi terakhir dengan kolektabilitas DPK",
+                                      "flag": 0
+                                  },
+                                  {
+                                      "id": 10,
+                                      "orderNumber": "f",
+                                      "answer": "Memiliki tunggakan pinjaman posisi terakhir dengan kolektabilitas NPL",
+                                      "flag": 0
+                                  },
+                                  {
+                                      "id": 11,
+                                      "orderNumber": "g",
+                                      "answer": "Sedang memiliki pinjaman dalam kondisi restrukturisasi",
+                                      "flag": 0
+                                  }
+                              ]
+                          },
+                          {
+                              "questionOrderNumber": 3,
+                              "questionId": 11,
+                              "type": "Karakter Kondisi Usaha",
+                              "question": "Bagaimana kondisi \npenjualan usaha nasabah?",
+                              "questionAnswerNumber": "a",
+                              "isScoring": 1,
+                              "answerList": [
+                                  {
+                                      "id": 33,
+                                      "orderNumber": "a",
+                                      "answer": "Memiliki pelanggan tetap atau Offtaker/mitra kerjasama",
+                                      "flag": 1
+                                  },
+                                  {
+                                      "id": 35,
+                                      "orderNumber": "b",
+                                      "answer": "Tidak memiliki pelanggan tetap atau Offtaker/mitra kerjasama",
+                                      "flag": 0
+                                  }
+                              ]
+                          },
+                          {
+                              "questionOrderNumber": 4,
+                              "questionId": 12,
+                              "type": "Karakter Output Barang/Jasa Usaha",
+                              "question": "Bagaimana karakter \nbarang/jasa yang dijual \nterhadap persaingan usaha?",
+                              "questionAnswerNumber": "a",
+                              "isScoring": 1,
+                              "answerList": [
+                                  {
+                                      "id": 36,
+                                      "orderNumber": "a",
+                                      "answer": "Barang/jasa bersifat umum dan masih sedikit pesaing di sekitar",
+                                      "flag": 1
+                                  },
+                                  {
+                                      "id": 37,
+                                      "orderNumber": "b",
+                                      "answer": "Barang/jasa bersifat umum dan banyak pesaing di sekitar",
+                                      "flag": 0
+                                  },
+                                  {
+                                      "id": 38,
+                                      "orderNumber": "c",
+                                      "answer": "Barang/jasa memiliki spesifikasi tertentu dengan pangsa pasar yang besar",
+                                      "flag": 0
+                                  },
+                                  {
+                                      "id": 39,
+                                      "orderNumber": "d",
+                                      "answer": "Barang/jasa memiliki spesifikasi tertentu dengan pangsa pasar terbatas",
+                                      "flag": 0
+                                  }
+                              ]
+                          }
+                      ]
+                  },
+                  "crsCollateral": [
+                      {
+                          "collateralType": "Tanah Dan Bangunan",
+                          "orderNumber": 1,
+                          "collateralOwnership": "SHM",
+                          "collateralOwnerName": "Syifa Mutiara Sari",
+                          "collateralNumber": "S.01S728",
+                          "collateralLandArea": 60,
+                          "collateralPictureBackPath": "prakarsa/crs/collateral/back/2023/9/22/IMG_20230922074036.jpg",
+                          "collateralPictureBackBase64": "string base64",
+                          "collateralPictureBackMimetype": "image/jpeg",
+                          "collateralPictureSidePath": "prakarsa/crs/collateral/side/2023/9/22/IMG_20230922074036.jpg",
+                          "collateralPictureSideBase64": "string base64",
+                          "collateralPictureSideMimetype": "image/jpeg",
+                          "collateralPictureFrontPath": "prakarsa/crs/collateral/front/2023/9/22/IMG_20230922074036.jpg",
+                          "collateralPictureFrontBase64": "string base64",
+                          "collateralPictureFrontMimetype": "image/jpeg",
+                          "collateralInteriorPicturePath": "prakarsa/crs/interior/2023/9/22/IMG_20230922074036.jpg",
+                          "collateralInteriorPictureBase64": "string base64",
+                          "collateralOwnershipPicture1Mimetype": "image/jpeg",
+                          "collateralOwnershipPicture2Path": "prakarsa/crs/ownership/second/2023/9/22/IMG_20230922074036.jpg",
+                          "collateralOwnershipPicture2Base64": "string base64",
+                          "collateralOwnershipPicture2Mimetype": "image/jpeg",
+                          "estimatedLandPrice": 500000,
+                          "estimatedCollateralValue": 90000000,
+                          "liquidationValue": 75000000,
+                          "collateralBuildingArea": 120,
+                          "estimatedBuildingPrice": 500000,
+                          "collateralDescription": null,
+                          "vehicleAssemblyYear": null
+                      }
+                  ],
+                  "crsFinancial": {
+                      "businessIncome": 135000000,
+                      "miscellaneousIncome": 0,
+                      "householdExpenses": 15000000,
+                      "totalOtherExpenses": 0,
+                      "totalOtherInstallment": 0,
+                      "nettoIncome": 120000000,
+                      "rpc": 90000000,
+                      "balance": 0,
+                      "accountReceivable": 0,
+                      "assets": 0,
+                      "currentAssets": 0,
+                      "fixedAssets": 0,
+                      "totalAssets": 0,
+                      "tradeDebt": 0,
+                      "shortTermDebt": 0,
+                      "longTermDebt": 0,
+                      "totalDebt": 0,
+                      "financialType": "Bulanan",
+                      "totalIncome": 150000000,
+                      "totalHppExpense": 10000000,
+                      "plantingSeasonPeriod": 0,
+                      "productionAmount": 0,
+                      "estimatedSellingPrice": 0,
+                      "totalPlantingCost": 0,
+                      "totalEmployee": 5,
+                      "wages": 1000000,
+                      "ownerEquity": 0,
+                      "totalLiability": 0,
+                      "grossProfit": 0,
+                      "operationalExpenses": 0,
+                      "operationalProfit": 0,
+                      "netProfit": 0,
+                      "salesProjection": 0,
+                      "tradeDebtProjection": 0,
+                      "creditProvided": 0,
+                      "sdsKmk": 0,
+                      "debtToEquityRation": 0,
+                      "nwcPositif": 0,
+                      "roe": 0,
+                      "roi": 0,
+                      "totalOtherOperationalExpense": 0
+                  },
+                  "crsLoan": {
+                      "loanType": "Pinang Performa Pro",
+                      "facilityType": "Performa Brilink",
+                      "flagFacilityType": "KMK Performa Pro Baru",
+                      "installmentPattern": 1,
+                      "loanTerm": 2,
+                      "loanAmount": 50000000,
+                      "rate": 0.255,
+                      "installmentAmount": 25799668,
+                      "totalLoanRepayment": 51599336,
+                      "totalLoanApproved": 50000000,
+                      "insuranceType": "BRISMA - Jamkrida",
+                      "insuranceAmount": 66667,
+                      "insuranceDebitur": 46667,
+                      "insuranceBank": 20000,
+                      "provisionFee": 0,
+                      "administrationFee": 100000,
+                      "remainingLastLoanAmount": 0,
+                      "brilinkStatus": -1
+                  },
+                  "letterNumbers": {
+                      "SPHNumber": "66/SPH/KNG/IX/2023",
+                      "SKMANumber": "61/SKMA/KNG/IX/2023",
+                      "SKPPNumber": "65/SKPP/KNG/IX/2023",
+                      "BASTNumber": "61/BAST/KNG/IX/2023",
+                      "TBLANumber": "60/TBLA/KNG/IX/2023",
+                      "SKPKNumber": "",
+                      "SKDRNumber": ""
+                  },
+                  "prakarsaLog": [
+                      {
+                          "type": "isi-analisa-pinjaman",
+                          "date": "2023-09-22 07:43:14"
+                      },
+                      {
+                          "type": "putusan-setuju-cbl",
+                          "date": "2023-09-22 08:11:49"
+                      },
+                      {
+                          "type": "putusan-nasabah-setuju",
+                          "date": "2023-09-22 08:17:26"
+                      },
+                      {
+                          "type": "akad-credit-setuju",
+                          "date": "2023-09-22 08:34:09"
+                      }
+                  ],
+                  "preScreening": {
+                      "id": 1065,
+                      "ktpNumber": "UmF5YVBpUGVyVG9w/l96m2T0lUNqKW+KHO473lcdpThBjd4dGhfx8Nb0dY4=",
+                      "ktpDate": "2020-09-21",
+                      "name": "UmF5YVBpUGVyVG9whQw/3y3t9BU2bTHdR794tr/ndG45RPafmXuXoJM+4A==",
+                      "placeOfBirth": "Jakarta",
+                      "birthDate": "2000-11-17",
+                      "motherMaidenName": "Yanti",
+                      "gender": "Laki-Laki",
+                      "religion": "Islam",
+                      "dependents": 0,
+                      "lastEducation": "S2",
+                      "maritalStatus": "Kawin",
+                      "familyRelationshipStatus": "Istri",
+                      "latitude": "-6.2406829",
+                      "longitude": "106.8364808",
+                      "address": "Jl. Gatot Subroto No.177A",
+                      "postalCode": "12870",
+                      "provinceCode": "03",
+                      "provinceName": "DKI Jakarta",
+                      "cityCode": "0394",
+                      "cityName": "Jakarta Selatan",
+                      "districtCode": "317401",
+                      "districtName": "Tebet",
+                      "villageCode": "3174011003",
+                      "villageName": "Menteng Dalam",
+                      "rt": "006",
+                      "rw": "003",
+                      "email": "UmF5YVBpUGVyVG9wvwQ3xjW/wgNqKh/dQb9ig5QOS8d7A6Pgb5mNwkzyp/uuomts",
+                      "mobileNumber": "UmF5YVBpUGVyVG9w9Vx/lWf5lkNuLGny71pjpv0jQ0YQ18SIe5il",
+                      "ktpPicturePath": "prakarsa/ktp/2023/9/21/IMG_20230921153055.jpg",
+                      "ktpPictureBase64": "string base64",
+                      "ktpPictureMimetype": "image/jpeg",
+                      "ktpPictureSelfiePath": "prakarsa/ktp-selfie/2023/9/21/IMG_20230921153055.jpg",
+                      "ktpPictureSelfieBase64": "string base64",
+                      "ktpPictureSelfieMimeType": "image/jpeg",
+                      "flagPrakarsa": 1,
+                      "flagUsaha": 1,
+                      "isSuplesi": 0,
+                      "suplesiPrakarsaId": 0,
+                      "status": 8,
+                      "currentStatus": "Proses Pencairan",
+                      "cancelReason": "",
+                      "isPreScreening": 1,
+                      "isPreScreeningResult": 1,
+                      "isCRS": 1,
+                      "isCRSResult": 1,
+                      "partnerKtpNumber": "UmF5YVBpUGVyVG9w/lx6mWT4kkZrKmaNHO4721SZZmm6pIbwlM0jnUTEsGM=",
+                      "partnerName": "UmF5YVBpUGVyVG9wnwQ3xjXt5QE3cT6aartpndMMSt6/r+J2kx400hVsmPzipvSUJg==",
+                      "genderPartner": "Perempuan",
+                      "birthDatePartner": "1997-02-22",
+                      "placeOfBirthPartner": "Jakarta",
+                      "emailPartner": "rizka.febrianti@bankraya.co.id",
+                      "mobileNumberPartner": "85153302956",
+                      "ktpPicturePartnerPath": "prakarsa/ktp-partner/2023/9/21/IMG_20230921153055.jpg",
+                      "ktpPicturePartnerBase64": "string base64",
+                      "ktpPicturePartnerMimetype": "image/jpeg",
+                      "economicSector": 12,
+                      "economicSectorName": "Penyediaan Akomodasi Dan Penyediaan Makan Minum",
+                      "subEconomicSector": 473,
+                      "subEconomicSectorName": "Penyediaan Akomodasi Dan Penyediaan Makan Minum",
+                      "businessAddress": "Jl. Gatot Subroto No.177A",
+                      "partnershipName": "BELANJAPARTS",
+                      "flagScreeningDukcapil": 1,
+                      "flagScreeningDukcapilText": "Lolos",
+                      "flagScreeningDHN": 1,
+                      "flagScreeningDHNText": "Lolos",
+                      "flagScreeningSIKP": 1,
+                      "flagScreeningSIKPText": "Lolos",
+                      "isWarningSIKP": 0,
+                      "flagScreeningSICD": 1,
+                      "flagScreeningSICDText": "Lolos",
+                      "isWarningSICD": 0,
+                      "flagScreeningSlik": 1,
+                      "isWarningSLIK": 0,
+                      "isWarningSLIKPartner": 0,
+                      "flagScreeningSlikText": "Lolos",
+                      "flagScreeningLPG": 1,
+                      "flagScreeningLPGText": "Lolos",
+                      "flagScreeningSlikPartner": 1,
+                      "flagScreeningSlikPartnerText": "Lolos",
+                      "businessTypeName": "WIRASWASTA",
+                      "jobDuration": 36,
+                      "latitudeBusiness": "-6.2406829",
+                      "longitudeBusiness": "106.8364808",
+                      "provinceNameBusiness": "DKI Jakarta",
+                      "cityNameBusiness": "Jakarta Selatan",
+                      "districtNameBusiness": "Tebet",
+                      "villageNameBusiness": "Menteng Dalam",
+                      "rtBusiness": "006",
+                      "rwBusiness": "003",
+                      "descriptionBusiness": "Rumah Makan Padang",
+                      "locationTravelTime": "16",
+                      "remainingQuota": 2,
+                      "originalQuota": 2,
+                      "employeeId": 2,
+                      "employeeName": "Kang TaeMo",
+                      "statusDigitalSign": 2,
+                      "updatedAt": "22-09-2023"
+                  },
+                  "scoringAIForesee": {
+                      "scoringType": "aiforesee",
+                      "probabilityToDefault": 0.021280298,
+                      "grade": "A+",
+                      "price": "0%",
+                      "billed": "YES",
+                      "gradeInt": "4"
+                  },
+                  "statusPrakarsa": [
+                      {
+                          "title": "Isi Pre-Screening Nasabah",
+                          "indicator": 1,
+                          "actionDate": null,
+                          "description": null,
+                          "actionFlag": null
+                      },
+                      {
+                          "title": "Lihat Hasil Pre-Screening Nasabah",
+                          "indicator": 1,
+                          "actionDate": null,
+                          "description": null,
+                          "actionFlag": null
+                      },
+                      {
+                          "title": "Isi Analisa Pinjaman",
+                          "indicator": 1,
+                          "actionDate": null,
+                          "description": null,
+                          "actionFlag": null
+                      },
+                      {
+                          "title": "Lihat Hasil Analisa Pinjaman",
+                          "indicator": 1,
+                          "actionDate": null,
+                          "description": null,
+                          "actionFlag": null
+                      },
+                      {
+                          "title": "Meminta Approval CBL",
+                          "indicator": 1,
+                          "actionDate": null,
+                          "description": null,
+                          "actionFlag": null
+                      },
+                      {
+                          "title": "Meminta Persetujuan Nasabah",
+                          "indicator": 1,
+                          "actionDate": null,
+                          "description": null,
+                          "actionFlag": null
+                      }
+                  ]
+              },
+              "desc": "Data Valid",
+              "message": "Data Ditemukan",
+              "status": 200
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{base_url_local}}/v/2/prakarsa/detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999952"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: prakarsaId
+            value: "30946"
+            description: Prakarsa ID { MANDATORY }
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 18 Jul 2022 11:00:58 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/2/prakarsa/detail"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: prakarsaId
+            value: "30946"
+            description: Prakarsa ID { MANDATORY }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 07 Jun 2021 07:11:49 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "message": "Invalid Token || Token Is Expired",
+              "desc": "Expired"
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/2/prakarsa/detail"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: prakarsaId
+            value: "30946"
+            description: Prakarsa ID { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 07 Jun 2021 07:11:49 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data": null
+          }
+  - name: data ditemukan (success)
+    request:
+      url: "{{base_url}}/v/2/prakarsa/detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: UmF5YVBpUGVyVG9w9FR0lGD8PJZ01laNFpB91ptV5mkFfw==
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: prakarsaId
+            value: "1065"
+            description: Prakarsa ID { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 03 Jan 2023 03:59:49 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "crsBusiness": {
+                      "businessCategory": "Non-Pertanian",
+                      "landArea": 120,
+                      "ownershipStatus": "Milik Sendiri",
+                      "businessPermit": "SIUP",
+                      "permitNumber": "S.01/267/56",
+                      "flagNpwp": 1,
+                      "npwpNumber": "86.583.576.5-768.358",
+                      "npwpDate": null,
+                      "landPictureFrontPath": "prakarsa/crs/land/front/2023/9/22/IMG_20230922073821.jpg",
+                      "landPictureFrontBase64": "string base64",
+                      "landPictureFrontMimetype": "image/jpeg",
+                      "landPictureSidePath": "prakarsa/crs/land/side/2023/9/22/IMG_20230922073821.jpg",
+                      "landPictureSideBase64": "string base64",
+                      "landPictureSideMimetype": "image/jpeg",
+                      "landPictureBackPath": "prakarsa/crs/land/back/2023/9/22/IMG_20230922073821.jpg",
+                      "landPictureBackBase64": "string base64",
+                      "landPictureBackMimetype": "image/jpeg",
+                      "businessPictureFrontPath": "prakarsa/crs/business/front/2023/9/22/IMG_20230922073821.jpg",
+                      "businessPictureFrontBase64": "string base64",
+                      "businessPictureFrontMimetype": "image/jpeg",
+                      "businessPictureSidePath": "prakarsa/crs/business/side/2023/9/22/IMG_20230922073821.jpg",
+                      "businessPictureSidebase64": "string base64",
+                      "businessPictureSideMimetype": "image/jpeg",
+                      "businessPictureBackPath": "prakarsa/crs/business/back/2023/9/22/IMG_20230922073821.jpg",
+                      "businessPictureBackBase64": "string base64",
+                      "businessPictureBackMimetype": "image/jpeg",
+                      "businessPermitPicturePath": "prakarsa/crs/business/permit/2023/9/22/IMG_20230922073821.jpg",
+                      "businessPermitPictureBase64": "string base64",
+                      "businessPermitPictureMimetype": "image/jpeg",
+                      "support1Path": null,
+                      "support1Base64": null,
+                      "support1Mimetype": null,
+                      "support2Path": null,
+                      "support2Base64": null,
+                      "support2Mimetype": null,
+                      "support3Path": null,
+                      "support3Base64": null,
+                      "support3Mimetype": null,
+                      "dataQualitativeAnalysis": [
+                          {
+                              "questionOrderNumber": 1,
+                              "questionId": 1,
+                              "type": "",
+                              "question": "Seberapa besar tingkat kepercayaan Anda terhadap nasabah",
+                              "questionAnswerNumber": "a",
+                              "isScoring": 0,
+                              "answerList": [
+                                  {
+                                      "id": 1,
+                                      "orderNumber": "a",
+                                      "answer": "Informasi yang diberikan debitur sesuai dengan kondisi sebenarnya dapat dibuktikan dengan dokumen atau pengamatan langsung",
+                                      "flag": 1
+                                  },
+                                  {
+                                      "id": 2,
+                                      "orderNumber": "b",
+                                      "answer": "Informasi yang diberikan debitur sesuai dengan kondisi sebenarnya namun tidak dapat dibuktikan dengan dokumen pendukung atau pengamatan langsung",
+                                      "flag": 0
+                                  },
+                                  {
+                                      "id": 3,
+                                      "orderNumber": "c",
+                                      "answer": "Sebagian kecil informasi yang diberikan kurang sesuai dengan kondisi sebenarnya",
+                                      "flag": 0
+                                  },
+                                  {
+                                      "id": 4,
+                                      "orderNumber": "d",
+                                      "answer": "Sebagian besar atau seluruh informasi yang diberikan tidak sesuai dengan kondisi sebenarnya",
+                                      "flag": 0
+                                  }
+                              ]
+                          },
+                          {
+                              "questionOrderNumber": 2,
+                              "questionId": 2,
+                              "type": "",
+                              "question": "Seberapa sering nasabah berhubungan dengan bank",
+                              "questionAnswerNumber": "a",
+                              "isScoring": 0,
+                              "answerList": [
+                                  {
+                                      "id": 5,
+                                      "orderNumber": "a",
+                                      "answer": "Pernah/sedang memiliki pinjaman dalam 2 tahun terakhir dengan kolektabilitas seluruhnya selalu lancar",
+                                      "flag": 1
+                                  },
+                                  {
+                                      "id": 6,
+                                      "orderNumber": "b",
+                                      "answer": "Pernah/sedang memiliki pinjaman dalam 2 tahun terakhir dengan kolektabilitasnya pernah DPK (kolektabilitas terakhir lancar)",
+                                      "flag": 0
+                                  },
+                                  {
+                                      "id": 7,
+                                      "orderNumber": "c",
+                                      "answer": "Pernah/sedang memiliki pinjaman dalam 2 tahun terakhir dengan kolektabilitasnya pernah NPL (KL, D, M)",
+                                      "flag": 0
+                                  },
+                                  {
+                                      "id": 8,
+                                      "orderNumber": "d",
+                                      "answer": "Nasabah baru atau belum pernah meminjam di Bank/Lembaga keuangan (tidak terdaftar di SLIK)",
+                                      "flag": 0
+                                  },
+                                  {
+                                      "id": 9,
+                                      "orderNumber": "e",
+                                      "answer": "Memiliki tunggakan pinjaman posisi terakhir dengan kolektabilitas DPK",
+                                      "flag": 0
+                                  },
+                                  {
+                                      "id": 10,
+                                      "orderNumber": "f",
+                                      "answer": "Memiliki tunggakan pinjaman posisi terakhir dengan kolektabilitas NPL",
+                                      "flag": 0
+                                  },
+                                  {
+                                      "id": 11,
+                                      "orderNumber": "g",
+                                      "answer": "Sedang memiliki pinjaman dalam kondisi restrukturisasi",
+                                      "flag": 0
+                                  }
+                              ]
+                          },
+                          {
+                              "questionOrderNumber": 3,
+                              "questionId": 11,
+                              "type": "Karakter Kondisi Usaha",
+                              "question": "Bagaimana kondisi \npenjualan usaha nasabah?",
+                              "questionAnswerNumber": "a",
+                              "isScoring": 1,
+                              "answerList": [
+                                  {
+                                      "id": 33,
+                                      "orderNumber": "a",
+                                      "answer": "Memiliki pelanggan tetap atau Offtaker/mitra kerjasama",
+                                      "flag": 1
+                                  },
+                                  {
+                                      "id": 35,
+                                      "orderNumber": "b",
+                                      "answer": "Tidak memiliki pelanggan tetap atau Offtaker/mitra kerjasama",
+                                      "flag": 0
+                                  }
+                              ]
+                          },
+                          {
+                              "questionOrderNumber": 4,
+                              "questionId": 12,
+                              "type": "Karakter Output Barang/Jasa Usaha",
+                              "question": "Bagaimana karakter \nbarang/jasa yang dijual \nterhadap persaingan usaha?",
+                              "questionAnswerNumber": "a",
+                              "isScoring": 1,
+                              "answerList": [
+                                  {
+                                      "id": 36,
+                                      "orderNumber": "a",
+                                      "answer": "Barang/jasa bersifat umum dan masih sedikit pesaing di sekitar",
+                                      "flag": 1
+                                  },
+                                  {
+                                      "id": 37,
+                                      "orderNumber": "b",
+                                      "answer": "Barang/jasa bersifat umum dan banyak pesaing di sekitar",
+                                      "flag": 0
+                                  },
+                                  {
+                                      "id": 38,
+                                      "orderNumber": "c",
+                                      "answer": "Barang/jasa memiliki spesifikasi tertentu dengan pangsa pasar yang besar",
+                                      "flag": 0
+                                  },
+                                  {
+                                      "id": 39,
+                                      "orderNumber": "d",
+                                      "answer": "Barang/jasa memiliki spesifikasi tertentu dengan pangsa pasar terbatas",
+                                      "flag": 0
+                                  }
+                              ]
+                          }
+                      ]
+                  },
+                  "crsCollateral": [
+                      {
+                          "collateralType": "Tanah Dan Bangunan",
+                          "orderNumber": 1,
+                          "collateralOwnership": "SHM",
+                          "collateralOwnerName": "Syifa Mutiara Sari",
+                          "collateralNumber": "S.01S728",
+                          "collateralLandArea": 60,
+                          "collateralPictureBackPath": "prakarsa/crs/collateral/back/2023/9/22/IMG_20230922074036.jpg",
+                          "collateralPictureBackBase64": "string base64",
+                          "collateralPictureBackMimetype": "image/jpeg",
+                          "collateralPictureSidePath": "prakarsa/crs/collateral/side/2023/9/22/IMG_20230922074036.jpg",
+                          "collateralPictureSideBase64": "string base64",
+                          "collateralPictureSideMimetype": "image/jpeg",
+                          "collateralPictureFrontPath": "prakarsa/crs/collateral/front/2023/9/22/IMG_20230922074036.jpg",
+                          "collateralPictureFrontBase64": "string base64",
+                          "collateralPictureFrontMimetype": "image/jpeg",
+                          "collateralInteriorPicturePath": "prakarsa/crs/interior/2023/9/22/IMG_20230922074036.jpg",
+                          "collateralInteriorPictureBase64": "string base64",
+                          "collateralOwnershipPicture1Mimetype": "image/jpeg",
+                          "collateralOwnershipPicture2Path": "prakarsa/crs/ownership/second/2023/9/22/IMG_20230922074036.jpg",
+                          "collateralOwnershipPicture2Base64": "string base64",
+                          "collateralOwnershipPicture2Mimetype": "image/jpeg",
+                          "estimatedLandPrice": 500000,
+                          "estimatedCollateralValue": 90000000,
+                          "liquidationValue": 75000000,
+                          "collateralBuildingArea": 120,
+                          "estimatedBuildingPrice": 500000,
+                          "collateralDescription": null,
+                          "vehicleAssemblyYear": null
+                      }
+                  ],
+                  "crsFinancial": {
+                      "businessIncome": 135000000,
+                      "miscellaneousIncome": 0,
+                      "householdExpenses": 15000000,
+                      "totalOtherExpenses": 0,
+                      "totalOtherInstallment": 0,
+                      "nettoIncome": 120000000,
+                      "rpc": 90000000,
+                      "balance": 0,
+                      "accountReceivable": 0,
+                      "assets": 0,
+                      "currentAssets": 0,
+                      "fixedAssets": 0,
+                      "totalAssets": 0,
+                      "tradeDebt": 0,
+                      "shortTermDebt": 0,
+                      "longTermDebt": 0,
+                      "totalDebt": 0,
+                      "financialType": "Bulanan",
+                      "totalIncome": 150000000,
+                      "totalHppExpense": 10000000,
+                      "plantingSeasonPeriod": 0,
+                      "productionAmount": 0,
+                      "estimatedSellingPrice": 0,
+                      "totalPlantingCost": 0,
+                      "totalEmployee": 5,
+                      "wages": 1000000,
+                      "ownerEquity": 0,
+                      "totalLiability": 0,
+                      "grossProfit": 0,
+                      "operationalExpenses": 0,
+                      "operationalProfit": 0,
+                      "netProfit": 0,
+                      "salesProjection": 0,
+                      "tradeDebtProjection": 0,
+                      "creditProvided": 0,
+                      "sdsKmk": 0,
+                      "debtToEquityRation": 0,
+                      "nwcPositif": 0,
+                      "roe": 0,
+                      "roi": 0,
+                      "totalOtherOperationalExpense": 0
+                  },
+                  "crsLoan": {
+                      "loanType": "Pinang Performa Pro",
+                      "facilityType": "Performa Brilink",
+                      "flagFacilityType": "KMK Performa Pro Baru",
+                      "installmentPattern": 1,
+                      "loanTerm": 2,
+                      "loanAmount": 50000000,
+                      "rate": 0.255,
+                      "installmentAmount": 25799668,
+                      "totalLoanRepayment": 51599336,
+                      "totalLoanApproved": 50000000,
+                      "insuranceType": "BRISMA - Jamkrida",
+                      "insuranceAmount": 66667,
+                      "insuranceDebitur": 46667,
+                      "insuranceBank": 20000,
+                      "provisionFee": 0,
+                      "administrationFee": 100000,
+                      "remainingLastLoanAmount": 0,
+                      "brilinkStatus": -1
+                  },
+                  "letterNumbers": {
+                      "SPHNumber": "66/SPH/KNG/IX/2023",
+                      "SKMANumber": "61/SKMA/KNG/IX/2023",
+                      "SKPPNumber": "65/SKPP/KNG/IX/2023",
+                      "BASTNumber": "61/BAST/KNG/IX/2023",
+                      "TBLANumber": "60/TBLA/KNG/IX/2023",
+                      "SKPKNumber": "",
+                      "SKDRNumber": ""
+                  },
+                  "prakarsaLog": [
+                      {
+                          "type": "isi-analisa-pinjaman",
+                          "date": "2023-09-22 07:43:14"
+                      },
+                      {
+                          "type": "putusan-setuju-cbl",
+                          "date": "2023-09-22 08:11:49"
+                      },
+                      {
+                          "type": "putusan-nasabah-setuju",
+                          "date": "2023-09-22 08:17:26"
+                      },
+                      {
+                          "type": "akad-credit-setuju",
+                          "date": "2023-09-22 08:34:09"
+                      }
+                  ],
+                  "preScreening": {
+                      "id": 1065,
+                      "ktpNumber": "UmF5YVBpUGVyVG9w/l96m2T0lUNqKW+KHO473lcdpThBjd4dGhfx8Nb0dY4=",
+                      "ktpDate": "2020-09-21",
+                      "name": "UmF5YVBpUGVyVG9whQw/3y3t9BU2bTHdR794tr/ndG45RPafmXuXoJM+4A==",
+                      "placeOfBirth": "Jakarta",
+                      "birthDate": "2000-11-17",
+                      "motherMaidenName": "Yanti",
+                      "gender": "Laki-Laki",
+                      "religion": "Islam",
+                      "dependents": 0,
+                      "lastEducation": "S2",
+                      "maritalStatus": "Kawin",
+                      "familyRelationshipStatus": "Istri",
+                      "latitude": "-6.2406829",
+                      "longitude": "106.8364808",
+                      "address": "Jl. Gatot Subroto No.177A",
+                      "postalCode": "12870",
+                      "provinceCode": "03",
+                      "provinceName": "DKI Jakarta",
+                      "cityCode": "0394",
+                      "cityName": "Jakarta Selatan",
+                      "districtCode": "317401",
+                      "districtName": "Tebet",
+                      "villageCode": "3174011003",
+                      "villageName": "Menteng Dalam",
+                      "rt": "006",
+                      "rw": "003",
+                      "email": "UmF5YVBpUGVyVG9wvwQ3xjW/wgNqKh/dQb9ig5QOS8d7A6Pgb5mNwkzyp/uuomts",
+                      "mobileNumber": "UmF5YVBpUGVyVG9w9Vx/lWf5lkNuLGny71pjpv0jQ0YQ18SIe5il",
+                      "ktpPicturePath": "prakarsa/ktp/2023/9/21/IMG_20230921153055.jpg",
+                      "ktpPictureBase64": "string base64",
+                      "ktpPictureMimetype": "image/jpeg",
+                      "ktpPictureSelfiePath": "prakarsa/ktp-selfie/2023/9/21/IMG_20230921153055.jpg",
+                      "ktpPictureSelfieBase64": "string base64",
+                      "ktpPictureSelfieMimeType": "image/jpeg",
+                      "flagPrakarsa": 1,
+                      "flagUsaha": 1,
+                      "isSuplesi": 0,
+                      "suplesiPrakarsaId": 0,
+                      "status": 8,
+                      "currentStatus": "Proses Pencairan",
+                      "cancelReason": "",
+                      "isPreScreening": 1,
+                      "isPreScreeningResult": 1,
+                      "isCRS": 1,
+                      "isCRSResult": 1,
+                      "partnerKtpNumber": "UmF5YVBpUGVyVG9w/lx6mWT4kkZrKmaNHO4721SZZmm6pIbwlM0jnUTEsGM=",
+                      "partnerName": "UmF5YVBpUGVyVG9wnwQ3xjXt5QE3cT6aartpndMMSt6/r+J2kx400hVsmPzipvSUJg==",
+                      "genderPartner": "Perempuan",
+                      "birthDatePartner": "1997-02-22",
+                      "placeOfBirthPartner": "Jakarta",
+                      "emailPartner": "rizka.febrianti@bankraya.co.id",
+                      "mobileNumberPartner": "85153302956",
+                      "ktpPicturePartnerPath": "prakarsa/ktp-partner/2023/9/21/IMG_20230921153055.jpg",
+                      "ktpPicturePartnerBase64": "string base64",
+                      "ktpPicturePartnerMimetype": "image/jpeg",
+                      "economicSector": 12,
+                      "economicSectorName": "Penyediaan Akomodasi Dan Penyediaan Makan Minum",
+                      "subEconomicSector": 473,
+                      "subEconomicSectorName": "Penyediaan Akomodasi Dan Penyediaan Makan Minum",
+                      "businessAddress": "Jl. Gatot Subroto No.177A",
+                      "partnershipName": "BELANJAPARTS",
+                      "flagScreeningDukcapil": 1,
+                      "flagScreeningDukcapilText": "Lolos",
+                      "flagScreeningDHN": 1,
+                      "flagScreeningDHNText": "Lolos",
+                      "flagScreeningSIKP": 1,
+                      "flagScreeningSIKPText": "Lolos",
+                      "isWarningSIKP": 0,
+                      "flagScreeningSICD": 1,
+                      "flagScreeningSICDText": "Lolos",
+                      "isWarningSICD": 0,
+                      "flagScreeningSlik": 1,
+                      "isWarningSLIK": 0,
+                      "isWarningSLIKPartner": 0,
+                      "flagScreeningSlikText": "Lolos",
+                      "flagScreeningLPG": 1,
+                      "flagScreeningLPGText": "Lolos",
+                      "flagScreeningSlikPartner": 1,
+                      "flagScreeningSlikPartnerText": "Lolos",
+                      "businessTypeName": "WIRASWASTA",
+                      "jobDuration": 36,
+                      "latitudeBusiness": "-6.2406829",
+                      "longitudeBusiness": "106.8364808",
+                      "provinceNameBusiness": "DKI Jakarta",
+                      "cityNameBusiness": "Jakarta Selatan",
+                      "districtNameBusiness": "Tebet",
+                      "villageNameBusiness": "Menteng Dalam",
+                      "rtBusiness": "006",
+                      "rwBusiness": "003",
+                      "descriptionBusiness": "Rumah Makan Padang",
+                      "locationTravelTime": "16",
+                      "remainingQuota": 2,
+                      "originalQuota": 2,
+                      "employeeId": 2,
+                      "employeeName": "Kang TaeMo",
+                      "statusDigitalSign": 2,
+                      "updatedAt": "22-09-2023"
+                  },
+                  "scoringAIForesee": {
+                      "scoringType": "aiforesee",
+                      "probabilityToDefault": 0.021280298,
+                      "grade": "A+",
+                      "price": "0%",
+                      "billed": "YES",
+                      "gradeInt": "4"
+                  },
+                  "statusPrakarsa": [
+                      {
+                          "title": "Isi Pre-Screening Nasabah",
+                          "indicator": 1,
+                          "actionDate": null,
+                          "description": null,
+                          "actionFlag": null
+                      },
+                      {
+                          "title": "Lihat Hasil Pre-Screening Nasabah",
+                          "indicator": 1,
+                          "actionDate": null,
+                          "description": null,
+                          "actionFlag": null
+                      },
+                      {
+                          "title": "Isi Analisa Pinjaman",
+                          "indicator": 1,
+                          "actionDate": null,
+                          "description": null,
+                          "actionFlag": null
+                      },
+                      {
+                          "title": "Lihat Hasil Analisa Pinjaman",
+                          "indicator": 1,
+                          "actionDate": null,
+                          "description": null,
+                          "actionFlag": null
+                      },
+                      {
+                          "title": "Meminta Approval CBL",
+                          "indicator": 1,
+                          "actionDate": null,
+                          "description": null,
+                          "actionFlag": null
+                      },
+                      {
+                          "title": "Meminta Persetujuan Nasabah",
+                          "indicator": 1,
+                          "actionDate": null,
+                          "description": null,
+                          "actionFlag": null
+                      }
+                  ]
+              },
+              "desc": "Data Valid",
+              "message": "Data Ditemukan",
+              "status": 200
+          }
+  - name: data tidak ditemukan
+    request:
+      url: "{{base_url}}/v/2/prakarsa/detail"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: prakarsaId
+            value: "-1"
+            description: Prakarsa ID { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 07 Jun 2021 07:11:49 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "crsBusiness": null,
+                  "crsCollateral": null,
+                  "crsFinancial": null,
+                  "crsLoan": null,
+                  "preScreening": null,
+                  "scoringAIForesee": null
+              },
+              "desc": "Error record not found",
+              "message": "Prakarsa Tidak Ditemukan",
+              "status": 404
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url_local}}/v/2/prakarsa/detail"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: prakarsaId
+            value: "30946"
+            description: Prakarsa ID { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 07 Jun 2021 07:11:49 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }

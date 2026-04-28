@@ -1,0 +1,376 @@
+meta {
+  name: Process
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{url-prod}}/v/1/middler/scoring/process
+  body: formUrlEncoded
+  auth: basic
+}
+
+auth:basic {
+  username: {{BasicAuthUsername}}
+  password: {{BasicAuthPassword}}
+}
+
+body:form-urlencoded {
+  userId: OTk5OTQx
+  ktpNumber: MTM3MTA2MjUwMTk1MDAwOQ==
+  uid: 1371062501950009-31415
+  name: Yoga Wahyudi
+  phone: +6287788194047
+  loanNumber: ORI-31415
+  scoringType: bigdata
+  netIncome: 0.4764
+  liquidationPlafond: 3780.0000
+  longTimeBusiness: 0.4167
+  longStay: 83.2500
+  residentialOwnership: miliksendiri
+  collateralOwnership: shm_tidak_pengikatan
+  debtorStatus: baru
+  nationalInflation: 10.5
+  age: 30
+  characterBusinessConditions: memiliki_pelanggan_tetap
+  characterOutputGoodsServices: umum_sedikit_pesaing
+  characterBusinessTransactions: tercermin_sebagian_kecil
+  businessManagementCharacter: memiliki_karyawan
+  levelConfidence: sesuai_kondisi_dapat_dibuktikan
+  personalBehaviorCharacter: tidak_pernah_tersangkut_perkara_kriminal
+  creditorQuality: selalu_lancar
+  businessIncome: 30000000.00
+  installmentAmount: 120000.00
+  plafond: 10000000.00
+  openMonth: 2025-01-01
+  collateralStatusCertified: 1
+}
+
+settings {
+  encodeUrl: true
+}
+
+example {
+  name: 400 : Parameter Validation
+  
+  request: {
+    url: {{url-local}}/v/1/middler/scoring/process
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: OTk5OTk5
+      ktpNumber: MzE3MTA1MTIxMTk1MDAwMQ==
+      uid: 1406011809860003-1187
+      name: Dwiki Saputra
+      phone: +62817765273711
+      loanNumber: ORI-99
+      scoringType: performa-musiman
+      netIncome: 47.4395
+      liquidationPlafond: 800.0000
+      debtorStatus: lama
+      installmentAmount: 120000.00
+      plafond: 10000000.00
+      openMonth: 2024-03-17
+      collateralStatusCertified: 1
+      ~longTimeBusiness: 2.0000
+      ~longStay: 1.0000
+      ~residentialOwnership: miliksendiri
+      ~collateralOwnership: bpkb_tidak_pengikatan
+      ~nationalInflation: 10.5
+      ~age: 27
+      ~characterBusinessConditions: memiliki_pelanggan_tetap
+      ~characterOutputGoodsServices: umum_sedikit_pesaing
+      ~characterBusinessTransactions: tercermin_sebagian_besar
+      ~businessManagementCharacter: memiliki_karyawan
+      ~levelConfidence: sesuai_kondisi_dapat_dibuktikan
+      ~personalBehaviorCharacter: tidak_pernah_tersangkut_perkara_kriminal
+      ~creditorQuality: selalu_lancar
+      ~businessIncome: 30000000.00
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Wed, 19 Feb 2025 02:46:25 GMT
+      Content-Length: 148
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "Validation failed on field ... with tag '...'",
+            "message": "Maaf, ... Tidak Boleh Kosong",
+            "status": 400
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: 500 : Server Error
+  
+  request: {
+    url: {{url}}/v/1/middler/scoring/process
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: OTk5OTk5
+      ktpNumber: MTM3MTA2MjUwMTk1MDAwOQ==
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Tue, 02 Jan 2024 04:20:46 GMT
+      Content-Length: 374
+    }
+  
+    status: {
+      code: 500
+      text: Internal Server Error
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "desc": ". . . . connectex: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.",
+            "message": "Maaf, Server Sedang Dalam Perbaikan. Silahkan coba beberapa saat lagi.",
+            "status": 500
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: 200 : Scoring Performa Pro (Big Data)
+  
+  request: {
+    url: {{url}}/v/1/middler/scoring/process
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: OTk5OTk5
+      ktpNumber: MzE3MTA1MTIxMTk1MDAwMQ==
+      uid: 3275056102990061-31357
+      name: Dwiki Saputra
+      ktpNumber: MzE3MTA1MTIxMTk1MDAwMQ==
+      phone: +62817765273711
+      loanNumber: ORI-99
+      scoringType: bigdata
+      netIncome: 47.4395
+      liquidationPlafond: 800.0000
+      longTimeBusiness: 2.0000
+      longStay: 1.0000
+      residentialOwnership: miliksendiri
+      collateralOwnership: bpkb_tidak_pengikatan
+      debiturStatus: lama
+      nationalInflation: 10.5
+      age: 27
+      characterBusinessConditions: memiliki_pelanggan_tetap
+      characterOutputGoodsServices: umum_sedikit_pesaing
+      characterBusinessTransactions: tercermin_sebagian_besar
+      businessManagementCharacter: memiliki_karyawan
+      levelConfidence: sesuai_kondisi_dapat_dibuktikan
+      personalBehaviorCharacter: tidak_pernah_tersangkut_perkara_kriminal
+      creditorQuality: selalu_lancar
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Thu, 04 Jan 2024 23:56:24 GMT
+      Content-Length: 294
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": {
+                "transactionId": "3275056102990061-31357",
+                "name": "Dwiki Saputra",
+                "idCardNo": "3171051211950001",
+                "phoneNo": "0817765273711",
+                "loanNo": "ORI-99",
+                "probabilityToDefault": 660,
+                "grade": "C",
+                "flow": "5",
+                "date": "2024-01-05 06:56:24"
+            },
+            "desc": "Success Process.",
+            "message": "Data Ditemukan.",
+            "status": 200
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: 200 : Scoring Performa Bulanan
+  
+  request: {
+    url: {{url-local}}/v/1/middler/scoring/process
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: OTk5OTk5
+      ktpNumber: MzE3MTA1MTIxMTk1MDAwMQ==
+      uid: 1406011809860003-1187
+      name: Dwiki Saputra
+      phone: +62817765273711
+      loanNumber: ORI-99
+      scoringType: performa-bulanan
+      netIncome: 47.4395
+      liquidationPlafond: 800.0000
+      debiturStatus: lama
+      businessIncome: 30000000
+      installmentAmount: 120000
+      plafond: 10000000
+      openMonth: 2024-03-17
+      ~ktpNumber: MzE3MTA1MTIxMTk1MDAwMQ==
+      ~longTimeBusiness: 2.0000
+      ~longStay: 1.0000
+      ~residentialOwnership: miliksendiri
+      ~collateralOwnership: bpkb_tidak_pengikatan
+      ~nationalInflation: 10.5
+      ~age: 27
+      ~characterBusinessConditions: memiliki_pelanggan_tetap
+      ~characterOutputGoodsServices: umum_sedikit_pesaing
+      ~characterBusinessTransactions: tercermin_sebagian_besar
+      ~businessManagementCharacter: memiliki_karyawan
+      ~levelConfidence: sesuai_kondisi_dapat_dibuktikan
+      ~personalBehaviorCharacter: tidak_pernah_tersangkut_perkara_kriminal
+      ~creditorQuality: selalu_lancar
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Mon, 17 Feb 2025 02:18:59 GMT
+      Content-Length: 323
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": {
+                "transactionId": "1406011809860003-1187",
+                "name": "Dwiki Saputra",
+                "idCardNo": "3171051211950001",
+                "phoneNo": "0817765273711",
+                "loanNo": "ORI-99",
+                "probabilityToDefault": 829.5255258947983,
+                "grade": "B",
+                "flow": "829.5255258947983",
+                "date": "2025-02-17 09:18:59"
+            },
+            "desc": "Success Process.",
+            "message": "Data Ditemukan.",
+            "status": 200
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: 200 : Scoring Performa Musiman
+  
+  request: {
+    url: {{url-local}}/v/1/middler/scoring/process
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: OTk5OTk5
+      ktpNumber: MzE3MTA1MTIxMTk1MDAwMQ==
+      uid: 1406011809860003-1187
+      name: Dwiki Saputra
+      phone: +62817765273711
+      loanNumber: ORI-99
+      scoringType: performa-musiman
+      netIncome: 47.4395
+      liquidationPlafond: 800.0000
+      debiturStatus: lama
+      businessIncome: 30000000.00
+      installmentAmount: 120000.00
+      plafond: 10000000.00
+      openMonth: 2024-03-17
+      collateralStatusCertified: 1
+      ~ktpNumber: MzE3MTA1MTIxMTk1MDAwMQ==
+      ~longTimeBusiness: 2.0000
+      ~longStay: 1.0000
+      ~residentialOwnership: miliksendiri
+      ~collateralOwnership: bpkb_tidak_pengikatan
+      ~nationalInflation: 10.5
+      ~age: 27
+      ~characterBusinessConditions: memiliki_pelanggan_tetap
+      ~characterOutputGoodsServices: umum_sedikit_pesaing
+      ~characterBusinessTransactions: tercermin_sebagian_besar
+      ~businessManagementCharacter: memiliki_karyawan
+      ~levelConfidence: sesuai_kondisi_dapat_dibuktikan
+      ~personalBehaviorCharacter: tidak_pernah_tersangkut_perkara_kriminal
+      ~creditorQuality: selalu_lancar
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Mon, 17 Feb 2025 02:49:01 GMT
+      Content-Length: 323
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": {
+                "transactionId": "1406011809860003-1187",
+                "name": "Dwiki Saputra",
+                "idCardNo": "3171051211950001",
+                "phoneNo": "0817765273711",
+                "loanNo": "ORI-99",
+                "probabilityToDefault": 433.8142408306245,
+                "grade": "D",
+                "flow": "433.8142408306245",
+                "date": "2025-02-17 09:49:01"
+            },
+            "desc": "Success Process.",
+            "message": "Data Ditemukan.",
+            "status": 200
+        }
+      '''
+    }
+  }
+}

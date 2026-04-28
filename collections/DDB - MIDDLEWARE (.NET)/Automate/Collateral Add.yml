@@ -1,0 +1,92 @@
+info:
+  name: Collateral Add
+  type: http
+  seq: 5
+
+http:
+  method: POST
+  url: "{{base_url}}/api/digiagri/collateral/add"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "999941"
+        description: AO
+      - name: kodeCabang
+        value: "0020"
+        description: Kode Cabang AO
+      - name: namaPemilik
+        value: Mohammad Khafid Barokum
+        description: Nama Nasabah
+      - name: noIdPemilik
+        value: "3515012710950003"
+        description: KTP Nasabah
+      - name: jenisAgunan
+        value: "010"
+        description: Sesuai Kode
+      - name: kodeLokasi
+        value: "0198"
+        description: Kode Kota Nasabah
+      - name: alamatAgunan
+        value: Jl PAKIS II E BLOK BB 50 / 11 PPI
+        description: Alamat Nasabah
+      - name: tanggalPengikatan
+        value: 05/10/2021
+        description: SPH Tanggal (dd/MM/yyyy)
+      - name: tanggalJatuhTempoPengikatan
+        value: 05/11/2021
+        description: SPH Tanggal + Jangka Waktu (dd/MM/yyyy)
+      - name: nilaiPasar
+        value: "100000000"
+        description: Nilai Pasar Wajar
+      - name: nilaiLikuidasi
+        value: "100000000"
+        description: Nilai Likuidasi
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: success
+    request:
+      url: "{{base_url}}/api/digiagri/collateral/add"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000426"
+          - name: kodeCabang
+            value: "0010"
+          - name: namaPemilik
+            value: Ibrahim Senoaji
+          - name: noIdPemilik
+            value: "3275042305890013"
+          - name: jenisAgunan
+            value: "010"
+          - name: kodeLokasi
+            value: "0198"
+          - name: alamatAgunan
+            value: Jl PAKIS II E BLOK BB 50 / 11 PPI
+          - name: tanggalPengikatan
+            value: 05/10/2021
+          - name: tanggalJatuhTempoPengikatan
+            value: 05/11/2021
+    response:
+      body:
+        type: text
+        data: "{\r
+
+          \    \"statusCode\": \"1\",\r
+
+          \    \"statusDescription\": \"Success\",\r
+
+          \    \"idAgunan\": \"0000007396\",\r
+
+          \    \"Validation\": \"\"\r
+
+          }"

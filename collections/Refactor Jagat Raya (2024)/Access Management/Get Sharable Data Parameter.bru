@@ -1,0 +1,52 @@
+meta {
+  name: Get Sharable Data Parameter
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{BASE_URL}}/v1/data/parameter/group/list
+  body: text
+  auth: none
+}
+
+headers {
+  Jagat-Raya-Api-Key: {{JAGAT_RAYA_API_KEY}}
+  Content-Type: application/json
+}
+
+body:text {
+  {
+      "payload": "{{REQUEST_BODY}}"
+  }
+}
+
+script:pre-request {
+  const payload = {
+      "limit": -1,
+      "list_role_capability_id": [
+          "ROLE-RIMA-000001-CAPABILITY-RIMA-B000013"
+      ],
+      "page": 1,
+      "personal_number": "000071"
+  }
+  
+  const result = encrypt(JSON.stringify(payload))
+  bru.setEnvVar("REQUEST_BODY", result);
+  
+}
+
+script:post-response {
+  const CryptoJS = require("crypto-js");
+  const responseJSON = res.getBody();
+  if (responseJSON.status) {
+      const data = decrypt(responseJSON.data)
+      const parseData = JSON.parse(data)
+      const parseData2 = JSON.parse(parseData)
+      console.log('/v1/data/parameter/group/list', parseData2)
+  }
+}
+
+settings {
+  encodeUrl: true
+}

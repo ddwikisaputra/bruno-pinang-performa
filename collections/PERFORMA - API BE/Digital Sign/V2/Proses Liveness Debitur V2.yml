@@ -1,0 +1,751 @@
+info:
+  name: Proses Liveness Debitur V2
+  type: http
+  seq: 6
+
+http:
+  method: POST
+  url: "{{base_url_dev}}/v/2/digitalsign/proses-liveness-debitur"
+  body:
+    type: form-urlencoded
+    data:
+      - name: kodeProses
+        value: UmF5YVBpUGVyVG9w/lx5nmBcgN3n/SIGOwbFwMMGVaBq
+        description: Prakarsa ID (Encode AES) { MANDATORY }
+      - name: status
+        value: "1"
+        description: Status Liveness [ 1 = lolos | 2 = tidak lolos ] { MANDATORY }
+      - name: selfieBlob
+        value: "{{selfieBase64JPG}}"
+        description: Blob File (base64) { MANDATORY }
+      - name: selfieMimetype
+        value: image/jpeg
+        description: MimeType File [ image/jpeg | image/png ] { MANDATORY }
+      - name: transactionIdLivenessPrivy
+        value: LN-A19-NxM-f78e3aec-49ef-43f4-9e57-3236c1167bdd
+        description: Transaction ID From Privy
+  auth:
+    type: bearer
+    token: "{{tokenJWT}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: unauthorized
+    request:
+      url: "{{base_url}}/v/2/digitalsign/tolak-ol"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: UmF5YVBpUGVyVG9w/lx+n2wXjR0uqNEIGTXN2gBk4OJN
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 20 Jul 2023 05:48:32 GMT
+        - name: Content-Length
+          value: "73"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "message": "Token is expired"
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/2/digitalsign/tolak-ol"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: UmF5YVBpUGVyVG9w/lx+n2wXjR0uqNEIGTXN2gBk4OJN
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 25 Jun 2021 08:48:50 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/2/digitalsign/proses-liveness-debitur"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MjA5NDI=
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+          - name: status
+            value: "1"
+            description: Status Liveness [ 1 = lolos | 2 = tidak lolos ] { MANDATORY }
+          - name: selfieBlob
+            value: "{{selfieBase64JPG}}"
+            description: Blob File (base64) { MANDATORY }
+          - name: selfieMimetype
+            value: image/jpeg
+            description: MimeType File [ image/jpeg | image/png ] { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 25 Jun 2021 08:48:50 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect ....."
+          }
+  - name: parameter validation
+    request:
+      url: "{{base_url}}/v/2/digitalsign/proses-liveness-debitur"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MjA5NDI=
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+          - name: status
+            value: "1"
+            description: Status Liveness [ 1 = lolos | 2 = tidak lolos ] { MANDATORY }
+          - name: selfieBlob
+            value: "{{selfieBase64JPG}}"
+            description: Blob File (base64) { MANDATORY }
+          - name: selfieMimetype
+            value: image/jpeg
+            description: MimeType File [ image/jpeg | image/png ] { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 20 Jul 2023 05:44:00 GMT
+        - name: Content-Length
+          value: "134"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "...",
+              "message": "...",
+              "status": 400
+          }
+  - name: error status digital sign != 4 (Debitur)
+    request:
+      url: "{{base_url}}/v/2/digitalsign/proses-liveness"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MjA5NDI=
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+          - name: typeLiveness
+            value: Debitur
+            description: Debitur / Pasangan { MANDATORY }
+          - name: status
+            value: "1"
+            description: Status Liveness [ 1 = lolos | 2 = tidak lolos ] { MANDATORY }
+          - name: selfieBlob
+            value: "{{selfieBase64JPG}}"
+            description: Blob File (base64) { MANDATORY }
+          - name: selfieMimetype
+            value: image/jpeg
+            description: MimeType File [ image/jpeg | image/png ] { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 28 Jul 2023 13:23:09 GMT
+        - name: Content-Length
+          value: "162"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Status Digital Sign != 4",
+              "message": "Maaf, Proses liveness tidak bisa dilakukan. Silahkan menunggu update status selanjutnya",
+              "status": 500
+          }
+  - name: error status prakarsa != 8
+    request:
+      url: "{{base_url}}/v/2/digitalsign/proses-liveness"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MjA5NDI=
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+          - name: status
+            value: "2"
+            description: Status Liveness [ 1 = lolos | 2 = tidak lolos ] { MANDATORY }
+          - name: selfieBlob
+            value: "{{selfieBase64JPG}}"
+            description: Blob File (base64) { MANDATORY }
+          - name: selfieMimetype
+            value: image/jpeg
+            description: MimeType File [ image/jpeg | image/png ] { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 28 Jul 2023 13:25:13 GMT
+        - name: Content-Length
+          value: "146"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Status Prakarasa != 8 ",
+              "message": "Maaf, Proses liveness tidak bisa dilakukan. Silahkan menunggu update status selanjutnya",
+              "status": 500
+          }
+  - name: error kesempatan liveness sudah 3x
+    request:
+      url: "{{base_url}}/v/2/digitalsign/proses-liveness"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MjA5NDI=
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+          - name: status
+            value: "2"
+            description: Status Liveness [ 1 = lolos | 2 = tidak lolos ] { MANDATORY }
+          - name: selfieBlob
+            value: "{{selfieBase64JPG}}"
+            description: Blob File (base64) { MANDATORY }
+          - name: selfieMimetype
+            value: image/jpeg
+            description: MimeType File [ image/jpeg | image/png ] { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 28 Jul 2023 13:27:05 GMT
+        - name: Content-Length
+          value: "233"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Masih dalam masa waktu tunggu liveness",
+              "message": "Kesempatan kamu sudah habis karena sudah mencobanya sebanyak 3 kali. Namun tidak perlu khawatir, kamu dapat menunggu 10 menit kedepan untuk mencobanya kembali.",
+              "status": 500
+          }
+  - name: error liveness masih dalam waktu tunggu
+    request:
+      url: "{{base_url}}/v/2/digitalsign/proses-liveness"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MjA5NDI=
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+          - name: typeLiveness
+            value: Debitur
+            description: Debitur / Pasangan { MANDATORY }
+          - name: status
+            value: "1"
+            description: Status Liveness [ 1 = lolos | 2 = tidak lolos ] { MANDATORY }
+          - name: selfieBlob
+            value: "{{selfieBase64JPG}}"
+            description: Blob File (base64) { MANDATORY }
+          - name: selfieMimetype
+            value: image/jpeg
+            description: MimeType File [ image/jpeg | image/png ] { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 28 Jul 2023 13:28:14 GMT
+        - name: Content-Length
+          value: "233"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Masih dalam masa waktu tunggu liveness",
+              "message": "Kesempatan kamu sudah habis karena sudah mencobanya sebanyak 3 kali. Namun tidak perlu khawatir, kamu dapat menunggu 15 menit kedepan untuk mencobanya kembali.",
+              "status": 500
+          }
+  - name: error liveness lolos tetapi biometric tidak lolos
+    request:
+      url: "{{base_url}}/v/2/digitalsign/proses-liveness"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MjA5NDI=
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+          - name: status
+            value: "1"
+            description: Status Liveness [ 1 = lolos | 2 = tidak lolos ] { MANDATORY }
+          - name: selfieBlob
+            value: "{{selfieBase64JPG}}"
+            description: Blob File (base64) { MANDATORY }
+          - name: selfieMimetype
+            value: image/jpeg
+            description: MimeType File [ image/jpeg | image/png ] { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 28 Jul 2023 13:31:25 GMT
+        - name: Content-Length
+          value: "148"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Biometric tidak lolos",
+              "message": "Foto Selfie belum sesuai! Kamu masih memiliki kesempatan 2 kali lagi, silakan mencobanya kembali.",
+              "status": 500
+          }
+  - name: lolos liveness & biometric
+    request:
+      url: "{{base_url}}/v/2/digitalsign/proses-liveness"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: UmF5YVBpUGVyVG9w+l19Lii1/b4CXiNqcFL2cIIZeA==
+            description: Prakarsa ID (Encode Base64) { MANDATORY }
+          - name: status
+            value: "1"
+            description: Status Liveness [ 1 = lolos | 2 = tidak lolos ] { MANDATORY }
+          - name: selfieBlob
+            value: "{{selfieBase64JPG}}"
+            description: Blob File (base64) { MANDATORY }
+          - name: selfieMimetype
+            value: image/jpeg
+            description: MimeType File [ image/jpeg | image/png ] { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Sat, 29 Jul 2023 07:36:18 GMT
+        - name: Content-Length
+          value: "73"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Data Tersimpan",
+              "message": "Data Berhasil Disimpan",
+              "status": 200
+          }
+  - name: error kesempatan liveness sudah 3x
+    request:
+      url: "{{base_url}}/v/2/digitalsign/proses-liveness"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MjA5NDI=
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+          - name: status
+            value: "2"
+            description: Status Liveness [ 1 = lolos | 2 = tidak lolos ] { MANDATORY }
+          - name: selfieBlob
+            value: "{{selfieBase64JPG}}"
+            description: Blob File (base64) { MANDATORY }
+          - name: selfieMimetype
+            value: image/jpeg
+            description: MimeType File [ image/jpeg | image/png ] { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 28 Jul 2023 13:27:05 GMT
+        - name: Content-Length
+          value: "233"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Masih dalam masa waktu tunggu liveness",
+              "message": "Kesempatan kamu sudah habis karena sudah mencobanya sebanyak 3 kali. Namun tidak perlu khawatir, kamu dapat menunggu 10 menit kedepan untuk mencobanya kembali.",
+              "status": 500
+          }
+  - name: error liveness lolos tetapi biometric tidak lolos
+    request:
+      url: "{{base_url}}/v/2/digitalsign/proses-liveness"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MjA5NDI=
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+          - name: status
+            value: "1"
+            description: Status Liveness [ 1 = lolos | 2 = tidak lolos ] { MANDATORY }
+          - name: selfieBlob
+            value: "{{selfieBase64JPG}}"
+            description: Blob File (base64) { MANDATORY }
+          - name: selfieMimetype
+            value: image/jpeg
+            description: MimeType File [ image/jpeg | image/png ] { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 28 Jul 2023 13:31:25 GMT
+        - name: Content-Length
+          value: "148"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Biometric tidak lolos",
+              "message": "Foto Selfie belum sesuai! Kamu masih memiliki kesempatan 2 kali lagi, silakan mencobanya kembali.",
+              "status": 500
+          }
+  - name: error status digital sign != 4 (Debitur)
+    request:
+      url: "{{base_url}}/v/2/digitalsign/proses-liveness"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MjA5NDI=
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+          - name: typeLiveness
+            value: Debitur
+            description: Debitur / Pasangan { MANDATORY }
+          - name: status
+            value: "1"
+            description: Status Liveness [ 1 = lolos | 2 = tidak lolos ] { MANDATORY }
+          - name: selfieBlob
+            value: "{{selfieBase64JPG}}"
+            description: Blob File (base64) { MANDATORY }
+          - name: selfieMimetype
+            value: image/jpeg
+            description: MimeType File [ image/jpeg | image/png ] { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 28 Jul 2023 13:23:09 GMT
+        - name: Content-Length
+          value: "162"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Status Digital Sign != 4",
+              "message": "Maaf, Proses liveness tidak bisa dilakukan. Silahkan menunggu update status selanjutnya",
+              "status": 500
+          }
+  - name: lolos liveness & biometric
+    request:
+      url: "{{base_url}}/v/2/digitalsign/proses-liveness"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: UmF5YVBpUGVyVG9w+l19Lii1/b4CXiNqcFL2cIIZeA==
+            description: Prakarsa ID (Encode Base64) { MANDATORY }
+          - name: status
+            value: "1"
+            description: Status Liveness [ 1 = lolos | 2 = tidak lolos ] { MANDATORY }
+          - name: selfieBlob
+            value: "{{selfieBase64JPG}}"
+            description: Blob File (base64) { MANDATORY }
+          - name: selfieMimetype
+            value: image/jpeg
+            description: MimeType File [ image/jpeg | image/png ] { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Sat, 29 Jul 2023 07:36:18 GMT
+        - name: Content-Length
+          value: "73"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Data Tersimpan",
+              "message": "Data Berhasil Disimpan",
+              "status": 200
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/2/digitalsign/proses-liveness-debitur"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MjA5NDI=
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+          - name: status
+            value: "1"
+            description: Status Liveness [ 1 = lolos | 2 = tidak lolos ] { MANDATORY }
+          - name: selfieBlob
+            value: "{{selfieBase64JPG}}"
+            description: Blob File (base64) { MANDATORY }
+          - name: selfieMimetype
+            value: image/jpeg
+            description: MimeType File [ image/jpeg | image/png ] { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 25 Jun 2021 08:48:50 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect ....."
+          }
+  - name: error liveness masih dalam waktu tunggu
+    request:
+      url: "{{base_url}}/v/2/digitalsign/proses-liveness"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MjA5NDI=
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+          - name: typeLiveness
+            value: Debitur
+            description: Debitur / Pasangan { MANDATORY }
+          - name: status
+            value: "1"
+            description: Status Liveness [ 1 = lolos | 2 = tidak lolos ] { MANDATORY }
+          - name: selfieBlob
+            value: "{{selfieBase64JPG}}"
+            description: Blob File (base64) { MANDATORY }
+          - name: selfieMimetype
+            value: image/jpeg
+            description: MimeType File [ image/jpeg | image/png ] { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 28 Jul 2023 13:28:14 GMT
+        - name: Content-Length
+          value: "233"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Masih dalam masa waktu tunggu liveness",
+              "message": "Kesempatan kamu sudah habis karena sudah mencobanya sebanyak 3 kali. Namun tidak perlu khawatir, kamu dapat menunggu 15 menit kedepan untuk mencobanya kembali.",
+              "status": 500
+          }
+  - name: error status prakarsa != 8
+    request:
+      url: "{{base_url}}/v/2/digitalsign/proses-liveness"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MjA5NDI=
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+          - name: status
+            value: "2"
+            description: Status Liveness [ 1 = lolos | 2 = tidak lolos ] { MANDATORY }
+          - name: selfieBlob
+            value: "{{selfieBase64JPG}}"
+            description: Blob File (base64) { MANDATORY }
+          - name: selfieMimetype
+            value: image/jpeg
+            description: MimeType File [ image/jpeg | image/png ] { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 28 Jul 2023 13:25:13 GMT
+        - name: Content-Length
+          value: "146"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Status Prakarasa != 8 ",
+              "message": "Maaf, Proses liveness tidak bisa dilakukan. Silahkan menunggu update status selanjutnya",
+              "status": 500
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/2/digitalsign/tolak-ol"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: UmF5YVBpUGVyVG9w/lx+n2wXjR0uqNEIGTXN2gBk4OJN
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 25 Jun 2021 08:48:50 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: parameter validation
+    request:
+      url: "{{base_url}}/v/2/digitalsign/proses-liveness-debitur"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MjA5NDI=
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+          - name: status
+            value: "1"
+            description: Status Liveness [ 1 = lolos | 2 = tidak lolos ] { MANDATORY }
+          - name: selfieBlob
+            value: "{{selfieBase64JPG}}"
+            description: Blob File (base64) { MANDATORY }
+          - name: selfieMimetype
+            value: image/jpeg
+            description: MimeType File [ image/jpeg | image/png ] { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 20 Jul 2023 05:44:00 GMT
+        - name: Content-Length
+          value: "134"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "...",
+              "message": "...",
+              "status": 400
+          }
+  - name: unauthorized
+    request:
+      url: "{{base_url}}/v/2/digitalsign/tolak-ol"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: UmF5YVBpUGVyVG9w/lx+n2wXjR0uqNEIGTXN2gBk4OJN
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 20 Jul 2023 05:48:32 GMT
+        - name: Content-Length
+          value: "73"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "message": "Token is expired"
+          }

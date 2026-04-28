@@ -1,0 +1,129 @@
+info:
+  name: Request OTP
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{base_url_otp_dev}}/api/reqotp"
+  body:
+    type: form-urlencoded
+    data:
+      - name: application
+        value: "{{appname_otp_dev}}"
+      - name: client
+        value: "{{client_otp_dev}}"
+      - name: phone
+        value: "081776527371"
+      - name: transactionDetail
+        value: OTP
+      - name: mataUang
+        value: IDR
+      - name: nominal
+        value: "0"
+      - name: tokenType
+        value: OTP
+  auth:
+    type: bearer
+    token: "{{tokenOTP}}"
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        var jsonData = res.getBody();
+        bru.setGlobalEnvVar("serverId", jsonData.desc);
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: error - new url
+    request:
+      url: "{{base_url_dev}}/api/reqotp"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: application
+            value: "{{appname_otp_dev}}"
+          - name: client
+            value: "{{client_otp_dev}}"
+          - name: phone
+            value: "087877278830"
+          - name: transactionDetail
+            value: OTP
+          - name: mataUang
+            value: IDR
+          - name: nominal
+            value: "0"
+          - name: tokenType
+            value: OTP
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Tue, 30 Sep 2025 08:06:38 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "55"
+        - name: Connection
+          value: keep-alive
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "status": "01",
+              "desc": "Request OTP Gagal",
+              "expTime": ""
+          }
+  - name: success - new url
+    request:
+      url: "{{base_url_dev_new}}/api/reqotp"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: application
+            value: "{{appname_otp_dev}}"
+          - name: client
+            value: "{{client_otp_dev}}"
+          - name: phone
+            value: "081776527371"
+          - name: transactionDetail
+            value: OTP
+          - name: mataUang
+            value: IDR
+          - name: nominal
+            value: "0"
+          - name: tokenType
+            value: OTP
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Tue, 30 Sep 2025 08:46:39 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "71"
+        - name: Connection
+          value: keep-alive
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "status": "00",
+              "desc": "RAYA8595207026",
+              "expTime": "2025-09-30 15:51:38"
+          }

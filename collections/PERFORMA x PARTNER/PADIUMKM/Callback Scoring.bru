@@ -1,0 +1,44 @@
+meta {
+  name: Callback Scoring
+  type: http
+  seq: 2
+}
+
+get {
+  url: https://gatekeeper-stg.berasumkm.id/v2/financing/callback-scoring
+  body: json
+  auth: inherit
+}
+
+headers {
+  X-App-Id: x
+  X-App-Secret: x’ \
+  "--header Content-Type": 
+}
+
+body:json {
+  {
+      "identity_number": "3275096907000007", 
+      "status": 2,
+      "tenor": 11,
+      "limit": 1000000
+  }
+}
+
+settings {
+  encodeUrl: true
+}
+
+docs {
+  Generated from cURL: curl --location 'https://gatekeeper-stg.berasumkm.id/v2/financing/callback-scoring' \
+  --header 'X-App-Id: x' \
+  --header 'X-App-Secret: x’ \
+  --header 'Content-Type: application/json' \
+  --data '{
+      
+      "identity_number": "3275096907000007", 
+      "status": 2,
+      "tenor": 11,
+      "limit": 1000000
+  }'
+}

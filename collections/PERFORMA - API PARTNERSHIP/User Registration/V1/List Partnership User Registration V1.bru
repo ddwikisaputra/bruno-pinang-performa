@@ -1,0 +1,560 @@
+meta {
+  name: List Partnership User Registration V1
+  type: http
+  seq: 6
+}
+
+post {
+  url: {{url}}/v/1/partnerships/list-partnership-user-registration
+  body: formUrlEncoded
+  auth: basic
+}
+
+auth:basic {
+  username: {{userBasicPartnership}}
+  password: {{passBasicPartnership}}
+}
+
+body:form-urlencoded {
+  type: partner
+  startIndex: 0
+  recordCount: 5
+  userId: 999941
+  ~textSearch: oms
+}
+
+settings {
+  encodeUrl: true
+}
+
+example {
+  name: success
+  
+  request: {
+    url: {{url}}/v/1/partnerships/list-partnership-user-registration
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      type: partner
+      startIndex: 0
+      recordCount: 5
+      userId: 999941
+      ~textSearch: tes
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Mon, 31 May 2021 06:35:05 GMT
+      Content-Length: 141
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": [
+                {
+                    "code": "ADA78",
+                    "name": "adada"
+                },
+                {
+                    "code": "ADA23",
+                    "name": "Adaka"
+                },
+                {
+                    "code": "AGJ1",
+                    "name": "Agriaku-Japfa"
+                },
+                {
+                    "code": "AGR23",
+                    "name": "Agroco"
+                },
+                {
+                    "code": "AJH23",
+                    "name": "ajhsjashjahs"
+                }
+            ],
+            "desc": "Data Valid",
+            "message": "Data ditemukan",
+            "status": 200
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: unautorized
+  
+  request: {
+    url: {{url}}/v/1/partnerships/list-partnership-user-registration
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      type: partner
+      startIndex: 0
+      recordCount: 5
+      userId: 999941
+      ~textSearch: tes
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Mon, 31 May 2021 06:32:34 GMT
+      Content-Length: 108
+    }
+  
+    status: {
+      code: 401
+      text: Unauthorized
+    }
+  
+    body: {
+      type: json
+      content: '''
+  
+      '''
+    }
+  }
+}
+
+example {
+  name: general error
+  
+  request: {
+    url: {{url}}/v/1/partnerships/list-partnership-user-registration
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      type: partner
+      startIndex: 0
+      recordCount: 5
+      ~textSearch: tes
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Mon, 31 May 2021 06:32:34 GMT
+      Content-Length: 108
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "status": 500,
+            "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+            "desc": "Could not connect .....",
+            "data": null
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: empty data
+  
+  request: {
+    url: {{url}}/v/1/partnerships/list-partnership-user-registration
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      type: partner
+      startIndex: 0
+      recordCount: 5
+      textSearch: tes1
+      userId: 999941
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Mon, 31 May 2021 06:32:34 GMT
+      Content-Length: 108
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "desc": "Data Partnership tidak ditemukan",
+            "message": "Partnership Tidak Ditemukan",
+            "status": 404
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: error database connection
+  
+  request: {
+    url: {{url}}/v/1/partnerships/list-partnership-user-registration
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      type: partner
+      startIndex: 0
+      recordCount: 5
+      userId: 999941
+      ~textSearch: tes
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Mon, 31 May 2021 06:32:34 GMT
+      Content-Length: 108
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+            "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+            "status": 400
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error Validation Parameters
+  
+  request: {
+    url: {{base-url-local}}/v/1/partnerships/list-partnership-user-registration
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      recordCount: 10
+      userId: 999941
+      ~type: partner
+      ~startIndex: 0
+      ~textSearch: oms
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Thu, 30 Jan 2025 11:39:28 GMT
+      Content-Length: 107
+    }
+  
+    status: {
+      code: 400
+      text: Bad Request
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "Validation failed on field Type with tag ...",
+            "message": "Maaf, ... Tidak Valid",
+            "status": 400
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: success
+  
+  request: {
+    url: {{url}}/v/1/partnerships/list-partnership-user-registration
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      type: partner
+      startIndex: 0
+      recordCount: 5
+      userId: 999941
+      ~textSearch: tes
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Mon, 31 May 2021 06:35:05 GMT
+      Content-Length: 141
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": [
+                {
+                    "code": "ADA78",
+                    "name": "adada"
+                },
+                {
+                    "code": "ADA23",
+                    "name": "Adaka"
+                },
+                {
+                    "code": "AGJ1",
+                    "name": "Agriaku-Japfa"
+                },
+                {
+                    "code": "AGR23",
+                    "name": "Agroco"
+                },
+                {
+                    "code": "AJH23",
+                    "name": "ajhsjashjahs"
+                }
+            ],
+            "desc": "Data Valid",
+            "message": "Data ditemukan",
+            "status": 200
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: unautorized
+  
+  request: {
+    url: {{url}}/v/1/partnerships/list-partnership-user-registration
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      type: partner
+      startIndex: 0
+      recordCount: 5
+      userId: 999941
+      ~textSearch: tes
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Mon, 31 May 2021 06:32:34 GMT
+      Content-Length: 108
+    }
+  
+    status: {
+      code: 401
+      text: Unauthorized
+    }
+  
+    body: {
+      type: json
+      content: '''
+  
+      '''
+    }
+  }
+}
+
+example {
+  name: general error
+  
+  request: {
+    url: {{url}}/v/1/partnerships/list-partnership-user-registration
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      type: partner
+      startIndex: 0
+      recordCount: 5
+      ~textSearch: tes
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Mon, 31 May 2021 06:32:34 GMT
+      Content-Length: 108
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "status": 500,
+            "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+            "desc": "Could not connect .....",
+            "data": null
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: empty data
+  
+  request: {
+    url: {{url}}/v/1/partnerships/list-partnership-user-registration
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      type: partner
+      startIndex: 0
+      recordCount: 5
+      textSearch: tes1
+      userId: 999941
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Mon, 31 May 2021 06:32:34 GMT
+      Content-Length: 108
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "desc": "Data Partnership tidak ditemukan",
+            "message": "Partnership Tidak Ditemukan",
+            "status": 404
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: error database connection
+  
+  request: {
+    url: {{url}}/v/1/partnerships/list-partnership-user-registration
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      type: partner
+      startIndex: 0
+      recordCount: 5
+      userId: 999941
+      ~textSearch: tes
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Mon, 31 May 2021 06:32:34 GMT
+      Content-Length: 108
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+            "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+            "status": 400
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error Validation Parameters
+  
+  request: {
+    url: {{base-url-local}}/v/1/partnerships/list-partnership-user-registration
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      recordCount: 10
+      userId: 999941
+      ~type: partner
+      ~startIndex: 0
+      ~textSearch: oms
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Thu, 30 Jan 2025 11:39:28 GMT
+      Content-Length: 107
+    }
+  
+    status: {
+      code: 400
+      text: Bad Request
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "Validation failed on field Type with tag ...",
+            "message": "Maaf, ... Tidak Valid",
+            "status": 400
+        }
+      '''
+    }
+  }
+}

@@ -1,0 +1,435 @@
+info:
+  name: Update TBLA V2
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: "{{base_url}}/v/2/document/update-tbla/31183"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: UmF5YVBpUGVyVG9w9FR0lGf/X53F2Tzm25VqShsrhmuQHg==
+        description: "[Encode]Personal Number BRI Agro (UserID Login) { MANDATORY }"
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: validasi data existing
+    request:
+      url: "{{base_url}}/v/1/document/update-tbla/-1"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 31 Aug 2021 18:25:28 GMT
+        - name: Content-Length
+          value: "132"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Error record not found",
+              "message": "TBLA Tidak Ditemukan",
+              "status": 500
+          }
+  - name: parameter validation
+    request:
+      url: "{{base_url}}/v/1/document/update-tbla/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 31 Aug 2021 18:25:28 GMT
+        - name: Content-Length
+          value: "132"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Menyesuaikan field kosong",
+              "message": "Menyesuaikan field kosong",
+              "status": 400
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/document/update-tbla/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 31 Aug 2021 18:25:28 GMT
+        - name: Content-Length
+          value: "132"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Tidak Memliki Akses",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/document/update-tbla/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 31 Aug 2021 18:25:28 GMT
+        - name: Content-Length
+          value: "132"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/document/update-tbla/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 31 Aug 2021 18:25:28 GMT
+        - name: Content-Length
+          value: "132"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "letterNumber": "2/TBLA/PPA/XI/2021"
+              },
+              "desc": "Data Tersimpan",
+              "message": "Data document TBLA berhasil disimpan",
+              "status": 200
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{base_url}}/v/1/document/update-tbla/30946"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Sun, 24 Jul 2022 02:33:15 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: success v2
+    request:
+      url: "{{base_url}}/v/2/document/update-tbla/31183"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: UmF5YVBpUGVyVG9w9FR0lGf/X53F2Tzm25VqShsrhmuQHg==
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 04 Jan 2023 12:29:46 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "letterNumber": "19/TBLA/KNG/XII/2022"
+              },
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{base_url}}/v/1/document/update-tbla/30946"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Sun, 24 Jul 2022 02:33:15 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: success v2
+    request:
+      url: "{{base_url}}/v/2/document/update-tbla/31183"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: UmF5YVBpUGVyVG9w9FR0lGf/X53F2Tzm25VqShsrhmuQHg==
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 04 Jan 2023 12:29:46 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "letterNumber": "19/TBLA/KNG/XII/2022"
+              },
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: parameter validation
+    request:
+      url: "{{base_url}}/v/1/document/update-tbla/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 31 Aug 2021 18:25:28 GMT
+        - name: Content-Length
+          value: "132"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Menyesuaikan field kosong",
+              "message": "Menyesuaikan field kosong",
+              "status": 400
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/document/update-tbla/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 31 Aug 2021 18:25:28 GMT
+        - name: Content-Length
+          value: "132"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "letterNumber": "2/TBLA/PPA/XI/2021"
+              },
+              "desc": "Data Tersimpan",
+              "message": "Data document TBLA berhasil disimpan",
+              "status": 200
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/document/update-tbla/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 31 Aug 2021 18:25:28 GMT
+        - name: Content-Length
+          value: "132"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Tidak Memliki Akses",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/document/update-tbla/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 31 Aug 2021 18:25:28 GMT
+        - name: Content-Length
+          value: "132"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: validasi data existing
+    request:
+      url: "{{base_url}}/v/1/document/update-tbla/-1"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 31 Aug 2021 18:25:28 GMT
+        - name: Content-Length
+          value: "132"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Error record not found",
+              "message": "TBLA Tidak Ditemukan",
+              "status": 500
+          }

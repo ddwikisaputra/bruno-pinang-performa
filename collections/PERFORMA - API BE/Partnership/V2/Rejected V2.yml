@@ -1,0 +1,400 @@
+info:
+  name: Rejected V2
+  type: http
+  seq: 11
+
+http:
+  method: POST
+  url: "{{base_url}}/v/2/partnerships/rejected"
+  body:
+    type: form-urlencoded
+    data:
+      - name: id
+        value: "1"
+        description: ID Pipeline
+      - name: userId
+        value: UmF5YVBpUGVyVG9w9FR0lGH8cGJNF4M8yVwLukqMUy12WA==
+        description: "[ENCODE] Personal Number BRI Agro (UserID Login)"
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: validasi status ditolak
+    request:
+      url: "{{base_url}}/v/1/partnerships/rejected"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "1"
+            description: ID Pipeline
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 07 Mar 2022 07:52:43 GMT
+        - name: Content-Length
+          value: "86"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Status Partnership = -1",
+              "message": "Partnership sudah ditolak.",
+              "status": 500
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/partnerships/rejected"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "1"
+            description: ID Pipeline
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:32:34 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/partnerships/rejected"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "1"
+            description: ID Pipeline
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:35:05 GMT
+        - name: Content-Length
+          value: "141"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Data Tersimpan",
+              "message": "Data Partnership berhasil ditolak",
+              "status": 200
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/partnerships/rejected"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "1"
+            description: ID Pipeline
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:32:34 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: validasi status aktif
+    request:
+      url: "{{base_url}}/v/1/partnerships/rejected"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "-11"
+            description: ID Pipeline
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:32:34 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Status Partnership = 1",
+              "message": "Partnership sudah disetujui.",
+              "status": 500
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/partnerships/rejected"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "1"
+            description: ID Pipeline
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:32:34 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect ....."
+          }
+  - name: validasi status aktif
+    request:
+      url: "{{base_url}}/v/1/partnerships/rejected"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "-11"
+            description: ID Pipeline
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:32:34 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Status Partnership = 1",
+              "message": "Partnership sudah disetujui.",
+              "status": 500
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/partnerships/rejected"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "1"
+            description: ID Pipeline
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:32:34 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: validasi status ditolak
+    request:
+      url: "{{base_url}}/v/1/partnerships/rejected"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "1"
+            description: ID Pipeline
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 07 Mar 2022 07:52:43 GMT
+        - name: Content-Length
+          value: "86"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Status Partnership = -1",
+              "message": "Partnership sudah ditolak.",
+              "status": 500
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/partnerships/rejected"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "1"
+            description: ID Pipeline
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:35:05 GMT
+        - name: Content-Length
+          value: "141"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Data Tersimpan",
+              "message": "Data Partnership berhasil ditolak",
+              "status": 200
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/partnerships/rejected"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "1"
+            description: ID Pipeline
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:32:34 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/partnerships/rejected"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "1"
+            description: ID Pipeline
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:32:34 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect ....."
+          }

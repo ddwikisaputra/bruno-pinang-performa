@@ -1,0 +1,259 @@
+info:
+  name: RAYA Inquiry
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{base_url}}/api/pinang/mikro/inquiry"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: dwikis0003
+      - name: deviceId
+        value: 2fd326e71014cbb9
+      - name: cifNum
+        value: "0000118826"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Success
+    request:
+      url: "{{base_url}}/api/pinang/mikro/inquiry"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: dwikis0003
+          - name: deviceId
+            value: 2fd326e71014cbb9
+          - name: cifNum
+            value: "0000118826"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "statusCode": "1",
+              "statusDescription": "Inquiry Sukses",
+              "data": [
+                  {
+                      "nomorFasilitas": "0010/0000118985/PK1/001",
+                      "nominalFasilitas": "50000000.00",
+                      "nominalFasilitasDigunakan": "22000000.00",
+                      "tanggalPembukaan": "2022-01-24",
+                      "tanggalJatuhTempo": "2022-07-24",
+                      "rekening": [
+                          {
+                              "nomorRekening": "001001008148103",
+                              "nomorRekeningDisbursement": "001001000065407",
+                              "plafond": "15000000.00",
+                              "status": "1",
+                              "saldo": "15000000.00",
+                              "bungaBerjalan": "0.00",
+                              "tanggalPembukaan": "2021-07-11",
+                              "tanggalJatuhTempo": "2021-07-18",
+                              "sukuBunga": "0.21000",
+                              "totalBunga": "271250.00",
+                              "penalti": "105428.64",
+                              "jangkaWaktuPinjaman": "7",
+                              "tanggalPengajuan": "2021-07-11",
+                              "tanggalPencairan": "2021-07-11",
+                              "tanggalPenolakan": null,
+                              "tanggalPelunasan": null,
+                              "keterangan": "Sukses",
+                              "listAGF": []
+                          },
+                          {
+                              "nomorRekening": "001001008149109",
+                              "nomorRekeningDisbursement": "001001001279319",
+                              "plafond": "5000000.00",
+                              "status": "2",
+                              "saldo": "5000000.00",
+                              "bungaBerjalan": "0.00",
+                              "tanggalPembukaan": "2021-07-11",
+                              "tanggalJatuhTempo": "2021-07-18",
+                              "sukuBunga": "0.24000",
+                              "totalBunga": "103333.23",
+                              "penalti": "40186.80",
+                              "jangkaWaktuPinjaman": "7",
+                              "tanggalPengajuan": "2021-07-11",
+                              "tanggalPencairan": "2021-07-11",
+                              "tanggalPenolakan": null,
+                              "tanggalPelunasan": "2021-07-18",
+                              "keterangan": "Lunas",
+                              "listAGF": [
+                                  {
+                                      "tanggal": "2021-07-18",
+                                      "nominalTotal": "5143520.00",
+                                      "nominalPokok": "5000000.00",
+                                      "nominalBungaDenda": "143520.00"
+                                  }
+                              ]
+                          },
+                          {
+                              "nomorRekening": "001001008157102",
+                              "nomorRekeningDisbursement": null,
+                              "plafond": "1500000.00",
+                              "status": "-1",
+                              "saldo": "1500000.00",
+                              "bungaBerjalan": "18000.00",
+                              "tanggalPembukaan": "2021-07-17",
+                              "tanggalJatuhTempo": "2021-07-24",
+                              "sukuBunga": "0.24000",
+                              "totalBunga": "7000.00",
+                              "penalti": "9041.94",
+                              "jangkaWaktuPinjaman": "7",
+                              "tanggalPengajuan": "2021-07-17",
+                              "tanggalPencairan": null,
+                              "tanggalPenolakan": "2021-07-17",
+                              "tanggalPelunasan": null,
+                              "keterangan": "Ditolak",
+                              "listAGF": []
+                          },
+                          {
+                              "nomorRekening": "001001008160105",
+                              "nomorRekeningDisbursement": null,
+                              "plafond": "500000.00",
+                              "status": "0",
+                              "saldo": "500000.00",
+                              "bungaBerjalan": "2666.64",
+                              "tanggalPembukaan": "2021-07-20",
+                              "tanggalJatuhTempo": "2021-08-03",
+                              "sukuBunga": "0.24000",
+                              "totalBunga": "4666.62",
+                              "penalti": "1345.84",
+                              "jangkaWaktuPinjaman": "7",
+                              "tanggalPengajuan": "2021-07-20",
+                              "tanggalPencairan": null,
+                              "tanggalPenolakan": null,
+                              "tanggalPelunasan": null,
+                              "keterangan": "Menunggu Konfirmasi",
+                              "listAGF": []
+                          },
+                          {
+                              "nomorRekening": "001001008149110",
+                              "nomorRekeningDisbursement": "001001001279319",
+                              "plafond": "5000000.00",
+                              "status": "3",
+                              "saldo": "5000000.00",
+                              "bungaBerjalan": "0.00",
+                              "tanggalPembukaan": "2021-07-11",
+                              "tanggalJatuhTempo": "2021-07-18",
+                              "sukuBunga": "0.24000",
+                              "totalBunga": "103333.23",
+                              "penalti": "40186.80",
+                              "jangkaWaktuPinjaman": "7",
+                              "tanggalPengajuan": "2021-07-11",
+                              "tanggalPencairan": "2021-07-11",
+                              "tanggalPenolakan": null,
+                              "tanggalPelunasan": null,
+                              "keterangan": "H-7 Jatuh Tempo",
+                              "listAGF": []
+                          },
+                          {
+                              "nomorRekening": "001001008149111",
+                              "nomorRekeningDisbursement": "001001001279319",
+                              "plafond": "5000000.00",
+                              "status": "4",
+                              "saldo": "5000000.00",
+                              "bungaBerjalan": "0.00",
+                              "tanggalPembukaan": "2021-07-11",
+                              "tanggalJatuhTempo": "2018-07-18",
+                              "sukuBunga": "0.24000",
+                              "totalBunga": "103333.23",
+                              "penalti": "40186.80",
+                              "jangkaWaktuPinjaman": "7",
+                              "tanggalPengajuan": "2021-07-11",
+                              "tanggalPencairan": "2021-07-11",
+                              "tanggalPenolakan": null,
+                              "tanggalPelunasan": null,
+                              "keterangan": "Jatuh Tempo",
+                              "listAGF": []
+                          },
+                          {
+                              "nomorRekening": "001001008149112",
+                              "nomorRekeningDisbursement": "001001001279319",
+                              "plafond": "5000000.00",
+                              "status": "5",
+                              "saldo": "5000000.00",
+                              "bungaBerjalan": "0.00",
+                              "tanggalPembukaan": "2021-07-21",
+                              "tanggalJatuhTempo": "2021-07-18",
+                              "sukuBunga": "0.24000",
+                              "totalBunga": "103333.23",
+                              "penalti": "40186.80",
+                              "jangkaWaktuPinjaman": "7",
+                              "tanggalPengajuan": "2021-07-11",
+                              "tanggalPencairan": "2021-07-11",
+                              "tanggalPenolakan": null,
+                              "tanggalPelunasan": null,
+                              "keterangan": "H+3 Jatuh Tempo",
+                              "listAGF": [
+                                  {
+                                      "tanggal": "2021-07-19",
+                                      "nominalTotal": "50000.00",
+                                      "nominalPokok": "0",
+                                      "nominalBungaDenda": "50000.00"
+                                  },
+                                  {
+                                      "tanggal": "2021-07-20",
+                                      "nominalTotal": "50000.00",
+                                      "nominalPokok": "0",
+                                      "nominalBungaDenda": "50000.00"
+                                  },
+                                  {
+                                      "tanggal": "2021-07-21",
+                                      "nominalTotal": "5043520.00",
+                                      "nominalPokok": "5000000.00",
+                                      "nominalBungaDenda": "43520.00"
+                                  }
+                              ]
+                          }
+                      ]
+                  }
+              ],
+              "dataBunga": [
+                  {
+                      "min": "1",
+                      "max": "20000000",
+                      "bunga": "24"
+                  },
+                  {
+                      "min": "20000001",
+                      "max": "100000000",
+                      "bunga": "24"
+                  }
+              ]
+          }
+  - name: Facility Not Found
+    request:
+      url: "{{base_url}}/api/pinang/mikro/inquiry"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: monika0001
+          - name: deviceId
+            value: 2fd326e71014cbb9
+          - name: cifNum
+            value: "0000000423"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "statusCode": "01",
+              "statusDescription": "Facility not Found",
+              "data": null,
+              "dataBunga": null
+          }

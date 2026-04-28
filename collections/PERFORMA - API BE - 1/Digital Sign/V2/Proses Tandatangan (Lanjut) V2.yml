@@ -1,0 +1,386 @@
+info:
+  name: Proses Tandatangan (Lanjut) V2
+  type: http
+  seq: 11
+
+http:
+  method: POST
+  url: "{{base_url_dev}}/v/2/digitalsign/proses-tandatangan"
+  body:
+    type: form-urlencoded
+    data:
+      - name: kodeProses
+        value: UmF5YVBpUGVyVG9w/lx5nmBcgN3n/SIGOwbFwMMGVaBq
+        description: PrakarsaId (Encode AES) {MANDATORY}
+      - name: continueType
+        value: Pasangan
+        description: ("PASANGAN"/"DEBITUR") {MANDATORY}
+  auth:
+    type: bearer
+    token: "{{tokenJWT}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: unauthorized
+    request:
+      url: "{{base_url}}/v/2/digitalsign/proses-tandatangan"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MzEzMjg=
+            description: PrakarsaId (Encode Base64) {MANDATORY}
+          - name: continueType
+            value: DEBITUR
+            description: ("PASANGAN"/"DEBITUR") {MANDATORY}
+    response:
+      body:
+        type: text
+        data: "{\r
+
+          \    \"code\": 401,\r
+
+          \    \"message\": \"signature is invalid || Token is expired\"\r
+
+          }"
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/2/digitalsign/proses-tandatangan"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MzEzMjg=
+            description: PrakarsaId (Encode Base64) {MANDATORY}
+          - name: continueType
+            value: DEBITUR
+            description: ("PASANGAN"/"DEBITUR") {MANDATORY}
+    response:
+      body:
+        type: text
+        data: "{\r
+
+          \    \"data\": null,\r
+
+          \    \"desc\": \"Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused\",\r
+
+          \    \"message\": \"Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.\",\r
+
+          \    \"status\": 400\r
+
+          }"
+  - name: general error
+    request:
+      url: "{{base_url}}/v/2/digitalsign/proses-tandatangan"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MzEzMjg=
+            description: PrakarsaId (Encode Base64) {MANDATORY}
+          - name: continueType
+            value: DEBITUR
+            description: ("PASANGAN"/"DEBITUR") {MANDATORY}
+    response:
+      body:
+        type: text
+        data: "{\r
+
+          \    \"status\": 500,\r
+
+          \    \"message\": \"Server sedang maintenance, silahkan coba beberapa saat lagi\",\r
+
+          \    \"desc\": \"Could not connect .....\",\r
+
+          \    \"data\" : null\r
+
+          }"
+  - name: validation parameter
+    request:
+      url: "{{base_url}}/v/2/digitalsign/proses-tandatangan"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MzEzMjg=
+            description: PrakarsaId (Encode Base64) {MANDATORY}
+          - name: continueType
+            value: DEBITUR
+            description: ("PASANGAN"/"DEBITUR") {MANDATORY}
+    response:
+      body:
+        type: text
+        data: "{\r
+
+          \    \"data\": null,\r
+
+          \    \"desc\": \"Parameter...\",\r
+
+          \    \"message\": \"Maaf, Parameter...\",\r
+
+          \    \"status\": 400\r
+
+          }"
+  - name: success
+    request:
+      url: "{{base_url_dev}}/v/2/digitalsign/proses-tandatangan"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MzEzMjg=
+            description: PrakarsaId (Encode Base64) {MANDATORY}
+          - name: continueType
+            value: DEBITUR
+            description: ("PASANGAN"/"DEBITUR") {MANDATORY}
+    response:
+      body:
+        type: text
+        data: "{\r
+
+          \    \"status\": 200\r
+
+          \    \"message\": \"message success\",\r
+
+          \    \"desc\": \"message success asd\",\r
+
+          }"
+  - name: status prakarsa != 8
+    request:
+      url: "{{base_url}}/v/2/digitalsign/proses-tandatangan"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MzEzMjg=
+            description: PrakarsaId (Encode Base64) {MANDATORY}
+          - name: continueType
+            value: DeBiTuR
+            description: ("PASANGAN"/"DEBITUR") {MANDATORY}
+    response:
+      body:
+        type: text
+        data: "{\r
+
+          \    \"desc\": \"Status prakarsa != 8\",\r
+
+          \    \"message\": \"Status prakarsa tidak sesuai\",\r
+
+          \    \"status\": 500\r
+
+          }"
+  - name: validasi digitalsign status
+    request:
+      url: "{{base_url}}/v/2/digitalsign/proses-tandatangan"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MzEzMjg=
+            description: PrakarsaId (Encode Base64) {MANDATORY}
+          - name: continueType
+            value: DeBiTuR
+            description: ("PASANGAN"/"DEBITUR") {MANDATORY}
+    response:
+      body:
+        type: text
+        data: "{\r
+
+          \    \"status\": 500\r
+
+          \    \"message\": \"Status digitalsign tidak sesuai\",\r
+
+          \    \"desc\": \"Status digitalsign != ...\",\r
+
+          }"
+  - name: validation parameter
+    request:
+      url: "{{base_url}}/v/2/digitalsign/proses-tandatangan"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MzEzMjg=
+            description: PrakarsaId (Encode Base64) {MANDATORY}
+          - name: continueType
+            value: DEBITUR
+            description: ("PASANGAN"/"DEBITUR") {MANDATORY}
+    response:
+      body:
+        type: text
+        data: "{\r
+
+          \    \"data\": null,\r
+
+          \    \"desc\": \"Parameter...\",\r
+
+          \    \"message\": \"Maaf, Parameter...\",\r
+
+          \    \"status\": 400\r
+
+          }"
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/2/digitalsign/proses-tandatangan"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MzEzMjg=
+            description: PrakarsaId (Encode Base64) {MANDATORY}
+          - name: continueType
+            value: DEBITUR
+            description: ("PASANGAN"/"DEBITUR") {MANDATORY}
+    response:
+      body:
+        type: text
+        data: "{\r
+
+          \    \"data\": null,\r
+
+          \    \"desc\": \"Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused\",\r
+
+          \    \"message\": \"Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.\",\r
+
+          \    \"status\": 400\r
+
+          }"
+  - name: success
+    request:
+      url: "{{base_url_dev}}/v/2/digitalsign/proses-tandatangan"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MzEzMjg=
+            description: PrakarsaId (Encode Base64) {MANDATORY}
+          - name: continueType
+            value: DEBITUR
+            description: ("PASANGAN"/"DEBITUR") {MANDATORY}
+    response:
+      body:
+        type: text
+        data: "{\r
+
+          \    \"status\": 200\r
+
+          \    \"message\": \"message success\",\r
+
+          \    \"desc\": \"message success asd\",\r
+
+          }"
+  - name: validasi digitalsign status
+    request:
+      url: "{{base_url}}/v/2/digitalsign/proses-tandatangan"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MzEzMjg=
+            description: PrakarsaId (Encode Base64) {MANDATORY}
+          - name: continueType
+            value: DeBiTuR
+            description: ("PASANGAN"/"DEBITUR") {MANDATORY}
+    response:
+      body:
+        type: text
+        data: "{\r
+
+          \    \"status\": 500\r
+
+          \    \"message\": \"Status digitalsign tidak sesuai\",\r
+
+          \    \"desc\": \"Status digitalsign != ...\",\r
+
+          }"
+  - name: status prakarsa != 8
+    request:
+      url: "{{base_url}}/v/2/digitalsign/proses-tandatangan"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MzEzMjg=
+            description: PrakarsaId (Encode Base64) {MANDATORY}
+          - name: continueType
+            value: DeBiTuR
+            description: ("PASANGAN"/"DEBITUR") {MANDATORY}
+    response:
+      body:
+        type: text
+        data: "{\r
+
+          \    \"desc\": \"Status prakarsa != 8\",\r
+
+          \    \"message\": \"Status prakarsa tidak sesuai\",\r
+
+          \    \"status\": 500\r
+
+          }"
+  - name: general error
+    request:
+      url: "{{base_url}}/v/2/digitalsign/proses-tandatangan"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MzEzMjg=
+            description: PrakarsaId (Encode Base64) {MANDATORY}
+          - name: continueType
+            value: DEBITUR
+            description: ("PASANGAN"/"DEBITUR") {MANDATORY}
+    response:
+      body:
+        type: text
+        data: "{\r
+
+          \    \"status\": 500,\r
+
+          \    \"message\": \"Server sedang maintenance, silahkan coba beberapa saat lagi\",\r
+
+          \    \"desc\": \"Could not connect .....\",\r
+
+          \    \"data\" : null\r
+
+          }"
+  - name: unauthorized
+    request:
+      url: "{{base_url}}/v/2/digitalsign/proses-tandatangan"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MzEzMjg=
+            description: PrakarsaId (Encode Base64) {MANDATORY}
+          - name: continueType
+            value: DEBITUR
+            description: ("PASANGAN"/"DEBITUR") {MANDATORY}
+    response:
+      body:
+        type: text
+        data: "{\r
+
+          \    \"code\": 401,\r
+
+          \    \"message\": \"signature is invalid || Token is expired\"\r
+
+          }"

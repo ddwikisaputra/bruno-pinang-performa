@@ -1,0 +1,684 @@
+info:
+  name: Return Prakarsa Detail V2
+  type: http
+  seq: 10
+
+http:
+  method: POST
+  url: "{{base_url_prod}}/v/2/prakarsa/return-prakarsa-detail"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "{{userId}}"
+        description: "[Encode]Personal Number BRI Agro (UserID Login)"
+      - name: id
+        value: "4861"
+        description: ID Prakarsa
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: empty data
+    request:
+      url: "{{base_url}}/v/1/prakarsa/return-prakarsa-detail"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 07 Jun 2021 07:11:49 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Error record not found",
+              "message": "Prakarsa Tidak Ditemukan",
+              "status": 404
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{base_url}}/v/1/prakarsa/return-prakarsa-detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "820"
+            description: ID Prakarsa
+          - name: userId
+            value: "999951"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 19 Jul 2022 06:17:26 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/prakarsa/return-prakarsa-detail"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "820"
+            description: ID Prakarsa
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 07 Jun 2021 07:11:49 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data": null
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/prakarsa/return-prakarsa-detail"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 07 Jun 2021 07:11:49 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Tidak Memliki Akses",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/prakarsa/return-prakarsa-detail"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 07 Jun 2021 07:11:49 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: empty return list
+    request:
+      url: "{{base_url}}/v/1/prakarsa/return-prakarsa-detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "820"
+            description: ID Prakarsa
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx/1.20.1
+        - name: Date
+          value: Tue, 15 Mar 2022 05:13:49 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "1224"
+        - name: Connection
+          value: keep-alive
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "id": 820,
+                  "ktpNumber": "3171051211950001",
+                  "ktpDate": "1995-11-12",
+                  "name": "Dwiki Saputra",
+                  "placeOfBirth": "Jakarta",
+                  "birthDate": "1995-11-12",
+                  "motherMaidenName": "Rumiyati",
+                  "gender": "Laki-Laki",
+                  "religion": "Islam",
+                  "dependents": 1,
+                  "lastEducation": "S1 / D4",
+                  "maritalStatus": "Kawin",
+                  "familyRelationshipStatus": "Kepala Keluarga",
+                  "latitude": "-6.2864776",
+                  "longitude": "106.8257881",
+                  "address": "3, Jl. Taman Margasatwa Raya No.3, RW.11, Kemang, Ragunan, Kec. Ps. Minggu, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12550, Indonesia",
+                  "postalCode": "12550",
+                  "provinceCode": "03",
+                  "provinceName": "DKI Jakarta",
+                  "cityCode": "0394",
+                  "cityName": "Jakarta Selatan",
+                  "districtCode": "317404",
+                  "districtName": "Pasar Minggu",
+                  "villageCode": "3174041004",
+                  "villageName": "Ragunan",
+                  "rt": "002",
+                  "rw": "005",
+                  "email": "tes@gmail.com",
+                  "mobileNumber": "81319968865",
+                  "flagPrakarsa": 1,
+                  "flagUsaha": 1,
+                  "status": -6,
+                  "statusText": "Isi Analisa Pinjaman Dibatalkan AO",
+                  "cancelReason": "Batal Proses Pre-Screening",
+                  "partnerKtpNumber": "3171054208970002",
+                  "partnerName": "Mutia",
+                  "genderPartner": "Perempuan",
+                  "birthDatePartner": "1997-08-02",
+                  "placeOfBirthPartner": "Jakarta",
+                  "updatedAt": "08-03-2022",
+                  "returnedList": null
+              },
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/2/prakarsa/return-prakarsa-detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "31124"
+            description: ID Prakarsa
+          - name: userId
+            value: UmF5YVBpUGVyVG9w9FR0lGL8pX4HVf3uqQiRDzjmjOHjMQ==
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 03 Jan 2023 07:42:26 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "id": 1110,
+                  "ktpNumber": "UmF5YVBpUGVyVG9w/l59nmT4kkxrLmaOHO473cBwhGGFHcqULgSIfOqknZo=",
+                  "ktpDate": "2012-03-12",
+                  "name": "UmF5YVBpUGVyVG9wmwQjwzXt9AY6bDbNRZYbvF0FtFLZ04iTRoQGGR0=",
+                  "placeOfBirth": "Jakarta",
+                  "birthDate": "1994-06-28",
+                  "motherMaidenName": "Desiangrainy",
+                  "gender": "Perempuan",
+                  "religion": "Katolik",
+                  "dependents": 0,
+                  "lastEducation": "S1 / D4",
+                  "maritalStatus": "Belum Kawin",
+                  "familyRelationshipStatus": "Anak",
+                  "latitude": "-7.7815036",
+                  "longitude": "110.3794896",
+                  "address": "Jl. Prof. Herman Yohanes No.1207, Terban, Kec. Gondokusuman, Kota Yogyakarta, Daerah Istimewa Yogyakarta 55223, Indonesia",
+                  "postalCode": "55563",
+                  "provinceCode": "05",
+                  "provinceName": "D.I Yogyakarta",
+                  "cityCode": "0502",
+                  "cityName": "Kab. Sleman",
+                  "districtCode": "340403",
+                  "districtName": "Moyudan",
+                  "villageCode": "3404032004",
+                  "villageName": "Sumberarum",
+                  "rt": "002",
+                  "rw": "001",
+                  "email": "UmF5YVBpUGVyVG9wuwQjwzW5zQMyfXGIFJ5sgtsESIS1N/XpCGzaIpoKt8FfvW8zfBbC",
+                  "mobileNumber": "UmF5YVBpUGVyVG9w9Vh6mWP9nUVvL2YulIhFkTh8uEWq8dJ+eMNN",
+                  "flagPrakarsa": 1,
+                  "flagUsaha": 1,
+                  "status": 8,
+                  "statusText": "Proses Pencairan",
+                  "cancelReason": "",
+                  "partnerKtpNumber": "",
+                  "partnerName": "",
+                  "genderPartner": "",
+                  "birthDatePartner": "",
+                  "placeOfBirthPartner": "",
+                  "statusDigitalSign": 2,
+                  "isBypassDigitalSign": 0,
+                  "updatedAt": "13-10-2023",
+                  "returnedList": null,
+                  "prakarsaLog": [
+                      {
+                          "type": "prescreening-selesai",
+                          "date": "2023-10-12 15:15:25"
+                      },
+                      {
+                          "type": "kirim-putusan",
+                          "date": "2023-10-12 15:19:49"
+                      },
+                      {
+                          "type": "isi-analisa-pinjaman",
+                          "date": "2023-10-12 15:14:00"
+                      },
+                      {
+                          "type": "putusan-setuju-cbl",
+                          "date": "2023-10-12 15:25:29"
+                      },
+                      {
+                          "type": "putusan-nasabah-setuju",
+                          "date": "2023-10-12 15:27:16"
+                      },
+                      {
+                          "type": "akad-credit-setuju",
+                          "date": "2023-10-12 15:45:18"
+                      },
+                      {
+                          "type": "pencairan-berhasil",
+                          "date": "2023-10-13 08:20:58"
+                      }
+                  ],
+                  "returnedListAfterAkad": null
+              },
+              "desc": "Data Valid",
+              "message": "Data Ditemukan",
+              "status": 200
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/prakarsa/return-prakarsa-detail"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 07 Jun 2021 07:11:49 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/2/prakarsa/return-prakarsa-detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "31124"
+            description: ID Prakarsa
+          - name: userId
+            value: UmF5YVBpUGVyVG9w9FR0lGL8pX4HVf3uqQiRDzjmjOHjMQ==
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 03 Jan 2023 07:42:26 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "id": 1110,
+                  "ktpNumber": "UmF5YVBpUGVyVG9w/l59nmT4kkxrLmaOHO473cBwhGGFHcqULgSIfOqknZo=",
+                  "ktpDate": "2012-03-12",
+                  "name": "UmF5YVBpUGVyVG9wmwQjwzXt9AY6bDbNRZYbvF0FtFLZ04iTRoQGGR0=",
+                  "placeOfBirth": "Jakarta",
+                  "birthDate": "1994-06-28",
+                  "motherMaidenName": "Desiangrainy",
+                  "gender": "Perempuan",
+                  "religion": "Katolik",
+                  "dependents": 0,
+                  "lastEducation": "S1 / D4",
+                  "maritalStatus": "Belum Kawin",
+                  "familyRelationshipStatus": "Anak",
+                  "latitude": "-7.7815036",
+                  "longitude": "110.3794896",
+                  "address": "Jl. Prof. Herman Yohanes No.1207, Terban, Kec. Gondokusuman, Kota Yogyakarta, Daerah Istimewa Yogyakarta 55223, Indonesia",
+                  "postalCode": "55563",
+                  "provinceCode": "05",
+                  "provinceName": "D.I Yogyakarta",
+                  "cityCode": "0502",
+                  "cityName": "Kab. Sleman",
+                  "districtCode": "340403",
+                  "districtName": "Moyudan",
+                  "villageCode": "3404032004",
+                  "villageName": "Sumberarum",
+                  "rt": "002",
+                  "rw": "001",
+                  "email": "UmF5YVBpUGVyVG9wuwQjwzW5zQMyfXGIFJ5sgtsESIS1N/XpCGzaIpoKt8FfvW8zfBbC",
+                  "mobileNumber": "UmF5YVBpUGVyVG9w9Vh6mWP9nUVvL2YulIhFkTh8uEWq8dJ+eMNN",
+                  "flagPrakarsa": 1,
+                  "flagUsaha": 1,
+                  "status": 8,
+                  "statusText": "Proses Pencairan",
+                  "cancelReason": "",
+                  "partnerKtpNumber": "",
+                  "partnerName": "",
+                  "genderPartner": "",
+                  "birthDatePartner": "",
+                  "placeOfBirthPartner": "",
+                  "statusDigitalSign": 2,
+                  "isBypassDigitalSign": 0,
+                  "updatedAt": "13-10-2023",
+                  "returnedList": null,
+                  "prakarsaLog": [
+                      {
+                          "type": "prescreening-selesai",
+                          "date": "2023-10-12 15:15:25"
+                      },
+                      {
+                          "type": "kirim-putusan",
+                          "date": "2023-10-12 15:19:49"
+                      },
+                      {
+                          "type": "isi-analisa-pinjaman",
+                          "date": "2023-10-12 15:14:00"
+                      },
+                      {
+                          "type": "putusan-setuju-cbl",
+                          "date": "2023-10-12 15:25:29"
+                      },
+                      {
+                          "type": "putusan-nasabah-setuju",
+                          "date": "2023-10-12 15:27:16"
+                      },
+                      {
+                          "type": "akad-credit-setuju",
+                          "date": "2023-10-12 15:45:18"
+                      },
+                      {
+                          "type": "pencairan-berhasil",
+                          "date": "2023-10-13 08:20:58"
+                      }
+                  ],
+                  "returnedListAfterAkad": null
+              },
+              "desc": "Data Valid",
+              "message": "Data Ditemukan",
+              "status": 200
+          }
+  - name: empty data
+    request:
+      url: "{{base_url}}/v/1/prakarsa/return-prakarsa-detail"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 07 Jun 2021 07:11:49 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Error record not found",
+              "message": "Prakarsa Tidak Ditemukan",
+              "status": 404
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{base_url}}/v/1/prakarsa/return-prakarsa-detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "820"
+            description: ID Prakarsa
+          - name: userId
+            value: "999951"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 19 Jul 2022 06:17:26 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/prakarsa/return-prakarsa-detail"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "820"
+            description: ID Prakarsa
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 07 Jun 2021 07:11:49 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data": null
+          }
+  - name: empty return list
+    request:
+      url: "{{base_url}}/v/1/prakarsa/return-prakarsa-detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "820"
+            description: ID Prakarsa
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx/1.20.1
+        - name: Date
+          value: Tue, 15 Mar 2022 05:13:49 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "1224"
+        - name: Connection
+          value: keep-alive
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "id": 820,
+                  "ktpNumber": "3171051211950001",
+                  "ktpDate": "1995-11-12",
+                  "name": "Dwiki Saputra",
+                  "placeOfBirth": "Jakarta",
+                  "birthDate": "1995-11-12",
+                  "motherMaidenName": "Rumiyati",
+                  "gender": "Laki-Laki",
+                  "religion": "Islam",
+                  "dependents": 1,
+                  "lastEducation": "S1 / D4",
+                  "maritalStatus": "Kawin",
+                  "familyRelationshipStatus": "Kepala Keluarga",
+                  "latitude": "-6.2864776",
+                  "longitude": "106.8257881",
+                  "address": "3, Jl. Taman Margasatwa Raya No.3, RW.11, Kemang, Ragunan, Kec. Ps. Minggu, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12550, Indonesia",
+                  "postalCode": "12550",
+                  "provinceCode": "03",
+                  "provinceName": "DKI Jakarta",
+                  "cityCode": "0394",
+                  "cityName": "Jakarta Selatan",
+                  "districtCode": "317404",
+                  "districtName": "Pasar Minggu",
+                  "villageCode": "3174041004",
+                  "villageName": "Ragunan",
+                  "rt": "002",
+                  "rw": "005",
+                  "email": "tes@gmail.com",
+                  "mobileNumber": "81319968865",
+                  "flagPrakarsa": 1,
+                  "flagUsaha": 1,
+                  "status": -6,
+                  "statusText": "Isi Analisa Pinjaman Dibatalkan AO",
+                  "cancelReason": "Batal Proses Pre-Screening",
+                  "partnerKtpNumber": "3171054208970002",
+                  "partnerName": "Mutia",
+                  "genderPartner": "Perempuan",
+                  "birthDatePartner": "1997-08-02",
+                  "placeOfBirthPartner": "Jakarta",
+                  "updatedAt": "08-03-2022",
+                  "returnedList": null
+              },
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/prakarsa/return-prakarsa-detail"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 07 Jun 2021 07:11:49 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Tidak Memliki Akses",
+              "message": "Invalid Token || Token Is Expired"
+          }

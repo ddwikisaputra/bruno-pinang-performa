@@ -1,0 +1,468 @@
+info:
+  name: Jenis Pekerjaan
+  type: http
+  seq: 5
+
+http:
+  method: GET
+  url: "{{base_url}}/raya/data-master/jenis-pekerjaan"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: success
+    request:
+      url: "{{base_url}}/raya/data-master/jenis-pekerjaan"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Mon, 02 Jun 2025 02:29:34 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Origin
+        - name: Vary
+          value: Origin
+        - name: Vary
+          value: Access-Control-Request-Method
+        - name: Vary
+          value: Access-Control-Request-Headers
+        - name: X-Krakend
+          value: Version 2.7.2
+        - name: X-Krakend-Completed
+          value: "false"
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+        - name: Access-Control-Allow-Origin
+          value: "*"
+        - name: X-Kong-Upstream-Latency
+          value: "151"
+        - name: X-Kong-Proxy-Latency
+          value: "15"
+        - name: Via
+          value: kong/3.3.1
+      body:
+        type: json
+        data: |-
+          {
+              "ResponseCode": "00",
+              "ResponseDesc": "Sukses",
+              "Data": [
+                  {
+                      "ItemValue": "D0",
+                      "ItemText": "TIDAK TERDEFINISI"
+                  },
+                  {
+                      "ItemValue": "D1",
+                      "ItemText": "BELUM/TIDAK BEKERJA"
+                  },
+                  {
+                      "ItemValue": "D10",
+                      "ItemText": "PETERNAK"
+                  },
+                  {
+                      "ItemValue": "D100",
+                      "ItemText": "ANGGOTA PARPOL"
+                  },
+                  {
+                      "ItemValue": "D11",
+                      "ItemText": "NELAYAN/PERIKANAN"
+                  },
+                  {
+                      "ItemValue": "D12",
+                      "ItemText": "INDUSTRI"
+                  },
+                  {
+                      "ItemValue": "D13",
+                      "ItemText": "KONSTRUKSI"
+                  },
+                  {
+                      "ItemValue": "D14",
+                      "ItemText": "TRANSPORTASI"
+                  },
+                  {
+                      "ItemValue": "D15",
+                      "ItemText": "KARYAWAN SWASTA"
+                  },
+                  {
+                      "ItemValue": "D16",
+                      "ItemText": "KARYAWAN BUMN"
+                  },
+                  {
+                      "ItemValue": "D17",
+                      "ItemText": "KARYAWAN BUMD"
+                  },
+                  {
+                      "ItemValue": "D18",
+                      "ItemText": "KARYAWAN HONORER"
+                  },
+                  {
+                      "ItemValue": "D19",
+                      "ItemText": "BURUH HARIAN LEPAS"
+                  },
+                  {
+                      "ItemValue": "D2",
+                      "ItemText": "MENGURUS RUMAH TANGGA"
+                  },
+                  {
+                      "ItemValue": "D20",
+                      "ItemText": "BURUH TANI/PERKEBUNAN"
+                  },
+                  {
+                      "ItemValue": "D21",
+                      "ItemText": "BURUH NELAYAN/PERIKANAN"
+                  },
+                  {
+                      "ItemValue": "D22",
+                      "ItemText": "BURUH PETERNAKAN"
+                  },
+                  {
+                      "ItemValue": "D23",
+                      "ItemText": "PEMBANTU RUMAH TANGGA"
+                  },
+                  {
+                      "ItemValue": "D24",
+                      "ItemText": "TUKANG CUKUR"
+                  },
+                  {
+                      "ItemValue": "D25",
+                      "ItemText": "TUKANG LISTRIK"
+                  },
+                  {
+                      "ItemValue": "D26",
+                      "ItemText": "TUKANG BATU"
+                  },
+                  {
+                      "ItemValue": "D27",
+                      "ItemText": "TUKANG KAYU"
+                  },
+                  {
+                      "ItemValue": "D28",
+                      "ItemText": "TUKANG SOL SEPATU"
+                  },
+                  {
+                      "ItemValue": "D29",
+                      "ItemText": "TUKANG LAS/PANDAI BESI"
+                  },
+                  {
+                      "ItemValue": "D3",
+                      "ItemText": "PELAJAR/MAHASISWA"
+                  },
+                  {
+                      "ItemValue": "D30",
+                      "ItemText": "TUKANG JAHIT"
+                  },
+                  {
+                      "ItemValue": "D31",
+                      "ItemText": "TUKANG GIGI"
+                  },
+                  {
+                      "ItemValue": "D32",
+                      "ItemText": "PENATA RIAS"
+                  },
+                  {
+                      "ItemValue": "D33",
+                      "ItemText": "PENATA BUSANA"
+                  },
+                  {
+                      "ItemValue": "D34",
+                      "ItemText": "PENATA RAMBUT"
+                  },
+                  {
+                      "ItemValue": "D35",
+                      "ItemText": "MEKANIK"
+                  },
+                  {
+                      "ItemValue": "D36",
+                      "ItemText": "SENIMAN"
+                  },
+                  {
+                      "ItemValue": "D37",
+                      "ItemText": "TABIB"
+                  },
+                  {
+                      "ItemValue": "D38",
+                      "ItemText": "PARAJI"
+                  },
+                  {
+                      "ItemValue": "D39",
+                      "ItemText": "PERANCANG BUSANA"
+                  },
+                  {
+                      "ItemValue": "D4",
+                      "ItemText": "PENSIUNAN"
+                  },
+                  {
+                      "ItemValue": "D40",
+                      "ItemText": "PENTERJEMAH"
+                  },
+                  {
+                      "ItemValue": "D41",
+                      "ItemText": "IMAM MASJID"
+                  },
+                  {
+                      "ItemValue": "D42",
+                      "ItemText": "PENDETA"
+                  },
+                  {
+                      "ItemValue": "D43",
+                      "ItemText": "PASTOR"
+                  },
+                  {
+                      "ItemValue": "D44",
+                      "ItemText": "WARTAWAN"
+                  },
+                  {
+                      "ItemValue": "D45",
+                      "ItemText": "USTADZ/MUBALIGH"
+                  },
+                  {
+                      "ItemValue": "D46",
+                      "ItemText": "JURU MASAK"
+                  },
+                  {
+                      "ItemValue": "D47",
+                      "ItemText": "PROMOTOR ACARA"
+                  },
+                  {
+                      "ItemValue": "D48",
+                      "ItemText": "ANGGOTA DPR RI"
+                  },
+                  {
+                      "ItemValue": "D49",
+                      "ItemText": "ANGGOTA DPD"
+                  },
+                  {
+                      "ItemValue": "D5",
+                      "ItemText": "PEGAWAI NEGERI SIPIL (PNS)"
+                  },
+                  {
+                      "ItemValue": "D50",
+                      "ItemText": "ANGGOTA BPK"
+                  },
+                  {
+                      "ItemValue": "D51",
+                      "ItemText": "PRESIDEN"
+                  },
+                  {
+                      "ItemValue": "D52",
+                      "ItemText": "WAKIL PRESIDEN"
+                  },
+                  {
+                      "ItemValue": "D53",
+                      "ItemText": "ANGGOTA MAHKAMAH KONSTITUSI"
+                  },
+                  {
+                      "ItemValue": "D54",
+                      "ItemText": "ANGGOTA KABINET KEMENTRIAN"
+                  },
+                  {
+                      "ItemValue": "D55",
+                      "ItemText": "DUTA BESAR"
+                  },
+                  {
+                      "ItemValue": "D56",
+                      "ItemText": "GUBERNUR"
+                  },
+                  {
+                      "ItemValue": "D57",
+                      "ItemText": "WAKIL GUBERNUR"
+                  },
+                  {
+                      "ItemValue": "D58",
+                      "ItemText": "BUPATI"
+                  },
+                  {
+                      "ItemValue": "D59",
+                      "ItemText": "WAKIL BUPATI"
+                  },
+                  {
+                      "ItemValue": "D6",
+                      "ItemText": "TENTARA NASIONAL INDONESIA (TNI)"
+                  },
+                  {
+                      "ItemValue": "D60",
+                      "ItemText": "WALIKOTA"
+                  },
+                  {
+                      "ItemValue": "D61",
+                      "ItemText": "WAKIL WALIKOTA"
+                  },
+                  {
+                      "ItemValue": "D62",
+                      "ItemText": "ANGGOTA DPRD PROP."
+                  },
+                  {
+                      "ItemValue": "D63",
+                      "ItemText": "ANGGOTA DPRD KAB."
+                  },
+                  {
+                      "ItemValue": "D64",
+                      "ItemText": "DOSEN"
+                  },
+                  {
+                      "ItemValue": "D65",
+                      "ItemText": "GURU"
+                  },
+                  {
+                      "ItemValue": "D66",
+                      "ItemText": "PILOT"
+                  },
+                  {
+                      "ItemValue": "D67",
+                      "ItemText": "PENGACARA"
+                  },
+                  {
+                      "ItemValue": "D68",
+                      "ItemText": "NOTARIS"
+                  },
+                  {
+                      "ItemValue": "D69",
+                      "ItemText": "ARSITEK"
+                  },
+                  {
+                      "ItemValue": "D7",
+                      "ItemText": "KEPOLISIAN RI (POLRI)"
+                  },
+                  {
+                      "ItemValue": "D70",
+                      "ItemText": "AKUNTAN"
+                  },
+                  {
+                      "ItemValue": "D71",
+                      "ItemText": "KONSULTAN"
+                  },
+                  {
+                      "ItemValue": "D72",
+                      "ItemText": "DOKTER"
+                  },
+                  {
+                      "ItemValue": "D73",
+                      "ItemText": "BIDAN"
+                  },
+                  {
+                      "ItemValue": "D74",
+                      "ItemText": "PERAWAT"
+                  },
+                  {
+                      "ItemValue": "D75",
+                      "ItemText": "APOTEKER"
+                  },
+                  {
+                      "ItemValue": "D76",
+                      "ItemText": "PSIKIATER/PSIKOLOG"
+                  },
+                  {
+                      "ItemValue": "D77",
+                      "ItemText": "PENYIAR TELEVISI"
+                  },
+                  {
+                      "ItemValue": "D78",
+                      "ItemText": "PENYIAR RADIO"
+                  },
+                  {
+                      "ItemValue": "D79",
+                      "ItemText": "PELAUT"
+                  },
+                  {
+                      "ItemValue": "D8",
+                      "ItemText": "PERDAGANGAN"
+                  },
+                  {
+                      "ItemValue": "D80",
+                      "ItemText": "PENELITI"
+                  },
+                  {
+                      "ItemValue": "D81",
+                      "ItemText": "SOPIR"
+                  },
+                  {
+                      "ItemValue": "D82",
+                      "ItemText": "PIALANG"
+                  },
+                  {
+                      "ItemValue": "D83",
+                      "ItemText": "PARANORMAL"
+                  },
+                  {
+                      "ItemValue": "D84",
+                      "ItemText": "PEDAGANG"
+                  },
+                  {
+                      "ItemValue": "D85",
+                      "ItemText": "PERANGKAT DESA"
+                  },
+                  {
+                      "ItemValue": "D86",
+                      "ItemText": "KEPALA DESA"
+                  },
+                  {
+                      "ItemValue": "D87",
+                      "ItemText": "BIARAWATI"
+                  },
+                  {
+                      "ItemValue": "D88",
+                      "ItemText": "WIRASWASTA"
+                  },
+                  {
+                      "ItemValue": "D89",
+                      "ItemText": "ANGGOTA LEMBAGA TINGGI LAINNYA"
+                  },
+                  {
+                      "ItemValue": "D9",
+                      "ItemText": "PETANI/PEKEBUN"
+                  },
+                  {
+                      "ItemValue": "D90",
+                      "ItemText": "ARTIS"
+                  },
+                  {
+                      "ItemValue": "D91",
+                      "ItemText": "ATLIT"
+                  },
+                  {
+                      "ItemValue": "D92",
+                      "ItemText": "CHEF"
+                  },
+                  {
+                      "ItemValue": "D93",
+                      "ItemText": "MANAGER"
+                  },
+                  {
+                      "ItemValue": "D94",
+                      "ItemText": "TENAGA TATA USAHA"
+                  },
+                  {
+                      "ItemValue": "D95",
+                      "ItemText": "OPERATOR"
+                  },
+                  {
+                      "ItemValue": "D96",
+                      "ItemText": "PEKERJA PENGOLAHAN,KERAJINAN"
+                  },
+                  {
+                      "ItemValue": "D97",
+                      "ItemText": "TEKNISI"
+                  },
+                  {
+                      "ItemValue": "D98",
+                      "ItemText": "ASISTEN AHLI"
+                  },
+                  {
+                      "ItemValue": "D99",
+                      "ItemText": "PEKERJAAN LAINNYA"
+                  }
+              ]
+          }

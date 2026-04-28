@@ -1,0 +1,552 @@
+info:
+  name: Monitoring RM
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{base_url}}/v/2/monitoring/kupedes-brilink"
+  body:
+    type: form-urlencoded
+    data:
+      - name: personalNumber[]
+        value: "999914"
+      - name: personalNumber[]
+        value: "999915"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: invalid parameter
+    request:
+      url: "{{base_url}}/v/2/monitoring/kupedes-brilink"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: personalNumber[]
+            value: "999914"
+            disabled: true
+          - name: personalNumber[]
+            value: "999915"
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 03 Aug 2023 01:41:07 GMT
+        - name: Content-Length
+          value: "98"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Parameter personalNumber[] kosong",
+              "message": "Parameter tidak boleh kosong",
+              "status": 400
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/2/monitoring/kupedes-brilink"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: personalNumber[]
+            value: "999914"
+          - name: personalNumber[]
+            value: "999915"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 03 Aug 2023 01:42:11 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "data": [
+                  {
+                      "personalNumber": "999914",
+                      "name": "Tiara Julianti",
+                      "branchCode": "0020",
+                      "organization": "Pinang Mikro",
+                      "dataPrakarsaKupedes": [
+                          {
+                              "prakarsaId": 31258,
+                              "prakarsaName": "Supini",
+                              "prakarsaKtp": "3519064201820003",
+                              "loanAmount": 126000000,
+                              "status": 7,
+                              "statusText": "PROSES AKAD KREDIT",
+                              "createdAt": "2023-08-03",
+                              "updatedAt": "2023-07-27",
+                              "facilityType": "Performa Brilink",
+                              "totalLoanRepayment": 161910330
+                          },
+                          {
+                              "prakarsaId": 31351,
+                              "prakarsaName": "ANDIKA APRIANTO PUTRA",
+                              "prakarsaKtp": "3201371611930001",
+                              "loanAmount": 114500000,
+                              "status": 7,
+                              "statusText": "PROSES AKAD KREDIT",
+                              "createdAt": "2023-08-26",
+                              "updatedAt": "2023-07-27",
+                              "facilityType": "Performa Brilink",
+                              "totalLoanRepayment": 119346628
+                          },
+                          {
+                              "prakarsaId": 31355,
+                              "prakarsaName": "Fitriani Hamy",
+                              "prakarsaKtp": "5171044512020003",
+                              "loanAmount": 10000000,
+                              "status": 5,
+                              "statusText": "MENUNGGU PUTUSAN UKER",
+                              "createdAt": "2023-08-31",
+                              "updatedAt": "2023-08-01",
+                              "facilityType": "Performa Brilink",
+                              "totalLoanRepayment": 11845530
+                          }
+                      ],
+                      "totalStatusSummary": {
+                          "inputPrescreeningProcess": 0,
+                          "waitingPrescreeningResult": 0,
+                          "prescreeningError": 0,
+                          "prescreeningRejected": 0,
+                          "prescreeningRejectedByAO": 0,
+                          "prescreeningApproved": 0,
+                          "inputCRSProcess": 0,
+                          "laonAnalysisRejectedByAO": 0,
+                          "waitingBranchDecision": 1,
+                          "waitingRBODecision": 0,
+                          "prakarsaRejected": 0,
+                          "prakarsaRejectedByRBO": 0,
+                          "prakarsaApprovedAskForCustomerApproval": 0,
+                          "prakarsaRejectedByCustomer": 0,
+                          "creditAgreementProcess": 2,
+                          "disbursementProcess": 0,
+                          "disbursementSuccess": 0
+                      }
+                  },
+                  {
+                      "personalNumber": "999915",
+                      "name": "Kang Tae-Mo",
+                      "branchCode": "0020",
+                      "organization": "Pinang Mikro",
+                      "dataPrakarsaKupedes": [
+                          {
+                              "prakarsaId": 31353,
+                              "prakarsaName": "Harry Pamungkas",
+                              "prakarsaKtp": "3276091711000001",
+                              "loanAmount": 90000000,
+                              "status": 8,
+                              "statusText": "PROSES PENCAIRAN",
+                              "createdAt": "2023-08-31",
+                              "updatedAt": "2023-08-01",
+                              "facilityType": "Performa Brilink",
+                              "totalLoanRepayment": 113822800
+                          },
+                          {
+                              "prakarsaId": 31337,
+                              "prakarsaName": "Ramala",
+                              "prakarsaKtp": "8648764876818986",
+                              "loanAmount": 93000000,
+                              "status": 8,
+                              "statusText": "PROSES PENCAIRAN",
+                              "createdAt": "2023-08-05",
+                              "updatedAt": "2023-07-28",
+                              "facilityType": "Performa Brilink",
+                              "totalLoanRepayment": 104567724
+                          }
+                      ],
+                      "totalStatusSummary": {
+                          "inputPrescreeningProcess": 0,
+                          "waitingPrescreeningResult": 0,
+                          "prescreeningError": 0,
+                          "prescreeningRejected": 0,
+                          "prescreeningRejectedByAO": 0,
+                          "prescreeningApproved": 0,
+                          "inputCRSProcess": 0,
+                          "laonAnalysisRejectedByAO": 0,
+                          "waitingBranchDecision": 0,
+                          "waitingRBODecision": 0,
+                          "prakarsaRejected": 0,
+                          "prakarsaRejectedByRBO": 0,
+                          "prakarsaApprovedAskForCustomerApproval": 0,
+                          "prakarsaRejectedByCustomer": 0,
+                          "creditAgreementProcess": 0,
+                          "disbursementProcess": 2,
+                          "disbursementSuccess": 0
+                      }
+                  }
+              ],
+              "desc": "sukses",
+              "message": "Data Ditemukan",
+              "status": "200"
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/2/monitoring/kupedes-brilink"
+      method: POST
+      body:
+        type: form-urlencoded
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/2/monitoring/kupedes-brilink"
+      method: POST
+      body:
+        type: form-urlencoded
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Sat, 22 May 2021 06:53:21 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Accept-Encoding
+        - name: Content-Encoding
+          value: gzip
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data" : null
+          }
+  - name: empty data
+    request:
+      url: "{{base_url}}/v/2/monitoring/kupedes-brilink"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: MzEzMjg=
+            description: Nomor KTP Debitur (Encode Base64) {MANDATORY}
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Sat, 22 May 2021 06:53:21 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Accept-Encoding
+        - name: Content-Encoding
+          value: gzip
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Error Record Not Found",
+              "message": "Data Tidak Ditemukan",
+              "status": 404
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/2/monitoring/kupedes-brilink"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: personalNumber[]
+            value: "999914"
+          - name: personalNumber[]
+            value: "999915"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 03 Aug 2023 01:42:11 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "data": [
+                  {
+                      "personalNumber": "999914",
+                      "name": "Tiara Julianti",
+                      "branchCode": "0020",
+                      "organization": "Pinang Mikro",
+                      "dataPrakarsaKupedes": [
+                          {
+                              "prakarsaId": 31258,
+                              "prakarsaName": "Supini",
+                              "prakarsaKtp": "3519064201820003",
+                              "loanAmount": 126000000,
+                              "status": 7,
+                              "statusText": "PROSES AKAD KREDIT",
+                              "createdAt": "2023-08-03",
+                              "updatedAt": "2023-07-27",
+                              "facilityType": "Performa Brilink",
+                              "totalLoanRepayment": 161910330
+                          },
+                          {
+                              "prakarsaId": 31351,
+                              "prakarsaName": "ANDIKA APRIANTO PUTRA",
+                              "prakarsaKtp": "3201371611930001",
+                              "loanAmount": 114500000,
+                              "status": 7,
+                              "statusText": "PROSES AKAD KREDIT",
+                              "createdAt": "2023-08-26",
+                              "updatedAt": "2023-07-27",
+                              "facilityType": "Performa Brilink",
+                              "totalLoanRepayment": 119346628
+                          },
+                          {
+                              "prakarsaId": 31355,
+                              "prakarsaName": "Fitriani Hamy",
+                              "prakarsaKtp": "5171044512020003",
+                              "loanAmount": 10000000,
+                              "status": 5,
+                              "statusText": "MENUNGGU PUTUSAN UKER",
+                              "createdAt": "2023-08-31",
+                              "updatedAt": "2023-08-01",
+                              "facilityType": "Performa Brilink",
+                              "totalLoanRepayment": 11845530
+                          }
+                      ],
+                      "totalStatusSummary": {
+                          "inputPrescreeningProcess": 0,
+                          "waitingPrescreeningResult": 0,
+                          "prescreeningError": 0,
+                          "prescreeningRejected": 0,
+                          "prescreeningRejectedByAO": 0,
+                          "prescreeningApproved": 0,
+                          "inputCRSProcess": 0,
+                          "laonAnalysisRejectedByAO": 0,
+                          "waitingBranchDecision": 1,
+                          "waitingRBODecision": 0,
+                          "prakarsaRejected": 0,
+                          "prakarsaRejectedByRBO": 0,
+                          "prakarsaApprovedAskForCustomerApproval": 0,
+                          "prakarsaRejectedByCustomer": 0,
+                          "creditAgreementProcess": 2,
+                          "disbursementProcess": 0,
+                          "disbursementSuccess": 0
+                      }
+                  },
+                  {
+                      "personalNumber": "999915",
+                      "name": "Kang Tae-Mo",
+                      "branchCode": "0020",
+                      "organization": "Pinang Mikro",
+                      "dataPrakarsaKupedes": [
+                          {
+                              "prakarsaId": 31353,
+                              "prakarsaName": "Harry Pamungkas",
+                              "prakarsaKtp": "3276091711000001",
+                              "loanAmount": 90000000,
+                              "status": 8,
+                              "statusText": "PROSES PENCAIRAN",
+                              "createdAt": "2023-08-31",
+                              "updatedAt": "2023-08-01",
+                              "facilityType": "Performa Brilink",
+                              "totalLoanRepayment": 113822800
+                          },
+                          {
+                              "prakarsaId": 31337,
+                              "prakarsaName": "Ramala",
+                              "prakarsaKtp": "8648764876818986",
+                              "loanAmount": 93000000,
+                              "status": 8,
+                              "statusText": "PROSES PENCAIRAN",
+                              "createdAt": "2023-08-05",
+                              "updatedAt": "2023-07-28",
+                              "facilityType": "Performa Brilink",
+                              "totalLoanRepayment": 104567724
+                          }
+                      ],
+                      "totalStatusSummary": {
+                          "inputPrescreeningProcess": 0,
+                          "waitingPrescreeningResult": 0,
+                          "prescreeningError": 0,
+                          "prescreeningRejected": 0,
+                          "prescreeningRejectedByAO": 0,
+                          "prescreeningApproved": 0,
+                          "inputCRSProcess": 0,
+                          "laonAnalysisRejectedByAO": 0,
+                          "waitingBranchDecision": 0,
+                          "waitingRBODecision": 0,
+                          "prakarsaRejected": 0,
+                          "prakarsaRejectedByRBO": 0,
+                          "prakarsaApprovedAskForCustomerApproval": 0,
+                          "prakarsaRejectedByCustomer": 0,
+                          "creditAgreementProcess": 0,
+                          "disbursementProcess": 2,
+                          "disbursementSuccess": 0
+                      }
+                  }
+              ],
+              "desc": "sukses",
+              "message": "Data Ditemukan",
+              "status": "200"
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/2/monitoring/kupedes-brilink"
+      method: POST
+      body:
+        type: form-urlencoded
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: empty data
+    request:
+      url: "{{base_url}}/v/2/monitoring/kupedes-brilink"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: MzEzMjg=
+            description: Nomor KTP Debitur (Encode Base64) {MANDATORY}
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Sat, 22 May 2021 06:53:21 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Accept-Encoding
+        - name: Content-Encoding
+          value: gzip
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Error Record Not Found",
+              "message": "Data Tidak Ditemukan",
+              "status": 404
+          }
+  - name: invalid parameter
+    request:
+      url: "{{base_url}}/v/2/monitoring/kupedes-brilink"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: personalNumber[]
+            value: "999914"
+            disabled: true
+          - name: personalNumber[]
+            value: "999915"
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 03 Aug 2023 01:41:07 GMT
+        - name: Content-Length
+          value: "98"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Parameter personalNumber[] kosong",
+              "message": "Parameter tidak boleh kosong",
+              "status": 400
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/2/monitoring/kupedes-brilink"
+      method: POST
+      body:
+        type: form-urlencoded
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Sat, 22 May 2021 06:53:21 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Accept-Encoding
+        - name: Content-Encoding
+          value: gzip
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data" : null
+          }

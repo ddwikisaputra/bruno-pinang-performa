@@ -1,0 +1,311 @@
+info:
+  name: Employee CBL By ADK V1
+  type: http
+  seq: 10
+
+http:
+  method: GET
+  url: "{{base_url}}/v/1/master/find-cbl-by-adk/001207"
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/master/find-cbl-by-adk/{{personalNumber}}"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: text/plain
+        - name: Date
+          value: Thu, 29 Jul 2021 06:58:15 GMT
+        - name: Content-Length
+          value: "18"
+      body:
+        type: text
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data": null
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/master/find-cbl-by-adk/{{personalNumber}}"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 29 Jul 2021 07:02:04 GMT
+        - name: Content-Length
+          value: "294"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "personalNumber": "999931",
+                  "name": "Shigeo Tokuda",
+                  "branchCode": "9999",
+                  "branchAddress": "BRI Agro State Building South Wakanda",
+                  "organizationId": "9999",
+                  "organization": "Pinang Mikro",
+                  "position": "CBL",
+                  "foto": ""
+              },
+              "desc": "Branch Found",
+              "message": "Data branch berhasil ditemukan",
+              "status": 200
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/master/find-cbl-by-adk/{{personalNumber}}"
+      method: GET
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 29 Jul 2021 06:55:54 GMT
+        - name: Content-Length
+          value: "294"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: error empty employee mapping
+    request:
+      url: "{{base_url}}/v/1/master/find-cbl-by-adk/-1"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 29 Jul 2021 06:59:18 GMT
+        - name: Content-Length
+          value: "101"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Error record not found",
+              "message": "Maaf, data CBL tidak ditemukan",
+              "status": 500
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/master/find-cbl-by-adk/{{personalNumber}}"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 29 Jul 2021 06:55:54 GMT
+        - name: Content-Length
+          value: "294"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: error empty personal number CBL
+    request:
+      url: "{{base_url}}/v/1/master/find-cbl-by-adk/{{personalNumber}}"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 29 Jul 2021 06:59:18 GMT
+        - name: Content-Length
+          value: "101"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Personal number empty",
+              "message": "Maaf, data CBL tidak ditemukan",
+              "status": 500
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/master/find-cbl-by-adk/{{personalNumber}}"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 29 Jul 2021 06:55:54 GMT
+        - name: Content-Length
+          value: "294"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: error empty employee mapping
+    request:
+      url: "{{base_url}}/v/1/master/find-cbl-by-adk/-1"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 29 Jul 2021 06:59:18 GMT
+        - name: Content-Length
+          value: "101"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Error record not found",
+              "message": "Maaf, data CBL tidak ditemukan",
+              "status": 500
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/master/find-cbl-by-adk/{{personalNumber}}"
+      method: GET
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 29 Jul 2021 06:55:54 GMT
+        - name: Content-Length
+          value: "294"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: error empty personal number CBL
+    request:
+      url: "{{base_url}}/v/1/master/find-cbl-by-adk/{{personalNumber}}"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 29 Jul 2021 06:59:18 GMT
+        - name: Content-Length
+          value: "101"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Personal number empty",
+              "message": "Maaf, data CBL tidak ditemukan",
+              "status": 500
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/master/find-cbl-by-adk/{{personalNumber}}"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: text/plain
+        - name: Date
+          value: Thu, 29 Jul 2021 06:58:15 GMT
+        - name: Content-Length
+          value: "18"
+      body:
+        type: text
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data": null
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/master/find-cbl-by-adk/{{personalNumber}}"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 29 Jul 2021 07:02:04 GMT
+        - name: Content-Length
+          value: "294"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "personalNumber": "999931",
+                  "name": "Shigeo Tokuda",
+                  "branchCode": "9999",
+                  "branchAddress": "BRI Agro State Building South Wakanda",
+                  "organizationId": "9999",
+                  "organization": "Pinang Mikro",
+                  "position": "CBL",
+                  "foto": ""
+              },
+              "desc": "Branch Found",
+              "message": "Data branch berhasil ditemukan",
+              "status": 200
+          }

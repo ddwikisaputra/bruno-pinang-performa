@@ -1,0 +1,57 @@
+meta {
+  name: Create Loan Performa
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{BASE_URL}}/v1/loan/performa/manage
+  body: json
+  auth: none
+}
+
+headers {
+  Jagat-Raya-API-Key: {{API_KEY_PERFORMA}}
+}
+
+body:json {
+  {
+      "payload": "{{REQUEST_BODY}}"
+  }
+}
+
+script:pre-request {
+  const payload = {
+      "loan_number": "001001008019100",
+      "account_nik": "1938475829384771",
+      "account_name": "I Made Wirawan",
+      "account_address": "Bali, Denpasar",
+      "account_dob": "1982-03-17",
+      "account_gender": "Laki-laki",
+      "credit_usage": "MODAL USAHA",
+      "credit_plafond": 42000000,
+      "guarantee_amount": 43050000,
+      "business_type": "Asosiasi Sepak Bola Lokal",
+      "interest_rate": 0.009,
+      "period_amount": 42,
+      "realization_date": "2022-09-15",
+      "due_date": "2025-09-15",
+      "collateral_type": "SKSD",
+      "collateral_amount": 11,
+      "employee_count": 10,
+      "guarantee_type": 1,
+      "ijp": 1050000,
+      "insurance_type": "BRI - ASURANSI",
+      "facility_type": "KMK",
+      "branch_id": "0020",
+      "documents": null
+  }
+  
+  const result = globalThis.encrypt(JSON.stringify(payload))
+  bru.setEnvVar("REQUEST_BODY", result);
+  
+}
+
+settings {
+  encodeUrl: true
+}

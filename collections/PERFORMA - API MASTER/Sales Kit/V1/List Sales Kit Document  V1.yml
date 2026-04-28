@@ -1,0 +1,430 @@
+info:
+  name: List Sales Kit Document  V1
+  type: http
+  seq: 5
+
+http:
+  method: POST
+  url: "{{url-prod}}/v/1/master/saleskit-document-list"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "001317"
+        description: User ID Login/ PN { MANDATORY }
+      - name: textSearch
+        value: dw
+        description: Text Pencarian Data { OPTIONAL }
+        disabled: true
+      - name: startIndex
+        value: "0"
+        description: Offset Data {Default 0} { MANDATORY }
+      - name: recordCount
+        value: "5"
+        description: Limit Data {Default 5} { MANDATORY }
+      - name: documentType
+        value: "2"
+        description: Tipe Dokumen [ 1=> Ketentuan | 2 => Produk , 0 = All] {Default ALL} { OPTIONAL }
+        disabled: true
+      - name: isShow
+        value: "1"
+        description: Filter Status Show [ 0 => FALSE | 1 => TRUE ] {Default 0} { OPTIONAL }
+        disabled: true
+      - name: isCount
+        value: "1"
+        description: Menampilkan Count Semua Data [ 0 => Tidak Tampil | 1 => Tampil  ] {Default 0} { OPTIONAL }
+  auth:
+    type: bearer
+    token: UmF5YVBpUGVyVG9wtk843jG/7RB5In2KHO843o1PCIi6N/9g1KDYjEHKFfrcgR+Er9FaSjiWfvpaYJ3wHKHqKfZA3sulxsHQ7T9P45sD+L32owynMK34Vzs1FExeNhzfaFhvSDwdMqm5zWJE5ch+60VTtVXgCB40OQ==
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: error database connection
+    request:
+      url: "{{url}}/v/1/master/saleskit-document-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login/ PN { MANDATORY }
+          - name: textSearch
+            value: dw
+            description: Text Pencarian Data { OPTIONAL }
+            disabled: true
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0} { MANDATORY }
+          - name: recordCount
+            value: "5"
+            description: Limit Data {Default 5} { MANDATORY }
+          - name: documentType
+            value: "2"
+            description: Tipe Dokumen [ 1=> Ketentuan | 2 => Produk ] {Default ALL} { OPTIONAL }
+            disabled: true
+          - name: isShow
+            value: "1"
+            description: Filter Status Show [ 0 => FALSE | 1 => TRUE ] {Default 0} { OPTIONAL }
+            disabled: true
+          - name: isCount
+            value: "1"
+            description: Menampilkan Count Semua Data [ 0 => Tidak Tampil | 1 => Tampil  ] {Default 0} { OPTIONAL }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "countData": 0,
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{url}}/v/1/master/saleskit-document-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: User ID Login/ PN { MANDATORY }
+          - name: textSearch
+            value: dw
+            description: Text Pencarian Data { OPTIONAL }
+            disabled: true
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0} { MANDATORY }
+          - name: recordCount
+            value: "5"
+            description: Limit Data {Default 5} { MANDATORY }
+          - name: documentType
+            value: "1"
+            description: Tipe Dokumen [ 1=> Ketentuan | 2 => Produk ] {Default ALL} { OPTIONAL }
+          - name: isShow
+            value: "1"
+            description: Filter Status Show [ 0 => FALSE | 1 => TRUE ] {Default 0} { OPTIONAL }
+            disabled: true
+          - name: isCount
+            value: "1"
+            description: Menampilkan Count Semua Data [ 0 => Tidak Tampil | 1 => Tampil  ] {Default 0} { OPTIONAL }
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 25 Jul 2022 06:36:47 GMT
+        - name: Content-Length
+          value: "75"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: error parameter validation
+    request:
+      url: "{{url}}/v/1/master/saleskit-document-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login/ PN { MANDATORY }
+            disabled: true
+          - name: textSearch
+            value: dw
+            description: Text Pencarian Data { OPTIONAL }
+            disabled: true
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0} { MANDATORY }
+          - name: recordCount
+            value: "5"
+            description: Limit Data {Default 5} { MANDATORY }
+          - name: documentType
+            value: "2"
+            description: Tipe Dokumen [ 1=> Ketentuan | 2 => Produk ] {Default ALL} { OPTIONAL }
+            disabled: true
+          - name: isShow
+            value: "1"
+            description: Filter Status Show [ 0 => FALSE | 1 => TRUE ] {Default 0} { OPTIONAL }
+            disabled: true
+          - name: isCount
+            value: "1"
+            description: Menampilkan Count Semua Data [ 0 => Tidak Tampil | 1 => Tampil  ] {Default 0} { OPTIONAL }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "countData": 0,
+              "data": null,
+              "desc": "Parameter ... kosong",
+              "message": "Maaf, Parameter ... tidak boleh kosong",
+              "status": 500
+          }
+  - name: success
+    request:
+      url: "{{url}}/v/1/master/saleskit-document-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login/ PN { MANDATORY }
+          - name: textSearch
+            value: dw
+            description: Text Pencarian Data { OPTIONAL }
+            disabled: true
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0} { MANDATORY }
+          - name: recordCount
+            value: "5"
+            description: Limit Data {Default 5} { MANDATORY }
+          - name: documentType
+            value: "2"
+            description: Tipe Dokumen [ 1=> Ketentuan | 2 => Produk ] {Default ALL} { OPTIONAL }
+            disabled: true
+          - name: isShow
+            value: "1"
+            description: Filter Status Show [ 0 => FALSE | 1 => TRUE ] {Default 0} { OPTIONAL }
+            disabled: true
+          - name: isCount
+            value: "1"
+            description: Menampilkan Count Semua Data [ 0 => Tidak Tampil | 1 => Tampil  ] {Default 0} { OPTIONAL }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 03:03:58 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "countData": 3,
+              "data": [
+                  {
+                      "id": 3,
+                      "name": "Testing 3",
+                      "documentType": 2,
+                      "documentTypeText": "Produk",
+                      "uploadedBy": "Dwiki Saputra",
+                      "createdAt": "2022-04-05 17:28:39",
+                      "status": 1,
+                      "statusText": "Show"
+                  },
+                  {
+                      "id": 2,
+                      "name": "Testing 2",
+                      "documentType": 2,
+                      "documentTypeText": "Produk",
+                      "uploadedBy": "Dwiki Saputra",
+                      "createdAt": "2022-04-05 14:32:07",
+                      "status": 1,
+                      "statusText": "Show"
+                  },
+                  {
+                      "id": 1,
+                      "name": "Testing",
+                      "documentType": 1,
+                      "documentTypeText": "Ketentuan",
+                      "uploadedBy": "Dwiki Saputra",
+                      "createdAt": "2022-04-04 15:15:32",
+                      "status": 0,
+                      "statusText": "Hide"
+                  }
+              ],
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: unautorized
+    request:
+      url: "{{url}}/v/1/master/saleskit-document-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login/ PN { MANDATORY }
+          - name: textSearch
+            value: dw
+            description: Text Pencarian Data { OPTIONAL }
+            disabled: true
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0} { MANDATORY }
+          - name: recordCount
+            value: "5"
+            description: Limit Data {Default 5} { MANDATORY }
+          - name: documentType
+            value: "2"
+            description: Tipe Dokumen [ 1=> Ketentuan | 2 => Produk ] {Default ALL} { OPTIONAL }
+            disabled: true
+          - name: isShow
+            value: "1"
+            description: Filter Status Show [ 0 => FALSE | 1 => TRUE ] {Default 0} { OPTIONAL }
+            disabled: true
+          - name: isCount
+            value: "1"
+            description: Menampilkan Count Semua Data [ 0 => Tidak Tampil | 1 => Tampil  ] {Default 0} { OPTIONAL }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:44:34 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: general error
+    request:
+      url: "{{url}}/v/1/master/saleskit-document-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login/ PN { MANDATORY }
+          - name: textSearch
+            value: dw
+            description: Text Pencarian Data { OPTIONAL }
+            disabled: true
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0} { MANDATORY }
+          - name: recordCount
+            value: "5"
+            description: Limit Data {Default 5} { MANDATORY }
+          - name: documentType
+            value: "2"
+            description: Tipe Dokumen [ 1=> Ketentuan | 2 => Produk ] {Default ALL} { OPTIONAL }
+            disabled: true
+          - name: isShow
+            value: "1"
+            description: Filter Status Show [ 0 => FALSE | 1 => TRUE ] {Default 0} { OPTIONAL }
+            disabled: true
+          - name: isCount
+            value: "1"
+            description: Menampilkan Count Semua Data [ 0 => Tidak Tampil | 1 => Tampil  ] {Default 0} { OPTIONAL }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "countData": 0,
+              "data": null,
+              "desc": "Could not connect .....",
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "status": 500
+          }
+  - name: empty data
+    request:
+      url: "{{url}}/v/1/master/saleskit-document-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login/ PN { MANDATORY }
+          - name: textSearch
+            value: dw
+            description: Text Pencarian Data { OPTIONAL }
+            disabled: true
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0} { MANDATORY }
+          - name: recordCount
+            value: "5"
+            description: Limit Data {Default 5} { MANDATORY }
+          - name: documentType
+            value: "2"
+            description: Tipe Dokumen [ 1=> Ketentuan | 2 => Produk ] {Default ALL} { OPTIONAL }
+            disabled: true
+          - name: isShow
+            value: "1"
+            description: Filter Status Show [ 0 => FALSE | 1 => TRUE ] {Default 0} { OPTIONAL }
+            disabled: true
+          - name: isCount
+            value: "1"
+            description: Menampilkan Count Semua Data [ 0 => Tidak Tampil | 1 => Tampil  ] {Default 0} { OPTIONAL }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 24 Nov 2021 18:18:31 GMT
+        - name: Content-Length
+          value: "657"
+      body:
+        type: json
+        data: |-
+          {
+              "countData": 0,
+              "data": null,
+              "desc": "Error record not found",
+              "message": "Dokumen Sales Kit Tidak Ditemukan",
+              "status": 404
+          }

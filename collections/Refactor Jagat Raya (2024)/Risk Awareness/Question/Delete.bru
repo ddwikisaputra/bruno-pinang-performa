@@ -1,0 +1,205 @@
+meta {
+  name: Delete
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{BASE_URL}}/v1/risk-awareness/batch/question/delete
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: 
+}
+
+body:json {
+  {
+      "payload": "{{REQUEST_BODY}}"
+  }
+}
+
+script:pre-request {
+  const payload = {
+      "question_id": "1e102e1e-9d8b-4c2e-9f3c-d8a61c46a1fa"
+  }
+  
+  const result = _.encrypt(JSON.stringify(payload))
+  bru.setEnvVar("REQUEST_BODY", result);
+}
+
+script:post-response {
+  const responseJSON = res.getBody()
+  if (responseJSON.status) {
+      const data = _.decrypt(responseJSON.data)
+      const parseData = JSON.parse(data)
+      const parseData2 = JSON.parse(parseData)
+      console.log('/v1/risk-awareness/batch/question/create', parseData2)
+  }
+}
+
+settings {
+  encodeUrl: true
+}
+
+example {
+  name: Success
+  
+  request: {
+    url: {{BASE_URL}}/v1/risk-awareness/batch/question/delete
+    method: POST
+    mode: json
+    body:json: {
+      {
+          "payload": "{{REQUEST_BODY}}"
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Thu, 04 Jul 2024 04:01:07 GMT
+      Content-Length: 68
+    }
+  
+    status: {
+      code: 200
+      text: 200
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "message": "Permintaan berhasil diproses",
+            "status": true
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Validation
+  
+  request: {
+    url: {{BASE_URL}}/v1/risk-awareness/batch/question/delete
+    method: POST
+    mode: json
+    body:json: {
+      {
+          "payload": "{{REQUEST_BODY}}"
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Thu, 04 Jul 2024 03:52:26 GMT
+      Content-Length: 124
+    }
+  
+    status: {
+      code: 200
+      text: 400
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": [
+                {
+                    "field": "QUESTION_ID",
+                    "message": "Question ID harus diisi"
+                }
+            ],
+            "message": "Terjadi kesalahan validasi",
+            "status": false
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Data Not Found
+  
+  request: {
+    url: {{BASE_URL}}/v1/risk-awareness/batch/question/delete
+    method: POST
+    mode: json
+    body:json: {
+      {
+          "payload": "{{REQUEST_BODY}}"
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Thu, 04 Jul 2024 03:54:29 GMT
+      Content-Length: 61
+    }
+  
+    status: {
+      code: 200
+      text: 500
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "message": "Data tidak ditemukan",
+            "status": false
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Already Deleted
+  
+  request: {
+    url: {{BASE_URL}}/v1/risk-awareness/batch/question/delete
+    method: POST
+    mode: json
+    body:json: {
+      {
+          "payload": "{{REQUEST_BODY}}"
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Thu, 04 Jul 2024 04:01:38 GMT
+      Content-Length: 59
+    }
+  
+    status: {
+      code: 200
+      text: 500
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "message": "Data sudah dihapus",
+            "status": false
+        }
+      '''
+    }
+  }
+}

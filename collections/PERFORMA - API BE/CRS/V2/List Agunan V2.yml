@@ -1,0 +1,599 @@
+info:
+  name: List Agunan V2
+  type: http
+  seq: 7
+
+http:
+  method: POST
+  url: "{{base_url_prod}}/v/2/crs/list-agunan/4761"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "{{userId}}"
+        description: "[Encode]Personal Number BRI Agro (UserID Login) { MANDATORY }"
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: empty data
+    request:
+      url: "{{base_url}}/v/1/crs/list-agunan/-1"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 02 Sep 2021 08:30:08 GMT
+        - name: Content-Length
+          value: "98"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Data Agunan tidak ditemukan",
+              "message": "Agunan Tidak Ditemukan",
+              "status": 404
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/crs/list-agunan/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 02 Sep 2021 08:30:08 GMT
+        - name: Content-Length
+          value: "98"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Tidak Memliki Akses",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/crs/list-agunan/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 02 Sep 2021 07:55:38 GMT
+        - name: Content-Length
+          value: "98"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data": null
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/crs/list-agunan/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 02 Sep 2021 08:30:08 GMT
+        - name: Content-Length
+          value: "98"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/crs/list-agunan/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 02 Sep 2021 08:32:53 GMT
+        - name: Content-Length
+          value: "334"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "id": 175,
+                  "prakarsaId": 332,
+                  "collateralTotal": 5000000.52,
+                  "liquidationTotal": 500000.95,
+                  "collateralDetail": [
+                      {
+                          "collateralId": 5,
+                          "orderNumber": 1,
+                          "collateralType": "Persediaan",
+                          "estimatedCollateralValue": 3000000.22,
+                          "liquidationValue": 0,
+                          "status": 0,
+                          "updatedAt": "02-09-2021"
+                      },
+                      {
+                          "collateralId": 6,
+                          "orderNumber": 1,
+                          "collateralType": "Kendaraan",
+                          "estimatedCollateralValue": 2000000.3,
+                          "liquidationValue": 500000.95,
+                          "status": 0,
+                          "updatedAt": "02-09-2021"
+                      }
+                  ]
+              },
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{base_url}}/v/1/crs/list-agunan/30946"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999951"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 20 Jul 2022 07:49:41 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: success v2
+    request:
+      url: "{{base_url}}/v/2/crs/list-agunan/31124"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: UmF5YVBpUGVyVG9w9FR0lGD8PJZ01laNFpB91ptV5mkFfw==
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 03 Jan 2023 08:55:58 GMT
+        - name: Content-Length
+          value: "1199"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "id": 20436,
+                  "prakarsaId": 31124,
+                  "collateralTotal": 264000002.67,
+                  "liquidationTotal": 2001087.62,
+                  "collateralDetail": [
+                      {
+                          "collateralId": 20555,
+                          "orderNumber": 1,
+                          "collateralType": "Kendaraan",
+                          "estimatedCollateralValue": 68000000.89,
+                          "liquidationValue": 500000.3,
+                          "status": 0,
+                          "updatedAt": "10-11-2022"
+                      },
+                      {
+                          "collateralId": 20558,
+                          "orderNumber": 1,
+                          "collateralType": "Persediaan",
+                          "estimatedCollateralValue": 68000000.89,
+                          "liquidationValue": 543.66,
+                          "status": 0,
+                          "updatedAt": "27-12-2022"
+                      },
+                      {
+                          "collateralId": 20567,
+                          "orderNumber": 1,
+                          "collateralType": "Tanah Dan Bangunan",
+                          "estimatedCollateralValue": 68000000.89,
+                          "liquidationValue": 543.66,
+                          "status": 0,
+                          "updatedAt": "09-12-2022"
+                      },
+                      {
+                          "collateralId": 20552,
+                          "orderNumber": 5,
+                          "collateralType": "Kendaraan",
+                          "estimatedCollateralValue": 20000000,
+                          "liquidationValue": 500000,
+                          "status": 0,
+                          "updatedAt": "04-11-2022"
+                      },
+                      {
+                          "collateralId": 20553,
+                          "orderNumber": 6,
+                          "collateralType": "Kendaraan",
+                          "estimatedCollateralValue": 20000000,
+                          "liquidationValue": 500000,
+                          "status": 0,
+                          "updatedAt": "04-11-2022"
+                      },
+                      {
+                          "collateralId": 20554,
+                          "orderNumber": 6,
+                          "collateralType": "Kendaraan",
+                          "estimatedCollateralValue": 20000000,
+                          "liquidationValue": 500000,
+                          "status": 0,
+                          "updatedAt": "04-11-2022"
+                      }
+                  ]
+              },
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/crs/list-agunan/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 02 Sep 2021 08:30:08 GMT
+        - name: Content-Length
+          value: "98"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/crs/list-agunan/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 02 Sep 2021 08:30:08 GMT
+        - name: Content-Length
+          value: "98"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Tidak Memliki Akses",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/crs/list-agunan/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 02 Sep 2021 08:32:53 GMT
+        - name: Content-Length
+          value: "334"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "id": 175,
+                  "prakarsaId": 332,
+                  "collateralTotal": 5000000.52,
+                  "liquidationTotal": 500000.95,
+                  "collateralDetail": [
+                      {
+                          "collateralId": 5,
+                          "orderNumber": 1,
+                          "collateralType": "Persediaan",
+                          "estimatedCollateralValue": 3000000.22,
+                          "liquidationValue": 0,
+                          "status": 0,
+                          "updatedAt": "02-09-2021"
+                      },
+                      {
+                          "collateralId": 6,
+                          "orderNumber": 1,
+                          "collateralType": "Kendaraan",
+                          "estimatedCollateralValue": 2000000.3,
+                          "liquidationValue": 500000.95,
+                          "status": 0,
+                          "updatedAt": "02-09-2021"
+                      }
+                  ]
+              },
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{base_url}}/v/1/crs/list-agunan/30946"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999951"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 20 Jul 2022 07:49:41 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: success v2
+    request:
+      url: "{{base_url}}/v/2/crs/list-agunan/31124"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: UmF5YVBpUGVyVG9w9FR0lGD8PJZ01laNFpB91ptV5mkFfw==
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 03 Jan 2023 08:55:58 GMT
+        - name: Content-Length
+          value: "1199"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "id": 20436,
+                  "prakarsaId": 31124,
+                  "collateralTotal": 264000002.67,
+                  "liquidationTotal": 2001087.62,
+                  "collateralDetail": [
+                      {
+                          "collateralId": 20555,
+                          "orderNumber": 1,
+                          "collateralType": "Kendaraan",
+                          "estimatedCollateralValue": 68000000.89,
+                          "liquidationValue": 500000.3,
+                          "status": 0,
+                          "updatedAt": "10-11-2022"
+                      },
+                      {
+                          "collateralId": 20558,
+                          "orderNumber": 1,
+                          "collateralType": "Persediaan",
+                          "estimatedCollateralValue": 68000000.89,
+                          "liquidationValue": 543.66,
+                          "status": 0,
+                          "updatedAt": "27-12-2022"
+                      },
+                      {
+                          "collateralId": 20567,
+                          "orderNumber": 1,
+                          "collateralType": "Tanah Dan Bangunan",
+                          "estimatedCollateralValue": 68000000.89,
+                          "liquidationValue": 543.66,
+                          "status": 0,
+                          "updatedAt": "09-12-2022"
+                      },
+                      {
+                          "collateralId": 20552,
+                          "orderNumber": 5,
+                          "collateralType": "Kendaraan",
+                          "estimatedCollateralValue": 20000000,
+                          "liquidationValue": 500000,
+                          "status": 0,
+                          "updatedAt": "04-11-2022"
+                      },
+                      {
+                          "collateralId": 20553,
+                          "orderNumber": 6,
+                          "collateralType": "Kendaraan",
+                          "estimatedCollateralValue": 20000000,
+                          "liquidationValue": 500000,
+                          "status": 0,
+                          "updatedAt": "04-11-2022"
+                      },
+                      {
+                          "collateralId": 20554,
+                          "orderNumber": 6,
+                          "collateralType": "Kendaraan",
+                          "estimatedCollateralValue": 20000000,
+                          "liquidationValue": 500000,
+                          "status": 0,
+                          "updatedAt": "04-11-2022"
+                      }
+                  ]
+              },
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: empty data
+    request:
+      url: "{{base_url}}/v/1/crs/list-agunan/-1"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 02 Sep 2021 08:30:08 GMT
+        - name: Content-Length
+          value: "98"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Data Agunan tidak ditemukan",
+              "message": "Agunan Tidak Ditemukan",
+              "status": 404
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/crs/list-agunan/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 02 Sep 2021 07:55:38 GMT
+        - name: Content-Length
+          value: "98"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data": null
+          }

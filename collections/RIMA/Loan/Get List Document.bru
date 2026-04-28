@@ -1,0 +1,49 @@
+meta {
+  name: Get List Document
+  type: http
+  seq: 6
+}
+
+post {
+  url: {{BASE_URL}}/v1/loan/document/list
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: 
+}
+
+body:json {
+  {
+      "payload": "{{REQUEST_BODY}}"
+  }
+}
+
+script:pre-request {
+  const payload = {
+      "q": null,
+      "page": 1, 
+      "limit": -1,
+      "loan_number": "033001000782107",
+      "list_application_media_type_id": null
+  }
+  
+  const result = encrypt(JSON.stringify(payload))
+  bru.setEnvVar("REQUEST_BODY", result);
+}
+
+script:post-response {
+  const CryptoJS = require("crypto-js");
+  const responseJSON = res.getBody();
+  if (responseJSON.status) {
+      const data = decrypt(responseJSON.data)
+      const parseData = JSON.parse(data)
+      const parseData2 = JSON.parse(parseData)
+      console.log('/v1/loan/document/list', parseData2)
+  }
+}
+
+settings {
+  encodeUrl: true
+}

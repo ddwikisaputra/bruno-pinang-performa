@@ -1,0 +1,341 @@
+info:
+  name: RAYA Disbursement v2
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: "{{base_url}}/api/digiagri/transactional/raya/v2/disbursement"
+  body:
+    type: form-urlencoded
+    data:
+      - name: kodeCabang
+        value: ""
+        disabled: true
+      - name: nomorCIF
+        value: "0000118826"
+      - name: nominal
+        value: "150000"
+      - name: namaSesuaiId
+        value: Dwiki Saputra
+      - name: sukuBunga
+        value: "0.25"
+      - name: jangkaWaktu
+        value: "14"
+      - name: nomorFasilitas
+        value: 0020/0000118826/PK3/018
+      - name: rekeningTujuan
+        value: "001001002278316"
+      - name: nomorPO
+        value: INV-DWK-DEV/01/01/23/0001
+      - name: catatan
+        value: Pencairan Express A
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Error Validasi Fasilitas Expired
+    request:
+      url: "{{base_url}}/api/digiagri/transactional/raya/v2/disbursement"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeCabang
+            value: ""
+            description: Kode Cabang Pencairan
+            disabled: true
+          - name: nomorCIF
+            value: "0000118826"
+            description: Nomor CIF
+          - name: nominal
+            value: "87000000"
+            description: Nominal Pencairan
+          - name: namaSesuaiId
+            value: DWIKI SAPUTRA
+            description: Nama Nasabah
+          - name: sukuBunga
+            value: "0.3"
+            description: "Suku Bunga (cth : 0.22)"
+          - name: jangkaWaktu
+            value: "7"
+            description: Jangka Waktu Pinjaman (7, 14, 30)
+          - name: nomorFasilitas
+            value: 0010/0000118826/PK3/003
+            description: "nomor Fasilitas "
+          - name: rekeningTujuan
+            value: "001001002278316"
+            description: Rekening Tujuan Pencairan (Untuk Pre Post Dikosongkan)
+          - name: nomorPO
+            value: PO/MER/07/08/22/01
+            description: nomor Purchase Order
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: no-cache
+        - name: Pragma
+          value: no-cache
+        - name: Content-Length
+          value: "100"
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Expires
+          value: "-1"
+        - name: Server
+          value: ""
+        - name: X-SourceFiles
+          value: =?UTF-8?B?QzpcVXNlcnNcQlJJQUdSTy1QQ1xTb3VyY2VcUmVwb3NcYXBpLWRldmVsb3BtZW50XEFncm9XZWJBUElcYXBpXGRpZ2lhZ3JpXHRyYW5zYWN0aW9uYWxccmF5YVx2MlxkaXNidXJzZW1lbnQ=?=
+        - name: Content-Security-Policy
+          value: default-src *;  script-src * 'unsafe-inline' 'unsafe-eval'; style-src  * 'unsafe-inline' 'unsafe-eval';
+        - name: Strict-Transport-Security
+          value: max-age=31536000
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-XSS-Protection
+          value: 1;mode=block
+        - name: x-permitted-cross-domain-policies
+          value: none
+        - name: Access-Control-Allow-Origin
+          value: http://202.77.121.68:4343
+        - name: Access-Control-Allow-Headers
+          value: Content-Type
+        - name: Access-Control-Allow-Methods
+          value: POST,GET,OPTIONS
+        - name: Date
+          value: Sun, 07 Aug 2022 07:18:58 GMT
+      body:
+        type: json
+        data: |-
+          {
+              "statusCode": "01",
+              "statusDescription": "Fasilitas Sudah Expired",
+              "statusPengajuan": -6
+          }
+  - name: Error Validasi Terdapat Pinjaman Jatuh Tempo
+    request:
+      url: "{{base_url}}/api/digiagri/transactional/raya/v2/disbursement"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeCabang
+            value: ""
+            description: Kode Cabang Pencairan
+            disabled: true
+          - name: nomorCIF
+            value: "0000118826"
+            description: Nomor CIF
+          - name: nominal
+            value: "87000000"
+            description: Nominal Pencairan
+          - name: namaSesuaiId
+            value: DWIKI SAPUTRA
+            description: Nama Nasabah
+          - name: sukuBunga
+            value: "0.3"
+            description: "Suku Bunga (cth : 0.22)"
+          - name: jangkaWaktu
+            value: "7"
+            description: Jangka Waktu Pinjaman (7, 14, 30)
+          - name: nomorFasilitas
+            value: 0010/0000118826/PK3/003
+            description: "nomor Fasilitas "
+          - name: rekeningTujuan
+            value: "001001002278316"
+            description: Rekening Tujuan Pencairan (Untuk Pre Post Dikosongkan)
+          - name: nomorPO
+            value: PO/MER/07/08/22/01
+            description: nomor Purchase Order
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: no-cache
+        - name: Pragma
+          value: no-cache
+        - name: Content-Length
+          value: "100"
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Expires
+          value: "-1"
+        - name: Server
+          value: ""
+        - name: X-SourceFiles
+          value: =?UTF-8?B?QzpcVXNlcnNcQlJJQUdSTy1QQ1xTb3VyY2VcUmVwb3NcYXBpLWRldmVsb3BtZW50XEFncm9XZWJBUElcYXBpXGRpZ2lhZ3JpXHRyYW5zYWN0aW9uYWxccmF5YVx2MlxkaXNidXJzZW1lbnQ=?=
+        - name: Content-Security-Policy
+          value: default-src *;  script-src * 'unsafe-inline' 'unsafe-eval'; style-src  * 'unsafe-inline' 'unsafe-eval';
+        - name: Strict-Transport-Security
+          value: max-age=31536000
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-XSS-Protection
+          value: 1;mode=block
+        - name: x-permitted-cross-domain-policies
+          value: none
+        - name: Access-Control-Allow-Origin
+          value: http://202.77.121.68:4343
+        - name: Access-Control-Allow-Headers
+          value: Content-Type
+        - name: Access-Control-Allow-Methods
+          value: POST,GET,OPTIONS
+        - name: Date
+          value: Sun, 07 Aug 2022 07:18:58 GMT
+      body:
+        type: json
+        data: |-
+          {
+              "statusCode": "01",
+              "statusDescription": "Terdapat pinjaman yang telah jatuh tempo yaitu : ..",
+              "statusPengajuan": -2
+          }
+  - name: Error Validasi Nominal Pencarian Melebihi Sisa Limit
+    request:
+      url: "{{base_url}}/api/digiagri/transactional/raya/v2/disbursement"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeCabang
+            value: ""
+            description: Kode Cabang Pencairan
+            disabled: true
+          - name: nomorCIF
+            value: "0000118826"
+            description: Nomor CIF
+          - name: nominal
+            value: "87000000"
+            description: Nominal Pencairan
+          - name: namaSesuaiId
+            value: DWIKI SAPUTRA
+            description: Nama Nasabah
+          - name: sukuBunga
+            value: "0.3"
+            description: "Suku Bunga (cth : 0.22)"
+          - name: jangkaWaktu
+            value: "7"
+            description: Jangka Waktu Pinjaman (7, 14, 30)
+          - name: nomorFasilitas
+            value: 0010/0000118826/PK3/003
+            description: "nomor Fasilitas "
+          - name: rekeningTujuan
+            value: "001001002278316"
+            description: Rekening Tujuan Pencairan (Untuk Pre Post Dikosongkan)
+          - name: nomorPO
+            value: PO/MER/07/08/22/01
+            description: nomor Purchase Order
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: no-cache
+        - name: Pragma
+          value: no-cache
+        - name: Content-Length
+          value: "100"
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Expires
+          value: "-1"
+        - name: Server
+          value: ""
+        - name: X-SourceFiles
+          value: =?UTF-8?B?QzpcVXNlcnNcQlJJQUdSTy1QQ1xTb3VyY2VcUmVwb3NcYXBpLWRldmVsb3BtZW50XEFncm9XZWJBUElcYXBpXGRpZ2lhZ3JpXHRyYW5zYWN0aW9uYWxccmF5YVx2MlxkaXNidXJzZW1lbnQ=?=
+        - name: Content-Security-Policy
+          value: default-src *;  script-src * 'unsafe-inline' 'unsafe-eval'; style-src  * 'unsafe-inline' 'unsafe-eval';
+        - name: Strict-Transport-Security
+          value: max-age=31536000
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-XSS-Protection
+          value: 1;mode=block
+        - name: x-permitted-cross-domain-policies
+          value: none
+        - name: Access-Control-Allow-Origin
+          value: http://202.77.121.68:4343
+        - name: Access-Control-Allow-Headers
+          value: Content-Type
+        - name: Access-Control-Allow-Methods
+          value: POST,GET,OPTIONS
+        - name: Date
+          value: Sun, 07 Aug 2022 07:18:58 GMT
+      body:
+        type: json
+        data: |-
+          {
+              "statusCode": "01",
+              "statusDescription": "Nominal Pengajuan Melebihi Sisa Limit",
+              "statusPengajuan": -1
+          }
+  - name: Success
+    request:
+      url: "{{base_url}}/api/digiagri/transactional/raya/v2/disbursement"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeCabang
+            value: "1312"
+            description: Kode Cabang Pencairan
+          - name: nomorCIF
+            value: "0000102196"
+            description: Nomor CIF
+          - name: nominal
+            value: "20000000"
+            description: Nominal Pencairan
+          - name: namaSesuaiId
+            value: SUMARNO
+            description: Nama Nasabah
+          - name: sukuBunga
+            value: "0.21"
+            description: "Suku Bunga (cth : 0.22)"
+          - name: jangkaWaktu
+            value: "7"
+            description: Jangka Waktu Pinjaman (7, 14, 30)
+          - name: penalti
+            value: "0"
+            description: 0 (Hardcode)
+          - name: nomorFasilitas
+            value: 1312/0000102196/PK1/001
+            description: "nomor Fasilitas "
+          - name: rekeningTujuan
+            value: "131201000002310"
+            description: Rekening Tujuan Pencairan (Untuk Pre Post Dikosongkan)
+          - name: nomorPO
+            value: "01"
+            description: nomor Purchase Order
+    response:
+      body:
+        type: text
+        data: "{\r
+
+          \    \"statusCode\": \"00\",\r
+
+          \    \"statusDescription\": \"Disbursement Succesfull\",\r
+
+          \    \"noRekPinjaman\": \"131201001731108\",\r
+
+          \    \"date\": null,\r
+
+          \    \"time\": null,\r
+
+          \    \"receipt\": \"6623505\",\r
+
+          \    \"refference\": \"101949\"\r
+
+          }"

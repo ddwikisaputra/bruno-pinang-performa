@@ -1,0 +1,67 @@
+info:
+  name: Register Finish
+  type: http
+  seq: 7
+
+http:
+  method: POST
+  url: "{{base_url}}/raya/opening-account/pinang/register-finish/fdc66be0-dbbc-4a79-961f-9d27c8f9330e"
+  auth:
+    type: basic
+    username: "{{username_dev}}"
+    password: "{{password_dev}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Customer ID not Found
+    request:
+      url: "{{base_url_prod}}/raya/opening-account/pinang/register-finish/26859ae9-ee8f-40f4-8373-940f"
+      method: POST
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Date
+          value: Fri, 15 Sep 2023 17:18:01 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: x-krakend
+          value: Version 2.4.3
+        - name: x-krakend-completed
+          value: "false"
+        - name: strict-transport-security
+          value: max-age=31536000; includeSubDomains; preload; always
+        - name: alt-svc
+          value: h3=":443"; ma=86400
+        - name: cf-cache-status
+          value: DYNAMIC
+        - name: Content-Encoding
+          value: gzip
+        - name: x-kong-upstream-latency
+          value: "47"
+        - name: x-kong-proxy-latency
+          value: "17"
+        - name: via
+          value: kong/3.3.1, 1.1 google
+        - name: Set-Cookie
+          value: __cf_bm=4JKDPG7ly0hriEHY8tRHhWUKBN5fQcfJwGCbvzcFTSQ-1694798281-0-ARDb8/LywzhH12AhXPXgJf50OWyht1S0GSB/RiJJ75Kp4jaGoikwsyX4caT1FS7cLYSVoxDPlShuVYHNOqpZzww=; path=/; expires=Fri, 15-Sep-23 17:48:01 GMT; domain=.bankraya.co.id; HttpOnly; Secure; SameSite=None
+        - name: Server
+          value: cloudflare
+        - name: CF-RAY
+          value: 807286c98a4f4abd-CGK
+      body:
+        type: json
+        data: |-
+          {
+              "responseCode": "4049600",
+              "responseMessage": "Customer ID Not Found"
+          }

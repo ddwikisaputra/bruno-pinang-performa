@@ -1,0 +1,501 @@
+info:
+  name: performa merchant financing (x)
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: "{{api-endpoint-cs-dev}}/api/v3.2/performa/merchant-financing/1406011809860003"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Bearer Z20QSDfPh0JpEY1yCiXQjb1B8Bj3yxwwQIPxa7mqYk6X9km3RUAqEDlw2JqYJrjU
+  body:
+    type: json
+    data: |-
+      // TIDAK LOLOS
+
+      // {
+      //     "uid": "1406011809860003",
+      //     "id": "AB123",
+      //     "name": "Mahfud",
+      //     "nik": "P12320210",
+      //     "merchant_name": "Nama Merchant",
+      //     "product_type": "src_cash_loan",
+      //     "length_of_stay": 24,
+      //     "amount_1_month_before": 9000000,
+      //     "amount_2_month_before": 5000000,
+      //     "amount_3_month_before": 5000000,
+      //     "amount_4_month_before": 5000000,
+      //     "amount_5_month_before": 5000000,
+      //     "amount_6_month_before": 5000000,
+      //     "amount_7_month_before": 1000000,
+      //     "amount_8_month_before": 9000000,
+      //     "amount_9_month_before": 200000,
+      //     "amount_10_month_before": 100000,
+      //     "amount_11_month_before": 1000000,
+      //     "amount_12_month_before": 200000,
+      //     "frequency_1_month_before": 5,
+      //     "frequency_2_month_before": 7,
+      //     "frequency_3_month_before": 3,
+      //     "frequency_4_month_before": 3,
+      //     "frequency_5_month_before": 5,
+      //     "frequency_6_month_before": 3,
+      //     "frequency_7_month_before": 5,
+      //     "frequency_8_month_before": 7,
+      //     "frequency_9_month_before": 3,
+      //     "frequency_10_month_before": 2,
+      //     "frequency_11_month_before": 5,
+      //     "frequency_12_month_before": 3
+      // }
+
+
+      // LOLOS
+      // {
+      //     "uid": "1406011809860003",
+      //     "id": "AB123",
+      //     "name": "Mahfud",
+      //     "nik": "P12320210",
+      //     "merchant_name": "Nama Merchant",
+      //     "product_type": "",
+      //     "length_of_stay": 24,
+      //     "amount_1_month_before": 9000000,
+      //     "amount_2_month_before": 5000000,
+      //     "amount_3_month_before": 5000000,
+      //     "amount_4_month_before": 5000000,
+      //     "amount_5_month_before": 5000000,
+      //     "amount_6_month_before": 5000000,
+      //     "amount_7_month_before": 1000000,
+      //     "amount_8_month_before": 9000000,
+      //     "amount_9_month_before": 200000,
+      //     "amount_10_month_before": 100000,
+      //     "amount_11_month_before": 1000000,
+      //     "amount_12_month_before": 200000,
+      //     "frequency_1_month_before": 5,
+      //     "frequency_2_month_before": 7,
+      //     "frequency_3_month_before": 3,
+      //     "frequency_4_month_before": 3,
+      //     "frequency_5_month_before": 5,
+      //     "frequency_6_month_before": 3,
+      //     "frequency_7_month_before": 5,
+      //     "frequency_8_month_before": 7,
+      //     "frequency_9_month_before": 3,
+      //     "frequency_10_month_before": 2,
+      //     "frequency_11_month_before": 5,
+      //     "frequency_12_month_before": 3
+      // }
+
+      {
+          "uid": "1406011809860003",
+          "id": "AB123",
+          "name": "Mahfud",
+          "nik": "P12320210",
+          "merchant_name": "Nama Merchant",
+          "product_type": "",
+          "length_of_stay": 24,
+          "amount_10_month_before":100000,
+          "amount_11_month_before":1000000,
+          "amount_12_month_before":200000,
+          "amount_1_month_before":9000000,
+          "amount_2_month_before":5000000,
+          "amount_3_month_before":5000000,
+          "amount_4_month_before":5000000,
+          "amount_5_month_before":5000000,
+          "amount_6_month_before":5000000,
+          "amount_7_month_before":1000000,
+          "amount_8_month_before":9000000,
+          "amount_9_month_before":200000,
+          "frequency_10_month_before":2,
+          "frequency_11_month_before":5,
+          "frequency_12_month_before":3,
+          "frequency_1_month_before":5,
+          "frequency_2_month_before":7,
+          "frequency_3_month_before":3,
+          "frequency_4_month_before":3,
+          "frequency_5_month_before":5,
+          "frequency_6_month_before":3,
+          "frequency_7_month_before":5,
+          "frequency_8_month_before":7,
+          "frequency_9_month_before":3
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: tidak lolos
+    request:
+      url: http://be-credit-scoring.dev.internal.rayain.net/api/v3.2/performa/merchant-financing/1406011809860003
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: Bearer Z20QSDfPh0JpEY1yCiXQjb1B8Bj3yxwwQIPxa7mqYk6X9km3RUAqEDlw2JqYJrjU
+      body:
+        type: json
+        data: |-
+          {
+              "uid": "1406011809860003",
+              "id": "AB123",
+              "name": "Mahfud",
+              "nik": "P12320210",
+              "merchant_name": "Nama Merchant",
+              "product_type": "src_cash_loan",
+              "length_of_stay": 24,
+              "amount_1_month_before": 9000000,
+              "amount_2_month_before": 5000000,
+              "amount_3_month_before": 5000000,
+              "amount_4_month_before": 5000000,
+              "amount_5_month_before": 5000000,
+              "amount_6_month_before": 5000000,
+              "amount_7_month_before": 1000000,
+              "amount_8_month_before": 9000000,
+              "amount_9_month_before": 200000,
+              "amount_10_month_before": 100000,
+              "amount_11_month_before": 1000000,
+              "amount_12_month_before": 200000,
+              "frequency_1_month_before": 5,
+              "frequency_2_month_before": 7,
+              "frequency_3_month_before": 3,
+              "frequency_4_month_before": 3,
+              "frequency_5_month_before": 5,
+              "frequency_6_month_before": 3,
+              "frequency_7_month_before": 5,
+              "frequency_8_month_before": 7,
+              "frequency_9_month_before": 3,
+              "frequency_10_month_before": 2,
+              "frequency_11_month_before": 5,
+              "frequency_12_month_before": 3
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Wed, 22 Oct 2025 01:33:51 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "198"
+        - name: Connection
+          value: keep-alive
+        - name: Access-Control-Allow-Origin
+          value: "*"
+        - name: Access-Control-Allow-Methods
+          value: GET, POST, PUT, DELETE
+        - name: Access-Control-Allow-Headers
+          value: Content-Type, Authorization
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "bin_score": 0,
+              "desc": "avg_clear_income [-4688183.45799] < 500000",
+              "flag_lolos": false,
+              "max_installment": 0,
+              "name": "Mahfud",
+              "plafond": 0,
+              "score": 0,
+              "status": "REJECT", // REJECT | FAILED | SUCCESS
+              "tenor": 0,
+              "uid": "1406011809860003"
+          }
+  - name: success
+    request:
+      url: http://be-credit-scoring.dev.internal.rayain.net/api/v3.2/performa/merchant-financing/1406011809860003
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: Bearer Z20QSDfPh0JpEY1yCiXQjb1B8Bj3yxwwQIPxa7mqYk6X9km3RUAqEDlw2JqYJrjU
+      body:
+        type: json
+        data: |-
+          // TIDAK LOLOS
+
+          // {
+          //     "uid": "1406011809860003",
+          //     "id": "AB123",
+          //     "name": "Mahfud",
+          //     "nik": "P12320210",
+          //     "merchant_name": "Nama Merchant",
+          //     "product_type": "src_cash_loan",
+          //     "length_of_stay": 24,
+          //     "amount_1_month_before": 9000000,
+          //     "amount_2_month_before": 5000000,
+          //     "amount_3_month_before": 5000000,
+          //     "amount_4_month_before": 5000000,
+          //     "amount_5_month_before": 5000000,
+          //     "amount_6_month_before": 5000000,
+          //     "amount_7_month_before": 1000000,
+          //     "amount_8_month_before": 9000000,
+          //     "amount_9_month_before": 200000,
+          //     "amount_10_month_before": 100000,
+          //     "amount_11_month_before": 1000000,
+          //     "amount_12_month_before": 200000,
+          //     "frequency_1_month_before": 5,
+          //     "frequency_2_month_before": 7,
+          //     "frequency_3_month_before": 3,
+          //     "frequency_4_month_before": 3,
+          //     "frequency_5_month_before": 5,
+          //     "frequency_6_month_before": 3,
+          //     "frequency_7_month_before": 5,
+          //     "frequency_8_month_before": 7,
+          //     "frequency_9_month_before": 3,
+          //     "frequency_10_month_before": 2,
+          //     "frequency_11_month_before": 5,
+          //     "frequency_12_month_before": 3
+          // }
+
+
+          // LOLOS
+
+
+          {
+              "uid": "1406011809860003",
+              "id": "AB123",
+              "name": "Mahfud",
+              "nik": "P12320210",
+              "merchant_name": "Nama Merchant",
+              "product_type": "",
+              "length_of_stay": 24,
+              "amount_1_month_before": 9000000,
+              "amount_2_month_before": 5000000,
+              "amount_3_month_before": 5000000,
+              "amount_4_month_before": 5000000,
+              "amount_5_month_before": 5000000,
+              "amount_6_month_before": 5000000,
+              "amount_7_month_before": 1000000,
+              "amount_8_month_before": 9000000,
+              "amount_9_month_before": 200000,
+              "amount_10_month_before": 100000,
+              "amount_11_month_before": 1000000,
+              "amount_12_month_before": 200000,
+              "frequency_1_month_before": 5,
+              "frequency_2_month_before": 7,
+              "frequency_3_month_before": 3,
+              "frequency_4_month_before": 3,
+              "frequency_5_month_before": 5,
+              "frequency_6_month_before": 3,
+              "frequency_7_month_before": 5,
+              "frequency_8_month_before": 7,
+              "frequency_9_month_before": 3,
+              "frequency_10_month_before": 2,
+              "frequency_11_month_before": 5,
+              "frequency_12_month_before": 3
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Wed, 22 Oct 2025 02:07:46 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "179"
+        - name: Connection
+          value: keep-alive
+        - name: Access-Control-Allow-Origin
+          value: "*"
+        - name: Access-Control-Allow-Methods
+          value: GET, POST, PUT, DELETE
+        - name: Access-Control-Allow-Headers
+          value: Content-Type, Authorization
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "bin_score": 0,
+              "desc": "APPROVE",
+              "flag_lolos": true,
+              "max_installment": 2210000,
+              "name": "Mahfud",
+              "plafond": 6500000,
+              "score": 0,
+              "status": "SUCCESS",
+              "tenor": 3,
+              "uid": "1406011809860003"
+          }
+  - name: error
+    request:
+      url: http://be-credit-scoring.dev.internal.rayain.net/api/v3.2/performa/merchant-financing/1406011809860003
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: Bearer Z20QSDfPh0JpEY1yCiXQjb1B8Bj3yxwwQIPxa7mqYk6X9km3RUAqEDlw2JqYJrjU
+      body:
+        type: json
+        data: |-
+          // TIDAK LOLOS
+
+          // {
+          //     "uid": "1406011809860003",
+          //     "id": "AB123",
+          //     "name": "Mahfud",
+          //     "nik": "P12320210",
+          //     "merchant_name": "Nama Merchant",
+          //     "product_type": "src_cash_loan",
+          //     "length_of_stay": 24,
+          //     "amount_1_month_before": 9000000,
+          //     "amount_2_month_before": 5000000,
+          //     "amount_3_month_before": 5000000,
+          //     "amount_4_month_before": 5000000,
+          //     "amount_5_month_before": 5000000,
+          //     "amount_6_month_before": 5000000,
+          //     "amount_7_month_before": 1000000,
+          //     "amount_8_month_before": 9000000,
+          //     "amount_9_month_before": 200000,
+          //     "amount_10_month_before": 100000,
+          //     "amount_11_month_before": 1000000,
+          //     "amount_12_month_before": 200000,
+          //     "frequency_1_month_before": 5,
+          //     "frequency_2_month_before": 7,
+          //     "frequency_3_month_before": 3,
+          //     "frequency_4_month_before": 3,
+          //     "frequency_5_month_before": 5,
+          //     "frequency_6_month_before": 3,
+          //     "frequency_7_month_before": 5,
+          //     "frequency_8_month_before": 7,
+          //     "frequency_9_month_before": 3,
+          //     "frequency_10_month_before": 2,
+          //     "frequency_11_month_before": 5,
+          //     "frequency_12_month_before": 3
+          // }
+
+
+          // LOLOS
+
+
+          {
+              "uid": "1406011809860003",
+              "id": "AB123",
+              "name": "Mahfud",
+              "nik": "P12320210",
+              "merchant_name": "Nama Merchant",
+              "product_type": "",
+              "length_of_stay": 24,
+              "amount_1_month_before": 9000000,
+              "amount_2_month_before": 5000000,
+              "amount_3_month_before": 5000000,
+              "amount_4_month_before": 5000000,
+              "amount_5_month_before": 5000000,
+              "frequency_1_month_before": 5,
+              "frequency_2_month_before": 7,
+              "frequency_3_month_before": 3,
+              "frequency_4_month_before": 3,
+              "frequency_5_month_before": 5,
+          }
+    response:
+      status: 400
+      statusText: BAD REQUEST
+      headers:
+        - name: Date
+          value: Wed, 22 Oct 2025 03:42:28 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "74"
+        - name: Connection
+          value: keep-alive
+        - name: Access-Control-Allow-Origin
+          value: "*"
+        - name: Access-Control-Allow-Methods
+          value: GET, POST, PUT, DELETE
+        - name: Access-Control-Allow-Headers
+          value: Content-Type, Authorization
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "REJECT",
+              "score": null,
+              "status": "FAILED",
+              "uid": "1406011809860003"
+          }
+  - name: unsupported product type
+    request:
+      url: http://be-credit-scoring-performa.dev.internal.rayain.net/api/v3.2/performa/merchant-financing/642160
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: Bearer Z20QSDfPh0JpEY1yCiXQjb1B8Bj3yxwwQIPxa7mqYk6X9km3RUAqEDlw2JqYJrjU
+      body:
+        type: json
+        data: |-
+          {
+              "uid": "642160",
+              "id": "642160",
+              "name": "Herizon",
+              "nik": "7229952252",
+              "merchant_name": "BRIMOLA",   
+              "product_type": "",
+              "length_of_stay": 55,
+              "amount_10_month_before":21000000,
+              "amount_11_month_before":21000000,
+              "amount_12_month_before":21000000,
+              "amount_1_month_before":22050000,
+              "amount_2_month_before":17850000,
+              "amount_3_month_before":18900000,
+              "amount_4_month_before":18900000,
+              "amount_5_month_before":19950000,
+              "amount_6_month_before":21000000,
+              "amount_7_month_before":16800000,
+              "amount_8_month_before":21000000,
+              "amount_9_month_before":27300000,
+              "frequency_10_month_before":10,
+              "frequency_12_month_before":10,
+              "frequency_1_month_before":11,
+              "frequency_2_month_before":9,
+              "frequency_3_month_before":9,
+              "frequency_4_month_before":9,
+              "frequency_5_month_before":10,
+              "frequency_6_month_before":10,
+              "frequency_7_month_before":8,
+              "frequency_8_month_before":10,
+              "frequency_9_month_before":13
+          }
+    response:
+      status: 400
+      statusText: BAD REQUEST
+      headers:
+        - name: Date
+          value: Mon, 05 Jan 2026 03:48:02 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "71"
+        - name: Connection
+          value: keep-alive
+        - name: Access-Control-Allow-Origin
+          value: "*"
+        - name: Access-Control-Allow-Methods
+          value: GET, POST, PUT, DELETE
+        - name: Access-Control-Allow-Headers
+          value: Content-Type, Authorization
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "message": "Unsupported product_type: ",
+              "status": "FAILED"
+          }

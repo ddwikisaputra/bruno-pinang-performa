@@ -1,0 +1,1753 @@
+info:
+  name: Add Finansial V2
+  type: http
+  seq: 10
+
+http:
+  method: POST
+  url: "{{base_url}}/v/2/crs/add-finansial"
+  body:
+    type: form-urlencoded
+    data:
+      - name: prakarsaId
+        value: "20942"
+        description: ID Prakarsa
+      - name: userId
+        value: "{{userId}}"
+        description: "[Encode]Personal Number BRI Agro (UserID Login) { MANDATORY }"
+      - name: financialType
+        value: BulananprakarsaId:20942
+        description: Jenis Analisa Finansial {MANDATORY} [ BULANAN ATAU MUSIAMAN ]
+      - name: userId
+        value: "{{userId}}"
+        description: Total Penjualan/Omset {OPTIONAL} [ BULANAN ATAU KMK ]
+      - name: financialType
+        value: Bulanan
+        description: Total Biaya HPP {OPTIONAL} [ BULANAN ATAU KMK ]
+      - name: totalIncome
+        value: "100000000"
+        description: Lama Musim Tanam {OPTIONAL} [ MUSIMAN ]
+      - name: totalHppExpense
+        value: "15000000"
+        description: Jumlah Produksi {OPTIONAL} [ MUSIMAN ]
+      - name: plantingSeasonPeriod
+        value: ""
+        description: Perkiraan Harga Jual Saat Panen  {OPTIONAL} [ MUSIMAN ]
+        disabled: true
+      - name: productionAmount
+        value: ""
+        description: Total Biaya Tanam Per Musim {OPTIONAL} [ MUSIMAN ]
+        disabled: true
+      - name: estimatedSellingPrice
+        value: ""
+        description: Jumlah Pekerja  {OPTIONAL} [ BULANAN AND MUSIMAN]
+        disabled: true
+      - name: totalPlantingCost
+        value: ""
+        description: Upah Pekerja {OPTIONAL} [ BULANAN ATAU MUSIAMAN ]
+        disabled: true
+      - name: totalEmployee
+        value: "4"
+        description: Pendapatan Usaha {OPTIONAL} [ BULANAN ATAU MUSIAMAN ]
+      - name: wages
+        value: "6000000"
+        description: Pendapatan Lain-lain {OPTIOANL} [ BULANAN ATAU MUSIAMAN ATAU KMK ]
+      - name: businessIncome
+        value: "80000000"
+        description: Total Biaya Rumah Tangga Per Bulan {OPTIONAL} [ MUSIMAN ]
+      - name: miscellaneousIncome
+        value: "15000000"
+        description: Total Biaya Lainnya {OPTIONAL}  [ BULANAN ATAU MUSIAMAN ATAU KMK ]
+      - name: householdExpenses
+        value: "20000000"
+        description: Total Angsuran Lainnya {OPTIONAL}  [ BULANAN ATAU MUSIAMAN ]
+      - name: totalOtherExpenses
+        value: "5000000"
+        description: Pendapatan Netto {OPTIONAL}  [ BULANAN ATAU MUSIAMAN ]
+      - name: totalOtherInstallment
+        value: "0"
+        description: RPC {OPTIONAL}  [ BULANAN ATAU MUSIAMAN ]
+      - name: nettoIncome
+        value: "40500000"
+        description: Kas /Bank {OPTIONAL}  [ KMK ]
+      - name: rpc
+        value: "30375000"
+        description: Piutang Dagang {OPTIONAL}  [ KMK ]
+      - name: balance
+        value: ""
+        description: Persediaan {OPTIONAL}  [ KMK ]
+      - name: accountReceivable
+        value: ""
+        description: Aktiva Lancar {OPTIONAL}  [ KMK ]
+        disabled: true
+      - name: assets
+        value: ""
+        description: Aktiva Tetap {OPTIONAL}  [ KMK ]
+        disabled: true
+      - name: currentAssets
+        value: ""
+        description: Total Aktiva {OPTIONAL}  [ KMK ]
+        disabled: true
+      - name: fixedAssets
+        value: ""
+        description: Hutnag Dagang {OPTIONAL}  [ KMK ]
+        disabled: true
+      - name: totalAssets
+        value: ""
+        description: Hutang Jangka Pendek {OPTIONAL}  [ KMK ]
+        disabled: true
+      - name: tradeDebt
+        value: ""
+        description: Hutang Jangka Panjang {OPTIONAL}  [ KMK ]
+        disabled: true
+      - name: shortTermDebt
+        value: ""
+        description: Total Hutang {OPTIONAL}  [ KMK ]
+        disabled: true
+      - name: longTermDebt
+        value: ""
+        description: Modal Sendiri {OPTIONAL}  [ KMK ]
+        disabled: true
+      - name: totalDebt
+        value: ""
+        description: Total Pasiva {OPTIONAL}  [ KMK ]
+        disabled: true
+      - name: ownerEquity
+        value: ""
+        description: Laba Kotor {OPTIONAL}  [ KMK ]
+        disabled: true
+      - name: totalLiability
+        value: ""
+        description: Biaya Operasional {OPTIONAL}  [ KMK ]
+        disabled: true
+      - name: grossProfit
+        value: ""
+        description: Laba Operasional {OPTIONAL}  [ KMK ]
+        disabled: true
+      - name: operationalExpenses
+        value: ""
+        description: Pendapatan Bersih {OPTIONAL}  [ KMK ]
+        disabled: true
+      - name: operationalProfit
+        value: ""
+        description: Proyeksi Penjualan {OPTIONAL}  [ KMK ]
+        disabled: true
+      - name: netProfit
+        value: ""
+        description: Proyeksi Hutang Dagang {OPTIONAL}  [ KMK ]
+        disabled: true
+      - name: salesProjection
+        value: ""
+        description: Kredit yang Diberikan {OPTIONAL}  [ KMK ]
+        disabled: true
+      - name: tradeDebtProjection
+        value: ""
+        description: SDS KMK {OPTIONAL}  [ KMK ]
+        disabled: true
+      - name: creditProvided
+        value: ""
+        description: Debt to Equity Ration {OPTIONAL}  [ KMK ]
+        disabled: true
+      - name: sdsKmk
+        value: ""
+        description: NWC Positif {OPTIONAL}  [ KMK ]
+        disabled: true
+      - name: debtToEquityRation
+        value: ""
+        description: ROE {OPTIONAL}  [ KMK ]
+        disabled: true
+      - name: nwcPositif
+        value: ""
+        description: ROI {OPTIONAL}  [ KMK ]
+        disabled: true
+      - name: roe
+        value: ""
+        description: Total Biaya Operasional Lainnya {MADNATORY} [ BULANAN ATAU MUSIAMAN ]
+        disabled: true
+      - name: roi
+        value: ""
+        disabled: true
+      - name: totalOtherOperationalExpense
+        value: "80000"
+      - name: totalIncome
+        value: "100000000"
+      - name: totalHppExpense
+        value: "15000000"
+      - name: plantingSeasonPeriod
+        value: ""
+        disabled: true
+      - name: productionAmount
+        value: ""
+        disabled: true
+      - name: estimatedSellingPrice
+        value: ""
+        disabled: true
+      - name: totalPlantingCost
+        value: ""
+        disabled: true
+      - name: totalEmployee
+        value: "4"
+      - name: wages
+        value: "6000000"
+      - name: businessIncome
+        value: "80000000"
+      - name: miscellaneousIncome
+        value: "15000000"
+      - name: householdExpenses
+        value: "20000000"
+      - name: totalOtherExpenses
+        value: "5000000"
+      - name: totalOtherInstallment
+        value: "0"
+      - name: nettoIncome
+        value: "40500000"
+      - name: rpc
+        value: "30375000"
+      - name: balance
+        value: ""
+      - name: accountReceivable
+        value: ""
+        disabled: true
+      - name: assets
+        value: ""
+        disabled: true
+      - name: currentAssets
+        value: ""
+        disabled: true
+      - name: fixedAssets
+        value: ""
+        disabled: true
+      - name: totalAssets
+        value: ""
+        disabled: true
+      - name: tradeDebt
+        value: ""
+        disabled: true
+      - name: shortTermDebt
+        value: ""
+        disabled: true
+      - name: longTermDebt
+        value: ""
+        disabled: true
+      - name: totalDebt
+        value: ""
+        disabled: true
+      - name: ownerEquity
+        value: ""
+        disabled: true
+      - name: totalLiability
+        value: ""
+        disabled: true
+      - name: grossProfit
+        value: ""
+        disabled: true
+      - name: operationalExpenses
+        value: ""
+        disabled: true
+      - name: operationalProfit
+        value: ""
+        disabled: true
+      - name: netProfit
+        value: ""
+        disabled: true
+      - name: salesProjection
+        value: ""
+        disabled: true
+      - name: tradeDebtProjection
+        value: ""
+        disabled: true
+      - name: creditProvided
+        value: ""
+        disabled: true
+      - name: sdsKmk
+        value: ""
+        disabled: true
+      - name: debtToEquityRation
+        value: ""
+        disabled: true
+      - name: nwcPositif
+        value: ""
+        disabled: true
+      - name: roe
+        value: ""
+        disabled: true
+      - name: roi
+        value: ""
+        disabled: true
+      - name: totalOtherOperationalExpense
+        value: "80000"
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/crs/add-finansial"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: prakarsaId
+            value: "2"
+            description: ID Prakarsa
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: financialType
+            value: Bulanan
+            description: Jenis Analisa Finansial {MANDATORY} [ BULANAN ATAU MUSIAMAN ]
+          - name: totalIncome
+            value: "100000000"
+            description: Total Penjualan/Omset {OPTIONAL} [ BULANAN ]
+          - name: totalHppExpense
+            value: "2500000"
+            description: Total Biaya HPP {OPTIONAL} [ BULANAN ]
+          - name: plantingSeasonPeriod
+            value: "0"
+            description: Lama Musim Tanam {OPTIONAL} [ MUSIMAN ]
+            disabled: true
+          - name: productionAmount
+            value: "0"
+            description: Jumlah Produksi {OPTIONAL} [ MUSIMAN ]
+            disabled: true
+          - name: estimatedSellingPrice
+            value: "0"
+            description: Perkiraan Harga Jual Saat Panan  {OPTIONAL} [ MUSIMAN ]
+            disabled: true
+          - name: totalPlantingCost
+            value: "0"
+            description: Total Biaya Tanam Per Musim {OPTIONAL} [ MUSIMAN ]
+            disabled: true
+          - name: totalEmployee
+            value: "300"
+            description: Jumlah Pekerja  {OPTIONAL} [ BULANAN AND MUSIMAN]
+          - name: wages
+            value: "5500000"
+            description: Upah Pekerja {OPTIONAL} [ BULANAN ATAU MUSIAMAN ]
+          - name: businessIncome
+            value: "98000000"
+            description: Pendapatan Usaha {OPTIONAL} [ BULANAN ATAU MUSIAMAN ]
+          - name: miscellaneousIncome
+            value: "0"
+            description: Pendapatan Lain-lain {OPTIOANL} [ BULANAN ATAU MUSIAMAN ]
+          - name: householdExpenses
+            value: "0"
+            description: Total Biaya Rumah Tangga Per Bulan {OPTIONAL} [ MUSIMAN ]
+          - name: totalOtherExpenses
+            value: "9000000"
+            description: Total Biaya Lainnya {OPTIONAL}  [ BULANAN ATAU MUSIAMAN ]
+          - name: totalOtherInstallment
+            value: "500000"
+            description: Total Angsuran Lainnya {OPTIONAL}  [ BULANAN ATAU MUSIAMAN ]
+          - name: nettoIncome
+            value: "92500050.59"
+            description: Pendapatan Netto {OPTIONAL}  [ BULANAN ATAU MUSIAMAN ]
+          - name: rpc
+            value: "9000000"
+            description: RPC {OPTIONAL}  [ BULANAN ATAU MUSIAMAN ]
+    response:
+      status: 401
+      statusText: Unauthorized
+      body:
+        type: text
+        data: |-
+          {
+              "code": 401,
+              "desc": "Tidak Memliki Akses",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/crs/add-finansial"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: prakarsaId
+            value: "2"
+            description: ID Prakarsa
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: financialType
+            value: Bulanan
+            description: Jenis Analisa Finansial {MANDATORY} [ BULANAN ATAU MUSIAMAN ]
+          - name: totalIncome
+            value: "100000000"
+            description: Total Penjualan/Omset {OPTIONAL} [ BULANAN ]
+          - name: totalHppExpense
+            value: "2500000"
+            description: Total Biaya HPP {OPTIONAL} [ BULANAN ]
+          - name: plantingSeasonPeriod
+            value: "0"
+            description: Lama Musim Tanam {OPTIONAL} [ MUSIMAN ]
+            disabled: true
+          - name: productionAmount
+            value: "0"
+            description: Jumlah Produksi {OPTIONAL} [ MUSIMAN ]
+            disabled: true
+          - name: estimatedSellingPrice
+            value: "0"
+            description: Perkiraan Harga Jual Saat Panan  {OPTIONAL} [ MUSIMAN ]
+            disabled: true
+          - name: totalPlantingCost
+            value: "0"
+            description: Total Biaya Tanam Per Musim {OPTIONAL} [ MUSIMAN ]
+            disabled: true
+          - name: totalEmployee
+            value: "300"
+            description: Jumlah Pekerja  {OPTIONAL} [ BULANAN AND MUSIMAN]
+          - name: wages
+            value: "5500000"
+            description: Upah Pekerja {OPTIONAL} [ BULANAN ATAU MUSIAMAN ]
+          - name: businessIncome
+            value: "98000000"
+            description: Pendapatan Usaha {OPTIONAL} [ BULANAN ATAU MUSIAMAN ]
+          - name: miscellaneousIncome
+            value: "0"
+            description: Pendapatan Lain-lain {OPTIOANL} [ BULANAN ATAU MUSIAMAN ]
+          - name: householdExpenses
+            value: "0"
+            description: Total Biaya Rumah Tangga Per Bulan {OPTIONAL} [ MUSIMAN ]
+          - name: totalOtherExpenses
+            value: "9000000"
+            description: Total Biaya Lainnya {OPTIONAL}  [ BULANAN ATAU MUSIAMAN ]
+          - name: totalOtherInstallment
+            value: "500000"
+            description: Total Angsuran Lainnya {OPTIONAL}  [ BULANAN ATAU MUSIAMAN ]
+          - name: nettoIncome
+            value: "92500050.59"
+            description: Pendapatan Netto {OPTIONAL}  [ BULANAN ATAU MUSIAMAN ]
+          - name: rpc
+            value: "9000000"
+            description: RPC {OPTIONAL}  [ BULANAN ATAU MUSIAMAN ]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 15 Jun 2021 04:09:52 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data": null
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/crs/add-finansial"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: prakarsaId
+            value: "2"
+            description: ID Prakarsa
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: financialType
+            value: Bulanan
+            description: Jenis Analisa Finansial {MANDATORY} [ BULANAN ATAU MUSIAMAN ]
+          - name: totalIncome
+            value: "100000000"
+            description: Total Penjualan/Omset {OPTIONAL} [ BULANAN ]
+          - name: totalHppExpense
+            value: "2500000"
+            description: Total Biaya HPP {OPTIONAL} [ BULANAN ]
+          - name: plantingSeasonPeriod
+            value: "0"
+            description: Lama Musim Tanam {OPTIONAL} [ MUSIMAN ]
+            disabled: true
+          - name: productionAmount
+            value: "0"
+            description: Jumlah Produksi {OPTIONAL} [ MUSIMAN ]
+            disabled: true
+          - name: estimatedSellingPrice
+            value: "0"
+            description: Perkiraan Harga Jual Saat Panan  {OPTIONAL} [ MUSIMAN ]
+            disabled: true
+          - name: totalPlantingCost
+            value: "0"
+            description: Total Biaya Tanam Per Musim {OPTIONAL} [ MUSIMAN ]
+            disabled: true
+          - name: totalEmployee
+            value: "300"
+            description: Jumlah Pekerja  {OPTIONAL} [ BULANAN AND MUSIMAN]
+          - name: wages
+            value: "5500000"
+            description: Upah Pekerja {OPTIONAL} [ BULANAN ATAU MUSIAMAN ]
+          - name: businessIncome
+            value: "98000000"
+            description: Pendapatan Usaha {OPTIONAL} [ BULANAN ATAU MUSIAMAN ]
+          - name: miscellaneousIncome
+            value: "0"
+            description: Pendapatan Lain-lain {OPTIOANL} [ BULANAN ATAU MUSIAMAN ]
+          - name: householdExpenses
+            value: "0"
+            description: Total Biaya Rumah Tangga Per Bulan {OPTIONAL} [ MUSIMAN ]
+          - name: totalOtherExpenses
+            value: "9000000"
+            description: Total Biaya Lainnya {OPTIONAL}  [ BULANAN ATAU MUSIAMAN ]
+          - name: totalOtherInstallment
+            value: "500000"
+            description: Total Angsuran Lainnya {OPTIONAL}  [ BULANAN ATAU MUSIAMAN ]
+          - name: nettoIncome
+            value: "92500050.59"
+            description: Pendapatan Netto {OPTIONAL}  [ BULANAN ATAU MUSIAMAN ]
+          - name: rpc
+            value: "9000000"
+            description: RPC {OPTIONAL}  [ BULANAN ATAU MUSIAMAN ]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 15 Jun 2021 04:09:52 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "prakarsa_id": 2
+              },
+              "desc": "Data Tersimpan",
+              "message": "Data CRS Usaha berhasil disimpan",
+              "status": 200
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/crs/add-finansial"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: prakarsaId
+            value: "2"
+            description: ID Prakarsa
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: financialType
+            value: Bulanan
+            description: Jenis Analisa Finansial {MANDATORY} [ BULANAN ATAU MUSIAMAN ]
+          - name: totalIncome
+            value: "100000000"
+            description: Total Penjualan/Omset {OPTIONAL} [ BULANAN ]
+          - name: totalHppExpense
+            value: "2500000"
+            description: Total Biaya HPP {OPTIONAL} [ BULANAN ]
+          - name: plantingSeasonPeriod
+            value: "0"
+            description: Lama Musim Tanam {OPTIONAL} [ MUSIMAN ]
+            disabled: true
+          - name: productionAmount
+            value: "0"
+            description: Jumlah Produksi {OPTIONAL} [ MUSIMAN ]
+            disabled: true
+          - name: estimatedSellingPrice
+            value: "0"
+            description: Perkiraan Harga Jual Saat Panan  {OPTIONAL} [ MUSIMAN ]
+            disabled: true
+          - name: totalPlantingCost
+            value: "0"
+            description: Total Biaya Tanam Per Musim {OPTIONAL} [ MUSIMAN ]
+            disabled: true
+          - name: totalEmployee
+            value: "300"
+            description: Jumlah Pekerja  {OPTIONAL} [ BULANAN AND MUSIMAN]
+          - name: wages
+            value: "5500000"
+            description: Upah Pekerja {OPTIONAL} [ BULANAN ATAU MUSIAMAN ]
+          - name: businessIncome
+            value: "98000000"
+            description: Pendapatan Usaha {OPTIONAL} [ BULANAN ATAU MUSIAMAN ]
+          - name: miscellaneousIncome
+            value: "0"
+            description: Pendapatan Lain-lain {OPTIOANL} [ BULANAN ATAU MUSIAMAN ]
+          - name: householdExpenses
+            value: "0"
+            description: Total Biaya Rumah Tangga Per Bulan {OPTIONAL} [ MUSIMAN ]
+          - name: totalOtherExpenses
+            value: "9000000"
+            description: Total Biaya Lainnya {OPTIONAL}  [ BULANAN ATAU MUSIAMAN ]
+          - name: totalOtherInstallment
+            value: "500000"
+            description: Total Angsuran Lainnya {OPTIONAL}  [ BULANAN ATAU MUSIAMAN ]
+          - name: nettoIncome
+            value: "92500050.59"
+            description: Pendapatan Netto {OPTIONAL}  [ BULANAN ATAU MUSIAMAN ]
+          - name: rpc
+            value: "9000000"
+            description: RPC {OPTIONAL}  [ BULANAN ATAU MUSIAMAN ]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 15 Jun 2021 04:09:52 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: error crs ditemukan (handle duplicate data)
+    request:
+      url: "{{base_url}}/v/1/crs/add-finansial"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: prakarsaId
+            value: "2"
+            description: ID Prakarsa
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: financialType
+            value: Bulanan
+            description: Jenis Analisa Finansial {MANDATORY} [ BULANAN ATAU MUSIAMAN ]
+          - name: totalIncome
+            value: "100000000"
+            description: Total Penjualan/Omset {OPTIONAL} [ BULANAN ]
+          - name: totalHppExpense
+            value: "2500000"
+            description: Total Biaya HPP {OPTIONAL} [ BULANAN ]
+          - name: plantingSeasonPeriod
+            value: "0"
+            description: Lama Musim Tanam {OPTIONAL} [ MUSIMAN ]
+            disabled: true
+          - name: productionAmount
+            value: "0"
+            description: Jumlah Produksi {OPTIONAL} [ MUSIMAN ]
+            disabled: true
+          - name: estimatedSellingPrice
+            value: "0"
+            description: Perkiraan Harga Jual Saat Panan  {OPTIONAL} [ MUSIMAN ]
+            disabled: true
+          - name: totalPlantingCost
+            value: "0"
+            description: Total Biaya Tanam Per Musim {OPTIONAL} [ MUSIMAN ]
+            disabled: true
+          - name: totalEmployee
+            value: "300"
+            description: Jumlah Pekerja  {OPTIONAL} [ BULANAN AND MUSIMAN]
+          - name: wages
+            value: "5500000"
+            description: Upah Pekerja {OPTIONAL} [ BULANAN ATAU MUSIAMAN ]
+          - name: businessIncome
+            value: "98000000"
+            description: Pendapatan Usaha {OPTIONAL} [ BULANAN ATAU MUSIAMAN ]
+          - name: miscellaneousIncome
+            value: "0"
+            description: Pendapatan Lain-lain {OPTIOANL} [ BULANAN ATAU MUSIAMAN ]
+          - name: householdExpenses
+            value: "0"
+            description: Total Biaya Rumah Tangga Per Bulan {OPTIONAL} [ MUSIMAN ]
+          - name: totalOtherExpenses
+            value: "9000000"
+            description: Total Biaya Lainnya {OPTIONAL}  [ BULANAN ATAU MUSIAMAN ]
+          - name: totalOtherInstallment
+            value: "500000"
+            description: Total Angsuran Lainnya {OPTIONAL}  [ BULANAN ATAU MUSIAMAN ]
+          - name: nettoIncome
+            value: "92500050.59"
+            description: Pendapatan Netto {OPTIONAL}  [ BULANAN ATAU MUSIAMAN ]
+          - name: rpc
+            value: "9000000"
+            description: RPC {OPTIONAL}  [ BULANAN ATAU MUSIAMAN ]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 15 Jun 2021 04:27:45 GMT
+        - name: Content-Length
+          value: "138"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Tidak bisa add, data CRS sudah ada",
+              "message": "Maaf, CRS ditemukan. Silahkan menggunakan Fungsi Update",
+              "status": 500
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{base_url}}/v/1/crs/add-finansial"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: prakarsaId
+            value: "30946"
+            description: ID Prakarsa
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: financialType
+            value: KMK Transaksional
+            description: Jenis Analisa Finansial {MANDATORY} [ BULANAN ATAU MUSIAMAN ]
+          - name: totalIncome
+            value: "100000000"
+            description: Total Penjualan/Omset {OPTIONAL} [ BULANAN ATAU KMK ]
+          - name: totalHppExpense
+            value: "2500000"
+            description: Total Biaya HPP {OPTIONAL} [ BULANAN ATAU KMK ]
+          - name: plantingSeasonPeriod
+            value: "0"
+            description: Lama Musim Tanam {OPTIONAL} [ MUSIMAN ]
+            disabled: true
+          - name: productionAmount
+            value: "0"
+            description: Jumlah Produksi {OPTIONAL} [ MUSIMAN ]
+            disabled: true
+          - name: estimatedSellingPrice
+            value: "0"
+            description: Perkiraan Harga Jual Saat Panen  {OPTIONAL} [ MUSIMAN ]
+            disabled: true
+          - name: totalPlantingCost
+            value: "0"
+            description: Total Biaya Tanam Per Musim {OPTIONAL} [ MUSIMAN ]
+            disabled: true
+          - name: totalEmployee
+            value: "300"
+            description: Jumlah Pekerja  {OPTIONAL} [ BULANAN AND MUSIMAN]
+            disabled: true
+          - name: wages
+            value: "5500000"
+            description: Upah Pekerja {OPTIONAL} [ BULANAN ATAU MUSIAMAN ]
+            disabled: true
+          - name: businessIncome
+            value: "98000000"
+            description: Pendapatan Usaha {OPTIONAL} [ BULANAN ATAU MUSIAMAN ]
+            disabled: true
+          - name: miscellaneousIncome
+            value: "0"
+            description: Pendapatan Lain-lain {OPTIOANL} [ BULANAN ATAU MUSIAMAN ATAU KMK ]
+          - name: householdExpenses
+            value: "0"
+            description: Total Biaya Rumah Tangga Per Bulan {OPTIONAL} [ MUSIMAN ]
+            disabled: true
+          - name: totalOtherExpenses
+            value: "9000000"
+            description: Total Biaya Lainnya {OPTIONAL}  [ BULANAN ATAU MUSIAMAN ATAU KMK ]
+          - name: totalOtherInstallment
+            value: "500000"
+            description: Total Angsuran Lainnya {OPTIONAL}  [ BULANAN ATAU MUSIAMAN ]
+            disabled: true
+          - name: nettoIncome
+            value: "92500050.59"
+            description: Pendapatan Netto {OPTIONAL}  [ BULANAN ATAU MUSIAMAN ]
+            disabled: true
+          - name: rpc
+            value: "9000000"
+            description: RPC {OPTIONAL}  [ BULANAN ATAU MUSIAMAN ]
+            disabled: true
+          - name: balance
+            value: "65000000"
+            description: Kas /Bank {OPTIONAL}  [ KMK ]
+          - name: accountReceivable
+            value: "500000"
+            description: Piutang Dagang {OPTIONAL}  [ KMK ]
+          - name: assets
+            value: "9000000"
+            description: Persediaan {OPTIONAL}  [ KMK ]
+          - name: currentAssets
+            value: "1000000"
+            description: Aktiva Lancar {OPTIONAL}  [ KMK ]
+          - name: fixedAssets
+            value: "5000000"
+            description: Aktiva Tetap {OPTIONAL}  [ KMK ]
+          - name: totalAssets
+            value: "6000000"
+            description: Total Aktiva {OPTIONAL}  [ KMK ]
+          - name: tradeDebt
+            value: "100000"
+            description: Hutnag Dagang {OPTIONAL}  [ KMK ]
+          - name: shortTermDebt
+            value: "400000"
+            description: Hutang Jangka Pendek {OPTIONAL}  [ KMK ]
+          - name: longTermDebt
+            value: "1000000"
+            description: Hutang Jangka Panjang {OPTIONAL}  [ KMK ]
+          - name: totalDebt
+            value: "1500000"
+            description: Total Hutang {OPTIONAL}  [ KMK ]
+          - name: ownerEquity
+            value: "500000"
+            description: Modal Sendiri {OPTIONAL}  [ KMK ]
+          - name: totalLiability
+            value: "1000000"
+            description: Total Pasiva {OPTIONAL}  [ KMK ]
+          - name: grossProfit
+            value: "45000000"
+            description: Laba Kotor {OPTIONAL}  [ KMK ]
+          - name: operationalExpenses
+            value: "500000"
+            description: Biaya Operasional {OPTIONAL}  [ KMK ]
+          - name: operationalProfit
+            value: "1000000"
+            description: Laba Operasional {OPTIONAL}  [ KMK ]
+          - name: netProfit
+            value: "45500000"
+            description: Pendapatan Bersih {OPTIONAL}  [ KMK ]
+          - name: salesProjection
+            value: "5000000"
+            description: Proyeksi Penjualan {OPTIONAL}  [ KMK ]
+          - name: tradeDebtProjection
+            value: "4000000"
+            description: Proyeksi Hutang Dagang {OPTIONAL}  [ KMK ]
+          - name: creditProvided
+            value: "40000000"
+            description: Kredit yang Diberikan {OPTIONAL}  [ KMK ]
+          - name: sdsKmk
+            value: "13"
+            description: SDS KMK {OPTIONAL}  [ KMK ]
+          - name: debtToEquityRation
+            value: "10"
+            description: Debt to Equity Ration {OPTIONAL}  [ KMK ]
+          - name: nwcPositif
+            value: "5000000"
+            description: NWC Positif {OPTIONAL}  [ KMK ]
+          - name: roe
+            value: "10"
+            description: ROE {OPTIONAL}  [ KMK ]
+          - name: roi
+            value: "10"
+            description: ROI {OPTIONAL}  [ KMK ]
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 20 Jul 2022 07:25:32 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: success V2
+    request:
+      url: "{{base_url}}/v/1/crs/add-finansial"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: prakarsaId
+            value: "31124"
+            description: ID Prakarsa
+          - name: userId
+            value: UmF5YVBpUGVyVG9w9FR0lGD8PJZ01laNFpB91ptV5mkFfw==
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: financialType
+            value: Bulanan
+            description: Jenis Analisa Finansial {MANDATORY} [ BULANAN ATAU MUSIAMAN ]
+          - name: totalIncome
+            value: "10000"
+            description: Total Penjualan/Omset {OPTIONAL} [ BULANAN ATAU KMK ]
+          - name: totalHppExpense
+            value: "500002"
+            description: Total Biaya HPP {OPTIONAL} [ BULANAN ATAU KMK ]
+          - name: plantingSeasonPeriod
+            value: "0"
+            description: Lama Musim Tanam {OPTIONAL} [ MUSIMAN ]
+            disabled: true
+          - name: productionAmount
+            value: "0"
+            description: Jumlah Produksi {OPTIONAL} [ MUSIMAN ]
+            disabled: true
+          - name: estimatedSellingPrice
+            value: "0"
+            description: Perkiraan Harga Jual Saat Panen  {OPTIONAL} [ MUSIMAN ]
+            disabled: true
+          - name: totalPlantingCost
+            value: "0"
+            description: Total Biaya Tanam Per Musim {OPTIONAL} [ MUSIMAN ]
+            disabled: true
+          - name: totalEmployee
+            value: "300"
+            description: Jumlah Pekerja  {OPTIONAL} [ BULANAN AND MUSIMAN]
+            disabled: true
+          - name: wages
+            value: "5500000"
+            description: Upah Pekerja {OPTIONAL} [ BULANAN ATAU MUSIAMAN ]
+            disabled: true
+          - name: businessIncome
+            value: "98000000"
+            description: Pendapatan Usaha {OPTIONAL} [ BULANAN ATAU MUSIAMAN ]
+            disabled: true
+          - name: miscellaneousIncome
+            value: "0"
+            description: Pendapatan Lain-lain {OPTIOANL} [ BULANAN ATAU MUSIAMAN ATAU KMK ]
+          - name: householdExpenses
+            value: "0"
+            description: Total Biaya Rumah Tangga Per Bulan {OPTIONAL} [ MUSIMAN ]
+            disabled: true
+          - name: totalOtherExpenses
+            value: "9000000"
+            description: Total Biaya Lainnya {OPTIONAL}  [ BULANAN ATAU MUSIAMAN ATAU KMK ]
+          - name: totalOtherInstallment
+            value: "500000"
+            description: Total Angsuran Lainnya {OPTIONAL}  [ BULANAN ATAU MUSIAMAN ]
+            disabled: true
+          - name: nettoIncome
+            value: "92500050.59"
+            description: Pendapatan Netto {OPTIONAL}  [ BULANAN ATAU MUSIAMAN ]
+            disabled: true
+          - name: rpc
+            value: "9000000"
+            description: RPC {OPTIONAL}  [ BULANAN ATAU MUSIAMAN ]
+            disabled: true
+          - name: balance
+            value: "65000000"
+            description: Kas /Bank {OPTIONAL}  [ KMK ]
+          - name: accountReceivable
+            value: "500000"
+            description: Piutang Dagang {OPTIONAL}  [ KMK ]
+          - name: assets
+            value: "9000000"
+            description: Persediaan {OPTIONAL}  [ KMK ]
+          - name: currentAssets
+            value: "1000000"
+            description: Aktiva Lancar {OPTIONAL}  [ KMK ]
+          - name: fixedAssets
+            value: "5000000"
+            description: Aktiva Tetap {OPTIONAL}  [ KMK ]
+          - name: totalAssets
+            value: "6000000"
+            description: Total Aktiva {OPTIONAL}  [ KMK ]
+          - name: tradeDebt
+            value: "100000"
+            description: Hutnag Dagang {OPTIONAL}  [ KMK ]
+          - name: shortTermDebt
+            value: "400000"
+            description: Hutang Jangka Pendek {OPTIONAL}  [ KMK ]
+          - name: longTermDebt
+            value: "1000000"
+            description: Hutang Jangka Panjang {OPTIONAL}  [ KMK ]
+          - name: totalDebt
+            value: "1500000"
+            description: Total Hutang {OPTIONAL}  [ KMK ]
+          - name: ownerEquity
+            value: "500000"
+            description: Modal Sendiri {OPTIONAL}  [ KMK ]
+          - name: totalLiability
+            value: "1000000"
+            description: Total Pasiva {OPTIONAL}  [ KMK ]
+          - name: grossProfit
+            value: "45000000"
+            description: Laba Kotor {OPTIONAL}  [ KMK ]
+          - name: operationalExpenses
+            value: "500000"
+            description: Biaya Operasional {OPTIONAL}  [ KMK ]
+          - name: operationalProfit
+            value: "1000000"
+            description: Laba Operasional {OPTIONAL}  [ KMK ]
+          - name: netProfit
+            value: "45500000"
+            description: Pendapatan Bersih {OPTIONAL}  [ KMK ]
+          - name: salesProjection
+            value: "5000000"
+            description: Proyeksi Penjualan {OPTIONAL}  [ KMK ]
+          - name: tradeDebtProjection
+            value: "4000000"
+            description: Proyeksi Hutang Dagang {OPTIONAL}  [ KMK ]
+          - name: creditProvided
+            value: "40000000"
+            description: Kredit yang Diberikan {OPTIONAL}  [ KMK ]
+          - name: sdsKmk
+            value: "13"
+            description: SDS KMK {OPTIONAL}  [ KMK ]
+          - name: debtToEquityRation
+            value: "10"
+            description: Debt to Equity Ration {OPTIONAL}  [ KMK ]
+          - name: nwcPositif
+            value: "5000000"
+            description: NWC Positif {OPTIONAL}  [ KMK ]
+          - name: roe
+            value: "10"
+            description: ROE {OPTIONAL}  [ KMK ]
+          - name: roi
+            value: "10"
+            description: ROI {OPTIONAL}  [ KMK ]
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "data": {
+                  "prakarsa_id": 2
+              },
+              "desc": "Data Tersimpan",
+              "message": "Data CRS Usaha berhasil disimpan",
+              "status": 200
+          }
+  - name: error crs ditemukan (handle duplicate data)
+    request:
+      url: "{{base_url}}/v/1/crs/add-finansial"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: prakarsaId
+            value: "2"
+            description: ID Prakarsa
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: financialType
+            value: Bulanan
+            description: Jenis Analisa Finansial {MANDATORY} [ BULANAN ATAU MUSIAMAN ]
+          - name: totalIncome
+            value: "100000000"
+            description: Total Penjualan/Omset {OPTIONAL} [ BULANAN ]
+          - name: totalHppExpense
+            value: "2500000"
+            description: Total Biaya HPP {OPTIONAL} [ BULANAN ]
+          - name: plantingSeasonPeriod
+            value: "0"
+            description: Lama Musim Tanam {OPTIONAL} [ MUSIMAN ]
+            disabled: true
+          - name: productionAmount
+            value: "0"
+            description: Jumlah Produksi {OPTIONAL} [ MUSIMAN ]
+            disabled: true
+          - name: estimatedSellingPrice
+            value: "0"
+            description: Perkiraan Harga Jual Saat Panan  {OPTIONAL} [ MUSIMAN ]
+            disabled: true
+          - name: totalPlantingCost
+            value: "0"
+            description: Total Biaya Tanam Per Musim {OPTIONAL} [ MUSIMAN ]
+            disabled: true
+          - name: totalEmployee
+            value: "300"
+            description: Jumlah Pekerja  {OPTIONAL} [ BULANAN AND MUSIMAN]
+          - name: wages
+            value: "5500000"
+            description: Upah Pekerja {OPTIONAL} [ BULANAN ATAU MUSIAMAN ]
+          - name: businessIncome
+            value: "98000000"
+            description: Pendapatan Usaha {OPTIONAL} [ BULANAN ATAU MUSIAMAN ]
+          - name: miscellaneousIncome
+            value: "0"
+            description: Pendapatan Lain-lain {OPTIOANL} [ BULANAN ATAU MUSIAMAN ]
+          - name: householdExpenses
+            value: "0"
+            description: Total Biaya Rumah Tangga Per Bulan {OPTIONAL} [ MUSIMAN ]
+          - name: totalOtherExpenses
+            value: "9000000"
+            description: Total Biaya Lainnya {OPTIONAL}  [ BULANAN ATAU MUSIAMAN ]
+          - name: totalOtherInstallment
+            value: "500000"
+            description: Total Angsuran Lainnya {OPTIONAL}  [ BULANAN ATAU MUSIAMAN ]
+          - name: nettoIncome
+            value: "92500050.59"
+            description: Pendapatan Netto {OPTIONAL}  [ BULANAN ATAU MUSIAMAN ]
+          - name: rpc
+            value: "9000000"
+            description: RPC {OPTIONAL}  [ BULANAN ATAU MUSIAMAN ]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 15 Jun 2021 04:27:45 GMT
+        - name: Content-Length
+          value: "138"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Tidak bisa add, data CRS sudah ada",
+              "message": "Maaf, CRS ditemukan. Silahkan menggunakan Fungsi Update",
+              "status": 500
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/crs/add-finansial"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: prakarsaId
+            value: "2"
+            description: ID Prakarsa
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: financialType
+            value: Bulanan
+            description: Jenis Analisa Finansial {MANDATORY} [ BULANAN ATAU MUSIAMAN ]
+          - name: totalIncome
+            value: "100000000"
+            description: Total Penjualan/Omset {OPTIONAL} [ BULANAN ]
+          - name: totalHppExpense
+            value: "2500000"
+            description: Total Biaya HPP {OPTIONAL} [ BULANAN ]
+          - name: plantingSeasonPeriod
+            value: "0"
+            description: Lama Musim Tanam {OPTIONAL} [ MUSIMAN ]
+            disabled: true
+          - name: productionAmount
+            value: "0"
+            description: Jumlah Produksi {OPTIONAL} [ MUSIMAN ]
+            disabled: true
+          - name: estimatedSellingPrice
+            value: "0"
+            description: Perkiraan Harga Jual Saat Panan  {OPTIONAL} [ MUSIMAN ]
+            disabled: true
+          - name: totalPlantingCost
+            value: "0"
+            description: Total Biaya Tanam Per Musim {OPTIONAL} [ MUSIMAN ]
+            disabled: true
+          - name: totalEmployee
+            value: "300"
+            description: Jumlah Pekerja  {OPTIONAL} [ BULANAN AND MUSIMAN]
+          - name: wages
+            value: "5500000"
+            description: Upah Pekerja {OPTIONAL} [ BULANAN ATAU MUSIAMAN ]
+          - name: businessIncome
+            value: "98000000"
+            description: Pendapatan Usaha {OPTIONAL} [ BULANAN ATAU MUSIAMAN ]
+          - name: miscellaneousIncome
+            value: "0"
+            description: Pendapatan Lain-lain {OPTIOANL} [ BULANAN ATAU MUSIAMAN ]
+          - name: householdExpenses
+            value: "0"
+            description: Total Biaya Rumah Tangga Per Bulan {OPTIONAL} [ MUSIMAN ]
+          - name: totalOtherExpenses
+            value: "9000000"
+            description: Total Biaya Lainnya {OPTIONAL}  [ BULANAN ATAU MUSIAMAN ]
+          - name: totalOtherInstallment
+            value: "500000"
+            description: Total Angsuran Lainnya {OPTIONAL}  [ BULANAN ATAU MUSIAMAN ]
+          - name: nettoIncome
+            value: "92500050.59"
+            description: Pendapatan Netto {OPTIONAL}  [ BULANAN ATAU MUSIAMAN ]
+          - name: rpc
+            value: "9000000"
+            description: RPC {OPTIONAL}  [ BULANAN ATAU MUSIAMAN ]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 15 Jun 2021 04:09:52 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{base_url}}/v/1/crs/add-finansial"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: prakarsaId
+            value: "30946"
+            description: ID Prakarsa
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: financialType
+            value: KMK Transaksional
+            description: Jenis Analisa Finansial {MANDATORY} [ BULANAN ATAU MUSIAMAN ]
+          - name: totalIncome
+            value: "100000000"
+            description: Total Penjualan/Omset {OPTIONAL} [ BULANAN ATAU KMK ]
+          - name: totalHppExpense
+            value: "2500000"
+            description: Total Biaya HPP {OPTIONAL} [ BULANAN ATAU KMK ]
+          - name: plantingSeasonPeriod
+            value: "0"
+            description: Lama Musim Tanam {OPTIONAL} [ MUSIMAN ]
+            disabled: true
+          - name: productionAmount
+            value: "0"
+            description: Jumlah Produksi {OPTIONAL} [ MUSIMAN ]
+            disabled: true
+          - name: estimatedSellingPrice
+            value: "0"
+            description: Perkiraan Harga Jual Saat Panen  {OPTIONAL} [ MUSIMAN ]
+            disabled: true
+          - name: totalPlantingCost
+            value: "0"
+            description: Total Biaya Tanam Per Musim {OPTIONAL} [ MUSIMAN ]
+            disabled: true
+          - name: totalEmployee
+            value: "300"
+            description: Jumlah Pekerja  {OPTIONAL} [ BULANAN AND MUSIMAN]
+            disabled: true
+          - name: wages
+            value: "5500000"
+            description: Upah Pekerja {OPTIONAL} [ BULANAN ATAU MUSIAMAN ]
+            disabled: true
+          - name: businessIncome
+            value: "98000000"
+            description: Pendapatan Usaha {OPTIONAL} [ BULANAN ATAU MUSIAMAN ]
+            disabled: true
+          - name: miscellaneousIncome
+            value: "0"
+            description: Pendapatan Lain-lain {OPTIOANL} [ BULANAN ATAU MUSIAMAN ATAU KMK ]
+          - name: householdExpenses
+            value: "0"
+            description: Total Biaya Rumah Tangga Per Bulan {OPTIONAL} [ MUSIMAN ]
+            disabled: true
+          - name: totalOtherExpenses
+            value: "9000000"
+            description: Total Biaya Lainnya {OPTIONAL}  [ BULANAN ATAU MUSIAMAN ATAU KMK ]
+          - name: totalOtherInstallment
+            value: "500000"
+            description: Total Angsuran Lainnya {OPTIONAL}  [ BULANAN ATAU MUSIAMAN ]
+            disabled: true
+          - name: nettoIncome
+            value: "92500050.59"
+            description: Pendapatan Netto {OPTIONAL}  [ BULANAN ATAU MUSIAMAN ]
+            disabled: true
+          - name: rpc
+            value: "9000000"
+            description: RPC {OPTIONAL}  [ BULANAN ATAU MUSIAMAN ]
+            disabled: true
+          - name: balance
+            value: "65000000"
+            description: Kas /Bank {OPTIONAL}  [ KMK ]
+          - name: accountReceivable
+            value: "500000"
+            description: Piutang Dagang {OPTIONAL}  [ KMK ]
+          - name: assets
+            value: "9000000"
+            description: Persediaan {OPTIONAL}  [ KMK ]
+          - name: currentAssets
+            value: "1000000"
+            description: Aktiva Lancar {OPTIONAL}  [ KMK ]
+          - name: fixedAssets
+            value: "5000000"
+            description: Aktiva Tetap {OPTIONAL}  [ KMK ]
+          - name: totalAssets
+            value: "6000000"
+            description: Total Aktiva {OPTIONAL}  [ KMK ]
+          - name: tradeDebt
+            value: "100000"
+            description: Hutnag Dagang {OPTIONAL}  [ KMK ]
+          - name: shortTermDebt
+            value: "400000"
+            description: Hutang Jangka Pendek {OPTIONAL}  [ KMK ]
+          - name: longTermDebt
+            value: "1000000"
+            description: Hutang Jangka Panjang {OPTIONAL}  [ KMK ]
+          - name: totalDebt
+            value: "1500000"
+            description: Total Hutang {OPTIONAL}  [ KMK ]
+          - name: ownerEquity
+            value: "500000"
+            description: Modal Sendiri {OPTIONAL}  [ KMK ]
+          - name: totalLiability
+            value: "1000000"
+            description: Total Pasiva {OPTIONAL}  [ KMK ]
+          - name: grossProfit
+            value: "45000000"
+            description: Laba Kotor {OPTIONAL}  [ KMK ]
+          - name: operationalExpenses
+            value: "500000"
+            description: Biaya Operasional {OPTIONAL}  [ KMK ]
+          - name: operationalProfit
+            value: "1000000"
+            description: Laba Operasional {OPTIONAL}  [ KMK ]
+          - name: netProfit
+            value: "45500000"
+            description: Pendapatan Bersih {OPTIONAL}  [ KMK ]
+          - name: salesProjection
+            value: "5000000"
+            description: Proyeksi Penjualan {OPTIONAL}  [ KMK ]
+          - name: tradeDebtProjection
+            value: "4000000"
+            description: Proyeksi Hutang Dagang {OPTIONAL}  [ KMK ]
+          - name: creditProvided
+            value: "40000000"
+            description: Kredit yang Diberikan {OPTIONAL}  [ KMK ]
+          - name: sdsKmk
+            value: "13"
+            description: SDS KMK {OPTIONAL}  [ KMK ]
+          - name: debtToEquityRation
+            value: "10"
+            description: Debt to Equity Ration {OPTIONAL}  [ KMK ]
+          - name: nwcPositif
+            value: "5000000"
+            description: NWC Positif {OPTIONAL}  [ KMK ]
+          - name: roe
+            value: "10"
+            description: ROE {OPTIONAL}  [ KMK ]
+          - name: roi
+            value: "10"
+            description: ROI {OPTIONAL}  [ KMK ]
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 20 Jul 2022 07:25:32 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: success V2
+    request:
+      url: "{{base_url}}/v/1/crs/add-finansial"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: prakarsaId
+            value: "31124"
+            description: ID Prakarsa
+          - name: userId
+            value: UmF5YVBpUGVyVG9w9FR0lGD8PJZ01laNFpB91ptV5mkFfw==
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: financialType
+            value: Bulanan
+            description: Jenis Analisa Finansial {MANDATORY} [ BULANAN ATAU MUSIAMAN ]
+          - name: totalIncome
+            value: "10000"
+            description: Total Penjualan/Omset {OPTIONAL} [ BULANAN ATAU KMK ]
+          - name: totalHppExpense
+            value: "500002"
+            description: Total Biaya HPP {OPTIONAL} [ BULANAN ATAU KMK ]
+          - name: plantingSeasonPeriod
+            value: "0"
+            description: Lama Musim Tanam {OPTIONAL} [ MUSIMAN ]
+            disabled: true
+          - name: productionAmount
+            value: "0"
+            description: Jumlah Produksi {OPTIONAL} [ MUSIMAN ]
+            disabled: true
+          - name: estimatedSellingPrice
+            value: "0"
+            description: Perkiraan Harga Jual Saat Panen  {OPTIONAL} [ MUSIMAN ]
+            disabled: true
+          - name: totalPlantingCost
+            value: "0"
+            description: Total Biaya Tanam Per Musim {OPTIONAL} [ MUSIMAN ]
+            disabled: true
+          - name: totalEmployee
+            value: "300"
+            description: Jumlah Pekerja  {OPTIONAL} [ BULANAN AND MUSIMAN]
+            disabled: true
+          - name: wages
+            value: "5500000"
+            description: Upah Pekerja {OPTIONAL} [ BULANAN ATAU MUSIAMAN ]
+            disabled: true
+          - name: businessIncome
+            value: "98000000"
+            description: Pendapatan Usaha {OPTIONAL} [ BULANAN ATAU MUSIAMAN ]
+            disabled: true
+          - name: miscellaneousIncome
+            value: "0"
+            description: Pendapatan Lain-lain {OPTIOANL} [ BULANAN ATAU MUSIAMAN ATAU KMK ]
+          - name: householdExpenses
+            value: "0"
+            description: Total Biaya Rumah Tangga Per Bulan {OPTIONAL} [ MUSIMAN ]
+            disabled: true
+          - name: totalOtherExpenses
+            value: "9000000"
+            description: Total Biaya Lainnya {OPTIONAL}  [ BULANAN ATAU MUSIAMAN ATAU KMK ]
+          - name: totalOtherInstallment
+            value: "500000"
+            description: Total Angsuran Lainnya {OPTIONAL}  [ BULANAN ATAU MUSIAMAN ]
+            disabled: true
+          - name: nettoIncome
+            value: "92500050.59"
+            description: Pendapatan Netto {OPTIONAL}  [ BULANAN ATAU MUSIAMAN ]
+            disabled: true
+          - name: rpc
+            value: "9000000"
+            description: RPC {OPTIONAL}  [ BULANAN ATAU MUSIAMAN ]
+            disabled: true
+          - name: balance
+            value: "65000000"
+            description: Kas /Bank {OPTIONAL}  [ KMK ]
+          - name: accountReceivable
+            value: "500000"
+            description: Piutang Dagang {OPTIONAL}  [ KMK ]
+          - name: assets
+            value: "9000000"
+            description: Persediaan {OPTIONAL}  [ KMK ]
+          - name: currentAssets
+            value: "1000000"
+            description: Aktiva Lancar {OPTIONAL}  [ KMK ]
+          - name: fixedAssets
+            value: "5000000"
+            description: Aktiva Tetap {OPTIONAL}  [ KMK ]
+          - name: totalAssets
+            value: "6000000"
+            description: Total Aktiva {OPTIONAL}  [ KMK ]
+          - name: tradeDebt
+            value: "100000"
+            description: Hutnag Dagang {OPTIONAL}  [ KMK ]
+          - name: shortTermDebt
+            value: "400000"
+            description: Hutang Jangka Pendek {OPTIONAL}  [ KMK ]
+          - name: longTermDebt
+            value: "1000000"
+            description: Hutang Jangka Panjang {OPTIONAL}  [ KMK ]
+          - name: totalDebt
+            value: "1500000"
+            description: Total Hutang {OPTIONAL}  [ KMK ]
+          - name: ownerEquity
+            value: "500000"
+            description: Modal Sendiri {OPTIONAL}  [ KMK ]
+          - name: totalLiability
+            value: "1000000"
+            description: Total Pasiva {OPTIONAL}  [ KMK ]
+          - name: grossProfit
+            value: "45000000"
+            description: Laba Kotor {OPTIONAL}  [ KMK ]
+          - name: operationalExpenses
+            value: "500000"
+            description: Biaya Operasional {OPTIONAL}  [ KMK ]
+          - name: operationalProfit
+            value: "1000000"
+            description: Laba Operasional {OPTIONAL}  [ KMK ]
+          - name: netProfit
+            value: "45500000"
+            description: Pendapatan Bersih {OPTIONAL}  [ KMK ]
+          - name: salesProjection
+            value: "5000000"
+            description: Proyeksi Penjualan {OPTIONAL}  [ KMK ]
+          - name: tradeDebtProjection
+            value: "4000000"
+            description: Proyeksi Hutang Dagang {OPTIONAL}  [ KMK ]
+          - name: creditProvided
+            value: "40000000"
+            description: Kredit yang Diberikan {OPTIONAL}  [ KMK ]
+          - name: sdsKmk
+            value: "13"
+            description: SDS KMK {OPTIONAL}  [ KMK ]
+          - name: debtToEquityRation
+            value: "10"
+            description: Debt to Equity Ration {OPTIONAL}  [ KMK ]
+          - name: nwcPositif
+            value: "5000000"
+            description: NWC Positif {OPTIONAL}  [ KMK ]
+          - name: roe
+            value: "10"
+            description: ROE {OPTIONAL}  [ KMK ]
+          - name: roi
+            value: "10"
+            description: ROI {OPTIONAL}  [ KMK ]
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "data": {
+                  "prakarsa_id": 2
+              },
+              "desc": "Data Tersimpan",
+              "message": "Data CRS Usaha berhasil disimpan",
+              "status": 200
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/crs/add-finansial"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: prakarsaId
+            value: "2"
+            description: ID Prakarsa
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: financialType
+            value: Bulanan
+            description: Jenis Analisa Finansial {MANDATORY} [ BULANAN ATAU MUSIAMAN ]
+          - name: totalIncome
+            value: "100000000"
+            description: Total Penjualan/Omset {OPTIONAL} [ BULANAN ]
+          - name: totalHppExpense
+            value: "2500000"
+            description: Total Biaya HPP {OPTIONAL} [ BULANAN ]
+          - name: plantingSeasonPeriod
+            value: "0"
+            description: Lama Musim Tanam {OPTIONAL} [ MUSIMAN ]
+            disabled: true
+          - name: productionAmount
+            value: "0"
+            description: Jumlah Produksi {OPTIONAL} [ MUSIMAN ]
+            disabled: true
+          - name: estimatedSellingPrice
+            value: "0"
+            description: Perkiraan Harga Jual Saat Panan  {OPTIONAL} [ MUSIMAN ]
+            disabled: true
+          - name: totalPlantingCost
+            value: "0"
+            description: Total Biaya Tanam Per Musim {OPTIONAL} [ MUSIMAN ]
+            disabled: true
+          - name: totalEmployee
+            value: "300"
+            description: Jumlah Pekerja  {OPTIONAL} [ BULANAN AND MUSIMAN]
+          - name: wages
+            value: "5500000"
+            description: Upah Pekerja {OPTIONAL} [ BULANAN ATAU MUSIAMAN ]
+          - name: businessIncome
+            value: "98000000"
+            description: Pendapatan Usaha {OPTIONAL} [ BULANAN ATAU MUSIAMAN ]
+          - name: miscellaneousIncome
+            value: "0"
+            description: Pendapatan Lain-lain {OPTIOANL} [ BULANAN ATAU MUSIAMAN ]
+          - name: householdExpenses
+            value: "0"
+            description: Total Biaya Rumah Tangga Per Bulan {OPTIONAL} [ MUSIMAN ]
+          - name: totalOtherExpenses
+            value: "9000000"
+            description: Total Biaya Lainnya {OPTIONAL}  [ BULANAN ATAU MUSIAMAN ]
+          - name: totalOtherInstallment
+            value: "500000"
+            description: Total Angsuran Lainnya {OPTIONAL}  [ BULANAN ATAU MUSIAMAN ]
+          - name: nettoIncome
+            value: "92500050.59"
+            description: Pendapatan Netto {OPTIONAL}  [ BULANAN ATAU MUSIAMAN ]
+          - name: rpc
+            value: "9000000"
+            description: RPC {OPTIONAL}  [ BULANAN ATAU MUSIAMAN ]
+    response:
+      status: 401
+      statusText: Unauthorized
+      body:
+        type: text
+        data: |-
+          {
+              "code": 401,
+              "desc": "Tidak Memliki Akses",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/crs/add-finansial"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: prakarsaId
+            value: "2"
+            description: ID Prakarsa
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: financialType
+            value: Bulanan
+            description: Jenis Analisa Finansial {MANDATORY} [ BULANAN ATAU MUSIAMAN ]
+          - name: totalIncome
+            value: "100000000"
+            description: Total Penjualan/Omset {OPTIONAL} [ BULANAN ]
+          - name: totalHppExpense
+            value: "2500000"
+            description: Total Biaya HPP {OPTIONAL} [ BULANAN ]
+          - name: plantingSeasonPeriod
+            value: "0"
+            description: Lama Musim Tanam {OPTIONAL} [ MUSIMAN ]
+            disabled: true
+          - name: productionAmount
+            value: "0"
+            description: Jumlah Produksi {OPTIONAL} [ MUSIMAN ]
+            disabled: true
+          - name: estimatedSellingPrice
+            value: "0"
+            description: Perkiraan Harga Jual Saat Panan  {OPTIONAL} [ MUSIMAN ]
+            disabled: true
+          - name: totalPlantingCost
+            value: "0"
+            description: Total Biaya Tanam Per Musim {OPTIONAL} [ MUSIMAN ]
+            disabled: true
+          - name: totalEmployee
+            value: "300"
+            description: Jumlah Pekerja  {OPTIONAL} [ BULANAN AND MUSIMAN]
+          - name: wages
+            value: "5500000"
+            description: Upah Pekerja {OPTIONAL} [ BULANAN ATAU MUSIAMAN ]
+          - name: businessIncome
+            value: "98000000"
+            description: Pendapatan Usaha {OPTIONAL} [ BULANAN ATAU MUSIAMAN ]
+          - name: miscellaneousIncome
+            value: "0"
+            description: Pendapatan Lain-lain {OPTIOANL} [ BULANAN ATAU MUSIAMAN ]
+          - name: householdExpenses
+            value: "0"
+            description: Total Biaya Rumah Tangga Per Bulan {OPTIONAL} [ MUSIMAN ]
+          - name: totalOtherExpenses
+            value: "9000000"
+            description: Total Biaya Lainnya {OPTIONAL}  [ BULANAN ATAU MUSIAMAN ]
+          - name: totalOtherInstallment
+            value: "500000"
+            description: Total Angsuran Lainnya {OPTIONAL}  [ BULANAN ATAU MUSIAMAN ]
+          - name: nettoIncome
+            value: "92500050.59"
+            description: Pendapatan Netto {OPTIONAL}  [ BULANAN ATAU MUSIAMAN ]
+          - name: rpc
+            value: "9000000"
+            description: RPC {OPTIONAL}  [ BULANAN ATAU MUSIAMAN ]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 15 Jun 2021 04:09:52 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "prakarsa_id": 2
+              },
+              "desc": "Data Tersimpan",
+              "message": "Data CRS Usaha berhasil disimpan",
+              "status": 200
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/crs/add-finansial"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: prakarsaId
+            value: "2"
+            description: ID Prakarsa
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: financialType
+            value: Bulanan
+            description: Jenis Analisa Finansial {MANDATORY} [ BULANAN ATAU MUSIAMAN ]
+          - name: totalIncome
+            value: "100000000"
+            description: Total Penjualan/Omset {OPTIONAL} [ BULANAN ]
+          - name: totalHppExpense
+            value: "2500000"
+            description: Total Biaya HPP {OPTIONAL} [ BULANAN ]
+          - name: plantingSeasonPeriod
+            value: "0"
+            description: Lama Musim Tanam {OPTIONAL} [ MUSIMAN ]
+            disabled: true
+          - name: productionAmount
+            value: "0"
+            description: Jumlah Produksi {OPTIONAL} [ MUSIMAN ]
+            disabled: true
+          - name: estimatedSellingPrice
+            value: "0"
+            description: Perkiraan Harga Jual Saat Panan  {OPTIONAL} [ MUSIMAN ]
+            disabled: true
+          - name: totalPlantingCost
+            value: "0"
+            description: Total Biaya Tanam Per Musim {OPTIONAL} [ MUSIMAN ]
+            disabled: true
+          - name: totalEmployee
+            value: "300"
+            description: Jumlah Pekerja  {OPTIONAL} [ BULANAN AND MUSIMAN]
+          - name: wages
+            value: "5500000"
+            description: Upah Pekerja {OPTIONAL} [ BULANAN ATAU MUSIAMAN ]
+          - name: businessIncome
+            value: "98000000"
+            description: Pendapatan Usaha {OPTIONAL} [ BULANAN ATAU MUSIAMAN ]
+          - name: miscellaneousIncome
+            value: "0"
+            description: Pendapatan Lain-lain {OPTIOANL} [ BULANAN ATAU MUSIAMAN ]
+          - name: householdExpenses
+            value: "0"
+            description: Total Biaya Rumah Tangga Per Bulan {OPTIONAL} [ MUSIMAN ]
+          - name: totalOtherExpenses
+            value: "9000000"
+            description: Total Biaya Lainnya {OPTIONAL}  [ BULANAN ATAU MUSIAMAN ]
+          - name: totalOtherInstallment
+            value: "500000"
+            description: Total Angsuran Lainnya {OPTIONAL}  [ BULANAN ATAU MUSIAMAN ]
+          - name: nettoIncome
+            value: "92500050.59"
+            description: Pendapatan Netto {OPTIONAL}  [ BULANAN ATAU MUSIAMAN ]
+          - name: rpc
+            value: "9000000"
+            description: RPC {OPTIONAL}  [ BULANAN ATAU MUSIAMAN ]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 15 Jun 2021 04:09:52 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data": null
+          }

@@ -1,0 +1,143 @@
+info:
+  name: Facility Create
+  type: http
+  seq: 4
+
+http:
+  method: POST
+  url: "{{base_url_dev}}/api/digiagri/facility/create"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "999941"
+        description: AO
+      - name: kodeCabang
+        value: "0020"
+        description: Kode Cabang AO
+      - name: noCIF
+        value: "0000149512"
+        description: CIF Number
+      - name: kodeFasilitas
+        value: PK2
+        description: Sesuai Tetap atau Transaksional
+      - name: nama
+        value: Dwiki Saputra
+        description: Nama Nasabah
+      - name: nominal
+        value: "100000000"
+        description: Loan Amount
+      - name: sektorEkonomi
+        value: "753000"
+        description: Kode Sub Sector Ekonomi
+      - name: kodeLokasi
+        value: "0197"
+        description: Kode Kota Nasabah
+      - name: jenisPenggunaan
+        value: "1"
+        description: KMK atau KI
+      - name: noAkadAwal
+        value: 8/eSPH/KNG/III/2023
+        description: "-"
+      - name: tanggalJatuhTempo
+        value: 28/05/2035
+        description: Contact Logs -> Due Date (dd/MM/yyyy)
+      - name: tanggalPembukaan
+        value: 28/05/2030
+        description: time.now()
+      - name: tanggalAkadAwal
+        value: 28/05/2030
+        description: SPH Signature Date
+      - name: tanggalTersedia
+        value: 28/05/2030
+        description: H-1 Contract Logs -> Due Date
+      - name: tanggalMulai
+        value: 28/05/2030
+        description: tanggalPembukaan
+      - name: agunanList
+        value: ""
+        description: idAgunan
+      - name: insType
+        value: BRISMA
+        description: Tipe Asuransi (ASKRINDO, BRISMA)
+      - name: statusPerkawinan
+        value: B
+        description: Status Perkawinan [ K=Kawin |  H=Cerai Hidup | M=Cerai Mati | B=Belum Kawin ]
+      - name: identitasPasangan
+        value: "3171054208970005"
+        description: No KTP Pasangan
+      - name: namaPasangan
+        value: Jumroh
+        description: Nama Pasangan
+      - name: tanggalLahirPasangan
+        value: 03/09/1997
+        description: Tanggal Lahir Pasangan
+      - name: perjanjianPisahHarta
+        value: T
+        description: Flag Perjanjian Pisah Harta [ T=Tidak | Y=Iya ]
+      - name: penjaminList
+        value: ""
+        description: IDPenjamin#PersentasePremi|IDPenjamin#PersentasePremi
+      - name: npwp
+        value: "3276091711000001"
+        description: Nomor NPWP
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: success
+    request:
+      url: "{{base_url}}/api/digiagri/facility/create"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000426"
+          - name: kodeCabang
+            value: "0010"
+          - name: noCIF
+            value: "0000000438"
+          - name: kodeFasilitas
+            value: PK2
+          - name: nama
+            value: R. Ibrahim Senoaji
+          - name: nominal
+            value: "100000000"
+          - name: sektorEkonomi
+            value: "523300"
+          - name: kodeLokasi
+            value: "0198"
+          - name: jenisPenggunaan
+            value: "1"
+          - name: noAkadAwal
+            value: abc/picro/123
+          - name: tanggalJatuhTempo
+            value: 03/10/2022
+          - name: tanggalPembukaan
+            value: 03/10/2021
+          - name: tanggalAkadAwal
+            value: 03/10/2021
+          - name: tanggalTersedia
+            value: 02/10/2022
+          - name: tanggalMulai
+            value: 03/10/2021
+    response:
+      body:
+        type: text
+        data: "{\r
+
+          \    \"statusCode\": \"1\",\r
+
+          \    \"statusDescription\": \"Success\",\r
+
+          \    \"nomorFasilitas\": \"0010/0000000438/PK2/002\",\r
+
+          \    \"Validation\": \"\"\r
+
+          }"

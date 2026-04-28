@@ -1,0 +1,337 @@
+meta {
+  name: Logout Partnership V1
+  type: http
+  seq: 12
+}
+
+post {
+  url: {{url}}/v/1/partnerships/logout
+  body: formUrlEncoded
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{tokenPartnership}}
+}
+
+body:form-urlencoded {
+  userId: 1
+  partnershipCode: OMS1
+  ticketNumber: T01TMS0yMDI0MTIwOTE1NTE1NA==
+}
+
+settings {
+  encodeUrl: true
+}
+
+example {
+  name: Success
+  
+  request: {
+    url: {{base-url-local}}/v/1/partnerships/logout
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      partnershipCode: OMS1
+      ticketNumber: T01TMS0yMDI0MTIwOTE1NTE1NA==
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Tue, 24 Dec 2024 02:03:10 GMT
+      Content-Length: 67
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "status": 200,
+            "message": "Logout berhasil",
+            "desc": "Logout berhasil"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Parameter Validation Required
+  
+  request: {
+    url: {{base-url-local}}/v/1/partnerships/logout
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      partnershipCode: OMS1
+      ~ticketNumber: T01TMS0yMDI0MTIwOTE1NTE1NA==
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Tue, 24 Dec 2024 02:05:47 GMT
+      Content-Length: 133
+    }
+  
+    status: {
+      code: 400
+      text: Bad Request
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "Validation failed on field ... with tag 'required'",
+            "message": "Maaf, ... Tidak Boleh Kosong",
+            "status": 400
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Token Expired or Invalid
+  
+  request: {
+    url: {{base-url-local}}/v/1/partnerships/logout
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      partnershipCode: OMS1
+      ticketNumber: T01TMS0yMDI0MTIwOTE1NTE1NA==
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Tue, 24 Dec 2024 02:11:40 GMT
+      Content-Length: 75
+    }
+  
+    status: {
+      code: 401
+      text: Unauthorized
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "code": 401,
+            "desc": "Expired",
+            "message": "Invalid Token || Token Is Expired"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Database Connection
+  
+  request: {
+    url: {{base-url-local}}/v/1/partnerships/logout
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      partnershipCode: OMS1
+      ticketNumber: T01TMS0yMDI0MTIwOTE1NTE1NA==
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Tue, 24 Dec 2024 02:29:31 GMT
+      Content-Length: 71
+    }
+  
+    status: {
+      code: 400
+      text: Bad Request
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "code": 400,
+            "desc": "Database Error",
+            "message": "Error koneksi database"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Database Connection
+  
+  request: {
+    url: {{base-url-local}}/v/1/partnerships/logout
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      partnershipCode: OMS1
+      ticketNumber: T01TMS0yMDI0MTIwOTE1NTE1NA==
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Tue, 24 Dec 2024 02:29:31 GMT
+      Content-Length: 71
+    }
+  
+    status: {
+      code: 400
+      text: Bad Request
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "code": 400,
+            "desc": "Database Error",
+            "message": "Error koneksi database"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Token Expired or Invalid
+  
+  request: {
+    url: {{base-url-local}}/v/1/partnerships/logout
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      partnershipCode: OMS1
+      ticketNumber: T01TMS0yMDI0MTIwOTE1NTE1NA==
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Tue, 24 Dec 2024 02:11:40 GMT
+      Content-Length: 75
+    }
+  
+    status: {
+      code: 401
+      text: Unauthorized
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "code": 401,
+            "desc": "Expired",
+            "message": "Invalid Token || Token Is Expired"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Success
+  
+  request: {
+    url: {{base-url-local}}/v/1/partnerships/logout
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      partnershipCode: OMS1
+      ticketNumber: T01TMS0yMDI0MTIwOTE1NTE1NA==
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Tue, 24 Dec 2024 02:03:10 GMT
+      Content-Length: 67
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "status": 200,
+            "message": "Logout berhasil",
+            "desc": "Logout berhasil"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Parameter Validation Required
+  
+  request: {
+    url: {{base-url-local}}/v/1/partnerships/logout
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      partnershipCode: OMS1
+      ~ticketNumber: T01TMS0yMDI0MTIwOTE1NTE1NA==
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Tue, 24 Dec 2024 02:05:47 GMT
+      Content-Length: 133
+    }
+  
+    status: {
+      code: 400
+      text: Bad Request
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "Validation failed on field ... with tag 'required'",
+            "message": "Maaf, ... Tidak Boleh Kosong",
+            "status": 400
+        }
+      '''
+    }
+  }
+}

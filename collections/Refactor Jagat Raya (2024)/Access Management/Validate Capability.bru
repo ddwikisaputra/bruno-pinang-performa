@@ -1,0 +1,126 @@
+meta {
+  name: Validate Capability
+  type: http
+  seq: 6
+}
+
+post {
+  url: {{BASE_URL}}/v1/user/capability/validate
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: 
+}
+
+body:json {
+  {
+      "payload": "{{REQUEST_BODY}}"
+  }
+}
+
+script:pre-request {
+  const payload = {
+      "capability_id":"ARAY-000001"
+  }
+  
+  const result = _.encrypt(JSON.stringify(payload))
+  bru.setEnvVar("REQUEST_BODY", result);
+}
+
+script:post-response {
+  const responseJSON = res.getBody()
+  if (responseJSON.status) {
+      const data = _.decrypt(responseJSON.data)
+      const response = _.parsingJson(data)
+  }
+}
+
+settings {
+  encodeUrl: true
+}
+
+example {
+  name: Success
+  
+  request: {
+    url: {{BASE_URL}}/v1/user/capability/list
+    method: POST
+    mode: none
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Tue, 28 Nov 2023 20:34:51 GMT
+      Content-Length: 236
+    }
+  
+    status: {
+      code: 200
+      text: 200
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": [
+                {
+                    "id": "1",
+                    "name": "Get Data Keluarga",
+                    "description": ""
+                },
+                {
+                    "id": "2",
+                    "name": "Create Data Keluarga",
+                    "description": ""
+                },
+                {
+                    "id": "3",
+                    "name": "Update Data Keluarga",
+                    "description": ""
+                }
+            ],
+            "message": "Permintaan berhasil diproses",
+            "status": true
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error
+  
+  request: {
+    url: {{BASE_URL}}/v1/user/capability/list
+    method: POST
+    mode: none
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Tue, 28 Nov 2023 20:48:44 GMT
+      Content-Length: 56
+    }
+  
+    status: {
+      code: 200
+      text: 500
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "message": "Akses terlarang",
+            "status": false
+        }
+      '''
+    }
+  }
+}

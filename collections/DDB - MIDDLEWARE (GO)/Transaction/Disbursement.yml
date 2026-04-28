@@ -1,0 +1,111 @@
+info:
+  name: Disbursement
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/digiagri/transaction/disbursement"
+  body:
+    type: form-urlencoded
+    data:
+      - name: kodeCabang
+        value: "0010"
+      - name: nominal
+        value: "10000"
+      - name: nomorFasilitas
+        value: 0010/0000121436/PK3/001
+      - name: rekeningSumber
+        value: "001001119131104"
+      - name: rekeningTujuan
+        value: "001001019405310"
+      - name: userId
+        value: "999906"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Rekening sudah ditutup
+    request:
+      url: "{{baseUrl}}/api/digiagri/transaction/disbursement"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+              "userId": "999906",
+              "kodeCabang": "0010",
+              "nomorFasilitas": "0020/0000120287/PK2/014",
+              "rekeningSumber": "001001119193106",
+              "rekeningTujuan": "001001019405310",
+              "nominal": "10000"
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Thu, 09 Oct 2025 04:06:28 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "85"
+        - name: Connection
+          value: keep-alive
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "statusCode": "99",
+              "statusDescription": "Rekening Sudah Ditutup",
+              "journalSequence": ""
+          }
+  - name: Success Response
+    request:
+      url: "{{baseUrl}}/api/digiagri/transaction/disbursement"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeCabang
+            value: "0010"
+          - name: nominal
+            value: "10000"
+          - name: nomorFasilitas
+            value: 0010/0000121436/PK3/001
+          - name: rekeningSumber
+            value: "001001119131104"
+          - name: rekeningTujuan
+            value: "001001019405310"
+          - name: userId
+            value: "999906"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Thu, 09 Oct 2025 04:07:55 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "146"
+        - name: Connection
+          value: keep-alive
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "statusCode": "1",
+              "statusDescription": "Success",
+              "journalSequence": "9913349",
+              "remark": "PIKRO DB 001001119131104 TO 001001019405310 10000 00000066"
+          }

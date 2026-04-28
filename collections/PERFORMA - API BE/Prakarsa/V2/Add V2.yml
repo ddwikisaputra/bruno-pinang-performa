@@ -1,0 +1,3090 @@
+info:
+  name: Add V2
+  type: http
+  seq: 15
+
+http:
+  method: POST
+  url: "{{base_url_local}}/v/2/prakarsa/add"
+  body:
+    type: form-urlencoded
+    data:
+      - name: ktpNumber
+        value: UmF5YVBpUGVyVG9w/lx6nGT4lUZqKWaPHO473n2U6FWtyCIygSantUHgOoc=
+        description: No KTP Nasabah
+      - name: ktpDate
+        value: 2014-07-16
+        description: "Tanggal Terbit KTP Nasabah  (Format : Y-m-d)"
+      - name: name
+        value: UmF5YVBpUGVyVG9wiRokxj3t9xUrbSvITfjD/Lc4uG4LaOFnerGXLcc=
+        description: Nama Nasabah
+      - name: placeOfBirth
+        value: Jakarta
+        description: Tempat Kelahiran
+      - name: birthDate
+        value: 1995-11-12
+        description: "Tanggal Lahir Nasabah (Format : Y-m-d)"
+      - name: motherMaidenName
+        value: Rumiyati
+        description: Nama Ibu Kandung
+      - name: gender
+        value: Laki-Laki
+        description: Jenis Kelamin (Laki-Laki | Perempuan)
+      - name: religion
+        value: Islam
+        description: Agama Nasabah [Budha | Hindu | Islam | Kristen | Konghucu | Lainnya ]
+      - name: dependents
+        value: "0"
+        description: Jumlah Tanggungan
+      - name: lastEducation
+        value: S1
+        description: Pendidikan Terakhir ( SD | SMP | SMA | D1 | D2 | D3 | S1 / D4 | S2 | S3 | Tidak Sekolah | Belum Tamat )
+      - name: maritalStatus
+        value: Kawin
+        description: Status Pernikahan (Kawin | Belum Kawin)
+      - name: familyRelationshipStatus
+        value: Anak
+        description: Status Hubungan dalam Keluarga [Kepala Keluarga | Suami | Istri | Anak | Menantu | Cucu | Orang Tua | Mertua | Famili Lain | Pembantu | Lainnya]
+      - name: latitude
+        value: "-7.7791375873045965"
+        description: Pin Berdasarkan Maps
+      - name: longitude
+        value: "110.41164592029301"
+        description: Pin Berdasarkan Maps
+      - name: address
+        value: 10, Jl. Penganten Ali IX No.10, RW.6, Ciracas, Kec. Ciracas, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13740, Indonesia
+        description: Alamat Nasabah
+      - name: postalCode
+        value: "10620"
+        description: Kode Pos
+      - name: provinceCode
+        value: "03"
+        description: Kode Provinsi
+      - name: cityCode
+        value: "0391"
+        description: Kode Kota Kabupaten
+      - name: districtCode
+        value: "317103"
+        description: Kode Kecamatan
+      - name: villageCode
+        value: "3171031001"
+        description: Kode Kelurahan
+      - name: rt
+        value: "001"
+        description: No RT
+      - name: rw
+        value: "006"
+        description: No RW
+      - name: email
+        value: UmF5YVBpUGVyVG9wqRokxj2Nwxk6cTOUT7FmQjNSnLb1pIANZhYdSCz7kA==
+        description: Email Nasabah
+      - name: mobileNumber
+        value: UmF5YVBpUGVyVG9w9Vx6mmL4lkNoL25AkQxG5X3fTMEitoMOdEPZ
+        description: No Telepon Nasabah
+      - name: partnerName
+        value: UmF5YVBpUGVyVG9wgQQjyTXt91p7VDbITf5YweoJ3hUl/Cl+MRdV8E/zoT7Xuw==
+        description: Nama Pasangan {OPTIONAL}
+      - name: partnerKtpNumber
+        value: UmF5YVBpUGVyVG9w+F58nGT8lkZqKmaDHO473Y/z627ORxkHbbnlt2YNoGo=
+        description: Nomor KTP Pasangan {OPTIONAL}
+      - name: genderPartner
+        value: Perempuan
+        description: Jenis Kelamin Pasangan (Laki-Laki | Perempuan)
+      - name: birthDatePartner
+        value: 1998-02-19
+        description: "Tanggal Lahir Pasangan (Format : Y-m-d)"
+      - name: placeOfBirthPartner
+        value: Jakarta
+        description: Tempat Kelahiran Pasangan
+      - name: ktpBlob
+        value: UmF5YVBpUGVyVG9wqSob1zCJ4Q0WYhrDYaROlvc5bdCbDNFz94vpk5Nn4Ng83jlprtkhGNMV/S8=
+        description: Blob KTP (base64)
+      - name: ktpMimeType
+        value: image/jpeg
+        description: MimeType KTP (image/jpeg | image/png)
+      - name: ktpSelfieBlob
+        value: UmF5YVBpUGVyVG9wqSob1zCJ4Q0WYhrDYaROlvc5bdCbDNFz94vpk5Nn4Ng83jlprtkhGNMV/S8=
+        description: Blob KTP Selfie (base64)
+      - name: ktpSelfieMimeType
+        value: image/jpeg
+        description: MimeType KTP Selfie (image/jpeg | image/png)
+      - name: ktpPartnerBlob
+        value: UmF5YVBpUGVyVG9wqSob1zCJ4Q0WYhrDYaROlvc5bdCbDNFz94vpk5Nn4Ng83jlprtkhGNMV/S8=
+        description: Blob KTP Partner (base64) {OPTIONAL}
+      - name: ktpPartnerMimeType
+        value: image/jpeg
+        description: MimeType KTP Partner (image/jpeg | image/png) {OPTIONAL}
+      - name: userId
+        value: UmF5YVBpUGVyVG9w9FR0lGD8PJZ01laNFpB91ptV5mkFfw==
+        description: "[Encode]Personal Number BRI Agro (UserID Login)"
+      - name: suplesiPrakarsaId
+        value: "31282"
+        description: ID Prakarsa yang akan di Suplesi [OPTIONAL]
+        disabled: true
+      - name: emailPartner
+        value: UmF5YVBpUGVyVG9wqRokxj2NxhU1cy3bVb8ljNVDTc7949U7QMgPM4i57FALEHIk
+        description: Email Pasangan {OPTIONAL}
+      - name: mobileNumberPartner
+        value: UmF5YVBpUGVyVG9w9Vx4nGH+l0VuL2hRxyvjTDwVxCnZ8241neB8
+        description: No Telepon Pasangan {OPTIONAL}
+      - name: flagResidenceAddress
+        value: "1"
+        description: Flag Alamat Domisili Sama Dengan Alamat KTP (1 = sama | 0 = beda) {Mandatory}
+      - name: residentialOwnership
+        value: Milik Sendiri
+        description: Kepemilikan Tempat Tinggal (Milik Sendiri | Milik Keluarga | Kontrak ) {Mandatory}
+      - name: longStay
+        value: "999"
+        description: Lama Menetap Dalam Bulan (min 0, max 3 digit) {Mandatory}
+      - name: residenceAddress
+        value: 10, Jl. Penganten Ali IX No.10, RW.6, Ciracas, Kec. Ciracas, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13740, Indonesia
+        description: Alamat Domisil
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/prakarsa/add"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: ktpNumber
+            value: "31710500129917"
+            description: No KTP Nasabah
+          - name: ktpDate
+            value: 2019-01-09
+            description: "Tanggal Terbit KTP Nasabah  (Format : Y-m-d)"
+          - name: name
+            value: Dwiki Saputra
+            description: Nama Nasabah
+          - name: placeOfBirth
+            value: Jakarta
+            description: Tempat Kelahiran
+          - name: birthDate
+            value: 1995-01-01
+            description: "Tanggal Lahir Nasabah (Format : Y-m-d)"
+          - name: motherMaidenName
+            value: Testing Mom
+            description: Nama Ibu Kandung
+          - name: gender
+            value: Laki-Laki
+            description: Jenis Kelamin (Laki-Laki | Perempuan)
+          - name: religion
+            value: Islam
+            description: Agama Nasabah [Budha | Hindu | Islam | Kristen | Konghucu | Lainnya ]
+          - name: dependents
+            value: "1"
+            description: Jumlah Tanggungan
+          - name: lastEducation
+            value: Diploma 3
+            description: Pendidikan Terakhir (SD | SMP | SMA | Diploma 3 | Diploma 4 | Sarjana | Lainnya
+          - name: maritalStatus
+            value: kawin
+            description: Status Pernikahan (Kawin | Belum Kawin)
+          - name: familyRelationshipStatus
+            value: Kepala Keluarga
+            description: Status Hubungan dalam Keluarga [Kepala Keluarga | Suami | Istri | Anak | Menantu | Cucu | Orang Tua | Mertua | Famili Lain | Pembantu | Lainnya]
+          - name: latitude
+            value: "-121212126464"
+            description: Pin Berdasarkan Maps
+          - name: longitude
+            value: "343432546243"
+            description: Pin Berdasarkan Maps
+          - name: address
+            value: Jl. Cempaka Putih Barat
+            description: Alamat Nasabah
+          - name: postalCode
+            value: "10520"
+            description: Kode Pos
+          - name: provinceCode
+            value: "3"
+            description: Kode Provinsi
+          - name: cityCode
+            value: "0393"
+            description: Kode Kota Kabupaten
+          - name: districtCode
+            value: "317305"
+            description: Kode Kecamatan
+          - name: villageCode
+            value: "3173051006"
+            description: Kode Kelurahan
+          - name: rt
+            value: "10"
+            description: No RT
+          - name: rw
+            value: "2"
+            description: No RW
+          - name: email
+            value: dwiki@gmaiil.com
+            description: Email Nasabah
+          - name: mobileNumber
+            value: "081766253554"
+            description: No Telepon Nasabah
+          - name: partnerKtpNumber
+            value: "317105121199883"
+            description: Nomor KTP Pasangan
+          - name: partnerName
+            value: Testing
+            description: Nama Pasangan
+          - name: genderPartner
+            value: Perempuan
+            description: Jenis Kelamin Pasangan (Laki-Laki | Perempuan)
+          - name: birthDatePartner
+            value: 1997-08-02
+            description: "Tanggal Lahir Pasangan (Format : Y-m-d)"
+          - name: placeOfBirthPartner
+            value: Jakarta
+            description: Tempat Kelahiran Pasangan
+          - name: ktpBlob
+            value: ""
+            description: Blob KTP (base64)
+          - name: ktpMimeType
+            value: image/jpeg
+            description: MimeType KTP (image/jpeg | image/png)
+          - name: ktpSelfieBlob
+            value: ""
+            description: Blob KTP Selfie (base64)
+          - name: ktpSelfieMimeType
+            value: image/jpeg
+            description: MimeType KTP Selfie (image/jpeg | image/png)
+          - name: ktpPartnerBlob
+            value: ""
+            description: Blob KTP Partner (base64)
+          - name: ktpPartnerMimeType
+            value: image/jpeg
+            description: MimeType KTP Partner (image/jpeg | image/png)
+          - name: userId
+            value: "1122"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: suplesiPrakarsaId
+            value: ""
+            description: ID Prakarsa yang akan di Suplesi [OPTIONAL]
+            disabled: true
+    response:
+      status: 401
+      statusText: Unauthorized
+      body:
+        type: text
+        data: |-
+          {
+              "code": 401,
+              "desc": "Tidak Memliki Akses",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{base_url}}/v/1/prakarsa/add"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: ktpNumber
+            value: "3171051211950001"
+            description: No KTP Nasabah
+          - name: ktpDate
+            value: 2019-01-01
+            description: "Tanggal Terbit KTP Nasabah  (Format : Y-m-d)"
+          - name: name
+            value: Dwiki Saputra
+            description: Nama Nasabah
+          - name: placeOfBirth
+            value: Jakarta
+            description: Tempat Kelahiran
+          - name: birthDate
+            value: 1995-11-12
+            description: "Tanggal Lahir Nasabah (Format : Y-m-d)"
+          - name: motherMaidenName
+            value: Rumiyati
+            description: Nama Ibu Kandung
+          - name: gender
+            value: Laki-Laki
+            description: Jenis Kelamin (Laki-Laki | Perempuan)
+          - name: religion
+            value: Islam
+            description: Agama Nasabah [Budha | Hindu | Islam | Kristen | Konghucu | Lainnya ]
+          - name: dependents
+            value: "2"
+            description: Jumlah Tanggungan
+          - name: lastEducation
+            value: D3
+            description: Pendidikan Terakhir ( SD | SMP | SMA | D1 | D2 | D3 | S1 / D4 | S2 | S3 | Tidak Sekolah | Belum Tamat )
+          - name: maritalStatus
+            value: Kawin
+            description: Status Pernikahan (Kawin | Belum Kawin)
+          - name: familyRelationshipStatus
+            value: Kepala Keluarga
+            description: Status Hubungan dalam Keluarga [Kepala Keluarga | Suami | Istri | Anak | Menantu | Cucu | Orang Tua | Mertua | Famili Lain | Pembantu | Lainnya]
+          - name: latitude
+            value: "-121212126464"
+            description: Pin Berdasarkan Maps
+          - name: longitude
+            value: "343432546243"
+            description: Pin Berdasarkan Maps
+          - name: address
+            value: 10, Jl. Penganten Ali IX No.10, RW.6, Ciracas, Kec. Ciracas, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13740, Indonesia
+            description: Alamat Nasabah
+          - name: postalCode
+            value: "10620"
+            description: Kode Pos
+          - name: provinceCode
+            value: "3"
+            description: Kode Provinsi
+          - name: cityCode
+            value: "0391"
+            description: Kode Kota Kabupaten
+          - name: districtCode
+            value: "317103"
+            description: Kode Kecamatan
+          - name: villageCode
+            value: "3171031001"
+            description: Kode Kelurahan
+          - name: rt
+            value: "001"
+            description: No RT
+          - name: rw
+            value: "006"
+            description: No RW
+          - name: email
+            value: dwiki@gmail.com
+            description: Email Nasabah
+          - name: mobileNumber
+            value: "81319968865"
+            description: No Telepon Nasabah
+          - name: partnerName
+            value: Mutia
+            description: Nama Pasangan {OPTIONAL}
+          - name: partnerKtpNumber
+            value: "3201131212940001"
+            description: Nomor KTP Pasangan {OPTIONAL}
+          - name: genderPartner
+            value: Perempuan
+            description: Jenis Kelamin Pasangan (Laki-Laki | Perempuan)
+          - name: birthDatePartner
+            value: 1997-08-02
+            description: "Tanggal Lahir Pasangan (Format : Y-m-d)"
+          - name: placeOfBirthPartner
+            value: Jakarta
+            description: Tempat Kelahiran Pasangan
+          - name: ktpBlob
+            value: "{{jpgBlob}}"
+            description: Blob KTP (base64)
+          - name: ktpMimeType
+            value: image/jpeg
+            description: MimeType KTP (image/jpeg | image/png)
+          - name: ktpSelfieBlob
+            value: "{{jpgBlob}}"
+            description: Blob KTP Selfie (base64)
+          - name: ktpSelfieMimeType
+            value: image/jpeg
+            description: MimeType KTP Selfie (image/jpeg | image/png)
+          - name: ktpPartnerBlob
+            value: "{{pngBlob}}"
+            description: Blob KTP Partner (base64) {OPTIONAL}
+          - name: ktpPartnerMimeType
+            value: image/png
+            description: MimeType KTP Partner (image/jpeg | image/png) {OPTIONAL}
+          - name: userId
+            value: "999951"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: suplesiPrakarsaId
+            value: ""
+            description: ID Prakarsa yang akan di Suplesi [OPTIONAL]
+            disabled: true
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 18 Jul 2022 13:22:41 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/prakarsa/add"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: ktpNumber
+            value: "31710500129917"
+            description: No KTP Nasabah
+          - name: ktpDate
+            value: 2019-01-09
+            description: "Tanggal Terbit KTP Nasabah  (Format : Y-m-d)"
+          - name: name
+            value: Dwiki Saputra
+            description: Nama Nasabah
+          - name: placeOfBirth
+            value: Jakarta
+            description: Tempat Kelahiran
+          - name: birthDate
+            value: 1995-01-01
+            description: "Tanggal Lahir Nasabah (Format : Y-m-d)"
+          - name: motherMaidenName
+            value: Testing Mom
+            description: Nama Ibu Kandung
+          - name: gender
+            value: Laki-Laki
+            description: Jenis Kelamin (Laki-Laki | Perempuan)
+          - name: religion
+            value: Islam
+            description: Agama Nasabah [Budha | Hindu | Islam | Kristen | Konghucu | Lainnya ]
+          - name: dependents
+            value: "1"
+            description: Jumlah Tanggungan
+          - name: lastEducation
+            value: Diploma 3
+            description: Pendidikan Terakhir (SD | SMP | SMA | Diploma 3 | Diploma 4 | Sarjana | Lainnya
+          - name: maritalStatus
+            value: kawin
+            description: Status Pernikahan (Kawin | Belum Kawin)
+          - name: familyRelationshipStatus
+            value: Kepala Keluarga
+            description: Status Hubungan dalam Keluarga [Kepala Keluarga | Suami | Istri | Anak | Menantu | Cucu | Orang Tua | Mertua | Famili Lain | Pembantu | Lainnya]
+          - name: latitude
+            value: "-121212126464"
+            description: Pin Berdasarkan Maps
+          - name: longitude
+            value: "343432546243"
+            description: Pin Berdasarkan Maps
+          - name: address
+            value: Jl. Cempaka Putih Barat
+            description: Alamat Nasabah
+          - name: postalCode
+            value: "10520"
+            description: Kode Pos
+          - name: provinceCode
+            value: "3"
+            description: Kode Provinsi
+          - name: cityCode
+            value: "0393"
+            description: Kode Kota Kabupaten
+          - name: districtCode
+            value: "317305"
+            description: Kode Kecamatan
+          - name: villageCode
+            value: "3173051006"
+            description: Kode Kelurahan
+          - name: rt
+            value: "10"
+            description: No RT
+          - name: rw
+            value: "2"
+            description: No RW
+          - name: email
+            value: dwiki@gmaiil.com
+            description: Email Nasabah
+          - name: mobileNumber
+            value: "081766253554"
+            description: No Telepon Nasabah
+          - name: partnerKtpNumber
+            value: "317105121199883"
+            description: Nomor KTP Pasangan
+          - name: partnerName
+            value: Testing
+            description: Nama Pasangan
+          - name: genderPartner
+            value: Perempuan
+            description: Jenis Kelamin Pasangan (Laki-Laki | Perempuan)
+          - name: birthDatePartner
+            value: 1997-08-02
+            description: "Tanggal Lahir Pasangan (Format : Y-m-d)"
+          - name: placeOfBirthPartner
+            value: Jakarta
+            description: Tempat Kelahiran Pasangan
+          - name: ktpBlob
+            value: ""
+            description: Blob KTP (base64)
+          - name: ktpMimeType
+            value: image/jpeg
+            description: MimeType KTP (image/jpeg | image/png)
+          - name: ktpSelfieBlob
+            value: ""
+            description: Blob KTP Selfie (base64)
+          - name: ktpSelfieMimeType
+            value: image/jpeg
+            description: MimeType KTP Selfie (image/jpeg | image/png)
+          - name: ktpPartnerBlob
+            value: ""
+            description: Blob KTP Partner (base64)
+          - name: ktpPartnerMimeType
+            value: image/jpeg
+            description: MimeType KTP Partner (image/jpeg | image/png)
+          - name: userId
+            value: "1122"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: suplesiPrakarsaId
+            value: ""
+            description: ID Prakarsa yang akan di Suplesi [OPTIONAL]
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data": null
+          }
+  - name: missing params
+    request:
+      url: "{{base_url}}/v/1/prakarsa/add"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: ktpNumber
+            value: "31710500129917"
+            description: No KTP Nasabah
+            disabled: true
+          - name: ktpDate
+            value: 2019-01-09
+            description: "Tanggal Terbit KTP Nasabah  (Format : Y-m-d)"
+          - name: name
+            value: Dwiki Saputra
+            description: Nama Nasabah
+          - name: placeOfBirth
+            value: Jakarta
+            description: Tempat Kelahiran
+          - name: birthDate
+            value: 1995-01-01
+            description: "Tanggal Lahir Nasabah (Format : Y-m-d)"
+          - name: motherMaidenName
+            value: Testing Mom
+            description: Nama Ibu Kandung
+          - name: gender
+            value: Laki-Laki
+            description: Jenis Kelamin (Laki-Laki | Perempuan)
+          - name: religion
+            value: Islam
+            description: Agama Nasabah [Budha | Hindu | Islam | Kristen | Konghucu | Lainnya ]
+          - name: dependents
+            value: "1"
+            description: Jumlah Tanggungan
+          - name: lastEducation
+            value: Diploma 3
+            description: Pendidikan Terakhir (SD | SMP | SMA | Diploma 3 | Diploma 4 | Sarjana | Lainnya
+          - name: maritalStatus
+            value: kawin
+            description: Status Pernikahan (Kawin | Belum Kawin)
+          - name: familyRelationshipStatus
+            value: Kepala Keluarga
+            description: Status Hubungan dalam Keluarga [Kepala Keluarga | Suami | Istri | Anak | Menantu | Cucu | Orang Tua | Mertua | Famili Lain | Pembantu | Lainnya]
+          - name: latitude
+            value: "-121212126464"
+            description: Pin Berdasarkan Maps
+          - name: longitude
+            value: "343432546243"
+            description: Pin Berdasarkan Maps
+          - name: address
+            value: Jl. Cempaka Putih Barat
+            description: Alamat Nasabah
+          - name: postalCode
+            value: "10520"
+            description: Kode Pos
+          - name: provinceCode
+            value: "3"
+            description: Kode Provinsi
+          - name: cityCode
+            value: "0393"
+            description: Kode Kota Kabupaten
+          - name: districtCode
+            value: "317305"
+            description: Kode Kecamatan
+          - name: villageCode
+            value: "3173051006"
+            description: Kode Kelurahan
+          - name: rt
+            value: "10"
+            description: No RT
+          - name: rw
+            value: "2"
+            description: No RW
+          - name: email
+            value: dwiki@gmaiil.com
+            description: Email Nasabah
+          - name: mobileNumber
+            value: "081766253554"
+            description: No Telepon Nasabah
+          - name: partnerKtpNumber
+            value: "317105121199883"
+            description: Nomor KTP Pasangan
+          - name: partnerName
+            value: Testing
+            description: Nama Pasangan
+          - name: genderPartner
+            value: Perempuan
+            description: Jenis Kelamin Pasangan (Laki-Laki | Perempuan)
+          - name: birthDatePartner
+            value: 1997-08-02
+            description: "Tanggal Lahir Pasangan (Format : Y-m-d)"
+          - name: placeOfBirthPartner
+            value: Jakarta
+            description: Tempat Kelahiran Pasangan
+          - name: ktpBlob
+            value: ""
+            description: Blob KTP (base64)
+          - name: ktpMimeType
+            value: image/jpeg
+            description: MimeType KTP (image/jpeg | image/png)
+          - name: ktpSelfieBlob
+            value: ""
+            description: Blob KTP Selfie (base64)
+          - name: ktpSelfieMimeType
+            value: image/jpeg
+            description: MimeType KTP Selfie (image/jpeg | image/png)
+          - name: ktpPartnerBlob
+            value: ""
+            description: Blob KTP Partner (base64)
+          - name: ktpPartnerMimeType
+            value: image/jpeg
+            description: MimeType KTP Partner (image/jpeg | image/png)
+          - name: userId
+            value: "1122"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: suplesiPrakarsaId
+            value: ""
+            description: ID Prakarsa yang akan di Suplesi [OPTIONAL]
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "status": 400,
+              "message": "Nomor KTP pasangan tidak boleh kosong",
+              "desc": "Parameter partnerKtpNumber kosong",
+              "data": null
+          }
+  - name: error Upload KTP Partner
+    request:
+      url: "{{base_url}}/v/1/prakarsa/add"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: ktpNumber
+            value: "31710500129917"
+            description: No KTP Nasabah
+          - name: ktpDate
+            value: 2019-01-09
+            description: "Tanggal Terbit KTP Nasabah  (Format : Y-m-d)"
+          - name: name
+            value: Dwiki Saputra
+            description: Nama Nasabah
+          - name: placeOfBirth
+            value: Jakarta
+            description: Tempat Kelahiran
+          - name: birthDate
+            value: 1995-01-01
+            description: "Tanggal Lahir Nasabah (Format : Y-m-d)"
+          - name: motherMaidenName
+            value: Testing Mom
+            description: Nama Ibu Kandung
+          - name: gender
+            value: Laki-Laki
+            description: Jenis Kelamin (Laki-Laki | Perempuan)
+          - name: religion
+            value: Islam
+            description: Agama Nasabah [Budha | Hindu | Islam | Kristen | Konghucu | Lainnya ]
+          - name: dependents
+            value: "1"
+            description: Jumlah Tanggungan
+          - name: lastEducation
+            value: Diploma 3
+            description: Pendidikan Terakhir (SD | SMP | SMA | Diploma 3 | Diploma 4 | Sarjana | Lainnya
+          - name: maritalStatus
+            value: kawin
+            description: Status Pernikahan (Kawin | Belum Kawin)
+          - name: familyRelationshipStatus
+            value: Kepala Keluarga
+            description: Status Hubungan dalam Keluarga [Kepala Keluarga | Suami | Istri | Anak | Menantu | Cucu | Orang Tua | Mertua | Famili Lain | Pembantu | Lainnya]
+          - name: latitude
+            value: "-121212126464"
+            description: Pin Berdasarkan Maps
+          - name: longitude
+            value: "343432546243"
+            description: Pin Berdasarkan Maps
+          - name: address
+            value: Jl. Cempaka Putih Barat
+            description: Alamat Nasabah
+          - name: postalCode
+            value: "10520"
+            description: Kode Pos
+          - name: provinceCode
+            value: "3"
+            description: Kode Provinsi
+          - name: cityCode
+            value: "0393"
+            description: Kode Kota Kabupaten
+          - name: districtCode
+            value: "317305"
+            description: Kode Kecamatan
+          - name: villageCode
+            value: "3173051006"
+            description: Kode Kelurahan
+          - name: rt
+            value: "10"
+            description: No RT
+          - name: rw
+            value: "2"
+            description: No RW
+          - name: email
+            value: dwiki@gmaiil.com
+            description: Email Nasabah
+          - name: mobileNumber
+            value: "081766253554"
+            description: No Telepon Nasabah
+          - name: partnerKtpNumber
+            value: "317105121199883"
+            description: Nomor KTP Pasangan
+          - name: partnerName
+            value: Testing
+            description: Nama Pasangan
+          - name: genderPartner
+            value: Perempuan
+            description: Jenis Kelamin Pasangan (Laki-Laki | Perempuan)
+          - name: birthDatePartner
+            value: 1997-08-02
+            description: "Tanggal Lahir Pasangan (Format : Y-m-d)"
+          - name: placeOfBirthPartner
+            value: Jakarta
+            description: Tempat Kelahiran Pasangan
+          - name: ktpBlob
+            value: ""
+            description: Blob KTP (base64)
+          - name: ktpMimeType
+            value: image/jpeg
+            description: MimeType KTP (image/jpeg | image/png)
+          - name: ktpSelfieBlob
+            value: ""
+            description: Blob KTP Selfie (base64)
+          - name: ktpSelfieMimeType
+            value: image/jpeg
+            description: MimeType KTP Selfie (image/jpeg | image/png)
+          - name: ktpPartnerBlob
+            value: ""
+            description: Blob KTP Partner (base64)
+          - name: ktpPartnerMimeType
+            value: image/jpeg
+            description: MimeType KTP Partner (image/jpeg | image/png)
+          - name: userId
+            value: "1122"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: suplesiPrakarsaId
+            value: ""
+            description: ID Prakarsa yang akan di Suplesi [OPTIONAL]
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang dalam perbaikan. Silahkan mencoba beberapa saat lagi.",
+              "desc": "Error message upload KTP partener",
+              "data": null
+          }
+  - name: error upload KTP
+    request:
+      url: "{{base_url}}/v/1/prakarsa/add"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: ktpNumber
+            value: "31710500129917"
+            description: No KTP Nasabah
+          - name: ktpDate
+            value: 2019-01-09
+            description: "Tanggal Terbit KTP Nasabah  (Format : Y-m-d)"
+          - name: name
+            value: Dwiki Saputra
+            description: Nama Nasabah
+          - name: placeOfBirth
+            value: Jakarta
+            description: Tempat Kelahiran
+          - name: birthDate
+            value: 1995-01-01
+            description: "Tanggal Lahir Nasabah (Format : Y-m-d)"
+          - name: motherMaidenName
+            value: Testing Mom
+            description: Nama Ibu Kandung
+          - name: gender
+            value: Laki-Laki
+            description: Jenis Kelamin (Laki-Laki | Perempuan)
+          - name: religion
+            value: Islam
+            description: Agama Nasabah [Budha | Hindu | Islam | Kristen | Konghucu | Lainnya ]
+          - name: dependents
+            value: "1"
+            description: Jumlah Tanggungan
+          - name: lastEducation
+            value: Diploma 3
+            description: Pendidikan Terakhir (SD | SMP | SMA | Diploma 3 | Diploma 4 | Sarjana | Lainnya
+          - name: maritalStatus
+            value: kawin
+            description: Status Pernikahan (Kawin | Belum Kawin)
+          - name: familyRelationshipStatus
+            value: Kepala Keluarga
+            description: Status Hubungan dalam Keluarga [Kepala Keluarga | Suami | Istri | Anak | Menantu | Cucu | Orang Tua | Mertua | Famili Lain | Pembantu | Lainnya]
+          - name: latitude
+            value: "-121212126464"
+            description: Pin Berdasarkan Maps
+          - name: longitude
+            value: "343432546243"
+            description: Pin Berdasarkan Maps
+          - name: address
+            value: Jl. Cempaka Putih Barat
+            description: Alamat Nasabah
+          - name: postalCode
+            value: "10520"
+            description: Kode Pos
+          - name: provinceCode
+            value: "3"
+            description: Kode Provinsi
+          - name: cityCode
+            value: "0393"
+            description: Kode Kota Kabupaten
+          - name: districtCode
+            value: "317305"
+            description: Kode Kecamatan
+          - name: villageCode
+            value: "3173051006"
+            description: Kode Kelurahan
+          - name: rt
+            value: "10"
+            description: No RT
+          - name: rw
+            value: "2"
+            description: No RW
+          - name: email
+            value: dwiki@gmaiil.com
+            description: Email Nasabah
+          - name: mobileNumber
+            value: "081766253554"
+            description: No Telepon Nasabah
+          - name: partnerKtpNumber
+            value: "317105121199883"
+            description: Nomor KTP Pasangan
+          - name: partnerName
+            value: Testing
+            description: Nama Pasangan
+          - name: genderPartner
+            value: Perempuan
+            description: Jenis Kelamin Pasangan (Laki-Laki | Perempuan)
+          - name: birthDatePartner
+            value: 1997-08-02
+            description: "Tanggal Lahir Pasangan (Format : Y-m-d)"
+          - name: placeOfBirthPartner
+            value: Jakarta
+            description: Tempat Kelahiran Pasangan
+          - name: ktpBlob
+            value: ""
+            description: Blob KTP (base64)
+          - name: ktpMimeType
+            value: image/jpeg
+            description: MimeType KTP (image/jpeg | image/png)
+          - name: ktpSelfieBlob
+            value: ""
+            description: Blob KTP Selfie (base64)
+          - name: ktpSelfieMimeType
+            value: image/jpeg
+            description: MimeType KTP Selfie (image/jpeg | image/png)
+          - name: ktpPartnerBlob
+            value: ""
+            description: Blob KTP Partner (base64)
+          - name: ktpPartnerMimeType
+            value: image/jpeg
+            description: MimeType KTP Partner (image/jpeg | image/png)
+          - name: userId
+            value: "1122"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: suplesiPrakarsaId
+            value: ""
+            description: ID Prakarsa yang akan di Suplesi [OPTIONAL]
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang dalam perbaikan. Silahkan mencoba beberapa saat lagi.",
+              "desc": "Error message upload KTP",
+              "data": null
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/prakarsa/add"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: ktpNumber
+            value: "31710500129918"
+            description: No KTP Nasabah
+          - name: ktpDate
+            value: 2019-01-09
+            description: "Tanggal Terbit KTP Nasabah  (Format : Y-m-d)"
+          - name: name
+            value: Dwiki Saputra
+            description: Nama Nasabah
+          - name: placeOfBirth
+            value: Jakarta
+            description: Tempat Kelahiran
+          - name: birthDate
+            value: 1995-01-01
+            description: "Tanggal Lahir Nasabah (Format : Y-m-d)"
+          - name: motherMaidenName
+            value: Testing Mom
+            description: Nama Ibu Kandung
+          - name: gender
+            value: Laki-Laki
+            description: Jenis Kelamin (Laki-Laki | Perempuan)
+          - name: religion
+            value: Islam
+            description: Agama Nasabah [Budha | Hindu | Islam | Kristen | Konghucu | Lainnya ]
+          - name: dependents
+            value: "1"
+            description: Jumlah Tanggungan
+          - name: lastEducation
+            value: Diploma 3
+            description: Pendidikan Terakhir (SD | SMP | SMA | Diploma 3 | Diploma 4 | Sarjana | Lainnya
+          - name: maritalStatus
+            value: kawin
+            description: Status Pernikahan (Kawin | Belum Kawin)
+          - name: familyRelationshipStatus
+            value: Kepala Keluarga
+            description: Status Hubungan dalam Keluarga [Kepala Keluarga | Suami | Istri | Anak | Menantu | Cucu | Orang Tua | Mertua | Famili Lain | Pembantu | Lainnya]
+          - name: latitude
+            value: "-121212126464"
+            description: Pin Berdasarkan Maps
+          - name: longitude
+            value: "343432546243"
+            description: Pin Berdasarkan Maps
+          - name: address
+            value: Jl. Cempaka Putih Barat
+            description: Alamat Nasabah
+          - name: postalCode
+            value: "10520"
+            description: Kode Pos
+          - name: provinceCode
+            value: "3"
+            description: Kode Provinsi
+          - name: cityCode
+            value: "0393"
+            description: Kode Kota Kabupaten
+          - name: districtCode
+            value: "317305"
+            description: Kode Kecamatan
+          - name: villageCode
+            value: "3173051006"
+            description: Kode Kelurahan
+          - name: rt
+            value: "10"
+            description: No RT
+          - name: rw
+            value: "2"
+            description: No RW
+          - name: email
+            value: dwiki@gmaiil.com
+            description: Email Nasabah
+          - name: mobileNumber
+            value: "081766253554"
+            description: No Telepon Nasabah
+          - name: partnerName
+            value: Testing
+            description: Nama Pasangan {OPTIONAL}
+          - name: partnerKtpNumber
+            value: "317105121199883"
+            description: Nomor KTP Pasangan {OPTIONAL}
+          - name: genderPartner
+            value: Perempuan
+            description: Jenis Kelamin Pasangan (Laki-Laki | Perempuan)
+          - name: birthDatePartner
+            value: 1997-08-02
+            description: "Tanggal Lahir Pasangan (Format : Y-m-d)"
+          - name: placeOfBirthPartner
+            value: Jakarta
+            description: Tempat Kelahiran Pasangan
+          - name: ktpBlob
+            value: ""
+            description: Blob KTP (base64)
+          - name: ktpMimeType
+            value: image/jpeg
+            description: MimeType KTP (image/jpeg | image/png)
+          - name: ktpSelfieBlob
+            value: ""
+            description: Blob KTP Selfie (base64)
+          - name: ktpSelfieMimeType
+            value: image/jpeg
+            description: MimeType KTP Selfie (image/jpeg | image/png)
+          - name: ktpPartnerBlob
+            value: ""
+            description: Blob KTP Partner (base64) {OPTIONAL}
+          - name: ktpPartnerMimeType
+            value: image/jpeg
+            description: MimeType KTP Partner (image/jpeg | image/png) {OPTIONAL}
+          - name: userId
+            value: "223"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: suplesiPrakarsaId
+            value: ""
+            description: ID Prakarsa yang akan di Suplesi [OPTIONAL]
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: error KTP Selfie
+    request:
+      url: "{{base_url}}/v/1/prakarsa/add"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: ktpNumber
+            value: "31710500129917"
+            description: No KTP Nasabah
+          - name: ktpDate
+            value: 2019-01-09
+            description: "Tanggal Terbit KTP Nasabah  (Format : Y-m-d)"
+          - name: name
+            value: Dwiki Saputra
+            description: Nama Nasabah
+          - name: placeOfBirth
+            value: Jakarta
+            description: Tempat Kelahiran
+          - name: birthDate
+            value: 1995-01-01
+            description: "Tanggal Lahir Nasabah (Format : Y-m-d)"
+          - name: motherMaidenName
+            value: Testing Mom
+            description: Nama Ibu Kandung
+          - name: gender
+            value: Laki-Laki
+            description: Jenis Kelamin (Laki-Laki | Perempuan)
+          - name: religion
+            value: Islam
+            description: Agama Nasabah [Budha | Hindu | Islam | Kristen | Konghucu | Lainnya ]
+          - name: dependents
+            value: "1"
+            description: Jumlah Tanggungan
+          - name: lastEducation
+            value: Diploma 3
+            description: Pendidikan Terakhir (SD | SMP | SMA | Diploma 3 | Diploma 4 | Sarjana | Lainnya
+          - name: maritalStatus
+            value: kawin
+            description: Status Pernikahan (Kawin | Belum Kawin)
+          - name: familyRelationshipStatus
+            value: Kepala Keluarga
+            description: Status Hubungan dalam Keluarga [Kepala Keluarga | Suami | Istri | Anak | Menantu | Cucu | Orang Tua | Mertua | Famili Lain | Pembantu | Lainnya]
+          - name: latitude
+            value: "-121212126464"
+            description: Pin Berdasarkan Maps
+          - name: longitude
+            value: "343432546243"
+            description: Pin Berdasarkan Maps
+          - name: address
+            value: Jl. Cempaka Putih Barat
+            description: Alamat Nasabah
+          - name: postalCode
+            value: "10520"
+            description: Kode Pos
+          - name: provinceCode
+            value: "3"
+            description: Kode Provinsi
+          - name: cityCode
+            value: "0393"
+            description: Kode Kota Kabupaten
+          - name: districtCode
+            value: "317305"
+            description: Kode Kecamatan
+          - name: villageCode
+            value: "3173051006"
+            description: Kode Kelurahan
+          - name: rt
+            value: "10"
+            description: No RT
+          - name: rw
+            value: "2"
+            description: No RW
+          - name: email
+            value: dwiki@gmaiil.com
+            description: Email Nasabah
+          - name: mobileNumber
+            value: "081766253554"
+            description: No Telepon Nasabah
+          - name: partnerKtpNumber
+            value: "317105121199883"
+            description: Nomor KTP Pasangan
+          - name: partnerName
+            value: Testing
+            description: Nama Pasangan
+          - name: genderPartner
+            value: Perempuan
+            description: Jenis Kelamin Pasangan (Laki-Laki | Perempuan)
+          - name: birthDatePartner
+            value: 1997-08-02
+            description: "Tanggal Lahir Pasangan (Format : Y-m-d)"
+          - name: placeOfBirthPartner
+            value: Jakarta
+            description: Tempat Kelahiran Pasangan
+          - name: ktpBlob
+            value: ""
+            description: Blob KTP (base64)
+          - name: ktpMimeType
+            value: image/jpeg
+            description: MimeType KTP (image/jpeg | image/png)
+          - name: ktpSelfieBlob
+            value: ""
+            description: Blob KTP Selfie (base64)
+          - name: ktpSelfieMimeType
+            value: image/jpeg
+            description: MimeType KTP Selfie (image/jpeg | image/png)
+          - name: ktpPartnerBlob
+            value: ""
+            description: Blob KTP Partner (base64)
+          - name: ktpPartnerMimeType
+            value: image/jpeg
+            description: MimeType KTP Partner (image/jpeg | image/png)
+          - name: userId
+            value: "1122"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: suplesiPrakarsaId
+            value: ""
+            description: ID Prakarsa yang akan di Suplesi [OPTIONAL]
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang dalam perbaikan. Silahkan mencoba beberapa saat lagi.",
+              "desc": "Error message upload KTP selfie",
+              "data": null
+          }
+  - name: validasi pre-screening rejected
+    request:
+      url: "{{base_url}}/v/1/prakarsa/add"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: ktpNumber
+            value: "317105121185668922"
+            description: No KTP Nasabah
+          - name: ktpDate
+            value: 2019-01-09
+            description: "Tanggal Terbit KTP Nasabah  (Format : Y-m-d)"
+          - name: name
+            value: adi rinaldi navaro
+            description: Nama Nasabah
+          - name: placeOfBirth
+            value: Jakarta
+            description: Tempat Kelahiran
+          - name: birthDate
+            value: 1973-06-15
+            description: "Tanggal Lahir Nasabah (Format : Y-m-d)"
+          - name: motherMaidenName
+            value: Nurmala
+            description: Nama Ibu Kandung
+          - name: gender
+            value: Laki-Laki
+            description: Jenis Kelamin (Laki-Laki | Perempuan)
+          - name: religion
+            value: Islam
+            description: Agama Nasabah [Budha | Hindu | Islam | Kristen | Konghucu | Lainnya ]
+          - name: dependents
+            value: "1"
+            description: Jumlah Tanggungan
+          - name: lastEducation
+            value: Diploma 3
+            description: Pendidikan Terakhir (SD | SMP | SMA | Diploma 3 | Diploma 4 | Sarjana | Lainnya
+          - name: maritalStatus
+            value: Belum Kawin
+            description: Status Pernikahan (Kawin | Belum Kawin)
+          - name: familyRelationshipStatus
+            value: Kepala Keluarga
+            description: Status Hubungan dalam Keluarga [Kepala Keluarga | Suami | Istri | Anak | Menantu | Cucu | Orang Tua | Mertua | Famili Lain | Pembantu | Lainnya]
+          - name: latitude
+            value: "-121212126464"
+            description: Pin Berdasarkan Maps
+          - name: longitude
+            value: "343432546243"
+            description: Pin Berdasarkan Maps
+          - name: address
+            value: Jl. Cempaka Putih Barat
+            description: Alamat Nasabah
+          - name: postalCode
+            value: "10520"
+            description: Kode Pos
+          - name: provinceCode
+            value: "3"
+            description: Kode Provinsi
+          - name: cityCode
+            value: "0393"
+            description: Kode Kota Kabupaten
+          - name: districtCode
+            value: "317305"
+            description: Kode Kecamatan
+          - name: villageCode
+            value: "3173051006"
+            description: Kode Kelurahan
+          - name: rt
+            value: "10"
+            description: No RT
+          - name: rw
+            value: "2"
+            description: No RW
+          - name: email
+            value: dwiki@gmaiil.com
+            description: Email Nasabah
+          - name: mobileNumber
+            value: "081766253554"
+            description: No Telepon Nasabah
+          - name: partnerName
+            value: ""
+            description: Nama Pasangan {OPTIONAL}
+            disabled: true
+          - name: partnerKtpNumber
+            value: ""
+            description: Nomor KTP Pasangan {OPTIONAL}
+            disabled: true
+          - name: genderPartner
+            value: Perempuan
+            description: Jenis Kelamin Pasangan (Laki-Laki | Perempuan)
+          - name: birthDatePartner
+            value: 1997-08-02
+            description: "Tanggal Lahir Pasangan (Format : Y-m-d)"
+          - name: placeOfBirthPartner
+            value: Jakarta
+            description: Tempat Kelahiran Pasangan
+          - name: ktpBlob
+            value: ""
+            description: Blob KTP (base64)
+          - name: ktpMimeType
+            value: image/png
+            description: MimeType KTP (image/jpeg | image/png)
+          - name: ktpSelfieBlob
+            value: ""
+            description: Blob KTP Selfie (base64)
+          - name: ktpSelfieMimeType
+            value: image/png
+            description: MimeType KTP Selfie (image/jpeg | image/png)
+          - name: ktpPartnerBlob
+            value: ""
+            description: Blob KTP Partner (base64) {OPTIONAL}
+            disabled: true
+          - name: ktpPartnerMimeType
+            value: image/png
+            description: MimeType KTP Partner (image/jpeg | image/png) {OPTIONAL}
+            disabled: true
+          - name: userId
+            value: "223"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: suplesiPrakarsaId
+            value: ""
+            description: ID Prakarsa yang akan di Suplesi [OPTIONAL]
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Fri, 02 Jul 2021 10:16:33 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "186"
+        - name: Connection
+          value: keep-alive
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Belum 1 minggu Nasabah di tolak pre-screening",
+              "message": "Maaf, Nasabah tidak dapat di prakarsai. Data Nasabah belum 1 minggu di tolak dalam proses pre-screening.",
+              "status": 500
+          }
+  - name: validasi nasabah dalam proses
+    request:
+      url: "{{base_url}}/v/1/prakarsa/add"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: ktpNumber
+            value: "31710500129917"
+            description: No KTP Nasabah
+          - name: ktpDate
+            value: 2019-01-09
+            description: "Tanggal Terbit KTP Nasabah  (Format : Y-m-d)"
+          - name: name
+            value: Dwiki Saputra
+            description: Nama Nasabah
+          - name: placeOfBirth
+            value: Jakarta
+            description: Tempat Kelahiran
+          - name: birthDate
+            value: 1995-01-01
+            description: "Tanggal Lahir Nasabah (Format : Y-m-d)"
+          - name: motherMaidenName
+            value: Testing Mom
+            description: Nama Ibu Kandung
+          - name: gender
+            value: Laki-Laki
+            description: Jenis Kelamin (Laki-Laki | Perempuan)
+          - name: religion
+            value: Islam
+            description: Agama Nasabah [Budha | Hindu | Islam | Kristen | Konghucu | Lainnya ]
+          - name: dependents
+            value: "1"
+            description: Jumlah Tanggungan
+          - name: lastEducation
+            value: Diploma 3
+            description: Pendidikan Terakhir (SD | SMP | SMA | Diploma 3 | Diploma 4 | Sarjana | Lainnya
+          - name: maritalStatus
+            value: kawin
+            description: Status Pernikahan (Kawin | Belum Kawin)
+          - name: familyRelationshipStatus
+            value: Kepala Keluarga
+            description: Status Hubungan dalam Keluarga [Kepala Keluarga | Suami | Istri | Anak | Menantu | Cucu | Orang Tua | Mertua | Famili Lain | Pembantu | Lainnya]
+          - name: latitude
+            value: "-121212126464"
+            description: Pin Berdasarkan Maps
+          - name: longitude
+            value: "343432546243"
+            description: Pin Berdasarkan Maps
+          - name: address
+            value: Jl. Cempaka Putih Barat
+            description: Alamat Nasabah
+          - name: postalCode
+            value: "10520"
+            description: Kode Pos
+          - name: provinceCode
+            value: "3"
+            description: Kode Provinsi
+          - name: cityCode
+            value: "0393"
+            description: Kode Kota Kabupaten
+          - name: districtCode
+            value: "317305"
+            description: Kode Kecamatan
+          - name: villageCode
+            value: "3173051006"
+            description: Kode Kelurahan
+          - name: rt
+            value: "10"
+            description: No RT
+          - name: rw
+            value: "2"
+            description: No RW
+          - name: email
+            value: dwiki@gmaiil.com
+            description: Email Nasabah
+          - name: mobileNumber
+            value: "081766253554"
+            description: No Telepon Nasabah
+          - name: partnerKtpNumber
+            value: "317105121199883"
+            description: Nama Pasangan {OPTIONAL}
+          - name: partnerName
+            value: Testing
+            description: Nomor KTP Pasangan {OPTIONAL}
+          - name: genderPartner
+            value: Perempuan
+            description: Jenis Kelamin Pasangan (Laki-Laki | Perempuan)
+          - name: birthDatePartner
+            value: 1997-08-02
+            description: "Tanggal Lahir Pasangan (Format : Y-m-d)"
+          - name: placeOfBirthPartner
+            value: Jakarta
+            description: Tempat Kelahiran Pasangan
+          - name: ktpBlob
+            value: ""
+            description: Blob KTP (base64)
+          - name: ktpMimeType
+            value: image/jpeg
+            description: MimeType KTP (image/jpeg | image/png)
+          - name: ktpSelfieBlob
+            value: ""
+            description: Blob KTP Selfie (base64)
+          - name: ktpSelfieMimeType
+            value: image/jpeg
+            description: MimeType KTP Selfie (image/jpeg | image/png)
+          - name: ktpPartnerBlob
+            value: ""
+            description: Blob KTP Partner (base64) {OPTIONAL}
+          - name: ktpPartnerMimeType
+            value: image/jpeg
+            description: MimeType KTP Partner (image/jpeg | image/png) {OPTIONAL}
+          - name: userId
+            value: "1122"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: suplesiPrakarsaId
+            value: ""
+            description: ID Prakarsa yang akan di Suplesi [OPTIONAL]
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 02 Jul 2021 10:21:44 GMT
+        - name: Content-Length
+          value: "186"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Status Nasabah >= 0 dan < 9",
+              "message": "Maaf, Nasabah sedang dalam proses prakarsa.",
+              "status": 500
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/prakarsa/add"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: ktpNumber
+            value: "31710500129917"
+            description: No KTP Nasabah
+          - name: ktpDate
+            value: 2019-01-09
+            description: "Tanggal Terbit KTP Nasabah  (Format : Y-m-d)"
+          - name: name
+            value: Dwiki Saputra
+            description: Nama Nasabah
+          - name: placeOfBirth
+            value: Jakarta
+            description: Tempat Kelahiran
+          - name: birthDate
+            value: 1995-01-01
+            description: "Tanggal Lahir Nasabah (Format : Y-m-d)"
+          - name: motherMaidenName
+            value: Testing Mom
+            description: Nama Ibu Kandung
+          - name: gender
+            value: Laki-Laki
+            description: Jenis Kelamin (Laki-Laki | Perempuan)
+          - name: religion
+            value: Islam
+            description: Agama Nasabah [Budha | Hindu | Islam | Kristen | Konghucu | Lainnya ]
+          - name: dependents
+            value: "1"
+            description: Jumlah Tanggungan
+          - name: lastEducation
+            value: Diploma 3
+            description: Pendidikan Terakhir (SD | SMP | SMA | Diploma 3 | Diploma 4 | Sarjana | Lainnya
+          - name: maritalStatus
+            value: kawin
+            description: Status Pernikahan (Kawin | Belum Kawin)
+          - name: familyRelationshipStatus
+            value: Kepala Keluarga
+            description: Status Hubungan dalam Keluarga [Kepala Keluarga | Suami | Istri | Anak | Menantu | Cucu | Orang Tua | Mertua | Famili Lain | Pembantu | Lainnya]
+          - name: latitude
+            value: "-121212126464"
+            description: Pin Berdasarkan Maps
+          - name: longitude
+            value: "343432546243"
+            description: Pin Berdasarkan Maps
+          - name: address
+            value: Jl. Cempaka Putih Barat
+            description: Alamat Nasabah
+          - name: postalCode
+            value: "10520"
+            description: Kode Pos
+          - name: provinceCode
+            value: "3"
+            description: Kode Provinsi
+          - name: cityCode
+            value: "0393"
+            description: Kode Kota Kabupaten
+          - name: districtCode
+            value: "317305"
+            description: Kode Kecamatan
+          - name: villageCode
+            value: "3173051006"
+            description: Kode Kelurahan
+          - name: rt
+            value: "10"
+            description: No RT
+          - name: rw
+            value: "2"
+            description: No RW
+          - name: email
+            value: dwiki@gmaiil.com
+            description: Email Nasabah
+          - name: mobileNumber
+            value: "081766253554"
+            description: No Telepon Nasabah
+          - name: partnerKtpNumber
+            value: "317105121199883"
+            description: Nomor KTP Pasangan
+          - name: partnerName
+            value: Testing
+            description: Nama Pasangan
+          - name: genderPartner
+            value: Perempuan
+            description: Jenis Kelamin Pasangan (Laki-Laki | Perempuan)
+          - name: birthDatePartner
+            value: 1997-08-02
+            description: "Tanggal Lahir Pasangan (Format : Y-m-d)"
+          - name: placeOfBirthPartner
+            value: Jakarta
+            description: Tempat Kelahiran Pasangan
+          - name: ktpBlob
+            value: ""
+            description: Blob KTP (base64)
+          - name: ktpMimeType
+            value: image/jpeg
+            description: MimeType KTP (image/jpeg | image/png)
+          - name: ktpSelfieBlob
+            value: ""
+            description: Blob KTP Selfie (base64)
+          - name: ktpSelfieMimeType
+            value: image/jpeg
+            description: MimeType KTP Selfie (image/jpeg | image/png)
+          - name: ktpPartnerBlob
+            value: ""
+            description: Blob KTP Partner (base64)
+          - name: ktpPartnerMimeType
+            value: image/jpeg
+            description: MimeType KTP Partner (image/jpeg | image/png)
+          - name: userId
+            value: "1122"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: suplesiPrakarsaId
+            value: ""
+            description: ID Prakarsa yang akan di Suplesi [OPTIONAL]
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "data": {
+                  "id": 8
+              },
+              "desc": "Data Tersimpan",
+              "message": "Data prakarsa berhasil disimpan",
+              "status": 200
+          }
+  - name: error Upload KTP Partner
+    request:
+      url: "{{base_url}}/v/1/prakarsa/add"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: ktpNumber
+            value: "31710500129917"
+            description: No KTP Nasabah
+          - name: ktpDate
+            value: 2019-01-09
+            description: "Tanggal Terbit KTP Nasabah  (Format : Y-m-d)"
+          - name: name
+            value: Dwiki Saputra
+            description: Nama Nasabah
+          - name: placeOfBirth
+            value: Jakarta
+            description: Tempat Kelahiran
+          - name: birthDate
+            value: 1995-01-01
+            description: "Tanggal Lahir Nasabah (Format : Y-m-d)"
+          - name: motherMaidenName
+            value: Testing Mom
+            description: Nama Ibu Kandung
+          - name: gender
+            value: Laki-Laki
+            description: Jenis Kelamin (Laki-Laki | Perempuan)
+          - name: religion
+            value: Islam
+            description: Agama Nasabah [Budha | Hindu | Islam | Kristen | Konghucu | Lainnya ]
+          - name: dependents
+            value: "1"
+            description: Jumlah Tanggungan
+          - name: lastEducation
+            value: Diploma 3
+            description: Pendidikan Terakhir (SD | SMP | SMA | Diploma 3 | Diploma 4 | Sarjana | Lainnya
+          - name: maritalStatus
+            value: kawin
+            description: Status Pernikahan (Kawin | Belum Kawin)
+          - name: familyRelationshipStatus
+            value: Kepala Keluarga
+            description: Status Hubungan dalam Keluarga [Kepala Keluarga | Suami | Istri | Anak | Menantu | Cucu | Orang Tua | Mertua | Famili Lain | Pembantu | Lainnya]
+          - name: latitude
+            value: "-121212126464"
+            description: Pin Berdasarkan Maps
+          - name: longitude
+            value: "343432546243"
+            description: Pin Berdasarkan Maps
+          - name: address
+            value: Jl. Cempaka Putih Barat
+            description: Alamat Nasabah
+          - name: postalCode
+            value: "10520"
+            description: Kode Pos
+          - name: provinceCode
+            value: "3"
+            description: Kode Provinsi
+          - name: cityCode
+            value: "0393"
+            description: Kode Kota Kabupaten
+          - name: districtCode
+            value: "317305"
+            description: Kode Kecamatan
+          - name: villageCode
+            value: "3173051006"
+            description: Kode Kelurahan
+          - name: rt
+            value: "10"
+            description: No RT
+          - name: rw
+            value: "2"
+            description: No RW
+          - name: email
+            value: dwiki@gmaiil.com
+            description: Email Nasabah
+          - name: mobileNumber
+            value: "081766253554"
+            description: No Telepon Nasabah
+          - name: partnerKtpNumber
+            value: "317105121199883"
+            description: Nomor KTP Pasangan
+          - name: partnerName
+            value: Testing
+            description: Nama Pasangan
+          - name: genderPartner
+            value: Perempuan
+            description: Jenis Kelamin Pasangan (Laki-Laki | Perempuan)
+          - name: birthDatePartner
+            value: 1997-08-02
+            description: "Tanggal Lahir Pasangan (Format : Y-m-d)"
+          - name: placeOfBirthPartner
+            value: Jakarta
+            description: Tempat Kelahiran Pasangan
+          - name: ktpBlob
+            value: ""
+            description: Blob KTP (base64)
+          - name: ktpMimeType
+            value: image/jpeg
+            description: MimeType KTP (image/jpeg | image/png)
+          - name: ktpSelfieBlob
+            value: ""
+            description: Blob KTP Selfie (base64)
+          - name: ktpSelfieMimeType
+            value: image/jpeg
+            description: MimeType KTP Selfie (image/jpeg | image/png)
+          - name: ktpPartnerBlob
+            value: ""
+            description: Blob KTP Partner (base64)
+          - name: ktpPartnerMimeType
+            value: image/jpeg
+            description: MimeType KTP Partner (image/jpeg | image/png)
+          - name: userId
+            value: "1122"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: suplesiPrakarsaId
+            value: ""
+            description: ID Prakarsa yang akan di Suplesi [OPTIONAL]
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang dalam perbaikan. Silahkan mencoba beberapa saat lagi.",
+              "desc": "Error message upload KTP partener",
+              "data": null
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/prakarsa/add"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: ktpNumber
+            value: "31710500129918"
+            description: No KTP Nasabah
+          - name: ktpDate
+            value: 2019-01-09
+            description: "Tanggal Terbit KTP Nasabah  (Format : Y-m-d)"
+          - name: name
+            value: Dwiki Saputra
+            description: Nama Nasabah
+          - name: placeOfBirth
+            value: Jakarta
+            description: Tempat Kelahiran
+          - name: birthDate
+            value: 1995-01-01
+            description: "Tanggal Lahir Nasabah (Format : Y-m-d)"
+          - name: motherMaidenName
+            value: Testing Mom
+            description: Nama Ibu Kandung
+          - name: gender
+            value: Laki-Laki
+            description: Jenis Kelamin (Laki-Laki | Perempuan)
+          - name: religion
+            value: Islam
+            description: Agama Nasabah [Budha | Hindu | Islam | Kristen | Konghucu | Lainnya ]
+          - name: dependents
+            value: "1"
+            description: Jumlah Tanggungan
+          - name: lastEducation
+            value: Diploma 3
+            description: Pendidikan Terakhir (SD | SMP | SMA | Diploma 3 | Diploma 4 | Sarjana | Lainnya
+          - name: maritalStatus
+            value: kawin
+            description: Status Pernikahan (Kawin | Belum Kawin)
+          - name: familyRelationshipStatus
+            value: Kepala Keluarga
+            description: Status Hubungan dalam Keluarga [Kepala Keluarga | Suami | Istri | Anak | Menantu | Cucu | Orang Tua | Mertua | Famili Lain | Pembantu | Lainnya]
+          - name: latitude
+            value: "-121212126464"
+            description: Pin Berdasarkan Maps
+          - name: longitude
+            value: "343432546243"
+            description: Pin Berdasarkan Maps
+          - name: address
+            value: Jl. Cempaka Putih Barat
+            description: Alamat Nasabah
+          - name: postalCode
+            value: "10520"
+            description: Kode Pos
+          - name: provinceCode
+            value: "3"
+            description: Kode Provinsi
+          - name: cityCode
+            value: "0393"
+            description: Kode Kota Kabupaten
+          - name: districtCode
+            value: "317305"
+            description: Kode Kecamatan
+          - name: villageCode
+            value: "3173051006"
+            description: Kode Kelurahan
+          - name: rt
+            value: "10"
+            description: No RT
+          - name: rw
+            value: "2"
+            description: No RW
+          - name: email
+            value: dwiki@gmaiil.com
+            description: Email Nasabah
+          - name: mobileNumber
+            value: "081766253554"
+            description: No Telepon Nasabah
+          - name: partnerName
+            value: Testing
+            description: Nama Pasangan {OPTIONAL}
+          - name: partnerKtpNumber
+            value: "317105121199883"
+            description: Nomor KTP Pasangan {OPTIONAL}
+          - name: genderPartner
+            value: Perempuan
+            description: Jenis Kelamin Pasangan (Laki-Laki | Perempuan)
+          - name: birthDatePartner
+            value: 1997-08-02
+            description: "Tanggal Lahir Pasangan (Format : Y-m-d)"
+          - name: placeOfBirthPartner
+            value: Jakarta
+            description: Tempat Kelahiran Pasangan
+          - name: ktpBlob
+            value: ""
+            description: Blob KTP (base64)
+          - name: ktpMimeType
+            value: image/jpeg
+            description: MimeType KTP (image/jpeg | image/png)
+          - name: ktpSelfieBlob
+            value: ""
+            description: Blob KTP Selfie (base64)
+          - name: ktpSelfieMimeType
+            value: image/jpeg
+            description: MimeType KTP Selfie (image/jpeg | image/png)
+          - name: ktpPartnerBlob
+            value: ""
+            description: Blob KTP Partner (base64) {OPTIONAL}
+          - name: ktpPartnerMimeType
+            value: image/jpeg
+            description: MimeType KTP Partner (image/jpeg | image/png) {OPTIONAL}
+          - name: userId
+            value: "223"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: suplesiPrakarsaId
+            value: ""
+            description: ID Prakarsa yang akan di Suplesi [OPTIONAL]
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/prakarsa/add"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: ktpNumber
+            value: "31710500129917"
+            description: No KTP Nasabah
+          - name: ktpDate
+            value: 2019-01-09
+            description: "Tanggal Terbit KTP Nasabah  (Format : Y-m-d)"
+          - name: name
+            value: Dwiki Saputra
+            description: Nama Nasabah
+          - name: placeOfBirth
+            value: Jakarta
+            description: Tempat Kelahiran
+          - name: birthDate
+            value: 1995-01-01
+            description: "Tanggal Lahir Nasabah (Format : Y-m-d)"
+          - name: motherMaidenName
+            value: Testing Mom
+            description: Nama Ibu Kandung
+          - name: gender
+            value: Laki-Laki
+            description: Jenis Kelamin (Laki-Laki | Perempuan)
+          - name: religion
+            value: Islam
+            description: Agama Nasabah [Budha | Hindu | Islam | Kristen | Konghucu | Lainnya ]
+          - name: dependents
+            value: "1"
+            description: Jumlah Tanggungan
+          - name: lastEducation
+            value: Diploma 3
+            description: Pendidikan Terakhir (SD | SMP | SMA | Diploma 3 | Diploma 4 | Sarjana | Lainnya
+          - name: maritalStatus
+            value: kawin
+            description: Status Pernikahan (Kawin | Belum Kawin)
+          - name: familyRelationshipStatus
+            value: Kepala Keluarga
+            description: Status Hubungan dalam Keluarga [Kepala Keluarga | Suami | Istri | Anak | Menantu | Cucu | Orang Tua | Mertua | Famili Lain | Pembantu | Lainnya]
+          - name: latitude
+            value: "-121212126464"
+            description: Pin Berdasarkan Maps
+          - name: longitude
+            value: "343432546243"
+            description: Pin Berdasarkan Maps
+          - name: address
+            value: Jl. Cempaka Putih Barat
+            description: Alamat Nasabah
+          - name: postalCode
+            value: "10520"
+            description: Kode Pos
+          - name: provinceCode
+            value: "3"
+            description: Kode Provinsi
+          - name: cityCode
+            value: "0393"
+            description: Kode Kota Kabupaten
+          - name: districtCode
+            value: "317305"
+            description: Kode Kecamatan
+          - name: villageCode
+            value: "3173051006"
+            description: Kode Kelurahan
+          - name: rt
+            value: "10"
+            description: No RT
+          - name: rw
+            value: "2"
+            description: No RW
+          - name: email
+            value: dwiki@gmaiil.com
+            description: Email Nasabah
+          - name: mobileNumber
+            value: "081766253554"
+            description: No Telepon Nasabah
+          - name: partnerKtpNumber
+            value: "317105121199883"
+            description: Nomor KTP Pasangan
+          - name: partnerName
+            value: Testing
+            description: Nama Pasangan
+          - name: genderPartner
+            value: Perempuan
+            description: Jenis Kelamin Pasangan (Laki-Laki | Perempuan)
+          - name: birthDatePartner
+            value: 1997-08-02
+            description: "Tanggal Lahir Pasangan (Format : Y-m-d)"
+          - name: placeOfBirthPartner
+            value: Jakarta
+            description: Tempat Kelahiran Pasangan
+          - name: ktpBlob
+            value: ""
+            description: Blob KTP (base64)
+          - name: ktpMimeType
+            value: image/jpeg
+            description: MimeType KTP (image/jpeg | image/png)
+          - name: ktpSelfieBlob
+            value: ""
+            description: Blob KTP Selfie (base64)
+          - name: ktpSelfieMimeType
+            value: image/jpeg
+            description: MimeType KTP Selfie (image/jpeg | image/png)
+          - name: ktpPartnerBlob
+            value: ""
+            description: Blob KTP Partner (base64)
+          - name: ktpPartnerMimeType
+            value: image/jpeg
+            description: MimeType KTP Partner (image/jpeg | image/png)
+          - name: userId
+            value: "1122"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: suplesiPrakarsaId
+            value: ""
+            description: ID Prakarsa yang akan di Suplesi [OPTIONAL]
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "data": {
+                  "id": 8
+              },
+              "desc": "Data Tersimpan",
+              "message": "Data prakarsa berhasil disimpan",
+              "status": 200
+          }
+  - name: validasi nasabah dalam proses
+    request:
+      url: "{{base_url}}/v/1/prakarsa/add"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: ktpNumber
+            value: "31710500129917"
+            description: No KTP Nasabah
+          - name: ktpDate
+            value: 2019-01-09
+            description: "Tanggal Terbit KTP Nasabah  (Format : Y-m-d)"
+          - name: name
+            value: Dwiki Saputra
+            description: Nama Nasabah
+          - name: placeOfBirth
+            value: Jakarta
+            description: Tempat Kelahiran
+          - name: birthDate
+            value: 1995-01-01
+            description: "Tanggal Lahir Nasabah (Format : Y-m-d)"
+          - name: motherMaidenName
+            value: Testing Mom
+            description: Nama Ibu Kandung
+          - name: gender
+            value: Laki-Laki
+            description: Jenis Kelamin (Laki-Laki | Perempuan)
+          - name: religion
+            value: Islam
+            description: Agama Nasabah [Budha | Hindu | Islam | Kristen | Konghucu | Lainnya ]
+          - name: dependents
+            value: "1"
+            description: Jumlah Tanggungan
+          - name: lastEducation
+            value: Diploma 3
+            description: Pendidikan Terakhir (SD | SMP | SMA | Diploma 3 | Diploma 4 | Sarjana | Lainnya
+          - name: maritalStatus
+            value: kawin
+            description: Status Pernikahan (Kawin | Belum Kawin)
+          - name: familyRelationshipStatus
+            value: Kepala Keluarga
+            description: Status Hubungan dalam Keluarga [Kepala Keluarga | Suami | Istri | Anak | Menantu | Cucu | Orang Tua | Mertua | Famili Lain | Pembantu | Lainnya]
+          - name: latitude
+            value: "-121212126464"
+            description: Pin Berdasarkan Maps
+          - name: longitude
+            value: "343432546243"
+            description: Pin Berdasarkan Maps
+          - name: address
+            value: Jl. Cempaka Putih Barat
+            description: Alamat Nasabah
+          - name: postalCode
+            value: "10520"
+            description: Kode Pos
+          - name: provinceCode
+            value: "3"
+            description: Kode Provinsi
+          - name: cityCode
+            value: "0393"
+            description: Kode Kota Kabupaten
+          - name: districtCode
+            value: "317305"
+            description: Kode Kecamatan
+          - name: villageCode
+            value: "3173051006"
+            description: Kode Kelurahan
+          - name: rt
+            value: "10"
+            description: No RT
+          - name: rw
+            value: "2"
+            description: No RW
+          - name: email
+            value: dwiki@gmaiil.com
+            description: Email Nasabah
+          - name: mobileNumber
+            value: "081766253554"
+            description: No Telepon Nasabah
+          - name: partnerKtpNumber
+            value: "317105121199883"
+            description: Nama Pasangan {OPTIONAL}
+          - name: partnerName
+            value: Testing
+            description: Nomor KTP Pasangan {OPTIONAL}
+          - name: genderPartner
+            value: Perempuan
+            description: Jenis Kelamin Pasangan (Laki-Laki | Perempuan)
+          - name: birthDatePartner
+            value: 1997-08-02
+            description: "Tanggal Lahir Pasangan (Format : Y-m-d)"
+          - name: placeOfBirthPartner
+            value: Jakarta
+            description: Tempat Kelahiran Pasangan
+          - name: ktpBlob
+            value: ""
+            description: Blob KTP (base64)
+          - name: ktpMimeType
+            value: image/jpeg
+            description: MimeType KTP (image/jpeg | image/png)
+          - name: ktpSelfieBlob
+            value: ""
+            description: Blob KTP Selfie (base64)
+          - name: ktpSelfieMimeType
+            value: image/jpeg
+            description: MimeType KTP Selfie (image/jpeg | image/png)
+          - name: ktpPartnerBlob
+            value: ""
+            description: Blob KTP Partner (base64) {OPTIONAL}
+          - name: ktpPartnerMimeType
+            value: image/jpeg
+            description: MimeType KTP Partner (image/jpeg | image/png) {OPTIONAL}
+          - name: userId
+            value: "1122"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: suplesiPrakarsaId
+            value: ""
+            description: ID Prakarsa yang akan di Suplesi [OPTIONAL]
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 02 Jul 2021 10:21:44 GMT
+        - name: Content-Length
+          value: "186"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Status Nasabah >= 0 dan < 9",
+              "message": "Maaf, Nasabah sedang dalam proses prakarsa.",
+              "status": 500
+          }
+  - name: error KTP Selfie
+    request:
+      url: "{{base_url}}/v/1/prakarsa/add"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: ktpNumber
+            value: "31710500129917"
+            description: No KTP Nasabah
+          - name: ktpDate
+            value: 2019-01-09
+            description: "Tanggal Terbit KTP Nasabah  (Format : Y-m-d)"
+          - name: name
+            value: Dwiki Saputra
+            description: Nama Nasabah
+          - name: placeOfBirth
+            value: Jakarta
+            description: Tempat Kelahiran
+          - name: birthDate
+            value: 1995-01-01
+            description: "Tanggal Lahir Nasabah (Format : Y-m-d)"
+          - name: motherMaidenName
+            value: Testing Mom
+            description: Nama Ibu Kandung
+          - name: gender
+            value: Laki-Laki
+            description: Jenis Kelamin (Laki-Laki | Perempuan)
+          - name: religion
+            value: Islam
+            description: Agama Nasabah [Budha | Hindu | Islam | Kristen | Konghucu | Lainnya ]
+          - name: dependents
+            value: "1"
+            description: Jumlah Tanggungan
+          - name: lastEducation
+            value: Diploma 3
+            description: Pendidikan Terakhir (SD | SMP | SMA | Diploma 3 | Diploma 4 | Sarjana | Lainnya
+          - name: maritalStatus
+            value: kawin
+            description: Status Pernikahan (Kawin | Belum Kawin)
+          - name: familyRelationshipStatus
+            value: Kepala Keluarga
+            description: Status Hubungan dalam Keluarga [Kepala Keluarga | Suami | Istri | Anak | Menantu | Cucu | Orang Tua | Mertua | Famili Lain | Pembantu | Lainnya]
+          - name: latitude
+            value: "-121212126464"
+            description: Pin Berdasarkan Maps
+          - name: longitude
+            value: "343432546243"
+            description: Pin Berdasarkan Maps
+          - name: address
+            value: Jl. Cempaka Putih Barat
+            description: Alamat Nasabah
+          - name: postalCode
+            value: "10520"
+            description: Kode Pos
+          - name: provinceCode
+            value: "3"
+            description: Kode Provinsi
+          - name: cityCode
+            value: "0393"
+            description: Kode Kota Kabupaten
+          - name: districtCode
+            value: "317305"
+            description: Kode Kecamatan
+          - name: villageCode
+            value: "3173051006"
+            description: Kode Kelurahan
+          - name: rt
+            value: "10"
+            description: No RT
+          - name: rw
+            value: "2"
+            description: No RW
+          - name: email
+            value: dwiki@gmaiil.com
+            description: Email Nasabah
+          - name: mobileNumber
+            value: "081766253554"
+            description: No Telepon Nasabah
+          - name: partnerKtpNumber
+            value: "317105121199883"
+            description: Nomor KTP Pasangan
+          - name: partnerName
+            value: Testing
+            description: Nama Pasangan
+          - name: genderPartner
+            value: Perempuan
+            description: Jenis Kelamin Pasangan (Laki-Laki | Perempuan)
+          - name: birthDatePartner
+            value: 1997-08-02
+            description: "Tanggal Lahir Pasangan (Format : Y-m-d)"
+          - name: placeOfBirthPartner
+            value: Jakarta
+            description: Tempat Kelahiran Pasangan
+          - name: ktpBlob
+            value: ""
+            description: Blob KTP (base64)
+          - name: ktpMimeType
+            value: image/jpeg
+            description: MimeType KTP (image/jpeg | image/png)
+          - name: ktpSelfieBlob
+            value: ""
+            description: Blob KTP Selfie (base64)
+          - name: ktpSelfieMimeType
+            value: image/jpeg
+            description: MimeType KTP Selfie (image/jpeg | image/png)
+          - name: ktpPartnerBlob
+            value: ""
+            description: Blob KTP Partner (base64)
+          - name: ktpPartnerMimeType
+            value: image/jpeg
+            description: MimeType KTP Partner (image/jpeg | image/png)
+          - name: userId
+            value: "1122"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: suplesiPrakarsaId
+            value: ""
+            description: ID Prakarsa yang akan di Suplesi [OPTIONAL]
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang dalam perbaikan. Silahkan mencoba beberapa saat lagi.",
+              "desc": "Error message upload KTP selfie",
+              "data": null
+          }
+  - name: validasi pre-screening rejected
+    request:
+      url: "{{base_url}}/v/1/prakarsa/add"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: ktpNumber
+            value: "317105121185668922"
+            description: No KTP Nasabah
+          - name: ktpDate
+            value: 2019-01-09
+            description: "Tanggal Terbit KTP Nasabah  (Format : Y-m-d)"
+          - name: name
+            value: adi rinaldi navaro
+            description: Nama Nasabah
+          - name: placeOfBirth
+            value: Jakarta
+            description: Tempat Kelahiran
+          - name: birthDate
+            value: 1973-06-15
+            description: "Tanggal Lahir Nasabah (Format : Y-m-d)"
+          - name: motherMaidenName
+            value: Nurmala
+            description: Nama Ibu Kandung
+          - name: gender
+            value: Laki-Laki
+            description: Jenis Kelamin (Laki-Laki | Perempuan)
+          - name: religion
+            value: Islam
+            description: Agama Nasabah [Budha | Hindu | Islam | Kristen | Konghucu | Lainnya ]
+          - name: dependents
+            value: "1"
+            description: Jumlah Tanggungan
+          - name: lastEducation
+            value: Diploma 3
+            description: Pendidikan Terakhir (SD | SMP | SMA | Diploma 3 | Diploma 4 | Sarjana | Lainnya
+          - name: maritalStatus
+            value: Belum Kawin
+            description: Status Pernikahan (Kawin | Belum Kawin)
+          - name: familyRelationshipStatus
+            value: Kepala Keluarga
+            description: Status Hubungan dalam Keluarga [Kepala Keluarga | Suami | Istri | Anak | Menantu | Cucu | Orang Tua | Mertua | Famili Lain | Pembantu | Lainnya]
+          - name: latitude
+            value: "-121212126464"
+            description: Pin Berdasarkan Maps
+          - name: longitude
+            value: "343432546243"
+            description: Pin Berdasarkan Maps
+          - name: address
+            value: Jl. Cempaka Putih Barat
+            description: Alamat Nasabah
+          - name: postalCode
+            value: "10520"
+            description: Kode Pos
+          - name: provinceCode
+            value: "3"
+            description: Kode Provinsi
+          - name: cityCode
+            value: "0393"
+            description: Kode Kota Kabupaten
+          - name: districtCode
+            value: "317305"
+            description: Kode Kecamatan
+          - name: villageCode
+            value: "3173051006"
+            description: Kode Kelurahan
+          - name: rt
+            value: "10"
+            description: No RT
+          - name: rw
+            value: "2"
+            description: No RW
+          - name: email
+            value: dwiki@gmaiil.com
+            description: Email Nasabah
+          - name: mobileNumber
+            value: "081766253554"
+            description: No Telepon Nasabah
+          - name: partnerName
+            value: ""
+            description: Nama Pasangan {OPTIONAL}
+            disabled: true
+          - name: partnerKtpNumber
+            value: ""
+            description: Nomor KTP Pasangan {OPTIONAL}
+            disabled: true
+          - name: genderPartner
+            value: Perempuan
+            description: Jenis Kelamin Pasangan (Laki-Laki | Perempuan)
+          - name: birthDatePartner
+            value: 1997-08-02
+            description: "Tanggal Lahir Pasangan (Format : Y-m-d)"
+          - name: placeOfBirthPartner
+            value: Jakarta
+            description: Tempat Kelahiran Pasangan
+          - name: ktpBlob
+            value: ""
+            description: Blob KTP (base64)
+          - name: ktpMimeType
+            value: image/png
+            description: MimeType KTP (image/jpeg | image/png)
+          - name: ktpSelfieBlob
+            value: ""
+            description: Blob KTP Selfie (base64)
+          - name: ktpSelfieMimeType
+            value: image/png
+            description: MimeType KTP Selfie (image/jpeg | image/png)
+          - name: ktpPartnerBlob
+            value: ""
+            description: Blob KTP Partner (base64) {OPTIONAL}
+            disabled: true
+          - name: ktpPartnerMimeType
+            value: image/png
+            description: MimeType KTP Partner (image/jpeg | image/png) {OPTIONAL}
+            disabled: true
+          - name: userId
+            value: "223"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: suplesiPrakarsaId
+            value: ""
+            description: ID Prakarsa yang akan di Suplesi [OPTIONAL]
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Fri, 02 Jul 2021 10:16:33 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "186"
+        - name: Connection
+          value: keep-alive
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Belum 1 minggu Nasabah di tolak pre-screening",
+              "message": "Maaf, Nasabah tidak dapat di prakarsai. Data Nasabah belum 1 minggu di tolak dalam proses pre-screening.",
+              "status": 500
+          }
+  - name: error upload KTP
+    request:
+      url: "{{base_url}}/v/1/prakarsa/add"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: ktpNumber
+            value: "31710500129917"
+            description: No KTP Nasabah
+          - name: ktpDate
+            value: 2019-01-09
+            description: "Tanggal Terbit KTP Nasabah  (Format : Y-m-d)"
+          - name: name
+            value: Dwiki Saputra
+            description: Nama Nasabah
+          - name: placeOfBirth
+            value: Jakarta
+            description: Tempat Kelahiran
+          - name: birthDate
+            value: 1995-01-01
+            description: "Tanggal Lahir Nasabah (Format : Y-m-d)"
+          - name: motherMaidenName
+            value: Testing Mom
+            description: Nama Ibu Kandung
+          - name: gender
+            value: Laki-Laki
+            description: Jenis Kelamin (Laki-Laki | Perempuan)
+          - name: religion
+            value: Islam
+            description: Agama Nasabah [Budha | Hindu | Islam | Kristen | Konghucu | Lainnya ]
+          - name: dependents
+            value: "1"
+            description: Jumlah Tanggungan
+          - name: lastEducation
+            value: Diploma 3
+            description: Pendidikan Terakhir (SD | SMP | SMA | Diploma 3 | Diploma 4 | Sarjana | Lainnya
+          - name: maritalStatus
+            value: kawin
+            description: Status Pernikahan (Kawin | Belum Kawin)
+          - name: familyRelationshipStatus
+            value: Kepala Keluarga
+            description: Status Hubungan dalam Keluarga [Kepala Keluarga | Suami | Istri | Anak | Menantu | Cucu | Orang Tua | Mertua | Famili Lain | Pembantu | Lainnya]
+          - name: latitude
+            value: "-121212126464"
+            description: Pin Berdasarkan Maps
+          - name: longitude
+            value: "343432546243"
+            description: Pin Berdasarkan Maps
+          - name: address
+            value: Jl. Cempaka Putih Barat
+            description: Alamat Nasabah
+          - name: postalCode
+            value: "10520"
+            description: Kode Pos
+          - name: provinceCode
+            value: "3"
+            description: Kode Provinsi
+          - name: cityCode
+            value: "0393"
+            description: Kode Kota Kabupaten
+          - name: districtCode
+            value: "317305"
+            description: Kode Kecamatan
+          - name: villageCode
+            value: "3173051006"
+            description: Kode Kelurahan
+          - name: rt
+            value: "10"
+            description: No RT
+          - name: rw
+            value: "2"
+            description: No RW
+          - name: email
+            value: dwiki@gmaiil.com
+            description: Email Nasabah
+          - name: mobileNumber
+            value: "081766253554"
+            description: No Telepon Nasabah
+          - name: partnerKtpNumber
+            value: "317105121199883"
+            description: Nomor KTP Pasangan
+          - name: partnerName
+            value: Testing
+            description: Nama Pasangan
+          - name: genderPartner
+            value: Perempuan
+            description: Jenis Kelamin Pasangan (Laki-Laki | Perempuan)
+          - name: birthDatePartner
+            value: 1997-08-02
+            description: "Tanggal Lahir Pasangan (Format : Y-m-d)"
+          - name: placeOfBirthPartner
+            value: Jakarta
+            description: Tempat Kelahiran Pasangan
+          - name: ktpBlob
+            value: ""
+            description: Blob KTP (base64)
+          - name: ktpMimeType
+            value: image/jpeg
+            description: MimeType KTP (image/jpeg | image/png)
+          - name: ktpSelfieBlob
+            value: ""
+            description: Blob KTP Selfie (base64)
+          - name: ktpSelfieMimeType
+            value: image/jpeg
+            description: MimeType KTP Selfie (image/jpeg | image/png)
+          - name: ktpPartnerBlob
+            value: ""
+            description: Blob KTP Partner (base64)
+          - name: ktpPartnerMimeType
+            value: image/jpeg
+            description: MimeType KTP Partner (image/jpeg | image/png)
+          - name: userId
+            value: "1122"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: suplesiPrakarsaId
+            value: ""
+            description: ID Prakarsa yang akan di Suplesi [OPTIONAL]
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang dalam perbaikan. Silahkan mencoba beberapa saat lagi.",
+              "desc": "Error message upload KTP",
+              "data": null
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/prakarsa/add"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: ktpNumber
+            value: "31710500129917"
+            description: No KTP Nasabah
+          - name: ktpDate
+            value: 2019-01-09
+            description: "Tanggal Terbit KTP Nasabah  (Format : Y-m-d)"
+          - name: name
+            value: Dwiki Saputra
+            description: Nama Nasabah
+          - name: placeOfBirth
+            value: Jakarta
+            description: Tempat Kelahiran
+          - name: birthDate
+            value: 1995-01-01
+            description: "Tanggal Lahir Nasabah (Format : Y-m-d)"
+          - name: motherMaidenName
+            value: Testing Mom
+            description: Nama Ibu Kandung
+          - name: gender
+            value: Laki-Laki
+            description: Jenis Kelamin (Laki-Laki | Perempuan)
+          - name: religion
+            value: Islam
+            description: Agama Nasabah [Budha | Hindu | Islam | Kristen | Konghucu | Lainnya ]
+          - name: dependents
+            value: "1"
+            description: Jumlah Tanggungan
+          - name: lastEducation
+            value: Diploma 3
+            description: Pendidikan Terakhir (SD | SMP | SMA | Diploma 3 | Diploma 4 | Sarjana | Lainnya
+          - name: maritalStatus
+            value: kawin
+            description: Status Pernikahan (Kawin | Belum Kawin)
+          - name: familyRelationshipStatus
+            value: Kepala Keluarga
+            description: Status Hubungan dalam Keluarga [Kepala Keluarga | Suami | Istri | Anak | Menantu | Cucu | Orang Tua | Mertua | Famili Lain | Pembantu | Lainnya]
+          - name: latitude
+            value: "-121212126464"
+            description: Pin Berdasarkan Maps
+          - name: longitude
+            value: "343432546243"
+            description: Pin Berdasarkan Maps
+          - name: address
+            value: Jl. Cempaka Putih Barat
+            description: Alamat Nasabah
+          - name: postalCode
+            value: "10520"
+            description: Kode Pos
+          - name: provinceCode
+            value: "3"
+            description: Kode Provinsi
+          - name: cityCode
+            value: "0393"
+            description: Kode Kota Kabupaten
+          - name: districtCode
+            value: "317305"
+            description: Kode Kecamatan
+          - name: villageCode
+            value: "3173051006"
+            description: Kode Kelurahan
+          - name: rt
+            value: "10"
+            description: No RT
+          - name: rw
+            value: "2"
+            description: No RW
+          - name: email
+            value: dwiki@gmaiil.com
+            description: Email Nasabah
+          - name: mobileNumber
+            value: "081766253554"
+            description: No Telepon Nasabah
+          - name: partnerKtpNumber
+            value: "317105121199883"
+            description: Nomor KTP Pasangan
+          - name: partnerName
+            value: Testing
+            description: Nama Pasangan
+          - name: genderPartner
+            value: Perempuan
+            description: Jenis Kelamin Pasangan (Laki-Laki | Perempuan)
+          - name: birthDatePartner
+            value: 1997-08-02
+            description: "Tanggal Lahir Pasangan (Format : Y-m-d)"
+          - name: placeOfBirthPartner
+            value: Jakarta
+            description: Tempat Kelahiran Pasangan
+          - name: ktpBlob
+            value: ""
+            description: Blob KTP (base64)
+          - name: ktpMimeType
+            value: image/jpeg
+            description: MimeType KTP (image/jpeg | image/png)
+          - name: ktpSelfieBlob
+            value: ""
+            description: Blob KTP Selfie (base64)
+          - name: ktpSelfieMimeType
+            value: image/jpeg
+            description: MimeType KTP Selfie (image/jpeg | image/png)
+          - name: ktpPartnerBlob
+            value: ""
+            description: Blob KTP Partner (base64)
+          - name: ktpPartnerMimeType
+            value: image/jpeg
+            description: MimeType KTP Partner (image/jpeg | image/png)
+          - name: userId
+            value: "1122"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: suplesiPrakarsaId
+            value: ""
+            description: ID Prakarsa yang akan di Suplesi [OPTIONAL]
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data": null
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/prakarsa/add"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: ktpNumber
+            value: "31710500129917"
+            description: No KTP Nasabah
+          - name: ktpDate
+            value: 2019-01-09
+            description: "Tanggal Terbit KTP Nasabah  (Format : Y-m-d)"
+          - name: name
+            value: Dwiki Saputra
+            description: Nama Nasabah
+          - name: placeOfBirth
+            value: Jakarta
+            description: Tempat Kelahiran
+          - name: birthDate
+            value: 1995-01-01
+            description: "Tanggal Lahir Nasabah (Format : Y-m-d)"
+          - name: motherMaidenName
+            value: Testing Mom
+            description: Nama Ibu Kandung
+          - name: gender
+            value: Laki-Laki
+            description: Jenis Kelamin (Laki-Laki | Perempuan)
+          - name: religion
+            value: Islam
+            description: Agama Nasabah [Budha | Hindu | Islam | Kristen | Konghucu | Lainnya ]
+          - name: dependents
+            value: "1"
+            description: Jumlah Tanggungan
+          - name: lastEducation
+            value: Diploma 3
+            description: Pendidikan Terakhir (SD | SMP | SMA | Diploma 3 | Diploma 4 | Sarjana | Lainnya
+          - name: maritalStatus
+            value: kawin
+            description: Status Pernikahan (Kawin | Belum Kawin)
+          - name: familyRelationshipStatus
+            value: Kepala Keluarga
+            description: Status Hubungan dalam Keluarga [Kepala Keluarga | Suami | Istri | Anak | Menantu | Cucu | Orang Tua | Mertua | Famili Lain | Pembantu | Lainnya]
+          - name: latitude
+            value: "-121212126464"
+            description: Pin Berdasarkan Maps
+          - name: longitude
+            value: "343432546243"
+            description: Pin Berdasarkan Maps
+          - name: address
+            value: Jl. Cempaka Putih Barat
+            description: Alamat Nasabah
+          - name: postalCode
+            value: "10520"
+            description: Kode Pos
+          - name: provinceCode
+            value: "3"
+            description: Kode Provinsi
+          - name: cityCode
+            value: "0393"
+            description: Kode Kota Kabupaten
+          - name: districtCode
+            value: "317305"
+            description: Kode Kecamatan
+          - name: villageCode
+            value: "3173051006"
+            description: Kode Kelurahan
+          - name: rt
+            value: "10"
+            description: No RT
+          - name: rw
+            value: "2"
+            description: No RW
+          - name: email
+            value: dwiki@gmaiil.com
+            description: Email Nasabah
+          - name: mobileNumber
+            value: "081766253554"
+            description: No Telepon Nasabah
+          - name: partnerKtpNumber
+            value: "317105121199883"
+            description: Nomor KTP Pasangan
+          - name: partnerName
+            value: Testing
+            description: Nama Pasangan
+          - name: genderPartner
+            value: Perempuan
+            description: Jenis Kelamin Pasangan (Laki-Laki | Perempuan)
+          - name: birthDatePartner
+            value: 1997-08-02
+            description: "Tanggal Lahir Pasangan (Format : Y-m-d)"
+          - name: placeOfBirthPartner
+            value: Jakarta
+            description: Tempat Kelahiran Pasangan
+          - name: ktpBlob
+            value: ""
+            description: Blob KTP (base64)
+          - name: ktpMimeType
+            value: image/jpeg
+            description: MimeType KTP (image/jpeg | image/png)
+          - name: ktpSelfieBlob
+            value: ""
+            description: Blob KTP Selfie (base64)
+          - name: ktpSelfieMimeType
+            value: image/jpeg
+            description: MimeType KTP Selfie (image/jpeg | image/png)
+          - name: ktpPartnerBlob
+            value: ""
+            description: Blob KTP Partner (base64)
+          - name: ktpPartnerMimeType
+            value: image/jpeg
+            description: MimeType KTP Partner (image/jpeg | image/png)
+          - name: userId
+            value: "1122"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: suplesiPrakarsaId
+            value: ""
+            description: ID Prakarsa yang akan di Suplesi [OPTIONAL]
+            disabled: true
+    response:
+      status: 401
+      statusText: Unauthorized
+      body:
+        type: text
+        data: |-
+          {
+              "code": 401,
+              "desc": "Tidak Memliki Akses",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{base_url}}/v/1/prakarsa/add"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: ktpNumber
+            value: "3171051211950001"
+            description: No KTP Nasabah
+          - name: ktpDate
+            value: 2019-01-01
+            description: "Tanggal Terbit KTP Nasabah  (Format : Y-m-d)"
+          - name: name
+            value: Dwiki Saputra
+            description: Nama Nasabah
+          - name: placeOfBirth
+            value: Jakarta
+            description: Tempat Kelahiran
+          - name: birthDate
+            value: 1995-11-12
+            description: "Tanggal Lahir Nasabah (Format : Y-m-d)"
+          - name: motherMaidenName
+            value: Rumiyati
+            description: Nama Ibu Kandung
+          - name: gender
+            value: Laki-Laki
+            description: Jenis Kelamin (Laki-Laki | Perempuan)
+          - name: religion
+            value: Islam
+            description: Agama Nasabah [Budha | Hindu | Islam | Kristen | Konghucu | Lainnya ]
+          - name: dependents
+            value: "2"
+            description: Jumlah Tanggungan
+          - name: lastEducation
+            value: D3
+            description: Pendidikan Terakhir ( SD | SMP | SMA | D1 | D2 | D3 | S1 / D4 | S2 | S3 | Tidak Sekolah | Belum Tamat )
+          - name: maritalStatus
+            value: Kawin
+            description: Status Pernikahan (Kawin | Belum Kawin)
+          - name: familyRelationshipStatus
+            value: Kepala Keluarga
+            description: Status Hubungan dalam Keluarga [Kepala Keluarga | Suami | Istri | Anak | Menantu | Cucu | Orang Tua | Mertua | Famili Lain | Pembantu | Lainnya]
+          - name: latitude
+            value: "-121212126464"
+            description: Pin Berdasarkan Maps
+          - name: longitude
+            value: "343432546243"
+            description: Pin Berdasarkan Maps
+          - name: address
+            value: 10, Jl. Penganten Ali IX No.10, RW.6, Ciracas, Kec. Ciracas, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13740, Indonesia
+            description: Alamat Nasabah
+          - name: postalCode
+            value: "10620"
+            description: Kode Pos
+          - name: provinceCode
+            value: "3"
+            description: Kode Provinsi
+          - name: cityCode
+            value: "0391"
+            description: Kode Kota Kabupaten
+          - name: districtCode
+            value: "317103"
+            description: Kode Kecamatan
+          - name: villageCode
+            value: "3171031001"
+            description: Kode Kelurahan
+          - name: rt
+            value: "001"
+            description: No RT
+          - name: rw
+            value: "006"
+            description: No RW
+          - name: email
+            value: dwiki@gmail.com
+            description: Email Nasabah
+          - name: mobileNumber
+            value: "81319968865"
+            description: No Telepon Nasabah
+          - name: partnerName
+            value: Mutia
+            description: Nama Pasangan {OPTIONAL}
+          - name: partnerKtpNumber
+            value: "3201131212940001"
+            description: Nomor KTP Pasangan {OPTIONAL}
+          - name: genderPartner
+            value: Perempuan
+            description: Jenis Kelamin Pasangan (Laki-Laki | Perempuan)
+          - name: birthDatePartner
+            value: 1997-08-02
+            description: "Tanggal Lahir Pasangan (Format : Y-m-d)"
+          - name: placeOfBirthPartner
+            value: Jakarta
+            description: Tempat Kelahiran Pasangan
+          - name: ktpBlob
+            value: "{{jpgBlob}}"
+            description: Blob KTP (base64)
+          - name: ktpMimeType
+            value: image/jpeg
+            description: MimeType KTP (image/jpeg | image/png)
+          - name: ktpSelfieBlob
+            value: "{{jpgBlob}}"
+            description: Blob KTP Selfie (base64)
+          - name: ktpSelfieMimeType
+            value: image/jpeg
+            description: MimeType KTP Selfie (image/jpeg | image/png)
+          - name: ktpPartnerBlob
+            value: "{{pngBlob}}"
+            description: Blob KTP Partner (base64) {OPTIONAL}
+          - name: ktpPartnerMimeType
+            value: image/png
+            description: MimeType KTP Partner (image/jpeg | image/png) {OPTIONAL}
+          - name: userId
+            value: "999951"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: suplesiPrakarsaId
+            value: ""
+            description: ID Prakarsa yang akan di Suplesi [OPTIONAL]
+            disabled: true
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 18 Jul 2022 13:22:41 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: missing params
+    request:
+      url: "{{base_url}}/v/1/prakarsa/add"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: ktpNumber
+            value: "31710500129917"
+            description: No KTP Nasabah
+            disabled: true
+          - name: ktpDate
+            value: 2019-01-09
+            description: "Tanggal Terbit KTP Nasabah  (Format : Y-m-d)"
+          - name: name
+            value: Dwiki Saputra
+            description: Nama Nasabah
+          - name: placeOfBirth
+            value: Jakarta
+            description: Tempat Kelahiran
+          - name: birthDate
+            value: 1995-01-01
+            description: "Tanggal Lahir Nasabah (Format : Y-m-d)"
+          - name: motherMaidenName
+            value: Testing Mom
+            description: Nama Ibu Kandung
+          - name: gender
+            value: Laki-Laki
+            description: Jenis Kelamin (Laki-Laki | Perempuan)
+          - name: religion
+            value: Islam
+            description: Agama Nasabah [Budha | Hindu | Islam | Kristen | Konghucu | Lainnya ]
+          - name: dependents
+            value: "1"
+            description: Jumlah Tanggungan
+          - name: lastEducation
+            value: Diploma 3
+            description: Pendidikan Terakhir (SD | SMP | SMA | Diploma 3 | Diploma 4 | Sarjana | Lainnya
+          - name: maritalStatus
+            value: kawin
+            description: Status Pernikahan (Kawin | Belum Kawin)
+          - name: familyRelationshipStatus
+            value: Kepala Keluarga
+            description: Status Hubungan dalam Keluarga [Kepala Keluarga | Suami | Istri | Anak | Menantu | Cucu | Orang Tua | Mertua | Famili Lain | Pembantu | Lainnya]
+          - name: latitude
+            value: "-121212126464"
+            description: Pin Berdasarkan Maps
+          - name: longitude
+            value: "343432546243"
+            description: Pin Berdasarkan Maps
+          - name: address
+            value: Jl. Cempaka Putih Barat
+            description: Alamat Nasabah
+          - name: postalCode
+            value: "10520"
+            description: Kode Pos
+          - name: provinceCode
+            value: "3"
+            description: Kode Provinsi
+          - name: cityCode
+            value: "0393"
+            description: Kode Kota Kabupaten
+          - name: districtCode
+            value: "317305"
+            description: Kode Kecamatan
+          - name: villageCode
+            value: "3173051006"
+            description: Kode Kelurahan
+          - name: rt
+            value: "10"
+            description: No RT
+          - name: rw
+            value: "2"
+            description: No RW
+          - name: email
+            value: dwiki@gmaiil.com
+            description: Email Nasabah
+          - name: mobileNumber
+            value: "081766253554"
+            description: No Telepon Nasabah
+          - name: partnerKtpNumber
+            value: "317105121199883"
+            description: Nomor KTP Pasangan
+          - name: partnerName
+            value: Testing
+            description: Nama Pasangan
+          - name: genderPartner
+            value: Perempuan
+            description: Jenis Kelamin Pasangan (Laki-Laki | Perempuan)
+          - name: birthDatePartner
+            value: 1997-08-02
+            description: "Tanggal Lahir Pasangan (Format : Y-m-d)"
+          - name: placeOfBirthPartner
+            value: Jakarta
+            description: Tempat Kelahiran Pasangan
+          - name: ktpBlob
+            value: ""
+            description: Blob KTP (base64)
+          - name: ktpMimeType
+            value: image/jpeg
+            description: MimeType KTP (image/jpeg | image/png)
+          - name: ktpSelfieBlob
+            value: ""
+            description: Blob KTP Selfie (base64)
+          - name: ktpSelfieMimeType
+            value: image/jpeg
+            description: MimeType KTP Selfie (image/jpeg | image/png)
+          - name: ktpPartnerBlob
+            value: ""
+            description: Blob KTP Partner (base64)
+          - name: ktpPartnerMimeType
+            value: image/jpeg
+            description: MimeType KTP Partner (image/jpeg | image/png)
+          - name: userId
+            value: "1122"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: suplesiPrakarsaId
+            value: ""
+            description: ID Prakarsa yang akan di Suplesi [OPTIONAL]
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "status": 400,
+              "message": "Nomor KTP pasangan tidak boleh kosong",
+              "desc": "Parameter partnerKtpNumber kosong",
+              "data": null
+          }

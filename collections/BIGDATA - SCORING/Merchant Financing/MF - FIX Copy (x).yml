@@ -1,0 +1,466 @@
+info:
+  name: MF - FIX Copy (x)
+  type: http
+  seq: 4
+
+http:
+  method: POST
+  url: https://api-cso.internal.bankraya.co.id/credit-scoring/api/v3.2/performa/merchant-financing/3304180701980001
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: Bearer TUFOVUFMOnN0Unliem90QTREc09XSGFobGZocjlZUFVrOFoyNWdhVGJiZm1Xb2ZTaGlqaFFPbXBYUnlyWmlKQ2JWV2NUcnQ=
+  body:
+    type: json
+    data: |-
+      {
+        "amount_10_month_before": 0,
+        "amount_11_month_before": 0,
+        "amount_12_month_before": 0,
+        "amount_1_month_before": 0,
+        "amount_2_month_before": 0,
+        "amount_3_month_before": 0,
+        "amount_4_month_before": 0,
+        "amount_5_month_before": 0,
+        "amount_6_month_before": 0,
+        "amount_7_month_before": 0,
+        "amount_8_month_before": 0,
+        "amount_9_month_before": 0,
+        "frequency_10_month_before": 49,
+        "frequency_11_month_before": 49,
+        "frequency_12_month_before": 49,
+        "frequency_1_month_before": 23,
+        "frequency_2_month_before": 19,
+        "frequency_3_month_before": 20,
+        "frequency_4_month_before": 48,
+        "frequency_5_month_before": 58,
+        "frequency_6_month_before": 68,
+        "frequency_7_month_before": 104,
+        "frequency_8_month_before": 49,
+        "frequency_9_month_before": 49,
+        "id": "1",
+        "length_of_stay": 24,
+        "merchant_name": "SRC-15",
+        "name": "Gilang Romadhon Nurohman",
+        "nik": "3304180701980001",
+        "product_type": "src_csh_loan",
+        "uid": "f845fa49-8a70-4d50-90c3-a8afda7508b0"
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: SRC Cashloan (Lolos)
+    request:
+      url: http://be-credit-scoring-performa.dev.internal.rayain.net/api/v3.2/performa/merchant-financing/PNK0031231
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: Bearer Z20QSDfPh0JpEY1yCiXQjb1B8Bj3yxwwQIPxa7mqYk6X9km3RUAqEDlw2JqYJrjU
+      body:
+        type: json
+        data: |-
+          {
+              "uid": "PNK0031231",
+              "id": "90613",
+              "name": "90613",
+              "nik": "P12320210",
+              "merchant_name": "Nama Merchant",   
+              "product_type": "src_cash_loan",
+              "length_of_stay": 46,
+              "amount_10_month_before":177808121.4,
+              "amount_11_month_before":177808121.4,
+              "amount_12_month_before":177808121.4,
+              "amount_1_month_before":190698550,
+              "amount_2_month_before":159801100,
+              "amount_3_month_before":135822700,
+              "amount_4_month_before":187995050,
+              "amount_5_month_before":191620800,
+              "amount_6_month_before":182310000,
+              "amount_7_month_before":196408650,
+              "amount_8_month_before":177808121.4,
+              "amount_9_month_before":177808121.4,
+              "frequency_10_month_before":28.42857143,
+              "frequency_11_month_before":28.42857143,
+              "frequency_12_month_before":28.42857143,
+              "frequency_1_month_before":27,
+              "frequency_2_month_before":30,
+              "frequency_3_month_before":25,
+              "frequency_4_month_before":26,
+              "frequency_5_month_before":31,
+              "frequency_6_month_before":29,
+              "frequency_7_month_before":31,
+              "frequency_8_month_before":28.42857143,
+              "frequency_9_month_before":28.42857143
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Mon, 29 Dec 2025 07:00:12 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "180"
+        - name: Connection
+          value: keep-alive
+        - name: Access-Control-Allow-Origin
+          value: "*"
+        - name: Access-Control-Allow-Methods
+          value: GET, POST, PUT, DELETE
+        - name: Access-Control-Allow-Headers
+          value: Content-Type, Authorization
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "bin_score": 0,
+              "desc": "APPROVE",
+              "flag_lolos": true,
+              "max_installment": 69883213.33333333,
+              "name": "90613",
+              "plafond": 5000000,
+              "score": 0,
+              "status": "SUCCESS",
+              "tenor": 3,
+              "uid": "PNK0031231"
+          }
+  - name: SRC Cashloan (Tidak Lolos)
+    request:
+      url: http://be-credit-scoring-performa.dev.internal.rayain.net/api/v3.2/performa/merchant-financing/TTE0016453
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: Bearer Z20QSDfPh0JpEY1yCiXQjb1B8Bj3yxwwQIPxa7mqYk6X9km3RUAqEDlw2JqYJrjU
+      body:
+        type: json
+        data: |-
+          {
+              "uid": "TTE0016453",
+              "id": "10825",
+              "name": "10825",
+              "nik": "7229952252",
+              "merchant_name": "Nama Merchant",   
+              "product_type": "src_cash_loan",
+              "length_of_stay": 29,
+              "amount_10_month_before":1883400,
+              "amount_11_month_before":1883400,
+              "amount_12_month_before":1883400,
+              "amount_1_month_before":2863000,
+              "amount_2_month_before":0,
+              "amount_3_month_before":0,
+              "amount_4_month_before":444000,
+              "amount_5_month_before":3080000,
+              "amount_6_month_before":2703000,
+              "amount_7_month_before":196408650,
+              "amount_8_month_before":327000,
+              "amount_9_month_before":1883400,
+              "frequency_10_month_before":1.4,
+              "frequency_11_month_before":1.4,
+              "frequency_12_month_before":1.4,
+              "frequency_1_month_before":2,
+              "frequency_2_month_before":0,
+              "frequency_3_month_before":0,
+              "frequency_4_month_before":1,
+              "frequency_5_month_before":1,
+              "frequency_6_month_before":2,
+              "frequency_7_month_before":1,
+              "frequency_8_month_before":1.4,
+              "frequency_9_month_before":1.4
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Mon, 29 Dec 2025 07:12:26 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "186"
+        - name: Connection
+          value: keep-alive
+        - name: Access-Control-Allow-Origin
+          value: "*"
+        - name: Access-Control-Allow-Methods
+          value: GET, POST, PUT, DELETE
+        - name: Access-Control-Allow-Headers
+          value: Content-Type, Authorization
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "bin_score": 0,
+              "desc": "active_months_3mo_before_loan [1] < 3",
+              "flag_lolos": false,
+              "max_installment": 0,
+              "name": "10825",
+              "plafond": 0,
+              "score": 0,
+              "status": "REJECT",
+              "tenor": 0,
+              "uid": "TTE0016453"
+          }
+  - name: Brimola (Tidak Lolos)
+    request:
+      url: http://be-credit-scoring-performa.dev.internal.rayain.net/api/v3.2/performa/merchant-financing/642160
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: Bearer Z20QSDfPh0JpEY1yCiXQjb1B8Bj3yxwwQIPxa7mqYk6X9km3RUAqEDlw2JqYJrjU
+      body:
+        type: json
+        data: |-
+          {
+              "uid": "642160",
+              "id": "642160",
+              "name": "Herizon",
+              "nik": "7229952252",
+              "merchant_name": "BRIMOLA",   
+              "product_type": "brimola_merchant_financing",
+              "length_of_stay": 55,
+              "amount_10_month_before":21000000,
+              "amount_11_month_before":21000000,
+              "amount_12_month_before":21000000,
+              "amount_1_month_before":22050000,
+              "amount_2_month_before":17850000,
+              "amount_3_month_before":18900000,
+              "amount_4_month_before":18900000,
+              "amount_5_month_before":19950000,
+              "amount_6_month_before":21000000,
+              "amount_7_month_before":16800000,
+              "amount_8_month_before":21000000,
+              "amount_9_month_before":27300000,
+              "frequency_10_month_before":10,
+              "frequency_12_month_before":10,
+              "frequency_11_month_before":10,
+              "frequency_1_month_before":11,
+              "frequency_2_month_before":9,
+              "frequency_3_month_before":9,
+              "frequency_4_month_before":9,
+              "frequency_5_month_before":10,
+              "frequency_6_month_before":10,
+              "frequency_7_month_before":8,
+              "frequency_8_month_before":10,
+              "frequency_9_month_before":13
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Mon, 29 Dec 2025 08:09:52 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "211"
+        - name: Connection
+          value: keep-alive
+        - name: Access-Control-Allow-Origin
+          value: "*"
+        - name: Access-Control-Allow-Methods
+          value: GET, POST, PUT, DELETE
+        - name: Access-Control-Allow-Headers
+          value: Content-Type, Authorization
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "bin_score": [
+                  400,
+                  500
+              ],
+              "desc": "cv_growth_12mo_before_loan [0.17185256257488632] < 0.5",
+              "flag_lolos": false,
+              "max_installment": 0,
+              "name": "Herizon",
+              "plafond": 0,
+              "score": 400,
+              "status": "REJECT",
+              "tenor": 3,
+              "uid": "642160"
+          }
+  - name: Brimola (Tidak Lolos)
+    request:
+      url: http://be-credit-scoring-performa.dev.internal.rayain.net/api/v3.2/performa/merchant-financing/642160
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: Bearer Z20QSDfPh0JpEY1yCiXQjb1B8Bj3yxwwQIPxa7mqYk6X9km3RUAqEDlw2JqYJrjU
+      body:
+        type: json
+        data: |-
+          {
+              "uid": "513983",
+              "id": "513983",
+              "name": "Hoiriah Abas",
+              "nik": "7229952252",
+              "merchant_name": "BRIMOLA",   
+              "product_type": "brimola_merchant_financing",
+              "length_of_stay": 80,
+              "amount_10_month_before":2070000,
+              "amount_11_month_before":1656000,
+              "amount_12_month_before":1656000,
+              "amount_1_month_before":2240000,
+              "amount_2_month_before":2400000,
+              "amount_3_month_before":2240000,
+              "amount_4_month_before":2400000,
+              "amount_5_month_before":1600000,
+              "amount_6_month_before":2080000,
+              "amount_7_month_before":2240000,
+              "amount_8_month_before":1920000,
+              "amount_9_month_before":1854000,
+              "frequency_10_month_before":5,
+              "frequency_12_month_before":4,
+              "frequency_11_month_before":4,
+              "frequency_1_month_before":4,
+              "frequency_2_month_before":5,
+              "frequency_3_month_before":4,
+              "frequency_4_month_before":5,
+              "frequency_5_month_before":3,
+              "frequency_6_month_before":4,
+              "frequency_7_month_before":4,
+              "frequency_8_month_before":4,
+              "frequency_9_month_before":4
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Mon, 29 Dec 2025 08:11:46 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "213"
+        - name: Connection
+          value: keep-alive
+        - name: Access-Control-Allow-Origin
+          value: "*"
+        - name: Access-Control-Allow-Methods
+          value: GET, POST, PUT, DELETE
+        - name: Access-Control-Allow-Headers
+          value: Content-Type, Authorization
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "bin_score": [
+                  0,
+                  100
+              ],
+              "desc": "avg_amt_12mo_before_loan [2029666.6666666667] < 7000000",
+              "flag_lolos": false,
+              "max_installment": 0,
+              "name": "Hoiriah Abas",
+              "plafond": 0,
+              "score": 0,
+              "status": "REJECT",
+              "tenor": 3,
+              "uid": "513983"
+          }
+  - name: Brimola (Lolos)
+    request:
+      url: http://be-credit-scoring-performa.dev.internal.rayain.net/api/v3.2/performa/merchant-financing/642160
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: Bearer Z20QSDfPh0JpEY1yCiXQjb1B8Bj3yxwwQIPxa7mqYk6X9km3RUAqEDlw2JqYJrjU
+      body:
+        type: json
+        data: |-
+          {
+              "uid": "642160",
+              "id": "642160",
+              "name": "Herizon",
+              "nik": "7229952252",
+              "merchant_name": "BRIMOLA",   
+              "product_type": "brimola_merchant_financing",
+              "length_of_stay": 55,
+              "amount_10_month_before":21000000,
+              "amount_11_month_before":21000000,
+              "amount_12_month_before":21000000,
+              "amount_1_month_before":22050000,
+              "amount_2_month_before":17850000,
+              "amount_3_month_before":18900000,
+              "amount_4_month_before":18900000,
+              "amount_5_month_before":19950000,
+              "amount_6_month_before":21000000,
+              "amount_7_month_before":16800000,
+              "amount_8_month_before":21000000,
+              "amount_9_month_before":27300000,
+              "frequency_10_month_before":10,
+              "frequency_12_month_before":10,
+              "frequency_11_month_before":10,
+              "frequency_1_month_before":11,
+              "frequency_2_month_before":9,
+              "frequency_3_month_before":9,
+              "frequency_4_month_before":9,
+              "frequency_5_month_before":10,
+              "frequency_6_month_before":10,
+              "frequency_7_month_before":8,
+              "frequency_8_month_before":10,
+              "frequency_9_month_before":13
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Mon, 29 Dec 2025 09:19:25 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "189"
+        - name: Connection
+          value: keep-alive
+        - name: Access-Control-Allow-Origin
+          value: "*"
+        - name: Access-Control-Allow-Methods
+          value: GET, POST, PUT, DELETE
+        - name: Access-Control-Allow-Headers
+          value: Content-Type, Authorization
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "bin_score": [
+                  500,
+                  600
+              ],
+              "desc": "APPROVE",
+              "flag_lolos": true,
+              "max_installment": 6833333.333333333,
+              "name": "Herizon",
+              "plafond": 20500000,
+              "score": 500,
+              "status": "SUCCESS",
+              "tenor": 3,
+              "uid": "642160"
+          }

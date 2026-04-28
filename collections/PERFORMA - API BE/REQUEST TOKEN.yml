@@ -1,0 +1,91 @@
+info:
+  name: REQUEST TOKEN
+  type: http
+  seq: 21
+
+http:
+  method: POST
+  url: "{{base_url_dev}}/request-token"
+  body:
+    type: form-urlencoded
+    data:
+      - name: username
+        value: YWdyaS1hcGk=
+        description: '{"username":"YWdyaS1hcGk=","password":"QUdyMWQxZzF0YWwyMDIx"}'
+      - name: password
+        value: QUdyMWQxZzF0YWwyMDIx
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        var jsonData = res.getBody();
+        bru.setGlobalEnvVar("tokenJWT", jsonData.token)
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Success
+    request:
+      url: "{{base_url}}/request-token"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: username
+            value: YWdyaS1hcGk=
+            description: '{"username":"YWdyaS1hcGk=","password":"QUdyMWQxZzF0YWwyMDIx"}'
+          - name: password
+            value: QUdyMWQxZzF0YWwyMDIx
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 16 Aug 2023 02:57:47 GMT
+        - name: Content-Length
+          value: "229"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 200,
+              "expire": "2023-08-23T09:57:47+07:00",
+              "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkMWdpdEFMQDRnUjEiOiJhZ3JpLWFwaSIsImV4cCI6MTY5Mjc1OTQ2Nywib3JpZ19pYXQiOjE2OTIxNTQ2Njd9.h5cV2tMaU_6kNDozDl__8_-U3yETkmgdPChmQ0ECs4c"
+          }
+  - name: Success
+    request:
+      url: "{{base_url}}/request-token"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: username
+            value: YWdyaS1hcGk=
+            description: '{"username":"YWdyaS1hcGk=","password":"QUdyMWQxZzF0YWwyMDIx"}'
+          - name: password
+            value: QUdyMWQxZzF0YWwyMDIx
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 16 Aug 2023 02:57:47 GMT
+        - name: Content-Length
+          value: "229"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 200,
+              "expire": "2023-08-23T09:57:47+07:00",
+              "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkMWdpdEFMQDRnUjEiOiJhZ3JpLWFwaSIsImV4cCI6MTY5Mjc1OTQ2Nywib3JpZ19pYXQiOjE2OTIxNTQ2Njd9.h5cV2tMaU_6kNDozDl__8_-U3yETkmgdPChmQ0ECs4c"
+          }

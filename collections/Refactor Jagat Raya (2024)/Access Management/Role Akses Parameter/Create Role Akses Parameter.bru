@@ -1,0 +1,169 @@
+meta {
+  name: Create Role Akses Parameter
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{BASE_URL}}/v1/role/parameter/create
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: 
+}
+
+body:json {
+  {
+      "payload": "{{REQUEST_BODY}}"
+  }
+}
+
+script:pre-request {
+  const payload = {
+      "role_id": "bc53effb-c00a-4bf6-80d7-7ba2b9277a5b",
+      "parameters": [
+          {
+              "type": "jabatan",
+              "label": "Pj. Community Branch Leader",
+              "value": "1071"
+          }
+      ]
+  }
+  
+  const result = _.encrypt(JSON.stringify(payload))
+  bru.setEnvVar("REQUEST_BODY", result);
+}
+
+script:post-response {
+  const responseJSON = res.getBody()
+  if (responseJSON.status) {
+      const data = _.decrypt(responseJSON.data)
+      const parseData = JSON.parse(data)
+      const parseData2 = JSON.parse(parseData)
+      console.log(parseData2)
+  }
+}
+
+settings {
+  encodeUrl: true
+}
+
+example {
+  name: Success
+  
+  request: {
+    url: {{BASE_URL}}/v1/access-management/role-param/create
+    method: POST
+    mode: json
+    body:json: {
+      {
+          "role_id": "edbbfe50-4ede-447c-a1be-cd2a90d7912a",
+          "parameters": [
+              {
+                  "param_type": "employee",
+                  "label": "001676",
+                  "value": "001676"
+              },
+              {
+                  "param_type": "organization",
+                  "label": "Divisi Application Development, Architecture & Governance",
+                  "value": "13"
+              }
+          ]
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Tue, 05 Dec 2023 03:26:05 GMT
+      Content-Length: 62
+    }
+  
+    status: {
+      code: 200
+      text: 200
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "message": "Data berhasil disimpan",
+            "status": true
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Validation
+  
+  request: {
+    url: {{BASE_URL}}/v1/access-management/role-param/create
+    method: POST
+    mode: json
+    body:json: {
+      {
+          "role_id": "",
+          "parameters": [
+              {
+                  "param_type": "",
+                  "label": "",
+                  "value": ""
+              }
+          ]
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Tue, 05 Dec 2023 01:24:16 GMT
+      Content-Length: 330
+    }
+  
+    status: {
+      code: 200
+      text: 400
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": [
+                {
+                    "field": "RoleID",
+                    "message": "role_id harus diisi"
+                },
+                {
+                    "field": "ParamType",
+                    "message": "ParamType harus diisi"
+                },
+                {
+                    "field": "Label",
+                    "message": "Label harus diisi"
+                },
+                {
+                    "field": "Value",
+                    "message": "Value harus diisi"
+                },
+                {
+                    "field": "ParamType",
+                    "message": "ParamType nilai tidak sesuai"
+                }
+            ],
+            "message": "Terjadi kesalahan validasi",
+            "status": false
+        }
+      '''
+    }
+  }
+}

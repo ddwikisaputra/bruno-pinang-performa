@@ -1,0 +1,910 @@
+info:
+  name: Data Document V1 (X)
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{base_url}}/v/1/prakarsa/credit-contract-document"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "999941"
+        description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+      - name: prakarsaId
+        value: "30946"
+        description: Prakarsa ID { MANDATORY }
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/prakarsa/credit-contract-document/28"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 07 Jun 2021 07:11:49 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data": null
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/prakarsa/credit-contract-document/28"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 07 Jun 2021 07:11:49 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "crsBusiness": {
+                      "businessCategory": "Pertanian",
+                      "landArea": 150,
+                      "ownershipStatus": "SHM",
+                      "businessPermit": "Izin",
+                      "permitNumber": "0010212",
+                      "flagNpwp": 1,
+                      "npwpNumber": "12121212121212",
+                      "npwpDate": "2021-10-09",
+                      "landPictureFrontPath": null,
+                      "landPictureFrontBase64": null,
+                      "landPictureFrontMimetype": null,
+                      "landPictureSidePath": null,
+                      "landPictureSideBase64": null,
+                      "landPictureSideMimetype": null,
+                      "landPictureBackPath": null,
+                      "landPictureBackBase64": null,
+                      "landPictureBackMimetype": null,
+                      "businessPictureFrontPath": null,
+                      "businessPictureFrontBase64": null,
+                      "businessPictureFrontMimetype": null,
+                      "businessPictureSidePath": null,
+                      "businessPictureSidebase64": null,
+                      "businessPictureSideMimetype": null,
+                      "businessPictureBackPath": null,
+                      "businessPictureBackBase64": null,
+                      "businessPictureBackMimetype": null,
+                      "businessPermitPicturePath": null,
+                      "businessPermitPictureBase64": null,
+                      "businessPermitPictureMimetype": null
+                  },
+                  "crsCollateral": [
+                      {
+                          "collateralType": "Kendaraan",
+                          "orderNumber": 1,
+                          "collateralOwnership": null,
+                          "collateralOwnerName": "Wawan Samir",
+                          "collateralNumber": null,
+                          "collateralLandArea": 0,
+                          "estimatedLandPrice": 0,
+                          "estimatedCollateralValue": 15000000,
+                          "liquidationValue": 500000.95,
+                          "collateralBuildingArea": 0,
+                          "estimatedBuildingPrice": 0,
+                          "collateralDescription": "Karpet Langka",
+                          "vehicleAssemblyYear": null,
+                          "collateralPictureFrontPath": "prakarsa/crs/collateral/front/2021/9/4/IMG_20210904065901.jpg",
+                          "collateralPictureFrontBase64": "",
+                          "collateralPictureFrontMimetype": "",
+                          "collateralPictureSidePath": "prakarsa/crs/collateral/side/2021/9/4/IMG_20210904065901.jpg",
+                          "collateralPictureSideBase64": "",
+                          "collateralPictureSideMimetype": "",
+                          "collateralPictureBackPath": "prakarsa/crs/collateral/back/2021/9/4/IMG_20210904065901.jpg",
+                          "collateralPictureBackBase64": "",
+                          "collateralPictureBackMimetype": "",
+                          "collateralOwnershipPicture1Path": null,
+                          "collateralOwnershipPicture1Base64": null,
+                          "collateralOwnershipPicture1Mimetype": null,
+                          "collateralOwnershipPicture2Path": null,
+                          "collateralOwnershipPicture2Base64": null,
+                          "collateralOwnershipPicture2Mimetype": null,
+                          "collateralInteriorPicturePath": null,
+                          "collateralInteriorPictureBase64": null,
+                          "collateralInteriorPictureMimetype": null
+                      },
+                      {
+                          "collateralType": "Persediaan",
+                          "orderNumber": 2,
+                          "collateralOwnership": null,
+                          "collateralOwnerName": "Bambang",
+                          "collateralNumber": null,
+                          "collateralLandArea": 0,
+                          "estimatedLandPrice": 0,
+                          "estimatedCollateralValue": 25000000,
+                          "liquidationValue": 500000.95,
+                          "collateralBuildingArea": 0,
+                          "estimatedBuildingPrice": 0,
+                          "collateralDescription": "Barang Keramat",
+                          "vehicleAssemblyYear": null,
+                          "collateralPictureFrontPath": "prakarsa/crs/collateral/front/2021/9/6/IMG_20210906083004.jpg",
+                          "collateralPictureFrontBase64": "",
+                          "collateralPictureFrontMimetype": "",
+                          "collateralPictureSidePath": "prakarsa/crs/collateral/side/2021/9/6/IMG_20210906083004.jpg",
+                          "collateralPictureSideBase64": "",
+                          "collateralPictureSideMimetype": "",
+                          "collateralPictureBackPath": "prakarsa/crs/collateral/back/2021/9/6/IMG_20210906083004.jpg",
+                          "collateralPictureBackBase64": "",
+                          "collateralPictureBackMimetype": "",
+                          "collateralOwnershipPicture1Path": null,
+                          "collateralOwnershipPicture1Base64": null,
+                          "collateralOwnershipPicture1Mimetype": null,
+                          "collateralOwnershipPicture2Path": null,
+                          "collateralOwnershipPicture2Base64": null,
+                          "collateralOwnershipPicture2Mimetype": null,
+                          "collateralInteriorPicturePath": null,
+                          "collateralInteriorPictureBase64": null,
+                          "collateralInteriorPictureMimetype": null
+                      },
+                      {
+                          "collateralType": "Piutang Dagang",
+                          "orderNumber": 3,
+                          "collateralOwnership": null,
+                          "collateralOwnerName": "Karim",
+                          "collateralNumber": null,
+                          "collateralLandArea": 0,
+                          "estimatedLandPrice": 0,
+                          "estimatedCollateralValue": 15000000,
+                          "collateralBuildingArea": 0,
+                          "estimatedBuildingPrice": 0,
+                          "collateralDescription": "Barang Antik",
+                          "vehicleAssemblyYear": null,
+                          "collateralPictureFrontPath": "prakarsa/crs/collateral/front/2021/9/6/IMG_20210906083128.jpg",
+                          "collateralPictureFrontBase64": "",
+                          "collateralPictureFrontMimetype": "",
+                          "collateralPictureSidePath": "prakarsa/crs/collateral/side/2021/9/6/IMG_20210906083128.jpg",
+                          "collateralPictureSideBase64": "",
+                          "collateralPictureSideMimetype": "",
+                          "collateralPictureBackPath": "prakarsa/crs/collateral/back/2021/9/6/IMG_20210906083128.jpg",
+                          "collateralPictureBackBase64": "",
+                          "collateralPictureBackMimetype": "",
+                          "collateralOwnershipPicture1Path": null,
+                          "collateralOwnershipPicture1Base64": null,
+                          "collateralOwnershipPicture1Mimetype": null,
+                          "collateralOwnershipPicture2Path": null,
+                          "collateralOwnershipPicture2Base64": null,
+                          "collateralOwnershipPicture2Mimetype": null,
+                          "collateralInteriorPicturePath": null,
+                          "collateralInteriorPictureBase64": null,
+                          "collateralInteriorPictureMimetype": null
+                      }
+                  ],
+                  "crsFinancial": {
+                      "financialType": "Musiman",
+                      "totalIncome": 0,
+                      "totalHppExpense": 0,
+                      "plantingSeasonPeriod": 5,
+                      "productionAmount": 500,
+                      "estimatedSellingPrice": 45000000,
+                      "totalPlantingCost": 30000000,
+                      "totalEmployee": 5,
+                      "wages": 1500000,
+                      "businessIncome": 22462500000,
+                      "miscellaneousIncome": 0,
+                      "householdExpenses": 0,
+                      "totalOtherExpenses": 0,
+                      "totalOtherInstallment": 0,
+                      "nettoIncome": 22462500000,
+                      "rpc": 16846875000,
+                      "balance": 0,
+                      "accountReceivable": 0,
+                      "assets": 0,
+                      "currentAssets": 0,
+                      "fixedAssets": 0,
+                      "totalAssets": 0,
+                      "tradeDebt": 0,
+                      "shortTermDebt": 0,
+                      "longTermDebt": 0,
+                      "totalDebt": 0,
+                      "ownerEquity": 0,
+                      "totalLiability": 0,
+                      "grossProfit": 0,
+                      "operationalExpenses": 0,
+                      "operationalProfit": 0,
+                      "netProfit": 0,
+                      "salesProjection": 0,
+                      "tradeDebtProjection": 0,
+                      "creditProvided": 0,
+                      "sdsKmk": 0,
+                      "debtToEquityRation": 0,
+                      "nwcPositif": 0,
+                      "roe": 0,
+                      "roi": 0
+                  },
+                  "crsLoan": {
+                      "loanType": "Pinang Mikro",
+                      "facilityType": "KMK (Kredit Modal Kerja)",
+                      "installmentPattern": 1,
+                      "loanTerm": 12,
+                      "loanAmount": 1000000,
+                      "rate": 0.21,
+                      "installmentAmount": 93113.77,
+                      "totalLoanRepayment": 1117365.29,
+                      "totalLoanApproved": 1000000,
+                      "provisionFee": 150000,
+                      "administrationFee": 100000
+                  },
+                  "letterNumbers": {
+                      "SPHNumber": "",
+                      "SKMANumber": "",
+                      "SKPPNumber": "",
+                      "BASTNumber": "",
+                      "TBLANumber": ""
+                  },
+                  "preScreening": {
+                      "id": 9,
+                      "ktpNumber": "3211234909199703",
+                      "ktpDate": "1900-01-20",
+                      "name": "DESMON",
+                      "placeOfBirth": "JAKARTA",
+                      "birthDate": "1900-01-19",
+                      "motherMaidenName": "PILI",
+                      "gender": "Perempuan",
+                      "religion": "Kristen",
+                      "maritalStatus": "Belum Kawin",
+                      "familyRelationshipStatus": "Orang Tua",
+                      "latitude": "33.985805",
+                      "longitude": "-118.2541117",
+                      "address": "JAKARTA",
+                      "postalCode": "12220",
+                      "provinceCode": "3",
+                      "provinceName": "DKI JAKARTA",
+                      "cityCode": "3",
+                      "cityName": "JAKARTA SELATAN",
+                      "districtCode": "317405",
+                      "districtName": "KEBAYORAN LAMA",
+                      "villageCode": "3174051005",
+                      "villageName": "GROGOL SELATAN KEL",
+                      "rt": "009",
+                      "rw": "010",
+                      "email": "dwiki1@gmaiil.com",
+                      "mobileNumber": "81319969965",
+                      "ktpPicturePath": "prakarsa/ktp/2021/6/14/IMG_20210614153021.jpg",
+                      "ktpPictureBase64": "",
+                      "ktpPictureMimetype": "",
+                      "ktpPictureSelfiePath": "prakarsa/ktp-selfie/2021/6/14/IMG_20210614153021.jpg",
+                      "ktpPictureSelfieBase64": "",
+                      "ktpPictureSelfieMimeType": "",
+                      "flagPrakarsa": 1,
+                      "flagUsaha": 1,
+                      "status": 4,
+                      "currentStatus": "Proses Input CRS",
+                      "isPreScreening": 1,
+                      "isPreScreeningResult": 1,
+                      "isCRS": 0,
+                      "isCRSResult": 0,
+                      "partnerKtpNumber": "",
+                      "partnerName": "",
+                      "genderPartner": "Perempuan",
+                      "birthDatePartner": "1991-01-01",
+                      "placeOfBirthPartner": "Jakarta",
+                      "ktpPicturePartnerPath": "",
+                      "ktpPicturePartnerBase64": "",
+                      "ktpPicturePartnerMimetype": "",
+                      "economicSector": 1,
+                      "economicSectorName": "Administrasi Pemerintahan, Pertahanan Dan Jaminan Sosial Wajib",
+                      "subEconomicSector": 1,
+                      "subEconomicSectorName": "Kegiatan Yang Belum Jelas Batasannya Perorangan",
+                      "businessType": 57,
+                      "businessTypeName": "BADAN USAHA UNIT DESA (BUUD)",
+                      "homeAddressFlag": 0,
+                      "businessAddress": "qwqws",
+                      "businessPostalCode": "10520",
+                      "businessProvinceCode": "3",
+                      "businessProvinceName": "DKI JAKARTA",
+                      "businessCityCode": "0391",
+                      "businessCityName": "JAKARTA PUSAT",
+                      "businessDistrictCode": "317105",
+                      "businessDistrictName": "CEMPAKA PUTIH",
+                      "businessVillageCode": "3171051002",
+                      "businessVillageName": "CEMPAKA PUTIH B KEL",
+                      "businessRt": "010",
+                      "businessRw": "002",
+                      "locationTravelTime": "15",
+                      "partnershipId": 1,
+                      "partnershipName": "Tanihub",
+                      "flagScreeningDukcapil": 0,
+                      "flagScreeningDukcapilText": "Proses Pre-Screening",
+                      "flagScreeningDHN": 0,
+                      "flagScreeningDHNText": "Proses Pre-Screening",
+                      "flagScreeningSIKP": 0,
+                      "flagScreeningSIKPText": "Proses Pre-Screening",
+                      "flagScreeningSICD": 0,
+                      "flagScreeningSICDText": "Proses Pre-Screening",
+                      "flagScreeningSlik": 0,
+                      "flagScreeningSlikText": "Proses Pre-Screening",
+                      "flagScreeningLPG": 0,
+                      "flagScreeningLPGText": "Proses Pre-Screening",
+                      "flagScreeningSlikPartner": -3,
+                      "flagScreeningSlikPartnerText": "Tidak Diproses",
+                      "updatedAt": "15-06-2021",
+                      "createdAt": "01-11-2021"
+                  },
+                  "scoringAIForesee": {
+                      "probabilityToDefault": 0,
+                      "grade": "",
+                      "price": "",
+                      "billed": ""
+                  }
+              },
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{base_url}}/v/1/prakarsa/credit-contract-document"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: prakarsaId
+            value: "30946"
+            description: Prakarsa ID { MANDATORY }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 19 Jul 2022 09:49:02 GMT
+        - name: Content-Length
+          value: "75"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/prakarsa/credit-contract-document/{{prakarsaId}}"
+      method: GET
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 07 Jun 2021 07:11:49 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Tidak Memliki Akses",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/prakarsa/credit-contract-document/28"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 07 Jun 2021 07:11:49 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: empty data
+    request:
+      url: "{{base_url}}/v/1/prakarsa/credit-contract-document/-1"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 07 Jun 2021 07:11:49 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "crsBusiness": null,
+                  "crsCollateral": null,
+                  "crsFinancial": null,
+                  "crsLoan": null,
+                  "preScreening": null,
+                  "scoringAIForesee": null
+              },
+              "desc": "Error record not found",
+              "message": "Prakarsa Tidak Ditemukan",
+              "status": 404
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{base_url}}/v/1/prakarsa/credit-contract-document"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: prakarsaId
+            value: "30946"
+            description: Prakarsa ID { MANDATORY }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 19 Jul 2022 09:49:02 GMT
+        - name: Content-Length
+          value: "75"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: empty data
+    request:
+      url: "{{base_url}}/v/1/prakarsa/credit-contract-document/-1"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 07 Jun 2021 07:11:49 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "crsBusiness": null,
+                  "crsCollateral": null,
+                  "crsFinancial": null,
+                  "crsLoan": null,
+                  "preScreening": null,
+                  "scoringAIForesee": null
+              },
+              "desc": "Error record not found",
+              "message": "Prakarsa Tidak Ditemukan",
+              "status": 404
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/prakarsa/credit-contract-document/28"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 07 Jun 2021 07:11:49 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data": null
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/prakarsa/credit-contract-document/28"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 07 Jun 2021 07:11:49 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "crsBusiness": {
+                      "businessCategory": "Pertanian",
+                      "landArea": 150,
+                      "ownershipStatus": "SHM",
+                      "businessPermit": "Izin",
+                      "permitNumber": "0010212",
+                      "flagNpwp": 1,
+                      "npwpNumber": "12121212121212",
+                      "npwpDate": "2021-10-09",
+                      "landPictureFrontPath": null,
+                      "landPictureFrontBase64": null,
+                      "landPictureFrontMimetype": null,
+                      "landPictureSidePath": null,
+                      "landPictureSideBase64": null,
+                      "landPictureSideMimetype": null,
+                      "landPictureBackPath": null,
+                      "landPictureBackBase64": null,
+                      "landPictureBackMimetype": null,
+                      "businessPictureFrontPath": null,
+                      "businessPictureFrontBase64": null,
+                      "businessPictureFrontMimetype": null,
+                      "businessPictureSidePath": null,
+                      "businessPictureSidebase64": null,
+                      "businessPictureSideMimetype": null,
+                      "businessPictureBackPath": null,
+                      "businessPictureBackBase64": null,
+                      "businessPictureBackMimetype": null,
+                      "businessPermitPicturePath": null,
+                      "businessPermitPictureBase64": null,
+                      "businessPermitPictureMimetype": null
+                  },
+                  "crsCollateral": [
+                      {
+                          "collateralType": "Kendaraan",
+                          "orderNumber": 1,
+                          "collateralOwnership": null,
+                          "collateralOwnerName": "Wawan Samir",
+                          "collateralNumber": null,
+                          "collateralLandArea": 0,
+                          "estimatedLandPrice": 0,
+                          "estimatedCollateralValue": 15000000,
+                          "liquidationValue": 500000.95,
+                          "collateralBuildingArea": 0,
+                          "estimatedBuildingPrice": 0,
+                          "collateralDescription": "Karpet Langka",
+                          "vehicleAssemblyYear": null,
+                          "collateralPictureFrontPath": "prakarsa/crs/collateral/front/2021/9/4/IMG_20210904065901.jpg",
+                          "collateralPictureFrontBase64": "",
+                          "collateralPictureFrontMimetype": "",
+                          "collateralPictureSidePath": "prakarsa/crs/collateral/side/2021/9/4/IMG_20210904065901.jpg",
+                          "collateralPictureSideBase64": "",
+                          "collateralPictureSideMimetype": "",
+                          "collateralPictureBackPath": "prakarsa/crs/collateral/back/2021/9/4/IMG_20210904065901.jpg",
+                          "collateralPictureBackBase64": "",
+                          "collateralPictureBackMimetype": "",
+                          "collateralOwnershipPicture1Path": null,
+                          "collateralOwnershipPicture1Base64": null,
+                          "collateralOwnershipPicture1Mimetype": null,
+                          "collateralOwnershipPicture2Path": null,
+                          "collateralOwnershipPicture2Base64": null,
+                          "collateralOwnershipPicture2Mimetype": null,
+                          "collateralInteriorPicturePath": null,
+                          "collateralInteriorPictureBase64": null,
+                          "collateralInteriorPictureMimetype": null
+                      },
+                      {
+                          "collateralType": "Persediaan",
+                          "orderNumber": 2,
+                          "collateralOwnership": null,
+                          "collateralOwnerName": "Bambang",
+                          "collateralNumber": null,
+                          "collateralLandArea": 0,
+                          "estimatedLandPrice": 0,
+                          "estimatedCollateralValue": 25000000,
+                          "liquidationValue": 500000.95,
+                          "collateralBuildingArea": 0,
+                          "estimatedBuildingPrice": 0,
+                          "collateralDescription": "Barang Keramat",
+                          "vehicleAssemblyYear": null,
+                          "collateralPictureFrontPath": "prakarsa/crs/collateral/front/2021/9/6/IMG_20210906083004.jpg",
+                          "collateralPictureFrontBase64": "",
+                          "collateralPictureFrontMimetype": "",
+                          "collateralPictureSidePath": "prakarsa/crs/collateral/side/2021/9/6/IMG_20210906083004.jpg",
+                          "collateralPictureSideBase64": "",
+                          "collateralPictureSideMimetype": "",
+                          "collateralPictureBackPath": "prakarsa/crs/collateral/back/2021/9/6/IMG_20210906083004.jpg",
+                          "collateralPictureBackBase64": "",
+                          "collateralPictureBackMimetype": "",
+                          "collateralOwnershipPicture1Path": null,
+                          "collateralOwnershipPicture1Base64": null,
+                          "collateralOwnershipPicture1Mimetype": null,
+                          "collateralOwnershipPicture2Path": null,
+                          "collateralOwnershipPicture2Base64": null,
+                          "collateralOwnershipPicture2Mimetype": null,
+                          "collateralInteriorPicturePath": null,
+                          "collateralInteriorPictureBase64": null,
+                          "collateralInteriorPictureMimetype": null
+                      },
+                      {
+                          "collateralType": "Piutang Dagang",
+                          "orderNumber": 3,
+                          "collateralOwnership": null,
+                          "collateralOwnerName": "Karim",
+                          "collateralNumber": null,
+                          "collateralLandArea": 0,
+                          "estimatedLandPrice": 0,
+                          "estimatedCollateralValue": 15000000,
+                          "collateralBuildingArea": 0,
+                          "estimatedBuildingPrice": 0,
+                          "collateralDescription": "Barang Antik",
+                          "vehicleAssemblyYear": null,
+                          "collateralPictureFrontPath": "prakarsa/crs/collateral/front/2021/9/6/IMG_20210906083128.jpg",
+                          "collateralPictureFrontBase64": "",
+                          "collateralPictureFrontMimetype": "",
+                          "collateralPictureSidePath": "prakarsa/crs/collateral/side/2021/9/6/IMG_20210906083128.jpg",
+                          "collateralPictureSideBase64": "",
+                          "collateralPictureSideMimetype": "",
+                          "collateralPictureBackPath": "prakarsa/crs/collateral/back/2021/9/6/IMG_20210906083128.jpg",
+                          "collateralPictureBackBase64": "",
+                          "collateralPictureBackMimetype": "",
+                          "collateralOwnershipPicture1Path": null,
+                          "collateralOwnershipPicture1Base64": null,
+                          "collateralOwnershipPicture1Mimetype": null,
+                          "collateralOwnershipPicture2Path": null,
+                          "collateralOwnershipPicture2Base64": null,
+                          "collateralOwnershipPicture2Mimetype": null,
+                          "collateralInteriorPicturePath": null,
+                          "collateralInteriorPictureBase64": null,
+                          "collateralInteriorPictureMimetype": null
+                      }
+                  ],
+                  "crsFinancial": {
+                      "financialType": "Musiman",
+                      "totalIncome": 0,
+                      "totalHppExpense": 0,
+                      "plantingSeasonPeriod": 5,
+                      "productionAmount": 500,
+                      "estimatedSellingPrice": 45000000,
+                      "totalPlantingCost": 30000000,
+                      "totalEmployee": 5,
+                      "wages": 1500000,
+                      "businessIncome": 22462500000,
+                      "miscellaneousIncome": 0,
+                      "householdExpenses": 0,
+                      "totalOtherExpenses": 0,
+                      "totalOtherInstallment": 0,
+                      "nettoIncome": 22462500000,
+                      "rpc": 16846875000,
+                      "balance": 0,
+                      "accountReceivable": 0,
+                      "assets": 0,
+                      "currentAssets": 0,
+                      "fixedAssets": 0,
+                      "totalAssets": 0,
+                      "tradeDebt": 0,
+                      "shortTermDebt": 0,
+                      "longTermDebt": 0,
+                      "totalDebt": 0,
+                      "ownerEquity": 0,
+                      "totalLiability": 0,
+                      "grossProfit": 0,
+                      "operationalExpenses": 0,
+                      "operationalProfit": 0,
+                      "netProfit": 0,
+                      "salesProjection": 0,
+                      "tradeDebtProjection": 0,
+                      "creditProvided": 0,
+                      "sdsKmk": 0,
+                      "debtToEquityRation": 0,
+                      "nwcPositif": 0,
+                      "roe": 0,
+                      "roi": 0
+                  },
+                  "crsLoan": {
+                      "loanType": "Pinang Mikro",
+                      "facilityType": "KMK (Kredit Modal Kerja)",
+                      "installmentPattern": 1,
+                      "loanTerm": 12,
+                      "loanAmount": 1000000,
+                      "rate": 0.21,
+                      "installmentAmount": 93113.77,
+                      "totalLoanRepayment": 1117365.29,
+                      "totalLoanApproved": 1000000,
+                      "provisionFee": 150000,
+                      "administrationFee": 100000
+                  },
+                  "letterNumbers": {
+                      "SPHNumber": "",
+                      "SKMANumber": "",
+                      "SKPPNumber": "",
+                      "BASTNumber": "",
+                      "TBLANumber": ""
+                  },
+                  "preScreening": {
+                      "id": 9,
+                      "ktpNumber": "3211234909199703",
+                      "ktpDate": "1900-01-20",
+                      "name": "DESMON",
+                      "placeOfBirth": "JAKARTA",
+                      "birthDate": "1900-01-19",
+                      "motherMaidenName": "PILI",
+                      "gender": "Perempuan",
+                      "religion": "Kristen",
+                      "maritalStatus": "Belum Kawin",
+                      "familyRelationshipStatus": "Orang Tua",
+                      "latitude": "33.985805",
+                      "longitude": "-118.2541117",
+                      "address": "JAKARTA",
+                      "postalCode": "12220",
+                      "provinceCode": "3",
+                      "provinceName": "DKI JAKARTA",
+                      "cityCode": "3",
+                      "cityName": "JAKARTA SELATAN",
+                      "districtCode": "317405",
+                      "districtName": "KEBAYORAN LAMA",
+                      "villageCode": "3174051005",
+                      "villageName": "GROGOL SELATAN KEL",
+                      "rt": "009",
+                      "rw": "010",
+                      "email": "dwiki1@gmaiil.com",
+                      "mobileNumber": "81319969965",
+                      "ktpPicturePath": "prakarsa/ktp/2021/6/14/IMG_20210614153021.jpg",
+                      "ktpPictureBase64": "",
+                      "ktpPictureMimetype": "",
+                      "ktpPictureSelfiePath": "prakarsa/ktp-selfie/2021/6/14/IMG_20210614153021.jpg",
+                      "ktpPictureSelfieBase64": "",
+                      "ktpPictureSelfieMimeType": "",
+                      "flagPrakarsa": 1,
+                      "flagUsaha": 1,
+                      "status": 4,
+                      "currentStatus": "Proses Input CRS",
+                      "isPreScreening": 1,
+                      "isPreScreeningResult": 1,
+                      "isCRS": 0,
+                      "isCRSResult": 0,
+                      "partnerKtpNumber": "",
+                      "partnerName": "",
+                      "genderPartner": "Perempuan",
+                      "birthDatePartner": "1991-01-01",
+                      "placeOfBirthPartner": "Jakarta",
+                      "ktpPicturePartnerPath": "",
+                      "ktpPicturePartnerBase64": "",
+                      "ktpPicturePartnerMimetype": "",
+                      "economicSector": 1,
+                      "economicSectorName": "Administrasi Pemerintahan, Pertahanan Dan Jaminan Sosial Wajib",
+                      "subEconomicSector": 1,
+                      "subEconomicSectorName": "Kegiatan Yang Belum Jelas Batasannya Perorangan",
+                      "businessType": 57,
+                      "businessTypeName": "BADAN USAHA UNIT DESA (BUUD)",
+                      "homeAddressFlag": 0,
+                      "businessAddress": "qwqws",
+                      "businessPostalCode": "10520",
+                      "businessProvinceCode": "3",
+                      "businessProvinceName": "DKI JAKARTA",
+                      "businessCityCode": "0391",
+                      "businessCityName": "JAKARTA PUSAT",
+                      "businessDistrictCode": "317105",
+                      "businessDistrictName": "CEMPAKA PUTIH",
+                      "businessVillageCode": "3171051002",
+                      "businessVillageName": "CEMPAKA PUTIH B KEL",
+                      "businessRt": "010",
+                      "businessRw": "002",
+                      "locationTravelTime": "15",
+                      "partnershipId": 1,
+                      "partnershipName": "Tanihub",
+                      "flagScreeningDukcapil": 0,
+                      "flagScreeningDukcapilText": "Proses Pre-Screening",
+                      "flagScreeningDHN": 0,
+                      "flagScreeningDHNText": "Proses Pre-Screening",
+                      "flagScreeningSIKP": 0,
+                      "flagScreeningSIKPText": "Proses Pre-Screening",
+                      "flagScreeningSICD": 0,
+                      "flagScreeningSICDText": "Proses Pre-Screening",
+                      "flagScreeningSlik": 0,
+                      "flagScreeningSlikText": "Proses Pre-Screening",
+                      "flagScreeningLPG": 0,
+                      "flagScreeningLPGText": "Proses Pre-Screening",
+                      "flagScreeningSlikPartner": -3,
+                      "flagScreeningSlikPartnerText": "Tidak Diproses",
+                      "updatedAt": "15-06-2021",
+                      "createdAt": "01-11-2021"
+                  },
+                  "scoringAIForesee": {
+                      "probabilityToDefault": 0,
+                      "grade": "",
+                      "price": "",
+                      "billed": ""
+                  }
+              },
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/prakarsa/credit-contract-document/{{prakarsaId}}"
+      method: GET
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 07 Jun 2021 07:11:49 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Tidak Memliki Akses",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/prakarsa/credit-contract-document/28"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 07 Jun 2021 07:11:49 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }

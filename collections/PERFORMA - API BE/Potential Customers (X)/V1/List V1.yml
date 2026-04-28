@@ -1,0 +1,565 @@
+info:
+  name: List V1
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: "{{base_url}}/v/1/potential-customers/list"
+  body:
+    type: form-urlencoded
+    data:
+      - name: textSearch
+        value: fa
+        description: Text Pencarian Data { OPTIONAL }
+        disabled: true
+      - name: partnershipId
+        value: "2"
+        description: ID Partnership { OPTIONAL Default '0' } [ 0 => all, ...]
+        disabled: true
+      - name: branchCode
+        value: "9999"
+        description: Branch Code BRI Agro (BranchCode Login)
+      - name: startIndex
+        value: "0"
+        description: Offset Data {Default 0}
+      - name: recordCount
+        value: "100"
+        description: Limit Data {Default 5}
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/potential-customers/list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: textSearch
+            value: fa
+            description: Text Pencarian Data { OPTIONAL }
+            disabled: true
+          - name: partnershipId
+            value: "2"
+            description: ID Partnership { OPTIONAL Default '0' } [ 0 => all, ...]
+          - name: branchCode
+            value: "00671"
+            description: Branch Code BRI Agro (BranchCode Login)
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "3"
+            description: Limit Data {Default 5}
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Jul 2021 04:27:47 GMT
+        - name: Content-Length
+          value: "122"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "message": "signature is invalid || Token is expired"
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/potential-customers/list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: textSearch
+            value: fa
+            description: Text Pencarian Data { OPTIONAL }
+            disabled: true
+          - name: partnershipId
+            value: "2"
+            description: ID Partnership { OPTIONAL Default '0' } [ 0 => all, ...]
+          - name: branchCode
+            value: "00671"
+            description: Branch Code BRI Agro (BranchCode Login)
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "3"
+            description: Limit Data {Default 5}
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Jul 2021 04:27:47 GMT
+        - name: Content-Length
+          value: "122"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: empty data
+    request:
+      url: "{{base_url}}/v/1/potential-customers/list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: textSearch
+            value: fa
+            description: Text Pencarian Data { OPTIONAL }
+            disabled: true
+          - name: partnershipId
+            value: "2"
+            description: ID Partnership { OPTIONAL Default '0' } [ 0 => all, ...]
+          - name: branchCode
+            value: "00671"
+            description: Branch Code BRI Agro (BranchCode Login)
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "3"
+            description: Limit Data {Default 5}
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Jul 2021 04:27:47 GMT
+        - name: Content-Length
+          value: "122"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Data Potential Customer tidak ditemukan",
+              "message": "Potential Customer Tidak Ditemukan",
+              "status": 404
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/potential-customers/list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: textSearch
+            value: fa
+            description: Text Pencarian Data { OPTIONAL }
+            disabled: true
+          - name: partnershipId
+            value: "2"
+            description: ID Partnership { OPTIONAL Default '0' } [ 0 => all, ...]
+          - name: branchCode
+            value: "00671"
+            description: Branch Code BRI Agro (BranchCode Login)
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "3"
+            description: Limit Data {Default 5}
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Jul 2021 04:30:16 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "data": [
+                  {
+                      "id": 3,
+                      "referenceId": "1",
+                      "prakarsaId": null,
+                      "branchCode": "00671",
+                      "partnershipId": 1,
+                      "partnershipName": "Tanihub",
+                      "ktpNumber": "3171051211950004",
+                      "name": "Dwiki Saputra",
+                      "address": "CPB",
+                      "ktpPictureSelfiePath": "prakarsa/ktp-selfie/2021/7/12/IMG_20210712155747.png",
+                      "ktpPictureSelfieBase64": "bas464 string",
+                      "ktpPictureSelfieMimetype": "",
+                      "status": 0,
+                      "statusText": "Waiting List",
+                      "createdAt": "12-07-2021",
+                      "updatedAt": "12-07-2021"
+                  },
+                  {
+                      "id": 2,
+                      "referenceId": "1",
+                      "prakarsaId": null,
+                      "branchCode": "00671",
+                      "partnershipId": 1,
+                      "partnershipName": "Tanihub",
+                      "ktpNumber": "3171051211950003",
+                      "name": "Dwiki Saputra",
+                      "address": "CPB",
+                      "ktpPictureSelfiePath": "prakarsa/ktp-selfie/2021/7/12/IMG_20210712154938.png",
+                      "ktpPictureSelfieBase64": "bas464 string",
+                      "ktpPictureSelfieMimetype": "",
+                      "status": 0,
+                      "statusText": "Waiting List",
+                      "createdAt": "12-07-2021",
+                      "updatedAt": "12-07-2021"
+                  },
+                  {
+                      "id": 1,
+                      "referenceId": "1",
+                      "prakarsaId": null,
+                      "branchCode": "00671",
+                      "partnershipId": 1,
+                      "partnershipName": "Tanihub",
+                      "ktpNumber": "3171051211950002",
+                      "name": "Dwiki Saputra",
+                      "address": "CPB",
+                      "ktpPictureSelfiePath": "prakarsa/ktp-selfie/2021/7/12/IMG_20210712152433.png",
+                      "ktpPictureSelfieBase64": "bas464 string",
+                      "ktpPictureSelfieMimetype": "",
+                      "status": 0,
+                      "statusText": "Waiting List",
+                      "createdAt": "12-07-2021",
+                      "updatedAt": "12-07-2021"
+                  }
+              ],
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/potential-customers/list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: textSearch
+            value: fa
+            description: Text Pencarian Data { OPTIONAL }
+            disabled: true
+          - name: partnershipId
+            value: "2"
+            description: ID Partnership { OPTIONAL Default '0' } [ 0 => all, ...]
+          - name: branchCode
+            value: "00671"
+            description: Branch Code BRI Agro (BranchCode Login)
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "3"
+            description: Limit Data {Default 5}
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Jul 2021 04:27:47 GMT
+        - name: Content-Length
+          value: "122"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data": null
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/potential-customers/list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: textSearch
+            value: fa
+            description: Text Pencarian Data { OPTIONAL }
+            disabled: true
+          - name: partnershipId
+            value: "2"
+            description: ID Partnership { OPTIONAL Default '0' } [ 0 => all, ...]
+          - name: branchCode
+            value: "00671"
+            description: Branch Code BRI Agro (BranchCode Login)
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "3"
+            description: Limit Data {Default 5}
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Jul 2021 04:27:47 GMT
+        - name: Content-Length
+          value: "122"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: empty data
+    request:
+      url: "{{base_url}}/v/1/potential-customers/list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: textSearch
+            value: fa
+            description: Text Pencarian Data { OPTIONAL }
+            disabled: true
+          - name: partnershipId
+            value: "2"
+            description: ID Partnership { OPTIONAL Default '0' } [ 0 => all, ...]
+          - name: branchCode
+            value: "00671"
+            description: Branch Code BRI Agro (BranchCode Login)
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "3"
+            description: Limit Data {Default 5}
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Jul 2021 04:27:47 GMT
+        - name: Content-Length
+          value: "122"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Data Potential Customer tidak ditemukan",
+              "message": "Potential Customer Tidak Ditemukan",
+              "status": 404
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/potential-customers/list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: textSearch
+            value: fa
+            description: Text Pencarian Data { OPTIONAL }
+            disabled: true
+          - name: partnershipId
+            value: "2"
+            description: ID Partnership { OPTIONAL Default '0' } [ 0 => all, ...]
+          - name: branchCode
+            value: "00671"
+            description: Branch Code BRI Agro (BranchCode Login)
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "3"
+            description: Limit Data {Default 5}
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Jul 2021 04:30:16 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "data": [
+                  {
+                      "id": 3,
+                      "referenceId": "1",
+                      "prakarsaId": null,
+                      "branchCode": "00671",
+                      "partnershipId": 1,
+                      "partnershipName": "Tanihub",
+                      "ktpNumber": "3171051211950004",
+                      "name": "Dwiki Saputra",
+                      "address": "CPB",
+                      "ktpPictureSelfiePath": "prakarsa/ktp-selfie/2021/7/12/IMG_20210712155747.png",
+                      "ktpPictureSelfieBase64": "bas464 string",
+                      "ktpPictureSelfieMimetype": "",
+                      "status": 0,
+                      "statusText": "Waiting List",
+                      "createdAt": "12-07-2021",
+                      "updatedAt": "12-07-2021"
+                  },
+                  {
+                      "id": 2,
+                      "referenceId": "1",
+                      "prakarsaId": null,
+                      "branchCode": "00671",
+                      "partnershipId": 1,
+                      "partnershipName": "Tanihub",
+                      "ktpNumber": "3171051211950003",
+                      "name": "Dwiki Saputra",
+                      "address": "CPB",
+                      "ktpPictureSelfiePath": "prakarsa/ktp-selfie/2021/7/12/IMG_20210712154938.png",
+                      "ktpPictureSelfieBase64": "bas464 string",
+                      "ktpPictureSelfieMimetype": "",
+                      "status": 0,
+                      "statusText": "Waiting List",
+                      "createdAt": "12-07-2021",
+                      "updatedAt": "12-07-2021"
+                  },
+                  {
+                      "id": 1,
+                      "referenceId": "1",
+                      "prakarsaId": null,
+                      "branchCode": "00671",
+                      "partnershipId": 1,
+                      "partnershipName": "Tanihub",
+                      "ktpNumber": "3171051211950002",
+                      "name": "Dwiki Saputra",
+                      "address": "CPB",
+                      "ktpPictureSelfiePath": "prakarsa/ktp-selfie/2021/7/12/IMG_20210712152433.png",
+                      "ktpPictureSelfieBase64": "bas464 string",
+                      "ktpPictureSelfieMimetype": "",
+                      "status": 0,
+                      "statusText": "Waiting List",
+                      "createdAt": "12-07-2021",
+                      "updatedAt": "12-07-2021"
+                  }
+              ],
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/potential-customers/list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: textSearch
+            value: fa
+            description: Text Pencarian Data { OPTIONAL }
+            disabled: true
+          - name: partnershipId
+            value: "2"
+            description: ID Partnership { OPTIONAL Default '0' } [ 0 => all, ...]
+          - name: branchCode
+            value: "00671"
+            description: Branch Code BRI Agro (BranchCode Login)
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "3"
+            description: Limit Data {Default 5}
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Jul 2021 04:27:47 GMT
+        - name: Content-Length
+          value: "122"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "message": "signature is invalid || Token is expired"
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/potential-customers/list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: textSearch
+            value: fa
+            description: Text Pencarian Data { OPTIONAL }
+            disabled: true
+          - name: partnershipId
+            value: "2"
+            description: ID Partnership { OPTIONAL Default '0' } [ 0 => all, ...]
+          - name: branchCode
+            value: "00671"
+            description: Branch Code BRI Agro (BranchCode Login)
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "3"
+            description: Limit Data {Default 5}
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Jul 2021 04:27:47 GMT
+        - name: Content-Length
+          value: "122"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data": null
+          }

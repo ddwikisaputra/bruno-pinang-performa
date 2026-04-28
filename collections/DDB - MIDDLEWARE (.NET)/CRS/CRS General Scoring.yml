@@ -1,0 +1,100 @@
+info:
+  name: CRS General Scoring
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{base_url}}/api/digiagri/aiforesee/score"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: OPNEX-3310140802930010
+        description: User ID Aplikasi
+      - name: name
+        value: Dwiki Saputra
+        description: Nama nasabah
+      - name: ktp
+        value: "3171051211950001"
+        description: KTP Nasabah
+      - name: phone
+        value: "+62881776527371"
+        description: No. HP Nasabah
+      - name: loanType
+        value: Performa / Performa Pro
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Success
+    request:
+      url: "{{base_url}}/api/digiagri/aiforesee/score"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000426"
+            description: User ID Aplikasi
+          - name: name
+            value: Ibrahim Senoaji
+            description: Nama nasabah
+          - name: ktp
+            value: "3275042305890013"
+            description: KTP Nasabah
+          - name: phone
+            value: "+6289604391382"
+            description: No. HP Nasabah
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "statusCode": "1",
+              "statusDescription": "request success",
+              "result": {
+                  "probability_to_default": "0.021280298",
+                  "grade": "C-",
+                  "price": "15%",
+                  "billed": "YES"
+              }
+          }
+  - name: Time out
+    request:
+      url: "{{base_url}}/api/digiagri/aiforesee/score"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000426"
+            description: User ID Aplikasi
+          - name: name
+            value: Ibrahim Senoaji
+            description: Nama nasabah
+          - name: ktp
+            value: "3275042305890013"
+            description: KTP Nasabah
+          - name: phone
+            value: "+6289604391382"
+            description: No. HP Nasabah
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "statusCode": "2",
+              "statusDescription": "fail to get data from partner, time out",
+              "result": {
+                  "probability_to_default": null,
+                  "grade": null,
+                  "price": null,
+                  "billed": null
+              }
+          }

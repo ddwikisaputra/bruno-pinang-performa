@@ -1,0 +1,48 @@
+meta {
+  name: Login Basic Admin - RIMA
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{BASE_URL}}/v1/auth/login/basic
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+      "payload": "{{REQUEST_BODY}}"
+  }
+}
+
+script:pre-request {
+  const payload = {
+  //     "username": "0000071", 
+     "username": "0000082", 
+      "password": "MA=="
+  }
+  
+  const result = globalThis.encrypt(JSON.stringify(payload))
+  bru.setEnvVar("REQUEST_BODY", result);
+  
+}
+
+script:post-response {
+  const CryptoJS = require("crypto-js");
+  
+  const responseJSON = res.getBody();
+  if (responseJSON.status) {
+      const data = decrypt(responseJSON.data);
+      const result = JSON.parse(JSON.parse(data));
+      bru.setEnvVar("TOKEN", result.access_token);
+      bru.setEnvVar("REFRESH_TOKEN", result.refresh_token);
+    console.log("access_token : ",result.access_token);
+    console.log("refresh_token : ",result.refresh_token);
+  }
+  
+}
+
+settings {
+  encodeUrl: true
+}

@@ -1,0 +1,195 @@
+info:
+  name: Add SIKP Calon [IN DEVELOP]
+  type: http
+  seq: 5
+
+http:
+  method: POST
+  url: "{{url}}/v/1/3party/sikp/submit-calon"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: OTk5OTQx
+        description: User Id [ENCODE BASE64] [MANDATORY]
+      - name: ktpNumber
+        value: MzIwOTM2NTQwNzgzMDAwMQ==
+        description: KTP Number [ENCODE BASE64] [MANDATORY]
+      - name: cif
+        value: "0000092434"
+        description: CIF Number [MANDATORY]
+      - name: kodeCabang
+        value: "0010"
+        description: Kode Cabang [MANDATORY]
+        disabled: true
+      - name: nama
+        value: SEKAR GAPURANING RAHAYU
+        description: Nama Calon Nasabah [MANDATORY]
+      - name: tanggalLahir
+        value: 1991-01-22
+        description: Tanggal Lahir [MANDATORY]
+      - name: jenisKelamin
+        value: "2"
+        description: Gender [Laki-Laki, Perempuan, Badan Usaha] [MANDATORY]
+      - name: statusPerkawinan
+        value: "1"
+        description: Status Perkawinan []
+      - name: pendidikanTerakhir
+        value: "6"
+        description: Pendidikan Terakhir []
+      - name: pekerjaan
+        value: "6"
+        description: Pekerjaan []
+      - name: alamat
+        value: "JL ARJUNA GANG BHINEKA NO 41 "
+        description: Alamat Nasabah [String] [MADATORY]
+      - name: kodeArea
+        value: "0393"
+        description: Kode Area [MADATORY]
+      - name: kodePos
+        value: "11740"
+        description: Kode Pos [MADATORY]
+      - name: npwp
+        value: "705662203331000"
+        description: NPWP [MADATORY]
+      - name: tanggalMulaiUsaha
+        value: 2016-01-01
+        description: Tanggal Mulai Usaha []
+      - name: alamatUsaha
+        value: Jl. Alamat Usaha No. 99
+        description: Alamat Usaha []
+      - name: modalUsaha
+        value: ""
+        description: Modal Usaha []
+      - name: noIzinUsaha
+        value: "0010111001010101"
+        description: Nomor Izin Usaha []
+      - name: jumlahKaryawan
+        value: "5"
+        description: Jumlah Karyawan []
+      - name: jumlahKredit
+        value: ""
+        description: Jumlah Kredit []
+      - name: isLinkage
+        value: "1"
+        description: Penanda apabila calon Debitur yang bersangkutan didaftarkan oleh linkage penyalur (Kodefikasi ada di glossary) [
+      - name: linkage
+        value: ""
+      - name: agunan
+        value: tanah bangunan
+      - name: isSubsidized
+        value: "0"
+        description: |-
+          Penanda apabila calon Debitur yang
+          bersangkutan pernah menerima subsidi dari
+          pemerintah (Kodefikasi ada di glossary)
+      - name: subsidiSebelumnya
+        value: ""
+      - name: aprovalId
+        value: "215871429"
+      - name: statusUpload
+        value: "2"
+      - name: keterangan
+        value: ""
+      - name: nomorHp
+        value: "082288228822"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Data Berhasil Disimpan
+    request:
+      url: "{{url}}/v/1/3party/sikp/add-calon"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: OTk5OTQx
+            description: User Id [ENCODE BASE64] [MANDATORY]
+          - name: ktpNumber
+            value: MzIwOTM2NTQwNzgzMDAwMQ==
+            description: KTP Number [ENCODE BASE64] [MANDATORY]
+          - name: cif
+            value: "0000092434"
+            description: CIF Number [MANDATORY]
+          - name: kodeCabang
+            value: "0010"
+            disabled: true
+          - name: nama
+            value: SEKAR GAPURANING RAHAYU
+            description: Nama Calon Nasabah [MANDATORY]
+          - name: tanggalLahir
+            value: 1991-01-22
+            description: Tanggal Lahir [MANDATORY]
+          - name: jenisKelamin
+            value: "2"
+            description: Gender [1 = MEN, 2 = WOWAN, 99 = OTHER] [MANDATORY]
+          - name: statusPerkawinan
+            value: "1"
+          - name: pendidikanTerakhir
+            value: "6"
+          - name: pekerjaan
+            value: "6"
+          - name: alamat
+            value: "JL ARJUNA GANG BHINEKA NO 41 "
+          - name: kodeArea
+            value: "0393"
+          - name: kodePos
+            value: "11740"
+          - name: npwp
+            value: "705662203331000"
+          - name: tanggalMulaiUsaha
+            value: 2016-01-01
+          - name: alamatUsaha
+            value: Jl. Alamat Usaha No. 99
+          - name: modalUsaha
+            value: ""
+          - name: noIzinUsaha
+            value: "0010111001010101"
+          - name: jumlahKaryawan
+            value: "5"
+          - name: jumlahKredit
+            value: ""
+          - name: flagLinkage
+            value: "1"
+          - name: linkage
+            value: ""
+          - name: agunan
+            value: tanah bangunan
+          - name: flagBersubsidi
+            value: "0"
+          - name: subsidiSebelumnya
+            value: ""
+          - name: aprovalId
+            value: "215871429"
+          - name: statusUpload
+            value: "2"
+          - name: keterangan
+            value: ""
+          - name: nomorHp
+            value: "082288228822"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Sun, 26 Feb 2023 06:20:07 GMT
+        - name: Content-Length
+          value: "88"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Success Process.",
+              "message": "Data Berhasil Disimpan.",
+              "status": 200
+          }

@@ -1,0 +1,136 @@
+info:
+  name: Loan Account Expense
+  type: http
+  seq: 9
+
+http:
+  method: POST
+  url: "{{base_url}}/api/digiagri/loan/account/expense"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "000193"
+        description: User ID AO
+      - name: kodeCabang
+        value: "0010"
+        description: "Uker yang melakukan transaksi (Branch Code AO atau CBL)  "
+      - name: prakarsaId
+        value: "-2"
+        description: Prakarsa Id
+      - name: accountNumber
+        value: "001001007890317"
+        description: Nomor Rekening Sumber (Saving)
+      - name: adminFee
+        value: "1000.0021"
+        description: Biaya Administrasi
+      - name: provisionFee
+        value: "2000.0022"
+        description: Biaya Provisi
+      - name: insuranceFee
+        value: "3000.0023"
+        description: Biaya Asuransi
+      - name: insuranceType
+        value: MIKROBRISMA
+        description: Tipe Asuransi yang digunakan (RITELBRISMA, MIKROASKRINDO, MIKROBRISMA, PAYFAZZ)
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Gagal
+    request:
+      url: "{{base_url}}/api/digiagri/loan/account/expense"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000426"
+            description: User ID AO
+          - name: kodeCabang
+            value: "0010"
+            description: "Uker yang melakukan transaksi (Branch Code AO atau CBL)  "
+          - name: prakarsaId
+            value: "200"
+            description: Prakarsa Id
+          - name: accountNumber
+            value: "001001000132301"
+            description: Nomor Rekening Sumber (Saving)
+          - name: adminFee
+            value: "123"
+            description: Biaya Administrasi
+          - name: provisionFee
+            value: "456"
+            description: Biaya Provisi
+          - name: insuranceFee
+            value: "789"
+            description: Biaya Asuransi
+          - name: insuranceType
+            value: MIKROBRISMA
+            description: Tipe Asuransi yang digunakan (RITELBRISMA, MIKROASKRINDO, MIKROBRISMA, PAYFAZZ)
+    response:
+      body:
+        type: text
+        data: "{\r
+
+          \    \"statusCode\": \"-1\",\r
+
+          \    \"statusDescription\": \"Terjadi kesalahan pada Sistem\"\r
+
+          }"
+  - name: Success
+    request:
+      url: "{{base_url}}/api/digiagri/loan/account/expense"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000426"
+            description: User ID AO
+          - name: kodeCabang
+            value: "0010"
+            description: "Uker yang melakukan transaksi (Branch Code AO atau CBL)  "
+          - name: prakarsaId
+            value: "200"
+            description: Prakarsa Id
+          - name: accountNumber
+            value: "001001000132301"
+            description: Nomor Rekening Sumber (Saving)
+          - name: adminFee
+            value: "123"
+            description: Biaya Administrasi
+          - name: provisionFee
+            value: "456"
+            description: Biaya Provisi
+          - name: insuranceFee
+            value: "789"
+            description: Biaya Asuransi
+          - name: insuranceType
+            value: MIKROBRISMA
+            description: Tipe Asuransi yang digunakan (RITELBRISMA, MIKROASKRINDO, MIKROBRISMA, PAYFAZZ)
+    response:
+      body:
+        type: text
+        data: "{\r
+
+          \    \"statusCode\": \"1\",\r
+
+          \    \"statusDescription\": \"Debet Biaya Sukses\",\r
+
+          \    \"result\": {\r
+
+          \            \"adminJournalSeq\": \"200001\",\r
+
+          \            \"provisionJournalSeq\": \"200002\",\r
+
+          \            \"insuranceJournalSeq\": \"200003\"\r
+
+          \        }\r
+
+          }"

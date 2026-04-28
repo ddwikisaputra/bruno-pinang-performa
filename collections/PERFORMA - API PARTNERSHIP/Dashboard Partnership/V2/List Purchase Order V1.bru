@@ -1,0 +1,684 @@
+meta {
+  name: List Purchase Order V1
+  type: http
+  seq: 10
+}
+
+post {
+  url: {{url}}/v/1/partnerships/po-list
+  body: formUrlEncoded
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{tokenPartnership}}
+}
+
+body:form-urlencoded {
+  userId: 1
+  startIndex: 0
+  recordCount: 10
+  partnershipCode: OMS1
+  transactionalType: 1
+  ~textSearch: Dwiki
+}
+
+settings {
+  encodeUrl: true
+}
+
+example {
+  name: success
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-list
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      startIndex: 0
+      recordCount: 10
+      partnershipCode: PST2021
+      transactionalType: 1
+      ~textSearch: joko
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 03:03:58 GMT
+      Content-Length: 82
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": [
+                {
+                    "id": 3,
+                    "poNumber": "P0003",
+                    "transactionalType": 1,
+                    "partnershipCode": "OMS1",
+                    "name": "Jafar",
+                    "branchCode": "0011",
+                    "loanAmount": 7000000,
+                    "status": 0,
+                    "statusText": "Menunggu Persetujuan PO",
+                    "createdAt": "24-11-2021 17:57:11",
+                    "updatedAt": "24-11-2021 17:57:13"
+                },
+                {
+                    "id": 2,
+                    "poNumber": "P0002",
+                    "transactionalType": 1,
+                    "partnershipCode": "AGF1",
+                    "name": "Mahmudin",
+                    "branchCode": "0010",
+                    "loanAmount": 6000000,
+                    "status": 0,
+                    "statusText": "Menunggu Persetujuan PO",
+                    "createdAt": "24-11-2021 17:54:03",
+                    "updatedAt": "24-11-2021 17:54:26"
+                }
+            ],
+            "desc": "Data Valid",
+            "message": "Data ditemukan",
+            "status": 200
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: general error
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-list
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      startIndex: 0
+      recordCount: 10
+      partnershipCode: PST2021
+      transactionalType: 1
+      ~textSearch: joko
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 02:53:38 GMT
+      Content-Length: 111
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "desc": "Could not connect .....",
+            "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+            "status": 500
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: error database connection
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-list
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      startIndex: 0
+      recordCount: 10
+      partnershipCode: PST2021
+      transactionalType: 1
+      ~textSearch: joko
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 02:53:38 GMT
+      Content-Length: 111
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+            "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+            "status": 400
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: error parameter validation
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-list
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      startIndex: 0
+      recordCount: 10
+      transactionalType: 1
+      ~textSearch: joko
+      ~partnershipCode: PST2021
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 02:53:38 GMT
+      Content-Length: 111
+    }
+  
+    status: {
+      code: 400
+      text: Bad Request
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "desc": "Parameter ... kosong",
+            "message": "Maaf, Parameter ... tidak boleh kosong",
+            "status": 500
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: empty data
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-list
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      startIndex: 0
+      recordCount: 10
+      partnershipCode: AA
+      transactionalType: 1
+      ~textSearch: joko
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Wed, 24 Nov 2021 18:18:31 GMT
+      Content-Length: 657
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "desc": "Data Purchase Order tidak ditemukan",
+            "message": "Purchase Order Tidak Ditemukan",
+            "status": 404
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: unautorized
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-list
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      startIndex: 0
+      recordCount: 10
+      partnershipCode: PST2021
+      transactionalType: 1
+      ~textSearch: joko
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 02:44:34 GMT
+      Content-Length: 82
+    }
+  
+    status: {
+      code: 401
+      text: Unauthorized
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "code": 401,
+            "desc": "Expired",
+            "message": "Invalid Token || Token Is Expired"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: access forbidden (403)
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-list
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 15
+      startIndex: 0
+      recordCount: 10
+      partnershipCode: IMK1
+      transactionalType: 1
+      ~textSearch: Dwiki
+    }
+  }
+  
+  response: {
+    headers: {
+      Server: nginx/1.18.0 (Ubuntu)
+      Date: Mon, 25 Jul 2022 03:18:52 GMT
+      Content-Type: application/json; charset=utf-8
+      Content-Length: 67
+      Connection: keep-alive
+    }
+  
+    status: {
+      code: 403
+      text: Forbidden
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "code": 403,
+            "desc": "Tidak Memliki Akses",
+            "message": "403 Forbidden"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: general error
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-list
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      startIndex: 0
+      recordCount: 10
+      partnershipCode: PST2021
+      transactionalType: 1
+      ~textSearch: joko
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 02:53:38 GMT
+      Content-Length: 111
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "desc": "Could not connect .....",
+            "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+            "status": 500
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: unautorized
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-list
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      startIndex: 0
+      recordCount: 10
+      partnershipCode: PST2021
+      transactionalType: 1
+      ~textSearch: joko
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 02:44:34 GMT
+      Content-Length: 82
+    }
+  
+    status: {
+      code: 401
+      text: Unauthorized
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "code": 401,
+            "desc": "Expired",
+            "message": "Invalid Token || Token Is Expired"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: success
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-list
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      startIndex: 0
+      recordCount: 10
+      partnershipCode: PST2021
+      transactionalType: 1
+      ~textSearch: joko
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 03:03:58 GMT
+      Content-Length: 82
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": [
+                {
+                    "id": 3,
+                    "poNumber": "P0003",
+                    "transactionalType": 1,
+                    "partnershipCode": "OMS1",
+                    "name": "Jafar",
+                    "branchCode": "0011",
+                    "loanAmount": 7000000,
+                    "status": 0,
+                    "statusText": "Menunggu Persetujuan PO",
+                    "createdAt": "24-11-2021 17:57:11",
+                    "updatedAt": "24-11-2021 17:57:13"
+                },
+                {
+                    "id": 2,
+                    "poNumber": "P0002",
+                    "transactionalType": 1,
+                    "partnershipCode": "AGF1",
+                    "name": "Mahmudin",
+                    "branchCode": "0010",
+                    "loanAmount": 6000000,
+                    "status": 0,
+                    "statusText": "Menunggu Persetujuan PO",
+                    "createdAt": "24-11-2021 17:54:03",
+                    "updatedAt": "24-11-2021 17:54:26"
+                }
+            ],
+            "desc": "Data Valid",
+            "message": "Data ditemukan",
+            "status": 200
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: error database connection
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-list
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      startIndex: 0
+      recordCount: 10
+      partnershipCode: PST2021
+      transactionalType: 1
+      ~textSearch: joko
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 02:53:38 GMT
+      Content-Length: 111
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+            "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+            "status": 400
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: access forbidden (403)
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-list
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 15
+      startIndex: 0
+      recordCount: 10
+      partnershipCode: IMK1
+      transactionalType: 1
+      ~textSearch: Dwiki
+    }
+  }
+  
+  response: {
+    headers: {
+      Server: nginx/1.18.0 (Ubuntu)
+      Date: Mon, 25 Jul 2022 03:18:52 GMT
+      Content-Type: application/json; charset=utf-8
+      Content-Length: 67
+      Connection: keep-alive
+    }
+  
+    status: {
+      code: 403
+      text: Forbidden
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "code": 403,
+            "desc": "Tidak Memliki Akses",
+            "message": "403 Forbidden"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: empty data
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-list
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      startIndex: 0
+      recordCount: 10
+      partnershipCode: AA
+      transactionalType: 1
+      ~textSearch: joko
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Wed, 24 Nov 2021 18:18:31 GMT
+      Content-Length: 657
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "desc": "Data Purchase Order tidak ditemukan",
+            "message": "Purchase Order Tidak Ditemukan",
+            "status": 404
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: error parameter validation
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-list
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      startIndex: 0
+      recordCount: 10
+      transactionalType: 1
+      ~textSearch: joko
+      ~partnershipCode: PST2021
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 02:53:38 GMT
+      Content-Length: 111
+    }
+  
+    status: {
+      code: 400
+      text: Bad Request
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "desc": "Parameter ... kosong",
+            "message": "Maaf, Parameter ... tidak boleh kosong",
+            "status": 500
+        }
+      '''
+    }
+  }
+}

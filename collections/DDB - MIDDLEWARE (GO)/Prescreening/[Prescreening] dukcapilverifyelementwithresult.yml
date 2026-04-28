@@ -1,0 +1,82 @@
+info:
+  name: "[Prescreening] dukcapilverifyelementwithresult"
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/digiagri/dukcapilverifyelementwithresult"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "000426"
+      - name: noKTP
+        value: "3175091506730016"
+      - name: namaLengkap
+        value: ADI RINALDI NAVARO
+      - name: tempatLahir
+        value: JAKARTA
+      - name: tanggalLahir
+        value: 15-06-1973
+      - name: namaLengkapIbuKandung
+        value: NURMALA
+      - name: type
+        value: Debitur
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Success Response
+    request:
+      url: "{{baseUrl}}/api/digiagri/dukcapilverifyelementwithresult"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000426"
+          - name: noKTP
+            value: "3175091506730016"
+          - name: namaLengkap
+            value: ADI RINALDI NAVARO
+          - name: tempatLahir
+            value: JAKARTA
+          - name: tanggalLahir
+            value: 15-06-1973
+          - name: namaLengkapIbuKandung
+            value: NURMALA
+          - name: type
+            value: Debitur
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Thu, 09 Oct 2025 04:15:29 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "149"
+        - name: Connection
+          value: keep-alive
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "statusCode": "1",
+              "statusDescription": "Verify Success",
+              "data": {
+                  "ktpNumber": "1",
+                  "name": "1",
+                  "placeOfBirth": "1",
+                  "birthDate": "1",
+                  "motherMaidenName": "1"
+              }
+          }

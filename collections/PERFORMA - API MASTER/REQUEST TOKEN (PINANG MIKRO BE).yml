@@ -1,0 +1,24 @@
+info:
+  name: REQUEST TOKEN (PINANG MIKRO BE)
+  type: http
+  seq: 9
+
+http:
+  method: POST
+  url: "{{url}}/request-token"
+  body:
+    type: json
+    data: "{\r
+
+      \    \"username\": \"agri-api\",\r
+
+      \    \"password\": \"AGr1d1g1tal2021\"\r
+
+      }"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -1,0 +1,80 @@
+info:
+  name: Partnership Loan AGF Detail
+  type: http
+  seq: 5
+
+http:
+  method: POST
+  url: "{{base_url_dev}}/api/digiagri/partnership/agf/detail"
+  body:
+    type: form-urlencoded
+    data:
+      - name: loanAccount
+        value: "002001003491106"
+        description: "002501004570107"
+      - name: destinationAccount
+        value: "001001003982316"
+        description: "001001000698316"
+      - name: nominalPengajuan
+        value: "100000000"
+        description: "100000000"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Success
+    request:
+      url: "{{base_url}}/api/digiagri/partnership/agf/detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: loanAccount
+            value: "001001008265109"
+          - name: destinationAccount
+            value: "001001000001315"
+          - name: nominalPengajuan
+            value: "550000"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "statusCode": "1",
+              "statusDescription": "Inquiry Success",
+              "data": [
+                  {
+                      "tanggal": "2018-12-13",
+                      "nominalTotal": "556416.62",
+                      "nominalPokok": "550000",
+                      "nominalBungaDenda": "6416.62"
+                  }
+              ]
+          }
+  - name: Data Tidak Ditemukan
+    request:
+      url: "{{base_url}}/api/digiagri/partnership/agf/detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: loanAccount
+            value: "00100100826510"
+          - name: destinationAccount
+            value: "001001000001315"
+          - name: nominalPengajuan
+            value: "550000"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "statusCode": "1",
+              "statusDescription": "Inquiry Success, Data Tidak Ditemukan",
+              "data": []
+          }

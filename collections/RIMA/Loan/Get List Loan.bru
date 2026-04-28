@@ -1,0 +1,54 @@
+meta {
+  name: Get List Loan
+  type: http
+  seq: 7
+}
+
+post {
+  url: {{BASE_URL}}/v1/loan/list
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: 
+}
+
+body:json {
+  {
+      "payload": "{{REQUEST_BODY}}"
+  }
+}
+
+script:pre-request {
+  const payload = {
+      "page": 1,
+      "limit": -1,
+      "q": "",
+      "cover_batch_id": null,
+      "branch_id": null,
+      "collectability": null,
+      "min_realization_date": null,
+      "max_realization_date": null,
+      "min_due_date": null,
+      "max_due_date": null
+  }
+  
+  const result = encrypt(JSON.stringify(payload))
+  bru.setEnvVar("REQUEST_BODY", result);
+}
+
+script:post-response {
+  const CryptoJS = require("crypto-js");
+  const responseJSON = res.getBody();
+  if (responseJSON.status) {
+      const data = decrypt(responseJSON.data)
+      const parseData = JSON.parse(data)
+      const parseData2 = JSON.parse(parseData)
+      console.log('/v1/loan/list', parseData2)
+  }
+}
+
+settings {
+  encodeUrl: true
+}

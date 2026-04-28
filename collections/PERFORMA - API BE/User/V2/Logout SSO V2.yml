@@ -1,0 +1,374 @@
+info:
+  name: Logout SSO V2
+  type: http
+  seq: 4
+
+http:
+  method: POST
+  url: "{{base_url_prod}}/v/2/user/logout-sso"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "{{userId}}"
+        description: "[ENCODE]Personal Number BRI Agro (UserID untuk i-SDM)"
+      - name: loginTicket
+        value: "{{loginTicket}}"
+        description: Parameter didapat dari response login-sso
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/user/logout-sso"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: "{\r
+
+          \    \"userId\": \"000426\",\r
+
+          \    \"loginTicket\": \"22601\"\r
+
+          }"
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: "{\r
+
+          \    \"status\": 200,\r
+
+          \    \"message\": \"Logout berhasil\",\r
+
+          \    \"desc\": \"Logout berhasil\"\r
+
+          }"
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/user/logout-sso"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: "{\r
+
+          \    \"userId\": \"000426\",\r
+
+          \    \"loginTicket\": \"22601\"\r
+
+          }"
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "code": 401,
+              "desc": "Tidak Memliki Akses",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/user/logout-sso"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: "{\r
+
+          \    \"userId\": \"000426\",\r
+
+          \    \"loginTicket\": \"22601\"\r
+
+          }"
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect ....."
+          }
+  - name: gagal
+    request:
+      url: "{{base_url}}/v/1/user/logout-sso"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: "{\r
+
+          \    \"userId\": \"000426\",\r
+
+          \    \"loginTicket\": \"22601\"\r
+
+          }"
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "status": 400,
+              "message": "Logout gagal",
+              "desc": "Logout gagal"
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{base_url}}/v/1/user/logout-sso"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999951"
+            description: Personal Number BRI Agro (UserID untuk i-SDM)
+          - name: loginTicket
+            value: "925985"
+            description: Parameter didapat dari response login-sso
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 18 Jul 2022 07:36:54 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: success v2
+    request:
+      url: "{{base_url}}/v/2/user/logout-sso"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: UmF5YVBpUGVyVG9w9FR0lGD8PJZ01laNFpB91ptV5mkFfw==
+            description: Personal Number BRI Agro (UserID untuk i-SDM)
+          - name: loginTicket
+            value: "{{loginTicket}}"
+            description: Parameter didapat dari response login-sso
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 03 Jan 2023 03:09:27 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Logout berhasil",
+              "message": "Logout berhasil",
+              "status": 200
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/user/logout-sso"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: "{\r
+
+          \    \"userId\": \"000426\",\r
+
+          \    \"loginTicket\": \"22601\"\r
+
+          }"
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect ....."
+          }
+  - name: success v2
+    request:
+      url: "{{base_url}}/v/2/user/logout-sso"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: UmF5YVBpUGVyVG9w9FR0lGD8PJZ01laNFpB91ptV5mkFfw==
+            description: Personal Number BRI Agro (UserID untuk i-SDM)
+          - name: loginTicket
+            value: "{{loginTicket}}"
+            description: Parameter didapat dari response login-sso
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 03 Jan 2023 03:09:27 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Logout berhasil",
+              "message": "Logout berhasil",
+              "status": 200
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{base_url}}/v/1/user/logout-sso"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999951"
+            description: Personal Number BRI Agro (UserID untuk i-SDM)
+          - name: loginTicket
+            value: "925985"
+            description: Parameter didapat dari response login-sso
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 18 Jul 2022 07:36:54 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/user/logout-sso"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: "{\r
+
+          \    \"userId\": \"000426\",\r
+
+          \    \"loginTicket\": \"22601\"\r
+
+          }"
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: "{\r
+
+          \    \"status\": 200,\r
+
+          \    \"message\": \"Logout berhasil\",\r
+
+          \    \"desc\": \"Logout berhasil\"\r
+
+          }"
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/user/logout-sso"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: "{\r
+
+          \    \"userId\": \"000426\",\r
+
+          \    \"loginTicket\": \"22601\"\r
+
+          }"
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "code": 401,
+              "desc": "Tidak Memliki Akses",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: gagal
+    request:
+      url: "{{base_url}}/v/1/user/logout-sso"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: "{\r
+
+          \    \"userId\": \"000426\",\r
+
+          \    \"loginTicket\": \"22601\"\r
+
+          }"
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "status": 400,
+              "message": "Logout gagal",
+              "desc": "Logout gagal"
+          }

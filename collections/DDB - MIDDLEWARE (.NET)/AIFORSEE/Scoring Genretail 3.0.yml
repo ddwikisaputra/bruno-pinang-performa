@@ -1,0 +1,30 @@
+info:
+  name: Scoring Genretail 3.0
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{url_dev}}"
+  headers:
+    - name: x-api-key
+      value: "{{token_dev}}"
+  body:
+    type: json
+    data: "{\r
+
+      \    \"name\": \"Dwiki Saputra\",\r
+
+      \    \"id_card_no\": \"3171051211950001\",\r
+
+      \    \"phone_no\": \"081776527371\",\r
+
+      \    \"loan_no\": \"ORI-99\" // MER-PRE-ID\r
+
+      }"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

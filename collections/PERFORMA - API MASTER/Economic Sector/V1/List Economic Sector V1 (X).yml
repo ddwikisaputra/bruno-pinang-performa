@@ -1,0 +1,190 @@
+info:
+  name: List Economic Sector V1 (X)
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: "{{url}}/v/1/master/economic-sector"
+  body:
+    type: multipart-form
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: success
+    request:
+      url: "{{url}}/v/1/master/economic-sector"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "data": [
+                  {
+                      "id": 1,
+                      "sectorName": "Administrasi Pemerintahan, Pertahanan Dan Jaminan Sosial Wajib"
+                  },
+                  {
+                      "id": 2,
+                      "sectorName": "Badan Internasional Dan Badan Ekstra Internasional Lainnya"
+                  },
+                  {
+                      "id": 3,
+                      "sectorName": "Bukan Lapang Usaha Lainnya"
+                  },
+                  {
+                      "id": 4,
+                      "sectorName": "Industri Pengolahan"
+                  },
+                  {
+                      "id": 5,
+                      "sectorName": "Jasa Kemasyarakatan, Sosial Budaya, Hiburan Dan Perorangan Lainnya"
+                  },
+                  {
+                      "id": 6,
+                      "sectorName": "Jasa Kesehatan Dan Kegiatan Sosial"
+                  },
+                  {
+                      "id": 7,
+                      "sectorName": "Jasa Pendidikan"
+                  },
+                  {
+                      "id": 8,
+                      "sectorName": "Jasa Perorangan Yang Melayani Rumah Tangga"
+                  },
+                  {
+                      "id": 9,
+                      "sectorName": "Kegiatan Yang Belum Jelas Batasannya"
+                  },
+                  {
+                      "id": 10,
+                      "sectorName": "Konstruksi"
+                  },
+                  {
+                      "id": 11,
+                      "sectorName": "Listrik, Gas Dan Air"
+                  },
+                  {
+                      "id": 12,
+                      "sectorName": "Penyediaan Akomodasi Dan Penyediaan Makan Minum"
+                  },
+                  {
+                      "id": 13,
+                      "sectorName": "Perantara Keuangan"
+                  },
+                  {
+                      "id": 14,
+                      "sectorName": "Perdagangan Besar Dan Eceran"
+                  },
+                  {
+                      "id": 15,
+                      "sectorName": "Perikanan"
+                  },
+                  {
+                      "id": 16,
+                      "sectorName": "Pertambangan Dan Penggalian"
+                  },
+                  {
+                      "id": 17,
+                      "sectorName": "Pertanian, Perburuan Dan Kehutanan"
+                  },
+                  {
+                      "id": 18,
+                      "sectorName": "Real Estate, Usaha Persewaan, Dan Jasa Perusahaan"
+                  },
+                  {
+                      "id": 19,
+                      "sectorName": "Rumah Tangga"
+                  },
+                  {
+                      "id": 20,
+                      "sectorName": "Transportasi, Pergudangan Dan Komunikasi"
+                  }
+              ],
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: error database connection
+    request:
+      url: "{{url}}/v/1/master/economic-sector"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 09 Jun 2021 04:30:36 GMT
+        - name: Content-Length
+          value: "1233"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 400,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "data": null
+          }
+  - name: general error
+    request:
+      url: "{{url}}/v/1/master/economic-sector"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data" : null
+          }
+  - name: not found
+    request:
+      url: "{{url}}/v/1/master/economic-sector"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "status": 404,
+              "desc": "Error record not found",
+              "message": "Sektor Ekonomi Tidak Ditemukan",
+              "data": null
+          }
+  - name: unautorized
+    request:
+      url: "{{url}}/v/1/master/economic-sector"
+      method: GET
+    response:
+      status: 401
+      statusText: Unauthorized
+      body:
+        type: text
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+
+docs: "'province' diisi dari parameter 'code' yang didapat dari endpoint 'master-province'"

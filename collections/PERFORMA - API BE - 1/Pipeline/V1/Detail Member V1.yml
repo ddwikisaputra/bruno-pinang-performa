@@ -1,0 +1,514 @@
+info:
+  name: Detail Member V1
+  type: http
+  seq: 6
+
+http:
+  method: POST
+  url: "{{base_url}}/v/1/pipeline/detail-member"
+  body:
+    type: form-urlencoded
+    data:
+      - name: id
+        value: "28"
+        description: ID Pipeline
+      - name: userId
+        value: "999941"
+        description: Personal Number BRI Agro (UserID Login)
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/pipeline/detail-member"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "8"
+            description: ID Pipeline
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Jul 2021 07:36:59 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "id": 1,
+                  "referenceId": "a379b3b5-6228-4f97-8a9e-045e7de1b71d",
+                  "branchCode": "0420",
+                  "partnershipId": 4,
+                  "partnershipName": "OMS",
+                  "ktpNumber": "1234567890123456",
+                  "name": "Johannes",
+                  "placeOfBirth": "Jakarta",
+                  "birthDate": "1997-01-01",
+                  "motherMaidenName": "Runa",
+                  "maritalStatus": "Kawin",
+                  "address": "Cempaka Putih",
+                  "rt": "010",
+                  "rw": "002",
+                  "longitude": "30.67890",
+                  "latitude": "-15.23456",
+                  "mobileNumber": "877625364",
+                  "email": "tes@gmail.comm",
+                  "partnerKtpNumber": "0987654321098765",
+                  "partnerName": "Harun",
+                  "businessAddress": "Gembrong Jaya",
+                  "businessRt": "001",
+                  "businessRw": "015",
+                  "estimationLoan": 5000000,
+                  "status": 1,
+                  "statusText": "Data Berhasil Diinput",
+                  "ktpPicturePath": "prakarsa/ktp/2022/2/18/IMG_PARTNERSHIP_OPENAPI_20220218122440.jpg",
+                  "ktpPicture64": "string base64",
+                  "ktpPictureMimetype": "image/jpg",
+                  "ktpPictureSelfiePath": "prakarsa/ktp-selfie/2022/2/18/IMG_PARTNERSHIP_OPENAPI_20220218122440.png",
+                  "ktpPictureSelfieBase64": "string base64",
+                  "ktpPictureSelfieMimetype": "image/jpg",
+                  "ktpPicturePartnerPath": "prakarsa/ktp-partner/2022/2/18/IMG_PARTNERSHIP_OPENAPI_20220218122440.png",
+                  "ktpPicturePartnerBase64": "string base64",
+                  "ktpPicturePartnerMimetype": "image/jpg",
+                  "createdAt": "18-02-2022",
+                  "updatedAt": "24-02-2022"
+              },
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: empty data
+    request:
+      url: "{{base_url}}/v/1/pipeline/detail-member"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "-1"
+            description: ID Pipeline
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Jul 2021 07:39:46 GMT
+        - name: Content-Length
+          value: "105"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Error record not found",
+              "message": "Member Pipline Prakarsa Tidak Ditemukan",
+              "status": 404
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/partnerships/detail-member"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "8"
+          - name: userId
+            value: "999941"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Jul 2021 07:34:14 GMT
+        - name: Content-Length
+          value: "105"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: error validation param
+    request:
+      url: "{{base_url}}/v/1/pipeline/detail-member"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "-1"
+            description: ID Pipeline
+            disabled: true
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 22 Feb 2022 08:01:21 GMT
+        - name: Content-Length
+          value: "93"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Data tidak ditemukan.",
+              "desc": "Parameter ... kosong",
+              "data": null
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/pipeline/detail-member"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "8"
+            description: ID Pipeline
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Jul 2021 07:34:14 GMT
+        - name: Content-Length
+          value: "105"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/pipeline/detail-member"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "8"
+            description: ID Pipeline
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Jul 2021 07:34:14 GMT
+        - name: Content-Length
+          value: "105"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data": null
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/pipeline/detail-member"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "8"
+            description: ID Pipeline
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Jul 2021 07:34:14 GMT
+        - name: Content-Length
+          value: "105"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/pipeline/detail-member"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "8"
+            description: ID Pipeline
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Jul 2021 07:36:59 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "id": 1,
+                  "referenceId": "a379b3b5-6228-4f97-8a9e-045e7de1b71d",
+                  "branchCode": "0420",
+                  "partnershipId": 4,
+                  "partnershipName": "OMS",
+                  "ktpNumber": "1234567890123456",
+                  "name": "Johannes",
+                  "placeOfBirth": "Jakarta",
+                  "birthDate": "1997-01-01",
+                  "motherMaidenName": "Runa",
+                  "maritalStatus": "Kawin",
+                  "address": "Cempaka Putih",
+                  "rt": "010",
+                  "rw": "002",
+                  "longitude": "30.67890",
+                  "latitude": "-15.23456",
+                  "mobileNumber": "877625364",
+                  "email": "tes@gmail.comm",
+                  "partnerKtpNumber": "0987654321098765",
+                  "partnerName": "Harun",
+                  "businessAddress": "Gembrong Jaya",
+                  "businessRt": "001",
+                  "businessRw": "015",
+                  "estimationLoan": 5000000,
+                  "status": 1,
+                  "statusText": "Data Berhasil Diinput",
+                  "ktpPicturePath": "prakarsa/ktp/2022/2/18/IMG_PARTNERSHIP_OPENAPI_20220218122440.jpg",
+                  "ktpPicture64": "string base64",
+                  "ktpPictureMimetype": "image/jpg",
+                  "ktpPictureSelfiePath": "prakarsa/ktp-selfie/2022/2/18/IMG_PARTNERSHIP_OPENAPI_20220218122440.png",
+                  "ktpPictureSelfieBase64": "string base64",
+                  "ktpPictureSelfieMimetype": "image/jpg",
+                  "ktpPicturePartnerPath": "prakarsa/ktp-partner/2022/2/18/IMG_PARTNERSHIP_OPENAPI_20220218122440.png",
+                  "ktpPicturePartnerBase64": "string base64",
+                  "ktpPicturePartnerMimetype": "image/jpg",
+                  "createdAt": "18-02-2022",
+                  "updatedAt": "24-02-2022"
+              },
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: error validation param
+    request:
+      url: "{{base_url}}/v/1/pipeline/detail-member"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "-1"
+            description: ID Pipeline
+            disabled: true
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 22 Feb 2022 08:01:21 GMT
+        - name: Content-Length
+          value: "93"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Data tidak ditemukan.",
+              "desc": "Parameter ... kosong",
+              "data": null
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/pipeline/detail-member"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "8"
+            description: ID Pipeline
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Jul 2021 07:34:14 GMT
+        - name: Content-Length
+          value: "105"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data": null
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/partnerships/detail-member"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "8"
+          - name: userId
+            value: "999941"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Jul 2021 07:34:14 GMT
+        - name: Content-Length
+          value: "105"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: empty data
+    request:
+      url: "{{base_url}}/v/1/pipeline/detail-member"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "-1"
+            description: ID Pipeline
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Jul 2021 07:39:46 GMT
+        - name: Content-Length
+          value: "105"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Error record not found",
+              "message": "Member Pipline Prakarsa Tidak Ditemukan",
+              "status": 404
+          }

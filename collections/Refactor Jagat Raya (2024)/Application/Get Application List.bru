@@ -1,0 +1,133 @@
+meta {
+  name: Get Application List
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{BASE_URL}}/v1/application/list
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: 
+}
+
+body:json {
+  {
+      "payload": "{{REQUEST_BODY}}"
+  }
+}
+
+script:pre-request {
+  const payload = {
+      "q": "A", // Optional
+      "page": 1,
+      "limit": -1
+  }
+  
+  const result = _.encrypt(JSON.stringify(payload))
+  bru.setEnvVar("REQUEST_BODY", result);
+}
+
+script:post-response {
+  const responseJSON = res.getBody()
+  if (responseJSON.status) {
+      const data = _.decrypt(responseJSON.data)
+      const parseData = JSON.parse(data)
+      const parseData2 = JSON.parse(parseData)
+      console.log('/v1/application/list', parseData2)
+  }
+}
+
+settings {
+  encodeUrl: true
+}
+
+example {
+  name: Branch
+  
+  request: {
+    url: {{BASE_URL}}/v1/branch/list
+    method: POST
+    mode: json
+    body:json: {
+      {
+          "q": "branch", // Optional
+          "page": 1,
+          "limit": -1
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Wed, 03 Apr 2024 06:52:41 GMT
+      Content-Length: 608
+    }
+  
+    status: {
+      code: 200
+      text: 200
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": {
+                "current_page": 1,
+                "total_page": 1,
+                "total_data": 10,
+                "data": [
+                    {
+                        "id": "0110",
+                        "name": "Community Branch Bandung"
+                    },
+                    {
+                        "id": "0440",
+                        "name": "Community Branch Bondowoso"
+                    },
+                    {
+                        "id": "0140",
+                        "name": "Community Branch Cirebon"
+                    },
+                    {
+                        "id": "0430",
+                        "name": "Community Branch Lamongan"
+                    },
+                    {
+                        "id": "0340",
+                        "name": "Community Branch Magelang"
+                    },
+                    {
+                        "id": "0420",
+                        "name": "Community Branch Malang"
+                    },
+                    {
+                        "id": "0350",
+                        "name": "Community Branch Purworejo"
+                    },
+                    {
+                        "id": "0310",
+                        "name": "Community Branch Semarang"
+                    },
+                    {
+                        "id": "0320",
+                        "name": "Community Branch Solo"
+                    },
+                    {
+                        "id": "0330",
+                        "name": "Community Branch Temanggung"
+                    }
+                ]
+            },
+            "message": "Permintaan berhasil diproses",
+            "status": true
+        }
+      '''
+    }
+  }
+}

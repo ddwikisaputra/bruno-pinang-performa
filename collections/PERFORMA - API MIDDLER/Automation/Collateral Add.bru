@@ -1,0 +1,127 @@
+meta {
+  name: Collateral Add
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{url-prod}}/v/1/middler/automation/collateral-add
+  body: formUrlEncoded
+  auth: basic
+}
+
+auth:basic {
+  username: {{BasicAuthUsername}}
+  password: {{BasicAuthPassword}}
+}
+
+body:form-urlencoded {
+  ktpNumber: MTM3MTA2MjUwMTk1MDAwOQ==
+  branchCode: 0020
+  name: Mohammad Khafid Barokum
+  collateralType: 193
+  locationCode: 0198
+  collateralAddress: Jl PAKIS II E BLOK BB 50 / 11 PPI
+  bindingDate: 2021-10-05
+  bindingDueDate: 2021-11-05
+  marketValue: 100000000
+  liquidationValue: 100000000
+  evidenceOwnership: BPKB
+  ~userId: OTk5OTk5
+}
+
+settings {
+  encodeUrl: true
+}
+
+example {
+  name: 500 : Server Error
+  
+  request: {
+    url: {{url}}/v/1/middler/automation/collateral-add
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: OTk5OTk5
+      ktpNumber: MTM3MTA2MjUwMTk1MDAwOQ==
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Tue, 02 Jan 2024 04:20:46 GMT
+      Content-Length: 374
+    }
+  
+    status: {
+      code: 500
+      text: Internal Server Error
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "desc": ". . . . connectex: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.",
+            "message": "Maaf, Server Sedang Dalam Perbaikan. Silahkan coba beberapa saat lagi.",
+            "status": 500
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: 200 : Success
+  
+  request: {
+    url: {{url}}/v/1/middler/automation/collateral-add
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: OTk5OTk5
+      ktpNumber: MTM3MTA2MjUwMTk1MDAwOQ==
+      branchCode: 0020
+      name: Mohammad Khafid Barokum
+      collateralType: 010
+      LocationCode: 0198
+      collateralAddress: Jl PAKIS II E BLOK BB 50 / 11 PPI
+      BindingDate: 2021-10-05
+      BindingDueDate: 2021-11-05
+      marketValue: 100000000
+      liquidationValue: 100000000
+      evidenceOwnership: BPKB
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 05 Jan 2024 03:28:46 GMT
+      Content-Length: 174
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+           "data": {
+              "statusCode": "1",
+              "statusDescription": "Success",
+              "idAgunan": "0000004299"
+           },
+           "desc": "Success Process.",
+           "message": "Data Berhasil Disimpan.",
+           "status": 200
+        }
+      '''
+    }
+  }
+}

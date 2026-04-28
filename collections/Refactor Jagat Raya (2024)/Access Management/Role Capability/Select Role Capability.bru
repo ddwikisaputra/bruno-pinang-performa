@@ -1,0 +1,48 @@
+meta {
+  name: Select Role Capability
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{BASE_URL}}/v1/role/capability/select
+  body: json
+  auth: bearer
+}
+
+headers {
+  Content-Type: application/json
+  Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJqYWdhdC1yYXlhLWFwaSIsImV4cCI6MTcwMjI4NzA2NCwiaWRlbnRpdHkiOiIiLCJwYXlsb2FkIjp7ImRldmljZUlkIjoiIiwiZGV2aWNlTmFtZSI6IlVOS05PV04iLCJpZGVudGl0eSI6IjAwMTY3NiIsImxvZ2luX3RpY2tldCI6IjI1NjAyNTciLCJyb2xlX2lkZW50aWZpZXJzIjpbIjIiXSwidmVyc2lvbiI6IiJ9fQ.LLlfoBvHFhsXArAZV7tdzaw8NbMd9979tvDLv-ll6r0
+}
+
+auth:bearer {
+  token: 
+}
+
+body:json {
+  {
+      "payload": "{{REQUEST_BODY}}"
+  }
+}
+
+script:pre-request {
+  const payload = {
+      "role_id" : "68fcb379-aa26-4ead-9a67-785dfb94faed",
+      "list_capability_id" : ["RYM-000003", "RYM-000002", "RYM-000004"]
+  }
+  
+  const result = _.encrypt(JSON.stringify(payload))
+  bru.setEnvVar("REQUEST_BODY", result);
+}
+
+script:post-response {
+  const responseJSON = res.getBody()
+  if (responseJSON.status) {
+      const data = _.decrypt(responseJSON.data)
+      const response = _.parsingJson(data)
+  }
+}
+
+settings {
+  encodeUrl: true
+}

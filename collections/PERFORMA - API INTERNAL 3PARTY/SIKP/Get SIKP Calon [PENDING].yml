@@ -1,0 +1,217 @@
+info:
+  name: Get SIKP Calon [PENDING]
+  type: http
+  seq: 7
+
+http:
+  method: POST
+  url: "{{url}}/v/1/3party/sikp/get-sikp-calon"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: OTk5OTQx
+        description: User Id [ENCODE BASE64] [MANDATORY]
+      - name: ktpNumber
+        value: NTE3MTAzMjkwODk4MDAyMQ==
+        description: KTP Number [ENCODE BASE64] [MANDATORY]
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Data Ditemukan (terdaftar di SIKP sebagai debitur Bank Lain)
+    request:
+      url: "{{url}}/v/1/3party/sikp/get-sikp-calon"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: OTk5OTQx
+          - name: ktpNumber
+            value: MzIwOTM2NTQwNzgzMDAwMQ==
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 17 Jan 2023 13:01:00 GMT
+        - name: Content-Length
+          value: "238"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "statusCode": -1,
+                  "statusDescription": "NIK telah terdaftar di SIKP sebagai debitur Bank Lain.",
+                  "data": {
+                      "bankCode": "008",
+                      "uploadDate": "2022-11-03 17:31:38"
+                  }
+              },
+              "desc": "Success Process.",
+              "message": "Data Ditemukan.",
+              "status": 200
+          }
+  - name: Data Tidak Ditemukan
+    request:
+      url: "{{url}}/v/1/3party/sikp/get-sikp-calon"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: OTk5OTQx
+          - name: ktpNumber
+            value: NTE3MTAzMjkwODk4MDAyMQ==
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 17 Jan 2023 13:05:40 GMT
+        - name: Content-Length
+          value: "165"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Success Process.",
+              "message": "Data Tidak Ditemukan.",
+              "status": 404
+          }
+  - name: Data Ditemukan (terdaftar di SIKP sebagai debitur Bank BRI AGRO)
+    request:
+      url: "{{url}}/v/1/3party/sikp/get-sikp-calon"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: OTk5OTQx
+          - name: ktpNumber
+            value: MzMyMzE2MjIxMTk2MDAwMQ==
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 17 Jan 2023 13:06:40 GMT
+        - name: Content-Length
+          value: "241"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "statusCode": 1,
+                  "statusDescription": "NIK telah terdaftar di SIKP sebagai debitur Bank BRI AGRO.",
+                  "data": {
+                      "bankCode": "494",
+                      "uploadDate": "2022-12-30 16:35:32",
+                      "ktpNumber": "3323162211960001",
+                      "birthDate": "1996-11-22 00:00:00",
+                      "gender": "1",
+                      "maritalStatus": "1",
+                      "lastEducation": "3",
+                      "address": "SAWIT , RT.000/RW.000, Kel.Bansari, Kec.Bansari, Kota Temanggung",
+                      "postalCode": "56265",
+                      "npwp": "536278963533000",
+                      "businessStartDate": "1998-12-30 00:00:00",
+                      "businessAddress": "SAWIT , RT./RW., Kel.BANSARI, Kec.BANSARI, Kota TEMANGGUNG",
+                      "businessLicense": "26.XII.2022",
+                      "businessCapital": "200000000"
+                  }
+              },
+              "desc": "Success Process.",
+              "message": "Data Ditemukan.",
+              "status": 200
+          }
+  - name: Error General
+    request:
+      url: "{{url}}/v/1/3party/sikp/get-sikp-calon"
+      method: POST
+      body:
+        type: form-urlencoded
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "...",
+              "message": "Maaf, Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 500
+          }
+  - name: Error Database Connection / Timeout
+    request:
+      url: "{{url}}/v/1/3party/sikp/get-sikp-calon"
+      method: POST
+      body:
+        type: form-urlencoded
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "...",
+              "message": "Maaf, Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 500
+          }
+  - name: Error Parameter Validation
+    request:
+      url: "{{url}}/v/1/3party/sikp/get-sikp-calon"
+      method: POST
+      body:
+        type: form-urlencoded
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Parameter .... kosong",
+              "message": ".... tidak boleh kosong",
+              "status": 400
+          }

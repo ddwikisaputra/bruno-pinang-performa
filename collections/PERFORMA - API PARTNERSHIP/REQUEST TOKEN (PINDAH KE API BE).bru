@@ -1,0 +1,20 @@
+meta {
+  name: REQUEST TOKEN (PINDAH KE API BE)
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{url}}/request-token
+  body: formUrlEncoded
+  auth: inherit
+}
+
+body:form-urlencoded {
+  username: agri-api
+  password: AGr1d1g1tal2021
+}
+
+settings {
+  encodeUrl: true
+}

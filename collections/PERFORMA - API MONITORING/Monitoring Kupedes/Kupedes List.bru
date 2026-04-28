@@ -1,0 +1,383 @@
+meta {
+  name: Kupedes List
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{base-url-dev}}/v/1/monitoring/kupedes-list
+  body: formUrlEncoded
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{tokenJWT}}
+}
+
+body:form-urlencoded {
+  startIndex: 0
+  recordCount: 5
+  ~kodeProses: UmF5YVBpUGVyVG9w/lx5nmBcgN3n/SIGOwbFwMMGVaBq
+  ~filterStatus: 0
+  ~filterDate: 0
+  ~startDate: 2020-09-30
+  ~endDate: 2020-09-30
+}
+
+settings {
+  encodeUrl: true
+}
+
+example {
+  name: success
+  
+  request: {
+    url: {{url}}/v/1/monitoring/kupedes-list
+    method: POST
+    mode: formUrlEncoded
+    params:query: {
+      ~: 
+    }
+  
+    body:form-urlencoded: {
+      kodeProses: UmF5YVBpUGVyVG9w+1x5iUuNKXspOphB57Cz/YMfkg==
+      filterStatus: 0
+      filterDate: 0
+      startDate: 2023-07-20
+      endDate: 2023-07-20
+      startIndex: 0
+      recordCount: 0
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Thu, 20 Jul 2023 06:52:57 GMT
+      Content-Length: 558
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": {
+                "outstanding": 0,
+                "facilityDate": "2021-08-30",
+                "dataMonitoringListKupedes": [
+                    {
+                        "seqNum": 1,
+                        "seqInvoice": "1/12",
+                        "dueDate": "2020-09-30",
+                        "tunggakanPokok": 0,
+                        "totalTunggakan": 0,
+                        "totalPembayaran": 658534.25,
+                        "status": 2,
+                        "statusText": "Lunas"
+                    },
+                    {
+                        "seqNum": 2,
+                        "seqInvoice": "2/12",
+                        "dueDate": "2020-10-30",
+                        "tunggakanPokok": 0,
+                        "totalTunggakan": 0,
+                        "totalPembayaran": 658534.25,
+                        "status": 2,
+                        "statusText": "Lunas"
+                    },
+                    {
+                        "seqNum": 3,
+                        "seqInvoice": "3/12",
+                        "dueDate": "2020-11-30",
+                        "tunggakanPokok": 0,
+                        "totalTunggakan": 0,
+                        "totalPembayaran": 658534.25,
+                        "status": 2,
+                        "statusText": "Lunas"
+                    },
+                    {
+                        "seqNum": 4,
+                        "seqInvoice": "4/12",
+                        "dueDate": "2020-12-30",
+                        "tunggakanPokok": 0,
+                        "totalTunggakan": 0,
+                        "totalPembayaran": 658534.25,
+                        "status": 2,
+                        "statusText": "Lunas"
+                    },
+                    {
+                        "seqNum": 5,
+                        "seqInvoice": "5/12",
+                        "dueDate": "2021-01-30",
+                        "tunggakanPokok": 0,
+                        "totalTunggakan": 0,
+                        "totalPembayaran": 658534.25,
+                        "status": 2,
+                        "statusText": "Lunas"
+                    },
+                    {
+                        "seqNum": 6,
+                        "seqInvoice": "6/12",
+                        "dueDate": "2021-02-28",
+                        "tunggakanPokok": 0,
+                        "totalTunggakan": 0,
+                        "totalPembayaran": 658534.25,
+                        "status": 2,
+                        "statusText": "Lunas"
+                    },
+                    {
+                        "seqNum": 7,
+                        "seqInvoice": "7/12",
+                        "dueDate": "2021-03-30",
+                        "tunggakanPokok": 0,
+                        "totalTunggakan": 0,
+                        "totalPembayaran": 658534.25,
+                        "status": 2,
+                        "statusText": "Lunas"
+                    },
+                    {
+                        "seqNum": 8,
+                        "seqInvoice": "8/12",
+                        "dueDate": "2021-04-30",
+                        "tunggakanPokok": 0,
+                        "totalTunggakan": 0,
+                        "totalPembayaran": 658534.25,
+                        "status": 2,
+                        "statusText": "Lunas"
+                    },
+                    {
+                        "seqNum": 9,
+                        "seqInvoice": "9/12",
+                        "dueDate": "2021-05-30",
+                        "tunggakanPokok": 0,
+                        "totalTunggakan": 0,
+                        "totalPembayaran": 658534.25,
+                        "status": 2,
+                        "statusText": "Lunas"
+                    },
+                    {
+                        "seqNum": 10,
+                        "seqInvoice": "10/12",
+                        "dueDate": "2021-06-30",
+                        "tunggakanPokok": 0,
+                        "totalTunggakan": 0,
+                        "totalPembayaran": 658534.25,
+                        "status": 2,
+                        "statusText": "Lunas"
+                    },
+                    {
+                        "seqNum": 11,
+                        "seqInvoice": "11/12",
+                        "dueDate": "2021-07-30",
+                        "tunggakanPokok": 0,
+                        "totalTunggakan": 0,
+                        "totalPembayaran": 658534.25,
+                        "status": 2,
+                        "statusText": "Lunas"
+                    },
+                    {
+                        "seqNum": 12,
+                        "seqInvoice": "12/12",
+                        "dueDate": "2021-08-30",
+                        "tunggakanPokok": 0,
+                        "totalTunggakan": 0,
+                        "totalPembayaran": 672864.05,
+                        "status": 2,
+                        "statusText": "Lunas"
+                    }
+                ]
+            },
+            "desc": "Data Valid",
+            "message": "Data Ditemukan",
+            "status": 200
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: success but status not found
+  
+  request: {
+    url: {{url}}/v/1/monitoring/kupedes-list
+    method: POST
+    mode: formUrlEncoded
+    params:query: {
+      ~: 
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Thu, 20 Jul 2023 09:00:35 GMT
+      Content-Length: 135
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": {
+                "outstanding": 0,
+                "facilityDate": "",
+                "dataMonitoringListKupedes": []
+            },
+            "desc": "Data Valid",
+            "message": "Data Ditemukan",
+            "status": 200
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: error validation param
+  
+  request: {
+    url: {{url}}/v/1/monitoring/kupedes-list
+    method: POST
+    mode: formUrlEncoded
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Tue, 22 Feb 2022 08:28:52 GMT
+      Content-Length: 111
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "status": 400,
+            "message": "Data tidak ditemukan.",
+            "desc": "Parameter ... kosong",
+            "data": null
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: unautorized
+  
+  request: {
+    url: {{url}}/v/1/monitoring/kupedes-list
+    method: POST
+    mode: formUrlEncoded
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Mon, 12 Jul 2021 04:27:47 GMT
+      Content-Length: 122
+    }
+  
+    status: {
+      code: 401
+      text: Unauthorized
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "code": 401,
+            "desc": "Expired",
+            "message": "Invalid Token || Token Is Expired"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: general error
+  
+  request: {
+    url: {{url}}/v/1/monitoring/kupedes-list
+    method: POST
+    mode: formUrlEncoded
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Mon, 12 Jul 2021 04:27:47 GMT
+      Content-Length: 122
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "status": 500,
+            "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+            "desc": "Could not connect .....",
+            "data": null
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: error database connection
+  
+  request: {
+    url: {{url}}/v/1/monitoring/kupedes-list
+    method: POST
+    mode: formUrlEncoded
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Mon, 12 Jul 2021 04:27:47 GMT
+      Content-Length: 122
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+            "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+            "status": 400
+        }
+      '''
+    }
+  }
+}

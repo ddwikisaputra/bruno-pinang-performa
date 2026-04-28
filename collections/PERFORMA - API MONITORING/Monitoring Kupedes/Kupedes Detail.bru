@@ -1,0 +1,261 @@
+meta {
+  name: Kupedes Detail
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{base-url-dev}}/v/1/monitoring/kupedes-detail
+  body: formUrlEncoded
+  auth: bearer
+}
+
+params:query {
+  ~: 
+}
+
+auth:bearer {
+  token: {{tokenJWT}}
+}
+
+body:form-urlencoded {
+  kodeProses: UmF5YVBpUGVyVG9w/lx5nmOJnJelg/Bmb5xwsqnZmTUD
+  seqNum: 1
+}
+
+settings {
+  encodeUrl: true
+}
+
+example {
+  name: success
+  
+  request: {
+    url: {{url}}/v/1/monitoring/kupedes-detail
+    method: POST
+    mode: formUrlEncoded
+    params:query: {
+      ~: 
+    }
+  
+    body:form-urlencoded: {
+      kodeProses: UmF5YVBpUGVyVG9w/F10mWcwnxU1vhmvxui5kY4dwvPB
+      seqNum: 1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Tue, 25 Jul 2023 08:19:12 GMT
+      Content-Length: 332
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": {
+                "seqNum": 1,
+                "seqInvoice": "1/12",
+                "nomorRekening": "001001000001315",
+                "typeRekening": "Rekening Raya",
+                "saldo": "250042510018.00",
+                "dueDate": "2020-09-30",
+                "tunggakanPokok": 0,
+                "denda": 0,
+                "totalPembayaran": 658534.25,
+                "status": 2,
+                "statusText": "Lunas",
+                "metodePembayaran": "Autodebet"
+            },
+            "desc": "Data Valid",
+            "message": "Data Ditemukan",
+            "status": 200
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: not found
+  
+  request: {
+    url: {{url}}/v/1/monitoring/kupedes-detail
+    method: POST
+    mode: formUrlEncoded
+    params:query: {
+      ~: 
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Thu, 20 Jul 2023 09:00:35 GMT
+      Content-Length: 135
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "desc": "Data Billing tidak ditemukan",
+            "message": "Billing Tidak Ditemukan",
+            "status": 404
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: error validation param
+  
+  request: {
+    url: {{url}}/v/1/monitoring/kupedes-detail
+    method: POST
+    mode: formUrlEncoded
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Tue, 22 Feb 2022 08:28:52 GMT
+      Content-Length: 111
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "desc": "Format Parameter seqnum tidak sesuai",
+            "message": "Maaf, Parameter seqnum hanya boleh menggunakan angka",
+            "status": 400
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: unautorized
+  
+  request: {
+    url: {{url}}/v/1/monitoring/kupedes-detail
+    method: POST
+    mode: formUrlEncoded
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Mon, 12 Jul 2021 04:27:47 GMT
+      Content-Length: 122
+    }
+  
+    status: {
+      code: 401
+      text: Unauthorized
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "code": 401,
+            "desc": "Expired",
+            "message": "Invalid Token || Token Is Expired"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: general error
+  
+  request: {
+    url: {{url}}/v/1/monitoring/kupedes-detail
+    method: POST
+    mode: formUrlEncoded
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Mon, 12 Jul 2021 04:27:47 GMT
+      Content-Length: 122
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "status": 500,
+            "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+            "desc": "Could not connect .....",
+            "data": null
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: error database connection
+  
+  request: {
+    url: {{url}}/v/1/monitoring/kupedes-detail
+    method: POST
+    mode: formUrlEncoded
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Mon, 12 Jul 2021 04:27:47 GMT
+      Content-Length: 122
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+            "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+            "status": 400
+        }
+      '''
+    }
+  }
+}

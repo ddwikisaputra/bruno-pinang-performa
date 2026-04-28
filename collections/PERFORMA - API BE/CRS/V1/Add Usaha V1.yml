@@ -1,0 +1,1871 @@
+info:
+  name: Add Usaha V1
+  type: http
+  seq: 8
+
+http:
+  method: POST
+  url: "{{base_url}}/v/1/crs/add-usaha"
+  body:
+    type: form-urlencoded
+    data:
+      - name: prakarsaId
+        value: "30946"
+        description: ID Prakarsa
+      - name: businessCategory
+        value: Pertanian
+        description: Kateogri Usaha { MANDATORY } [ 'Pertanian' | 'Non Pertanian' ]
+      - name: userId
+        value: "999941"
+        description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+      - name: landArea
+        value: "150"
+        description: Luas Lahan / Toko { OPTIONAL }
+      - name: ownershipStatus
+        value: SHM
+        description: Status Kepemilikan Lahan / Toko { OPTIONAL }
+      - name: businessPermit
+        value: Izin
+        description: Ijin Usaha { OPTIONAL }
+      - name: permitNumber
+        value: "0010212"
+        description: Nomor Perijinan { OPTIONAL }
+      - name: npwpType
+        value: "3"
+        description: Option NPWP [1 = Memiliki NPWP, 2 = Tidak Memiliki NPWP , 3 = NPWP dalam Pengurusan] { OPTIONAL }
+      - name: npwpNumber
+        value: "12121212121212"
+        description: Nomor NPWP { OPTIONAL }
+        disabled: true
+      - name: npwpDate
+        value: 2021-10-10
+        description: "Tanggal NPWP Tersedia (Format : Y-m-d)"
+      - name: landFrontBlob
+        value: ""
+        description: Blob Lahan / Toko Depan (base64)
+        disabled: true
+      - name: landFrontMimeType
+        value: image/jpeg
+        description: MimeType Lahan / Toko Depan (image/jpeg | image/png)
+        disabled: true
+      - name: landSideBlob
+        value: ""
+        description: Blob Lahan / Toko Samping (base64)
+        disabled: true
+      - name: landSideMimeType
+        value: image/jpeg
+        description: MimeType Lahan / Toko Samping (image/jpeg | image/png)
+        disabled: true
+      - name: landBackBlob
+        value: ""
+        description: Blob Lahan / Toko Belakang (base64)
+        disabled: true
+      - name: landBackMimeType
+        value: image/png
+        description: MimeType Lahan / Toko Belakang (image/jpeg | image/png)
+        disabled: true
+      - name: businessFrontBlob
+        value: ""
+        description: Blob Usaha Depan (base64)
+        disabled: true
+      - name: businessFrontMimeType
+        value: image/jpeg
+        description: MimeType Usaha Depan (image/jpeg | image/png)
+        disabled: true
+      - name: businessSideBlob
+        value: ""
+        description: Blob Usaha Samping (base64)
+        disabled: true
+      - name: businessSideMimeType
+        value: image/jpeg
+        description: MimeType Usaha Samping (image/jpeg | image/png)
+        disabled: true
+      - name: businessBackBlob
+        value: ""
+        description: Blob Usaha Belakang (base64)
+        disabled: true
+      - name: businessBackMimeType
+        value: image/png
+        description: MimeType Usaha Belakang (image/jpeg | image/png)
+        disabled: true
+      - name: businessPermitBlob
+        value: ""
+        description: Blob Ijin Usaha (base64)
+        disabled: true
+      - name: businessPermitMimeType
+        value: image/jpeg
+        description: MimeType Ijin Usaha (image/jpeg | image/png)
+        disabled: true
+      - name: support1Blob
+        value: ""
+        description: Blob Foto Data Pendukung 1 (base64)
+        disabled: true
+      - name: support1MimeType
+        value: image/jpeg
+        description: MimeType Foto Data Pendukung 1 (image/jpeg | image/png)
+        disabled: true
+      - name: support2Blob
+        value: ""
+        description: Blob Foto Data Pendukung 2 (base64)
+        disabled: true
+      - name: support2MimeType
+        value: image/jpeg
+        description: MimeType Foto Data Pendukung 2 (image/jpeg | image/png)
+        disabled: true
+      - name: support3Blob
+        value: ""
+        description: Blob Foto Data Pendukung 2 (base64)
+        disabled: true
+      - name: support3MimeType
+        value: image/png
+        description: MimeType Foto Data Pendukung 2 (image/jpeg | image/png)
+        disabled: true
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/crs/add-usaha"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: prakarsaId
+            value: "4"
+            description: ID Prakarsa
+          - name: businessCategory
+            value: Pertanian
+            description: Kateogri Usaha { MANDATORY } [ 'Pertanian' | 'Non Pertanian' ]
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: landArea
+            value: "150"
+            description: Luas Lahan / Toko { OPTIONAL }
+          - name: ownershipStatus
+            value: SHM
+            description: Status Kepemilikan Lahan / Toko { OPTIONAL }
+          - name: businessPermit
+            value: Izin
+            description: Ijin Usaha { OPTIONAL }
+          - name: permitNumber
+            value: "0010212"
+            description: Nomor Perijinan { OPTIONAL }
+          - name: npwpType
+            value: "1"
+            description: Option NPWP [1 = Memiliki NPWP, 2 = NPWP dalam Pengurusan, 3 = Tidak Memiliki NPWP] { OPTIONAL }
+          - name: npwpNumber
+            value: "12121212121212"
+            description: Nomor NPWP { OPTIONAL }
+          - name: npwpDate
+            value: 2021-10-10
+            description: "Tanggal NPWP Tersedia (Format : Y-m-d)"
+          - name: landFrontBlob
+            value: ""
+            description: Blob Lahan / Toko Depan (base64)
+          - name: landFrontMimeType
+            value: image/jpeg
+            description: MimeType Lahan / Toko Depan (image/jpeg | image/png)
+          - name: landSideBlob
+            value: ""
+            description: Blob Lahan / Toko Samping (base64)
+          - name: landSideMimeType
+            value: image/jpeg
+            description: MimeType Lahan / Toko Samping (image/jpeg | image/png)
+          - name: landBackBlob
+            value: ""
+            description: Blob Lahan / Toko Belakang (base64)
+          - name: landBackMimeType
+            value: image/png
+            description: MimeType Lahan / Toko Belakang (image/jpeg | image/png)
+          - name: businessFrontBlob
+            value: ""
+            description: Blob Usaha Depan (base64)
+          - name: businessFrontMimeType
+            value: image/jpeg
+            description: MimeType Usaha Depan (image/jpeg | image/png)
+          - name: businessSideBlob
+            value: ""
+            description: Blob Usaha Samping (base64)
+          - name: businessSideMimeType
+            value: image/jpeg
+            description: MimeType Usaha Samping (image/jpeg | image/png)
+          - name: businessBackBlob
+            value: ""
+            description: Blob Usaha Belakang (base64)
+          - name: businessBackMimeType
+            value: image/png
+            description: MimeType Usaha Belakang (image/jpeg | image/png)
+          - name: businessPermitBlob
+            value: ""
+            description: Blob Ijin Usaha (base64)
+          - name: businessPermitMimeType
+            value: image/png
+            description: MimeType Ijin Usaha (image/jpeg | image/png)
+          - name: support1Blob
+            value: ""
+            description: Blob Foto Data Pendukung 1 (base64)
+            disabled: true
+          - name: support1MimeType
+            value: image/jpeg
+            description: MimeType Foto Data Pendukung 1 (image/jpeg | image/png)
+            disabled: true
+          - name: support2Blob
+            value: ""
+            description: Blob Foto Data Pendukung 2 (base64)
+            disabled: true
+          - name: support2MimeType
+            value: image/jpeg
+            description: MimeType Foto Data Pendukung 2 (image/jpeg | image/png)
+            disabled: true
+          - name: support3Blob
+            value: ""
+            description: Blob Foto Data Pendukung 3 (base64)
+            disabled: true
+          - name: support3MimeType
+            value: image/png
+            description: MimeType Foto Data Pendukung 3 (image/jpeg | image/png)
+            disabled: true
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 14 Jun 2021 04:34:54 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Tidak Memliki Akses",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/crs/add-usaha"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: prakarsaId
+            value: "4"
+            description: ID Prakarsa
+          - name: businessCategory
+            value: Pertanian
+            description: Kateogri Usaha { MANDATORY } [ 'Pertanian' | 'Non Pertanian' ]
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: landArea
+            value: "150"
+            description: Luas Lahan / Toko { OPTIONAL }
+          - name: ownershipStatus
+            value: SHM
+            description: Status Kepemilikan Lahan / Toko { OPTIONAL }
+          - name: businessPermit
+            value: Izin
+            description: Ijin Usaha { OPTIONAL }
+          - name: permitNumber
+            value: "0010212"
+            description: Nomor Perijinan { OPTIONAL }
+          - name: npwpType
+            value: "1"
+            description: Option NPWP [1 = Memiliki NPWP, 2 = NPWP dalam Pengurusan, 3 = Tidak Memiliki NPWP] { OPTIONAL }
+          - name: npwpNumber
+            value: "12121212121212"
+            description: Nomor NPWP { OPTIONAL }
+          - name: npwpDate
+            value: 2021-10-10
+            description: "Tanggal NPWP Tersedia (Format : Y-m-d)"
+          - name: landFrontBlob
+            value: ""
+            description: Blob Lahan / Toko Depan (base64)
+          - name: landFrontMimeType
+            value: image/jpeg
+            description: MimeType Lahan / Toko Depan (image/jpeg | image/png)
+          - name: landSideBlob
+            value: ""
+            description: Blob Lahan / Toko Samping (base64)
+          - name: landSideMimeType
+            value: image/jpeg
+            description: MimeType Lahan / Toko Samping (image/jpeg | image/png)
+          - name: landBackBlob
+            value: ""
+            description: Blob Lahan / Toko Belakang (base64)
+          - name: landBackMimeType
+            value: image/png
+            description: MimeType Lahan / Toko Belakang (image/jpeg | image/png)
+          - name: businessFrontBlob
+            value: ""
+            description: Blob Usaha Depan (base64)
+          - name: businessFrontMimeType
+            value: image/jpeg
+            description: MimeType Usaha Depan (image/jpeg | image/png)
+          - name: businessSideBlob
+            value: ""
+            description: Blob Usaha Samping (base64)
+          - name: businessSideMimeType
+            value: image/jpeg
+            description: MimeType Usaha Samping (image/jpeg | image/png)
+          - name: businessBackBlob
+            value: ""
+            description: Blob Usaha Belakang (base64)
+          - name: businessBackMimeType
+            value: image/png
+            description: MimeType Usaha Belakang (image/jpeg | image/png)
+          - name: businessPermitBlob
+            value: ""
+            description: Blob Ijin Usaha (base64)
+          - name: businessPermitMimeType
+            value: image/png
+            description: MimeType Ijin Usaha (image/jpeg | image/png)
+          - name: support1Blob
+            value: ""
+            description: Blob Foto Data Pendukung 1 (base64)
+            disabled: true
+          - name: support1MimeType
+            value: image/jpeg
+            description: MimeType Foto Data Pendukung 1 (image/jpeg | image/png)
+            disabled: true
+          - name: support2Blob
+            value: ""
+            description: Blob Foto Data Pendukung 2 (base64)
+            disabled: true
+          - name: support2MimeType
+            value: image/jpeg
+            description: MimeType Foto Data Pendukung 2 (image/jpeg | image/png)
+            disabled: true
+          - name: support3Blob
+            value: ""
+            description: Blob Foto Data Pendukung 3 (base64)
+            disabled: true
+          - name: support3MimeType
+            value: image/png
+            description: MimeType Foto Data Pendukung 3 (image/jpeg | image/png)
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 14 Jun 2021 04:34:54 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "prakarsa_id": 4
+              },
+              "desc": "Data Tersimpan",
+              "message": "Data CRS Usaha berhasil disimpan",
+              "status": 200
+          }
+  - name: error upload file
+    request:
+      url: "{{base_url}}/v/1/crs/add-usaha"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: prakarsaId
+            value: "4"
+            description: ID Prakarsa
+          - name: businessCategory
+            value: Pertanian
+            description: Kateogri Usaha { MANDATORY } [ 'Pertanian' | 'Non Pertanian' ]
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: landArea
+            value: "150"
+            description: Luas Lahan / Toko { OPTIONAL }
+          - name: ownershipStatus
+            value: SHM
+            description: Status Kepemilikan Lahan / Toko { OPTIONAL }
+          - name: businessPermit
+            value: Izin
+            description: Ijin Usaha { OPTIONAL }
+          - name: permitNumber
+            value: "0010212"
+            description: Nomor Perijinan { OPTIONAL }
+          - name: npwpType
+            value: "1"
+            description: Option NPWP [1 = Memiliki NPWP, 2 = NPWP dalam Pengurusan, 3 = Tidak Memiliki NPWP] { OPTIONAL }
+          - name: npwpNumber
+            value: "12121212121212"
+            description: Nomor NPWP { OPTIONAL }
+          - name: npwpDate
+            value: 2021-10-10
+            description: "Tanggal NPWP Tersedia (Format : Y-m-d)"
+          - name: landFrontBlob
+            value: ""
+            description: Blob Lahan / Toko Depan (base64)
+          - name: landFrontMimeType
+            value: image/jpeg
+            description: MimeType Lahan / Toko Depan (image/jpeg | image/png)
+          - name: landSideBlob
+            value: ""
+            description: Blob Lahan / Toko Samping (base64)
+          - name: landSideMimeType
+            value: image/jpeg
+            description: MimeType Lahan / Toko Samping (image/jpeg | image/png)
+          - name: landBackBlob
+            value: ""
+            description: Blob Lahan / Toko Belakang (base64)
+          - name: landBackMimeType
+            value: image/png
+            description: MimeType Lahan / Toko Belakang (image/jpeg | image/png)
+          - name: businessFrontBlob
+            value: ""
+            description: Blob Usaha Depan (base64)
+          - name: businessFrontMimeType
+            value: image/jpeg
+            description: MimeType Usaha Depan (image/jpeg | image/png)
+          - name: businessSideBlob
+            value: ""
+            description: Blob Usaha Samping (base64)
+          - name: businessSideMimeType
+            value: image/jpeg
+            description: MimeType Usaha Samping (image/jpeg | image/png)
+          - name: businessBackBlob
+            value: ""
+            description: Blob Usaha Belakang (base64)
+          - name: businessBackMimeType
+            value: image/png
+            description: MimeType Usaha Belakang (image/jpeg | image/png)
+          - name: businessPermitBlob
+            value: ""
+            description: Blob Ijin Usaha (base64)
+          - name: businessPermitMimeType
+            value: image/png
+            description: MimeType Ijin Usaha (image/jpeg | image/png)
+          - name: support1Blob
+            value: ""
+            description: Blob Foto Data Pendukung 1 (base64)
+            disabled: true
+          - name: support1MimeType
+            value: image/jpeg
+            description: MimeType Foto Data Pendukung 1 (image/jpeg | image/png)
+            disabled: true
+          - name: support2Blob
+            value: ""
+            description: Blob Foto Data Pendukung 2 (base64)
+            disabled: true
+          - name: support2MimeType
+            value: image/jpeg
+            description: MimeType Foto Data Pendukung 2 (image/jpeg | image/png)
+            disabled: true
+          - name: support3Blob
+            value: ""
+            description: Blob Foto Data Pendukung 3 (base64)
+            disabled: true
+          - name: support3MimeType
+            value: image/png
+            description: MimeType Foto Data Pendukung 3 (image/jpeg | image/png)
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 14 Jun 2021 04:34:54 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang dalam perbaikan. Silahkan mencoba beberapa saat lagi.",
+              "desc": "Menyesuaikan file yang diupload",
+              "data": null
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/crs/add-usaha"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: prakarsaId
+            value: "4"
+            description: ID Prakarsa
+          - name: businessCategory
+            value: Pertanian
+            description: Kateogri Usaha { MANDATORY } [ 'Pertanian' | 'Non Pertanian' ]
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: landArea
+            value: "150"
+            description: Luas Lahan / Toko { OPTIONAL }
+          - name: ownershipStatus
+            value: SHM
+            description: Status Kepemilikan Lahan / Toko { OPTIONAL }
+          - name: businessPermit
+            value: Izin
+            description: Ijin Usaha { OPTIONAL }
+          - name: permitNumber
+            value: "0010212"
+            description: Nomor Perijinan { OPTIONAL }
+          - name: npwpType
+            value: "1"
+            description: Option NPWP [1 = Memiliki NPWP, 2 = NPWP dalam Pengurusan, 3 = Tidak Memiliki NPWP] { OPTIONAL }
+          - name: npwpNumber
+            value: "12121212121212"
+            description: Nomor NPWP { OPTIONAL }
+          - name: npwpDate
+            value: 2021-10-10
+            description: "Tanggal NPWP Tersedia (Format : Y-m-d)"
+          - name: landFrontBlob
+            value: ""
+            description: Blob Lahan / Toko Depan (base64)
+          - name: landFrontMimeType
+            value: image/jpeg
+            description: MimeType Lahan / Toko Depan (image/jpeg | image/png)
+          - name: landSideBlob
+            value: ""
+            description: Blob Lahan / Toko Samping (base64)
+          - name: landSideMimeType
+            value: image/jpeg
+            description: MimeType Lahan / Toko Samping (image/jpeg | image/png)
+          - name: landBackBlob
+            value: ""
+            description: Blob Lahan / Toko Belakang (base64)
+          - name: landBackMimeType
+            value: image/png
+            description: MimeType Lahan / Toko Belakang (image/jpeg | image/png)
+          - name: businessFrontBlob
+            value: ""
+            description: Blob Usaha Depan (base64)
+          - name: businessFrontMimeType
+            value: image/jpeg
+            description: MimeType Usaha Depan (image/jpeg | image/png)
+          - name: businessSideBlob
+            value: ""
+            description: Blob Usaha Samping (base64)
+          - name: businessSideMimeType
+            value: image/jpeg
+            description: MimeType Usaha Samping (image/jpeg | image/png)
+          - name: businessBackBlob
+            value: ""
+            description: Blob Usaha Belakang (base64)
+          - name: businessBackMimeType
+            value: image/png
+            description: MimeType Usaha Belakang (image/jpeg | image/png)
+          - name: businessPermitBlob
+            value: ""
+            description: Blob Ijin Usaha (base64)
+          - name: businessPermitMimeType
+            value: image/png
+            description: MimeType Ijin Usaha (image/jpeg | image/png)
+          - name: support1Blob
+            value: ""
+            description: Blob Foto Data Pendukung 1 (base64)
+            disabled: true
+          - name: support1MimeType
+            value: image/jpeg
+            description: MimeType Foto Data Pendukung 1 (image/jpeg | image/png)
+            disabled: true
+          - name: support2Blob
+            value: ""
+            description: Blob Foto Data Pendukung 2 (base64)
+            disabled: true
+          - name: support2MimeType
+            value: image/jpeg
+            description: MimeType Foto Data Pendukung 2 (image/jpeg | image/png)
+            disabled: true
+          - name: support3Blob
+            value: ""
+            description: Blob Foto Data Pendukung 3 (base64)
+            disabled: true
+          - name: support3MimeType
+            value: image/png
+            description: MimeType Foto Data Pendukung 3 (image/jpeg | image/png)
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 14 Jun 2021 04:34:54 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data": null
+          }
+  - name: error crs ditemukan (handle duplicate data)
+    request:
+      url: "{{base_url}}/v/1/crs/add-usaha"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: prakarsaId
+            value: "2"
+            description: ID Prakarsa
+          - name: businessCategory
+            value: Pertanian
+            description: Kateogri Usaha { MANDATORY } [ 'Pertanian' | 'Non Pertanian' ]
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: landArea
+            value: "150"
+            description: Luas Lahan / Toko { OPTIONAL }
+          - name: ownershipStatus
+            value: SHM
+            description: Status Kepemilikan Lahan / Toko { OPTIONAL }
+          - name: businessPermit
+            value: Izin
+            description: Ijin Usaha { OPTIONAL }
+          - name: permitNumber
+            value: "0010212"
+            description: Nomor Perijinan { OPTIONAL }
+          - name: npwpType
+            value: "1"
+            description: Option NPWP [1 = Memiliki NPWP, 2 = NPWP dalam Pengurusan, 3 = Tidak Memiliki NPWP] { OPTIONAL }
+          - name: npwpNumber
+            value: "12121212121212"
+            description: Nomor NPWP { OPTIONAL }
+          - name: npwpDate
+            value: 2021-10-10
+            description: "Tanggal NPWP Tersedia (Format : Y-m-d)"
+          - name: landFrontBlob
+            value: ""
+            description: Blob Lahan / Toko Depan (base64)
+          - name: landFrontMimeType
+            value: image/jpeg
+            description: MimeType Lahan / Toko Depan (image/jpeg | image/png)
+          - name: landSideBlob
+            value: ""
+            description: Blob Lahan / Toko Samping (base64)
+          - name: landSideMimeType
+            value: image/jpeg
+            description: MimeType Lahan / Toko Samping (image/jpeg | image/png)
+          - name: landBackBlob
+            value: ""
+            description: Blob Lahan / Toko Belakang (base64)
+          - name: landBackMimeType
+            value: image/png
+            description: MimeType Lahan / Toko Belakang (image/jpeg | image/png)
+          - name: businessFrontBlob
+            value: ""
+            description: Blob Usaha Depan (base64)
+          - name: businessFrontMimeType
+            value: image/jpeg
+            description: MimeType Usaha Depan (image/jpeg | image/png)
+          - name: businessSideBlob
+            value: ""
+            description: Blob Usaha Samping (base64)
+          - name: businessSideMimeType
+            value: image/jpeg
+            description: MimeType Usaha Samping (image/jpeg | image/png)
+          - name: businessBackBlob
+            value: ""
+            description: Blob Usaha Belakang (base64)
+          - name: businessBackMimeType
+            value: image/png
+            description: MimeType Usaha Belakang (image/jpeg | image/png)
+          - name: businessPermitBlob
+            value: ""
+            description: Blob Ijin Usaha (base64)
+          - name: businessPermitMimeType
+            value: image/png
+            description: MimeType Ijin Usaha (image/jpeg | image/png)
+          - name: support1Blob
+            value: ""
+            description: Blob Foto Data Pendukung 1 (base64)
+            disabled: true
+          - name: support1MimeType
+            value: image/jpeg
+            description: MimeType Foto Data Pendukung 1 (image/jpeg | image/png)
+            disabled: true
+          - name: support2Blob
+            value: ""
+            description: Blob Foto Data Pendukung 2 (base64)
+            disabled: true
+          - name: support2MimeType
+            value: image/jpeg
+            description: MimeType Foto Data Pendukung 2 (image/jpeg | image/png)
+            disabled: true
+          - name: support3Blob
+            value: ""
+            description: Blob Foto Data Pendukung 3 (base64)
+            disabled: true
+          - name: support3MimeType
+            value: image/png
+            description: MimeType Foto Data Pendukung 3 (image/jpeg | image/png)
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 15 Jun 2021 04:27:32 GMT
+        - name: Content-Length
+          value: "138"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Tidak bisa add, data CRS sudah ada",
+              "message": "Maaf, CRS ditemukan. Silahkan menggunakan Fungsi Update",
+              "status": 500
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{base_url}}/v/1/crs/add-usaha"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: prakarsaId
+            value: "30946"
+            description: ID Prakarsa
+          - name: businessCategory
+            value: Pertanian
+            description: Kateogri Usaha { MANDATORY } [ 'Pertanian' | 'Non Pertanian' ]
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: landArea
+            value: "150"
+            description: Luas Lahan / Toko { OPTIONAL }
+          - name: ownershipStatus
+            value: SHM
+            description: Status Kepemilikan Lahan / Toko { OPTIONAL }
+          - name: businessPermit
+            value: Izin
+            description: Ijin Usaha { OPTIONAL }
+          - name: permitNumber
+            value: "0010212"
+            description: Nomor Perijinan { OPTIONAL }
+          - name: npwpType
+            value: "3"
+            description: Option NPWP [1 = Memiliki NPWP, 2 = Tidak Memiliki NPWP , 3 = NPWP dalam Pengurusan] { OPTIONAL }
+          - name: npwpNumber
+            value: "12121212121212"
+            description: Nomor NPWP { OPTIONAL }
+            disabled: true
+          - name: npwpDate
+            value: 2021-10-10
+            description: "Tanggal NPWP Tersedia (Format : Y-m-d)"
+          - name: landFrontBlob
+            value: ""
+            description: Blob Lahan / Toko Depan (base64)
+            disabled: true
+          - name: landFrontMimeType
+            value: image/jpeg
+            description: MimeType Lahan / Toko Depan (image/jpeg | image/png)
+            disabled: true
+          - name: landSideBlob
+            value: ""
+            description: Blob Lahan / Toko Samping (base64)
+            disabled: true
+          - name: landSideMimeType
+            value: image/jpeg
+            description: MimeType Lahan / Toko Samping (image/jpeg | image/png)
+            disabled: true
+          - name: landBackBlob
+            value: ""
+            description: Blob Lahan / Toko Belakang (base64)
+            disabled: true
+          - name: landBackMimeType
+            value: image/png
+            description: MimeType Lahan / Toko Belakang (image/jpeg | image/png)
+            disabled: true
+          - name: businessFrontBlob
+            value: ""
+            description: Blob Usaha Depan (base64)
+            disabled: true
+          - name: businessFrontMimeType
+            value: image/jpeg
+            description: MimeType Usaha Depan (image/jpeg | image/png)
+            disabled: true
+          - name: businessSideBlob
+            value: ""
+            description: Blob Usaha Samping (base64)
+            disabled: true
+          - name: businessSideMimeType
+            value: image/jpeg
+            description: MimeType Usaha Samping (image/jpeg | image/png)
+            disabled: true
+          - name: businessBackBlob
+            value: ""
+            description: Blob Usaha Belakang (base64)
+            disabled: true
+          - name: businessBackMimeType
+            value: image/png
+            description: MimeType Usaha Belakang (image/jpeg | image/png)
+            disabled: true
+          - name: businessPermitBlob
+            value: ""
+            description: Blob Ijin Usaha (base64)
+            disabled: true
+          - name: businessPermitMimeType
+            value: image/jpeg
+            description: MimeType Ijin Usaha (image/jpeg | image/png)
+            disabled: true
+          - name: support1Blob
+            value: ""
+            description: Blob Foto Data Pendukung 1 (base64)
+            disabled: true
+          - name: support1MimeType
+            value: image/jpeg
+            description: MimeType Foto Data Pendukung 1 (image/jpeg | image/png)
+            disabled: true
+          - name: support2Blob
+            value: ""
+            description: Blob Foto Data Pendukung 2 (base64)
+            disabled: true
+          - name: support2MimeType
+            value: image/jpeg
+            description: MimeType Foto Data Pendukung 2 (image/jpeg | image/png)
+            disabled: true
+          - name: support3Blob
+            value: ""
+            description: Blob Foto Data Pendukung 2 (base64)
+            disabled: true
+          - name: support3MimeType
+            value: image/png
+            description: MimeType Foto Data Pendukung 2 (image/jpeg | image/png)
+            disabled: true
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 20 Jul 2022 01:12:53 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/crs/add-usaha"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: prakarsaId
+            value: "4"
+            description: ID Prakarsa
+          - name: businessCategory
+            value: Pertanian
+            description: Kateogri Usaha { MANDATORY } [ 'Pertanian' | 'Non Pertanian' ]
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: landArea
+            value: "150"
+            description: Luas Lahan / Toko { OPTIONAL }
+          - name: ownershipStatus
+            value: SHM
+            description: Status Kepemilikan Lahan / Toko { OPTIONAL }
+          - name: businessPermit
+            value: Izin
+            description: Ijin Usaha { OPTIONAL }
+          - name: permitNumber
+            value: "0010212"
+            description: Nomor Perijinan { OPTIONAL }
+          - name: npwpType
+            value: "1"
+            description: Option NPWP [1 = Memiliki NPWP, 2 = NPWP dalam Pengurusan, 3 = Tidak Memiliki NPWP] { OPTIONAL }
+          - name: npwpNumber
+            value: "12121212121212"
+            description: Nomor NPWP { OPTIONAL }
+          - name: npwpDate
+            value: 2021-10-10
+            description: "Tanggal NPWP Tersedia (Format : Y-m-d)"
+          - name: landFrontBlob
+            value: ""
+            description: Blob Lahan / Toko Depan (base64)
+          - name: landFrontMimeType
+            value: image/jpeg
+            description: MimeType Lahan / Toko Depan (image/jpeg | image/png)
+          - name: landSideBlob
+            value: ""
+            description: Blob Lahan / Toko Samping (base64)
+          - name: landSideMimeType
+            value: image/jpeg
+            description: MimeType Lahan / Toko Samping (image/jpeg | image/png)
+          - name: landBackBlob
+            value: ""
+            description: Blob Lahan / Toko Belakang (base64)
+          - name: landBackMimeType
+            value: image/png
+            description: MimeType Lahan / Toko Belakang (image/jpeg | image/png)
+          - name: businessFrontBlob
+            value: ""
+            description: Blob Usaha Depan (base64)
+          - name: businessFrontMimeType
+            value: image/jpeg
+            description: MimeType Usaha Depan (image/jpeg | image/png)
+          - name: businessSideBlob
+            value: ""
+            description: Blob Usaha Samping (base64)
+          - name: businessSideMimeType
+            value: image/jpeg
+            description: MimeType Usaha Samping (image/jpeg | image/png)
+          - name: businessBackBlob
+            value: ""
+            description: Blob Usaha Belakang (base64)
+          - name: businessBackMimeType
+            value: image/png
+            description: MimeType Usaha Belakang (image/jpeg | image/png)
+          - name: businessPermitBlob
+            value: ""
+            description: Blob Ijin Usaha (base64)
+          - name: businessPermitMimeType
+            value: image/png
+            description: MimeType Ijin Usaha (image/jpeg | image/png)
+          - name: support1Blob
+            value: ""
+            description: Blob Foto Data Pendukung 1 (base64)
+            disabled: true
+          - name: support1MimeType
+            value: image/jpeg
+            description: MimeType Foto Data Pendukung 1 (image/jpeg | image/png)
+            disabled: true
+          - name: support2Blob
+            value: ""
+            description: Blob Foto Data Pendukung 2 (base64)
+            disabled: true
+          - name: support2MimeType
+            value: image/jpeg
+            description: MimeType Foto Data Pendukung 2 (image/jpeg | image/png)
+            disabled: true
+          - name: support3Blob
+            value: ""
+            description: Blob Foto Data Pendukung 3 (base64)
+            disabled: true
+          - name: support3MimeType
+            value: image/png
+            description: MimeType Foto Data Pendukung 3 (image/jpeg | image/png)
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 14 Jun 2021 04:34:54 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: error crs ditemukan (handle duplicate data)
+    request:
+      url: "{{base_url}}/v/1/crs/add-usaha"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: prakarsaId
+            value: "2"
+            description: ID Prakarsa
+          - name: businessCategory
+            value: Pertanian
+            description: Kateogri Usaha { MANDATORY } [ 'Pertanian' | 'Non Pertanian' ]
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: landArea
+            value: "150"
+            description: Luas Lahan / Toko { OPTIONAL }
+          - name: ownershipStatus
+            value: SHM
+            description: Status Kepemilikan Lahan / Toko { OPTIONAL }
+          - name: businessPermit
+            value: Izin
+            description: Ijin Usaha { OPTIONAL }
+          - name: permitNumber
+            value: "0010212"
+            description: Nomor Perijinan { OPTIONAL }
+          - name: npwpType
+            value: "1"
+            description: Option NPWP [1 = Memiliki NPWP, 2 = NPWP dalam Pengurusan, 3 = Tidak Memiliki NPWP] { OPTIONAL }
+          - name: npwpNumber
+            value: "12121212121212"
+            description: Nomor NPWP { OPTIONAL }
+          - name: npwpDate
+            value: 2021-10-10
+            description: "Tanggal NPWP Tersedia (Format : Y-m-d)"
+          - name: landFrontBlob
+            value: ""
+            description: Blob Lahan / Toko Depan (base64)
+          - name: landFrontMimeType
+            value: image/jpeg
+            description: MimeType Lahan / Toko Depan (image/jpeg | image/png)
+          - name: landSideBlob
+            value: ""
+            description: Blob Lahan / Toko Samping (base64)
+          - name: landSideMimeType
+            value: image/jpeg
+            description: MimeType Lahan / Toko Samping (image/jpeg | image/png)
+          - name: landBackBlob
+            value: ""
+            description: Blob Lahan / Toko Belakang (base64)
+          - name: landBackMimeType
+            value: image/png
+            description: MimeType Lahan / Toko Belakang (image/jpeg | image/png)
+          - name: businessFrontBlob
+            value: ""
+            description: Blob Usaha Depan (base64)
+          - name: businessFrontMimeType
+            value: image/jpeg
+            description: MimeType Usaha Depan (image/jpeg | image/png)
+          - name: businessSideBlob
+            value: ""
+            description: Blob Usaha Samping (base64)
+          - name: businessSideMimeType
+            value: image/jpeg
+            description: MimeType Usaha Samping (image/jpeg | image/png)
+          - name: businessBackBlob
+            value: ""
+            description: Blob Usaha Belakang (base64)
+          - name: businessBackMimeType
+            value: image/png
+            description: MimeType Usaha Belakang (image/jpeg | image/png)
+          - name: businessPermitBlob
+            value: ""
+            description: Blob Ijin Usaha (base64)
+          - name: businessPermitMimeType
+            value: image/png
+            description: MimeType Ijin Usaha (image/jpeg | image/png)
+          - name: support1Blob
+            value: ""
+            description: Blob Foto Data Pendukung 1 (base64)
+            disabled: true
+          - name: support1MimeType
+            value: image/jpeg
+            description: MimeType Foto Data Pendukung 1 (image/jpeg | image/png)
+            disabled: true
+          - name: support2Blob
+            value: ""
+            description: Blob Foto Data Pendukung 2 (base64)
+            disabled: true
+          - name: support2MimeType
+            value: image/jpeg
+            description: MimeType Foto Data Pendukung 2 (image/jpeg | image/png)
+            disabled: true
+          - name: support3Blob
+            value: ""
+            description: Blob Foto Data Pendukung 3 (base64)
+            disabled: true
+          - name: support3MimeType
+            value: image/png
+            description: MimeType Foto Data Pendukung 3 (image/jpeg | image/png)
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 15 Jun 2021 04:27:32 GMT
+        - name: Content-Length
+          value: "138"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Tidak bisa add, data CRS sudah ada",
+              "message": "Maaf, CRS ditemukan. Silahkan menggunakan Fungsi Update",
+              "status": 500
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{base_url}}/v/1/crs/add-usaha"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: prakarsaId
+            value: "30946"
+            description: ID Prakarsa
+          - name: businessCategory
+            value: Pertanian
+            description: Kateogri Usaha { MANDATORY } [ 'Pertanian' | 'Non Pertanian' ]
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: landArea
+            value: "150"
+            description: Luas Lahan / Toko { OPTIONAL }
+          - name: ownershipStatus
+            value: SHM
+            description: Status Kepemilikan Lahan / Toko { OPTIONAL }
+          - name: businessPermit
+            value: Izin
+            description: Ijin Usaha { OPTIONAL }
+          - name: permitNumber
+            value: "0010212"
+            description: Nomor Perijinan { OPTIONAL }
+          - name: npwpType
+            value: "3"
+            description: Option NPWP [1 = Memiliki NPWP, 2 = Tidak Memiliki NPWP , 3 = NPWP dalam Pengurusan] { OPTIONAL }
+          - name: npwpNumber
+            value: "12121212121212"
+            description: Nomor NPWP { OPTIONAL }
+            disabled: true
+          - name: npwpDate
+            value: 2021-10-10
+            description: "Tanggal NPWP Tersedia (Format : Y-m-d)"
+          - name: landFrontBlob
+            value: ""
+            description: Blob Lahan / Toko Depan (base64)
+            disabled: true
+          - name: landFrontMimeType
+            value: image/jpeg
+            description: MimeType Lahan / Toko Depan (image/jpeg | image/png)
+            disabled: true
+          - name: landSideBlob
+            value: ""
+            description: Blob Lahan / Toko Samping (base64)
+            disabled: true
+          - name: landSideMimeType
+            value: image/jpeg
+            description: MimeType Lahan / Toko Samping (image/jpeg | image/png)
+            disabled: true
+          - name: landBackBlob
+            value: ""
+            description: Blob Lahan / Toko Belakang (base64)
+            disabled: true
+          - name: landBackMimeType
+            value: image/png
+            description: MimeType Lahan / Toko Belakang (image/jpeg | image/png)
+            disabled: true
+          - name: businessFrontBlob
+            value: ""
+            description: Blob Usaha Depan (base64)
+            disabled: true
+          - name: businessFrontMimeType
+            value: image/jpeg
+            description: MimeType Usaha Depan (image/jpeg | image/png)
+            disabled: true
+          - name: businessSideBlob
+            value: ""
+            description: Blob Usaha Samping (base64)
+            disabled: true
+          - name: businessSideMimeType
+            value: image/jpeg
+            description: MimeType Usaha Samping (image/jpeg | image/png)
+            disabled: true
+          - name: businessBackBlob
+            value: ""
+            description: Blob Usaha Belakang (base64)
+            disabled: true
+          - name: businessBackMimeType
+            value: image/png
+            description: MimeType Usaha Belakang (image/jpeg | image/png)
+            disabled: true
+          - name: businessPermitBlob
+            value: ""
+            description: Blob Ijin Usaha (base64)
+            disabled: true
+          - name: businessPermitMimeType
+            value: image/jpeg
+            description: MimeType Ijin Usaha (image/jpeg | image/png)
+            disabled: true
+          - name: support1Blob
+            value: ""
+            description: Blob Foto Data Pendukung 1 (base64)
+            disabled: true
+          - name: support1MimeType
+            value: image/jpeg
+            description: MimeType Foto Data Pendukung 1 (image/jpeg | image/png)
+            disabled: true
+          - name: support2Blob
+            value: ""
+            description: Blob Foto Data Pendukung 2 (base64)
+            disabled: true
+          - name: support2MimeType
+            value: image/jpeg
+            description: MimeType Foto Data Pendukung 2 (image/jpeg | image/png)
+            disabled: true
+          - name: support3Blob
+            value: ""
+            description: Blob Foto Data Pendukung 2 (base64)
+            disabled: true
+          - name: support3MimeType
+            value: image/png
+            description: MimeType Foto Data Pendukung 2 (image/jpeg | image/png)
+            disabled: true
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 20 Jul 2022 01:12:53 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/crs/add-usaha"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: prakarsaId
+            value: "4"
+            description: ID Prakarsa
+          - name: businessCategory
+            value: Pertanian
+            description: Kateogri Usaha { MANDATORY } [ 'Pertanian' | 'Non Pertanian' ]
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: landArea
+            value: "150"
+            description: Luas Lahan / Toko { OPTIONAL }
+          - name: ownershipStatus
+            value: SHM
+            description: Status Kepemilikan Lahan / Toko { OPTIONAL }
+          - name: businessPermit
+            value: Izin
+            description: Ijin Usaha { OPTIONAL }
+          - name: permitNumber
+            value: "0010212"
+            description: Nomor Perijinan { OPTIONAL }
+          - name: npwpType
+            value: "1"
+            description: Option NPWP [1 = Memiliki NPWP, 2 = NPWP dalam Pengurusan, 3 = Tidak Memiliki NPWP] { OPTIONAL }
+          - name: npwpNumber
+            value: "12121212121212"
+            description: Nomor NPWP { OPTIONAL }
+          - name: npwpDate
+            value: 2021-10-10
+            description: "Tanggal NPWP Tersedia (Format : Y-m-d)"
+          - name: landFrontBlob
+            value: ""
+            description: Blob Lahan / Toko Depan (base64)
+          - name: landFrontMimeType
+            value: image/jpeg
+            description: MimeType Lahan / Toko Depan (image/jpeg | image/png)
+          - name: landSideBlob
+            value: ""
+            description: Blob Lahan / Toko Samping (base64)
+          - name: landSideMimeType
+            value: image/jpeg
+            description: MimeType Lahan / Toko Samping (image/jpeg | image/png)
+          - name: landBackBlob
+            value: ""
+            description: Blob Lahan / Toko Belakang (base64)
+          - name: landBackMimeType
+            value: image/png
+            description: MimeType Lahan / Toko Belakang (image/jpeg | image/png)
+          - name: businessFrontBlob
+            value: ""
+            description: Blob Usaha Depan (base64)
+          - name: businessFrontMimeType
+            value: image/jpeg
+            description: MimeType Usaha Depan (image/jpeg | image/png)
+          - name: businessSideBlob
+            value: ""
+            description: Blob Usaha Samping (base64)
+          - name: businessSideMimeType
+            value: image/jpeg
+            description: MimeType Usaha Samping (image/jpeg | image/png)
+          - name: businessBackBlob
+            value: ""
+            description: Blob Usaha Belakang (base64)
+          - name: businessBackMimeType
+            value: image/png
+            description: MimeType Usaha Belakang (image/jpeg | image/png)
+          - name: businessPermitBlob
+            value: ""
+            description: Blob Ijin Usaha (base64)
+          - name: businessPermitMimeType
+            value: image/png
+            description: MimeType Ijin Usaha (image/jpeg | image/png)
+          - name: support1Blob
+            value: ""
+            description: Blob Foto Data Pendukung 1 (base64)
+            disabled: true
+          - name: support1MimeType
+            value: image/jpeg
+            description: MimeType Foto Data Pendukung 1 (image/jpeg | image/png)
+            disabled: true
+          - name: support2Blob
+            value: ""
+            description: Blob Foto Data Pendukung 2 (base64)
+            disabled: true
+          - name: support2MimeType
+            value: image/jpeg
+            description: MimeType Foto Data Pendukung 2 (image/jpeg | image/png)
+            disabled: true
+          - name: support3Blob
+            value: ""
+            description: Blob Foto Data Pendukung 3 (base64)
+            disabled: true
+          - name: support3MimeType
+            value: image/png
+            description: MimeType Foto Data Pendukung 3 (image/jpeg | image/png)
+            disabled: true
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 14 Jun 2021 04:34:54 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Tidak Memliki Akses",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/crs/add-usaha"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: prakarsaId
+            value: "4"
+            description: ID Prakarsa
+          - name: businessCategory
+            value: Pertanian
+            description: Kateogri Usaha { MANDATORY } [ 'Pertanian' | 'Non Pertanian' ]
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: landArea
+            value: "150"
+            description: Luas Lahan / Toko { OPTIONAL }
+          - name: ownershipStatus
+            value: SHM
+            description: Status Kepemilikan Lahan / Toko { OPTIONAL }
+          - name: businessPermit
+            value: Izin
+            description: Ijin Usaha { OPTIONAL }
+          - name: permitNumber
+            value: "0010212"
+            description: Nomor Perijinan { OPTIONAL }
+          - name: npwpType
+            value: "1"
+            description: Option NPWP [1 = Memiliki NPWP, 2 = NPWP dalam Pengurusan, 3 = Tidak Memiliki NPWP] { OPTIONAL }
+          - name: npwpNumber
+            value: "12121212121212"
+            description: Nomor NPWP { OPTIONAL }
+          - name: npwpDate
+            value: 2021-10-10
+            description: "Tanggal NPWP Tersedia (Format : Y-m-d)"
+          - name: landFrontBlob
+            value: ""
+            description: Blob Lahan / Toko Depan (base64)
+          - name: landFrontMimeType
+            value: image/jpeg
+            description: MimeType Lahan / Toko Depan (image/jpeg | image/png)
+          - name: landSideBlob
+            value: ""
+            description: Blob Lahan / Toko Samping (base64)
+          - name: landSideMimeType
+            value: image/jpeg
+            description: MimeType Lahan / Toko Samping (image/jpeg | image/png)
+          - name: landBackBlob
+            value: ""
+            description: Blob Lahan / Toko Belakang (base64)
+          - name: landBackMimeType
+            value: image/png
+            description: MimeType Lahan / Toko Belakang (image/jpeg | image/png)
+          - name: businessFrontBlob
+            value: ""
+            description: Blob Usaha Depan (base64)
+          - name: businessFrontMimeType
+            value: image/jpeg
+            description: MimeType Usaha Depan (image/jpeg | image/png)
+          - name: businessSideBlob
+            value: ""
+            description: Blob Usaha Samping (base64)
+          - name: businessSideMimeType
+            value: image/jpeg
+            description: MimeType Usaha Samping (image/jpeg | image/png)
+          - name: businessBackBlob
+            value: ""
+            description: Blob Usaha Belakang (base64)
+          - name: businessBackMimeType
+            value: image/png
+            description: MimeType Usaha Belakang (image/jpeg | image/png)
+          - name: businessPermitBlob
+            value: ""
+            description: Blob Ijin Usaha (base64)
+          - name: businessPermitMimeType
+            value: image/png
+            description: MimeType Ijin Usaha (image/jpeg | image/png)
+          - name: support1Blob
+            value: ""
+            description: Blob Foto Data Pendukung 1 (base64)
+            disabled: true
+          - name: support1MimeType
+            value: image/jpeg
+            description: MimeType Foto Data Pendukung 1 (image/jpeg | image/png)
+            disabled: true
+          - name: support2Blob
+            value: ""
+            description: Blob Foto Data Pendukung 2 (base64)
+            disabled: true
+          - name: support2MimeType
+            value: image/jpeg
+            description: MimeType Foto Data Pendukung 2 (image/jpeg | image/png)
+            disabled: true
+          - name: support3Blob
+            value: ""
+            description: Blob Foto Data Pendukung 3 (base64)
+            disabled: true
+          - name: support3MimeType
+            value: image/png
+            description: MimeType Foto Data Pendukung 3 (image/jpeg | image/png)
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 14 Jun 2021 04:34:54 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data": null
+          }
+  - name: error upload file
+    request:
+      url: "{{base_url}}/v/1/crs/add-usaha"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: prakarsaId
+            value: "4"
+            description: ID Prakarsa
+          - name: businessCategory
+            value: Pertanian
+            description: Kateogri Usaha { MANDATORY } [ 'Pertanian' | 'Non Pertanian' ]
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: landArea
+            value: "150"
+            description: Luas Lahan / Toko { OPTIONAL }
+          - name: ownershipStatus
+            value: SHM
+            description: Status Kepemilikan Lahan / Toko { OPTIONAL }
+          - name: businessPermit
+            value: Izin
+            description: Ijin Usaha { OPTIONAL }
+          - name: permitNumber
+            value: "0010212"
+            description: Nomor Perijinan { OPTIONAL }
+          - name: npwpType
+            value: "1"
+            description: Option NPWP [1 = Memiliki NPWP, 2 = NPWP dalam Pengurusan, 3 = Tidak Memiliki NPWP] { OPTIONAL }
+          - name: npwpNumber
+            value: "12121212121212"
+            description: Nomor NPWP { OPTIONAL }
+          - name: npwpDate
+            value: 2021-10-10
+            description: "Tanggal NPWP Tersedia (Format : Y-m-d)"
+          - name: landFrontBlob
+            value: ""
+            description: Blob Lahan / Toko Depan (base64)
+          - name: landFrontMimeType
+            value: image/jpeg
+            description: MimeType Lahan / Toko Depan (image/jpeg | image/png)
+          - name: landSideBlob
+            value: ""
+            description: Blob Lahan / Toko Samping (base64)
+          - name: landSideMimeType
+            value: image/jpeg
+            description: MimeType Lahan / Toko Samping (image/jpeg | image/png)
+          - name: landBackBlob
+            value: ""
+            description: Blob Lahan / Toko Belakang (base64)
+          - name: landBackMimeType
+            value: image/png
+            description: MimeType Lahan / Toko Belakang (image/jpeg | image/png)
+          - name: businessFrontBlob
+            value: ""
+            description: Blob Usaha Depan (base64)
+          - name: businessFrontMimeType
+            value: image/jpeg
+            description: MimeType Usaha Depan (image/jpeg | image/png)
+          - name: businessSideBlob
+            value: ""
+            description: Blob Usaha Samping (base64)
+          - name: businessSideMimeType
+            value: image/jpeg
+            description: MimeType Usaha Samping (image/jpeg | image/png)
+          - name: businessBackBlob
+            value: ""
+            description: Blob Usaha Belakang (base64)
+          - name: businessBackMimeType
+            value: image/png
+            description: MimeType Usaha Belakang (image/jpeg | image/png)
+          - name: businessPermitBlob
+            value: ""
+            description: Blob Ijin Usaha (base64)
+          - name: businessPermitMimeType
+            value: image/png
+            description: MimeType Ijin Usaha (image/jpeg | image/png)
+          - name: support1Blob
+            value: ""
+            description: Blob Foto Data Pendukung 1 (base64)
+            disabled: true
+          - name: support1MimeType
+            value: image/jpeg
+            description: MimeType Foto Data Pendukung 1 (image/jpeg | image/png)
+            disabled: true
+          - name: support2Blob
+            value: ""
+            description: Blob Foto Data Pendukung 2 (base64)
+            disabled: true
+          - name: support2MimeType
+            value: image/jpeg
+            description: MimeType Foto Data Pendukung 2 (image/jpeg | image/png)
+            disabled: true
+          - name: support3Blob
+            value: ""
+            description: Blob Foto Data Pendukung 3 (base64)
+            disabled: true
+          - name: support3MimeType
+            value: image/png
+            description: MimeType Foto Data Pendukung 3 (image/jpeg | image/png)
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 14 Jun 2021 04:34:54 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang dalam perbaikan. Silahkan mencoba beberapa saat lagi.",
+              "desc": "Menyesuaikan file yang diupload",
+              "data": null
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/crs/add-usaha"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: prakarsaId
+            value: "4"
+            description: ID Prakarsa
+          - name: businessCategory
+            value: Pertanian
+            description: Kateogri Usaha { MANDATORY } [ 'Pertanian' | 'Non Pertanian' ]
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: landArea
+            value: "150"
+            description: Luas Lahan / Toko { OPTIONAL }
+          - name: ownershipStatus
+            value: SHM
+            description: Status Kepemilikan Lahan / Toko { OPTIONAL }
+          - name: businessPermit
+            value: Izin
+            description: Ijin Usaha { OPTIONAL }
+          - name: permitNumber
+            value: "0010212"
+            description: Nomor Perijinan { OPTIONAL }
+          - name: npwpType
+            value: "1"
+            description: Option NPWP [1 = Memiliki NPWP, 2 = NPWP dalam Pengurusan, 3 = Tidak Memiliki NPWP] { OPTIONAL }
+          - name: npwpNumber
+            value: "12121212121212"
+            description: Nomor NPWP { OPTIONAL }
+          - name: npwpDate
+            value: 2021-10-10
+            description: "Tanggal NPWP Tersedia (Format : Y-m-d)"
+          - name: landFrontBlob
+            value: ""
+            description: Blob Lahan / Toko Depan (base64)
+          - name: landFrontMimeType
+            value: image/jpeg
+            description: MimeType Lahan / Toko Depan (image/jpeg | image/png)
+          - name: landSideBlob
+            value: ""
+            description: Blob Lahan / Toko Samping (base64)
+          - name: landSideMimeType
+            value: image/jpeg
+            description: MimeType Lahan / Toko Samping (image/jpeg | image/png)
+          - name: landBackBlob
+            value: ""
+            description: Blob Lahan / Toko Belakang (base64)
+          - name: landBackMimeType
+            value: image/png
+            description: MimeType Lahan / Toko Belakang (image/jpeg | image/png)
+          - name: businessFrontBlob
+            value: ""
+            description: Blob Usaha Depan (base64)
+          - name: businessFrontMimeType
+            value: image/jpeg
+            description: MimeType Usaha Depan (image/jpeg | image/png)
+          - name: businessSideBlob
+            value: ""
+            description: Blob Usaha Samping (base64)
+          - name: businessSideMimeType
+            value: image/jpeg
+            description: MimeType Usaha Samping (image/jpeg | image/png)
+          - name: businessBackBlob
+            value: ""
+            description: Blob Usaha Belakang (base64)
+          - name: businessBackMimeType
+            value: image/png
+            description: MimeType Usaha Belakang (image/jpeg | image/png)
+          - name: businessPermitBlob
+            value: ""
+            description: Blob Ijin Usaha (base64)
+          - name: businessPermitMimeType
+            value: image/png
+            description: MimeType Ijin Usaha (image/jpeg | image/png)
+          - name: support1Blob
+            value: ""
+            description: Blob Foto Data Pendukung 1 (base64)
+            disabled: true
+          - name: support1MimeType
+            value: image/jpeg
+            description: MimeType Foto Data Pendukung 1 (image/jpeg | image/png)
+            disabled: true
+          - name: support2Blob
+            value: ""
+            description: Blob Foto Data Pendukung 2 (base64)
+            disabled: true
+          - name: support2MimeType
+            value: image/jpeg
+            description: MimeType Foto Data Pendukung 2 (image/jpeg | image/png)
+            disabled: true
+          - name: support3Blob
+            value: ""
+            description: Blob Foto Data Pendukung 3 (base64)
+            disabled: true
+          - name: support3MimeType
+            value: image/png
+            description: MimeType Foto Data Pendukung 3 (image/jpeg | image/png)
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 14 Jun 2021 04:34:54 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "prakarsa_id": 4
+              },
+              "desc": "Data Tersimpan",
+              "message": "Data CRS Usaha berhasil disimpan",
+              "status": 200
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/crs/add-usaha"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: prakarsaId
+            value: "4"
+            description: ID Prakarsa
+          - name: businessCategory
+            value: Pertanian
+            description: Kateogri Usaha { MANDATORY } [ 'Pertanian' | 'Non Pertanian' ]
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: landArea
+            value: "150"
+            description: Luas Lahan / Toko { OPTIONAL }
+          - name: ownershipStatus
+            value: SHM
+            description: Status Kepemilikan Lahan / Toko { OPTIONAL }
+          - name: businessPermit
+            value: Izin
+            description: Ijin Usaha { OPTIONAL }
+          - name: permitNumber
+            value: "0010212"
+            description: Nomor Perijinan { OPTIONAL }
+          - name: npwpType
+            value: "1"
+            description: Option NPWP [1 = Memiliki NPWP, 2 = NPWP dalam Pengurusan, 3 = Tidak Memiliki NPWP] { OPTIONAL }
+          - name: npwpNumber
+            value: "12121212121212"
+            description: Nomor NPWP { OPTIONAL }
+          - name: npwpDate
+            value: 2021-10-10
+            description: "Tanggal NPWP Tersedia (Format : Y-m-d)"
+          - name: landFrontBlob
+            value: ""
+            description: Blob Lahan / Toko Depan (base64)
+          - name: landFrontMimeType
+            value: image/jpeg
+            description: MimeType Lahan / Toko Depan (image/jpeg | image/png)
+          - name: landSideBlob
+            value: ""
+            description: Blob Lahan / Toko Samping (base64)
+          - name: landSideMimeType
+            value: image/jpeg
+            description: MimeType Lahan / Toko Samping (image/jpeg | image/png)
+          - name: landBackBlob
+            value: ""
+            description: Blob Lahan / Toko Belakang (base64)
+          - name: landBackMimeType
+            value: image/png
+            description: MimeType Lahan / Toko Belakang (image/jpeg | image/png)
+          - name: businessFrontBlob
+            value: ""
+            description: Blob Usaha Depan (base64)
+          - name: businessFrontMimeType
+            value: image/jpeg
+            description: MimeType Usaha Depan (image/jpeg | image/png)
+          - name: businessSideBlob
+            value: ""
+            description: Blob Usaha Samping (base64)
+          - name: businessSideMimeType
+            value: image/jpeg
+            description: MimeType Usaha Samping (image/jpeg | image/png)
+          - name: businessBackBlob
+            value: ""
+            description: Blob Usaha Belakang (base64)
+          - name: businessBackMimeType
+            value: image/png
+            description: MimeType Usaha Belakang (image/jpeg | image/png)
+          - name: businessPermitBlob
+            value: ""
+            description: Blob Ijin Usaha (base64)
+          - name: businessPermitMimeType
+            value: image/png
+            description: MimeType Ijin Usaha (image/jpeg | image/png)
+          - name: support1Blob
+            value: ""
+            description: Blob Foto Data Pendukung 1 (base64)
+            disabled: true
+          - name: support1MimeType
+            value: image/jpeg
+            description: MimeType Foto Data Pendukung 1 (image/jpeg | image/png)
+            disabled: true
+          - name: support2Blob
+            value: ""
+            description: Blob Foto Data Pendukung 2 (base64)
+            disabled: true
+          - name: support2MimeType
+            value: image/jpeg
+            description: MimeType Foto Data Pendukung 2 (image/jpeg | image/png)
+            disabled: true
+          - name: support3Blob
+            value: ""
+            description: Blob Foto Data Pendukung 3 (base64)
+            disabled: true
+          - name: support3MimeType
+            value: image/png
+            description: MimeType Foto Data Pendukung 3 (image/jpeg | image/png)
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 14 Jun 2021 04:34:54 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }

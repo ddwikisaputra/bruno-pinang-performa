@@ -1,0 +1,487 @@
+info:
+  name: List History Pipeline V2
+  type: http
+  seq: 7
+
+http:
+  method: POST
+  url: "{{base_url}}/v/2/pipeline/histories"
+  body:
+    type: form-urlencoded
+    data:
+      - name: startIndex
+        value: "0"
+        description: Offset Data {Default 0}
+      - name: recordCount
+        value: "6"
+        description: Limit Data {Default 5}
+      - name: userId
+        value: UmF5YVBpUGVyVG9w9FR0lGD8PJZ01laNFpB91ptV5mkFfw==
+        description: "[ENCODE] Personal Number BRI Agro (UserID Login)"
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: empty data
+    request:
+      url: "{{base_url}}/v/1/pipeline/histories"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "6"
+            description: Limit Data {Default 5}
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Jul 2021 04:27:47 GMT
+        - name: Content-Length
+          value: "122"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Data Pipeline Employee tidak ditemukan",
+              "message": "Pipeline Tidak Ditemukan",
+              "status": 404
+          }
+  - name: error validation param
+    request:
+      url: "{{base_url}}/v/1/pipeline/histories"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "6"
+            description: Limit Data {Default 5}
+          - name: userId
+            value: "999940"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 22 Feb 2022 08:28:52 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Data tidak ditemukan.",
+              "desc": "Parameter ... kosong",
+              "data": null
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/pipeline/histories"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "6"
+            description: Limit Data {Default 5}
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Jul 2021 04:27:47 GMT
+        - name: Content-Length
+          value: "122"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/pipeline/histories"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "6"
+            description: Limit Data {Default 5}
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Jul 2021 04:27:47 GMT
+        - name: Content-Length
+          value: "122"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data": null
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/2/pipeline/histories"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "6"
+            description: Limit Data {Default 5}
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Jul 2021 04:30:16 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "data": [
+                  {
+                      "id": 1,
+                      "month": "Januari",
+                      "year": 2022,
+                      "estimationTarget": 20000000,
+                      "totalMember": 0,
+                      "createdAt": "",
+                      "updatedAt": ""
+                  },
+                  {
+                      "id": 7,
+                      "month": "Februari",
+                      "year": 2022,
+                      "estimationTarget": 20000000,
+                      "totalMember": 2,
+                      "createdAt": "",
+                      "updatedAt": ""
+                  }
+              ],
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/pipeline/histories"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "6"
+            description: Limit Data {Default 5}
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Jul 2021 04:27:47 GMT
+        - name: Content-Length
+          value: "122"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/2/pipeline/histories"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "6"
+            description: Limit Data {Default 5}
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Jul 2021 04:30:16 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "data": [
+                  {
+                      "id": 1,
+                      "month": "Januari",
+                      "year": 2022,
+                      "estimationTarget": 20000000,
+                      "totalMember": 0,
+                      "createdAt": "",
+                      "updatedAt": ""
+                  },
+                  {
+                      "id": 7,
+                      "month": "Februari",
+                      "year": 2022,
+                      "estimationTarget": 20000000,
+                      "totalMember": 2,
+                      "createdAt": "",
+                      "updatedAt": ""
+                  }
+              ],
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/pipeline/histories"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "6"
+            description: Limit Data {Default 5}
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Jul 2021 04:27:47 GMT
+        - name: Content-Length
+          value: "122"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: empty data
+    request:
+      url: "{{base_url}}/v/1/pipeline/histories"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "6"
+            description: Limit Data {Default 5}
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Jul 2021 04:27:47 GMT
+        - name: Content-Length
+          value: "122"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Data Pipeline Employee tidak ditemukan",
+              "message": "Pipeline Tidak Ditemukan",
+              "status": 404
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/pipeline/histories"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "6"
+            description: Limit Data {Default 5}
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Jul 2021 04:27:47 GMT
+        - name: Content-Length
+          value: "122"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data": null
+          }
+  - name: error validation param
+    request:
+      url: "{{base_url}}/v/1/pipeline/histories"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "6"
+            description: Limit Data {Default 5}
+          - name: userId
+            value: "999940"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 22 Feb 2022 08:28:52 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Data tidak ditemukan.",
+              "desc": "Parameter ... kosong",
+              "data": null
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/pipeline/histories"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "6"
+            description: Limit Data {Default 5}
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Jul 2021 04:27:47 GMT
+        - name: Content-Length
+          value: "122"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }

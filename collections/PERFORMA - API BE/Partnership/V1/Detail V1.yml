@@ -1,0 +1,729 @@
+info:
+  name: Detail V1
+  type: http
+  seq: 6
+
+http:
+  method: POST
+  url: "{{base_url}}/v/1/partnerships/detail"
+  body:
+    type: form-urlencoded
+    data:
+      - name: id
+        value: "4"
+        description: Id Partnership| MANDATORY
+      - name: userId
+        value: "999941"
+        description: Personal Number BRI Agro (UserID Login) | MANDATORY
+      - name: isLoanType
+        value: "1"
+        description: "Preload Data Loan Type | [ 1 = FOR LOANTYPE] | OPTIONAL "
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/partnerships/detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "54"
+            description: ID Member
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: isLoanType
+            value: "1"
+            description: "Preload Data Loan Type | [ 1 = FOR LOANTYPE] | OPTIONAL "
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 01 Sep 2022 14:40:16 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "id": 54,
+                  "code": "AGR94",
+                  "commodity": "",
+                  "name": "Agroco",
+                  "type": "partner",
+                  "address": "Jl Candi Sewu No. 10",
+                  "postalCode": "65141",
+                  "provinceCode": "12",
+                  "provinceName": "Jawa Timur",
+                  "cityCode": "1293",
+                  "cityName": "Kota Malang",
+                  "districtCode": "357305",
+                  "districtName": "Lowokwaru",
+                  "villageCode": "3573051007",
+                  "villageName": "Jatimulyo",
+                  "rt": "010",
+                  "rw": "011",
+                  "email": "agroco@gmail.com",
+                  "picName": "Mika Yudha Pratama",
+                  "picMobileNumber": "+628113787813",
+                  "pksNumber": "BANK RAYA/PKS-08/RAC/04/22",
+                  "branchCode": "0010",
+                  "status": 0,
+                  "createdAt": "01-09-2022",
+                  "updatedAt": "01-09-2022",
+                  "dataLoanTypeChild": [
+                      {
+                          "id": 33,
+                          "productType": "40003",
+                          "loanTypeParentId": 26,
+                          "loanTypeSubparentId": 2,
+                          "loanTypeName": "KIM GU RAM",
+                          "loanTypeCode": "CHILD-KGR-68",
+                          "transactionType": 3,
+                          "isCustom": 1,
+                          "provisionFee": 10.12,
+                          "status": -2,
+                          "dataInterestRates": [
+                              {
+                                  "plafondStart": 500000,
+                                  "plafondEnd": 1000000,
+                                  "loanTermStart": 1,
+                                  "loanTermEnd": 7,
+                                  "loanTermType": 1,
+                                  "interestRate": 12.1
+                              },
+                              {
+                                  "plafondStart": 500000,
+                                  "plafondEnd": 1000000,
+                                  "loanTermStart": 1,
+                                  "loanTermEnd": 7,
+                                  "loanTermType": 1,
+                                  "interestRate": 12.1
+                              },
+                              {
+                                  "plafondStart": 500000,
+                                  "plafondEnd": 1000000,
+                                  "loanTermStart": 1,
+                                  "loanTermEnd": 7,
+                                  "loanTermType": 1,
+                                  "interestRate": 12.1
+                              }
+                          ],
+                          "dataInstallmentPatterns": [
+                              {
+                                  "installmentPattern": "7 hari",
+                                  "installmentPatternType": 1
+                              },
+                              {
+                                  "installmentPattern": "7 hari",
+                                  "installmentPatternType": 1
+                              },
+                              {
+                                  "installmentPattern": "7 hari",
+                                  "installmentPatternType": 1
+                              }
+                          ],
+                          "dataAdministrationFees": [
+                              {
+                                  "nominalStart": 500000,
+                                  "nominalEnd": 1000000,
+                                  "adminFee": 50000
+                              },
+                              {
+                                  "nominalStart": 500000,
+                                  "nominalEnd": 1000000,
+                                  "adminFee": 50000
+                              },
+                              {
+                                  "nominalStart": 500000,
+                                  "nominalEnd": 1000000,
+                                  "adminFee": 50000
+                              }
+                          ],
+                          "dataInsurance": {
+                              "id": 1,
+                              "insuranceName": "testSatu",
+                              "productType": "40003",
+                              "percentage": 0.2,
+                              "status": 0
+                          }
+                      },
+                      {
+                          "id": 36,
+                          "productType": "40003",
+                          "loanTypeParentId": 26,
+                          "loanTypeSubparentId": 2,
+                          "loanTypeName": "KIM GU RAME",
+                          "loanTypeCode": "CHILD-KGR-39",
+                          "transactionType": 3,
+                          "isCustom": 1,
+                          "provisionFee": 10.12,
+                          "status": 0,
+                          "dataInterestRates": [
+                              {
+                                  "plafondStart": 500000,
+                                  "plafondEnd": 1000000,
+                                  "loanTermStart": 1,
+                                  "loanTermEnd": 7,
+                                  "loanTermType": 1,
+                                  "interestRate": 12.1
+                              }
+                          ],
+                          "dataInstallmentPatterns": [
+                              {
+                                  "installmentPattern": "7 hari",
+                                  "installmentPatternType": 1
+                              }
+                          ],
+                          "dataAdministrationFees": [
+                              {
+                                  "nominalStart": 500000,
+                                  "nominalEnd": 1000000,
+                                  "adminFee": 50000
+                              }
+                          ],
+                          "dataInsurance": {
+                              "id": 1,
+                              "insuranceName": "testSatu",
+                              "productType": "40003",
+                              "percentage": 0.2,
+                              "status": 0
+                          }
+                      }
+                  ]
+              },
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/partnerships/detail"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "8"
+            description: ID Member
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Jul 2021 07:34:14 GMT
+        - name: Content-Length
+          value: "105"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data": null
+          }
+  - name: not found
+    request:
+      url: "{{base_url}}/v/1/partnerships/detail"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "8"
+          - name: userId
+            value: "999941"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Jul 2021 07:34:14 GMT
+        - name: Content-Length
+          value: "105"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Data .... Kosong",
+              "message": ".... Tidak Ditemukan",
+              "status": 404
+          }
+  - name: unautorized (401)
+    request:
+      url: "{{base_url}}/v/1/partnerships/detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "-1"
+            description: ID Member
+            disabled: true
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 22 Feb 2022 08:01:21 GMT
+        - name: Content-Length
+          value: "93"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{base_url}}/v/1/partnerships/detail"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "-1"
+            description: ID Member
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Jul 2021 07:39:46 GMT
+        - name: Content-Length
+          value: "105"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Data Partnership tidak ditemukan",
+              "message": "Partnership Tidak Ditemukan",
+              "status": 404
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/partnerships/detail"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "8"
+            description: ID Member
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Jul 2021 07:34:14 GMT
+        - name: Content-Length
+          value: "105"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/partnerships/detail"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "8"
+            description: ID Member
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Jul 2021 07:34:14 GMT
+        - name: Content-Length
+          value: "105"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/partnerships/detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "54"
+            description: ID Member
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: isLoanType
+            value: "1"
+            description: "Preload Data Loan Type | [ 1 = FOR LOANTYPE] | OPTIONAL "
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 01 Sep 2022 14:40:16 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "id": 54,
+                  "code": "AGR94",
+                  "commodity": "",
+                  "name": "Agroco",
+                  "type": "partner",
+                  "address": "Jl Candi Sewu No. 10",
+                  "postalCode": "65141",
+                  "provinceCode": "12",
+                  "provinceName": "Jawa Timur",
+                  "cityCode": "1293",
+                  "cityName": "Kota Malang",
+                  "districtCode": "357305",
+                  "districtName": "Lowokwaru",
+                  "villageCode": "3573051007",
+                  "villageName": "Jatimulyo",
+                  "rt": "010",
+                  "rw": "011",
+                  "email": "agroco@gmail.com",
+                  "picName": "Mika Yudha Pratama",
+                  "picMobileNumber": "+628113787813",
+                  "pksNumber": "BANK RAYA/PKS-08/RAC/04/22",
+                  "branchCode": "0010",
+                  "status": 0,
+                  "createdAt": "01-09-2022",
+                  "updatedAt": "01-09-2022",
+                  "dataLoanTypeChild": [
+                      {
+                          "id": 33,
+                          "productType": "40003",
+                          "loanTypeParentId": 26,
+                          "loanTypeSubparentId": 2,
+                          "loanTypeName": "KIM GU RAM",
+                          "loanTypeCode": "CHILD-KGR-68",
+                          "transactionType": 3,
+                          "isCustom": 1,
+                          "provisionFee": 10.12,
+                          "status": -2,
+                          "dataInterestRates": [
+                              {
+                                  "plafondStart": 500000,
+                                  "plafondEnd": 1000000,
+                                  "loanTermStart": 1,
+                                  "loanTermEnd": 7,
+                                  "loanTermType": 1,
+                                  "interestRate": 12.1
+                              },
+                              {
+                                  "plafondStart": 500000,
+                                  "plafondEnd": 1000000,
+                                  "loanTermStart": 1,
+                                  "loanTermEnd": 7,
+                                  "loanTermType": 1,
+                                  "interestRate": 12.1
+                              },
+                              {
+                                  "plafondStart": 500000,
+                                  "plafondEnd": 1000000,
+                                  "loanTermStart": 1,
+                                  "loanTermEnd": 7,
+                                  "loanTermType": 1,
+                                  "interestRate": 12.1
+                              }
+                          ],
+                          "dataInstallmentPatterns": [
+                              {
+                                  "installmentPattern": "7 hari",
+                                  "installmentPatternType": 1
+                              },
+                              {
+                                  "installmentPattern": "7 hari",
+                                  "installmentPatternType": 1
+                              },
+                              {
+                                  "installmentPattern": "7 hari",
+                                  "installmentPatternType": 1
+                              }
+                          ],
+                          "dataAdministrationFees": [
+                              {
+                                  "nominalStart": 500000,
+                                  "nominalEnd": 1000000,
+                                  "adminFee": 50000
+                              },
+                              {
+                                  "nominalStart": 500000,
+                                  "nominalEnd": 1000000,
+                                  "adminFee": 50000
+                              },
+                              {
+                                  "nominalStart": 500000,
+                                  "nominalEnd": 1000000,
+                                  "adminFee": 50000
+                              }
+                          ],
+                          "dataInsurance": {
+                              "id": 1,
+                              "insuranceName": "testSatu",
+                              "productType": "40003",
+                              "percentage": 0.2,
+                              "status": 0
+                          }
+                      },
+                      {
+                          "id": 36,
+                          "productType": "40003",
+                          "loanTypeParentId": 26,
+                          "loanTypeSubparentId": 2,
+                          "loanTypeName": "KIM GU RAME",
+                          "loanTypeCode": "CHILD-KGR-39",
+                          "transactionType": 3,
+                          "isCustom": 1,
+                          "provisionFee": 10.12,
+                          "status": 0,
+                          "dataInterestRates": [
+                              {
+                                  "plafondStart": 500000,
+                                  "plafondEnd": 1000000,
+                                  "loanTermStart": 1,
+                                  "loanTermEnd": 7,
+                                  "loanTermType": 1,
+                                  "interestRate": 12.1
+                              }
+                          ],
+                          "dataInstallmentPatterns": [
+                              {
+                                  "installmentPattern": "7 hari",
+                                  "installmentPatternType": 1
+                              }
+                          ],
+                          "dataAdministrationFees": [
+                              {
+                                  "nominalStart": 500000,
+                                  "nominalEnd": 1000000,
+                                  "adminFee": 50000
+                              }
+                          ],
+                          "dataInsurance": {
+                              "id": 1,
+                              "insuranceName": "testSatu",
+                              "productType": "40003",
+                              "percentage": 0.2,
+                              "status": 0
+                          }
+                      }
+                  ]
+              },
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{base_url}}/v/1/partnerships/detail"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "-1"
+            description: ID Member
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Jul 2021 07:39:46 GMT
+        - name: Content-Length
+          value: "105"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Data Partnership tidak ditemukan",
+              "message": "Partnership Tidak Ditemukan",
+              "status": 404
+          }
+  - name: not found
+    request:
+      url: "{{base_url}}/v/1/partnerships/detail"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "8"
+          - name: userId
+            value: "999941"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Jul 2021 07:34:14 GMT
+        - name: Content-Length
+          value: "105"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Data .... Kosong",
+              "message": ".... Tidak Ditemukan",
+              "status": 404
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/partnerships/detail"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "8"
+            description: ID Member
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Jul 2021 07:34:14 GMT
+        - name: Content-Length
+          value: "105"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data": null
+          }
+  - name: unautorized (401)
+    request:
+      url: "{{base_url}}/v/1/partnerships/detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "-1"
+            description: ID Member
+            disabled: true
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 22 Feb 2022 08:01:21 GMT
+        - name: Content-Length
+          value: "93"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }

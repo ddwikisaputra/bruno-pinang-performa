@@ -1,0 +1,672 @@
+info:
+  name: Add Loan Type Subparent V1
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{url-local}}/v/1/master/loan-type-subparent-add"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "999999"
+        description: UserId Login | MANDATORY
+      - name: loanTypeParentId
+        value: "391"
+        description: Loan Type Parent Id | Mandatory
+      - name: loanTypeName
+        value: Testing Dwiki WSWS
+        description: Loan Type Name | MANDATORY
+      - name: insurance
+        value: "11"
+        description: insurance id [check on list insurance] | MANDATORY
+      - name: provisionFee
+        value: "10.12"
+        description: "percentage value (decimal number) [ex : 0.12] | MANDATORY"
+      - name: interestRate[]
+        value: "12.1"
+        description: Persentasi Suku Bunga | MANDATORY
+      - name: plafondStart[]
+        value: "500000"
+        description: Plafond Awal untuk range rate suku bunga | MANDATORY
+      - name: plafondEnd[]
+        value: "1000000"
+        description: Plafond Akhir untuk range rate suku bunga | MANDATORY
+      - name: loanTermStart[]
+        value: "1"
+        description: Tenor Awal | MANDATORY
+      - name: loanTermEnd[]
+        value: "7"
+        description: Tenor Akhir | MANDATORY
+      - name: installmentPattern[]
+        value: 7 hari
+        description: "Pola Angsuran (ex : 3 bulan | 4 bulan | 6 bulan | 7 hari | 14 hari | 30 hari) | MANDATORY"
+      - name: installmentPatternType[]
+        value: "1"
+        description: Pola Angsuran Type( 1 = Angsuran Tetap | 2 = Sekali Lunas) | MANDATORY
+      - name: adminFee[]
+        value: "50000"
+        description: Biaya Admin | MANDATORY
+      - name: nominalStart[]
+        value: "500000"
+        description: Nominal Pinjaman Awal untuk range admin fee | MANDATORY
+      - name: nominalEnd[]
+        value: "1000000"
+        description: Nominal Pinjaman Akhir untuk range admin fee | MANDATORY
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Unauthorized (401)
+    request:
+      url: "{{base_url}}/v/1/master/loan-type-subparent-add"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+          - name: loanTypeParentId
+            value: "26"
+          - name: loanTypeName
+            value: PARK SHIN HYEEEEEEEEEEEEE
+          - name: insurance
+            value: "1"
+          - name: provisionFee
+            value: "1"
+          - name: plafondStart[]
+            value: "500000"
+          - name: plafondEnd[]
+            value: "10000"
+          - name: loanTermStart[]
+            value: "1"
+          - name: loanTermEnd[]
+            value: "7"
+          - name: interestRate[]
+            value: "12.1"
+          - name: installmentPattern[]
+            value: 7 hari
+          - name: installmentPatternType[]
+            value: "1"
+          - name: nominalStart[]
+            value: "500000"
+          - name: nominalEnd[]
+            value: "1000000"
+          - name: adminFee[]
+            value: "50000"
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 23 Aug 2022 09:47:14 GMT
+        - name: Content-Length
+          value: "154"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{base_url}}/v/1/master/loan-type-subparent-add"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+          - name: loanTypeParentId
+            value: "26"
+          - name: loanTypeName
+            value: PARK SHIN HYEEEEEEEEEEEEE
+          - name: insurance
+            value: "1"
+          - name: provisionFee
+            value: "1"
+          - name: plafondStart[]
+            value: "500000"
+          - name: plafondEnd[]
+            value: "10000"
+          - name: loanTermStart[]
+            value: "1"
+          - name: loanTermEnd[]
+            value: "7"
+          - name: interestRate[]
+            value: "12.1"
+          - name: installmentPattern[]
+            value: 7 hari
+          - name: installmentPatternType[]
+            value: "1"
+          - name: nominalStart[]
+            value: "500000"
+          - name: nominalEnd[]
+            value: "1000000"
+          - name: adminFee[]
+            value: "50000"
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 23 Aug 2022 09:47:14 GMT
+        - name: Content-Length
+          value: "154"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/master/loan-type-subparent-add"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+          - name: loanTypeParentId
+            value: "26"
+          - name: loanTypeName
+            value: PARK SHIN HYEEEEEEEEEEEEE
+          - name: insurance
+            value: "1"
+          - name: provisionFee
+            value: "1"
+          - name: plafondStart[]
+            value: "500000"
+          - name: plafondEnd[]
+            value: "10000"
+          - name: loanTermStart[]
+            value: "1"
+          - name: loanTermEnd[]
+            value: "7"
+          - name: interestRate[]
+            value: "12.1"
+          - name: installmentPattern[]
+            value: 7 hari
+          - name: installmentPatternType[]
+            value: "1"
+          - name: nominalStart[]
+            value: "500000"
+          - name: nominalEnd[]
+            value: "1000000"
+          - name: adminFee[]
+            value: "50000"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 23 Aug 2022 09:47:14 GMT
+        - name: Content-Length
+          value: "154"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect ....."
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/master/loan-type-subparent-add"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+          - name: loanTypeParentId
+            value: "26"
+          - name: loanTypeName
+            value: PARK SHIN HYEEEEEE
+          - name: insurance
+            value: "1"
+          - name: provisionFee
+            value: "10.12"
+          - name: plafondStart[]
+            value: "500000"
+          - name: plafondEnd[]
+            value: "1000000"
+          - name: loanTermStart[]
+            value: "1"
+          - name: loanTermEnd[]
+            value: "7"
+          - name: interestRate[]
+            value: "12.1"
+          - name: installmentPattern[]
+            value: 7 hari
+          - name: installmentPatternType[]
+            value: "1"
+          - name: nominalStart[]
+            value: "500000"
+          - name: nominalEnd[]
+            value: "1000000"
+          - name: adminFee[]
+            value: "50000"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 23 Aug 2022 09:43:09 GMT
+        - name: Content-Length
+          value: "73"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Data Tersimpan",
+              "message": "Data Berhasil Disimpan",
+              "status": 200
+          }
+  - name: not found
+    request:
+      url: "{{base_url}}/v/1/master/loan-type-subparent-add"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+          - name: loanTypeParentId
+            value: "24"
+          - name: loanTypeName
+            value: PARK SHIN HYEEEE
+          - name: insurance
+            value: "2"
+          - name: provisionFee
+            value: "10.12"
+          - name: plafondStart[]
+            value: "500000"
+          - name: plafondEnd[]
+            value: "1000000"
+          - name: loanTermStart[]
+            value: "1"
+          - name: loanTermEnd[]
+            value: "7"
+          - name: interestRate[]
+            value: "12.1"
+          - name: installmentPattern[]
+            value: 7 hari
+          - name: installmentPatternType[]
+            value: "1"
+          - name: nominalStart[]
+            value: "500000"
+          - name: nominalEnd[]
+            value: "1000000"
+          - name: adminFee[]
+            value: "50000"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 23 Aug 2022 09:39:03 GMT
+        - name: Content-Length
+          value: "122"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": ".... tidak ditemukan",
+              "message": "Maaf, .... yang dipilih belum tersedia",
+              "status": 404
+          }
+  - name: "not found #2"
+    request:
+      url: "{{base_url}}/v/1/master/loan-type-subparent-add"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+          - name: loanTypeParentId
+            value: "26"
+          - name: loanTypeName
+            value: PARK SHIN HYEEEEEEEEE
+          - name: insurance
+            value: "2"
+          - name: provisionFee
+            value: "10.12"
+          - name: plafondStart[]
+            value: "500000"
+          - name: plafondEnd[]
+            value: "1000000"
+          - name: loanTermStart[]
+            value: "1"
+          - name: loanTermEnd[]
+            value: "7"
+          - name: interestRate[]
+            value: "12.1"
+          - name: installmentPattern[]
+            value: 7 hari
+          - name: installmentPatternType[]
+            value: "1"
+          - name: nominalStart[]
+            value: "500000"
+          - name: nominalEnd[]
+            value: "1000000"
+          - name: adminFee[]
+            value: "50000"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 23 Aug 2022 09:43:26 GMT
+        - name: Content-Length
+          value: "88"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Error Record Not Found",
+              "message": "Data .... Tidak Ditemukan",
+              "status": 404
+          }
+  - name: "bad request #3"
+    request:
+      url: "{{base_url}}/v/1/master/loan-type-subparent-add"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+          - name: loanTypeParentId
+            value: "26"
+          - name: loanTypeName
+            value: PARK SHIN HYEEEEEEEEEEEEE
+          - name: insurance
+            value: "1"
+          - name: provisionFee
+            value: "1"
+          - name: plafondStart[]
+            value: "500000"
+          - name: plafondEnd[]
+            value: "10000"
+          - name: loanTermStart[]
+            value: "1"
+          - name: loanTermEnd[]
+            value: "7"
+          - name: interestRate[]
+            value: "12.1"
+          - name: installmentPattern[]
+            value: 7 hari
+          - name: installmentPatternType[]
+            value: "1"
+          - name: nominalStart[]
+            value: "500000"
+          - name: nominalEnd[]
+            value: "1000000"
+          - name: adminFee[]
+            value: "50000"
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 23 Aug 2022 09:47:14 GMT
+        - name: Content-Length
+          value: "154"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Error Parameter plafondEnd harus lebih besar dari plafondStart",
+              "message": "Maaf, Plafond akhir harus lebih besar dari plafond awal",
+              "status": 400
+          }
+  - name: "bad request #2"
+    request:
+      url: "{{base_url}}/v/1/master/loan-type-subparent-add"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+          - name: loanTypeParentId
+            value: "26"
+          - name: loanTypeName
+            value: PARK SHIN HYEEEEEEEEEEEEE
+          - name: insurance
+            value: "1"
+          - name: provisionFee
+            value: "1"
+          - name: plafondStart[]
+            value: "0"
+          - name: plafondEnd[]
+            value: "1000000"
+          - name: loanTermStart[]
+            value: "1"
+          - name: loanTermEnd[]
+            value: "7"
+          - name: interestRate[]
+            value: "12.1"
+          - name: installmentPattern[]
+            value: 7 hari
+          - name: installmentPatternType[]
+            value: "1"
+          - name: nominalStart[]
+            value: "500000"
+          - name: nominalEnd[]
+            value: "1000000"
+          - name: adminFee[]
+            value: "50000"
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 23 Aug 2022 09:46:02 GMT
+        - name: Content-Length
+          value: "141"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Parameter .... harus lebih besar dari '0'",
+              "message": "Maaf, Parameter .... awal harus lebih besar dari '0'",
+              "status": 400
+          }
+  - name: bad request
+    request:
+      url: "{{base_url}}/v/1/master/loan-type-subparent-add"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+          - name: loanTypeParentId
+            value: 26A
+          - name: loanTypeName
+            value: PARK SHIN HYEEEEEEEEE
+          - name: insurance
+            value: "1"
+          - name: provisionFee
+            value: "10.12"
+          - name: plafondStart[]
+            value: "500000"
+          - name: plafondEnd[]
+            value: "1000000"
+          - name: loanTermStart[]
+            value: "1"
+          - name: loanTermEnd[]
+            value: "7"
+          - name: interestRate[]
+            value: "12.1"
+          - name: installmentPattern[]
+            value: 7 hari
+          - name: installmentPatternType[]
+            value: "1"
+          - name: nominalStart[]
+            value: "500000"
+          - name: nominalEnd[]
+            value: "1000000"
+          - name: adminFee[]
+            value: "50000"
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 23 Aug 2022 09:44:12 GMT
+        - name: Content-Length
+          value: "149"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Format Parameter .... tidak sesuai",
+              "message": "Maaf, Parameter .... hanya boleh menggunakan angka",
+              "status": 400
+          }
+  - name: name already exist
+    request:
+      url: "{{base_url}}/v/1/master/loan-type-subparent-add"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+          - name: loanTypeParentId
+            value: "26"
+          - name: loanTypeName
+            value: PARK SHIN HYEEE
+          - name: insurance
+            value: "2"
+          - name: provisionFee
+            value: "10.12"
+          - name: plafondStart[]
+            value: "500000"
+          - name: plafondEnd[]
+            value: "1000000"
+          - name: loanTermStart[]
+            value: "1"
+          - name: loanTermEnd[]
+            value: "7"
+          - name: interestRate[]
+            value: "12.1"
+          - name: installmentPattern[]
+            value: 7 hari
+          - name: installmentPatternType[]
+            value: "1"
+          - name: nominalStart[]
+            value: "500000"
+          - name: nominalEnd[]
+            value: "1000000"
+          - name: adminFee[]
+            value: "50000"
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 23 Aug 2022 09:42:33 GMT
+        - name: Content-Length
+          value: "109"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "LoanTypeSubparentName already exist",
+              "message": "Maaf, Nama loan type sudah terdaftar.",
+              "status": 400
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/master/loan-type-subparent-add"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+          - name: loanTypeParentId
+            value: "26"
+          - name: loanTypeName
+            value: PARK SHIN HYEEEEEEEEEEEEE
+          - name: insurance
+            value: "1"
+          - name: provisionFee
+            value: "1"
+          - name: plafondStart[]
+            value: "500000"
+          - name: plafondEnd[]
+            value: "10000"
+          - name: loanTermStart[]
+            value: "1"
+          - name: loanTermEnd[]
+            value: "7"
+          - name: interestRate[]
+            value: "12.1"
+          - name: installmentPattern[]
+            value: 7 hari
+          - name: installmentPatternType[]
+            value: "1"
+          - name: nominalStart[]
+            value: "500000"
+          - name: nominalEnd[]
+            value: "1000000"
+          - name: adminFee[]
+            value: "50000"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 23 Aug 2022 09:47:14 GMT
+        - name: Content-Length
+          value: "154"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 500
+          }

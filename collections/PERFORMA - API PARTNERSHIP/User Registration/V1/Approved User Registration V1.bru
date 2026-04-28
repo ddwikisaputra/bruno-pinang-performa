@@ -1,0 +1,632 @@
+meta {
+  name: Approved User Registration V1
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{base-url-local}}/v/1/partnerships/approved-user-registration
+  body: formUrlEncoded
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{tokenPartnership}}
+}
+
+body:form-urlencoded {
+  userId: {{userId}}
+  id: 1
+}
+
+settings {
+  encodeUrl: true
+}
+
+example {
+  name: Parameter error validation
+  
+  request: {
+    url: {{url}}/v/1/partnerships/approved-user-registration
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 999961
+      ~id: 1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 02:53:38 GMT
+      Content-Length: 111
+    }
+  
+    status: {
+      code: 400
+      text: Bad Request
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "Parameter ... kosong",
+            "message": "Maaf, Parameter ... tidak boleh kosong",
+            "status": 500
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Success
+  
+  request: {
+    url: {{url}}/v/1/partnerships/approved-user-registration
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 999961
+      id: 1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 03:03:58 GMT
+      Content-Length: 82
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "Data Tersimpan",
+            "message": "Data user registration berhasil disetujui",
+            "status": 200
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: General error
+  
+  request: {
+    url: {{url}}/v/1/partnerships/approved-user-registration
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 999961
+      id: 1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 02:53:38 GMT
+      Content-Length: 111
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "Could not connect .....",
+            "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+            "status": 500
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Database error
+  
+  request: {
+    url: {{url}}/v/1/partnerships/approved-user-registration
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 999961
+      id: 1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 02:53:38 GMT
+      Content-Length: 111
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+            "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+            "status": 400
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Unauthorized
+  
+  request: {
+    url: {{url}}/v/1/partnerships/approved-user-registration
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 999961
+      id: 1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 02:44:34 GMT
+      Content-Length: 82
+    }
+  
+    status: {
+      code: 401
+      text: Unauthorized
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "code": 401,
+            "desc": "Expired",
+            "message": "Invalid Token || Token Is Expired"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Validasi user tidak dapat disetujui
+  
+  request: {
+    url: {{base-url-local}}/v/1/partnerships/approved-user-registration
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: {{userId}}
+      id: 1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Wed, 29 Jan 2025 08:25:25 GMT
+      Content-Length: 142
+    }
+  
+    status: {
+      code: 500
+      text: Internal Server Error
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "status": 500,
+            "message": "Maaf, User tidak dapat disetujui. Silahkan cek kembali status pengajuan User terakhir.",
+            "messageLocal": "Status != 0"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Validasi user sudah aktif
+  
+  request: {
+    url: {{base-url-local}}/v/1/partnerships/approved-user-registration
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: {{userId}}
+      id: 49
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Wed, 29 Jan 2025 08:32:56 GMT
+      Content-Length: 130
+    }
+  
+    status: {
+      code: 400
+      text: Bad Request
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "status": 400,
+            "message": "Maaf, User tidak dapat disetujui. Email sudah terdaftar sebagai user aktif.",
+            "messageLocal": "User Aktif"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Validasi user tidak dietemukan
+  
+  request: {
+    url: {{base-url-local}}/v/1/partnerships/approved-user-registration
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: {{userId}}
+      id: 490
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Wed, 29 Jan 2025 08:33:50 GMT
+      Content-Length: 116
+    }
+  
+    status: {
+      code: 404
+      text: Not Found
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "status": 404,
+            "message": "User Registration Tidak Ditemukan",
+            "messageLocal": "Data User Registration tidak ditemukan"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Parameter error validation
+  
+  request: {
+    url: {{url}}/v/1/partnerships/approved-user-registration
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 999961
+      ~id: 1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 02:53:38 GMT
+      Content-Length: 111
+    }
+  
+    status: {
+      code: 400
+      text: Bad Request
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "Parameter ... kosong",
+            "message": "Maaf, Parameter ... tidak boleh kosong",
+            "status": 500
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Success
+  
+  request: {
+    url: {{url}}/v/1/partnerships/approved-user-registration
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 999961
+      id: 1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 03:03:58 GMT
+      Content-Length: 82
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "Data Tersimpan",
+            "message": "Data user registration berhasil disetujui",
+            "status": 200
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Validasi user sudah aktif
+  
+  request: {
+    url: {{base-url-local}}/v/1/partnerships/approved-user-registration
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: {{userId}}
+      id: 49
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Wed, 29 Jan 2025 08:32:56 GMT
+      Content-Length: 130
+    }
+  
+    status: {
+      code: 400
+      text: Bad Request
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "status": 400,
+            "message": "Maaf, User tidak dapat disetujui. Email sudah terdaftar sebagai user aktif.",
+            "messageLocal": "User Aktif"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: General error
+  
+  request: {
+    url: {{url}}/v/1/partnerships/approved-user-registration
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 999961
+      id: 1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 02:53:38 GMT
+      Content-Length: 111
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "Could not connect .....",
+            "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+            "status": 500
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Validasi user tidak dapat disetujui
+  
+  request: {
+    url: {{base-url-local}}/v/1/partnerships/approved-user-registration
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: {{userId}}
+      id: 1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Wed, 29 Jan 2025 08:25:25 GMT
+      Content-Length: 142
+    }
+  
+    status: {
+      code: 500
+      text: Internal Server Error
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "status": 500,
+            "message": "Maaf, User tidak dapat disetujui. Silahkan cek kembali status pengajuan User terakhir.",
+            "messageLocal": "Status != 0"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Database error
+  
+  request: {
+    url: {{url}}/v/1/partnerships/approved-user-registration
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 999961
+      id: 1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 02:53:38 GMT
+      Content-Length: 111
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+            "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+            "status": 400
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Validasi user tidak dietemukan
+  
+  request: {
+    url: {{base-url-local}}/v/1/partnerships/approved-user-registration
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: {{userId}}
+      id: 490
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Wed, 29 Jan 2025 08:33:50 GMT
+      Content-Length: 116
+    }
+  
+    status: {
+      code: 404
+      text: Not Found
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "status": 404,
+            "message": "User Registration Tidak Ditemukan",
+            "messageLocal": "Data User Registration tidak ditemukan"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Unauthorized
+  
+  request: {
+    url: {{url}}/v/1/partnerships/approved-user-registration
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 999961
+      id: 1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 02:44:34 GMT
+      Content-Length: 82
+    }
+  
+    status: {
+      code: 401
+      text: Unauthorized
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "code": 401,
+            "desc": "Expired",
+            "message": "Invalid Token || Token Is Expired"
+        }
+      '''
+    }
+  }
+}

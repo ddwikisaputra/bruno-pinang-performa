@@ -1,0 +1,19 @@
+info:
+  name: REFRESH TOKEN (PINANG MIKRO BE)
+  type: http
+  seq: 10
+
+http:
+  method: GET
+  url: "{{url}}/refresh-token"
+  body:
+    type: form-urlencoded
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

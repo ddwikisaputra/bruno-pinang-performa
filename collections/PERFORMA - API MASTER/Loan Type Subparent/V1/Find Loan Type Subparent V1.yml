@@ -1,0 +1,307 @@
+info:
+  name: Find Loan Type Subparent V1
+  type: http
+  seq: 6
+
+http:
+  method: POST
+  url: "{{url-local}}/v/1/master/loan-type-subparent-detail"
+  params:
+    - name: ""
+      value: ""
+      type: query
+      disabled: true
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "999999"
+        description: UserId Login | MANDATORY
+      - name: id
+        value: "114"
+        description: Loan Type Id | MANDATORY
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Unauthorized (401)
+    request:
+      url: "{{base_url}}/v/1/master/loan-type-subaprent-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: UserId Login | MANDATORY
+          - name: id
+            value: "26"
+            description: Loan Type Id | MANDATORY
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 01 Aug 2022 02:53:30 GMT
+        - name: Content-Length
+          value: "75"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{base_url}}/v/1/master/loan-type-subaprent-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: UserId Login | MANDATORY
+          - name: id
+            value: "26"
+            description: Loan Type Id | MANDATORY
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Sun, 31 Jul 2022 08:40:30 GMT
+        - name: Content-Length
+          value: "73"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/master/loan-type-subaprent-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: UserId Login | MANDATORY
+          - name: id
+            value: "26"
+            description: Loan Type Id | MANDATORY
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Sun, 31 Jul 2022 08:40:30 GMT
+        - name: Content-Length
+          value: "73"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect ....."
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/master/loan-type-subaprent-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: UserId Login | MANDATORY
+          - name: id
+            value: "26"
+            description: Loan Type Id | MANDATORY
+    response:
+      statusText: undefined
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Sun, 31 Jul 2022 08:40:30 GMT
+        - name: Content-Length
+          value: "73"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/master/loan-type-subaprent-detail"
+      method: POST
+      params:
+        - name: ""
+          value: ""
+          type: query
+          disabled: true
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: UserId Login | MANDATORY
+          - name: id
+            value: "232"
+            description: Loan Type Id | MANDATORY
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 16 Aug 2022 03:28:16 GMT
+        - name: Content-Length
+          value: "580"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "id": 37,
+                  "loan_type_parent_id": 26,
+                  "loanTypeName": "HURA",
+                  "loanTypeCode": "SUB-HUR-22",
+                  "provisionFee": 10.12,
+                  "status": -2,
+                  "dataInterestRates": [
+                      {
+                          "plafondStart": 500000,
+                          "plafondEnd": 1000000,
+                          "loanTermStart": 1,
+                          "loanTermEnd": 7,
+                          "loanTermType": 1,
+                          "interestRate": 12.1
+                      }
+                  ],
+                  "dataInstallmentPatterns": [
+                      {
+                          "installmentPattern": 7,
+                          "installmentPatternType": 1
+                      }
+                  ],
+                  "dataAdministrationFees": [
+                      {
+                          "nominalStart": 500000,
+                          "nominalEnd": 1000000,
+                          "adminFee": 50000
+                      }
+                  ],
+                  "dataInsurance": {
+                      "id": 1,
+                      "insuranceName": "testSatu",
+                      "productType": "40003",
+                      "percentage": 0.2,
+                      "status": 0
+                  }
+              },
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: bad request
+    request:
+      url: "{{base_url}}/v/1/master/loan-type-subaprent-detail"
+      method: POST
+      params:
+        - name: ""
+          value: ""
+          type: query
+          disabled: true
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: UserId Login | MANDATORY
+          - name: id
+            value: "26"
+            description: Loan Type Id | MANDATORY
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 08 Aug 2022 10:34:06 GMT
+        - name: Content-Length
+          value: "603"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Parameter ... belum terisi",
+              "message": "Maaf, parameter ... belum diisi",
+              "status": 400
+          }
+  - name: not found
+    request:
+      url: "{{base_url}}/v/1/master/loan-type-subaprent-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: UserId Login | MANDATORY
+          - name: id
+            value: "26"
+            description: Loan Type Id | MANDATORY
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Sat, 22 May 2021 06:53:21 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Accept-Encoding
+        - name: Content-Encoding
+          value: gzip
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Error Record Not Found",
+              "message": "Loan Type Parent Tidak Ditemukan",
+              "status": 404
+          }

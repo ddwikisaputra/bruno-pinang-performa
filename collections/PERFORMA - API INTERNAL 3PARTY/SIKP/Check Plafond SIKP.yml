@@ -1,0 +1,177 @@
+info:
+  name: Check Plafond SIKP
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{url}}/v/1/3party/sikp/check-plafond"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: OTk5OTQx
+        description: User Id [ENCODE BASE64] [MANDATORY]
+      - name: ktpNumber
+        value: MzMyMzE2MjIxMTk2MDAwMQ==
+        description: KTP Number [ENCODE BASE64] [MANDATORY]
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Data Ditemukan
+    request:
+      url: "{{url}}/v/1/3party/sikp/check-plafond"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: OTk5OTQx
+            description: User Id [ENCODE BASE64] [MANDATORY]
+          - name: ktpNumber
+            value: MzMyMzE2MjIxMTk2MDAwMQ==
+            description: KTP Number [ENCODE BASE64] [MANDATORY]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Wed, 01 Feb 2023 02:12:24 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "251"
+        - name: Connection
+          value: keep-alive
+        - name: Strict-Transport-Security
+          value: max-age=15724800; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "data": [
+                  {
+                      "ktNumber": "MzMyMzE2MjIxMTk2MDAwMQ==",
+                      "scheme": 3,
+                      "totalLimitDefault": 500000000,
+                      "totalLimit": 300000000,
+                      "limitActiveDefault": 500000000,
+                      "limitActive": 300000000,
+                      "bankCode": 494
+                  }
+              ],
+              "desc": "Success Process.",
+              "message": "Data Ditemukan.",
+              "status": 200
+          }
+  - name: Data Tidak Ditemukan
+    request:
+      url: "{{url}}/v/1/3party/sikp/check-plafond"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: OTk5OTQx
+          - name: ktpNumber
+            value: MzIwOTM2NTQwNzgzMDAwMQ==
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 26 Jan 2023 04:27:50 GMT
+        - name: Content-Length
+          value: "86"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Success Process.",
+              "message": "Data Tidak Ditemukan.",
+              "status": 404
+          }
+  - name: Error General
+    request:
+      url: "{{url}}/v/1/3party/sikp/check-plafond"
+      method: POST
+      body:
+        type: form-urlencoded
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "...",
+              "message": "Maaf, Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 500
+          }
+  - name: Error Database Connection / Timeout
+    request:
+      url: "{{url}}/v/1/3party/sikp/check-plafond"
+      method: POST
+      body:
+        type: form-urlencoded
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "...",
+              "message": "Maaf, Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 500
+          }
+  - name: Error Parameter Validation
+    request:
+      url: "{{url}}/v/1/3party/sikp/check-plafond"
+      method: POST
+      body:
+        type: form-urlencoded
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Parameter .... kosong",
+              "message": ".... tidak boleh kosong",
+              "status": 400
+          }

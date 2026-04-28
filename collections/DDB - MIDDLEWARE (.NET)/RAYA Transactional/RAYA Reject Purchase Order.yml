@@ -1,0 +1,89 @@
+info:
+  name: RAYA Reject Purchase Order
+  type: http
+  seq: 5
+
+http:
+  method: POST
+  url: "{{base_url}}/api/digiagri/transactional/raya/v2/order/reject"
+  body:
+    type: form-urlencoded
+    data:
+      - name: phoneNumber
+        value: "+089604391382"
+      - name: PONumber
+        value: PO/001
+      - name: reason
+        value: Barang Tidak Diterima
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Error exception
+    request:
+      url: "{{base_url}}/api/digiagri/transactional/raya/v2/order/reject"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: phoneNumber
+            value: "+089604391382"
+          - name: PONumber
+            value: PO/001
+          - name: reason
+            value: Barang Tidak Diterima
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "statusCode":"-1",
+              "statusDescription":"Terjadi kesalahan pada Sistem"
+          }
+  - name: nomor PO tidak ditemukan
+    request:
+      url: "{{base_url}}/api/digiagri/transactional/raya/v2/order/reject"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: phoneNumber
+            value: "+089604391382"
+          - name: PONumber
+            value: PO/001
+          - name: reason
+            value: Barang Tidak Diterima
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "statusCode":"2",
+              "statusDescription":"Nomor PO tidak ditemukan"
+          }
+  - name: Success
+    request:
+      url: "{{base_url}}/api/digiagri/transactional/raya/v2/order/reject"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: phoneNumber
+            value: "+089604391382"
+          - name: PONumber
+            value: PO/001
+          - name: reason
+            value: Barang Tidak Diterima
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "statusCode":"1",
+              "statusDescription":"Purchase Order berhasil disimpan"
+          }

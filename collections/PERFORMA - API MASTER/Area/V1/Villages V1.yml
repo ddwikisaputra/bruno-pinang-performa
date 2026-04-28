@@ -1,0 +1,182 @@
+info:
+  name: Villages V1
+  type: http
+  seq: 5
+
+http:
+  method: GET
+  url: "{{url}}/v/1/master/villages/317105"
+  body:
+    type: multipart-form
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: unautorized
+    request:
+      url: "{{url}}/v/1/master/cities/{{districtId}}"
+      method: GET
+    response:
+      status: 401
+      statusText: Unauthorized
+      body:
+        type: text
+        data: |-
+          {
+              "code": 401,
+              "message": "signature is invalid || Token is expired"
+          }
+  - name: not found
+    request:
+      url: "{{url}}/v/1/master/cities/{{districtId}}"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "status": 404,
+              "message": "Kelurahan / Desa Tidak Ditemukan",
+              "desc": "Data Kelurahan / Desa Tidak Ditemukan",
+              "data": null
+          }
+  - name: success
+    request:
+      url: "{{url}}/v/1/master/cities/{{districtId}}"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "data": [
+                  {
+                      "villageCode": "1111142016",
+                      "village": "Bale Kunyuen"
+                  },
+                  {
+                      "villageCode": "1111142001",
+                      "village": "Cot Batee"
+                  },
+                  {
+                      "villageCode": "1111142004",
+                      "village": "Cot Gleumpang"
+                  },
+                  {
+                      "villageCode": "1111142005",
+                      "village": "Cot Kuta"
+                  },
+                  {
+                      "villageCode": "1111142011",
+                      "village": "Cot Laga Sawa"
+                  },
+                  {
+                      "villageCode": "1111142009",
+                      "village": "Cot Trieng"
+                  },
+                  {
+                      "villageCode": "1111142012",
+                      "village": "Cot U Sibak"
+                  },
+                  {
+                      "villageCode": "1111142002",
+                      "village": "Cot Unou"
+                  },
+                  {
+                      "villageCode": "1111142006",
+                      "village": "Glumpang Baroh"
+                  },
+                  {
+                      "villageCode": "1111142015",
+                      "village": "Kareung"
+                  },
+                  {
+                      "villageCode": "1111142008",
+                      "village": "Krueng Juli Barat"
+                  },
+                  {
+                      "villageCode": "1111142007",
+                      "village": "Krueng Juli Timu"
+                  },
+                  {
+                      "villageCode": "1111142020",
+                      "village": "Kuala Raja"
+                  },
+                  {
+                      "villageCode": "1111142003",
+                      "village": "Kuta Baro"
+                  },
+                  {
+                      "villageCode": "1111142013",
+                      "village": "Lancok Pante Ara"
+                  },
+                  {
+                      "villageCode": "1111142014",
+                      "village": "Lancok-Lancok"
+                  },
+                  {
+                      "villageCode": "1111142010",
+                      "village": "Lhok Awe Awe"
+                  },
+                  {
+                      "villageCode": "1111142017",
+                      "village": "Ujong Blang"
+                  },
+                  {
+                      "villageCode": "1111142018",
+                      "village": "Ujong Blang Mesjid"
+                  },
+                  {
+                      "villageCode": "1111142019",
+                      "village": "Weu Jangka"
+                  }
+              ],
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: general error
+    request:
+      url: "{{url}}/v/1/master/cities/{{districtId}}"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data" : null
+          }
+  - name: validation param
+    request:
+      url: "{{url}}/v/1/master/cities/{{districtId}}"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "status": 500,
+              "message": "Maaf, Parameter kecamatan belum dipilih",
+              "desc": "Parameter districtId belum terisi",
+              "data" : null
+          }
+
+docs: "'province' diisi dari parameter 'code' yang didapat dari endpoint 'master-province'"

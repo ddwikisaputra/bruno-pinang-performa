@@ -1,0 +1,24 @@
+info:
+  name: Pikro Callback
+  type: http
+  seq: 5
+
+http:
+  method: POST
+  url: "{{base_url}}/pikro-callback/1"
+  body:
+    type: form-urlencoded
+    data:
+      - name: actionDate
+        value: 2021-09-22 13:50:02
+      - name: prakarsaStatus
+        value: "1"
+      - name: statusDescription
+        value: Pengajuan akan segera diproses
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

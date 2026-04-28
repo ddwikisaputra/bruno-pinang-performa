@@ -1,0 +1,82 @@
+meta {
+  name: Validate Callback Token
+  type: http
+  seq: 30
+}
+
+post {
+  url: {{BASE_URL}}/v1/auth/callback/validate
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+      "payload": "Y61ObvHeZyBrDs9C/rfHM1llsu3g6S8KJdl07v/KcrbN/XvUNAODU5Ivtl/QXGhWwDrPYcfA2j2pWPXx+vkR3y8islUEPOnS+8K45Efb/vFw2Agk4rRDo0YTV9Z/jD2QkcF1YfMIV1M+xe8xYuUgK28dAsy0bseuPCHl5qCtPwVmX2wSv3NXKuEb8F24+mE8"
+  }
+}
+
+script:pre-request {
+  const payload = {
+      "callback_token": "ymM4Uh3P1EKYaEeqTOmIcTOst"
+  }
+  
+  const result = _.encrypt(JSON.stringify(payload))
+  bru.setEnvVar("REQUEST_BODY", result);
+}
+
+script:post-response {
+  const responseJSON = res.getBody()
+  if (responseJSON.status) {
+      const data = _.decrypt(responseJSON.data)
+      const result = JSON.parse(JSON.parse(data))
+      bru.setEnvVar("TOKEN", result.access_token)
+      bru.setEnvVar("REFRESH_TOKEN", result.refresh_token)
+      bru.setEnvVar("DATA_ENCRYPT", responseJSON.data)
+      console.log("Access_Token", result.access_token)
+      console.log("Refresh_Token", result.refresh_token)
+  }
+}
+
+settings {
+  encodeUrl: true
+}
+
+example {
+  name: Error Invalid Token
+  
+  request: {
+    url: {{BASE_URL}}/v1/auth/callback/validate
+    method: POST
+    mode: json
+    body:json: {
+      {
+          "payload": "{{REQUEST_BODY}}"
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Wed, 15 May 2024 09:37:41 GMT
+      Content-Length: 59
+    }
+  
+    status: {
+      code: 200
+      text: 401
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "message": "Token tidak sesuai",
+            "status": false
+        }
+      '''
+    }
+  }
+}

@@ -1,0 +1,66 @@
+info:
+  name: dukcapil verify element Huma
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{base_url}}/api/digiagri/dukcapil/huma"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "000426"
+      - name: noKTP
+        value: "3275042305890013"
+      - name: namaLengkap
+        value: R. IBRAHIM SENOAJI
+      - name: tempatLahir
+        value: SOLO
+      - name: tanggalLahir
+        value: 23-05-1989
+      - name: alamat
+        value: Jl PAKIS II E BLOK BB 50 / 11 PPI
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: success
+    request:
+      url: "{{base_url}}/api/digiagri/dukcapilverifyelementwithresult"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000426"
+          - name: noKTP
+            value: "3275042305890013"
+          - name: namaLengkap
+            value: R. IBRAHIM SENOAJI
+          - name: tempatLahir
+            value: SOLO
+          - name: tanggalLahir
+            value: 23-05-1989
+          - name: namaLengkapIbuKandung
+            value: RR DYAH AGUSTIN
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "statusCode": "1",
+              "statusDescription": "Verify Success",
+              "data": {
+                  "ktpNumber": "1",
+                  "name": "1",
+                  "placeOfBirth": "1",
+                  "birthDate": "1",
+                  "address": "1"
+              }
+          }

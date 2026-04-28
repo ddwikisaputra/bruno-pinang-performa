@@ -1,0 +1,144 @@
+info:
+  name: Loan Account Inquiry
+  type: http
+  seq: 5
+
+http:
+  method: POST
+  url: "{{base_url}}/api/digiagri/loan/account/inquiry"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: ""
+      - name: noCIF
+        value: ""
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: success
+    request:
+      url: "{{base_url}}/api/digiagri/loan/account/inquiry"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000426"
+          - name: noCIF
+            value: "438"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "statusCode": "1",
+              "statusDescription": "Success",
+              "Data": [
+                  {
+                      "accountNumber": "001001007975109",
+                      "accountName": "IBRAHIM SENOAJI",
+                      "accountDesc": "PINANG MIKRO - PTR"
+                  },
+                  {
+                      "accountNumber": "001001007976105",
+                      "accountName": "IBRAHIM SENOAJI",
+                      "accountDesc": "PINANG MIKRO - PTR"
+                  },
+                  {
+                      "accountNumber": "001001007977101",
+                      "accountName": "IBRAHIM SENOAJI",
+                      "accountDesc": "PINANG MIKRO - PTR"
+                  },
+                  {
+                      "accountNumber": "001001007978107",
+                      "accountName": "IBRAHIM SENOAJI",
+                      "accountDesc": "PINANG MIKRO - PTR"
+                  },
+                  {
+                      "accountNumber": "001001008020101",
+                      "accountName": "IBRAHIM SENOAJI",
+                      "accountDesc": "PINANG MIKRO - PTR"
+                  },
+                  {
+                      "accountNumber": "001001008021107",
+                      "accountName": "IBRAHIM SENOAJI",
+                      "accountDesc": "PINANG MIKRO - PTR"
+                  },
+                  {
+                      "accountNumber": "001001008022103",
+                      "accountName": "IBRAHIM SENOAJI",
+                      "accountDesc": "PINANG MIKRO - PTR"
+                  },
+                  {
+                      "accountNumber": "001001008023109",
+                      "accountName": "IBRAHIM SENOAJI",
+                      "accountDesc": "PINANG MIKRO - PTR"
+                  },
+                  {
+                      "accountNumber": "001001008024105",
+                      "accountName": "IBRAHIM SENOAJI",
+                      "accountDesc": "PINANG MIKRO - PTR"
+                  },
+                  {
+                      "accountNumber": "001001008025101",
+                      "accountName": "IBRAHIM SENOAJI",
+                      "accountDesc": "PINANG MIKRO - PTR"
+                  },
+                  {
+                      "accountNumber": "001001008026107",
+                      "accountName": "IBRAHIM SENOAJI",
+                      "accountDesc": "PINANG MIKRO - PTR"
+                  },
+                  {
+                      "accountNumber": "001001008027103",
+                      "accountName": "IBRAHIM SENOAJI",
+                      "accountDesc": "PINANG MIKRO - PTR"
+                  }
+              ]
+          }
+  - name: gagal
+    request:
+      url: "{{base_url}}/api/digiagri/loan/account/inquiry"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000426"
+          - name: noCIF
+            value: "438"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "statusCode": "99",
+              "statusDescription": "Inquiry Gagal!"
+          }
+  - name: tidak ada rekening
+    request:
+      url: "{{base_url}}/api/digiagri/loan/account/inquiry"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000426"
+          - name: noCIF
+            value: "438"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "statusCode": "1",
+              "statusDescription": "Success",
+              "Data": []
+          }

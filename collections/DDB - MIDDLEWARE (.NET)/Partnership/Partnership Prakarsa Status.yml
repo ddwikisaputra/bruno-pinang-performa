@@ -1,0 +1,112 @@
+info:
+  name: Partnership Prakarsa Status
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{base_url}}/api/digiagri/partnership/prakarsa/status"
+  body:
+    type: form-urlencoded
+    data:
+      - name: referenceId
+        value: "10655"
+        description: reference id
+      - name: rekeningSumber
+        value: "002001003097106"
+        description: rekening sumber (pinjaman)
+      - name: rekeningTujuan
+        value: "001001000001315"
+        description: rekening tujuan(simpanan atau giro)
+      - name: status
+        value: "1"
+        description: status prakarsa
+      - name: approveDate
+        value: 2023-03-17 16:55:24.746
+        description: tanggal approve partnership (yyyy-MM-dd HH:mm:ss)
+      - name: disburseDate
+        value: 2023-03-17 16:55:24.746
+        description: tanggal disburse partnership (yyyy-MM-dd HH:mm:ss)
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Success
+    request:
+      url: "{{base_url}}/api/digiagri/partnership/prakarsa/status"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: referenceId
+            value: "20"
+            description: reference id
+          - name: rekeningSumber
+            value: "001001008148103"
+            description: rekening sumber (pinjaman)
+          - name: rekeningTujuan
+            value: "001001000065407"
+            description: rekening tujuan(simpanan atau giro)
+          - name: status
+            value: Sukses
+            description: status prakarsa
+          - name: approveDate
+            value: 2022-02-10 10:00:00
+            description: tanggal approve partnership (yyyy-MM-dd HH:mm:ss)
+          - name: disburseDate
+            value: 2022-02-10 10:00:00
+            description: tanggal disburse partnership (yyyy-MM-dd HH:mm:ss)
+    response:
+      body:
+        type: text
+        data: "{\r
+
+          \    \"statusCode\": \"1\",\r
+
+          \    \"statusDescription\": \"Update Status Prakarsa Berhasil\",\r
+
+          \    \"referenceId\": \"20\"\r
+
+          }"
+  - name: Gagal
+    request:
+      url: "{{base_url}}/api/digiagri/partnership/prakarsa/status"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: referenceId
+            value: "20"
+            description: reference id
+          - name: rekeningSumber
+            value: "001001008148103"
+            description: rekening sumber (pinjaman)
+          - name: rekeningTujuan
+            value: "001001000065407"
+            description: rekening tujuan(simpanan atau giro)
+          - name: status
+            value: Sukses
+            description: status prakarsa
+          - name: approveDate
+            value: 2022-02-10 10:00:00
+            description: tanggal approve partnership (yyyy-MM-dd HH:mm:ss)
+          - name: disburseDate
+            value: 2022-02-10 10:00:00
+            description: tanggal disburse partnership (yyyy-MM-dd HH:mm:ss)
+    response:
+      body:
+        type: text
+        data: "{\r
+
+          \    \"statusCode\": \"-1\",\r
+
+          \    \"statusDescription\": \"Terjadi Kesalahan Pada Sistem\",\r
+
+          \    \"referenceId\": \"20\"\r
+
+          }"

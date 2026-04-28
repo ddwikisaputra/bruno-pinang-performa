@@ -1,0 +1,221 @@
+meta {
+  name: Organization Tree
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{BASE_URL}}/v1/organization/tree
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: 
+}
+
+body:json {
+  {
+      "payload": "{{REQUEST_BODY}}"
+  }
+}
+
+script:pre-request {
+  const payload = {
+     "id":"2"
+  }
+  
+  const result = _.encrypt(JSON.stringify(payload))
+  bru.setEnvVar("REQUEST_BODY", result);
+}
+
+script:post-response {
+  const responseJSON = res.getBody()
+  if (responseJSON.status) {
+      const data = _.decrypt(responseJSON.data)
+      const parseData = JSON.parse(data)
+      const parseData2 = JSON.parse(parseData)
+      console.log('/v1/organization/tree', parseData2)
+  }
+}
+
+settings {
+  encodeUrl: true
+}
+
+example {
+  name: Error Validation
+  
+  request: {
+    url: {{BASE_URL}}/v1/organization/tree
+    method: POST
+    mode: json
+    body:json: {
+      {
+          "payload": "{{REQUEST_BODY}}"
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Mon, 03 Jun 2024 02:39:25 GMT
+      Content-Length: 117
+    }
+  
+    status: {
+      code: 200
+      text: 400
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": [
+                {
+                    "field": "ID",
+                    "message": "ID Organisasi harus diisi"
+                }
+            ],
+            "message": "Terjadi kesalahan validasi",
+            "status": false
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error Data Not Found
+  
+  request: {
+    url: {{BASE_URL}}/v1/organization/tree
+    method: POST
+    mode: json
+    body:json: {
+      {
+          "payload": "{{REQUEST_BODY}}"
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Mon, 03 Jun 2024 02:43:57 GMT
+      Content-Length: 61
+    }
+  
+    status: {
+      code: 200
+      text: 500
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "message": "Data tidak ditemukan",
+            "status": false
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Success
+  
+  request: {
+    url: {{BASE_URL}}/v1/organization/tree
+    method: POST
+    mode: json
+    body:json: {
+      {
+          "payload": "{{REQUEST_BODY}}"
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Mon, 03 Jun 2024 02:40:49 GMT
+      Content-Length: 1841
+    }
+  
+    status: {
+      code: 200
+      text: 200
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": [
+                {
+                    "id": "13",
+                    "name": "Divisi Application Development, Architecture & Governance",
+                    "parent_id": "256",
+                    "parent_name": "SEVP IT"
+                },
+                {
+                    "id": "86",
+                    "name": "Divisi Application Development, Architecture & Governance - Bagian Core Banking",
+                    "parent_id": "13",
+                    "parent_name": "Divisi Application Development, Architecture & Governance"
+                },
+                {
+                    "id": "90",
+                    "name": "Divisi Application Development, Architecture & Governance - Bagian Quality Assurance",
+                    "parent_id": "13",
+                    "parent_name": "Divisi Application Development, Architecture & Governance"
+                },
+                {
+                    "id": "199",
+                    "name": "Divisi Application Development, Architecture & Governance - Bagian Digital Banking & Delivery",
+                    "parent_id": "13",
+                    "parent_name": "Divisi Application Development, Architecture & Governance"
+                },
+                {
+                    "id": "201",
+                    "name": "Divisi Application Development, Architecture & Governance - Bagian CISO",
+                    "parent_id": "13",
+                    "parent_name": "Divisi Application Development, Architecture & Governance"
+                },
+                {
+                    "id": "276",
+                    "name": "Divisi Application Development, Architecture & Governance - Bagian Raya Development",
+                    "parent_id": "13",
+                    "parent_name": "Divisi Application Development, Architecture & Governance"
+                },
+                {
+                    "id": "277",
+                    "name": "Divisi Application Development, Architecture & Governance - Bagian IT Strategic",
+                    "parent_id": "13",
+                    "parent_name": "Divisi Application Development, Architecture & Governance"
+                },
+                {
+                    "id": "278",
+                    "name": "Divisi Application Development, Architecture & Governance - Bagian Pinang Development",
+                    "parent_id": "13",
+                    "parent_name": "Divisi Application Development, Architecture & Governance"
+                },
+                {
+                    "id": "337",
+                    "name": "Divisi Application Development, Architecture & Governance - Bagian Support System",
+                    "parent_id": "13",
+                    "parent_name": "Divisi Application Development, Architecture & Governance"
+                }
+            ],
+            "message": "Permintaan berhasil diproses",
+            "status": true
+        }
+      '''
+    }
+  }
+}

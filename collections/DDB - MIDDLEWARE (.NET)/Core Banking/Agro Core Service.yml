@@ -1,0 +1,37 @@
+info:
+  name: Agro Core Service
+  type: http
+  seq: 7
+
+http:
+  method: POST
+  url: http://172.31.1.93:9000/Service/AgroCoreService.asmx
+  headers:
+    - name: Content-Type
+      value: text/xml
+  body:
+    type: xml
+    data: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r
+
+      <soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\r
+
+      \  <soap:Body>\r
+
+      \    <GetDataAFT xmlns=\"http://tempuri.org/\">\r
+
+      \      <dracct>001001000371401</dracct>\r
+
+      \      <cracct>002001002638103</cracct>\r
+
+      \    </GetDataAFT>\r
+
+      \  </soap:Body>\r
+
+      </soap:Envelope>"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

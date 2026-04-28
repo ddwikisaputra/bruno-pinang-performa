@@ -1,0 +1,43 @@
+info:
+  name: logoutsso
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: http://202.77.121.68:4343/api/digiagri/logoutsso
+  body:
+    type: form-urlencoded
+    data:
+      - name: userid
+        value: "000426"
+      - name: loginTicket
+        value: "21945"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: success
+    request:
+      url: http://202.77.121.68:4343/api/digiagri/logoutsso
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userid
+            value: "000424"
+          - name: loginTicket
+            value: "21945"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "statusCode": "1",
+              "statusDescription": "Logout berhasil"
+          }

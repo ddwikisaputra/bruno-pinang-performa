@@ -1,0 +1,105 @@
+info:
+  name: Create Rekening Escrow
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{url}}/v/1/3party/cbs/create-escrow"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: OTk5OTQx
+        description: User Id [ENCODE BASE64] [MANDATORY]
+      - name: cif
+        value: "000000043"
+        description: CIF Number [MANDATORY]
+      - name: branchCode
+        value: "0010"
+        description: Kode Cabang [MANDATORY]
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Suscess Create Escrow
+    request:
+      url: "{{url}}/v/1/3party/cbs/create-escrow"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: OTk5OTQx
+            description: User Id [ENCODE BASE64] [MANDATORY]
+          - name: cif
+            value: "000000043"
+            description: CIF Number [MANDATORY]
+          - name: branchCode
+            value: "0010"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Sun, 26 Feb 2023 22:42:49 GMT
+        - name: Content-Length
+          value: "170"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "statusCode": 1,
+                  "statusDescription": "Success",
+                  "escrowAccountNumber": "001001000337994"
+              },
+              "desc": "Success Process.",
+              "message": "Data Berhasil Disimpan.",
+              "status": 200
+          }
+  - name: CIF Memiliki Rekening Sscrow
+    request:
+      url: "{{url}}/v/1/3party/cbs/create-escrow"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: OTk5OTQx
+            description: User Id [ENCODE BASE64] [MANDATORY]
+          - name: cif
+            value: "000000043"
+            description: CIF Number [MANDATORY]
+          - name: branchCode
+            value: "0010"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Sun, 26 Feb 2023 22:43:48 GMT
+        - name: Content-Length
+          value: "183"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "statusCode": 1,
+                  "statusDescription": "CIF memiliki rekening escrow",
+                  "escrowAccountNumber": "001001000337994"
+              },
+              "desc": "Success Process.",
+              "message": "Data Ditemukan.",
+              "status": 200
+          }

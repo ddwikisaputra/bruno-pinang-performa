@@ -1,0 +1,418 @@
+info:
+  name: Create CIF
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: "{{url}}/v/1/3party/cbs/create-cif"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: OTk5OTQx
+        description: User Id [ENCODE BASE64] [MANDATORY]
+      - name: branchCode
+        value: "0010"
+        description: Kode Cabang [MANDATORY]
+      - name: ktpNumber
+        value: MTEwMTA4MDgwNTkwMDAwMw==
+        description: Nomor KTP [ENCODE BASE64] [MANDATORY]
+      - name: name
+        value: Sephia Aldiariza Hernandha
+        description: Nama Nasabah [MANDATORY]
+      - name: npwp
+        value: ""
+        description: Nomor Peseta Wajib Pajak [OPTIONAL]
+      - name: email
+        value: sephia@majoo.id
+        description: Email [MANDATORY]
+      - name: placeOfBirth
+        value: Medan
+        description: Tempat Lahir [MANDATORY]
+      - name: birthDate
+        value: 1996-09-12
+        description: "Tanggal Lahir [FORMAT : yyyy-MM-dd] [MANDATORY]"
+      - name: gender
+        value: Perempuan
+        description: Perempuan || Laki-Laki [MANDATORY]
+      - name: motherMaidenName
+        value: Gloria Tri Lestari Wardhani
+        description: Nama Gadis Ibu Kandung [MANDATORY]
+      - name: releaseKtpNumber
+        value: 2012-08-03
+        description: "Tanggal Terbit KTP [FORMAT : yyyy-MM-dd] [MANDATORY]"
+      - name: lastEducation
+        value: S1
+        description: Pendidikan Terakhir Nasabah [ SMP || SMU || SMA || D1 || D2 || D3 || D4 || S1 || S2 || S3 || Tidak Sekolah || Belum Tamat || Lainnya ] [MANDATORY]
+      - name: religion
+        value: Islam
+        description: Agama Nasabah [ Budha || Hindu || Islam || Kristen || Katolik || Konghucu || lainnya ] [MANDATORY]
+      - name: maritalStatus
+        value: Kawin
+        description: Kawin || Belum Kawin || Cerai Hidup || Cerai Mati || Duda || Janda [MANDATORY]
+      - name: address
+        value: Graha Mulia M/18
+        description: Alamat Nasabah [MANDATORY]
+      - name: rt
+        value: "007"
+        description: RT [MANDATORY]
+      - name: rw
+        value: "005"
+        description: RW [MANDATORY]
+      - name: provinceCode
+        value: "12"
+        description: Kode Provinsi [MANDATORY]
+      - name: cityCode
+        value: "1293"
+        description: Kode Kota [MANDATORY]
+      - name: districtCode
+        value: "357305"
+        description: Kode Kecamatan [MANDATORY]
+      - name: villageCode
+        value: "3573051012"
+        description: Kode Kelurahan [MANDATORY]
+      - name: postalCode
+        value: "65143"
+        description: Kode Pos [MANDATORY]
+      - name: mobileNumber
+        value: "+6281217070127"
+        description: "Nomor Handphone [FORMAT : +62xxxxx] [MANDATORY]"
+      - name: workplceName
+        value: Sephia Aldiariza Hernandha
+        description: Nama Tempat Kerja [MANDATORY]
+      - name: businessType
+        value: "0001"
+        description: Tipe Usaha  [MANDATORY]
+      - name: workplaceAddress
+        value: Jl. Kahuripan no 5
+        description: Alamat Kantor [MANDATORY]
+      - name: workplaceRt
+        value: "007"
+        description: RT Kantor [MANDATORY]
+      - name: workplaceRw
+        value: "005"
+        description: RW Kantor [MANDATORY]
+      - name: workplaceProvinceCode
+        value: "12"
+        description: Kode Provinsi Kantor [MANDATORY]
+      - name: workplaceCityCode
+        value: "1293"
+        description: Kode Kota Kantor [MANDATORY]
+      - name: workplaceDistrictCode
+        value: "357302"
+        description: Kode Kecamatan Kantor [MANDATORY]
+      - name: workplaceVillageCode
+        value: "3573021007"
+        description: Kode Kelurahan Kantor [MANDATORY]
+      - name: workplacePostalCode
+        value: "65119"
+        description: Kode Pos Kantor [MANDATORY]
+      - name: numberOfDependents
+        value: "0"
+        description: Jumlah Tanggungan [MANDATORY]
+      - name: partnerKtpNumber
+        value: "3573040810940007"
+        description: Nomor KTP Pasang [MANDATORY]
+      - name: partnerName
+        value: Alief Zul Helmy Fadhillah Akbar
+        description: Nama Pasangan [MANDATORY]
+      - name: partnerBirthDate
+        value: 1994-10-08
+        description: Tanggal Lahir Pasangan [MANDATORY]
+      - name: familyRelationshipStatus
+        value: Istri
+        description: Status Hubungan Keluarga si Nasabah dengan Partner [ Kepala Keluarga || Suami || Istri || Anak || Menantu || Cucu || Orang Tua || Mertua || Famili Lain || Pembantu || Lainnya ] [MANDATORY]
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Success Create CIF
+    request:
+      url: "{{url}}/v/1/3party/cbs/create-cif"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: OTk5OTQx
+            description: User Id [ENCODE BASE64] [MANDATORY]
+          - name: branchCode
+            value: "0010"
+            description: Kode Cabang [MANDATORY]
+          - name: ktpNumber
+            value: MTEwMTA4MDgwNTkwMDAwMw==
+            description: Nomor KTP [ENCODE BASE64] [MANDATORY]
+          - name: name
+            value: Sephia Aldiariza Hernandha
+            description: Nama Nasabah [MANDATORY]
+          - name: npwp
+            value: ""
+            description: Nomor Peseta Wajib Pajak [OPTIONAL]
+          - name: email
+            value: sephia@majoo.id
+            description: Email [MANDATORY]
+          - name: placeOfBirth
+            value: Medan
+            description: Tempat Lahir [MANDATORY]
+          - name: birthDate
+            value: 1996-09-12
+            description: "Tanggal Lahir [FORMAT : yyyy-MM-dd] [MANDATORY]"
+          - name: gender
+            value: Perempuan
+            description: Perempuan || Laki-Laki [MANDATORY]
+          - name: motherMaidenName
+            value: Gloria Tri Lestari Wardhani
+            description: Nama Gadis Ibu Kandung [MANDATORY]
+          - name: releaseKtpNumber
+            value: 2012-08-03
+            description: "Tanggal Terbit KTP [FORMAT : yyyy-MM-dd] [MANDATORY]"
+          - name: lastEducation
+            value: S1
+            description: Pendidikan Terakhir Nasabah [ SMP || SMU || SMA || D1 || D2 || D3 || D4 || S1 || S2 || S3 || Tidak Sekolah || Belum Tamat || Lainnya ] [MANDATORY]
+          - name: religion
+            value: Islam
+            description: Agama Nasabah [ Budha || Hindu || Islam || Kristen || Katolik || Konghucu || lainnya ] [MANDATORY]
+          - name: maritalStatus
+            value: Kawin
+            description: Kawin || Belum Kawin || Cerai Hidup || Cerai Mati || Duda || Janda [MANDATORY]
+          - name: address
+            value: Graha Mulia M/18
+            description: Alamat Nasabah [MANDATORY]
+          - name: rt
+            value: "007"
+            description: RT [MANDATORY]
+          - name: rw
+            value: "005"
+            description: RW [MANDATORY]
+          - name: provinceCode
+            value: "12"
+            description: Kode Provinsi [MANDATORY]
+          - name: cityCode
+            value: "1293"
+            description: Kode Kota [MANDATORY]
+          - name: districtCode
+            value: "357305"
+            description: Kode Kecamatan [MANDATORY]
+          - name: villageCode
+            value: "3573051012"
+            description: Kode Kelurahan [MANDATORY]
+          - name: postalCode
+            value: "65143"
+            description: Kode Pos [MANDATORY]
+          - name: mobileNumber
+            value: "+6281217070127"
+            description: "Nomor Handphone [FORMAT : +62xxxxx] [MANDATORY]"
+          - name: workplceName
+            value: Sephia Aldiariza Hernandha
+            description: Nama Tempat Kerja [MANDATORY]
+          - name: businessType
+            value: "0001"
+            description: Tipe Usaha  [MANDATORY]
+          - name: workplaceAddress
+            value: Jl. Kahuripan no 5
+            description: Alamat Kantor [MANDATORY]
+          - name: workplaceRt
+            value: "007"
+            description: RT Kantor [MANDATORY]
+          - name: workplaceRw
+            value: "005"
+            description: RW Kantor [MANDATORY]
+          - name: workplaceProvinceCode
+            value: "12"
+            description: Kode Provinsi Kantor [MANDATORY]
+          - name: workplaceCityCode
+            value: "1293"
+            description: Kode Kota Kantor [MANDATORY]
+          - name: workplaceDistrictCode
+            value: "357302"
+            description: Kode Kecamatan Kantor [MANDATORY]
+          - name: workplaceVillageCode
+            value: "3573021007"
+            description: Kode Kelurahan Kantor [MANDATORY]
+          - name: workplacePostalCode
+            value: "65119"
+            description: Kode Pos Kantor [MANDATORY]
+          - name: numberOfDependents
+            value: "0"
+            description: Jumlah Tanggungan [MANDATORY]
+          - name: partnerKtpNumber
+            value: "3573040810940007"
+            description: Nomor KTP Pasang [MANDATORY]
+          - name: partnerName
+            value: Alief Zul Helmy Fadhillah Akbar
+            description: Nama Pasangan [MANDATORY]
+          - name: partnerBirthDate
+            value: 1994-10-08
+            description: Tanggal Lahir Pasangan [MANDATORY]
+          - name: familyRelationshipStatus
+            value: Istri
+            description: Status Hubungan Keluarga si Nasabah dengan Partner [ Kepala Keluarga || Suami || Istri || Anak || Menantu || Cucu || Orang Tua || Mertua || Famili Lain || Pembantu || Lainnya ] [MANDATORY]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "statusCode": 1,
+                  "statusDescription": "Success",
+                  "cif": "0000121093"
+              },
+              "desc": "Success Process.",
+              "message": "Data Berhasil Disimpan.",
+              "status": 200
+          }
+  - name: Data CIF Sudah Ada
+    request:
+      url: "{{url}}/v/1/3party/cbs/create-cif"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: OTk5OTQx
+            description: User Id [ENCODE BASE64] [MANDATORY]
+          - name: branchCode
+            value: "0010"
+            description: Kode Cabang [MANDATORY]
+          - name: ktpNumber
+            value: MTEwMTA4MDgwNTkwMDAyMw==
+            description: Nomor KTP [ENCODE BASE64] [MANDATORY]
+          - name: name
+            value: Sephia Aldiariza Hernandha
+            description: Nama Nasabah [MANDATORY]
+          - name: npwp
+            value: ""
+            description: Nomor Peseta Wajib Pajak [OPTIONAL]
+          - name: email
+            value: sephia@majoo.id
+            description: Email [MANDATORY]
+          - name: placeOfBirth
+            value: Medan
+            description: Tempat Lahir [MANDATORY]
+          - name: birthDate
+            value: 1996-09-12
+            description: "Tanggal Lahir [FORMAT : yyyy-MM-dd] [MANDATORY]"
+          - name: gender
+            value: Perempuan
+            description: Perempuan || Laki-Laki [MANDATORY]
+          - name: motherMaidenName
+            value: Gloria Tri Lestari Wardhani
+            description: Nama Gadis Ibu Kandung [MANDATORY]
+          - name: releaseKtpNumber
+            value: 2012-08-03
+            description: "Tanggal Terbit KTP [FORMAT : yyyy-MM-dd] [MANDATORY]"
+          - name: lastEducation
+            value: S1
+            description: Pendidikan Terakhir Nasabah [ SMP || SMU || SMA || D1 || D2 || D3 || D4 || S1 || S2 || S3 || Tidak Sekolah || Belum Tamat || Lainnya ] [MANDATORY]
+          - name: religion
+            value: Islam
+            description: Agama Nasabah [ Budha || Hindu || Islam || Kristen || Katolik || Konghucu || lainnya ] [MANDATORY]
+          - name: maritalStatus
+            value: Kawin
+            description: Kawin || Belum Kawin || Cerai Hidup || Cerai Mati || Duda || Janda [MANDATORY]
+          - name: address
+            value: Graha Mulia M/18
+            description: Alamat Nasabah [MANDATORY]
+          - name: rt
+            value: "007"
+            description: RT [MANDATORY]
+          - name: rw
+            value: "005"
+            description: RW [MANDATORY]
+          - name: provinceCode
+            value: "12"
+            description: Kode Provinsi [MANDATORY]
+          - name: cityCode
+            value: "1293"
+            description: Kode Kota [MANDATORY]
+          - name: districtCode
+            value: "357305"
+            description: Kode Kecamatan [MANDATORY]
+          - name: villageCode
+            value: "3573051012"
+            description: Kode Kelurahan [MANDATORY]
+          - name: postalCode
+            value: "65143"
+            description: Kode Pos [MANDATORY]
+          - name: mobileNumber
+            value: "+6281217070127"
+            description: "Nomor Handphone [FORMAT : +62xxxxx] [MANDATORY]"
+          - name: workplceName
+            value: Sephia Aldiariza Hernandha
+            description: Nama Tempat Kerja [MANDATORY]
+          - name: businessType
+            value: "0001"
+            description: Tipe Usaha  [MANDATORY]
+          - name: workplaceAddress
+            value: Jl. Kahuripan no 5
+            description: Alamat Kantor [MANDATORY]
+          - name: workplaceRt
+            value: "007"
+            description: RT Kantor [MANDATORY]
+          - name: workplaceRw
+            value: "005"
+            description: RW Kantor [MANDATORY]
+          - name: workplaceProvinceCode
+            value: "12"
+            description: Kode Provinsi Kantor [MANDATORY]
+          - name: workplaceCityCode
+            value: "1293"
+            description: Kode Kota Kantor [MANDATORY]
+          - name: workplaceDistrictCode
+            value: "357302"
+            description: Kode Kecamatan Kantor [MANDATORY]
+          - name: workplaceVillageCode
+            value: "3573021007"
+            description: Kode Kelurahan Kantor [MANDATORY]
+          - name: workplacePostalCode
+            value: "65119"
+            description: Kode Pos Kantor [MANDATORY]
+          - name: numberOfDependents
+            value: "0"
+            description: Jumlah Tanggungan [MANDATORY]
+          - name: partnerKtpNumber
+            value: "3573040810940007"
+            description: Nomor KTP Pasang [MANDATORY]
+          - name: partnerName
+            value: Alief Zul Helmy Fadhillah Akbar
+            description: Nama Pasangan [MANDATORY]
+          - name: partnerBirthDate
+            value: 1994-10-08
+            description: Tanggal Lahir Pasangan [MANDATORY]
+          - name: familyRelationshipStatus
+            value: Istri
+            description: Status Hubungan Keluarga si Nasabah dengan Partner [ Kepala Keluarga || Suami || Istri || Anak || Menantu || Cucu || Orang Tua || Mertua || Famili Lain || Pembantu || Lainnya ] [MANDATORY]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 01 May 2023 11:31:45 GMT
+        - name: Content-Length
+          value: "147"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "statusCode": 1,
+                  "statusDescription": "CIF sudah ada",
+                  "cif": "0000121093"
+              },
+              "desc": "Success Process.",
+              "message": "Data Ditemukan.",
+              "status": 200
+          }

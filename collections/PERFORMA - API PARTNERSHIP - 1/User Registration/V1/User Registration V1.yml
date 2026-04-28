@@ -1,0 +1,633 @@
+info:
+  name: User Registration V1
+  type: http
+  seq: 5
+
+http:
+  method: POST
+  url: "{{url}}/v/1/partnerships/user-registration"
+  body:
+    type: multipart-form
+    data:
+      - name: name
+        type: text
+        value: Dwiki Saputra
+        description: Nama User {MANDATORY}
+      - name: email
+        type: text
+        value: dwiki.saputra@bankraya.co.id
+        description: Email User [Format:abc@gmail.com] {MADNATORY}
+      - name: position
+        type: text
+        value: Pemilik
+        description: Jabatan Usesr {MANDATORY}
+      - name: partnershipCode
+        type: text
+        value: SAT23
+        description: Code Partnership {MANDATORY}
+      - name: mobileNumber
+        type: text
+        value: "+6285153315771"
+        description: No Telepon Calon User [Format:+628xxxxxx] { MANDATORY }
+      - name: password
+        type: text
+        value: MDAwMDAwMDA=
+        description: Password User (encode base64) { MANDATORY }
+  auth:
+    type: basic
+    username: "{{userBasicPartnership}}"
+    password: "{{passBasicPartnership}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: unautorized
+    request:
+      url: "{{url}}/v/1/partnerships/user-registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: name
+            value: Testing
+            description: Nama User {MANDATORY}
+          - name: email
+            value: tes@gmail.com
+            description: Email User [Format:abc@gmail.com] {MADNATORY}
+          - name: position
+            value: Pemilik
+            description: Jabatan Usesr {MANDATORY}
+          - name: partnershipCode
+            value: RAN20
+            description: Code Partnership {MANDATORY}
+          - name: mobileNumber
+            value: "+6282288194042"
+            description: No Telepon Calon User [Format:+628xxxxxx] { MANDATORY }
+          - name: password
+            value: MA==
+            description: Password User (encode base64) { MANDATORY }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:44:34 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: ""
+  - name: error parameter validation
+    request:
+      url: "{{url}}/v/1/partnerships/user-registration"
+      method: POST
+      body:
+        type: multipart-form
+        data:
+          - name: name
+            type: text
+            value: mocci
+            description: Nama User {MANDATORY}
+            disabled: true
+          - name: email
+            type: text
+            value: mocci@gmail.com
+            description: Email User [Format:abc@gmail.com] {MADNATORY}
+          - name: position
+            type: text
+            value: pemilik
+            description: Jabatan Usesr {MANDATORY}
+          - name: partnershipCode
+            type: text
+            value: RAN20
+            description: Code Partnership {MANDATORY}
+          - name: mobileNumber
+            type: text
+            value: "+6282288194042"
+            description: No Telepon Calon Nasabah [Format:+628xxxxxx] { MANDATORY }
+          - name: password
+            type: text
+            value: MA====
+            description: Password User (encode base64) { MANDATORY }
+    response:
+      status: 400
+      statusText: Bad Request
+      body:
+        type: text
+        data: |-
+          {
+              "desc": "Parameter ... kosong",
+              "message": "Maaf, ... tidak boleh kosong",
+              "status": 400
+          }
+  - name: data user on prosses
+    request:
+      url: "{{url}}/v/1/partnerships/user-registration"
+      method: POST
+      body:
+        type: multipart-form
+        data:
+          - name: name
+            type: text
+            value: mocci
+            description: Nama User {MANDATORY}
+          - name: email
+            type: text
+            value: mocci@gmail.com
+            description: Email User [Format:abc@gmail.com] {MADNATORY}
+          - name: position
+            type: text
+            value: pemilik
+            description: Jabatan Usesr {MANDATORY}
+          - name: partnershipCode
+            type: text
+            value: RAN20
+            description: Code Partnership {MANDATORY}
+          - name: mobileNumber
+            type: text
+            value: "+6282288194042"
+            description: No Telepon Calon Nasabah [Format:+628xxxxxx] { MANDATORY }
+          - name: password
+            type: text
+            value: MA====
+            description: Password User (encode base64) { MANDATORY }
+    response:
+      body:
+        type: text
+        data: ""
+  - name: user active validation
+    request:
+      url: "{{url}}/v/1/partnerships/user-registration"
+      method: POST
+      body:
+        type: multipart-form
+        data:
+          - name: name
+            type: text
+            value: mocci
+            description: Nama User {MANDATORY}
+          - name: email
+            type: text
+            value: mocci@gmail.com
+            description: Email User [Format:abc@gmail.com] {MADNATORY}
+          - name: position
+            type: text
+            value: pemilik
+            description: Jabatan Usesr {MANDATORY}
+          - name: partnershipCode
+            type: text
+            value: RAN20
+            description: Code Partnership {MANDATORY}
+          - name: mobileNumber
+            type: text
+            value: "+6282288194042"
+            description: No Telepon Calon Nasabah [Format:+628xxxxxx] { MANDATORY }
+          - name: password
+            type: text
+            value: MA====
+            description: Password User (encode base64) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 30 Mar 2022 05:09:48 GMT
+        - name: Content-Length
+          value: "75"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Data Valid",
+              "message": "Maaf, Email sudah terdaftar!",
+              "status": 500
+          }
+  - name: success
+    request:
+      url: "{{url}}/v/1/partnerships/user-registration"
+      method: POST
+      body:
+        type: multipart-form
+        data:
+          - name: name
+            type: text
+            value: mocci
+            description: Nama User {MANDATORY}
+          - name: email
+            type: text
+            value: mocci@gmail.com
+            description: Email User [Format:abc@gmail.com] {MADNATORY}
+          - name: position
+            type: text
+            value: pemilik
+            description: Jabatan Usesr {MANDATORY}
+          - name: partnershipCode
+            type: text
+            value: RAN20
+            description: Code Partnership {MANDATORY}
+          - name: mobileNumber
+            type: text
+            value: "+6282288194042"
+            description: No Telepon Calon Nasabah [Format:+628xxxxxx] { MANDATORY }
+          - name: password
+            type: text
+            value: MA====
+            description: Password User (encode base64) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "desc": "Data Tersimpan",
+              "message": "Data user registration berhasil disimpan",
+              "status": 200
+          }
+  - name: general error
+    request:
+      url: "{{url}}/v/1/partnerships/add-member"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: name
+            value: Testing
+            description: Login Id
+          - name: email
+            value: tes@gmail.com
+            description: Kode Cabang BRI AGRO { MANDATORY }
+          - name: position
+            value: Pemilik
+            description: Kode Partnership { MANDATORY }
+          - name: partnershipCode
+            value: RAN20
+            description: No KTP Nasabah { MANDATORY }
+          - name: mobileNumber
+            value: "+6282288194042"
+            description: Nama Calon Nasabah { MANDATORY }
+          - name: password
+            value: MA==
+            description: "Tanggal Lahir Calon Nasabah [Format : 1990-01-01] { MANDATORY } "
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Could not connect .....",
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "status": 500
+          }
+  - name: error database connection
+    request:
+      url: "{{url}}/v/1/partnerships/user-registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: name
+            value: Testing
+            description: Nama User {MANDATORY}
+          - name: email
+            value: tes@gmail.com
+            description: Email User [Format:abc@gmail.com] {MADNATORY}
+          - name: position
+            value: Pemilik
+            description: Jabatan Usesr {MANDATORY}
+          - name: partnershipCode
+            value: RAN20
+            description: Code Partnership {MANDATORY}
+          - name: mobileNumber
+            value: "+6282288194042"
+            description: No Telepon Calon User [Format:+628xxxxxx] { MANDATORY }
+          - name: password
+            value: MA==
+            description: Password User (encode base64) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: unautorized
+    request:
+      url: "{{url}}/v/1/partnerships/user-registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: name
+            value: Testing
+            description: Nama User {MANDATORY}
+          - name: email
+            value: tes@gmail.com
+            description: Email User [Format:abc@gmail.com] {MADNATORY}
+          - name: position
+            value: Pemilik
+            description: Jabatan Usesr {MANDATORY}
+          - name: partnershipCode
+            value: RAN20
+            description: Code Partnership {MANDATORY}
+          - name: mobileNumber
+            value: "+6282288194042"
+            description: No Telepon Calon User [Format:+628xxxxxx] { MANDATORY }
+          - name: password
+            value: MA==
+            description: Password User (encode base64) { MANDATORY }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:44:34 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: ""
+  - name: error parameter validation
+    request:
+      url: "{{url}}/v/1/partnerships/user-registration"
+      method: POST
+      body:
+        type: multipart-form
+        data:
+          - name: name
+            type: text
+            value: mocci
+            description: Nama User {MANDATORY}
+            disabled: true
+          - name: email
+            type: text
+            value: mocci@gmail.com
+            description: Email User [Format:abc@gmail.com] {MADNATORY}
+          - name: position
+            type: text
+            value: pemilik
+            description: Jabatan Usesr {MANDATORY}
+          - name: partnershipCode
+            type: text
+            value: RAN20
+            description: Code Partnership {MANDATORY}
+          - name: mobileNumber
+            type: text
+            value: "+6282288194042"
+            description: No Telepon Calon Nasabah [Format:+628xxxxxx] { MANDATORY }
+          - name: password
+            type: text
+            value: MA====
+            description: Password User (encode base64) { MANDATORY }
+    response:
+      status: 400
+      statusText: Bad Request
+      body:
+        type: text
+        data: |-
+          {
+              "desc": "Parameter ... kosong",
+              "message": "Maaf, ... tidak boleh kosong",
+              "status": 400
+          }
+  - name: data user on prosses
+    request:
+      url: "{{url}}/v/1/partnerships/user-registration"
+      method: POST
+      body:
+        type: multipart-form
+        data:
+          - name: name
+            type: text
+            value: mocci
+            description: Nama User {MANDATORY}
+          - name: email
+            type: text
+            value: mocci@gmail.com
+            description: Email User [Format:abc@gmail.com] {MADNATORY}
+          - name: position
+            type: text
+            value: pemilik
+            description: Jabatan Usesr {MANDATORY}
+          - name: partnershipCode
+            type: text
+            value: RAN20
+            description: Code Partnership {MANDATORY}
+          - name: mobileNumber
+            type: text
+            value: "+6282288194042"
+            description: No Telepon Calon Nasabah [Format:+628xxxxxx] { MANDATORY }
+          - name: password
+            type: text
+            value: MA====
+            description: Password User (encode base64) { MANDATORY }
+    response:
+      body:
+        type: text
+        data: ""
+  - name: user active validation
+    request:
+      url: "{{url}}/v/1/partnerships/user-registration"
+      method: POST
+      body:
+        type: multipart-form
+        data:
+          - name: name
+            type: text
+            value: mocci
+            description: Nama User {MANDATORY}
+          - name: email
+            type: text
+            value: mocci@gmail.com
+            description: Email User [Format:abc@gmail.com] {MADNATORY}
+          - name: position
+            type: text
+            value: pemilik
+            description: Jabatan Usesr {MANDATORY}
+          - name: partnershipCode
+            type: text
+            value: RAN20
+            description: Code Partnership {MANDATORY}
+          - name: mobileNumber
+            type: text
+            value: "+6282288194042"
+            description: No Telepon Calon Nasabah [Format:+628xxxxxx] { MANDATORY }
+          - name: password
+            type: text
+            value: MA====
+            description: Password User (encode base64) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 30 Mar 2022 05:09:48 GMT
+        - name: Content-Length
+          value: "75"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Data Valid",
+              "message": "Maaf, Email sudah terdaftar!",
+              "status": 500
+          }
+  - name: success
+    request:
+      url: "{{url}}/v/1/partnerships/user-registration"
+      method: POST
+      body:
+        type: multipart-form
+        data:
+          - name: name
+            type: text
+            value: mocci
+            description: Nama User {MANDATORY}
+          - name: email
+            type: text
+            value: mocci@gmail.com
+            description: Email User [Format:abc@gmail.com] {MADNATORY}
+          - name: position
+            type: text
+            value: pemilik
+            description: Jabatan Usesr {MANDATORY}
+          - name: partnershipCode
+            type: text
+            value: RAN20
+            description: Code Partnership {MANDATORY}
+          - name: mobileNumber
+            type: text
+            value: "+6282288194042"
+            description: No Telepon Calon Nasabah [Format:+628xxxxxx] { MANDATORY }
+          - name: password
+            type: text
+            value: MA====
+            description: Password User (encode base64) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "desc": "Data Tersimpan",
+              "message": "Data user registration berhasil disimpan",
+              "status": 200
+          }
+  - name: general error
+    request:
+      url: "{{url}}/v/1/partnerships/add-member"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: name
+            value: Testing
+            description: Login Id
+          - name: email
+            value: tes@gmail.com
+            description: Kode Cabang BRI AGRO { MANDATORY }
+          - name: position
+            value: Pemilik
+            description: Kode Partnership { MANDATORY }
+          - name: partnershipCode
+            value: RAN20
+            description: No KTP Nasabah { MANDATORY }
+          - name: mobileNumber
+            value: "+6282288194042"
+            description: Nama Calon Nasabah { MANDATORY }
+          - name: password
+            value: MA==
+            description: "Tanggal Lahir Calon Nasabah [Format : 1990-01-01] { MANDATORY } "
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Could not connect .....",
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "status": 500
+          }
+  - name: error database connection
+    request:
+      url: "{{url}}/v/1/partnerships/user-registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: name
+            value: Testing
+            description: Nama User {MANDATORY}
+          - name: email
+            value: tes@gmail.com
+            description: Email User [Format:abc@gmail.com] {MADNATORY}
+          - name: position
+            value: Pemilik
+            description: Jabatan Usesr {MANDATORY}
+          - name: partnershipCode
+            value: RAN20
+            description: Code Partnership {MANDATORY}
+          - name: mobileNumber
+            value: "+6282288194042"
+            description: No Telepon Calon User [Format:+628xxxxxx] { MANDATORY }
+          - name: password
+            value: MA==
+            description: Password User (encode base64) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }

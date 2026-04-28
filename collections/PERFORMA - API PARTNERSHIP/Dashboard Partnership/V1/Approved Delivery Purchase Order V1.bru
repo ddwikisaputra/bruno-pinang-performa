@@ -1,0 +1,575 @@
+meta {
+  name: Approved Delivery Purchase Order V1
+  type: http
+  seq: 3
+}
+
+post {
+  url: localhost:7007/v/1/partnerships/po-delivery-approved
+  body: formUrlEncoded
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{tokenPartnership}}
+}
+
+body:form-urlencoded {
+  userId: 1
+  id: 567
+  partnershipCode: OMS1
+}
+
+settings {
+  encodeUrl: true
+}
+
+example {
+  name: validasi po sedang dalam proses (status != 0)
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-delivery-approved
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      id: -1
+      partnershipCode: OMS1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Wed, 24 Nov 2021 18:18:31 GMT
+      Content-Length: 657
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "PO Status != 1 (sedang dalam proses pengajuan)",
+            "message": "Maaf, Pengajuan anda sedang dalam proses. Silahkan tunggu sampai proses pengajuan selesai.",
+            "status": 500
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: success
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-delivery-approved
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      id: 1
+      partnershipCode: OMS1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 03:03:58 GMT
+      Content-Length: 82
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "Data Tersimpan",
+            "message": "Data pengiriman purchase order berhasil disetujui",
+            "status": 200
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: unautorized
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-delivery-approved
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      id: 1
+      partnershipCode: OMS1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 02:44:34 GMT
+      Content-Length: 82
+    }
+  
+    status: {
+      code: 401
+      text: Unauthorized
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "code": 401,
+            "desc": "Expired",
+            "message": "Invalid Token || Token Is Expired"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: access forbidden (403)
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-delivery-approved
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 15
+      id: 142
+      partnershipCode: OMS1
+    }
+  }
+  
+  response: {
+    headers: {
+      Server: nginx/1.18.0 (Ubuntu)
+      Date: Mon, 25 Jul 2022 03:32:34 GMT
+      Content-Type: application/json; charset=utf-8
+      Content-Length: 67
+      Connection: keep-alive
+    }
+  
+    status: {
+      code: 403
+      text: Forbidden
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "code": 403,
+            "desc": "Tidak Memliki Akses",
+            "message": "403 Forbidden"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: general error
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-delivery-approved
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      id: 1
+      partnershipCode: OMS1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 02:53:38 GMT
+      Content-Length: 111
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "Could not connect .....",
+            "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+            "status": 500
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: error database connection
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-delivery-approved
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      id: 1
+      partnershipCode: OMS1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 02:53:38 GMT
+      Content-Length: 111
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+            "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+            "status": 400
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: error parameter validation
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-delivery-approved
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      partnershipCode: OMS1
+      ~id: 1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 02:53:38 GMT
+      Content-Length: 111
+    }
+  
+    status: {
+      code: 400
+      text: Bad Request
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "Parameter ... kosong",
+            "message": "Maaf, Parameter ... tidak boleh kosong",
+            "status": 500
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: validasi po sedang dalam proses (status != 0)
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-delivery-approved
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      id: -1
+      partnershipCode: OMS1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Wed, 24 Nov 2021 18:18:31 GMT
+      Content-Length: 657
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "PO Status != 1 (sedang dalam proses pengajuan)",
+            "message": "Maaf, Pengajuan anda sedang dalam proses. Silahkan tunggu sampai proses pengajuan selesai.",
+            "status": 500
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: success
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-delivery-approved
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      id: 1
+      partnershipCode: OMS1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 03:03:58 GMT
+      Content-Length: 82
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "Data Tersimpan",
+            "message": "Data pengiriman purchase order berhasil disetujui",
+            "status": 200
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: unautorized
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-delivery-approved
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      id: 1
+      partnershipCode: OMS1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 02:44:34 GMT
+      Content-Length: 82
+    }
+  
+    status: {
+      code: 401
+      text: Unauthorized
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "code": 401,
+            "desc": "Expired",
+            "message": "Invalid Token || Token Is Expired"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: access forbidden (403)
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-delivery-approved
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 15
+      id: 142
+      partnershipCode: OMS1
+    }
+  }
+  
+  response: {
+    headers: {
+      Server: nginx/1.18.0 (Ubuntu)
+      Date: Mon, 25 Jul 2022 03:32:34 GMT
+      Content-Type: application/json; charset=utf-8
+      Content-Length: 67
+      Connection: keep-alive
+    }
+  
+    status: {
+      code: 403
+      text: Forbidden
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "code": 403,
+            "desc": "Tidak Memliki Akses",
+            "message": "403 Forbidden"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: general error
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-delivery-approved
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      id: 1
+      partnershipCode: OMS1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 02:53:38 GMT
+      Content-Length: 111
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "Could not connect .....",
+            "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+            "status": 500
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: error database connection
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-delivery-approved
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      id: 1
+      partnershipCode: OMS1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 02:53:38 GMT
+      Content-Length: 111
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+            "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+            "status": 400
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: error parameter validation
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-delivery-approved
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      partnershipCode: OMS1
+      ~id: 1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 02:53:38 GMT
+      Content-Length: 111
+    }
+  
+    status: {
+      code: 400
+      text: Bad Request
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "Parameter ... kosong",
+            "message": "Maaf, Parameter ... tidak boleh kosong",
+            "status": 500
+        }
+      '''
+    }
+  }
+}

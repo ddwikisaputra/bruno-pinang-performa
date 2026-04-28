@@ -1,0 +1,103 @@
+info:
+  name: OTP Request
+  type: http
+  seq: 8
+
+http:
+  method: POST
+  url: "{{base_url}}/api/digiagri/otp/request"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: partnership
+        description: '"partnership"'
+      - name: tokenType
+        value: PASSWORD
+        description: '"PASSWORD"'
+      - name: transactionDetail
+        value: FORGET PASSWORD
+        description: '"FORGET PASSWORD"'
+      - name: emailAddress
+        value: ibrahim.senoaji@bankraya.co.id
+        description: email Address
+      - name: phone
+        value: "089604391382"
+        description: Phone Number
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Gagal
+    request:
+      url: "{{base_url}}/api/digiagri/otp/request"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: partnership
+            description: '"partnership"'
+          - name: tokenType
+            value: PASSWORD
+            description: '"PASSWORD"'
+          - name: transactionDetail
+            value: FORGET PASSWORD
+            description: '"FORGET PASSWORD"'
+          - name: emailAddress
+            value: ibrahim.senoaji@bankraya.co.id
+            description: email Address
+          - name: phone
+            value: "089604391382"
+            description: Phone Number
+    response:
+      body:
+        type: text
+        data: "{\r
+
+          \    \"statusCode\": \"-1\",\r
+
+          \    \"statusDescription\": \"Request OTP Gagal\",\r
+
+          \    \"expTime\": \"\"\r
+
+          }"
+  - name: Success
+    request:
+      url: "{{base_url}}/api/digiagri/otp/request"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: partnership
+            description: '"partnership"'
+          - name: tokenType
+            value: PASSWORD
+            description: '"PASSWORD"'
+          - name: transactionDetail
+            value: FORGET PASSWORD
+            description: '"FORGET PASSWORD"'
+          - name: emailAddress
+            value: ibrahim.senoaji@bankraya.co.id
+            description: email Address
+          - name: phone
+            value: "089604391382"
+            description: Phone Number
+    response:
+      body:
+        type: text
+        data: "{\r
+
+          \    \"statusCode\": \"1\",\r
+
+          \    \"statusDescription\": \"RAYA3009460145\",\r
+
+          \    \"expTime\": \"\"\r
+
+          }"

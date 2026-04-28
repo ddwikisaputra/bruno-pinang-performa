@@ -1,0 +1,666 @@
+meta {
+  name: Confirmation Received Purchase Order V1
+  type: http
+  seq: 6
+}
+
+post {
+  url: localhost:7007/v/1/partnerships/po-confirmation-received
+  body: formUrlEncoded
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+body:form-urlencoded {
+  referenceId: 202312
+  from: RAYAAPPS
+  partnershipCode: OMS1
+  userId: 1
+}
+
+settings {
+  encodeUrl: true
+}
+
+example {
+  name: general error
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-confirmation-received
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      referenceId: 00000051
+      from: RAYAAPPS
+      partnershipCode: OMS1
+      userId: 009
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 02:53:38 GMT
+      Content-Length: 111
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "Could not connect .....",
+            "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+            "status": 500
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Success
+  
+  request: {
+    url: {{base-url-local}}/v/1/partnerships/po-confirmation-received
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      referenceId: 202312
+      from: RAYAAPPS
+      partnershipCode: OMS1
+      userId: 1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 20 Dec 2024 02:38:42 GMT
+      Content-Length: 91
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "status": 200,
+            "message": "Purchase Order berhasil disimpan",
+            "messageLocal": "Data Tersimpan"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Validation PO Sudah Cair = 3
+  
+  request: {
+    url: localhost:7007/v/1/partnerships/po-confirmation-received
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      referenceId: 202312
+      from: RAYAAPPS
+      partnershipCode: OMS1
+      userId: 1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 20 Dec 2024 02:39:10 GMT
+      Content-Length: 161
+    }
+  
+    status: {
+      code: 500
+      text: Internal Server Error
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "status": 500,
+            "message": "Maaf, Pengajuan anda sudah berhasil dicairkan. Silahkan cek kembali status pengajuan anda.",
+            "messageLocal": "PO Status = 3 (sudah cair)"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Validation bukan Mechant Financing
+  
+  request: {
+    url: localhost:7007/v/1/partnerships/po-confirmation-received
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      referenceId: 202312
+      from: RAYAAPPS
+      partnershipCode: OMS1
+      userId: 1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 20 Dec 2024 02:42:48 GMT
+      Content-Length: 125
+    }
+  
+    status: {
+      code: 500
+      text: Internal Server Error
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "status": 500,
+            "message": "Maaf, PO tersebut tidak bertipe Merchant Financing.",
+            "messageLocal": "Tipe bukan Merchant Financing"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Validation PO Ditolak
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-confirmation-received
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      referenceId: 202312
+      from: RAYAAPPS
+      partnershipCode: OMS1
+      userId: 1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 20 Dec 2024 02:45:38 GMT
+      Content-Length: 165
+    }
+  
+    status: {
+      code: 500
+      text: Internal Server Error
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "status": 500,
+            "message": "Maaf, Pengajuan anda sudah ditolak. Silahkan cek kembali status pengajuan anda.",
+            "messageLocal": "PO Status < 0 (semua status ditolak)"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Database Connection
+  
+  request: {
+    url: localhost:7007/v/1/partnerships/po-confirmation-received
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      referenceId: 202312
+      from: RAYAAPPS
+      partnershipCode: OMS1
+      userId: 1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 20 Dec 2024 05:41:29 GMT
+      Content-Length: 128
+    }
+  
+    status: {
+      code: 400
+      text: Bad Request
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "status": 400,
+            "message": "Maaf, Server sedang dalam gangguan. Silahkan coba beberapa saat lagi.",
+            "desc": "Error koneksi database"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Validation Param Required
+  
+  request: {
+    url: {{base-url-local}}/v/1/partnerships/po-confirmation-received
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      from: RAYAAPPS
+      partnershipCode: OMS1
+      userId: 1
+      ~referenceId: 202312
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 20 Dec 2024 05:42:30 GMT
+      Content-Length: 131
+    }
+  
+    status: {
+      code: 400
+      text: Bad Request
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "Validation failed on field ... with tag 'required'",
+            "message": "Maaf, ... Tidak Boleh Kosong",
+            "status": 400
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Unauthorized
+  
+  request: {
+    url: localhost:7007/v/1/partnerships/po-confirmation-received
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      from: RAYAAPPS
+      partnershipCode: OMS1
+      userId: 1
+      ~referenceId: 202312
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 20 Dec 2024 05:44:28 GMT
+      Content-Length: 75
+    }
+  
+    status: {
+      code: 401
+      text: Unauthorized
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "code": 401,
+            "desc": "Expired",
+            "message": "Invalid Token || Token Is Expired"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Validation PO Ditolak
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-confirmation-received
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      referenceId: 202312
+      from: RAYAAPPS
+      partnershipCode: OMS1
+      userId: 1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 20 Dec 2024 02:45:38 GMT
+      Content-Length: 165
+    }
+  
+    status: {
+      code: 500
+      text: Internal Server Error
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "status": 500,
+            "message": "Maaf, Pengajuan anda sudah ditolak. Silahkan cek kembali status pengajuan anda.",
+            "messageLocal": "PO Status < 0 (semua status ditolak)"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Success
+  
+  request: {
+    url: {{base-url-local}}/v/1/partnerships/po-confirmation-received
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      referenceId: 202312
+      from: RAYAAPPS
+      partnershipCode: OMS1
+      userId: 1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 20 Dec 2024 02:38:42 GMT
+      Content-Length: 91
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "status": 200,
+            "message": "Purchase Order berhasil disimpan",
+            "messageLocal": "Data Tersimpan"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Validation Param Required
+  
+  request: {
+    url: {{base-url-local}}/v/1/partnerships/po-confirmation-received
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      from: RAYAAPPS
+      partnershipCode: OMS1
+      userId: 1
+      ~referenceId: 202312
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 20 Dec 2024 05:42:30 GMT
+      Content-Length: 131
+    }
+  
+    status: {
+      code: 400
+      text: Bad Request
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "Validation failed on field ... with tag 'required'",
+            "message": "Maaf, ... Tidak Boleh Kosong",
+            "status": 400
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Validation PO Sudah Cair = 3
+  
+  request: {
+    url: localhost:7007/v/1/partnerships/po-confirmation-received
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      referenceId: 202312
+      from: RAYAAPPS
+      partnershipCode: OMS1
+      userId: 1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 20 Dec 2024 02:39:10 GMT
+      Content-Length: 161
+    }
+  
+    status: {
+      code: 500
+      text: Internal Server Error
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "status": 500,
+            "message": "Maaf, Pengajuan anda sudah berhasil dicairkan. Silahkan cek kembali status pengajuan anda.",
+            "messageLocal": "PO Status = 3 (sudah cair)"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Unauthorized
+  
+  request: {
+    url: localhost:7007/v/1/partnerships/po-confirmation-received
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      from: RAYAAPPS
+      partnershipCode: OMS1
+      userId: 1
+      ~referenceId: 202312
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 20 Dec 2024 05:44:28 GMT
+      Content-Length: 75
+    }
+  
+    status: {
+      code: 401
+      text: Unauthorized
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "code": 401,
+            "desc": "Expired",
+            "message": "Invalid Token || Token Is Expired"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: general error
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-confirmation-received
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      referenceId: 00000051
+      from: RAYAAPPS
+      partnershipCode: OMS1
+      userId: 009
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 02:53:38 GMT
+      Content-Length: 111
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "Could not connect .....",
+            "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+            "status": 500
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Database Connection
+  
+  request: {
+    url: localhost:7007/v/1/partnerships/po-confirmation-received
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      referenceId: 202312
+      from: RAYAAPPS
+      partnershipCode: OMS1
+      userId: 1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 20 Dec 2024 05:41:29 GMT
+      Content-Length: 128
+    }
+  
+    status: {
+      code: 400
+      text: Bad Request
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "status": 400,
+            "message": "Maaf, Server sedang dalam gangguan. Silahkan coba beberapa saat lagi.",
+            "desc": "Error koneksi database"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Validation bukan Mechant Financing
+  
+  request: {
+    url: localhost:7007/v/1/partnerships/po-confirmation-received
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      referenceId: 202312
+      from: RAYAAPPS
+      partnershipCode: OMS1
+      userId: 1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 20 Dec 2024 02:42:48 GMT
+      Content-Length: 125
+    }
+  
+    status: {
+      code: 500
+      text: Internal Server Error
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "status": 500,
+            "message": "Maaf, PO tersebut tidak bertipe Merchant Financing.",
+            "messageLocal": "Tipe bukan Merchant Financing"
+        }
+      '''
+    }
+  }
+}

@@ -1,0 +1,29 @@
+meta {
+  name: Profile
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{BASE_URL}}/v1/employee/profile
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: 
+}
+
+script:post-response {
+  const responseJSON = res.getBody()
+  if (responseJSON.status) {
+      const data = _.decrypt(responseJSON.data)
+      const parseData = JSON.parse(data)
+      const parseData2 = JSON.parse(parseData)
+      console.log('/v1/employee/profile', parseData2)
+  }
+}
+
+settings {
+  encodeUrl: true
+}

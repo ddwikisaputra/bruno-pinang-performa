@@ -1,0 +1,678 @@
+info:
+  name: List Member Pipeline V1
+  type: http
+  seq: 9
+
+http:
+  method: POST
+  url: "{{base_url}}/v/1/pipeline/list-member"
+  body:
+    type: form-urlencoded
+    data:
+      - name: id
+        value: "365"
+        description: ID Pipeline
+      - name: startIndex
+        value: "0"
+        description: Offset Data {Default 0}
+      - name: recordCount
+        value: "100"
+        description: Limit Data {Default 5}
+      - name: textSearch
+        value: mut
+        description: Text Pencarian Data { OPTIONAL }
+        disabled: true
+      - name: filterAmount[]
+        value: "1"
+        description: Filter < 25 JT
+        disabled: true
+      - name: filterAmount[]
+        value: "2"
+        description: Filter >= 25 JT & < 70JT
+        disabled: true
+      - name: filterAmount[]
+        value: "3"
+        description: Filter >= 70 JT & <= 100JT
+        disabled: true
+      - name: userId
+        value: "999941"
+        description: Personal Number BRI Agro (UserID Login)
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/pipeline/list-member"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "1"
+            description: ID Pipeline
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "10"
+            description: Limit Data {Default 5}
+          - name: textSearch
+            value: mut
+            description: Text Pencarian Data { OPTIONAL }
+          - name: filterAmount[]
+            value: "1"
+            description: Filter >= 25 JT & < 70JT
+          - name: filterAmount[]
+            value: "2"
+            description: Filter >= 70 JT & <= 100JT
+          - name: filterAmount[]
+            value: "3"
+            description: Filter >= 70 JT & <= 100JT
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Jul 2021 04:27:47 GMT
+        - name: Content-Length
+          value: "122"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/pipeline/list-member"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "1"
+            description: ID Pipeline
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "10"
+            description: Limit Data {Default 5}
+          - name: textSearch
+            value: mut
+            description: Text Pencarian Data { OPTIONAL }
+          - name: filterAmount[]
+            value: "1"
+            description: Filter >= 25 JT & < 70JT
+          - name: filterAmount[]
+            value: "2"
+            description: Filter >= 70 JT & <= 100JT
+          - name: filterAmount[]
+            value: "3"
+            description: Filter >= 70 JT & <= 100JT
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Jul 2021 04:30:16 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "data": [
+                  {
+                      "id": 1,
+                      "referenceId": "b7487635-f5fe-434e-bca9-ec010dfdb881",
+                      "ktpNumber": "3171051111110001",
+                      "name": "Andi Sanjaya",
+                      "branchCode": "9999",
+                      "partnershipId": 4,
+                      "partnershipName": "OMS",
+                      "estimationLoan": 5000000,
+                      "status": -2,
+                      "statusText": "Pinjaman Belum Dapat Disetujui",
+                      "createdAt": "01-03-2022",
+                      "updatedAt": "08-03-2022"
+                  }
+              ],
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/pipeline/list-member"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "1"
+            description: ID Pipeline
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "10"
+            description: Limit Data {Default 5}
+          - name: textSearch
+            value: mut
+            description: Text Pencarian Data { OPTIONAL }
+          - name: filterAmount[]
+            value: "1"
+            description: Filter >= 25 JT & < 70JT
+          - name: filterAmount[]
+            value: "2"
+            description: Filter >= 70 JT & <= 100JT
+          - name: filterAmount[]
+            value: "3"
+            description: Filter >= 70 JT & <= 100JT
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Jul 2021 04:27:47 GMT
+        - name: Content-Length
+          value: "122"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data": null
+          }
+  - name: error validation param
+    request:
+      url: "{{base_url}}/v/1/pipeline/list-member"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "1"
+            description: ID Pipeline
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "10"
+            description: Limit Data {Default 5}
+          - name: textSearch
+            value: mut
+            description: Text Pencarian Data { OPTIONAL }
+          - name: filterAmount[]
+            value: "1"
+            description: Filter >= 25 JT & < 70JT
+          - name: filterAmount[]
+            value: "2"
+            description: Filter >= 70 JT & <= 100JT
+          - name: filterAmount[]
+            value: "3"
+            description: Filter >= 70 JT & <= 100JT
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 22 Feb 2022 08:00:10 GMT
+        - name: Content-Length
+          value: "361"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Data tidak ditemukan.",
+              "desc": "Parameter ... kosong",
+              "data": null
+          }
+  - name: empty data
+    request:
+      url: "{{base_url}}/v/1/pipeline/list-member"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "-1"
+            description: ID Pipeline
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "10"
+            description: Limit Data {Default 5}
+          - name: textSearch
+            value: mut
+            description: Text Pencarian Data { OPTIONAL }
+          - name: filterAmount[]
+            value: "1"
+            description: Filter >= 25 JT & < 70JT
+          - name: filterAmount[]
+            value: "2"
+            description: Filter >= 70 JT & <= 100JT
+          - name: filterAmount[]
+            value: "3"
+            description: Filter >= 70 JT & <= 100JT
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Jul 2021 04:27:47 GMT
+        - name: Content-Length
+          value: "122"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Data Member Pipeline tidak ditemukan",
+              "message": "Member Pipeline Tidak Ditemukan",
+              "status": 404
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/pipeline/list-member"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "1"
+            description: ID Pipeline
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "10"
+            description: Limit Data {Default 5}
+          - name: textSearch
+            value: mut
+            description: Text Pencarian Data { OPTIONAL }
+          - name: filterAmount[]
+            value: "1"
+            description: Filter >= 25 JT & < 70JT
+          - name: filterAmount[]
+            value: "2"
+            description: Filter >= 70 JT & <= 100JT
+          - name: filterAmount[]
+            value: "3"
+            description: Filter >= 70 JT & <= 100JT
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Jul 2021 04:27:47 GMT
+        - name: Content-Length
+          value: "122"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: empty data
+    request:
+      url: "{{base_url}}/v/1/pipeline/list-member"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "-1"
+            description: ID Pipeline
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "10"
+            description: Limit Data {Default 5}
+          - name: textSearch
+            value: mut
+            description: Text Pencarian Data { OPTIONAL }
+          - name: filterAmount[]
+            value: "1"
+            description: Filter >= 25 JT & < 70JT
+          - name: filterAmount[]
+            value: "2"
+            description: Filter >= 70 JT & <= 100JT
+          - name: filterAmount[]
+            value: "3"
+            description: Filter >= 70 JT & <= 100JT
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Jul 2021 04:27:47 GMT
+        - name: Content-Length
+          value: "122"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Data Member Pipeline tidak ditemukan",
+              "message": "Member Pipeline Tidak Ditemukan",
+              "status": 404
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/pipeline/list-member"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "1"
+            description: ID Pipeline
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "10"
+            description: Limit Data {Default 5}
+          - name: textSearch
+            value: mut
+            description: Text Pencarian Data { OPTIONAL }
+          - name: filterAmount[]
+            value: "1"
+            description: Filter >= 25 JT & < 70JT
+          - name: filterAmount[]
+            value: "2"
+            description: Filter >= 70 JT & <= 100JT
+          - name: filterAmount[]
+            value: "3"
+            description: Filter >= 70 JT & <= 100JT
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Jul 2021 04:30:16 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "data": [
+                  {
+                      "id": 1,
+                      "referenceId": "b7487635-f5fe-434e-bca9-ec010dfdb881",
+                      "ktpNumber": "3171051111110001",
+                      "name": "Andi Sanjaya",
+                      "branchCode": "9999",
+                      "partnershipId": 4,
+                      "partnershipName": "OMS",
+                      "estimationLoan": 5000000,
+                      "status": -2,
+                      "statusText": "Pinjaman Belum Dapat Disetujui",
+                      "createdAt": "01-03-2022",
+                      "updatedAt": "08-03-2022"
+                  }
+              ],
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/pipeline/list-member"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "1"
+            description: ID Pipeline
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "10"
+            description: Limit Data {Default 5}
+          - name: textSearch
+            value: mut
+            description: Text Pencarian Data { OPTIONAL }
+          - name: filterAmount[]
+            value: "1"
+            description: Filter >= 25 JT & < 70JT
+          - name: filterAmount[]
+            value: "2"
+            description: Filter >= 70 JT & <= 100JT
+          - name: filterAmount[]
+            value: "3"
+            description: Filter >= 70 JT & <= 100JT
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Jul 2021 04:27:47 GMT
+        - name: Content-Length
+          value: "122"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/pipeline/list-member"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "1"
+            description: ID Pipeline
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "10"
+            description: Limit Data {Default 5}
+          - name: textSearch
+            value: mut
+            description: Text Pencarian Data { OPTIONAL }
+          - name: filterAmount[]
+            value: "1"
+            description: Filter >= 25 JT & < 70JT
+          - name: filterAmount[]
+            value: "2"
+            description: Filter >= 70 JT & <= 100JT
+          - name: filterAmount[]
+            value: "3"
+            description: Filter >= 70 JT & <= 100JT
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Jul 2021 04:27:47 GMT
+        - name: Content-Length
+          value: "122"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data": null
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/pipeline/list-member"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "1"
+            description: ID Pipeline
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "10"
+            description: Limit Data {Default 5}
+          - name: textSearch
+            value: mut
+            description: Text Pencarian Data { OPTIONAL }
+          - name: filterAmount[]
+            value: "1"
+            description: Filter >= 25 JT & < 70JT
+          - name: filterAmount[]
+            value: "2"
+            description: Filter >= 70 JT & <= 100JT
+          - name: filterAmount[]
+            value: "3"
+            description: Filter >= 70 JT & <= 100JT
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Jul 2021 04:27:47 GMT
+        - name: Content-Length
+          value: "122"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: error validation param
+    request:
+      url: "{{base_url}}/v/1/pipeline/list-member"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "1"
+            description: ID Pipeline
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "10"
+            description: Limit Data {Default 5}
+          - name: textSearch
+            value: mut
+            description: Text Pencarian Data { OPTIONAL }
+          - name: filterAmount[]
+            value: "1"
+            description: Filter >= 25 JT & < 70JT
+          - name: filterAmount[]
+            value: "2"
+            description: Filter >= 70 JT & <= 100JT
+          - name: filterAmount[]
+            value: "3"
+            description: Filter >= 70 JT & <= 100JT
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 22 Feb 2022 08:00:10 GMT
+        - name: Content-Length
+          value: "361"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Data tidak ditemukan.",
+              "desc": "Parameter ... kosong",
+              "data": null
+          }

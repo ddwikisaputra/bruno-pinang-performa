@@ -1,0 +1,551 @@
+meta {
+  name: Create CIF
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{url-local}}/v/1/middler/automation/create-cif
+  body: formUrlEncoded
+  auth: basic
+}
+
+auth:basic {
+  username: {{BasicAuthUsername}}
+  password: {{BasicAuthPassword}}
+}
+
+body:form-urlencoded {
+  userId: OTk5OTQx
+  branchCode: 0010
+  ktpNumber: MzE3MTAzNTIwMzkzMTExMw==
+  issueDateKtpNumber: 2027-03-12
+  name: Nur Safira
+  flagNPWP: 1
+  npwp: 123456789012345
+  email: pras@bankraya.co.id
+  placeOfBirth: Jakarta
+  dateOfBirth: 1993-03-12
+  gender: Perempuan
+  motherMaidenName: Titin
+  highestEducation: S1 / D4
+  religion: Islam
+  maritalStatus: Belum Kawin
+  dependents: 1
+  partnerKtpNumber: 
+  partnerName: 
+  partnerDateOfBirth: 
+  familyRelationship: Anak
+  address: Jl.Basudewa Blok 5 No 11 perum, Beringin Raya, Kec. Kemiling, Kota Bandar Lampung, Lampung, Indonesia
+  rt: 006
+  rw: 003
+  postalCode: 35158
+  village: Beringin Raya
+  district: Kemiling
+  city: Kota Bandar Lampung
+  cityCode: 3991
+  province: Lampung
+  mobileNumber: +62821083153064
+  workplaceName: Saida
+  businessType: 0001
+  workplaceAddress: Jl.Basudewa Blok 5 No 11 perum, Beringin Raya, Kec. Kemiling, Kota Bandar Lampung, Lampung, Indonesia
+  workplaceRt: 006
+  workplaceRw: 003
+  workplacePostalCode: 35158
+  workplaceVillage: Beringin Raya
+  workplaceDistrict: Kemiling
+  workplaceCity: Kota Bandar Lampung
+  workplaceProvince: Lampung
+  emergencyName: Sumiarsih
+  emergencyNumber: +6281394356896
+  emergencyRelationship: Tante
+}
+
+settings {
+  encodeUrl: true
+}
+
+example {
+  name: 401 : Unauthorized
+  
+  request: {
+    url: {{url-local}}/v/1/middler/automation/create-cif
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: OTk5OTQx
+      branchCode: 0010
+      ktpNumber: MzE3MTAzNTIwMzkzMDAxMQ==
+      issueDateKtpNumber: 2027-03-12
+      name: Nur Safira
+      flagNPWP: 1
+      npwp: 3171035203930002
+      email: pras@bankraya.co.id
+      placeOfBirth: Jakarta
+      dateOfBirth: 1993-03-12
+      gender: Perempuan
+      motherMaidenName: Titin
+      highestEducation: S1 / D4
+      religion: Islam
+      maritalStatus: Kawinin
+      dependents: 1
+      partnerKtpNumber: 
+      partnerName: 
+      partnerDateOfBirth: 
+      familyRelationship: Anak
+      address: Jl.Basudewa Blok 5 No 11 perum, Beringin Raya, Kec. Kemiling, Kota Bandar Lampung, Lampung, Indonesia
+      rt: 006
+      rw: 003
+      postalCode: 35158
+      village: Beringin Raya
+      district: Kemiling
+      city: Kota Bandar Lampung
+      cityCode: 3991
+      province: Lampung
+      mobileNumber: +62821083153064
+      workplaceName: Saida
+      businessType: 0001
+      workplaceAddress: Jl.Basudewa Blok 5 No 11 perum, Beringin Raya, Kec. Kemiling, Kota Bandar Lampung, Lampung, Indonesia
+      workplaceRt: 006
+      workplaceRw: 003
+      workplacePostalCode: 35158
+      workplaceVillage: Beringin Raya
+      workplaceDistrict: Kemiling
+      workplaceCity: Kota Bandar Lampung
+      workplaceProvince: Lampung
+      emergencyName: Sumiarsih
+      emergencyNumber: +6281394356896
+      emergencyRelationship: Tante
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Tue, 17 Dec 2024 03:00:30 GMT
+      Content-Length: 65
+    }
+  
+    status: {
+      code: 401
+      text: Unauthorized
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "Invalid Header.",
+            "message": "Unauthorized.",
+            "status": 401
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: 400 : Error Validation
+  
+  request: {
+    url: {{url-local}}/v/1/middler/automation/create-cif
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: OTk5OTQx
+      branchCode: 0010
+      ktpNumber: MzE3MTAzNTIwMzkzMDAxMQ==
+      issueDateKtpNumber: 2027-03-12
+      name: Nur Safira
+      flagNPWP: 1
+      npwp: 3171035203930002
+      email: pras@bankraya.co.id
+      placeOfBirth: Jakarta
+      dateOfBirth: 1993-03-12
+      gender: Perempuan
+      motherMaidenName: Titin
+      highestEducation: S1 / D4
+      religion: Islam
+      maritalStatus: Kawinin
+      dependents: 1
+      partnerKtpNumber: 
+      partnerName: 
+      partnerDateOfBirth: 
+      familyRelationship: Anak
+      address: Jl.Basudewa Blok 5 No 11 perum, Beringin Raya, Kec. Kemiling, Kota Bandar Lampung, Lampung, Indonesia
+      rt: 006
+      rw: 003
+      postalCode: 35158
+      village: Beringin Raya
+      district: Kemiling
+      city: Kota Bandar Lampung
+      cityCode: 3991
+      province: Lampung
+      mobileNumber: +62821083153064
+      workplaceName: Saida
+      businessType: 0001
+      workplaceAddress: Jl.Basudewa Blok 5 No 11 perum, Beringin Raya, Kec. Kemiling, Kota Bandar Lampung, Lampung, Indonesia
+      workplaceRt: 006
+      workplaceRw: 003
+      workplacePostalCode: 35158
+      workplaceVillage: Beringin Raya
+      workplaceDistrict: Kemiling
+      workplaceCity: Kota Bandar Lampung
+      workplaceProvince: Lampung
+      emergencyName: Sumiarsih
+      emergencyNumber: +6281394356896
+      emergencyRelationship: Tante
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Tue, 17 Dec 2024 02:54:29 GMT
+      Content-Length: 187
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "Validation failed on field MaritalStatus with tag '...'",
+            "message": "Maaf, ...",
+            "status": 400
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: 500 : BranchCode - data id is zero
+  
+  request: {
+    url: {{url-local}}/v/1/middler/automation/create-cif
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: OTk5OTQx
+      branchCode: 9010
+      ktpNumber: MzE3MTAzNTIwMzkzMTExMw==
+      issueDateKtpNumber: 2027-03-12
+      name: Nur Safira
+      flagNPWP: 1
+      npwp: 123456789012345
+      email: pras@bankraya.co.id
+      placeOfBirth: Jakarta
+      dateOfBirth: 1993-03-12
+      gender: Perempuan
+      motherMaidenName: Titin
+      highestEducation: S1 / D4
+      religion: Islam
+      maritalStatus: Belum Kawin
+      dependents: 1
+      partnerKtpNumber: 
+      partnerName: 
+      partnerDateOfBirth: 
+      familyRelationship: Anak
+      address: Jl.Basudewa Blok 5 No 11 perum, Beringin Raya, Kec. Kemiling, Kota Bandar Lampung, Lampung, Indonesia
+      rt: 006
+      rw: 003
+      postalCode: 35158
+      village: Beringin Raya
+      district: Kemiling
+      city: Kota Bandar Lampung
+      cityCode: 3991
+      province: Lampung
+      mobileNumber: +62821083153064
+      workplaceName: Saida
+      businessType: 0001
+      workplaceAddress: Jl.Basudewa Blok 5 No 11 perum, Beringin Raya, Kec. Kemiling, Kota Bandar Lampung, Lampung, Indonesia
+      workplaceRt: 006
+      workplaceRw: 003
+      workplacePostalCode: 35158
+      workplaceVillage: Beringin Raya
+      workplaceDistrict: Kemiling
+      workplaceCity: Kota Bandar Lampung
+      workplaceProvince: Lampung
+      emergencyName: Sumiarsih
+      emergencyNumber: +6281394356896
+      emergencyRelationship: Tante
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Tue, 17 Dec 2024 03:27:41 GMT
+      Content-Length: 92
+    }
+  
+    status: {
+      code: 500
+      text: Internal Server Error
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "desc": "data id is zero",
+            "message": "Kode Cabang Tidak Ditemukan.",
+            "status": 500
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: 500 : BusinessType - data id is zero
+  
+  request: {
+    url: {{url-local}}/v/1/middler/automation/create-cif
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: OTk5OTQx
+      branchCode: 0010
+      ktpNumber: MzE3MTAzNTIwMzkzMTExNg==
+      issueDateKtpNumber: 2027-03-12
+      name: Nur Safira
+      flagNPWP: 1
+      npwp: 123456789012345
+      email: pras@bankraya.co.id
+      placeOfBirth: Jakarta
+      dateOfBirth: 1993-03-12
+      gender: Perempuan
+      motherMaidenName: Titin
+      highestEducation: S1 / D4
+      religion: Islam
+      maritalStatus: Belum Kawin
+      dependents: 1
+      partnerKtpNumber: 
+      partnerName: 
+      partnerDateOfBirth: 
+      familyRelationship: Anak
+      address: Jl.Basudewa Blok 5 No 11 perum, Beringin Raya, Kec. Kemiling, Kota Bandar Lampung, Lampung, Indonesia
+      rt: 006
+      rw: 003
+      postalCode: 35158
+      village: Beringin Raya
+      district: Kemiling
+      city: Kota Bandar Lampung
+      cityCode: 3991
+      province: Lampung
+      mobileNumber: +62821083153064
+      workplaceName: Saida
+      businessType: 9999
+      workplaceAddress: Jl.Basudewa Blok 5 No 11 perum, Beringin Raya, Kec. Kemiling, Kota Bandar Lampung, Lampung, Indonesia
+      workplaceRt: 006
+      workplaceRw: 003
+      workplacePostalCode: 35158
+      workplaceVillage: Beringin Raya
+      workplaceDistrict: Kemiling
+      workplaceCity: Kota Bandar Lampung
+      workplaceProvince: Lampung
+      emergencyName: Sumiarsih
+      emergencyNumber: +6281394356896
+      emergencyRelationship: Tante
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Mon, 20 Jan 2025 07:11:49 GMT
+      Content-Length: 92
+    }
+  
+    status: {
+      code: 500
+      text: Internal Server Error
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "desc": "data id is zero",
+            "message": "Jenis Usaha Tidak Ditemukan.",
+            "status": 500
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: 200 : Success CIF Already Axist
+  
+  request: {
+    url: {{url}}/v/1/middler/automation/create-cif
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: OTk5OTk5
+      branchCode: 0020
+      ktpNumber: MzE3MTA1MTIxMTk1MDAwMQ==
+      issueDateKtpNumber: 2012-01-01
+      name: bambang
+      flagNPWP: 1
+      npwp: 123456789
+      email: ggwp@gmail.com
+      placeOfBirth: sungai
+      dateOfBirth: 2012-01-01
+      gender: Laki-Laki
+      motherMaidenName: Mommy
+      highestEducation: S1
+      religion: Islam
+      maritalStatus: Belum Kawin
+      dependents: 0
+      partnerKtpNumber: MzE3MTA1MTIxMTk1MDAwMQ==
+      partnerName: Aibo
+      partnerDateOfBirth: 2012-01-01
+      familyRelationship: Suami
+      address: jalan rumah kebenaran nomor satu
+      rt: 001
+      rw: 001
+      postalCode: 91911
+      village: Dekat Sungai
+      district: Dalam Sungai
+      city: Kota Air
+      cityCode: 0108
+      province: Negara Air
+      mobileNumber: +62817765273711
+      workplaceName: Kantor Onta
+      businessType: 0047
+      workplaceAddress: Gurun Pasir
+      workplaceRT: 001
+      workplaceRW: 001
+      workplacePostalCode: 12121
+      workplaceVillage: Gurun Mendung
+      workplaceDistrict: Gurun Angin
+      workplaceCity: Kota Gurun
+      workplaceProvince: Negara Pasir
+    }
+  }
+  
+  response: {
+    headers: {
+      Date: Mon, 12 Feb 2024 06:08:51 GMT
+      Content-Type: application/json; charset=utf-8
+      Content-Length: 187
+      Connection: keep-alive
+      Strict-Transport-Security: max-age=15724800; includeSubDomains
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": {
+                "statusCode": "1",
+                "statusDescription": "Nomor KTP sudah pernah dipakai di CIF lain.",
+                "cif": "0000121757"
+            },
+            "desc": "Success Process.",
+            "message": "Data Berhasil Disimpan.",
+            "status": 200
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: 200 : Success Create CIF
+  
+  request: {
+    url: {{url-local}}/v/1/middler/automation/create-cif
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: OTk5OTQx
+      branchCode: 0010
+      ktpNumber: MzE3MTAzNTIwMzkzMDAxMQ==
+      issueDateKtpNumber: 2027-03-12
+      name: Nur Safira
+      flagNPWP: 1
+      npwp: 3171035203930002
+      email: pras@bankraya.co.id
+      placeOfBirth: Jakarta
+      dateOfBirth: 1993-03-12
+      gender: Perempuan
+      motherMaidenName: Titin
+      highestEducation: S1 / D4
+      religion: Islam
+      maritalStatus: Belum Kawin
+      dependents: 1
+      partnerKtpNumber: 
+      partnerName: 
+      partnerDateOfBirth: 
+      familyRelationship: Anak
+      address: Jl.Basudewa Blok 5 No 11 perum, Beringin Raya, Kec. Kemiling, Kota Bandar Lampung, Lampung, Indonesia
+      rt: 006
+      rw: 003
+      postalCode: 35158
+      village: Beringin Raya
+      district: Kemiling
+      city: Kota Bandar Lampung
+      cityCode: 3991
+      province: Lampung
+      mobileNumber: +62821083153064
+      workplaceName: Saida
+      businessType: 0001
+      workplaceAddress: Jl.Basudewa Blok 5 No 11 perum, Beringin Raya, Kec. Kemiling, Kota Bandar Lampung, Lampung, Indonesia
+      workplaceRt: 006
+      workplaceRw: 003
+      workplacePostalCode: 35158
+      workplaceVillage: Beringin Raya
+      workplaceDistrict: Kemiling
+      workplaceCity: Kota Bandar Lampung
+      workplaceProvince: Lampung
+      emergencyName: Sumiarsih
+      emergencyNumber: +6281394356896
+      emergencyRelationship: Tante
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Mon, 16 Dec 2024 09:03:49 GMT
+      Content-Length: 151
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": {
+                "statusCode": "1",
+                "statusDescription": "Success",
+                "cif": "0000688516"
+            },
+            "desc": "Success Process.",
+            "message": "Data Berhasil Disimpan.",
+            "status": 200
+        }
+      '''
+    }
+  }
+}

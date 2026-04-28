@@ -1,0 +1,710 @@
+info:
+  name: Registration V2
+  type: http
+  seq: 10
+
+http:
+  method: POST
+  url: "{{base_url}}/v/2/partnerships/registration"
+  body:
+    type: form-urlencoded
+    data:
+      - name: name
+        value: Majoo
+        description: Nama Partnership {MANDATORY}
+      - name: commodity
+        value: Toko Bangunan
+        description: Jenis Usaha Partnership {MANDATORY}
+      - name: picName
+        value: UmF5YVBpUGVyVG9wiRokxj3t9xUrbSvITfjD/Lc4uG4LaOFnerGXLcc=
+        description: "[ENCODE] Nama PIC Partnership {OPTIONAL}"
+      - name: picMobileNumber
+        value: UmF5YVBpUGVyVG9w5lt/lWX8l0NjL2eLH9ynJJthYIdItC/5MJyAWVE=
+        description: "[ENCODE] Nomor Telepon PIC Partnership (ex:8xxxxxxxx) {OPTIONAL}"
+      - name: pksNumber
+        value: 001/PKS/MAJU JAYA/RAYA
+        description: Nomor PKS Partnership {OPTIONAL}
+      - name: address
+        value: Jl. Cimpedak
+        description: Alamat Partnership {OPTIONAL}
+      - name: postalCode
+        value: "1050"
+        description: Kode Pos Alamat Partnership {OPTIONAL}
+      - name: provinceCode
+        value: "03"
+        description: Kode Provinsi Alamat Partnership {OPTIONAL}
+      - name: cityCode
+        value: "0391"
+        description: Kode Kota Alamat Partnership {OPTIONAL}
+      - name: districtCode
+        value: "317105"
+        description: Kode Kecamatan Alamat Partnership {OPTIONAL}
+      - name: villageCode
+        value: "3171051002"
+        description: Kode Kelurahan Alamat Partnership {OPTIONAL}
+      - name: rt
+        value: "010"
+        description: RT Alamat Partnership {OPTIONAL}
+      - name: rw
+        value: "011"
+        description: RW Alamat Partnership {OPTIONAL}
+      - name: email
+        value: UmF5YVBpUGVyVG9woAANyjmszRh1ezDXVY8GV6e+6xywGX7961nKRA==
+        description: "[ENCODE] Alamat Email Partnership {OPTIONAL}"
+      - name: userId
+        value: UmF5YVBpUGVyVG9w9FR0lGD8PJZ01laNFpB91ptV5mkFfw==
+        description: "[ENCODE] Personal Number BRI Agro (UserID Login)"
+      - name: branchCode
+        value: "9999"
+        description: Kode Unit Kerja {MANDATORY}
+      - name: typePartnership
+        value: Avalis
+        description: Avalis || Offtaker {MANDATORY}
+      - name: pksType
+        value: PKS
+        description: PKS || MoU || Tidak Ada {MANDATORY}
+  auth:
+    type: bearer
+    token: UmF5YVBpUGVyVG9wtk843jG/7RB5In2DFecy24tPCIi6N/9g1KDYjEHKFfrchh+Eo9FaRDiUd/pcbJ32FKHuKvNA3sulxsHQ7T9P45sD+L32owygMK30Vzs7FE9fNhrTaF5nSDgeN6m5UdFStwBeElbpmmqJOsB45A==
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/partnerships/registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: name
+            value: Majoo
+            description: Nama Partnership {MANDATORY}
+          - name: commodity
+            value: Toko Bangunan
+            description: Jenis Usaha Partnership {MANDATORY}
+          - name: picName
+            value: Dwiki Saputra
+            description: Nama PIC Partnership {OPTIONAL}
+          - name: picMobileNumber
+            value: "8"
+            description: Nomor Telepon PIC Partnership (ex:8xxxxxxxx) {OPTIONAL}
+          - name: pksNumber
+            value: 001/PKS/MAJU JAYA/RAYA
+            description: Nomor PKS Partnership {OPTIONAL}
+          - name: address
+            value: Jl. Cimpedak
+            description: Alamat Partnership {OPTIONAL}
+          - name: postalCode
+            value: "1050"
+            description: Kode Pos Alamat Partnership {OPTIONAL}
+          - name: provinceCode
+            value: "03"
+            description: Kode Provinsi Alamat Partnership {OPTIONAL}
+          - name: cityCode
+            value: "0391"
+            description: Kode Kota Alamat Partnership {OPTIONAL}
+          - name: districtCode
+            value: "317105"
+            description: Kode Kecamatan Alamat Partnership {OPTIONAL}
+          - name: villageCode
+            value: "3171051002"
+            description: Kode Kelurahan Alamat Partnership {OPTIONAL}
+          - name: rt
+            value: "010"
+            description: RT Alamat Partnership {OPTIONAL}
+          - name: rw
+            value: "011"
+            description: RW Alamat Partnership {OPTIONAL}
+          - name: email
+            value: mm@gmail.com
+            description: Alamat Email Partnership {OPTIONAL}
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect ....."
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/partnerships/registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: name
+            value: Majoo
+            description: Nama Partnership {MANDATORY}
+          - name: commodity
+            value: Toko Bangunan
+            description: Jenis Usaha Partnership {MANDATORY}
+          - name: picName
+            value: Dwiki Saputra
+            description: Nama PIC Partnership {OPTIONAL}
+          - name: picMobileNumber
+            value: "8"
+            description: Nomor Telepon PIC Partnership (ex:8xxxxxxxx) {OPTIONAL}
+          - name: pksNumber
+            value: 001/PKS/MAJU JAYA/RAYA
+            description: Nomor PKS Partnership {OPTIONAL}
+          - name: address
+            value: Jl. Cimpedak
+            description: Alamat Partnership {OPTIONAL}
+          - name: postalCode
+            value: "1050"
+            description: Kode Pos Alamat Partnership {OPTIONAL}
+          - name: provinceCode
+            value: "03"
+            description: Kode Provinsi Alamat Partnership {OPTIONAL}
+          - name: cityCode
+            value: "0391"
+            description: Kode Kota Alamat Partnership {OPTIONAL}
+          - name: districtCode
+            value: "317105"
+            description: Kode Kecamatan Alamat Partnership {OPTIONAL}
+          - name: villageCode
+            value: "3171051002"
+            description: Kode Kelurahan Alamat Partnership {OPTIONAL}
+          - name: rt
+            value: "010"
+            description: RT Alamat Partnership {OPTIONAL}
+          - name: rw
+            value: "011"
+            description: RW Alamat Partnership {OPTIONAL}
+          - name: email
+            value: mm@gmail.com
+            description: Alamat Email Partnership {OPTIONAL}
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "desc": "Data Tersimpan",
+              "message": "Data Partnership berhasil disimpan",
+              "status": 200
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/partnerships/registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: name
+            value: Majoo
+            description: Nama Partnership {MANDATORY}
+          - name: commodity
+            value: Toko Bangunan
+            description: Jenis Usaha Partnership {MANDATORY}
+          - name: picName
+            value: Dwiki Saputra
+            description: Nama PIC Partnership {OPTIONAL}
+          - name: picMobileNumber
+            value: "8"
+            description: Nomor Telepon PIC Partnership (ex:8xxxxxxxx) {OPTIONAL}
+          - name: pksNumber
+            value: 001/PKS/MAJU JAYA/RAYA
+            description: Nomor PKS Partnership {OPTIONAL}
+          - name: address
+            value: Jl. Cimpedak
+            description: Alamat Partnership {OPTIONAL}
+          - name: postalCode
+            value: "1050"
+            description: Kode Pos Alamat Partnership {OPTIONAL}
+          - name: provinceCode
+            value: "03"
+            description: Kode Provinsi Alamat Partnership {OPTIONAL}
+          - name: cityCode
+            value: "0391"
+            description: Kode Kota Alamat Partnership {OPTIONAL}
+          - name: districtCode
+            value: "317105"
+            description: Kode Kecamatan Alamat Partnership {OPTIONAL}
+          - name: villageCode
+            value: "3171051002"
+            description: Kode Kelurahan Alamat Partnership {OPTIONAL}
+          - name: rt
+            value: "010"
+            description: RT Alamat Partnership {OPTIONAL}
+          - name: rw
+            value: "011"
+            description: RW Alamat Partnership {OPTIONAL}
+          - name: email
+            value: mm@gmail.com
+            description: Alamat Email Partnership {OPTIONAL}
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 401
+      statusText: Unauthorized
+      body:
+        type: text
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: validasi params
+    request:
+      url: "{{base_url}}/v/1/partnerships/registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: name
+            value: Majoo
+            description: Nama Partnership {MANDATORY}
+            disabled: true
+          - name: commodity
+            value: Toko Bangunan
+            description: Jenis Usaha Partnership {MANDATORY}
+          - name: picName
+            value: Dwiki Saputra
+            description: Nama PIC Partnership {OPTIONAL}
+          - name: picMobileNumber
+            value: "8"
+            description: Nomor Telepon PIC Partnership (ex:8xxxxxxxx) {OPTIONAL}
+          - name: pksNumber
+            value: 001/PKS/MAJU JAYA/RAYA
+            description: Nomor PKS Partnership {OPTIONAL}
+          - name: address
+            value: Jl. Cimpedak
+            description: Alamat Partnership {OPTIONAL}
+          - name: postalCode
+            value: "1050"
+            description: Kode Pos Alamat Partnership {OPTIONAL}
+          - name: provinceCode
+            value: "03"
+            description: Kode Provinsi Alamat Partnership {OPTIONAL}
+          - name: cityCode
+            value: "0391"
+            description: Kode Kota Alamat Partnership {OPTIONAL}
+          - name: districtCode
+            value: "317105"
+            description: Kode Kecamatan Alamat Partnership {OPTIONAL}
+          - name: villageCode
+            value: "3171051002"
+            description: Kode Kelurahan Alamat Partnership {OPTIONAL}
+          - name: rt
+            value: "010"
+            description: RT Alamat Partnership {OPTIONAL}
+          - name: rw
+            value: "011"
+            description: RW Alamat Partnership {OPTIONAL}
+          - name: email
+            value: mm@gmail.com
+            description: Alamat Email Partnership {OPTIONAL}
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "desc": "Parameter ... kosong",
+              "message": "... Belum Diisi",
+              "status": 500
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/partnerships/registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: name
+            value: Majoo
+            description: Nama Partnership {MANDATORY}
+            disabled: true
+          - name: commodity
+            value: Toko Bangunan
+            description: Jenis Usaha Partnership {MANDATORY}
+          - name: picName
+            value: Dwiki Saputra
+            description: Nama PIC Partnership {OPTIONAL}
+          - name: picMobileNumber
+            value: "8"
+            description: Nomor Telepon PIC Partnership (ex:8xxxxxxxx) {OPTIONAL}
+          - name: pksNumber
+            value: 001/PKS/MAJU JAYA/RAYA
+            description: Nomor PKS Partnership {OPTIONAL}
+          - name: address
+            value: Jl. Cimpedak
+            description: Alamat Partnership {OPTIONAL}
+          - name: postalCode
+            value: "1050"
+            description: Kode Pos Alamat Partnership {OPTIONAL}
+          - name: provinceCode
+            value: "03"
+            description: Kode Provinsi Alamat Partnership {OPTIONAL}
+          - name: cityCode
+            value: "0391"
+            description: Kode Kota Alamat Partnership {OPTIONAL}
+          - name: districtCode
+            value: "317105"
+            description: Kode Kecamatan Alamat Partnership {OPTIONAL}
+          - name: villageCode
+            value: "3171051002"
+            description: Kode Kelurahan Alamat Partnership {OPTIONAL}
+          - name: rt
+            value: "010"
+            description: RT Alamat Partnership {OPTIONAL}
+          - name: rw
+            value: "011"
+            description: RW Alamat Partnership {OPTIONAL}
+          - name: email
+            value: mm@gmail.com
+            description: Alamat Email Partnership {OPTIONAL}
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/partnerships/registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: name
+            value: Majoo
+            description: Nama Partnership {MANDATORY}
+          - name: commodity
+            value: Toko Bangunan
+            description: Jenis Usaha Partnership {MANDATORY}
+          - name: picName
+            value: Dwiki Saputra
+            description: Nama PIC Partnership {OPTIONAL}
+          - name: picMobileNumber
+            value: "8"
+            description: Nomor Telepon PIC Partnership (ex:8xxxxxxxx) {OPTIONAL}
+          - name: pksNumber
+            value: 001/PKS/MAJU JAYA/RAYA
+            description: Nomor PKS Partnership {OPTIONAL}
+          - name: address
+            value: Jl. Cimpedak
+            description: Alamat Partnership {OPTIONAL}
+          - name: postalCode
+            value: "1050"
+            description: Kode Pos Alamat Partnership {OPTIONAL}
+          - name: provinceCode
+            value: "03"
+            description: Kode Provinsi Alamat Partnership {OPTIONAL}
+          - name: cityCode
+            value: "0391"
+            description: Kode Kota Alamat Partnership {OPTIONAL}
+          - name: districtCode
+            value: "317105"
+            description: Kode Kecamatan Alamat Partnership {OPTIONAL}
+          - name: villageCode
+            value: "3171051002"
+            description: Kode Kelurahan Alamat Partnership {OPTIONAL}
+          - name: rt
+            value: "010"
+            description: RT Alamat Partnership {OPTIONAL}
+          - name: rw
+            value: "011"
+            description: RW Alamat Partnership {OPTIONAL}
+          - name: email
+            value: mm@gmail.com
+            description: Alamat Email Partnership {OPTIONAL}
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 401
+      statusText: Unauthorized
+      body:
+        type: text
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: validasi params
+    request:
+      url: "{{base_url}}/v/1/partnerships/registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: name
+            value: Majoo
+            description: Nama Partnership {MANDATORY}
+            disabled: true
+          - name: commodity
+            value: Toko Bangunan
+            description: Jenis Usaha Partnership {MANDATORY}
+          - name: picName
+            value: Dwiki Saputra
+            description: Nama PIC Partnership {OPTIONAL}
+          - name: picMobileNumber
+            value: "8"
+            description: Nomor Telepon PIC Partnership (ex:8xxxxxxxx) {OPTIONAL}
+          - name: pksNumber
+            value: 001/PKS/MAJU JAYA/RAYA
+            description: Nomor PKS Partnership {OPTIONAL}
+          - name: address
+            value: Jl. Cimpedak
+            description: Alamat Partnership {OPTIONAL}
+          - name: postalCode
+            value: "1050"
+            description: Kode Pos Alamat Partnership {OPTIONAL}
+          - name: provinceCode
+            value: "03"
+            description: Kode Provinsi Alamat Partnership {OPTIONAL}
+          - name: cityCode
+            value: "0391"
+            description: Kode Kota Alamat Partnership {OPTIONAL}
+          - name: districtCode
+            value: "317105"
+            description: Kode Kecamatan Alamat Partnership {OPTIONAL}
+          - name: villageCode
+            value: "3171051002"
+            description: Kode Kelurahan Alamat Partnership {OPTIONAL}
+          - name: rt
+            value: "010"
+            description: RT Alamat Partnership {OPTIONAL}
+          - name: rw
+            value: "011"
+            description: RW Alamat Partnership {OPTIONAL}
+          - name: email
+            value: mm@gmail.com
+            description: Alamat Email Partnership {OPTIONAL}
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "desc": "Parameter ... kosong",
+              "message": "... Belum Diisi",
+              "status": 500
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/partnerships/registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: name
+            value: Majoo
+            description: Nama Partnership {MANDATORY}
+          - name: commodity
+            value: Toko Bangunan
+            description: Jenis Usaha Partnership {MANDATORY}
+          - name: picName
+            value: Dwiki Saputra
+            description: Nama PIC Partnership {OPTIONAL}
+          - name: picMobileNumber
+            value: "8"
+            description: Nomor Telepon PIC Partnership (ex:8xxxxxxxx) {OPTIONAL}
+          - name: pksNumber
+            value: 001/PKS/MAJU JAYA/RAYA
+            description: Nomor PKS Partnership {OPTIONAL}
+          - name: address
+            value: Jl. Cimpedak
+            description: Alamat Partnership {OPTIONAL}
+          - name: postalCode
+            value: "1050"
+            description: Kode Pos Alamat Partnership {OPTIONAL}
+          - name: provinceCode
+            value: "03"
+            description: Kode Provinsi Alamat Partnership {OPTIONAL}
+          - name: cityCode
+            value: "0391"
+            description: Kode Kota Alamat Partnership {OPTIONAL}
+          - name: districtCode
+            value: "317105"
+            description: Kode Kecamatan Alamat Partnership {OPTIONAL}
+          - name: villageCode
+            value: "3171051002"
+            description: Kode Kelurahan Alamat Partnership {OPTIONAL}
+          - name: rt
+            value: "010"
+            description: RT Alamat Partnership {OPTIONAL}
+          - name: rw
+            value: "011"
+            description: RW Alamat Partnership {OPTIONAL}
+          - name: email
+            value: mm@gmail.com
+            description: Alamat Email Partnership {OPTIONAL}
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "desc": "Data Tersimpan",
+              "message": "Data Partnership berhasil disimpan",
+              "status": 200
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/partnerships/registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: name
+            value: Majoo
+            description: Nama Partnership {MANDATORY}
+          - name: commodity
+            value: Toko Bangunan
+            description: Jenis Usaha Partnership {MANDATORY}
+          - name: picName
+            value: Dwiki Saputra
+            description: Nama PIC Partnership {OPTIONAL}
+          - name: picMobileNumber
+            value: "8"
+            description: Nomor Telepon PIC Partnership (ex:8xxxxxxxx) {OPTIONAL}
+          - name: pksNumber
+            value: 001/PKS/MAJU JAYA/RAYA
+            description: Nomor PKS Partnership {OPTIONAL}
+          - name: address
+            value: Jl. Cimpedak
+            description: Alamat Partnership {OPTIONAL}
+          - name: postalCode
+            value: "1050"
+            description: Kode Pos Alamat Partnership {OPTIONAL}
+          - name: provinceCode
+            value: "03"
+            description: Kode Provinsi Alamat Partnership {OPTIONAL}
+          - name: cityCode
+            value: "0391"
+            description: Kode Kota Alamat Partnership {OPTIONAL}
+          - name: districtCode
+            value: "317105"
+            description: Kode Kecamatan Alamat Partnership {OPTIONAL}
+          - name: villageCode
+            value: "3171051002"
+            description: Kode Kelurahan Alamat Partnership {OPTIONAL}
+          - name: rt
+            value: "010"
+            description: RT Alamat Partnership {OPTIONAL}
+          - name: rw
+            value: "011"
+            description: RW Alamat Partnership {OPTIONAL}
+          - name: email
+            value: mm@gmail.com
+            description: Alamat Email Partnership {OPTIONAL}
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect ....."
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/partnerships/registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: name
+            value: Majoo
+            description: Nama Partnership {MANDATORY}
+            disabled: true
+          - name: commodity
+            value: Toko Bangunan
+            description: Jenis Usaha Partnership {MANDATORY}
+          - name: picName
+            value: Dwiki Saputra
+            description: Nama PIC Partnership {OPTIONAL}
+          - name: picMobileNumber
+            value: "8"
+            description: Nomor Telepon PIC Partnership (ex:8xxxxxxxx) {OPTIONAL}
+          - name: pksNumber
+            value: 001/PKS/MAJU JAYA/RAYA
+            description: Nomor PKS Partnership {OPTIONAL}
+          - name: address
+            value: Jl. Cimpedak
+            description: Alamat Partnership {OPTIONAL}
+          - name: postalCode
+            value: "1050"
+            description: Kode Pos Alamat Partnership {OPTIONAL}
+          - name: provinceCode
+            value: "03"
+            description: Kode Provinsi Alamat Partnership {OPTIONAL}
+          - name: cityCode
+            value: "0391"
+            description: Kode Kota Alamat Partnership {OPTIONAL}
+          - name: districtCode
+            value: "317105"
+            description: Kode Kecamatan Alamat Partnership {OPTIONAL}
+          - name: villageCode
+            value: "3171051002"
+            description: Kode Kelurahan Alamat Partnership {OPTIONAL}
+          - name: rt
+            value: "010"
+            description: RT Alamat Partnership {OPTIONAL}
+          - name: rw
+            value: "011"
+            description: RW Alamat Partnership {OPTIONAL}
+          - name: email
+            value: mm@gmail.com
+            description: Alamat Email Partnership {OPTIONAL}
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }

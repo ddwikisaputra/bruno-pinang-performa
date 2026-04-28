@@ -1,0 +1,661 @@
+info:
+  name: List User Registration V1
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: "{{url}}/v/1/partnerships/list-user-registration"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "{{userId}}"
+        description: User ID Login { MANDATORY }
+      - name: branchCode
+        value: "9999"
+        description: Kode Branch { MANDATORY }
+      - name: startIndex
+        value: "0"
+        description: "Offset Data { Default 0 } "
+      - name: recordCount
+        value: "10"
+        description: "Limit Data { Default 5 } "
+      - name: textSearch
+        value: dwiki
+        description: Text Search { Default NULL }
+        disabled: true
+      - name: filterDate
+        value: 2012-03-21
+        description: "Filter Tanggal Pengajuan User [ ex : 2022-03-01 ] { Default NULL }"
+        disabled: true
+      - name: filterStatus
+        value: "0"
+        description: Filter Status Pengajuan User [ 0 = Menunggu Approval | 1 =  Disetujui | -1 = Ditolak] { Default NULL }
+  auth:
+    type: bearer
+    token: "{{tokenPartnership}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Unauthorized
+    request:
+      url: "{{url}}/v/1/partnerships/list-user-registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: User ID Login { MANDATORY }
+          - name: branchCode
+            value: "9999"
+            description: Kode Branch { MANDATORY }
+          - name: startIndex
+            value: "0"
+            description: "Offset Data { Default 0 } "
+          - name: recordCount
+            value: "5"
+            description: "Limit Data { Default 5 } "
+          - name: textSearch
+            value: oms
+            description: Text Search { Default NULL }
+            disabled: true
+          - name: filterDate
+            value: 2022-03-24
+            description: "Filter Tanggal Pengajuan User [ ex : 2022-03-01 ] { Default NULL }"
+            disabled: true
+          - name: filterStatus
+            value: "1"
+            description: Filter Status Pengajuan User [ 0 = Menunggu Approval | 1 =  Disetujui | -1 = Ditolak] { Default NULL }
+            disabled: true
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:32:34 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: Database error
+    request:
+      url: "{{url}}/v/1/partnerships/list-user-registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: User ID Login { MANDATORY }
+          - name: branchCode
+            value: "9999"
+            description: Kode Branch { MANDATORY }
+          - name: startIndex
+            value: "0"
+            description: "Offset Data { Default 0 } "
+          - name: recordCount
+            value: "5"
+            description: "Limit Data { Default 5 } "
+          - name: textSearch
+            value: oms
+            description: Text Search { Default NULL }
+            disabled: true
+          - name: filterDate
+            value: 2022-03-24
+            description: "Filter Tanggal Pengajuan User [ ex : 2022-03-01 ] { Default NULL }"
+            disabled: true
+          - name: filterStatus
+            value: "1"
+            description: Filter Status Pengajuan User [ 0 = Menunggu Approval | 1 =  Disetujui | -1 = Ditolak] { Default NULL }
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:32:34 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: general error
+    request:
+      url: "{{url}}/v/1/partnerships/list-user-registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: User ID Login { MANDATORY }
+          - name: branchCode
+            value: "9999"
+            description: Kode Branch { MANDATORY }
+          - name: startIndex
+            value: "0"
+            description: "Offset Data { Default 0 } "
+          - name: recordCount
+            value: "5"
+            description: "Limit Data { Default 5 } "
+          - name: textSearch
+            value: oms
+            description: Text Search { Default NULL }
+            disabled: true
+          - name: filterDate
+            value: 2022-03-24
+            description: "Filter Tanggal Pengajuan User [ ex : 2022-03-01 ] { Default NULL }"
+            disabled: true
+          - name: filterStatus
+            value: "1"
+            description: Filter Status Pengajuan User [ 0 = Menunggu Approval | 1 =  Disetujui | -1 = Ditolak] { Default NULL }
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:32:34 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data": null
+          }
+  - name: success
+    request:
+      url: "{{url}}/v/1/partnerships/list-user-registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: User ID Login { MANDATORY }
+          - name: branchCode
+            value: "9999"
+            description: Kode Branch { MANDATORY }
+          - name: startIndex
+            value: "0"
+            description: "Offset Data { Default 0 } "
+          - name: recordCount
+            value: "5"
+            description: "Limit Data { Default 5 } "
+          - name: textSearch
+            value: oms
+            description: Text Search { Default NULL }
+            disabled: true
+          - name: filterDate
+            value: 2022-03-24
+            description: "Filter Tanggal Pengajuan User [ ex : 2022-03-01 ] { Default NULL }"
+            disabled: true
+          - name: filterStatus
+            value: "1"
+            description: Filter Status Pengajuan User [ 0 = Menunggu Approval | 1 =  Disetujui | -1 = Ditolak] { Default NULL }
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:35:05 GMT
+        - name: Content-Length
+          value: "141"
+      body:
+        type: json
+        data: |-
+          {
+              "data": [
+                  {
+                      "id": 1,
+                      "name": "Dwiki Saputra Testing",
+                      "position": "Pemilik",
+                      "partnershipCode": "OMS1",
+                      "partnershipName": "OMS",
+                      "status": 0,
+                      "statusText": "Menunggu Approval",
+                      "createdAt": "24-03-2022 13:48:16",
+                      "updatedAt": "24-03-2022 13:48:19"
+                  }
+              ],
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: Empty data error
+    request:
+      url: localhost:7007/v/1/partnerships/list-user-registration
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "{{userId}}"
+            description: User ID Login { MANDATORY }
+          - name: branchCode
+            value: "9999"
+            description: Kode Branch { MANDATORY }
+          - name: startIndex
+            value: "0"
+            description: "Offset Data { Default 0 } "
+          - name: recordCount
+            value: "10"
+            description: "Limit Data { Default 5 } "
+          - name: textSearch
+            value: dwiki
+            description: Text Search { Default NULL }
+            disabled: true
+          - name: filterDate
+            value: 2018-03-21
+            description: "Filter Tanggal Pengajuan User [ ex : 2022-03-01 ] { Default NULL }"
+          - name: filterStatus
+            value: "0"
+            description: Filter Status Pengajuan User [ 0 = Menunggu Approval | 1 =  Disetujui | -1 = Ditolak] { Default NULL }
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 29 Jan 2025 11:08:17 GMT
+        - name: Content-Length
+          value: "120"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "status": 404,
+              "message": "User Registration Tidak Ditemukan",
+              "desc": "Data User Registration tidak ditemukan"
+          }
+  - name: Validation param error
+    request:
+      url: localhost:7007/v/1/partnerships/list-user-registration
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "{{userId}}"
+            description: User ID Login { MANDATORY }
+            disabled: true
+          - name: branchCode
+            value: "9999"
+            description: Kode Branch { MANDATORY }
+          - name: startIndex
+            value: "0"
+            description: "Offset Data { Default 0 } "
+          - name: recordCount
+            value: "10"
+            description: "Limit Data { Default 5 } "
+          - name: textSearch
+            value: dwiki
+            description: Text Search { Default NULL }
+            disabled: true
+          - name: filterDate
+            value: 2012-03-21
+            description: "Filter Tanggal Pengajuan User [ ex : 2022-03-01 ] { Default NULL }"
+            disabled: true
+          - name: filterStatus
+            value: "0"
+            description: Filter Status Pengajuan User [ 0 = Menunggu Approval | 1 =  Disetujui | -1 = Ditolak] { Default NULL }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 30 Jan 2025 01:37:16 GMT
+        - name: Content-Length
+          value: "121"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Validation failed on field UserId with tag 'required'",
+              "message": "Maaf, Userid Tidak Boleh Kosong",
+              "status": 400
+          }
+  - name: Unauthorized
+    request:
+      url: "{{url}}/v/1/partnerships/list-user-registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: User ID Login { MANDATORY }
+          - name: branchCode
+            value: "9999"
+            description: Kode Branch { MANDATORY }
+          - name: startIndex
+            value: "0"
+            description: "Offset Data { Default 0 } "
+          - name: recordCount
+            value: "5"
+            description: "Limit Data { Default 5 } "
+          - name: textSearch
+            value: oms
+            description: Text Search { Default NULL }
+            disabled: true
+          - name: filterDate
+            value: 2022-03-24
+            description: "Filter Tanggal Pengajuan User [ ex : 2022-03-01 ] { Default NULL }"
+            disabled: true
+          - name: filterStatus
+            value: "1"
+            description: Filter Status Pengajuan User [ 0 = Menunggu Approval | 1 =  Disetujui | -1 = Ditolak] { Default NULL }
+            disabled: true
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:32:34 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: Database error
+    request:
+      url: "{{url}}/v/1/partnerships/list-user-registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: User ID Login { MANDATORY }
+          - name: branchCode
+            value: "9999"
+            description: Kode Branch { MANDATORY }
+          - name: startIndex
+            value: "0"
+            description: "Offset Data { Default 0 } "
+          - name: recordCount
+            value: "5"
+            description: "Limit Data { Default 5 } "
+          - name: textSearch
+            value: oms
+            description: Text Search { Default NULL }
+            disabled: true
+          - name: filterDate
+            value: 2022-03-24
+            description: "Filter Tanggal Pengajuan User [ ex : 2022-03-01 ] { Default NULL }"
+            disabled: true
+          - name: filterStatus
+            value: "1"
+            description: Filter Status Pengajuan User [ 0 = Menunggu Approval | 1 =  Disetujui | -1 = Ditolak] { Default NULL }
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:32:34 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: Validation param error
+    request:
+      url: localhost:7007/v/1/partnerships/list-user-registration
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "{{userId}}"
+            description: User ID Login { MANDATORY }
+            disabled: true
+          - name: branchCode
+            value: "9999"
+            description: Kode Branch { MANDATORY }
+          - name: startIndex
+            value: "0"
+            description: "Offset Data { Default 0 } "
+          - name: recordCount
+            value: "10"
+            description: "Limit Data { Default 5 } "
+          - name: textSearch
+            value: dwiki
+            description: Text Search { Default NULL }
+            disabled: true
+          - name: filterDate
+            value: 2012-03-21
+            description: "Filter Tanggal Pengajuan User [ ex : 2022-03-01 ] { Default NULL }"
+            disabled: true
+          - name: filterStatus
+            value: "0"
+            description: Filter Status Pengajuan User [ 0 = Menunggu Approval | 1 =  Disetujui | -1 = Ditolak] { Default NULL }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 30 Jan 2025 01:37:16 GMT
+        - name: Content-Length
+          value: "121"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Validation failed on field UserId with tag 'required'",
+              "message": "Maaf, Userid Tidak Boleh Kosong",
+              "status": 400
+          }
+  - name: general error
+    request:
+      url: "{{url}}/v/1/partnerships/list-user-registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: User ID Login { MANDATORY }
+          - name: branchCode
+            value: "9999"
+            description: Kode Branch { MANDATORY }
+          - name: startIndex
+            value: "0"
+            description: "Offset Data { Default 0 } "
+          - name: recordCount
+            value: "5"
+            description: "Limit Data { Default 5 } "
+          - name: textSearch
+            value: oms
+            description: Text Search { Default NULL }
+            disabled: true
+          - name: filterDate
+            value: 2022-03-24
+            description: "Filter Tanggal Pengajuan User [ ex : 2022-03-01 ] { Default NULL }"
+            disabled: true
+          - name: filterStatus
+            value: "1"
+            description: Filter Status Pengajuan User [ 0 = Menunggu Approval | 1 =  Disetujui | -1 = Ditolak] { Default NULL }
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:32:34 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data": null
+          }
+  - name: success
+    request:
+      url: "{{url}}/v/1/partnerships/list-user-registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: User ID Login { MANDATORY }
+          - name: branchCode
+            value: "9999"
+            description: Kode Branch { MANDATORY }
+          - name: startIndex
+            value: "0"
+            description: "Offset Data { Default 0 } "
+          - name: recordCount
+            value: "5"
+            description: "Limit Data { Default 5 } "
+          - name: textSearch
+            value: oms
+            description: Text Search { Default NULL }
+            disabled: true
+          - name: filterDate
+            value: 2022-03-24
+            description: "Filter Tanggal Pengajuan User [ ex : 2022-03-01 ] { Default NULL }"
+            disabled: true
+          - name: filterStatus
+            value: "1"
+            description: Filter Status Pengajuan User [ 0 = Menunggu Approval | 1 =  Disetujui | -1 = Ditolak] { Default NULL }
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:35:05 GMT
+        - name: Content-Length
+          value: "141"
+      body:
+        type: json
+        data: |-
+          {
+              "data": [
+                  {
+                      "id": 1,
+                      "name": "Dwiki Saputra Testing",
+                      "position": "Pemilik",
+                      "partnershipCode": "OMS1",
+                      "partnershipName": "OMS",
+                      "status": 0,
+                      "statusText": "Menunggu Approval",
+                      "createdAt": "24-03-2022 13:48:16",
+                      "updatedAt": "24-03-2022 13:48:19"
+                  }
+              ],
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: Empty data error
+    request:
+      url: localhost:7007/v/1/partnerships/list-user-registration
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "{{userId}}"
+            description: User ID Login { MANDATORY }
+          - name: branchCode
+            value: "9999"
+            description: Kode Branch { MANDATORY }
+          - name: startIndex
+            value: "0"
+            description: "Offset Data { Default 0 } "
+          - name: recordCount
+            value: "10"
+            description: "Limit Data { Default 5 } "
+          - name: textSearch
+            value: dwiki
+            description: Text Search { Default NULL }
+            disabled: true
+          - name: filterDate
+            value: 2018-03-21
+            description: "Filter Tanggal Pengajuan User [ ex : 2022-03-01 ] { Default NULL }"
+          - name: filterStatus
+            value: "0"
+            description: Filter Status Pengajuan User [ 0 = Menunggu Approval | 1 =  Disetujui | -1 = Ditolak] { Default NULL }
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 29 Jan 2025 11:08:17 GMT
+        - name: Content-Length
+          value: "120"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "status": 404,
+              "message": "User Registration Tidak Ditemukan",
+              "desc": "Data User Registration tidak ditemukan"
+          }

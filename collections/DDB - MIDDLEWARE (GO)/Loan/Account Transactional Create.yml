@@ -1,0 +1,82 @@
+info:
+  name: Account Transactional Create
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/digiagri/loan/account/transactional/create"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "999941"
+      - name: kodeCabang
+        value: "0010"
+      - name: noCIF
+        value: "0000118819"
+      - name: nominal
+        value: "20000"
+      - name: nama
+        value: SUDARMIN SJAMSOE
+      - name: sukuBunga
+        value: "25.00"
+      - name: jangkaWaktu
+        value: "7"
+      - name: nomorFasilitas
+        value: 0010/0000118819/PK1/005
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Fasilitas telah ditutup
+    request:
+      url: "{{baseUrl}}/api/digiagri/loan/account/transactional/create"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+          - name: kodeCabang
+            value: "0010"
+          - name: noCIF
+            value: "0000118819"
+          - name: nominal
+            value: "20000"
+          - name: nama
+            value: SUDARMIN SJAMSOE
+          - name: sukuBunga
+            value: "25.00"
+          - name: jangkaWaktu
+            value: "7"
+          - name: nomorFasilitas
+            value: 0010/0000118819/PK1/005
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Thu, 09 Oct 2025 06:05:50 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "100"
+        - name: Connection
+          value: keep-alive
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "statusCode": "99",
+              "statusDescription": "Fasilitas Telah Ditutup",
+              "NomorRekening": "",
+              "Validation": ""
+          }

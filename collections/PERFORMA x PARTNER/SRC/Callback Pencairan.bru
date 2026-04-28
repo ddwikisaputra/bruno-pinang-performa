@@ -1,0 +1,143 @@
+meta {
+  name: Callback Pencairan
+  type: http
+  seq: 1
+}
+
+post {
+  url: https://businesses.api.dev.src.id/api/v2/business/client/pinang-performa/callback-pencairan
+  body: formUrlEncoded
+  auth: basic
+}
+
+headers {
+  Content-Type: application/json
+}
+
+auth:basic {
+  username: U1JDLTI4
+  password: cGhtV3VZYWRkSg==
+}
+
+body:form-urlencoded {
+  nomorInvoice: b67a3baa-0ba1-4548-a7ac-399e1e7132db
+  kodePengajuanPencairan: TRX2026796
+}
+
+settings {
+  encodeUrl: true
+}
+
+example {
+  name: success
+  
+  request: {
+    url: https://businesses.api.dev.src.id/api/v2/business/client/pinang-performa/callback-pencairan
+    method: POST
+    mode: formUrlEncoded
+    headers: {
+      Content-Type: application/json
+    }
+  
+    body:form-urlencoded: {
+      nomorInvoice: 4bc3d2f3-66aa-4435-b97f-7a02b352cfaf
+      kodePengajuanPencairan: Test23
+    }
+  }
+  
+  response: {
+    headers: {
+      Date: Wed, 25 Feb 2026 02:49:30 GMT
+      Content-Type: application/json
+      Transfer-Encoding: chunked
+      Connection: keep-alive
+      Vary: Accept-Encoding
+      Cache-Control: no-cache, private
+      Access-Control-Allow-Origin: *
+      Referrer-Policy: no-referrer-when-downgrade
+      Content-Security-Policy: default-src 'self'; script-src 'self' https://apps.apple.com https://play.google.com; style-src 'self' https://fonts.googleapis.com; object-src 'none'; base-uri 'self'; connect-src 'self'; font-src 'self' https://fonts.gstatic.com; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; worker-src 'none';
+      Strict-Transport-Security: max-age=31536000; includeSubdomains; preload
+      X-Frame-Options: SAMEORIGIN
+      X-XSS-Protection: 1; mode=block
+      X-Content-Type-Options: nosniff
+      Permissions-Policy: camera=(self), microphone=(self), geolocation=(self)
+      Cross-Origin-Resource-Policy: same-site
+      Cross-Origin-Embedder-Policy: require-corp
+      Cross-Origin-Opener-Policy: same-origin
+      Content-Encoding: gzip
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "Data Berhasil Dikonfirmasi",
+            "message": "Berhasil",
+            "status": 200
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: error
+  
+  request: {
+    url: https://businesses.api.dev.src.id/api/v2/business/client/pinang-performa/callback-pencairan
+    method: POST
+    mode: formUrlEncoded
+    headers: {
+      Content-Type: application/json
+    }
+  
+    body:form-urlencoded: {
+      kodePengajuanPencairan: Test23
+      ~nomorInvoice: 
+    }
+  }
+  
+  response: {
+    headers: {
+      Date: Wed, 25 Feb 2026 02:49:46 GMT
+      Content-Type: application/json
+      Transfer-Encoding: chunked
+      Connection: keep-alive
+      Vary: Accept-Encoding
+      Cache-Control: no-cache, private
+      Access-Control-Allow-Origin: *
+      Referrer-Policy: no-referrer-when-downgrade
+      Content-Security-Policy: default-src 'self'; script-src 'self' https://apps.apple.com https://play.google.com; style-src 'self' https://fonts.googleapis.com; object-src 'none'; base-uri 'self'; connect-src 'self'; font-src 'self' https://fonts.gstatic.com; frame-src 'self'; img-src 'self'; manifest-src 'self'; media-src 'self'; worker-src 'none';
+      Strict-Transport-Security: max-age=31536000; includeSubdomains; preload
+      X-Frame-Options: SAMEORIGIN
+      X-XSS-Protection: 1; mode=block
+      X-Content-Type-Options: nosniff
+      Permissions-Policy: camera=(self), microphone=(self), geolocation=(self)
+      Cross-Origin-Resource-Policy: same-site
+      Cross-Origin-Embedder-Policy: require-corp
+      Cross-Origin-Opener-Policy: same-origin
+      Content-Encoding: gzip
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "Data Gagal Dikonfirmasi",
+            "message": "Gagal",
+            "status": 500
+        }
+      '''
+    }
+  }
+}

@@ -1,0 +1,671 @@
+meta {
+  name: Verify OTP Partnerhip V1
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{url}}/v/1/partnerships/verify-otp
+  body: formUrlEncoded
+  auth: basic
+}
+
+auth:basic {
+  username: UmF5YVBpUGVyVG9wvQQ9yCaZywQnor3oTiEnI7QBWZVTYFT2
+  password: UmF5YVBpUGVyVG9w/18dnAT+9iY6YT7toW1oEEdcvgxwAkuWwDSb
+}
+
+body:form-urlencoded {
+  email: dwiki.saputra@bankraya.co.id
+  mobileNumber: +6285153315772
+  serverId: AGRO8974353801
+  otp: 034558
+}
+
+settings {
+  encodeUrl: true
+}
+
+example {
+  name: validasi parameter
+  
+  request: {
+    url: {{url}}/v/1/partnerships/verify-otp
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      email: oms@gmail.com
+      mobileNumber: +6281776527556
+      serverId: RAYA4374289782
+      otp: 158372
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 02:53:38 GMT
+      Content-Length: 111
+    }
+  
+    status: {
+      code: 400
+      text: Bad Request
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "Parameter ... kosong",
+            "message": "Maaf, Parameter ... tidak boleh kosong",
+            "status": 500
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: unautorized
+  
+  request: {
+    url: {{url}}/v/1/partnerships/verify-otp
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      email: oms@gmail.com
+      mobileNumber: +6281776527556
+      serverId: RAYA4374289782
+      otp: 158372
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 02:44:34 GMT
+      Content-Length: 82
+    }
+  
+    status: {
+      code: 401
+      text: Unauthorized
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "code": 401,
+            "desc": "Expired",
+            "message": "Invalid Token || Token Is Expired"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: validasi otp kadaluarsa
+  
+  request: {
+    url: {{url}}/v/1/partnerships/verify-otp
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      email: dwiki.saputra@bankraya.co.id
+      mobileNumber: +6285153315772
+      serverId: RAYA0213162195
+      otp: 626058
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 11 Mar 2022 08:29:13 GMT
+      Content-Length: 104
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "Session Expired",
+            "message": "Maaf, OTP expired. Silahkan coba Resend OTP kembali.",
+            "status": 700
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: error database connection
+  
+  request: {
+    url: {{url}}/v/1/partnerships/verify-otp
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      email: oms@gmail.com
+      mobileNumber: +6281776527556
+      serverId: RAYA4374289782
+      otp: 158372
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 02:53:38 GMT
+      Content-Length: 111
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+            "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+            "status": 400
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: general error
+  
+  request: {
+    url: {{url}}/v/1/partnerships/verify-otp
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      email: oms@gmail.com
+      mobileNumber: +6281776527556
+      serverId: RAYA4374289782
+      otp: 158372
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 02:53:38 GMT
+      Content-Length: 111
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "Could not connect .....",
+            "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+            "status": 500
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: success
+  
+  request: {
+    url: {{url}}/v/1/partnerships/verify-otp
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      email: oms@gmail.com
+      mobileNumber: +6281776527556
+      serverId: RAYA4374289782
+      otp: 158372
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 03:03:58 GMT
+      Content-Length: 82
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "Verify OTP berhasil",
+            "message": "Verifikasi OTP berhasil",
+            "status": 200
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: validasi otp sudah pernah digunakan
+  
+  request: {
+    url: {{url}}/v/1/partnerships/verify-otp
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      email: dwiki.saputra@bankraya.co.id
+      mobileNumber: +6285153315772
+      serverId: AGRO8974353801
+      otp: 034558
+    }
+  }
+  
+  response: {
+    headers: {
+      Server: nginx/1.20.1
+      Date: Fri, 11 Mar 2022 19:33:20 GMT
+      Content-Type: application/json; charset=utf-8
+      Content-Length: 79
+      Connection: keep-alive
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "Token sudah pernah digunakan",
+            "message": "Maaf, Server sedang dalam gangguan. Silahkan coba beberapa saat lagi.",
+            "status": 600
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: validasi otp salah
+  
+  request: {
+    url: {{url}}/v/1/partnerships/verify-otp
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      email: dwiki.saputra@bankraya.co.id
+      mobileNumber: +6285153315772
+      serverId: RAYA3035283863
+      otp: 626058
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 11 Mar 2022 08:29:40 GMT
+      Content-Length: 119
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "Invalid Token",
+            "message": "Maaf, OTP yang anda masukan salah.",
+            "status": 800
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: validasi parameter
+  
+  request: {
+    url: {{url}}/v/1/partnerships/verify-otp
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      email: oms@gmail.com
+      mobileNumber: +6281776527556
+      serverId: RAYA4374289782
+      otp: 158372
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 02:53:38 GMT
+      Content-Length: 111
+    }
+  
+    status: {
+      code: 400
+      text: Bad Request
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "Parameter ... kosong",
+            "message": "Maaf, Parameter ... tidak boleh kosong",
+            "status": 500
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: unautorized
+  
+  request: {
+    url: {{url}}/v/1/partnerships/verify-otp
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      email: oms@gmail.com
+      mobileNumber: +6281776527556
+      serverId: RAYA4374289782
+      otp: 158372
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 02:44:34 GMT
+      Content-Length: 82
+    }
+  
+    status: {
+      code: 401
+      text: Unauthorized
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "code": 401,
+            "desc": "Expired",
+            "message": "Invalid Token || Token Is Expired"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: validasi otp kadaluarsa
+  
+  request: {
+    url: {{url}}/v/1/partnerships/verify-otp
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      email: dwiki.saputra@bankraya.co.id
+      mobileNumber: +6285153315772
+      serverId: RAYA0213162195
+      otp: 626058
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 11 Mar 2022 08:29:13 GMT
+      Content-Length: 104
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "Session Expired",
+            "message": "Maaf, OTP expired. Silahkan coba Resend OTP kembali.",
+            "status": 700
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: error database connection
+  
+  request: {
+    url: {{url}}/v/1/partnerships/verify-otp
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      email: oms@gmail.com
+      mobileNumber: +6281776527556
+      serverId: RAYA4374289782
+      otp: 158372
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 02:53:38 GMT
+      Content-Length: 111
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+            "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+            "status": 400
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: general error
+  
+  request: {
+    url: {{url}}/v/1/partnerships/verify-otp
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      email: oms@gmail.com
+      mobileNumber: +6281776527556
+      serverId: RAYA4374289782
+      otp: 158372
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 02:53:38 GMT
+      Content-Length: 111
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "Could not connect .....",
+            "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+            "status": 500
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: success
+  
+  request: {
+    url: {{url}}/v/1/partnerships/verify-otp
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      email: oms@gmail.com
+      mobileNumber: +6281776527556
+      serverId: RAYA4374289782
+      otp: 158372
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 03:03:58 GMT
+      Content-Length: 82
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "Verify OTP berhasil",
+            "message": "Verifikasi OTP berhasil",
+            "status": 200
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: validasi otp sudah pernah digunakan
+  
+  request: {
+    url: {{url}}/v/1/partnerships/verify-otp
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      email: dwiki.saputra@bankraya.co.id
+      mobileNumber: +6285153315772
+      serverId: AGRO8974353801
+      otp: 034558
+    }
+  }
+  
+  response: {
+    headers: {
+      Server: nginx/1.20.1
+      Date: Fri, 11 Mar 2022 19:33:20 GMT
+      Content-Type: application/json; charset=utf-8
+      Content-Length: 79
+      Connection: keep-alive
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "Token sudah pernah digunakan",
+            "message": "Maaf, Server sedang dalam gangguan. Silahkan coba beberapa saat lagi.",
+            "status": 600
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: validasi otp salah
+  
+  request: {
+    url: {{url}}/v/1/partnerships/verify-otp
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      email: dwiki.saputra@bankraya.co.id
+      mobileNumber: +6285153315772
+      serverId: RAYA3035283863
+      otp: 626058
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 11 Mar 2022 08:29:40 GMT
+      Content-Length: 119
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "Invalid Token",
+            "message": "Maaf, OTP yang anda masukan salah.",
+            "status": 800
+        }
+      '''
+    }
+  }
+}

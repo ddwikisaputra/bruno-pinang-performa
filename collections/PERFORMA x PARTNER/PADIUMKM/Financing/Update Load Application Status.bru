@@ -1,0 +1,237 @@
+meta {
+  name: Update Load Application Status
+  type: http
+  seq: 1
+}
+
+put {
+  url: https://gatekeeper-stg.berasumkm.id/v1/financing/invoices/INV-2024-10-24-940672001?nik=3125562627277255
+  body: json
+  auth: inherit
+}
+
+params:query {
+  nik: 3125562627277255
+}
+
+headers {
+  X-App-Id: {{App-Id}}
+  X-App-Secret: {{App-Secret}}
+}
+
+body:json {
+  {
+      "action": "process",
+      "invoice_id": "INV-2024-10-24-940672001",
+      "loan_application_id": "TRX-10001-1", 
+      "value_proposed": 300000,
+      "value_approved": 300000,
+      "due_date": "2024-12-01",
+      "value_repayment": 0,
+      "admin_fee": 0,
+      "collect_fee": 0,
+      "interest": 0,
+      "penalty": 0,
+      "notes": "Pengajuan pinjaman sedang di proses [ - ]"
+  }
+}
+
+settings {
+  encodeUrl: true
+}
+
+example {
+  name: Error - Invoice Not Found
+  
+  request: {
+    url: https://gatekeeper-stg.berasumkm.id/v1/financing/invoices/INV-2024-10-24-940672001
+    method: PUT
+    mode: json
+    headers: {
+      X-App-Id: {{App-Id}}
+      X-App-Secret: {{App-Secret}}
+    }
+  
+    body:json: {
+      {
+          "npwp": "3125562627277255",
+          "action": "process",
+          "loan_application_id": "TRX-2001-1", 
+          "value_proposed": 300000
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Date: Fri, 22 Nov 2024 00:31:26 GMT
+      Content-Type: application/json; charset=utf-8
+      Transfer-Encoding: chunked
+      Connection: keep-alive
+      Vary: Accept-Encoding
+      Vary: Origin
+      Access-Control-Allow-Origin: gatekeeper-stg.berasumkm.id
+      Access-Control-Allow-Credentials: true
+      Access-Control-Expose-Headers: Content-Disposition
+      Content-Security-Policy: default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests
+      Cross-Origin-Embedder-Policy: require-corp
+      Cross-Origin-Opener-Policy: same-origin
+      Cross-Origin-Resource-Policy: same-origin
+      X-DNS-Prefetch-Control: off
+      Expect-CT: max-age=0
+      X-Frame-Options: SAMEORIGIN
+      Strict-Transport-Security: max-age=15724800; includeSubDomains
+      X-Download-Options: noopen
+      X-Content-Type-Options: nosniff
+      Origin-Agent-Cluster: ?1
+      X-Permitted-Cross-Domain-Policies: none
+      Referrer-Policy: no-referrer
+      X-XSS-Protection: 0
+      X-Request-Id: 350f2d1adec8885501c1f23ed3e87ccf
+      ETag: W/"91-mEDgR6mAi5W75kDj9rs6EDHuYGI"
+      Content-Encoding: br
+    }
+  
+    status: {
+      code: 404
+      text: Not Found
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "status": {
+                "code": 404,
+                "message": "Invoice INV-2024-10-24-940672001 with NPWP 3125562627277255 not found or not eligible for financing"
+            },
+            "data": {}
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Success - Submission Process
+  
+  request: {
+    url: https://gatekeeper-stg.berasumkm.id/v1/financing/invoices/INV-2024-10-24-940672000?nik=3125562627277255
+    method: PUT
+    mode: json
+    params:query: {
+      nik: 3125562627277255
+    }
+  
+    headers: {
+      X-App-Id: {{App-Id}}
+      X-App-Secret: {{App-Secret}}
+    }
+  
+    body:json: {
+      {
+          "action": "process",
+          "invoice_id": "INV-2024-10-24-940672000",
+          "loan_application_id": "TRX-10001-1", 
+          "value_proposed": 300000,
+          "value_approved": 300000,
+          "due_date": "2024-12-01",
+          "value_repayment": 0,
+          "admin_fee": 0,
+          "collect_fee": 0,
+          "interest": 0,
+          "penalty": 0,
+          "notes": "Pengajuan pinjaman sedang di proses [ - ]"
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Date: Fri, 22 Nov 2024 08:59:43 GMT
+      Content-Type: application/json; charset=utf-8
+      Transfer-Encoding: chunked
+      Connection: keep-alive
+      Vary: Accept-Encoding
+      Vary: Origin
+      Access-Control-Allow-Origin: gatekeeper-stg.berasumkm.id
+      Access-Control-Allow-Credentials: true
+      Access-Control-Expose-Headers: Content-Disposition
+      Content-Security-Policy: default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests
+      Cross-Origin-Embedder-Policy: require-corp
+      Cross-Origin-Opener-Policy: same-origin
+      Cross-Origin-Resource-Policy: same-origin
+      X-DNS-Prefetch-Control: off
+      Expect-CT: max-age=0
+      X-Frame-Options: SAMEORIGIN
+      Strict-Transport-Security: max-age=15724800; includeSubDomains
+      X-Download-Options: noopen
+      X-Content-Type-Options: nosniff
+      Origin-Agent-Cluster: ?1
+      X-Permitted-Cross-Domain-Policies: none
+      Referrer-Policy: no-referrer
+      X-XSS-Protection: 0
+      X-Request-Id: 3019e935ed26b3ffbf0c55581d65bbea
+      ETag: W/"3b0-0QZyCYUMpif1ShCkNMG5vBmfmmM"
+      Content-Encoding: br
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "status": {
+                "code": 200,
+                "message": "Ok"
+            },
+            "data": {
+                "loan_status": {
+                    "id": 2,
+                    "status": "Pengajuan pendanaan sedang diproses"
+                },
+                "buyer": {
+                    "address": "jakarta raya",
+                    "city": "Kab. Tangerang",
+                    "district": "Kelapa Dua",
+                    "email": "stafftiga3@yopmail.com",
+                    "group": "PT ETAX TESTING",
+                    "name": "staff nya tiga",
+                    "phone": "08777777112",
+                    "province": "Banten",
+                    "zipcode": "15811"
+                },
+                "invoice": {
+                    "created_at": "2024-10-24 02:50:42",
+                    "delivery_address": "jakarta raya",
+                    "delivery_city": "Kab. Tangerang",
+                    "delivery_district": "Kelapa Dua",
+                    "delivery_phone": "0833333",
+                    "delivery_receiver": "MANAGER TIGA",
+                    "delivery_zipcode": "15811",
+                    "invoice_id": "INV-2024-10-24-940672000",
+                    "purchase_order_number": "PO-2024-10-24-940672000",
+                    "price_total": 57700000,
+                    "status": "Menunggu Pembayaran",
+                    "due_date": "2024-11-23"
+                },
+                "vendor": {
+                    "address": "RUMAH  RUMAH RUMAH",
+                    "city": "Kab. Tangerang",
+                    "district": "Kelapa Dua",
+                    "email": "",
+                    "name": "HEXA SARANA INTERMEDIA",
+                    "pic_name": "",
+                    "zipcode": "15834",
+                    "id": "649133953aadb1eb7a5df632"
+                }
+            }
+        }
+      '''
+    }
+  }
+}

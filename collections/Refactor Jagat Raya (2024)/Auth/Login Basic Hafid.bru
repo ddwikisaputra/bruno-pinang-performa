@@ -1,0 +1,48 @@
+meta {
+  name: Login Basic Hafid
+  type: http
+  seq: 15
+}
+
+post {
+  url: {{BASE_URL}}/v1/auth/login/basic
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+      "payload": "{{REQUEST_BODY}}"
+  }
+}
+
+script:pre-request {
+  const payload = {
+      "username": "KP000005",
+      "password": "UEBzc3cwcmQ="
+  }
+  
+  const result = _.encrypt(JSON.stringify(payload))
+  bru.setEnvVar("REQUEST_BODY", result);
+}
+
+script:post-response {
+  const responseJSON = res.getBody()
+  if (responseJSON.status) {
+      const data = _.decrypt(responseJSON.data)
+      const result = JSON.parse(JSON.parse(data))
+      bru.setEnvVar("TOKEN", result.access_token)
+      bru.setEnvVar("REFRESH_TOKEN", result.refresh_token)
+      bru.setEnvVar("DATA_ENCRYPT", responseJSON.data)
+      console.log("Access_Token", result.access_token)
+      console.log("Refresh_Token", result.refresh_token)
+  } else {
+      const data = _.decrypt(responseJSON.data)
+      const result = JSON.parse(JSON.parse(data))
+      console.log("forcible", result.forcible)
+  }
+}
+
+settings {
+  encodeUrl: true
+}

@@ -1,0 +1,140 @@
+info:
+  name: Rqequest Bulk Raya Account
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: https://be-monorepo-user-chart.superapps.svc.cluster.local:3000/registration/bulk-register
+  body:
+    type: form-urlencoded
+    data:
+      - name: phoneNumber
+        value: "+6285770003834"
+      - name: password
+        value: $2a$10$IQn7CBRG.vdy1fc2Ze/wverZflECFmnh8.ZdluMSb1Vye7aSQEaFG
+      - name: pin
+        value: $2a$10$yM9M2V/2N9PIt7PRjXsOu.ZyBUabLiNH1ZHIS/26bkI1oZsXvMbiS
+      - name: email
+        value: gilang.nurohman@bankraya.co.id
+      - name: fullName
+        value: Gilang Romadhon Nurohman
+      - name: cif
+        value: "0000688952"
+      - name: accountNumber
+        value: "002001000536313"
+      - name: nickName
+        value: ""
+      - name: address
+        value: Jl. Gatot Subroto No.177A
+      - name: province
+        value: 31-DKI Jakarta
+      - name: city
+        value: 3174-Jakarta Selatan
+      - name: district
+        value: 01-Tebet
+      - name: subDistrict
+        value: 1003-Menteng Dalam
+      - name: rt
+        value: "004"
+      - name: rw
+        value: "003"
+      - name: identityNo
+        value: "3304180701980001"
+      - name: taxNo
+        value: ""
+      - name: referralCode
+        value: ""
+      - name: pob
+        value: Banjarnegara
+      - name: dob
+        value: 07 / Jan / 1998
+      - name: gender
+        value: Pria
+      - name: maritalStatus
+        value: B-Belum Kawin
+      - name: nationality
+        value: ID-Indonesia
+      - name: zipCode
+        value: "12870"
+      - name: motherMaidenName
+        value: Sart
+      - name: occupationCode
+        value: D88-WIRASWASTA
+      - name: companyName
+        value: Gilang Romadhon Nurohman
+      - name: industryCode
+        value: 0001-WIRASWASTA
+      - name: positionCode
+        value: 01-Pemilik Direktur Utama/Presiden Dir.
+      - name: companyTelephoneNumber
+        value: ""
+      - name: companyZipCode
+        value: "12870"
+      - name: sourceIncomeCode
+        value: 00012-Hasil Usaha
+      - name: monthlyIncomeCode
+        value: G3-10 - 50 juta
+      - name: correspondenceAddress
+        value: Jl. Gatot Subroto No.177A
+      - name: CorrespondenceProvinceCode
+        value: 31-DKI Jakarta
+      - name: CorrespondenceCityCode
+        value: 3174-Jakarta Selatan
+      - name: CorrespondenceDistrictCode
+        value: 01-Tebet
+      - name: CorrespondenceSubDistrictCode
+        value: 1003-Menteng Dalam
+      - name: CorrespondenceRT
+        value: "004"
+      - name: CorrespondenceRW
+        value: "003"
+      - name: accountPurpose
+        value: T2-Transaksi
+      - name: religion
+        value: ISL-Islam
+      - name: education
+        value: S1-Sarjana
+      - name: INT_FLAGFATCA
+        value: N
+      - name: INT_FLAGSELAINAS
+        value: N
+      - name: INT_FLAGTIN
+        value: N
+      - name: INT_FLAGWAJIBPAJAKID
+        value: Y
+      - name: INT_NEGARAFATCA
+        value: ""
+      - name: INT_NPWPFATCA
+        value: ""
+      - name: INT_PENJELASANSERTI
+        value: ""
+      - name: INT_SALINSERTI
+        value: N
+      - name: INT_TDKADANPWP
+        value: ""
+      - name: INT_TIN
+        value: ""
+      - name: INT_FLAGSALINSERTI
+        value: N
+      - name: photoFile
+        value: ""
+      - name: frResultFile
+        value: ""
+      - name: npwpFile
+        value: ""
+      - name: ktpFile
+        value: ""
+      - name: createFrom
+        value: Pinang Performa
+      - name: deviceId
+        value: ""
+      - name: firebaseId
+        value: ""
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -1,0 +1,728 @@
+info:
+  name: Process V1
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{base_url}}/v/1/scoring/process"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "999961"
+        description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+      - name: prakarsaId
+        value: "30946"
+        description: Prakarsa ID { MANDATORY }
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: error timeout hit aiforesee
+    request:
+      url: "{{base_url}}/v/1/scoring/process"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: prakarsaId
+            value: "30946"
+            description: Prakarsa ID { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 23 Jun 2021 06:38:45 GMT
+        - name: Content-Length
+          value: "89"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Error Detail",
+              "message": "Maaf, server scoring sedang dalam gangguan. Coba beberapa saat lagi.",
+              "status": 504
+          }
+  - name: scoring has been done
+    request:
+      url: "{{base_url}}/v/1/scoring/process"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: prakarsaId
+            value: "30946"
+            description: Prakarsa ID { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 23 Jun 2021 07:31:16 GMT
+        - name: Content-Length
+          value: "91"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "DStatus > 5 Done Scoring",
+              "message": "Maaf, Scoring sudah dilakukan. Silahkan untuk melanjutkan ke tahap selajutnya",
+              "status": 500
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/scoring/process/2"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 23 Jun 2021 06:38:45 GMT
+        - name: Content-Length
+          value: "89"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: prakarsa not found
+    request:
+      url: "{{base_url}}/v/1/scoring/process"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: prakarsaId
+            value: "30946"
+            description: Prakarsa ID { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 23 Jun 2021 06:38:45 GMT
+        - name: Content-Length
+          value: "89"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Prakarsa tidak ditemukan",
+              "desc": "Error record not found"
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{base_url}}/v/1/scoring/process"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: prakarsaId
+            value: "30946"
+            description: Prakarsa ID { MANDATORY }
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 21 Jul 2022 12:42:39 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/scoring/process/2"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 23 Jun 2021 06:38:45 GMT
+        - name: Content-Length
+          value: "89"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: aiforesee status failed
+    request:
+      url: "{{base_url}}/v/1/scoring/process"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: prakarsaId
+            value: "30946"
+    response:
+      status: 408
+      statusText: Request Timeout
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 23 Jun 2021 06:38:45 GMT
+        - name: Content-Length
+          value: "89"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Error Detail",
+              "message": "Maaf, server scoring sedang dalam gangguan. Silahkan coba beberapa saat lagi.",
+              "status": 408
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/scoring/process"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: prakarsaId
+            value: "30946"
+            description: Prakarsa ID { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 23 Jun 2021 07:18:49 GMT
+        - name: Content-Length
+          value: "91"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Data scoring AIForesee tersimpan",
+              "message": "Data berhasil disimpan",
+              "status": 200
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/scoring/process"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: prakarsaId
+            value: "30946"
+            description: Prakarsa ID { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 23 Jun 2021 06:38:45 GMT
+        - name: Content-Length
+          value: "89"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect ....."
+          }
+  - name: validasi npwp untuk pinjaman > 50 JT
+    request:
+      url: "{{base_url}}/v/1/scoring/process"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: prakarsaId
+            value: "30946"
+            description: Prakarsa ID { MANDATORY }
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "status": 600,
+              "message": "Maaf, untuk pinjaman diatas 50.0000.000 wajib memiliki NPWP. Silahkan lengkapi data NPWP pada form Informasi Usaha.",
+              "desc": "Error validasi NPWP"
+          }
+  - name: endpoint aiforesee not found
+    request:
+      url: "{{base_url}}/v/1/scoring/process/2"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 23 Jun 2021 06:38:45 GMT
+        - name: Content-Length
+          value: "89"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Error Detail",
+              "message": "Maaf, server sedang dalam gangguan. Silahkan kontak administrator.",
+              "status": 404
+          }
+  - name: aiforesee status timeout
+    request:
+      url: "{{base_url}}/v/1/scoring/process/99"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 408
+      statusText: Request Timeout
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 24 Jun 2021 16:47:13 GMT
+        - name: Content-Length
+          value: "91"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Error Detail",
+              "message": "Maaf, server scoring sedang dalam gangguan. Silahkan coba beberapa saat lagi.",
+              "status": 408
+          }
+  - name: endpoint aiforesee not found
+    request:
+      url: "{{base_url}}/v/1/scoring/process/2"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 23 Jun 2021 06:38:45 GMT
+        - name: Content-Length
+          value: "89"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Error Detail",
+              "message": "Maaf, server sedang dalam gangguan. Silahkan kontak administrator.",
+              "status": 404
+          }
+  - name: error timeout hit aiforesee
+    request:
+      url: "{{base_url}}/v/1/scoring/process"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: prakarsaId
+            value: "30946"
+            description: Prakarsa ID { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 23 Jun 2021 06:38:45 GMT
+        - name: Content-Length
+          value: "89"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Error Detail",
+              "message": "Maaf, server scoring sedang dalam gangguan. Coba beberapa saat lagi.",
+              "status": 504
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/scoring/process/2"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 23 Jun 2021 06:38:45 GMT
+        - name: Content-Length
+          value: "89"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: aiforesee status failed
+    request:
+      url: "{{base_url}}/v/1/scoring/process"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: prakarsaId
+            value: "30946"
+    response:
+      status: 408
+      statusText: Request Timeout
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 23 Jun 2021 06:38:45 GMT
+        - name: Content-Length
+          value: "89"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Error Detail",
+              "message": "Maaf, server scoring sedang dalam gangguan. Silahkan coba beberapa saat lagi.",
+              "status": 408
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/scoring/process"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: prakarsaId
+            value: "30946"
+            description: Prakarsa ID { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 23 Jun 2021 06:38:45 GMT
+        - name: Content-Length
+          value: "89"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect ....."
+          }
+  - name: scoring has been done
+    request:
+      url: "{{base_url}}/v/1/scoring/process"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: prakarsaId
+            value: "30946"
+            description: Prakarsa ID { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 23 Jun 2021 07:31:16 GMT
+        - name: Content-Length
+          value: "91"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "DStatus > 5 Done Scoring",
+              "message": "Maaf, Scoring sudah dilakukan. Silahkan untuk melanjutkan ke tahap selajutnya",
+              "status": 500
+          }
+  - name: validasi npwp untuk pinjaman > 50 JT
+    request:
+      url: "{{base_url}}/v/1/scoring/process"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: prakarsaId
+            value: "30946"
+            description: Prakarsa ID { MANDATORY }
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "status": 600,
+              "message": "Maaf, untuk pinjaman diatas 50.0000.000 wajib memiliki NPWP. Silahkan lengkapi data NPWP pada form Informasi Usaha.",
+              "desc": "Error validasi NPWP"
+          }
+  - name: prakarsa not found
+    request:
+      url: "{{base_url}}/v/1/scoring/process"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: prakarsaId
+            value: "30946"
+            description: Prakarsa ID { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 23 Jun 2021 06:38:45 GMT
+        - name: Content-Length
+          value: "89"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Prakarsa tidak ditemukan",
+              "desc": "Error record not found"
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/scoring/process"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: prakarsaId
+            value: "30946"
+            description: Prakarsa ID { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 23 Jun 2021 07:18:49 GMT
+        - name: Content-Length
+          value: "91"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Data scoring AIForesee tersimpan",
+              "message": "Data berhasil disimpan",
+              "status": 200
+          }
+  - name: aiforesee status timeout
+    request:
+      url: "{{base_url}}/v/1/scoring/process/99"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 408
+      statusText: Request Timeout
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 24 Jun 2021 16:47:13 GMT
+        - name: Content-Length
+          value: "91"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Error Detail",
+              "message": "Maaf, server scoring sedang dalam gangguan. Silahkan coba beberapa saat lagi.",
+              "status": 408
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/scoring/process/2"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 23 Jun 2021 06:38:45 GMT
+        - name: Content-Length
+          value: "89"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{base_url}}/v/1/scoring/process"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: prakarsaId
+            value: "30946"
+            description: Prakarsa ID { MANDATORY }
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 21 Jul 2022 12:42:39 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }

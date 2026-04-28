@@ -1,0 +1,288 @@
+meta {
+  name: Detail PTA V1
+  type: http
+  seq: 6
+}
+
+post {
+  url: {{url}}/v/1/monitoring/detail-pta
+  body: formUrlEncoded
+  auth: bearer
+}
+
+auth:bearer {
+  token: UmF5YVBpUGVyVG9wtk843jG/7RB5In2DFecy3o9PCIi6N/9g1KDYjEHKFfrchh+ErtFaRDiVf/pbZZ3xGqHnKPlA3sulxsHQ7T9P45sD+L32owygMK35Vzs7FE9dNh3aaFlpSDEcPam5YRLz1Br6FcV/09N2lbQ6ig==
+}
+
+body:form-urlencoded {
+  userId: 999915
+  prakarsaId: 31260
+  statusPaymentId: 203
+}
+
+settings {
+  encodeUrl: true
+}
+
+example {
+  name: unautorized
+  
+  request: {
+    url: {{url}}/v/1/monitoring/ldetail-pta
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      id: 
+      statusPaymentId: 2
+      userId: 1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Wed, 25 May 2022 07:06:28 GMT
+      Content-Length: 106
+    }
+  
+    status: {
+      code: 401
+      text: Unauthorized
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "code": 401,
+            "desc": "Expired",
+            "message": "Invalid Token || Token Is Expired"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: error data not found
+  
+  request: {
+    url: {{url}}/v/1/monitoring/ldetail-pta
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      id: 1
+      statusPaymentId: -1
+      userId: 1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Wed, 25 May 2022 07:21:34 GMT
+      Content-Length: 104
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "desc": "Error record not found",
+            "message": "Informasi Pinjaman Tidak Ditemukan",
+            "status": 404
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: error database connection
+  
+  request: {
+    url: {{url}}/v/1/monitoring/ldetail-pta
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      id: 
+      statusPaymentId: 2
+      userId: 1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Wed, 25 May 2022 07:06:28 GMT
+      Content-Length: 106
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+            "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+            "status": 400
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: success angsuran tetap
+  
+  request: {
+    url: {{url}}/v/1/monitoring/ldetail-pta
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 999915
+      id: 685
+      statusPaymentId: 9
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 03 Jun 2022 11:08:23 GMT
+      Content-Length: 460
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": {
+                "jatuhTempoBerikutnya": "2023-09-07",
+                "nominalPinjaman": 10000000.00,
+                "totalAngsuran": 3158808.00,
+                "facilityDueDate": "2024-11-07",
+                "polaAngsuran": 1,
+                "tenor": 15,
+                "status": 1,
+                "statusText": "Pinjaman Aktif",
+                "billing": [
+                    {
+                        "bulan": "Oktober",
+                        "total": 789702.00,
+                        "status": 1
+                    },
+                    {
+                        "bulan": "September",
+                        "total": 789702.00,
+                        "status": 1
+                    },
+                    {
+                        "bulan": "Agustus",
+                        "total": 789702.00,
+                        "status": -1
+                    }
+                ]
+            },
+            "desc": "Data Valid",
+            "message": "Data Ditemukan",
+            "status": 200
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: error parameter validation
+  
+  request: {
+    url: {{url}}/v/1/monitoring/ldetail-pta
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      id: 
+      statusPaymentId: 2
+      userId: 1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Wed, 25 May 2022 07:06:28 GMT
+      Content-Length: 106
+    }
+  
+    status: {
+      code: 400
+      text: Bad Request
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "desc": "Parameter ... Belum Terisi",
+            "message": "Maaf, Parameter ... Belum Dipilih",
+            "status": 500
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: general error
+  
+  request: {
+    url: {{url}}/v/1/monitoring/ldetail-pta
+    method: GET
+    mode: none
+    headers: {
+      Content-Type: application/x-www-form-urlencoded
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Thu, 29 Jul 2021 07:05:21 GMT
+      Content-Length: 287
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "status": 500,
+            "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+            "desc": "Could not connect .....",
+            "data": null
+        }
+      '''
+    }
+  }
+}

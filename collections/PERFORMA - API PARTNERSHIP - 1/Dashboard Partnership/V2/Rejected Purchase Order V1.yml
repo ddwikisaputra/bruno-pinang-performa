@@ -1,0 +1,585 @@
+info:
+  name: Rejected Purchase Order V1
+  type: http
+  seq: 13
+
+http:
+  method: POST
+  url: "{{url}}/v/1/partnerships/po-rejected"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "15"
+        description: User ID Login { MANDATORY }
+      - name: id
+        value: "53"
+        description: ID PO { MANDATORY }
+      - name: partnershipCode
+        value: OMS1
+        description: Kode Partnership (Login Session) { MANDATORY }
+  auth:
+    type: bearer
+    token: "{{tokenPartnership}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: validasi proses 3 step automation
+    request:
+      url: "{{url}}/v/1/partnerships/po-rejected"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: id
+            value: "20"
+            description: ID PO { MANDATORY }
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 04 Feb 2022 07:42:38 GMT
+        - name: Content-Length
+          value: "87"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Salah satu automation sudah terbentuk.",
+              "message": "Maaf, Pembatalan tidak dapat dilakukan. Silahkan lanjutkan proses approval.",
+              "status": 500
+          }
+  - name: general error
+    request:
+      url: "{{url}}/v/1/partnerships/po-rejected"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: id
+            value: "1"
+            description: ID PO { MANDATORY }
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Could not connect .....",
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "status": 500
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{url}}/v/1/partnerships/po-rejected"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "15"
+            description: User ID Login { MANDATORY }
+          - name: id
+            value: "53"
+            description: ID PO { MANDATORY }
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Server
+          value: nginx/1.18.0 (Ubuntu)
+        - name: Date
+          value: Mon, 25 Jul 2022 03:31:10 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "67"
+        - name: Connection
+          value: keep-alive
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: error database connection
+    request:
+      url: "{{url}}/v/1/partnerships/po-rejected"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: id
+            value: "1"
+            description: ID PO { MANDATORY }
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: unautorized
+    request:
+      url: "{{url}}/v/1/partnerships/po-rejected"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: id
+            value: "1"
+            description: ID PO { MANDATORY }
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:44:34 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: success
+    request:
+      url: "{{url}}/v/1/partnerships/po-rejected"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: id
+            value: "1"
+            description: ID PO { MANDATORY }
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 03:03:58 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Data Tersimpan",
+              "message": "Data purchase order berhasil ditolak",
+              "status": 200
+          }
+  - name: error parameter validation
+    request:
+      url: "{{url}}/v/1/partnerships/po-rejected"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: id
+            value: "1"
+            description: ID PO { MANDATORY }
+            disabled: true
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Parameter ... kosong",
+              "message": "Maaf, Parameter ... tidak boleh kosong",
+              "status": 500
+          }
+  - name: validasi po sedang dalam proses (status != 0)
+    request:
+      url: "{{url}}/v/1/partnerships/po-rejected"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: id
+            value: "-1"
+            description: ID PO { MANDATORY }
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 24 Nov 2021 18:18:31 GMT
+        - name: Content-Length
+          value: "657"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "PO Status != 0 (sedang dalam proses pengajuan)",
+              "message": "Maaf, Pengajuan anda sedang dalam proses. Silahkan tunggu sampai proses pengajuan selesai.",
+              "status": 500
+          }
+  - name: error parameter validation
+    request:
+      url: "{{url}}/v/1/partnerships/po-rejected"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: id
+            value: "1"
+            description: ID PO { MANDATORY }
+            disabled: true
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Parameter ... kosong",
+              "message": "Maaf, Parameter ... tidak boleh kosong",
+              "status": 500
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{url}}/v/1/partnerships/po-rejected"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "15"
+            description: User ID Login { MANDATORY }
+          - name: id
+            value: "53"
+            description: ID PO { MANDATORY }
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Server
+          value: nginx/1.18.0 (Ubuntu)
+        - name: Date
+          value: Mon, 25 Jul 2022 03:31:10 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "67"
+        - name: Connection
+          value: keep-alive
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: unautorized
+    request:
+      url: "{{url}}/v/1/partnerships/po-rejected"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: id
+            value: "1"
+            description: ID PO { MANDATORY }
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:44:34 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: success
+    request:
+      url: "{{url}}/v/1/partnerships/po-rejected"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: id
+            value: "1"
+            description: ID PO { MANDATORY }
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 03:03:58 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Data Tersimpan",
+              "message": "Data purchase order berhasil ditolak",
+              "status": 200
+          }
+  - name: general error
+    request:
+      url: "{{url}}/v/1/partnerships/po-rejected"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: id
+            value: "1"
+            description: ID PO { MANDATORY }
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Could not connect .....",
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "status": 500
+          }
+  - name: validasi proses 3 step automation
+    request:
+      url: "{{url}}/v/1/partnerships/po-rejected"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: id
+            value: "20"
+            description: ID PO { MANDATORY }
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 04 Feb 2022 07:42:38 GMT
+        - name: Content-Length
+          value: "87"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Salah satu automation sudah terbentuk.",
+              "message": "Maaf, Pembatalan tidak dapat dilakukan. Silahkan lanjutkan proses approval.",
+              "status": 500
+          }
+  - name: error database connection
+    request:
+      url: "{{url}}/v/1/partnerships/po-rejected"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: id
+            value: "1"
+            description: ID PO { MANDATORY }
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: validasi po sedang dalam proses (status != 0)
+    request:
+      url: "{{url}}/v/1/partnerships/po-rejected"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: id
+            value: "-1"
+            description: ID PO { MANDATORY }
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 24 Nov 2021 18:18:31 GMT
+        - name: Content-Length
+          value: "657"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "PO Status != 0 (sedang dalam proses pengajuan)",
+              "message": "Maaf, Pengajuan anda sedang dalam proses. Silahkan tunggu sampai proses pengajuan selesai.",
+              "status": 500
+          }

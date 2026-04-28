@@ -1,0 +1,63 @@
+meta {
+  name: Create Loan Performa - With Document (V)
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{BASE_URL}}/v1/loan/performa/manage
+  body: json
+  auth: none
+}
+
+headers {
+  Jagat-Raya-API-Key: {{API_KEY_PERFORMA}}
+}
+
+body:json {
+  {
+      "payload": "{{REQUEST_BODY}}"
+  }
+}
+
+script:pre-request {
+  const payload = {
+    "loan_number": "001001008023109", // [automation_loan_accounts.loan_account_number]
+    "account_nik": "2847593847593858", // [prakrasa.ktp_number]
+    "account_name": "Dedé Sulaiman", // [prakarsa.name]
+    "account_address": "Yogyakarta, DIY", // [prakrasa.address, prakarsa.village_code (area), prakarsa.ditrict_code (area), prakarsa.city_code (area), prakarsa.province_code (area), prakarsa.postal_code (area)]
+    "account_dob": "1987-09-05", // prakarsa.birth_date
+    "account_gender": "Laki-laki", // prakarsa.gender
+    "credit_usage": "MODAL USAHA", // hardcode MODAL KERJA | INVESTASI (text) jika KMK = MODAL USAHA | jika KI = INVESTASI | jika else = MODAL USAHA
+    "credit_plafond": 38000000, // plafond [prakarsa_crs.loan_amount]
+    "guarantee_amount": 38950000, // nilai penjaminan (75% plafond) -> bisa berubah [prakarsa_crs.loan_amount * 75%]
+    "business_type": "Agen Atlet dan Manajemen", // text [prakarsa_crs.business_description]
+    "interest_rate": 0.009, // persentase bunga [prakarsa_crs.rate]
+    "period_amount": 42,// jangka waktu pinjaman [prakarsa_crs.loan_term]
+    "realization_date": "2022-11-15", // tgl pencairan [today]
+    "due_date": "2025-11-15", // jatuh tempo loan [contract_logs.due_date]
+    "collateral_type": "SKSD", // hardcode SKMA
+    "collateral_amount": 10, // jumlah semua nilai likuidasi agunan [sum crs_collateral.liquidation_value]
+    "employee_count": 8, // jumlah pekerja [prakarsa_crs.total_employee]
+    "guarantee_type": 1, // jenis terjamin hardcode = 1 (0=Perorangan, 1= Usaha Mikro, 2 = Usaha Kecil, 3 = Usaha Menegah, 4 = Koperasi, 5= ritel, 9=lainny)
+    "ijp": 950000, // nilai rupiah premi asuransi (0.7) -> dinamis [prakarsa_crs.insurance_amout]
+    "insurance_type": "BRI - ASURANSI", // asuransi pinjaman - BRISMA JAMKRIDA [prakarsa_crs.insurance_type]
+    "facility_type": "KMK", // facility type (text) [prakarsa_crs.flag_facility_type]
+    "branch_id": "0020", // cabang pencairan [employee.branch_code]
+    "documents": [
+      {
+        "application_media_type_id": "RIMA-MLT-000001", // sesuai mapping (SPH = MLT-000013 || SKMA = MLT-000011)
+        "file_name": "dokumen dah pokoknya", // NAMAFILE - PRAKARSA ID
+        "src": "JVBERi0xLjQKJZOMi54gUmVwb3J0TGFiIEdlbmVyYXRlZCBQREYgZG9jdW1lbnQgaHR0cDovL3d3dy5yZXBvcnRsYWIuY29tCjEgMCBvYmoKPDwKL0YxIDIgMCBSCj4+CmVuZG9iagoyIDAgb2JqCjw8Ci9CYXNlRm9udCAvSGVsdmV0aWNhIC9FbmNvZGluZyAvV2luQW5zaUVuY29kaW5nIC9OYW1lIC9GMSAvU3VidHlwZSAvVHlwZTEgL1R5cGUgL0ZvbnQKPj4KZW5kb2JqCjMgMCBvYmoKPDwKL0NvbnRlbnRzIDcgMCBSIC9NZWRpYUJveCBbIDAgMCA1OTUuMjc1NiA4NDEuODg5OCBdIC9QYXJlbnQgNiAwIFIgL1Jlc291cmNlcyA8PAovRm9udCAxIDAgUiAvUHJvY1NldCBbIC9QREYgL1RleHQgL0ltYWdlQiAvSW1hZ2VDIC9JbWFnZUkgXQo+PiAvUm90YXRlIDAgL1RyYW5zIDw8Cgo+PiAKICAvVHlwZSAvUGFnZQo+PgplbmRvYmoKNCAwIG9iago8PAovUGFnZU1vZGUgL1VzZU5vbmUgL1BhZ2VzIDYgMCBSIC9UeXBlIC9DYXRhbG9nCj4+CmVuZG9iago1IDAgb2JqCjw8Ci9BdXRob3IgKFwoYW5vbnltb3VzXCkpIC9DcmVhdGlvbkRhdGUgKEQ6MjAyNTEwMTMwNTU2MDMrMDAnMDAnKSAvQ3JlYXRvciAoXCh1bnNwZWNpZmllZFwpKSAvS2V5d29yZHMgKCkgL01vZERhdGUgKEQ6MjAyNTEwMTMwNTU2MDMrMDAnMDAnKSAvUHJvZHVjZXIgKFJlcG9ydExhYiBQREYgTGlicmFyeSAtIHd3dy5yZXBvcnRsYWIuY29tKSAKICAvU3ViamVjdCAoXCh1bnNwZWNpZmllZFwpKSAvVGl0bGUgKFwoYW5vbnltb3VzXCkpIC9UcmFwcGVkIC9GYWxzZQo+PgplbmRvYmoKNiAwIG9iago8PAovQ291bnQgMSAvS2lkcyBbIDMgMCBSIF0gL1R5cGUgL1BhZ2VzCj4+CmVuZG9iago3IDAgb2JqCjw8Ci9GaWx0ZXIgWyAvQVNDSUk4NURlY29kZSAvRmxhdGVEZWNvZGUgXSAvTGVuZ3RoIDQ2Ngo+PgpzdHJlYW0KR2FxMyM5MjZIXSZEYlldaE5CIzJrcEFlbFtTYiwnOXBGYz8ndFwoVmFNNHVjTHVWRipMLV8sL0cuWlU0PzgxLDtjPGhCPVQuQFlUP0VpM280XmJnaW1dXG43QEdSSnRiUFVCISpyIzk4QnRzXFEyaFlKXGtET1pBKTBXUjtJQG1kYU5HQ18haCUkPF9hJzpWazklKyc8NmB0K042JzskUj5ZXjhha0g1UVxWKz5aak5vMiUuX0kqIUAhL246UTRaXlZtP3FGLCtHWUs0NCZhNWs3SiYxdCdsU1lpVERcQSIiYSRjUkMtYCUsRipMbkNEIyw3KCRNXUY4J2kyImVfRXBIXmdwbSVuRDowaG1sTC1YL0o5am5IJScydVA3U1ovRyYjWVohWlJgRSZFMS5laFBDSl40PEwvXiQjPkJXVDo+VWhzWm5tJjomcXNmaSUoNmA9OUFdX2NqSTdBNWlfRkpZVTxaTGBbZTwsSk8nV1E/JzNvVCZKRVRzUiI/TCZxIjgqayc7QmI9LWgrPXBObD1aZSg0XjVXPWtnaEEwWTs2cmc3TFAlUTBHXSRkLDw2U2UnVS9ARl86JG9XPE5SSi1aaFRJIUZmWSU9VSMwJDB+PmVuZHN0cmVhbQplbmRvYmoKeHJlZgowIDgKMDAwMDAwMDAwMCA2NTUzNSBmIAowMDAwMDAwMDczIDAwMDAwIG4gCjAwMDAwMDAxMDQgMDAwMDAgbiAKMDAwMDAwMDIxMSAwMDAwMCBuIAowMDAwMDAwNDE0IDAwMDAwIG4gCjAwMDAwMDA0ODIgMDAwMDAgbiAKMDAwMDAwMDc2NSAwMDAwMCBuIAowMDAwMDAwODI0IDAwMDAwIG4gCnRyYWlsZXIKPDwKL0lEIApbPDExMWE5ZGZlZjE0ZDNhNTg4NmQyZjZjMzhkMjhiMzc2PjwxMTFhOWRmZWYxNGQzYTU4ODZkMmY2YzM4ZDI4YjM3Nj5dCiUgUmVwb3J0TGFiIGdlbmVyYXRlZCBQREYgZG9jdW1lbnQgLS0gZGlnZXN0IChodHRwOi8vd3d3LnJlcG9ydGxhYi5jb20pCgovSW5mbyA1IDAgUgovUm9vdCA0IDAgUgovU2l6ZSA4Cj4+CnN0YXJ0eHJlZgoxMzgwCiUlRU9GCg==",
+        "mime_type": "application/pdf"
+      }
+    ]
+  }
+  const result = globalThis.encrypt(JSON.stringify(payload))
+  bru.setEnvVar("REQUEST_BODY", result);
+  
+}
+
+settings {
+  encodeUrl: true
+}

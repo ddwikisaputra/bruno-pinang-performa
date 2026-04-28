@@ -1,0 +1,152 @@
+info:
+  name: "[Digiagri OTP] Auth"
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/digiagri/otp/auth"
+  body:
+    type: form-urlencoded
+    data:
+      - name: serverId
+        value: RAYA1156721394
+      - name: token
+        value: "368672"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Invalid Session
+    request:
+      url: "{{baseUrl}}/api/digiagri/otp/auth"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: serverId
+            value: RAYA3755687839
+          - name: token
+            value: "840653"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Thu, 09 Oct 2025 03:19:18 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "56"
+        - name: Connection
+          value: keep-alive
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "statusCode": "3",
+              "statusDescription": "Invalid Session"
+          }
+  - name: Invalid Token
+    request:
+      url: "{{baseUrl}}/api/digiagri/otp/auth"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: serverId
+            value: RAYA4305120086
+          - name: token
+            value: "840653"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Thu, 09 Oct 2025 03:20:52 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "54"
+        - name: Connection
+          value: keep-alive
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "statusCode": "3",
+              "statusDescription": "Invalid Token"
+          }
+  - name: Token Already used
+    request:
+      url: "{{baseUrl}}/api/digiagri/otp/auth"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: serverId
+            value: RAYA0551417154
+          - name: token
+            value: "534235"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Thu, 09 Oct 2025 03:27:46 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "60"
+        - name: Connection
+          value: keep-alive
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "statusCode": "-1",
+              "statusDescription": "Token Already Used"
+          }
+  - name: Auth Success
+    request:
+      url: "{{baseUrl}}/api/digiagri/otp/auth"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: serverId
+            value: RAYA1156721394
+          - name: token
+            value: "368672"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Thu, 09 Oct 2025 03:29:17 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "61"
+        - name: Connection
+          value: keep-alive
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "statusCode": "1",
+              "statusDescription": "Authenticate Success"
+          }

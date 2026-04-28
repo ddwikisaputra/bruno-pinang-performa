@@ -1,0 +1,171 @@
+info:
+  name: District V1
+  type: http
+  seq: 2
+
+http:
+  method: GET
+  url: "{{url}}/v/1/master/districts/0391"
+  body:
+    type: multipart-form
+  auth:
+    type: bearer
+    token: UmF5YVBpUGVyVG9wtk843jG/7RB5In2DFecy3o9PCIi6N/9g1KDYjEHKFfrchh+EoNFaRziUd/paYJ31H6HuLvNA3sulxsHQ7T9P45sD+L32owygMK33Vzs4FE9fNhzfaF1sSDgaN6m5V1OPqHXDW5YUkaJHZyx4fw==
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: validation param
+    request:
+      url: "{{url}}/v/1/master/cities/{{cityId}}"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "status": 500,
+              "message": "Maaf, parameter kota / kabupaten belum dipilih",
+              "desc": "Parameter cityId belum terisi",
+              "data" : null,
+          }
+  - name: general error
+    request:
+      url: "{{url}}/v/1/master/cities/{{cityId}}"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data" : null,
+          }
+  - name: not found
+    request:
+      url: "{{url}}/v/1/master/cities/{{cityId}}"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "status": 404,
+              "message": "Kecamatan Tidak Ditemukan",
+              "desc": "Data Kecamatan Tidak Ditemukan",
+              "data": null
+          }
+  - name: success
+    request:
+      url: "{{url}}/v/1/master/cities/{{cityId}}"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "data": [
+                  {
+                      "districtCode": "111107",
+                      "district": "Gandapura"
+                  },
+                  {
+                      "districtCode": "111110",
+                      "district": "Jangka"
+                  },
+                  {
+                      "districtCode": "111104",
+                      "district": "Jeumpa"
+                  },
+                  {
+                      "districtCode": "111102",
+                      "district": "Jeunieb"
+                  },
+                  {
+                      "districtCode": "111109",
+                      "district": "Juli"
+                  },
+                  {
+                      "districtCode": "111113",
+                      "district": "Kota Juang"
+                  },
+                  {
+                      "districtCode": "111114",
+                      "district": "Kuala"
+                  },
+                  {
+                      "districtCode": "111117",
+                      "district": "Kuta Blang"
+                  },
+                  {
+                      "districtCode": "111106",
+                      "district": "Makmur"
+                  },
+                  {
+                      "districtCode": "111108",
+                      "district": "Pandrah"
+                  },
+                  {
+                      "districtCode": "111103",
+                      "district": "Peudada"
+                  },
+                  {
+                      "districtCode": "111112",
+                      "district": "Peulimbang"
+                  },
+                  {
+                      "districtCode": "111105",
+                      "district": "Peusangan"
+                  },
+                  {
+                      "districtCode": "111116",
+                      "district": "Peusangan Selatan"
+                  },
+                  {
+                      "districtCode": "111115",
+                      "district": "Peusangan Siblah Krueng"
+                  },
+                  {
+                      "districtCode": "111101",
+                      "district": "Samalanga"
+                  },
+                  {
+                      "districtCode": "111111",
+                      "district": "Simpang Mamplam"
+                  }
+              ],
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: unautorized
+    request:
+      url: "{{url}}/v/1/master/cities/{{cityId}}"
+      method: GET
+    response:
+      status: 401
+      statusText: Unauthorized
+      body:
+        type: text
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+
+docs: "'province' diisi dari parameter 'code' yang didapat dari endpoint 'master-province'"

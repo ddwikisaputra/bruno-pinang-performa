@@ -1,0 +1,80 @@
+info:
+  name: slik prescreening request
+  type: http
+  seq: 6
+
+http:
+  method: POST
+  url: "{{base_url}}/api/digiagri/prescreening/request"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "000230"
+        description: User Id Aplikasi
+      - name: nik
+        value: "3171051211950001"
+        description: Nomor KTP nasabah
+      - name: name
+        value: Dwiki Saputra
+        description: Nama Nasabah
+      - name: birthDate
+        value: 1995-11-12
+        description: "Tanggal Lahir Nasabah (Format : yyyy-MM-dd)"
+      - name: jenisKelamin
+        value: M
+        description: Jenis Kelamin Nasabah (M/F)
+      - name: prakarsaId
+        value: "935"
+        description: Id Prakarsa
+      - name: callbackUrl
+        value: http://36.66.74.166/v/1/screening/slik-callback/935
+        description: URL untuk callback access
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: success
+    request:
+      url: "{{base_url}}/api/digiagri/prescreening/request"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000426"
+            description: User Id Aplikasi
+          - name: nik
+            value: "3275042305890013"
+            description: Nomor KTP nasabah
+          - name: name
+            value: R. IBRAHIM SENOAJI
+            description: Nama Nasabah
+          - name: birthDate
+            value: 1989-05-23
+            description: "Tanggal Lahir Nasabah (Format : yyyy-MM-dd)"
+          - name: jenisKelamin
+            value: F
+            description: Jenis Kelamin Nasabah (M/F)
+          - name: prakarsaId
+            value: "99"
+            description: Id Prakarsa
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "statusCode": "1",
+              "statusDescription": "request success",
+              "result": {
+                  "status": "success",
+                  "uid": "c3atn5k1s7aboh07u390",
+                  "respCode": "000",
+                  "desc": "Your request is on process"
+              }
+          }

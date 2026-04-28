@@ -1,0 +1,37 @@
+meta {
+  name: Encrypt
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{BASE_URL}}/v1/security/encrypt
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: 
+}
+
+body:json {
+  {
+      "limit": 10,
+      "page": 1,
+      "q" : "0013"
+  }
+}
+
+script:post-response {
+  const responseJSON = res.getBody()
+  if (responseJSON.status) {
+      const data = _.decrypt(responseJSON.data)
+      const parseData = JSON.parse(data)
+      const parseData2 = JSON.parse(parseData)
+      console.log('/v1/security/share/encrypt', parseData2)
+  }
+}
+
+settings {
+  encodeUrl: true
+}

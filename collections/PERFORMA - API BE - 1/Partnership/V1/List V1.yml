@@ -1,0 +1,1897 @@
+info:
+  name: List V1
+  type: http
+  seq: 11
+
+http:
+  method: POST
+  url: "{{base_url}}/v/1/partnerships/list"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "999941"
+        description: Personal Number BRI Agro (UserID Login) | MANDATORY
+      - name: type
+        value: partner
+        description: Tipe Data (partner / community) { DEFAULT "partner" }
+      - name: startIndex
+        value: "0"
+        description: Offset Data {Default 0}
+      - name: recordCount
+        value: "100"
+        description: Limit Data {Default 5}
+      - name: textSearch
+        value: Superkiosk
+        description: Text Search { Default NULL }
+        disabled: true
+      - name: branchCode
+        value: "0020"
+        description: Branch Code BRI Agro (BranchCode Login) | Main Branch = 0010[FOR LOANTYPE]
+      - name: isLoanType
+        value: "1"
+        description: "Preload Data Loan Type | [ 1 = FOR LOANTYPE] | OPTIONAL "
+        disabled: true
+      - name: filterLoanTypeStatus
+        value: "0"
+        description: Filtering Loan Type Status | 0 = Include Enabled & Disabled | 1 = Only Enabled | 2 = Only Disabled | 3 = Only Deleted | 4 - all status | Default = 0 | OPTIONAL
+        disabled: true
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: unautorized (401)
+    request:
+      url: "{{base_url}}/v/1/partnerships/list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "5"
+            description: Limit Data {Default 5}
+          - name: textSearch
+            value: oms
+            description: Text Search { Default NULL }
+            disabled: true
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: userLevel
+            value: "30"
+            description: Access Level ID (UserID Login) [ 10 = SF, 20 = Supervisor, 30 = Head, 90 = Kantor Pusat ]
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:32:34 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/partnerships/list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "5"
+            description: Limit Data {Default 5}
+          - name: textSearch
+            value: oms
+            description: Text Search { Default NULL }
+            disabled: true
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: userLevel
+            value: "30"
+            description: Access Level ID (UserID Login) [ 10 = SF, 20 = Supervisor, 30 = Head, 90 = Kantor Pusat ]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:32:34 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{base_url}}/v/1/partnerships/list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "5"
+            description: Limit Data {Default 5}
+          - name: textSearch
+            value: oms
+            description: Text Search { Default NULL }
+            disabled: true
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: userLevel
+            value: "30"
+            description: Access Level ID (UserID Login) [ 10 = SF, 20 = Supervisor, 30 = Head, 90 = Kantor Pusat ]
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:32:34 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/partnerships/list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: type
+            value: partner
+            description: Tipe Data (partner / community) { DEFAULT "partner" }
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "100"
+            description: Limit Data {Default 5}
+          - name: textSearch
+            value: Superkiosk
+            description: Text Search { Default NULL }
+            disabled: true
+          - name: branchCode
+            value: "0010"
+            description: Branch Code BRI Agro (BranchCode Login) | Main Branch = 0010[FOR LOANTYPE]
+            disabled: true
+          - name: isLoanType
+            value: "1"
+            description: "Preload Data Loan Type | [ 1 = FOR LOANTYPE] | OPTIONAL "
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 01 Sep 2022 13:53:11 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "data": [
+                  {
+                      "id": 44,
+                      "type": "partner",
+                      "name": "Adaka",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "999932"
+                  },
+                  {
+                      "id": 12,
+                      "type": "partner",
+                      "name": "Agriaku-Japfa",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": ""
+                  },
+                  {
+                      "id": 57,
+                      "type": "partner",
+                      "name": "Agroco",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "000358"
+                  },
+                  {
+                      "id": 56,
+                      "type": "partner",
+                      "name": "Agroco",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "000358"
+                  },
+                  {
+                      "id": 55,
+                      "type": "partner",
+                      "name": "Agroco",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "000358"
+                  },
+                  {
+                      "id": 54,
+                      "type": "partner",
+                      "name": "Agroco",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "000358",
+                      "dataLoanTypeChild": [
+                          {
+                              "id": 36,
+                              "productType": "40003",
+                              "loanTypeParentId": 26,
+                              "loanTypeSubparentId": 2,
+                              "loanTypeName": "KIM GU RAME",
+                              "loanTypeCode": "CHILD-KGR-39",
+                              "transactionType": 3,
+                              "isCustom": 1,
+                              "provisionFee": 10.12,
+                              "status": 0,
+                              "dataInterestRates": [
+                                  {
+                                      "plafondStart": 500000,
+                                      "plafondEnd": 1000000,
+                                      "loanTermStart": 1,
+                                      "loanTermEnd": 7,
+                                      "loanTermType": 1,
+                                      "interestRate": 12.1
+                                  }
+                              ],
+                              "dataInstallmentPatterns": [
+                                  {
+                                      "installmentPattern": "7 hari",
+                                      "installmentPatternType": 1
+                                  }
+                              ],
+                              "dataAdministrationFees": [
+                                  {
+                                      "nominalStart": 500000,
+                                      "nominalEnd": 1000000,
+                                      "adminFee": 50000
+                                  }
+                              ],
+                              "dataInsurance": {
+                                  "id": 1,
+                                  "insuranceName": "testSatu",
+                                  "productType": "40003",
+                                  "percentage": 0.2,
+                                  "status": 0
+                              }
+                          }
+                      ]
+                  },
+                  {
+                      "id": 53,
+                      "type": "partner",
+                      "name": "Agroco",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "000358"
+                  },
+                  {
+                      "id": 52,
+                      "type": "partner",
+                      "name": "Agroco",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "000358"
+                  },
+                  {
+                      "id": 51,
+                      "type": "partner",
+                      "name": "Agroco",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "000358"
+                  },
+                  {
+                      "id": 50,
+                      "type": "partner",
+                      "name": "Agroco",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "000358"
+                  },
+                  {
+                      "id": 49,
+                      "type": "partner",
+                      "name": "Agroco",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "000358"
+                  },
+                  {
+                      "id": 48,
+                      "type": "partner",
+                      "name": "Agroco",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "000358"
+                  },
+                  {
+                      "id": 47,
+                      "type": "partner",
+                      "name": "Agroco",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "000358"
+                  },
+                  {
+                      "id": 46,
+                      "type": "partner",
+                      "name": "Agroco",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "000358"
+                  },
+                  {
+                      "id": 39,
+                      "type": "partner",
+                      "name": "ajhsjashjahs",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "999932"
+                  },
+                  {
+                      "id": 38,
+                      "type": "partner",
+                      "name": "Amanah",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "999932"
+                  },
+                  {
+                      "id": 26,
+                      "type": "partner",
+                      "name": "Aquascape",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "999900"
+                  },
+                  {
+                      "id": 43,
+                      "type": "partner",
+                      "name": "asdas",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "999932"
+                  },
+                  {
+                      "id": 20,
+                      "type": "partner",
+                      "name": "Barista Tools Solo",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": ""
+                  },
+                  {
+                      "id": 33,
+                      "type": "partner",
+                      "name": "Delima",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "999932"
+                  },
+                  {
+                      "id": 35,
+                      "type": "partner",
+                      "name": "Demoney",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "999932"
+                  },
+                  {
+                      "id": 25,
+                      "type": "partner",
+                      "name": "Demoney",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "999961"
+                  },
+                  {
+                      "id": 18,
+                      "type": "partner",
+                      "name": "Dontogo",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": ""
+                  },
+                  {
+                      "id": 37,
+                      "type": "partner",
+                      "name": "Ikoy",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "999932"
+                  },
+                  {
+                      "id": 17,
+                      "type": "partner",
+                      "name": "Inamikro",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": ""
+                  },
+                  {
+                      "id": 19,
+                      "type": "partner",
+                      "name": "Japang",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": ""
+                  },
+                  {
+                      "id": 29,
+                      "type": "partner",
+                      "name": "Jupiter",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "999961"
+                  },
+                  {
+                      "id": 41,
+                      "type": "partner",
+                      "name": "Koala",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "999932"
+                  },
+                  {
+                      "id": 13,
+                      "type": "partner",
+                      "name": "KUD Puspa Mekar",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": ""
+                  },
+                  {
+                      "id": 6,
+                      "type": "partner",
+                      "name": "Majoo",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "",
+                      "dataLoanTypeChild": [
+                          {
+                              "id": 1,
+                              "productType": "40003",
+                              "loanTypeParentId": 2,
+                              "loanTypeSubparentId": 1,
+                              "loanTypeName": "Merchant Financing",
+                              "loanTypeCode": "KMK-MDL-KJR-MER-FIN-1",
+                              "transactionType": 2,
+                              "isCustom": 0,
+                              "provisionFee": 1,
+                              "status": 0,
+                              "dataInterestRates": [
+                                  {
+                                      "plafondStart": 500000,
+                                      "plafondEnd": 25000000,
+                                      "loanTermStart": 1,
+                                      "loanTermEnd": 30,
+                                      "loanTermType": 1,
+                                      "interestRate": 25
+                                  },
+                                  {
+                                      "plafondStart": 25000001,
+                                      "plafondEnd": 50000000,
+                                      "loanTermStart": 1,
+                                      "loanTermEnd": 30,
+                                      "loanTermType": 1,
+                                      "interestRate": 24
+                                  },
+                                  {
+                                      "plafondStart": 50000001,
+                                      "plafondEnd": 75000000,
+                                      "loanTermStart": 1,
+                                      "loanTermEnd": 30,
+                                      "loanTermType": 1,
+                                      "interestRate": 23
+                                  },
+                                  {
+                                      "plafondStart": 75000001,
+                                      "plafondEnd": 100000000,
+                                      "loanTermStart": 1,
+                                      "loanTermEnd": 30,
+                                      "loanTermType": 1,
+                                      "interestRate": 22
+                                  }
+                              ],
+                              "dataInstallmentPatterns": [
+                                  {
+                                      "installmentPattern": "6 bulan",
+                                      "installmentPatternType": 1
+                                  }
+                              ],
+                              "dataAdministrationFees": [
+                                  {
+                                      "nominalStart": 500000,
+                                      "nominalEnd": 10000000,
+                                      "adminFee": 50000
+                                  },
+                                  {
+                                      "nominalStart": 10000001,
+                                      "nominalEnd": 20000000,
+                                      "adminFee": 100000
+                                  },
+                                  {
+                                      "nominalStart": 20000001,
+                                      "nominalEnd": 50000000,
+                                      "adminFee": 150000
+                                  },
+                                  {
+                                      "nominalStart": 50000001,
+                                      "nominalEnd": 75000000,
+                                      "adminFee": 200000
+                                  },
+                                  {
+                                      "nominalStart": 75000001,
+                                      "nominalEnd": 100000000,
+                                      "adminFee": 250000
+                                  }
+                              ],
+                              "dataInsurance": {
+                                  "id": 5,
+                                  "insuranceName": "BRISMA",
+                                  "productType": "40003",
+                                  "percentage": 1.2,
+                                  "status": 0
+                              }
+                          },
+                          {
+                              "id": 3,
+                              "productType": "40002",
+                              "loanTypeParentId": 4,
+                              "loanTypeSubparentId": 0,
+                              "loanTypeName": "KMK Modal Kerja",
+                              "loanTypeCode": "KMK-MDL-KJR",
+                              "transactionType": 2,
+                              "isCustom": 0,
+                              "provisionFee": 1,
+                              "status": -1,
+                              "dataInterestRates": [
+                                  {
+                                      "plafondStart": 500000,
+                                      "plafondEnd": 25000000,
+                                      "loanTermStart": 1,
+                                      "loanTermEnd": 12,
+                                      "loanTermType": 1,
+                                      "interestRate": 24
+                                  },
+                                  {
+                                      "plafondStart": 500000,
+                                      "plafondEnd": 25000000,
+                                      "loanTermStart": 13,
+                                      "loanTermEnd": 24,
+                                      "loanTermType": 1,
+                                      "interestRate": 25
+                                  },
+                                  {
+                                      "plafondStart": 25000001,
+                                      "plafondEnd": 50000000,
+                                      "loanTermStart": 1,
+                                      "loanTermEnd": 12,
+                                      "loanTermType": 1,
+                                      "interestRate": 23
+                                  },
+                                  {
+                                      "plafondStart": 25000001,
+                                      "plafondEnd": 50000000,
+                                      "loanTermStart": 13,
+                                      "loanTermEnd": 24,
+                                      "loanTermType": 1,
+                                      "interestRate": 24
+                                  },
+                                  {
+                                      "plafondStart": 50000001,
+                                      "plafondEnd": 75000000,
+                                      "loanTermStart": 1,
+                                      "loanTermEnd": 12,
+                                      "loanTermType": 1,
+                                      "interestRate": 22
+                                  },
+                                  {
+                                      "plafondStart": 50000001,
+                                      "plafondEnd": 75000000,
+                                      "loanTermStart": 13,
+                                      "loanTermEnd": 24,
+                                      "loanTermType": 1,
+                                      "interestRate": 23
+                                  },
+                                  {
+                                      "plafondStart": 75000001,
+                                      "plafondEnd": 100000000,
+                                      "loanTermStart": 1,
+                                      "loanTermEnd": 12,
+                                      "loanTermType": 1,
+                                      "interestRate": 18
+                                  },
+                                  {
+                                      "plafondStart": 75000001,
+                                      "plafondEnd": 100000000,
+                                      "loanTermStart": 13,
+                                      "loanTermEnd": 24,
+                                      "loanTermType": 1,
+                                      "interestRate": 20
+                                  }
+                              ],
+                              "dataInstallmentPatterns": null,
+                              "dataAdministrationFees": null,
+                              "dataInsurance": {
+                                  "id": 1,
+                                  "insuranceName": "testSatu",
+                                  "productType": "40003",
+                                  "percentage": 0.2,
+                                  "status": 0
+                              }
+                          }
+                      ]
+                  },
+                  {
+                      "id": 28,
+                      "type": "partner",
+                      "name": "Mars",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": ""
+                  },
+                  {
+                      "id": 34,
+                      "type": "partner",
+                      "name": "Modern",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "999981"
+                  },
+                  {
+                      "id": 27,
+                      "type": "partner",
+                      "name": "Moondur",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": ""
+                  },
+                  {
+                      "id": 4,
+                      "type": "partner",
+                      "name": "OMS",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "",
+                      "dataLoanTypeChild": [
+                          {
+                              "id": 1,
+                              "productType": "40003",
+                              "loanTypeParentId": 2,
+                              "loanTypeSubparentId": 1,
+                              "loanTypeName": "Merchant Financing",
+                              "loanTypeCode": "KMK-MDL-KJR-MER-FIN-1",
+                              "transactionType": 2,
+                              "isCustom": 0,
+                              "provisionFee": 1,
+                              "status": 0,
+                              "dataInterestRates": [
+                                  {
+                                      "plafondStart": 500000,
+                                      "plafondEnd": 25000000,
+                                      "loanTermStart": 1,
+                                      "loanTermEnd": 30,
+                                      "loanTermType": 1,
+                                      "interestRate": 25
+                                  },
+                                  {
+                                      "plafondStart": 25000001,
+                                      "plafondEnd": 50000000,
+                                      "loanTermStart": 1,
+                                      "loanTermEnd": 30,
+                                      "loanTermType": 1,
+                                      "interestRate": 24
+                                  },
+                                  {
+                                      "plafondStart": 50000001,
+                                      "plafondEnd": 75000000,
+                                      "loanTermStart": 1,
+                                      "loanTermEnd": 30,
+                                      "loanTermType": 1,
+                                      "interestRate": 23
+                                  },
+                                  {
+                                      "plafondStart": 75000001,
+                                      "plafondEnd": 100000000,
+                                      "loanTermStart": 1,
+                                      "loanTermEnd": 30,
+                                      "loanTermType": 1,
+                                      "interestRate": 22
+                                  }
+                              ],
+                              "dataInstallmentPatterns": [
+                                  {
+                                      "installmentPattern": "6 bulan",
+                                      "installmentPatternType": 1
+                                  }
+                              ],
+                              "dataAdministrationFees": [
+                                  {
+                                      "nominalStart": 500000,
+                                      "nominalEnd": 10000000,
+                                      "adminFee": 50000
+                                  },
+                                  {
+                                      "nominalStart": 10000001,
+                                      "nominalEnd": 20000000,
+                                      "adminFee": 100000
+                                  },
+                                  {
+                                      "nominalStart": 20000001,
+                                      "nominalEnd": 50000000,
+                                      "adminFee": 150000
+                                  },
+                                  {
+                                      "nominalStart": 50000001,
+                                      "nominalEnd": 75000000,
+                                      "adminFee": 200000
+                                  },
+                                  {
+                                      "nominalStart": 75000001,
+                                      "nominalEnd": 100000000,
+                                      "adminFee": 250000
+                                  }
+                              ],
+                              "dataInsurance": {
+                                  "id": 5,
+                                  "insuranceName": "BRISMA",
+                                  "productType": "40003",
+                                  "percentage": 1.2,
+                                  "status": 0
+                              }
+                          }
+                      ]
+                  },
+                  {
+                      "id": 40,
+                      "type": "partner",
+                      "name": "Partner Kuningan",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "999932"
+                  },
+                  {
+                      "id": 21,
+                      "type": "partner",
+                      "name": "Rans",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": ""
+                  },
+                  {
+                      "id": 22,
+                      "type": "partner",
+                      "name": "Rans1",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": ""
+                  },
+                  {
+                      "id": 23,
+                      "type": "partner",
+                      "name": "Rans2",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": ""
+                  },
+                  {
+                      "id": 30,
+                      "type": "partner",
+                      "name": "Saturnus",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "999961"
+                  },
+                  {
+                      "id": 24,
+                      "type": "partner",
+                      "name": "Suka Mandi",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "999961"
+                  },
+                  {
+                      "id": 16,
+                      "type": "partner",
+                      "name": "Superkiosk",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": ""
+                  },
+                  {
+                      "id": 42,
+                      "type": "partner",
+                      "name": "Sysimpus",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "999932"
+                  },
+                  {
+                      "id": 31,
+                      "type": "partner",
+                      "name": "Thinkpad",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "999981"
+                  },
+                  {
+                      "id": 32,
+                      "type": "partner",
+                      "name": "Uranus",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "999961"
+                  },
+                  {
+                      "id": 36,
+                      "type": "partner",
+                      "name": "Venus",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "999961"
+                  }
+              ],
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/partnerships/list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "5"
+            description: Limit Data {Default 5}
+          - name: textSearch
+            value: oms
+            description: Text Search { Default NULL }
+            disabled: true
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: userLevel
+            value: "30"
+            description: Access Level ID (UserID Login) [ 10 = SF, 20 = Supervisor, 30 = Head, 90 = Kantor Pusat ]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:32:34 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data": null
+          }
+  - name: not found
+    request:
+      url: "{{base_url}}/v/1/partnerships/list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "5"
+            description: Limit Data {Default 5}
+          - name: textSearch
+            value: oms
+            description: Text Search { Default NULL }
+            disabled: true
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: userLevel
+            value: "30"
+            description: Access Level ID (UserID Login) [ 10 = SF, 20 = Supervisor, 30 = Head, 90 = Kantor Pusat ]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:32:34 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Data .... Kosong",
+              "message": ".... Tidak Ditemukan",
+              "status": 404
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/partnerships/list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: type
+            value: partner
+            description: Tipe Data (partner / community) { DEFAULT "partner" }
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "100"
+            description: Limit Data {Default 5}
+          - name: textSearch
+            value: Superkiosk
+            description: Text Search { Default NULL }
+            disabled: true
+          - name: branchCode
+            value: "0010"
+            description: Branch Code BRI Agro (BranchCode Login) | Main Branch = 0010[FOR LOANTYPE]
+            disabled: true
+          - name: isLoanType
+            value: "1"
+            description: "Preload Data Loan Type | [ 1 = FOR LOANTYPE] | OPTIONAL "
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 01 Sep 2022 13:53:11 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "data": [
+                  {
+                      "id": 44,
+                      "type": "partner",
+                      "name": "Adaka",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "999932"
+                  },
+                  {
+                      "id": 12,
+                      "type": "partner",
+                      "name": "Agriaku-Japfa",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": ""
+                  },
+                  {
+                      "id": 57,
+                      "type": "partner",
+                      "name": "Agroco",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "000358"
+                  },
+                  {
+                      "id": 56,
+                      "type": "partner",
+                      "name": "Agroco",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "000358"
+                  },
+                  {
+                      "id": 55,
+                      "type": "partner",
+                      "name": "Agroco",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "000358"
+                  },
+                  {
+                      "id": 54,
+                      "type": "partner",
+                      "name": "Agroco",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "000358",
+                      "dataLoanTypeChild": [
+                          {
+                              "id": 36,
+                              "productType": "40003",
+                              "loanTypeParentId": 26,
+                              "loanTypeSubparentId": 2,
+                              "loanTypeName": "KIM GU RAME",
+                              "loanTypeCode": "CHILD-KGR-39",
+                              "transactionType": 3,
+                              "isCustom": 1,
+                              "provisionFee": 10.12,
+                              "status": 0,
+                              "dataInterestRates": [
+                                  {
+                                      "plafondStart": 500000,
+                                      "plafondEnd": 1000000,
+                                      "loanTermStart": 1,
+                                      "loanTermEnd": 7,
+                                      "loanTermType": 1,
+                                      "interestRate": 12.1
+                                  }
+                              ],
+                              "dataInstallmentPatterns": [
+                                  {
+                                      "installmentPattern": "7 hari",
+                                      "installmentPatternType": 1
+                                  }
+                              ],
+                              "dataAdministrationFees": [
+                                  {
+                                      "nominalStart": 500000,
+                                      "nominalEnd": 1000000,
+                                      "adminFee": 50000
+                                  }
+                              ],
+                              "dataInsurance": {
+                                  "id": 1,
+                                  "insuranceName": "testSatu",
+                                  "productType": "40003",
+                                  "percentage": 0.2,
+                                  "status": 0
+                              }
+                          }
+                      ]
+                  },
+                  {
+                      "id": 53,
+                      "type": "partner",
+                      "name": "Agroco",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "000358"
+                  },
+                  {
+                      "id": 52,
+                      "type": "partner",
+                      "name": "Agroco",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "000358"
+                  },
+                  {
+                      "id": 51,
+                      "type": "partner",
+                      "name": "Agroco",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "000358"
+                  },
+                  {
+                      "id": 50,
+                      "type": "partner",
+                      "name": "Agroco",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "000358"
+                  },
+                  {
+                      "id": 49,
+                      "type": "partner",
+                      "name": "Agroco",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "000358"
+                  },
+                  {
+                      "id": 48,
+                      "type": "partner",
+                      "name": "Agroco",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "000358"
+                  },
+                  {
+                      "id": 47,
+                      "type": "partner",
+                      "name": "Agroco",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "000358"
+                  },
+                  {
+                      "id": 46,
+                      "type": "partner",
+                      "name": "Agroco",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "000358"
+                  },
+                  {
+                      "id": 39,
+                      "type": "partner",
+                      "name": "ajhsjashjahs",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "999932"
+                  },
+                  {
+                      "id": 38,
+                      "type": "partner",
+                      "name": "Amanah",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "999932"
+                  },
+                  {
+                      "id": 26,
+                      "type": "partner",
+                      "name": "Aquascape",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "999900"
+                  },
+                  {
+                      "id": 43,
+                      "type": "partner",
+                      "name": "asdas",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "999932"
+                  },
+                  {
+                      "id": 20,
+                      "type": "partner",
+                      "name": "Barista Tools Solo",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": ""
+                  },
+                  {
+                      "id": 33,
+                      "type": "partner",
+                      "name": "Delima",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "999932"
+                  },
+                  {
+                      "id": 35,
+                      "type": "partner",
+                      "name": "Demoney",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "999932"
+                  },
+                  {
+                      "id": 25,
+                      "type": "partner",
+                      "name": "Demoney",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "999961"
+                  },
+                  {
+                      "id": 18,
+                      "type": "partner",
+                      "name": "Dontogo",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": ""
+                  },
+                  {
+                      "id": 37,
+                      "type": "partner",
+                      "name": "Ikoy",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "999932"
+                  },
+                  {
+                      "id": 17,
+                      "type": "partner",
+                      "name": "Inamikro",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": ""
+                  },
+                  {
+                      "id": 19,
+                      "type": "partner",
+                      "name": "Japang",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": ""
+                  },
+                  {
+                      "id": 29,
+                      "type": "partner",
+                      "name": "Jupiter",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "999961"
+                  },
+                  {
+                      "id": 41,
+                      "type": "partner",
+                      "name": "Koala",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "999932"
+                  },
+                  {
+                      "id": 13,
+                      "type": "partner",
+                      "name": "KUD Puspa Mekar",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": ""
+                  },
+                  {
+                      "id": 6,
+                      "type": "partner",
+                      "name": "Majoo",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "",
+                      "dataLoanTypeChild": [
+                          {
+                              "id": 1,
+                              "productType": "40003",
+                              "loanTypeParentId": 2,
+                              "loanTypeSubparentId": 1,
+                              "loanTypeName": "Merchant Financing",
+                              "loanTypeCode": "KMK-MDL-KJR-MER-FIN-1",
+                              "transactionType": 2,
+                              "isCustom": 0,
+                              "provisionFee": 1,
+                              "status": 0,
+                              "dataInterestRates": [
+                                  {
+                                      "plafondStart": 500000,
+                                      "plafondEnd": 25000000,
+                                      "loanTermStart": 1,
+                                      "loanTermEnd": 30,
+                                      "loanTermType": 1,
+                                      "interestRate": 25
+                                  },
+                                  {
+                                      "plafondStart": 25000001,
+                                      "plafondEnd": 50000000,
+                                      "loanTermStart": 1,
+                                      "loanTermEnd": 30,
+                                      "loanTermType": 1,
+                                      "interestRate": 24
+                                  },
+                                  {
+                                      "plafondStart": 50000001,
+                                      "plafondEnd": 75000000,
+                                      "loanTermStart": 1,
+                                      "loanTermEnd": 30,
+                                      "loanTermType": 1,
+                                      "interestRate": 23
+                                  },
+                                  {
+                                      "plafondStart": 75000001,
+                                      "plafondEnd": 100000000,
+                                      "loanTermStart": 1,
+                                      "loanTermEnd": 30,
+                                      "loanTermType": 1,
+                                      "interestRate": 22
+                                  }
+                              ],
+                              "dataInstallmentPatterns": [
+                                  {
+                                      "installmentPattern": "6 bulan",
+                                      "installmentPatternType": 1
+                                  }
+                              ],
+                              "dataAdministrationFees": [
+                                  {
+                                      "nominalStart": 500000,
+                                      "nominalEnd": 10000000,
+                                      "adminFee": 50000
+                                  },
+                                  {
+                                      "nominalStart": 10000001,
+                                      "nominalEnd": 20000000,
+                                      "adminFee": 100000
+                                  },
+                                  {
+                                      "nominalStart": 20000001,
+                                      "nominalEnd": 50000000,
+                                      "adminFee": 150000
+                                  },
+                                  {
+                                      "nominalStart": 50000001,
+                                      "nominalEnd": 75000000,
+                                      "adminFee": 200000
+                                  },
+                                  {
+                                      "nominalStart": 75000001,
+                                      "nominalEnd": 100000000,
+                                      "adminFee": 250000
+                                  }
+                              ],
+                              "dataInsurance": {
+                                  "id": 5,
+                                  "insuranceName": "BRISMA",
+                                  "productType": "40003",
+                                  "percentage": 1.2,
+                                  "status": 0
+                              }
+                          },
+                          {
+                              "id": 3,
+                              "productType": "40002",
+                              "loanTypeParentId": 4,
+                              "loanTypeSubparentId": 0,
+                              "loanTypeName": "KMK Modal Kerja",
+                              "loanTypeCode": "KMK-MDL-KJR",
+                              "transactionType": 2,
+                              "isCustom": 0,
+                              "provisionFee": 1,
+                              "status": -1,
+                              "dataInterestRates": [
+                                  {
+                                      "plafondStart": 500000,
+                                      "plafondEnd": 25000000,
+                                      "loanTermStart": 1,
+                                      "loanTermEnd": 12,
+                                      "loanTermType": 1,
+                                      "interestRate": 24
+                                  },
+                                  {
+                                      "plafondStart": 500000,
+                                      "plafondEnd": 25000000,
+                                      "loanTermStart": 13,
+                                      "loanTermEnd": 24,
+                                      "loanTermType": 1,
+                                      "interestRate": 25
+                                  },
+                                  {
+                                      "plafondStart": 25000001,
+                                      "plafondEnd": 50000000,
+                                      "loanTermStart": 1,
+                                      "loanTermEnd": 12,
+                                      "loanTermType": 1,
+                                      "interestRate": 23
+                                  },
+                                  {
+                                      "plafondStart": 25000001,
+                                      "plafondEnd": 50000000,
+                                      "loanTermStart": 13,
+                                      "loanTermEnd": 24,
+                                      "loanTermType": 1,
+                                      "interestRate": 24
+                                  },
+                                  {
+                                      "plafondStart": 50000001,
+                                      "plafondEnd": 75000000,
+                                      "loanTermStart": 1,
+                                      "loanTermEnd": 12,
+                                      "loanTermType": 1,
+                                      "interestRate": 22
+                                  },
+                                  {
+                                      "plafondStart": 50000001,
+                                      "plafondEnd": 75000000,
+                                      "loanTermStart": 13,
+                                      "loanTermEnd": 24,
+                                      "loanTermType": 1,
+                                      "interestRate": 23
+                                  },
+                                  {
+                                      "plafondStart": 75000001,
+                                      "plafondEnd": 100000000,
+                                      "loanTermStart": 1,
+                                      "loanTermEnd": 12,
+                                      "loanTermType": 1,
+                                      "interestRate": 18
+                                  },
+                                  {
+                                      "plafondStart": 75000001,
+                                      "plafondEnd": 100000000,
+                                      "loanTermStart": 13,
+                                      "loanTermEnd": 24,
+                                      "loanTermType": 1,
+                                      "interestRate": 20
+                                  }
+                              ],
+                              "dataInstallmentPatterns": null,
+                              "dataAdministrationFees": null,
+                              "dataInsurance": {
+                                  "id": 1,
+                                  "insuranceName": "testSatu",
+                                  "productType": "40003",
+                                  "percentage": 0.2,
+                                  "status": 0
+                              }
+                          }
+                      ]
+                  },
+                  {
+                      "id": 28,
+                      "type": "partner",
+                      "name": "Mars",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": ""
+                  },
+                  {
+                      "id": 34,
+                      "type": "partner",
+                      "name": "Modern",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "999981"
+                  },
+                  {
+                      "id": 27,
+                      "type": "partner",
+                      "name": "Moondur",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": ""
+                  },
+                  {
+                      "id": 4,
+                      "type": "partner",
+                      "name": "OMS",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "",
+                      "dataLoanTypeChild": [
+                          {
+                              "id": 1,
+                              "productType": "40003",
+                              "loanTypeParentId": 2,
+                              "loanTypeSubparentId": 1,
+                              "loanTypeName": "Merchant Financing",
+                              "loanTypeCode": "KMK-MDL-KJR-MER-FIN-1",
+                              "transactionType": 2,
+                              "isCustom": 0,
+                              "provisionFee": 1,
+                              "status": 0,
+                              "dataInterestRates": [
+                                  {
+                                      "plafondStart": 500000,
+                                      "plafondEnd": 25000000,
+                                      "loanTermStart": 1,
+                                      "loanTermEnd": 30,
+                                      "loanTermType": 1,
+                                      "interestRate": 25
+                                  },
+                                  {
+                                      "plafondStart": 25000001,
+                                      "plafondEnd": 50000000,
+                                      "loanTermStart": 1,
+                                      "loanTermEnd": 30,
+                                      "loanTermType": 1,
+                                      "interestRate": 24
+                                  },
+                                  {
+                                      "plafondStart": 50000001,
+                                      "plafondEnd": 75000000,
+                                      "loanTermStart": 1,
+                                      "loanTermEnd": 30,
+                                      "loanTermType": 1,
+                                      "interestRate": 23
+                                  },
+                                  {
+                                      "plafondStart": 75000001,
+                                      "plafondEnd": 100000000,
+                                      "loanTermStart": 1,
+                                      "loanTermEnd": 30,
+                                      "loanTermType": 1,
+                                      "interestRate": 22
+                                  }
+                              ],
+                              "dataInstallmentPatterns": [
+                                  {
+                                      "installmentPattern": "6 bulan",
+                                      "installmentPatternType": 1
+                                  }
+                              ],
+                              "dataAdministrationFees": [
+                                  {
+                                      "nominalStart": 500000,
+                                      "nominalEnd": 10000000,
+                                      "adminFee": 50000
+                                  },
+                                  {
+                                      "nominalStart": 10000001,
+                                      "nominalEnd": 20000000,
+                                      "adminFee": 100000
+                                  },
+                                  {
+                                      "nominalStart": 20000001,
+                                      "nominalEnd": 50000000,
+                                      "adminFee": 150000
+                                  },
+                                  {
+                                      "nominalStart": 50000001,
+                                      "nominalEnd": 75000000,
+                                      "adminFee": 200000
+                                  },
+                                  {
+                                      "nominalStart": 75000001,
+                                      "nominalEnd": 100000000,
+                                      "adminFee": 250000
+                                  }
+                              ],
+                              "dataInsurance": {
+                                  "id": 5,
+                                  "insuranceName": "BRISMA",
+                                  "productType": "40003",
+                                  "percentage": 1.2,
+                                  "status": 0
+                              }
+                          }
+                      ]
+                  },
+                  {
+                      "id": 40,
+                      "type": "partner",
+                      "name": "Partner Kuningan",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "999932"
+                  },
+                  {
+                      "id": 21,
+                      "type": "partner",
+                      "name": "Rans",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": ""
+                  },
+                  {
+                      "id": 22,
+                      "type": "partner",
+                      "name": "Rans1",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": ""
+                  },
+                  {
+                      "id": 23,
+                      "type": "partner",
+                      "name": "Rans2",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": ""
+                  },
+                  {
+                      "id": 30,
+                      "type": "partner",
+                      "name": "Saturnus",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "999961"
+                  },
+                  {
+                      "id": 24,
+                      "type": "partner",
+                      "name": "Suka Mandi",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "999961"
+                  },
+                  {
+                      "id": 16,
+                      "type": "partner",
+                      "name": "Superkiosk",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": ""
+                  },
+                  {
+                      "id": 42,
+                      "type": "partner",
+                      "name": "Sysimpus",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "999932"
+                  },
+                  {
+                      "id": 31,
+                      "type": "partner",
+                      "name": "Thinkpad",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "999981"
+                  },
+                  {
+                      "id": 32,
+                      "type": "partner",
+                      "name": "Uranus",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "999961"
+                  },
+                  {
+                      "id": 36,
+                      "type": "partner",
+                      "name": "Venus",
+                      "totalMember": 0,
+                      "status": 0,
+                      "approvedBy": "999961"
+                  }
+              ],
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: not found
+    request:
+      url: "{{base_url}}/v/1/partnerships/list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "5"
+            description: Limit Data {Default 5}
+          - name: textSearch
+            value: oms
+            description: Text Search { Default NULL }
+            disabled: true
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: userLevel
+            value: "30"
+            description: Access Level ID (UserID Login) [ 10 = SF, 20 = Supervisor, 30 = Head, 90 = Kantor Pusat ]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:32:34 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Data .... Kosong",
+              "message": ".... Tidak Ditemukan",
+              "status": 404
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{base_url}}/v/1/partnerships/list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "5"
+            description: Limit Data {Default 5}
+          - name: textSearch
+            value: oms
+            description: Text Search { Default NULL }
+            disabled: true
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: userLevel
+            value: "30"
+            description: Access Level ID (UserID Login) [ 10 = SF, 20 = Supervisor, 30 = Head, 90 = Kantor Pusat ]
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:32:34 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/partnerships/list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "5"
+            description: Limit Data {Default 5}
+          - name: textSearch
+            value: oms
+            description: Text Search { Default NULL }
+            disabled: true
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: userLevel
+            value: "30"
+            description: Access Level ID (UserID Login) [ 10 = SF, 20 = Supervisor, 30 = Head, 90 = Kantor Pusat ]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:32:34 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: unautorized (401)
+    request:
+      url: "{{base_url}}/v/1/partnerships/list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "5"
+            description: Limit Data {Default 5}
+          - name: textSearch
+            value: oms
+            description: Text Search { Default NULL }
+            disabled: true
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: userLevel
+            value: "30"
+            description: Access Level ID (UserID Login) [ 10 = SF, 20 = Supervisor, 30 = Head, 90 = Kantor Pusat ]
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:32:34 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/partnerships/list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "5"
+            description: Limit Data {Default 5}
+          - name: textSearch
+            value: oms
+            description: Text Search { Default NULL }
+            disabled: true
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: userLevel
+            value: "30"
+            description: Access Level ID (UserID Login) [ 10 = SF, 20 = Supervisor, 30 = Head, 90 = Kantor Pusat ]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:32:34 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data": null
+          }

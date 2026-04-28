@@ -1,0 +1,74 @@
+info:
+  name: Saving Account Create
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{base_url}}/api/digiagri/saving/account/create"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "000426"
+      - name: kodeCabang
+        value: "0010"
+      - name: noCIF
+        value: "0000118829"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: CIF tidak ditemukan
+    request:
+      url: "{{base_url}}/api/digiagri/saving/account/create"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000426"
+          - name: kodeCabang
+            value: "0010"
+          - name: noCIF
+            value: "118826"
+    response:
+      body:
+        type: text
+        data: "{\r
+
+          \    \"statusCode\": \"99\",\r
+
+          \    \"statusDescription\": \"CIF Tidak Ditemukan\"\r
+
+          }"
+  - name: success
+    request:
+      url: "{{base_url}}/api/digiagri/saving/account/create"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000426"
+          - name: kodeCabang
+            value: "0010"
+          - name: noCIF
+            value: "118826"
+    response:
+      body:
+        type: text
+        data: "{\r
+
+          \    \"statusCode\": \"1\",\r
+
+          \    \"statusDescription\": \"Success\",\r
+
+          \    \"nomorRekening\": \"001001004381301\"\r
+
+          }"

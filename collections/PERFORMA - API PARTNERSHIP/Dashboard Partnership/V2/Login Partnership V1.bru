@@ -1,0 +1,272 @@
+meta {
+  name: Login Partnership V1
+  type: http
+  seq: 11
+}
+
+post {
+  url: {{base-url-staging}}/v/1/partnerships/login
+  body: formUrlEncoded
+  auth: none
+}
+
+body:form-urlencoded {
+  email: oms@gmail.com
+  password: MA==
+}
+
+script:post-response {
+  var jsonData = res.getBody();
+  bru.setGlobalEnvVar("tokenPartnership", jsonData.data.accessToken)
+  bru.setEnvVar("tokenPartnership", jsonData.data.accessToken)
+}
+
+settings {
+  encodeUrl: true
+}
+
+example {
+  name: Error - Parameter Validation Required
+  
+  request: {
+    url: {{base-url-local}}/v/1/partnerships/login
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      email: oms@gmail.com
+      ~password: MA==
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Tue, 24 Dec 2024 02:08:11 GMT
+      Content-Length: 125
+    }
+  
+    status: {
+      code: 400
+      text: Bad Request
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "Validation failed on field ... with tag 'required'",
+            "message": "Maaf, ... Tidak Boleh Kosong",
+            "status": 400
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Validation Email
+  
+  request: {
+    url: {{base-url-local}}/v/1/partnerships/login
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      email: oms
+      password: MA==
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Tue, 24 Dec 2024 02:09:38 GMT
+      Content-Length: 109
+    }
+  
+    status: {
+      code: 400
+      text: Bad Request
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "Validation failed on field Email with tag 'email'",
+            "message": "Maaf, Email Tidak Valid",
+            "status": 400
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Database Connection
+  
+  request: {
+    url: {{base-url-local}}/v/1/partnerships/login
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      email: oms@gmail.com
+      password: MA===
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Tue, 24 Dec 2024 00:22:39 GMT
+      Content-Length: 131
+    }
+  
+    status: {
+      code: 400
+      text: Bad Request
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "status": 500,
+            "message": "Server sedang dalam perbaikan. Silahkan menghubungi administrator.",
+            "desc": "No DB Connection"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Email or Password invalid
+  
+  request: {
+    url: {{base-url-local}}/v/1/partnerships/login
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      email: majoo@gmail.com
+      password: MA==A
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Tue, 22 Nov 2022 08:52:48 GMT
+      Content-Length: 139
+    }
+  
+    status: {
+      code: 401
+      text: Unauthorized
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "desc": "Email & Password is not valid",
+            "message": "Pastikan kamu menggunakan email dan password yang sesuai",
+            "status": 401
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Email or Password invalid 3x
+  
+  request: {
+    url: {{base-url-local}}/v/1/partnerships/login
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      email: majoo@gmail.com
+      password: MA==A
+    }
+  }
+  
+  response: {
+    headers: {
+      Date: Wed, 23 Nov 2022 02:08:52 GMT
+      Content-Type: application/json; charset=utf-8
+      Content-Length: 194
+      Connection: keep-alive
+      Strict-Transport-Security: max-age=15724800; includeSubDomains
+    }
+  
+    status: {
+      code: 401
+      text: Unauthorized
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "desc": "Email & Password is not valid 3x",
+            "message": "Sudah 3 kali salah, mohon menunggu selama 60 menit. Pastikan kamu menggunakan email dan password yang sesuai",
+            "status": 401
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Success
+  
+  request: {
+    url: {{base-url-local}}/v/1/partnerships/login
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      email: oms@gmail.com
+      password: MA==
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json
+      Date: Mon, 08 Dec 2025 02:52:40 GMT
+      Content-Length: 471
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": {
+                "id": 1,
+                "name": "Admin OMS",
+                "email": "oms@gmail.com",
+                "partnershipId": 4,
+                "partnershipCode": "OMS1",
+                "partnershipName": "OMS",
+                "ticketNumber": "T01TMS0yMDI1MTIwODA5NTIzOQ==",
+                "accessLevel": 90,
+                "merchantEntryPoint": "",
+                "accessToken": "UmF5YVBpUGVyVG9wtk843jG/7RB5In2LDvIpg9UKTcSXLLozmNOcnE7FFvjDhQqUp8VSRyqeevBGYp/zDqP8fbgSm5ul2vDNvWAJkN8T97L1oROjJb3xSjM4BkRbPADdalt9G2Oe0im67LRegPCuIRaV0zI=",
+                "productType": "partner"
+            },
+            "desc": "Data Valid",
+            "message": "Data ditemukan",
+            "status": 200
+        }
+      '''
+    }
+  }
+}

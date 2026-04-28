@@ -1,0 +1,46 @@
+meta {
+  name: Get List Role Capability
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{BASE_URL}}/v1/role/capability/list
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: 
+}
+
+body:json {
+  {
+      "payload": "{{REQUEST_BODY}}"
+  }
+}
+
+script:pre-request {
+  const payload = {
+      "role_id":"f3a73df5-53fc-4454-80e5-c360a536fa3d",
+      "application_id": "RYM",
+      "page": 1,
+      "limit": -1,
+  }
+  
+  const result = _.encrypt(JSON.stringify(payload))
+  bru.setEnvVar("REQUEST_BODY", result);
+}
+
+script:post-response {
+  const responseJSON = res.getBody()
+  if (responseJSON.status) {
+      const data = _.decrypt(responseJSON.data)
+      const result = JSON.parse(JSON.parse(data))
+      console.log("Result", result)
+  }
+}
+
+settings {
+  encodeUrl: true
+}

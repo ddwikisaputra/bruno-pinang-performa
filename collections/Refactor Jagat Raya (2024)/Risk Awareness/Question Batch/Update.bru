@@ -1,0 +1,252 @@
+meta {
+  name: Update
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{BASE_URL}}/v1/risk-awareness/batch/update
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: 
+}
+
+body:json {
+  {
+      "payload": "{{REQUEST_BODY}}"
+  }
+}
+
+script:pre-request {
+  const payload = {
+      "id": "46f0508c-ef12-4165-bcc2-987432b95d5a",
+      "title": "Terresta Cluster Update",
+      "start_date":"2025-01-27", //YYYY-MM-DD
+      "finish_date":"2025-02-03" //YYYY-MM-DD
+  }
+  
+  const result = _.encrypt(JSON.stringify(payload))
+  bru.setEnvVar("REQUEST_BODY", result);
+}
+
+script:post-response {
+  const responseJSON = res.getBody()
+  if (responseJSON.status) {
+      const data = _.decrypt(responseJSON.data)
+      const parseData = JSON.parse(data)
+      const parseData2 = JSON.parse(parseData)
+      console.log('/v1/risk-awareness/batch/update', parseData2)
+  }
+}
+
+settings {
+  encodeUrl: true
+}
+
+example {
+  name: Error - Start Data < Current Date
+  
+  request: {
+    url: {{BASE_URL}}/v1/risk-awareness/batch/update
+    method: POST
+    mode: json
+    body:json: {
+      {
+          "payload": "{{REQUEST_BODY}}"
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Tue, 09 Jul 2024 03:21:11 GMT
+      Content-Length: 148
+    }
+  
+    status: {
+      code: 200
+      text: 400
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": [
+                {
+                    "field": "START_DATE",
+                    "message": "Tanggal tidak boleh kurang dari tanggal sekarang"
+                }
+            ],
+            "message": "Terjadi kesalahan validasi",
+            "status": false
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Start Date & Finish Date Beririsan
+  
+  request: {
+    url: {{BASE_URL}}/v1/risk-awareness/batch/update
+    method: POST
+    mode: json
+    body:json: {
+      {
+          "payload": "{{REQUEST_BODY}}"
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Mon, 08 Jul 2024 04:30:12 GMT
+      Content-Length: 100
+    }
+  
+    status: {
+      code: 200
+      text: 500
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "message": "batch tidak tersedia pada tanggal 2024-09-01 s/d 2024-09-06",
+            "status": false
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Finish Date < Start Date
+  
+  request: {
+    url: {{BASE_URL}}/v1/risk-awareness/batch/update
+    method: POST
+    mode: json
+    body:json: {
+      {
+          "payload": "{{REQUEST_BODY}}"
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Tue, 09 Jul 2024 03:21:54 GMT
+      Content-Length: 137
+    }
+  
+    status: {
+      code: 200
+      text: 400
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": [
+                {
+                    "field": "FINISH_DATE",
+                    "message": "Finish Date harus sesudah Start Date"
+                }
+            ],
+            "message": "Terjadi kesalahan validasi",
+            "status": false
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Data Not Found
+  
+  request: {
+    url: {{BASE_URL}}/v1/risk-awareness/batch/update
+    method: POST
+    mode: json
+    body:json: {
+      {
+          "payload": "{{REQUEST_BODY}}"
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Mon, 08 Jul 2024 04:31:03 GMT
+      Content-Length: 61
+    }
+  
+    status: {
+      code: 200
+      text: 500
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "message": "Data tidak ditemukan",
+            "status": false
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Success
+  
+  request: {
+    url: {{BASE_URL}}/v1/risk-awareness/batch/update
+    method: POST
+    mode: json
+    body:json: {
+      {
+          "payload": "{{REQUEST_BODY}}"
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Mon, 08 Jul 2024 04:32:04 GMT
+      Content-Length: 62
+    }
+  
+    status: {
+      code: 200
+      text: 201
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "message": "Data berhasil diupdate",
+            "status": true
+        }
+      '''
+    }
+  }
+}

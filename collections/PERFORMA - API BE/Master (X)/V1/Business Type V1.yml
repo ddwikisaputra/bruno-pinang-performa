@@ -1,0 +1,841 @@
+info:
+  name: Business Type V1
+  type: http
+  seq: 5
+
+http:
+  method: GET
+  url: "{{base_url}}/v/1/master/business-type"
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/master/business-type"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 10 Jun 2021 01:34:27 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data": null
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/master/business-type"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 10 Jun 2021 01:34:27 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/master/business-type"
+      method: GET
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 10 Jun 2021 01:34:27 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: empty data
+    request:
+      url: "{{base_url}}/v/1/master/business-type"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 10 Jun 2021 01:34:27 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Error record not found",
+              "message": "Jenis Usaha Tidak Ditemukan",
+              "status": 404
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/master/business-type"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 10 Jun 2021 01:34:27 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "data": [
+                  {
+                      "id": 48,
+                      "name": "AGEN PERJALANAN"
+                  },
+                  {
+                      "id": 52,
+                      "name": "AKUNTAN, PENGACARA DAN NOTARIS"
+                  },
+                  {
+                      "id": 10,
+                      "name": "ASURANSI"
+                  },
+                  {
+                      "id": 57,
+                      "name": "BADAN USAHA UNIT DESA (BUUD)"
+                  },
+                  {
+                      "id": 5,
+                      "name": "BANK"
+                  },
+                  {
+                      "id": 1,
+                      "name": "BELUM DIKETAHUI"
+                  },
+                  {
+                      "id": 19,
+                      "name": "BHMN"
+                  },
+                  {
+                      "id": 18,
+                      "name": "BUMD"
+                  },
+                  {
+                      "id": 17,
+                      "name": "BUMN"
+                  },
+                  {
+                      "id": 53,
+                      "name": "CATERING"
+                  },
+                  {
+                      "id": 13,
+                      "name": "COMMANDITER VENOTSCHAP (CV)"
+                  },
+                  {
+                      "id": 41,
+                      "name": "CUSTODIAN"
+                  },
+                  {
+                      "id": 16,
+                      "name": "DANA PENSIUN"
+                  },
+                  {
+                      "id": 49,
+                      "name": "DEALER MOBIL, KAPAL"
+                  },
+                  {
+                      "id": 58,
+                      "name": "DEBITUR KELOMPOK"
+                  },
+                  {
+                      "id": 59,
+                      "name": "EKSPEDISI MUATAN KAPAL LAUT (EMKL)"
+                  },
+                  {
+                      "id": 24,
+                      "name": "EKSPLORASI"
+                  },
+                  {
+                      "id": 25,
+                      "name": "EKSPOR IMPOR"
+                  },
+                  {
+                      "id": 35,
+                      "name": "ELECTRONIC BANKING"
+                  },
+                  {
+                      "id": 15,
+                      "name": "FA"
+                  },
+                  {
+                      "id": 60,
+                      "name": "FIRMA"
+                  },
+                  {
+                      "id": 61,
+                      "name": "GABUNGAN KOPERASI"
+                  },
+                  {
+                      "id": 62,
+                      "name": "INDUK KOPERASI"
+                  },
+                  {
+                      "id": 26,
+                      "name": "INDUSTRI"
+                  },
+                  {
+                      "id": 36,
+                      "name": "INTERNET BANKING"
+                  },
+                  {
+                      "id": 14,
+                      "name": "JASA"
+                  },
+                  {
+                      "id": 44,
+                      "name": "JUAL BELI VALUTA ASING"
+                  },
+                  {
+                      "id": 38,
+                      "name": "KARTU KREDIT TERMASUK KTA"
+                  },
+                  {
+                      "id": 27,
+                      "name": "KEHUTANAN"
+                  },
+                  {
+                      "id": 28,
+                      "name": "KELAUTAN"
+                  },
+                  {
+                      "id": 56,
+                      "name": "KONSTRUKSI"
+                  },
+                  {
+                      "id": 55,
+                      "name": "KONSULTAN"
+                  },
+                  {
+                      "id": 9,
+                      "name": "KOPERASI"
+                  },
+                  {
+                      "id": 63,
+                      "name": "KOPERASI UNIT DESA"
+                  },
+                  {
+                      "id": 6,
+                      "name": "LAINNYA"
+                  },
+                  {
+                      "id": 73,
+                      "name": "LAINNYA BADAN USAHA"
+                  },
+                  {
+                      "id": 45,
+                      "name": "LETTER OF CREDIT (LC)"
+                  },
+                  {
+                      "id": 64,
+                      "name": "LIMITED"
+                  },
+                  {
+                      "id": 29,
+                      "name": "LOGGING"
+                  },
+                  {
+                      "id": 65,
+                      "name": "MASKAPAI ANDIL INDONESIA"
+                  },
+                  {
+                      "id": 66,
+                      "name": "NAMLOOSE VENOTSCHAAP"
+                  },
+                  {
+                      "id": 30,
+                      "name": "ORGANISASI MASA (ORMAS)"
+                  },
+                  {
+                      "id": 46,
+                      "name": "PEDAGANG BRG MEWAH/EMAS/BERLIA"
+                  },
+                  {
+                      "id": 3,
+                      "name": "PEMERINTAHAN"
+                  },
+                  {
+                      "id": 31,
+                      "name": "PENDIDIKAN"
+                  },
+                  {
+                      "id": 32,
+                      "name": "PERDAGANGAN"
+                  },
+                  {
+                      "id": 7,
+                      "name": "PERDAGANGAN & JASA"
+                  },
+                  {
+                      "id": 33,
+                      "name": "PERIKANAN"
+                  },
+                  {
+                      "id": 21,
+                      "name": "PERJAN"
+                  },
+                  {
+                      "id": 11,
+                      "name": "PERKEBUNAN"
+                  },
+                  {
+                      "id": 67,
+                      "name": "PERSEKUTUAN PERDATA"
+                  },
+                  {
+                      "id": 20,
+                      "name": "PERSERO"
+                  },
+                  {
+                      "id": 8,
+                      "name": "PERSEROAN TERBATAS (PT)"
+                  },
+                  {
+                      "id": 12,
+                      "name": "PERTANIAN"
+                  },
+                  {
+                      "id": 22,
+                      "name": "PERUM"
+                  },
+                  {
+                      "id": 23,
+                      "name": "PERUSAHAAN DAERAH"
+                  },
+                  {
+                      "id": 68,
+                      "name": "PERUSAHAAN UMUM"
+                  },
+                  {
+                      "id": 69,
+                      "name": "PRIMER KOPERASI"
+                  },
+                  {
+                      "id": 40,
+                      "name": "PRIVATE BANKING"
+                  },
+                  {
+                      "id": 70,
+                      "name": "PUSAT KOPERASI"
+                  },
+                  {
+                      "id": 71,
+                      "name": "PUSAT KOPERASI UNIT DESA"
+                  },
+                  {
+                      "id": 43,
+                      "name": "REKSADANA"
+                  },
+                  {
+                      "id": 42,
+                      "name": "SAFE DEPOSIT BOX"
+                  },
+                  {
+                      "id": 54,
+                      "name": "SURVEYOR"
+                  },
+                  {
+                      "id": 4,
+                      "name": "SWASTA"
+                  },
+                  {
+                      "id": 50,
+                      "name": "TEMPAT HIBURAN,KASINO/EXE.CLUB"
+                  },
+                  {
+                      "id": 37,
+                      "name": "TRANSFER DANA"
+                  },
+                  {
+                      "id": 39,
+                      "name": "TRAVELERS CHECK DAN BANK DRAFT"
+                  },
+                  {
+                      "id": 72,
+                      "name": "UNIT DAGANG KREDIT PEDESAAN"
+                  },
+                  {
+                      "id": 47,
+                      "name": "USAHA BARANG-BARANG ANTIK"
+                  },
+                  {
+                      "id": 74,
+                      "name": "USAHA DAGANG"
+                  },
+                  {
+                      "id": 51,
+                      "name": "USAHA DI NEGARA NCCT/TAX HAVEN"
+                  },
+                  {
+                      "id": 2,
+                      "name": "WIRASWASTA"
+                  },
+                  {
+                      "id": 34,
+                      "name": "YAYASAN"
+                  }
+              ],
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: empty data
+    request:
+      url: "{{base_url}}/v/1/master/business-type"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 10 Jun 2021 01:34:27 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Error record not found",
+              "message": "Jenis Usaha Tidak Ditemukan",
+              "status": 404
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/master/business-type"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 10 Jun 2021 01:34:27 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "data": [
+                  {
+                      "id": 48,
+                      "name": "AGEN PERJALANAN"
+                  },
+                  {
+                      "id": 52,
+                      "name": "AKUNTAN, PENGACARA DAN NOTARIS"
+                  },
+                  {
+                      "id": 10,
+                      "name": "ASURANSI"
+                  },
+                  {
+                      "id": 57,
+                      "name": "BADAN USAHA UNIT DESA (BUUD)"
+                  },
+                  {
+                      "id": 5,
+                      "name": "BANK"
+                  },
+                  {
+                      "id": 1,
+                      "name": "BELUM DIKETAHUI"
+                  },
+                  {
+                      "id": 19,
+                      "name": "BHMN"
+                  },
+                  {
+                      "id": 18,
+                      "name": "BUMD"
+                  },
+                  {
+                      "id": 17,
+                      "name": "BUMN"
+                  },
+                  {
+                      "id": 53,
+                      "name": "CATERING"
+                  },
+                  {
+                      "id": 13,
+                      "name": "COMMANDITER VENOTSCHAP (CV)"
+                  },
+                  {
+                      "id": 41,
+                      "name": "CUSTODIAN"
+                  },
+                  {
+                      "id": 16,
+                      "name": "DANA PENSIUN"
+                  },
+                  {
+                      "id": 49,
+                      "name": "DEALER MOBIL, KAPAL"
+                  },
+                  {
+                      "id": 58,
+                      "name": "DEBITUR KELOMPOK"
+                  },
+                  {
+                      "id": 59,
+                      "name": "EKSPEDISI MUATAN KAPAL LAUT (EMKL)"
+                  },
+                  {
+                      "id": 24,
+                      "name": "EKSPLORASI"
+                  },
+                  {
+                      "id": 25,
+                      "name": "EKSPOR IMPOR"
+                  },
+                  {
+                      "id": 35,
+                      "name": "ELECTRONIC BANKING"
+                  },
+                  {
+                      "id": 15,
+                      "name": "FA"
+                  },
+                  {
+                      "id": 60,
+                      "name": "FIRMA"
+                  },
+                  {
+                      "id": 61,
+                      "name": "GABUNGAN KOPERASI"
+                  },
+                  {
+                      "id": 62,
+                      "name": "INDUK KOPERASI"
+                  },
+                  {
+                      "id": 26,
+                      "name": "INDUSTRI"
+                  },
+                  {
+                      "id": 36,
+                      "name": "INTERNET BANKING"
+                  },
+                  {
+                      "id": 14,
+                      "name": "JASA"
+                  },
+                  {
+                      "id": 44,
+                      "name": "JUAL BELI VALUTA ASING"
+                  },
+                  {
+                      "id": 38,
+                      "name": "KARTU KREDIT TERMASUK KTA"
+                  },
+                  {
+                      "id": 27,
+                      "name": "KEHUTANAN"
+                  },
+                  {
+                      "id": 28,
+                      "name": "KELAUTAN"
+                  },
+                  {
+                      "id": 56,
+                      "name": "KONSTRUKSI"
+                  },
+                  {
+                      "id": 55,
+                      "name": "KONSULTAN"
+                  },
+                  {
+                      "id": 9,
+                      "name": "KOPERASI"
+                  },
+                  {
+                      "id": 63,
+                      "name": "KOPERASI UNIT DESA"
+                  },
+                  {
+                      "id": 6,
+                      "name": "LAINNYA"
+                  },
+                  {
+                      "id": 73,
+                      "name": "LAINNYA BADAN USAHA"
+                  },
+                  {
+                      "id": 45,
+                      "name": "LETTER OF CREDIT (LC)"
+                  },
+                  {
+                      "id": 64,
+                      "name": "LIMITED"
+                  },
+                  {
+                      "id": 29,
+                      "name": "LOGGING"
+                  },
+                  {
+                      "id": 65,
+                      "name": "MASKAPAI ANDIL INDONESIA"
+                  },
+                  {
+                      "id": 66,
+                      "name": "NAMLOOSE VENOTSCHAAP"
+                  },
+                  {
+                      "id": 30,
+                      "name": "ORGANISASI MASA (ORMAS)"
+                  },
+                  {
+                      "id": 46,
+                      "name": "PEDAGANG BRG MEWAH/EMAS/BERLIA"
+                  },
+                  {
+                      "id": 3,
+                      "name": "PEMERINTAHAN"
+                  },
+                  {
+                      "id": 31,
+                      "name": "PENDIDIKAN"
+                  },
+                  {
+                      "id": 32,
+                      "name": "PERDAGANGAN"
+                  },
+                  {
+                      "id": 7,
+                      "name": "PERDAGANGAN & JASA"
+                  },
+                  {
+                      "id": 33,
+                      "name": "PERIKANAN"
+                  },
+                  {
+                      "id": 21,
+                      "name": "PERJAN"
+                  },
+                  {
+                      "id": 11,
+                      "name": "PERKEBUNAN"
+                  },
+                  {
+                      "id": 67,
+                      "name": "PERSEKUTUAN PERDATA"
+                  },
+                  {
+                      "id": 20,
+                      "name": "PERSERO"
+                  },
+                  {
+                      "id": 8,
+                      "name": "PERSEROAN TERBATAS (PT)"
+                  },
+                  {
+                      "id": 12,
+                      "name": "PERTANIAN"
+                  },
+                  {
+                      "id": 22,
+                      "name": "PERUM"
+                  },
+                  {
+                      "id": 23,
+                      "name": "PERUSAHAAN DAERAH"
+                  },
+                  {
+                      "id": 68,
+                      "name": "PERUSAHAAN UMUM"
+                  },
+                  {
+                      "id": 69,
+                      "name": "PRIMER KOPERASI"
+                  },
+                  {
+                      "id": 40,
+                      "name": "PRIVATE BANKING"
+                  },
+                  {
+                      "id": 70,
+                      "name": "PUSAT KOPERASI"
+                  },
+                  {
+                      "id": 71,
+                      "name": "PUSAT KOPERASI UNIT DESA"
+                  },
+                  {
+                      "id": 43,
+                      "name": "REKSADANA"
+                  },
+                  {
+                      "id": 42,
+                      "name": "SAFE DEPOSIT BOX"
+                  },
+                  {
+                      "id": 54,
+                      "name": "SURVEYOR"
+                  },
+                  {
+                      "id": 4,
+                      "name": "SWASTA"
+                  },
+                  {
+                      "id": 50,
+                      "name": "TEMPAT HIBURAN,KASINO/EXE.CLUB"
+                  },
+                  {
+                      "id": 37,
+                      "name": "TRANSFER DANA"
+                  },
+                  {
+                      "id": 39,
+                      "name": "TRAVELERS CHECK DAN BANK DRAFT"
+                  },
+                  {
+                      "id": 72,
+                      "name": "UNIT DAGANG KREDIT PEDESAAN"
+                  },
+                  {
+                      "id": 47,
+                      "name": "USAHA BARANG-BARANG ANTIK"
+                  },
+                  {
+                      "id": 74,
+                      "name": "USAHA DAGANG"
+                  },
+                  {
+                      "id": 51,
+                      "name": "USAHA DI NEGARA NCCT/TAX HAVEN"
+                  },
+                  {
+                      "id": 2,
+                      "name": "WIRASWASTA"
+                  },
+                  {
+                      "id": 34,
+                      "name": "YAYASAN"
+                  }
+              ],
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/master/business-type"
+      method: GET
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 10 Jun 2021 01:34:27 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/master/business-type"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 10 Jun 2021 01:34:27 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data": null
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/master/business-type"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 10 Jun 2021 01:34:27 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }

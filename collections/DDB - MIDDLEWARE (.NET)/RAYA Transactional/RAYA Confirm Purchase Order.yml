@@ -1,0 +1,81 @@
+info:
+  name: RAYA Confirm Purchase Order
+  type: http
+  seq: 4
+
+http:
+  method: POST
+  url: "{{base_url}}/api/digiagri/transactional/raya/v2/order/confirm"
+  body:
+    type: form-urlencoded
+    data:
+      - name: phoneNumber
+        value: "+6289604391382"
+      - name: PONumber
+        value: PO/001
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: nomor PO tidak ditemukan
+    request:
+      url: "{{base_url}}/api/digiagri/transactional/raya/v2/order/confirm"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: phoneNumber
+            value: "+6289604391382"
+          - name: PONumber
+            value: PO/001
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "statusCode":"2",
+              "statusDescription":"Nomor PO tidak ditemukan"
+          }
+  - name: Error exception
+    request:
+      url: "{{base_url}}/api/digiagri/transactional/raya/v2/order/confirm"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: phoneNumber
+            value: "+6289604391382"
+          - name: PONumber
+            value: PO/001
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "statusCode":"-1",
+              "statusDescription":"Terjadi kesalahan pada Sistem"
+          }
+  - name: Success
+    request:
+      url: "{{base_url}}/api/digiagri/transactional/raya/v2/order/confirm"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: phoneNumber
+            value: "+6289604391382"
+          - name: PONumber
+            value: PO/001
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "statusCode":"1",
+              "statusDescription":"Purchase Order berhasil disimpan"
+          }

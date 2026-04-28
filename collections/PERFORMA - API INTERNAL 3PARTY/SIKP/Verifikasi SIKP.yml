@@ -1,0 +1,212 @@
+info:
+  name: Verifikasi SIKP
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{url}}/v/1/3party/sikp/verification"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: OTk5OTQx
+        description: User Id [ENCODE BASE64] [MANDATORY]
+      - name: ktpNumber
+        value: MzMyMzE2MjIxMTk2MDAwMQ==
+        description: KTP Number [ENCODE BASE64] [MANDATORY]
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Data Ditemukan (terdaftar di SIKP sebagai debitur Bank Lain)
+    request:
+      url: "{{url}}/v/1/3party/sikp/verification"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: OTk5OTQx
+          - name: ktpNumber
+            value: MzIwOTM2NTQwNzgzMDAwMQ==
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 17 Jan 2023 13:01:00 GMT
+        - name: Content-Length
+          value: "238"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "statusCode": 1,
+                  "statusDescription": "NIK telah terdaftar di SIKP sebagai debitur Bank Lain.",
+                  "bankCode": "008",
+                  "uploadDate": "2022-11-03 17:31:38",
+                  "isWarning": 1
+              },
+              "desc": "Success Process.",
+              "message": "Data Ditemukan.",
+              "status": 200
+          }
+  - name: Data Ditemukan (terdaftar di SIKP sebagai debitur Bank BRI AGRO)
+    request:
+      url: "{{url}}/v/1/3party/sikp/verification"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: OTk5OTQx
+          - name: ktpNumber
+            value: MzMyMzE2MjIxMTk2MDAwMQ==
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 17 Jan 2023 13:06:40 GMT
+        - name: Content-Length
+          value: "241"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "statusCode": 1,
+                  "statusDescription": "NIK telah terdaftar di SIKP sebagai debitur Bank BRI AGRO.",
+                  "bankCode": "494",
+                  "uploadDate": "2022-12-30 16:35:32",
+                  "isWarning": 1
+              },
+              "desc": "Success Process.",
+              "message": "Data Ditemukan.",
+              "status": 200
+          }
+  - name: Data Tidak Ditemukan (belum terdaftar di SIKP)
+    request:
+      url: "{{url}}/v/1/3party/sikp/verification"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: OTk5OTQx
+          - name: ktpNumber
+            value: NTE3MTAzMjkwODk4MDAyMQ==
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 17 Jan 2023 13:05:40 GMT
+        - name: Content-Length
+          value: "165"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "statusCode": 1,
+                  "statusDescription": "NIK belum terdaftar di SIKP.",
+                  "isWarning": 0
+              },
+              "desc": "Success Process.",
+              "message": "Data Tidak Ditemukan.",
+              "status": 404
+          }
+  - name: Error General
+    request:
+      url: "{{url}}/v/1/3party/sikp/verification"
+      method: POST
+      body:
+        type: form-urlencoded
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "statusCode": -2,
+                  "statusDescription": "response Blank dari SIKP.",
+                  "uploadDate": "2022-12-30 16:35:32",
+                  "isWarning": -2
+              },
+              "desc": "Success Process.",
+              "message": "Data Ditemukan.",
+              "status": 200
+          }
+  - name: Error Database Connection / Timeout
+    request:
+      url: "{{url}}/v/1/3party/sikp/verification"
+      method: POST
+      body:
+        type: form-urlencoded
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "...",
+              "message": "Maaf, Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 500
+          }
+  - name: Error Parameter Validation
+    request:
+      url: "{{url}}/v/1/3party/sikp/verification"
+      method: POST
+      body:
+        type: form-urlencoded
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Parameter .... kosong",
+              "message": ".... tidak boleh kosong",
+              "status": 400
+          }

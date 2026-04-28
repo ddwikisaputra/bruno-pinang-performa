@@ -1,0 +1,153 @@
+info:
+  name: Post Data KYC
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{base_url}}/raya/opening-account/pinang/post-data-ekyc/fdc66be0-dbbc-4a79-961f-9d27c8f9330e"
+  body:
+    type: json
+    data: |-
+      {
+          "provider": "vida",
+          "livenessScore": "0.999",
+          "faceMatchScore": "9.413321",
+          "refId": "tessoopppaa",
+          "status": 1,
+          "progress": 1
+      }
+  auth:
+    type: basic
+    username: "{{username_dev}}"
+    password: "{{password_dev}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Successful
+    request:
+      url: https://apigw.bankraya.co.id/raya/opening-account/pinang/post-data-ekyc/4b9432d0-2c98-4185-afcb-837329705b49
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+              "provider": "vida",
+              "livenessScore": "0.999",
+              "faceMatchScore": "9.413321",
+              "refId": "krihfadiyg823985y23ihjdenq91u0",
+              "status": 1,
+              "progress": 1
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Fri, 15 Sep 2023 15:44:26 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: x-krakend
+          value: Version 2.4.3
+        - name: x-krakend-completed
+          value: "false"
+        - name: strict-transport-security
+          value: max-age=31536000; includeSubDomains; preload; always
+        - name: alt-svc
+          value: h3=":443"; ma=86400
+        - name: cf-cache-status
+          value: DYNAMIC
+        - name: set-cookie
+          value: __cf_bm=KBK12tDz2tvgEJleEZLnTkSkEmseuNsRxWALWf9z2go-1694792666-0-AYp4272r8OhSk6903SoIWStipujey0pvh51INedYneU2lX2aNBMsiEVx3UJvTvqjvgxkJgD0UrodVgzte0MVeoY=; path=/; expires=Fri, 15-Sep-23 16:14:26 GMT; domain=.bankraya.co.id; HttpOnly; Secure; SameSite=None
+        - name: Content-Encoding
+          value: gzip
+        - name: x-kong-upstream-latency
+          value: "1124"
+        - name: x-kong-proxy-latency
+          value: "14"
+        - name: via
+          value: kong/3.3.1, 1.1 google
+        - name: Server
+          value: cloudflare
+        - name: CF-RAY
+          value: 8071fdabc85a4ab4-CGK
+      body:
+        type: json
+        data: |-
+          {
+              "responseCode": "2009700",
+              "responseMessage": "Successful",
+              "additionalInfo": {
+                  "customerId": "4b9432d0-2c98-4185-afcb-837329705b49"
+              }
+          }
+  - name: Success Part 2
+    request:
+      url: https://apigw.bankraya.co.id/raya/opening-account/pinang/post-data-ekyc/57f8a86e-e8f7-4de0-b06f-9be7d59e0bf2
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+              "provider": "vida",
+              "livenessScore": "0.999",
+              "faceMatchScore": "9.413321",
+              "refId": "krihfadiyg823985y2ihihinq91u0",
+              "status": 1,
+              "progress": 1
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Tue, 19 Sep 2023 06:25:44 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: x-krakend
+          value: Version 2.4.3
+        - name: x-krakend-completed
+          value: "false"
+        - name: strict-transport-security
+          value: max-age=31536000; includeSubDomains; preload; always
+        - name: alt-svc
+          value: h3=":443"; ma=86400
+        - name: cf-cache-status
+          value: DYNAMIC
+        - name: set-cookie
+          value: __cf_bm=X2ocmFHgaMuCsSZQxBbaMb1QVqz_fUZEU1gZc4LHQnE-1695104744-0-AWiUZMzWNaU76MnzC9qVqvX08fOPQ93bDOkRCNEnxcuV959PLLmAKtdIGIsptMMxZP4Dv3Q8npmHH1vkRVnXMEE=; path=/; expires=Tue, 19-Sep-23 06:55:44 GMT; domain=.bankraya.co.id; HttpOnly; Secure; SameSite=None
+        - name: Content-Encoding
+          value: gzip
+        - name: x-kong-upstream-latency
+          value: "117"
+        - name: x-kong-proxy-latency
+          value: "18"
+        - name: via
+          value: kong/3.3.1, 1.1 google
+        - name: Server
+          value: cloudflare
+        - name: CF-RAY
+          value: 808fc0ca4a254d33-SIN
+      body:
+        type: json
+        data: |-
+          {
+              "responseCode": "2009700",
+              "responseMessage": "Successful",
+              "additionalInfo": {
+                  "customerId": "57f8a86e-e8f7-4de0-b06f-9be7d59e0bf2"
+              }
+          }

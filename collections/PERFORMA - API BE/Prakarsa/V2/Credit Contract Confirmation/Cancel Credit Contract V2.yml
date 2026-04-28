@@ -1,0 +1,506 @@
+info:
+  name: Cancel Credit Contract V2
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: "{{base_url}}/v/2/prakarsa/cancel-credit-contract/31183"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: UmF5YVBpUGVyVG9w9FR0lGf/X53F2Tzm25VqShsrhmuQHg==
+        description: Personal Number BRI Agro (UserID Login)
+      - name: reason
+        value: Batal Akad Kredit
+        description: Penjelasan Dibatalkan
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/prakarsa/cancel-credit-contract/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: reason
+            value: Kurang Tepat
+            description: Penjelasan Dibatalkan
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 24 Jun 2021 07:03:46 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Tidak Memliki Akses",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/prakarsa/cancel-credit-contract/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: reason
+            value: Kurang Tepat
+            description: Penjelasan Dibatalkan
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 24 Jun 2021 07:03:46 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Data Tersimpan",
+              "message": "Data prakarsa berhasil disimpan",
+              "status": 200
+          }
+  - name: prakarsa not found
+    request:
+      url: "{{base_url}}/v/1/prakarsa/cancel-credit-contract/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: reason
+            value: Kurang Tepat
+            description: Penjelasan Dibatalkan
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 24 Jun 2021 07:03:46 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Error record not found",
+              "message": "Prakarsa Tidak Ditemukan",
+              "status": 500
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/prakarsa/cancel-credit-contract/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: reason
+            value: Kurang Tepat
+            description: Penjelasan Dibatalkan
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 24 Jun 2021 07:03:46 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect ....."
+          }
+  - name: validasi status
+    request:
+      url: "{{base_url}}/v/1/prakarsa/cancel-credit-contract/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: reason
+            value: Kurang Tepat
+            description: Penjelasan Dibatalkan
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 24 Jun 2021 07:03:46 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Status < 7 (dibawah proses akad kredit)",
+              "message": "Maaf, Proses pembatalan belum bisa digunakan. Silahkan monitor status terakhir Prakarsa",
+              "status": 500
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/prakarsa/cancel-credit-contract/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: reason
+            value: Kurang Tepat
+            description: Penjelasan Dibatalkan
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 24 Jun 2021 07:03:46 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{base_url}}/v/1/prakarsa/cancel-credit-contract/30946"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: reason
+            value: Batal Akad Kredit
+            description: Penjelasan Dibatalkan
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 19 Jul 2022 08:15:07 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: success v2
+    request:
+      url: "{{base_url}}/v/2/prakarsa/cancel-credit-contract/31183"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: UmF5YVBpUGVyVG9w9FR0lGf/X53F2Tzm25VqShsrhmuQHg==
+            description: Personal Number BRI Agro (UserID Login)
+          - name: reason
+            value: Batal Akad Kredit
+            description: Penjelasan Dibatalkan
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "desc": "Data Tersimpan",
+              "message": "Data prakarsa berhasil disimpan",
+              "status": 200
+          }
+  - name: validasi status
+    request:
+      url: "{{base_url}}/v/1/prakarsa/cancel-credit-contract/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: reason
+            value: Kurang Tepat
+            description: Penjelasan Dibatalkan
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 24 Jun 2021 07:03:46 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Status < 7 (dibawah proses akad kredit)",
+              "message": "Maaf, Proses pembatalan belum bisa digunakan. Silahkan monitor status terakhir Prakarsa",
+              "status": 500
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/prakarsa/cancel-credit-contract/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: reason
+            value: Kurang Tepat
+            description: Penjelasan Dibatalkan
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 24 Jun 2021 07:03:46 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect ....."
+          }
+  - name: prakarsa not found
+    request:
+      url: "{{base_url}}/v/1/prakarsa/cancel-credit-contract/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: reason
+            value: Kurang Tepat
+            description: Penjelasan Dibatalkan
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 24 Jun 2021 07:03:46 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Error record not found",
+              "message": "Prakarsa Tidak Ditemukan",
+              "status": 500
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/prakarsa/cancel-credit-contract/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: reason
+            value: Kurang Tepat
+            description: Penjelasan Dibatalkan
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 24 Jun 2021 07:03:46 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Data Tersimpan",
+              "message": "Data prakarsa berhasil disimpan",
+              "status": 200
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{base_url}}/v/1/prakarsa/cancel-credit-contract/30946"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: reason
+            value: Batal Akad Kredit
+            description: Penjelasan Dibatalkan
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 19 Jul 2022 08:15:07 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/prakarsa/cancel-credit-contract/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: reason
+            value: Kurang Tepat
+            description: Penjelasan Dibatalkan
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 24 Jun 2021 07:03:46 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: success v2
+    request:
+      url: "{{base_url}}/v/2/prakarsa/cancel-credit-contract/31183"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: UmF5YVBpUGVyVG9w9FR0lGf/X53F2Tzm25VqShsrhmuQHg==
+            description: Personal Number BRI Agro (UserID Login)
+          - name: reason
+            value: Batal Akad Kredit
+            description: Penjelasan Dibatalkan
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "desc": "Data Tersimpan",
+              "message": "Data prakarsa berhasil disimpan",
+              "status": 200
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/prakarsa/cancel-credit-contract/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: reason
+            value: Kurang Tepat
+            description: Penjelasan Dibatalkan
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 24 Jun 2021 07:03:46 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Tidak Memliki Akses",
+              "message": "Invalid Token || Token Is Expired"
+          }

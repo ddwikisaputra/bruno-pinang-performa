@@ -1,0 +1,615 @@
+info:
+  name: Branch List V1
+  type: http
+  seq: 4
+
+http:
+  method: POST
+  url: "{{base_url}}/v/1/master/branch-list"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "999941"
+        description: Personal Number BRI Agro (UserID Login)
+      - name: startIndex
+        value: "0"
+        description: Offset Data {Default 0}
+      - name: recordCount
+        value: "1000"
+        description: Limit Data {Default 5}
+      - name: textSearch
+        value: cahya
+        description: Text Pencarian Data { OPTIONAL }
+        disabled: true
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/master/branch-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999900"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "5"
+            description: Limit Data {Default 5}
+          - name: textSearch
+            value: tes
+            description: Text Pencarian Data { OPTIONAL }
+            disabled: true
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Sat, 22 May 2021 06:53:21 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Accept-Encoding
+        - name: Content-Encoding
+          value: gzip
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/master/branch-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999900"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "5"
+            description: Limit Data {Default 5}
+          - name: textSearch
+            value: tes
+            description: Text Pencarian Data { OPTIONAL }
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Sat, 22 May 2021 06:53:21 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Accept-Encoding
+        - name: Content-Encoding
+          value: gzip
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data" : null
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/master/branch-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999900"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "5"
+            description: Limit Data {Default 5}
+          - name: textSearch
+            value: tes
+            description: Text Pencarian Data { OPTIONAL }
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Sat, 22 May 2021 06:57:05 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Accept-Encoding
+        - name: Content-Encoding
+          value: gzip
+      body:
+        type: json
+        data: |-
+          {
+              "data": [
+                  {
+                      "branchCode": "1314",
+                      "branchCorrespondenceCode": "ALK",
+                      "branchName": "AIR MOLEK",
+                      "branchLevel": "2",
+                      "branchHead": "1310"
+                  },
+                  {
+                      "branchCode": "2310",
+                      "branchCorrespondenceCode": "BLP",
+                      "branchName": "BALIKPAPAN",
+                      "branchLevel": "1",
+                      "branchHead": "2310"
+                  },
+                  {
+                      "branchCode": "1711",
+                      "branchCorrespondenceCode": "BDJ",
+                      "branchName": "BANDAR JAYA",
+                      "branchLevel": "2",
+                      "branchHead": "1710"
+                  },
+                  {
+                      "branchCode": "0110",
+                      "branchCorrespondenceCode": "BDG",
+                      "branchName": "BANDUNG",
+                      "branchLevel": "1",
+                      "branchHead": "0110"
+                  },
+                  {
+                      "branchCode": "0311",
+                      "branchCorrespondenceCode": "BYM",
+                      "branchName": "BANYUMANIK",
+                      "branchLevel": "2",
+                      "branchHead": "0310"
+                  },
+                  {
+                      "branchCode": "0025",
+                      "branchCorrespondenceCode": "BKS",
+                      "branchName": "BEKASI",
+                      "branchLevel": "2",
+                      "branchHead": "0020"
+                  },
+                  {
+                      "branchCode": "0510",
+                      "branchCorrespondenceCode": "BTR",
+                      "branchName": "BINTARO",
+                      "branchLevel": "1",
+                      "branchHead": "0510"
+                  },
+                  {
+                      "branchCode": "0120",
+                      "branchCorrespondenceCode": "BGR",
+                      "branchName": "BOGOR",
+                      "branchLevel": "1",
+                      "branchHead": "0120"
+                  },
+                  {
+                      "branchCode": "0130",
+                      "branchCorrespondenceCode": "CKR",
+                      "branchName": "CIKARANG",
+                      "branchLevel": "1",
+                      "branchHead": "0130"
+                  },
+                  {
+                      "branchCode": "1315",
+                      "branchCorrespondenceCode": "DAL",
+                      "branchName": "DALU DALU",
+                      "branchLevel": "2",
+                      "branchHead": "1310"
+                  }
+              ],
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: empty data
+    request:
+      url: "{{base_url}}/v/1/master/branch-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999900"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "5"
+            description: Limit Data {Default 5}
+          - name: textSearch
+            value: tes
+            description: Text Pencarian Data { OPTIONAL }
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Sat, 22 May 2021 06:53:21 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Accept-Encoding
+        - name: Content-Encoding
+          value: gzip
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Data Prakarsa tidak ditemukan",
+              "message": "Prakarsa Tidak Ditemukan",
+              "status": 404
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/master/branch-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999900"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "5"
+            description: Limit Data {Default 5}
+          - name: textSearch
+            value: tes
+            description: Text Pencarian Data { OPTIONAL }
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/master/branch-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999900"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "5"
+            description: Limit Data {Default 5}
+          - name: textSearch
+            value: tes
+            description: Text Pencarian Data { OPTIONAL }
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Sat, 22 May 2021 06:53:21 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Accept-Encoding
+        - name: Content-Encoding
+          value: gzip
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data" : null
+          }
+  - name: empty data
+    request:
+      url: "{{base_url}}/v/1/master/branch-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999900"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "5"
+            description: Limit Data {Default 5}
+          - name: textSearch
+            value: tes
+            description: Text Pencarian Data { OPTIONAL }
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Sat, 22 May 2021 06:53:21 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Accept-Encoding
+        - name: Content-Encoding
+          value: gzip
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Data Prakarsa tidak ditemukan",
+              "message": "Prakarsa Tidak Ditemukan",
+              "status": 404
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/master/branch-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999900"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "5"
+            description: Limit Data {Default 5}
+          - name: textSearch
+            value: tes
+            description: Text Pencarian Data { OPTIONAL }
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/master/branch-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999900"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "5"
+            description: Limit Data {Default 5}
+          - name: textSearch
+            value: tes
+            description: Text Pencarian Data { OPTIONAL }
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Sat, 22 May 2021 06:57:05 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Accept-Encoding
+        - name: Content-Encoding
+          value: gzip
+      body:
+        type: json
+        data: |-
+          {
+              "data": [
+                  {
+                      "branchCode": "1314",
+                      "branchCorrespondenceCode": "ALK",
+                      "branchName": "AIR MOLEK",
+                      "branchLevel": "2",
+                      "branchHead": "1310"
+                  },
+                  {
+                      "branchCode": "2310",
+                      "branchCorrespondenceCode": "BLP",
+                      "branchName": "BALIKPAPAN",
+                      "branchLevel": "1",
+                      "branchHead": "2310"
+                  },
+                  {
+                      "branchCode": "1711",
+                      "branchCorrespondenceCode": "BDJ",
+                      "branchName": "BANDAR JAYA",
+                      "branchLevel": "2",
+                      "branchHead": "1710"
+                  },
+                  {
+                      "branchCode": "0110",
+                      "branchCorrespondenceCode": "BDG",
+                      "branchName": "BANDUNG",
+                      "branchLevel": "1",
+                      "branchHead": "0110"
+                  },
+                  {
+                      "branchCode": "0311",
+                      "branchCorrespondenceCode": "BYM",
+                      "branchName": "BANYUMANIK",
+                      "branchLevel": "2",
+                      "branchHead": "0310"
+                  },
+                  {
+                      "branchCode": "0025",
+                      "branchCorrespondenceCode": "BKS",
+                      "branchName": "BEKASI",
+                      "branchLevel": "2",
+                      "branchHead": "0020"
+                  },
+                  {
+                      "branchCode": "0510",
+                      "branchCorrespondenceCode": "BTR",
+                      "branchName": "BINTARO",
+                      "branchLevel": "1",
+                      "branchHead": "0510"
+                  },
+                  {
+                      "branchCode": "0120",
+                      "branchCorrespondenceCode": "BGR",
+                      "branchName": "BOGOR",
+                      "branchLevel": "1",
+                      "branchHead": "0120"
+                  },
+                  {
+                      "branchCode": "0130",
+                      "branchCorrespondenceCode": "CKR",
+                      "branchName": "CIKARANG",
+                      "branchLevel": "1",
+                      "branchHead": "0130"
+                  },
+                  {
+                      "branchCode": "1315",
+                      "branchCorrespondenceCode": "DAL",
+                      "branchName": "DALU DALU",
+                      "branchLevel": "2",
+                      "branchHead": "1310"
+                  }
+              ],
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/master/branch-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999900"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "5"
+            description: Limit Data {Default 5}
+          - name: textSearch
+            value: tes
+            description: Text Pencarian Data { OPTIONAL }
+            disabled: true
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Sat, 22 May 2021 06:53:21 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Accept-Encoding
+        - name: Content-Encoding
+          value: gzip
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }

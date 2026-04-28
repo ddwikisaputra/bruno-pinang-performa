@@ -1,0 +1,205 @@
+info:
+  name: Cif Create
+  type: http
+  seq: 10
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/digiagri/cif/create"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "12345"
+      - name: kodeCabang
+        value: "0010"
+      - name: noId
+        value: "3201123456789012"
+      - name: nama
+        value: Andi Pratama
+      - name: NPWP
+        value: "123456789012345"
+      - name: email
+        value: andi.pratama@example.com
+      - name: tempatLahir
+        value: Jakarta
+      - name: tanggalLahir
+        value: 12/09/1995
+      - name: jenisKelamin
+        value: M
+      - name: namaGadisIbuKandung
+        value: Siti Aminah
+      - name: tanggalIdTerbit
+        value: 12/09/2025
+      - name: pendidikanTerakhir
+        value: S1
+      - name: agama
+        value: ISL
+      - name: statusPerkawinan
+        value: K
+      - name: alamat
+        value: Jalan Merpati No 10
+      - name: rt
+        value: "01"
+      - name: rw
+        value: "02"
+      - name: kodePos
+        value: "12345"
+      - name: kelurahan
+        value: Cempaka Putih
+      - name: kecamatan
+        value: Cempaka Putih
+      - name: kota
+        value: Jakarta Pusat
+      - name: kodeKota
+        value: "3173"
+      - name: propinsi
+        value: DKI Jakarta
+      - name: noHP
+        value: "081234567890"
+      - name: namaTempatKerja
+        value: PT Maju Jaya
+      - name: bidangPekerjaan
+        value: IT Developer
+      - name: alamatKerja
+        value: Jl. Sudirman No 25
+      - name: rtKerja
+        value: "03"
+      - name: rwKerja
+        value: "04"
+      - name: kodePosKerja
+        value: "54321"
+      - name: kelurahanKerja
+        value: Karet
+      - name: kecamatanKerja
+        value: Setiabudi
+      - name: kotaKerja
+        value: Jakarta Selatan
+      - name: propinsiKerja
+        value: DKI Jakarta
+      - name: jumlahTanggungan
+        value: "2"
+      - name: noIdPasangan
+        value: "3201123456789013"
+      - name: namaPasangan
+        value: Dewi Lestari
+      - name: tanggalLahirPasangan
+        value: 12/09/1995
+      - name: hubunganDalamKeluarga
+        value: Istri
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Success Response
+    request:
+      url: "{{baseUrl}}/api/digiagri/cif/create"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "12345"
+          - name: kodeCabang
+            value: "0010"
+          - name: noId
+            value: "3201123456789012"
+          - name: nama
+            value: Andi Pratama
+          - name: NPWP
+            value: "123456789012345"
+          - name: email
+            value: andi.pratama@example.com
+          - name: tempatLahir
+            value: Jakarta
+          - name: tanggalLahir
+            value: 12/09/1995
+          - name: jenisKelamin
+            value: M
+          - name: namaGadisIbuKandung
+            value: Siti Aminah
+          - name: tanggalIdTerbit
+            value: 12/09/2025
+          - name: pendidikanTerakhir
+            value: S1
+          - name: agama
+            value: ISL
+          - name: statusPerkawinan
+            value: K
+          - name: alamat
+            value: Jalan Merpati No 10
+          - name: rt
+            value: "01"
+          - name: rw
+            value: "02"
+          - name: kodePos
+            value: "12345"
+          - name: kelurahan
+            value: Cempaka Putih
+          - name: kecamatan
+            value: Cempaka Putih
+          - name: kota
+            value: Jakarta Pusat
+          - name: kodeKota
+            value: "3173"
+          - name: propinsi
+            value: DKI Jakarta
+          - name: noHP
+            value: "081234567890"
+          - name: namaTempatKerja
+            value: PT Maju Jaya
+          - name: bidangPekerjaan
+            value: IT Developer
+          - name: alamatKerja
+            value: Jl. Sudirman No 25
+          - name: rtKerja
+            value: "03"
+          - name: rwKerja
+            value: "04"
+          - name: kodePosKerja
+            value: "54321"
+          - name: kelurahanKerja
+            value: Karet
+          - name: kecamatanKerja
+            value: Setiabudi
+          - name: kotaKerja
+            value: Jakarta Selatan
+          - name: propinsiKerja
+            value: DKI Jakarta
+          - name: jumlahTanggungan
+            value: "2"
+          - name: noIdPasangan
+            value: "3201123456789013"
+          - name: namaPasangan
+            value: Dewi Lestari
+          - name: tanggalLahirPasangan
+            value: 12/09/1995
+          - name: hubunganDalamKeluarga
+            value: Istri
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Thu, 09 Oct 2025 03:12:41 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "67"
+        - name: Connection
+          value: keep-alive
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "statusCode": "1",
+              "statusDescription": "Success",
+              "CIF": "0000689653"
+          }

@@ -1,0 +1,677 @@
+info:
+  name: List Dokumen Akad V2
+  type: http
+  seq: 19
+
+http:
+  method: POST
+  url: "{{base_url}}/v/2/prakarsa/list-dokumen-akad"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "{{userId}}"
+        description: "[Encode]Personal Number BRI Agro (UserID Login) { MANDATORY }"
+      - name: kodeProses
+        value: MTE4Mw==
+        description: Prakarsa ID (base64) {MANDATORY}
+      - name: docType
+        value: "0"
+        description: "[0 = sebelum ttd (origin file) | 1 = sesudah ttd (doc token ttd) | 2 = sesudah ematerai (doc token ematerai)"
+      - name: isBeforeDisbursement
+        value: "0"
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/2/digitalsign/list-dokumen-akad"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MzEzMjg=
+            description: prakarsaId base64
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Sat, 22 May 2021 06:53:21 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Accept-Encoding
+        - name: Content-Encoding
+          value: gzip
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "message": "signature is invalid || Token is expired"
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/2/digitalsign/list-dokumen-akad"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MzEzMjg=
+            description: prakrasaId base64
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{base_url}}/v/2/digitalsign/list-dokumen-akad"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MzEzMjg=
+            description: prakarsaId base64
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 18 Jul 2022 07:35:20 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/2/digitalsign/list-dokumen-akad"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MzEzMjg=
+            description: prakarsaId base64
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Sat, 22 May 2021 06:53:21 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Accept-Encoding
+        - name: Content-Encoding
+          value: gzip
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data" : null
+          }
+  - name: empty data
+    request:
+      url: "{{base_url}}/v/2/digitalsign/list-dokumen-akad"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MzEzMjg=
+            description: prakarsaId base64
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Sat, 22 May 2021 06:53:21 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Accept-Encoding
+        - name: Content-Encoding
+          value: gzip
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Error Record Not Found",
+              "message": "Data Tidak Ditemukan",
+              "status": 404
+          }
+  - name: error status prakrarsa <> 9 (isBefore = 0)
+    request:
+      url: "{{base_url}}/v/2/digitalsign/list-dokumen-akad"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MjA5NDI=
+            description: KTP Number (Encode base64) {MANDATORY}
+          - name: isBeforeDisbursement
+            value: "0"
+            description: Flag Dokumen [ 0 = sebelum pencairan | 1 = sesudah pencairan ]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 27 Jul 2023 04:43:57 GMT
+        - name: Content-Length
+          value: "148"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Status prakarsa != 9",
+              "message": "Maaf, Dokumen belum dapat dilihat. Silahkan menunggu update status selanjutnya.",
+              "status": 500
+          }
+  - name: error status prakarsa <> 8 (isBefore = 1)
+    request:
+      url: "{{base_url}}/v/2/digitalsign/list-dokumen-akad"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MjA5NDI=
+            description: prakarsaId base64
+          - name: isBeforeDisbursement
+            value: "1"
+            description: Flag Dokumen [ 0 = sebelum pencairan | 1 = sesudah pencairan ]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 Jul 2023 06:53:06 GMT
+        - name: Content-Length
+          value: "148"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Status Prakarsa != 8",
+              "message": "Maaf, Dokumen belum dapat dilihat. Silahkan menunggu update status selanjutnya.",
+              "status": 500
+          }
+  - name: error status digitalsign status <> 11 (isBefore = 0)
+    request:
+      url: "{{base_url}}/v/2/digitalsign/list-dokumen-akad"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MjA5NDI=
+            description: KTP Number (Encode base64) {MANDATORY}
+          - name: isBeforeDisbursement
+            value: "0"
+            description: Flag Dokumen [ 0 = sebelum pencairan | 1 = sesudah pencairan ]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 27 Jul 2023 04:44:52 GMT
+        - name: Content-Length
+          value: "152"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Status digitalsign != 11",
+              "message": "Maaf, Dokumen belum dapat dilihat. Silahkan menunggu update status selanjutnya.",
+              "status": 500
+          }
+  - name: error process get dokumen
+    request:
+      url: "{{base_url}}/v/2/digitalsign/list-dokumen-akad"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MjA5NDI=
+            description: prakarsaId base64
+          - name: isBeforeDisbursement
+            value: "0"
+            description: Flag Dokumen [ 0 = sebelum pencairan | 1 = sesudah pencairan ]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 Jul 2023 07:08:07 GMT
+        - name: Content-Length
+          value: "141"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Download dokumen gagal",
+              "message": "Maaf, Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 500
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/2/digitalsign/list-dokumen-akad"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MzEzMjg=
+            description: prakarsa id base64
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 03 Jan 2023 04:16:23 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "data": [
+                  {
+                      "docBase64": "string base64",
+                      "docMimeType": "application/pdf",
+                      "typeDoc": "xXxsphxXx"
+                  }
+              ],
+              "desc": "Data Valid",
+              "message": "Data Ditemukan",
+              "status": 200
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/2/digitalsign/list-dokumen-akad"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MzEzMjg=
+            description: prakarsaId base64
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Sat, 22 May 2021 06:53:21 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Accept-Encoding
+        - name: Content-Encoding
+          value: gzip
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data" : null
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{base_url}}/v/2/digitalsign/list-dokumen-akad"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MzEzMjg=
+            description: prakarsaId base64
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 18 Jul 2022 07:35:20 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/2/digitalsign/list-dokumen-akad"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MzEzMjg=
+            description: prakarsa id base64
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 03 Jan 2023 04:16:23 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "data": [
+                  {
+                      "docBase64": "string base64",
+                      "docMimeType": "application/pdf",
+                      "typeDoc": "xXxsphxXx"
+                  }
+              ],
+              "desc": "Data Valid",
+              "message": "Data Ditemukan",
+              "status": 200
+          }
+  - name: error process get dokumen
+    request:
+      url: "{{base_url}}/v/2/digitalsign/list-dokumen-akad"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MjA5NDI=
+            description: prakarsaId base64
+          - name: isBeforeDisbursement
+            value: "0"
+            description: Flag Dokumen [ 0 = sebelum pencairan | 1 = sesudah pencairan ]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 Jul 2023 07:08:07 GMT
+        - name: Content-Length
+          value: "141"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Download dokumen gagal",
+              "message": "Maaf, Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 500
+          }
+  - name: error status prakrarsa <> 9 (isBefore = 0)
+    request:
+      url: "{{base_url}}/v/2/digitalsign/list-dokumen-akad"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MjA5NDI=
+            description: KTP Number (Encode base64) {MANDATORY}
+          - name: isBeforeDisbursement
+            value: "0"
+            description: Flag Dokumen [ 0 = sebelum pencairan | 1 = sesudah pencairan ]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 27 Jul 2023 04:43:57 GMT
+        - name: Content-Length
+          value: "148"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Status prakarsa != 9",
+              "message": "Maaf, Dokumen belum dapat dilihat. Silahkan menunggu update status selanjutnya.",
+              "status": 500
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/2/digitalsign/list-dokumen-akad"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MzEzMjg=
+            description: prakarsaId base64
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Sat, 22 May 2021 06:53:21 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Accept-Encoding
+        - name: Content-Encoding
+          value: gzip
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "message": "signature is invalid || Token is expired"
+          }
+  - name: error status prakarsa <> 8 (isBefore = 1)
+    request:
+      url: "{{base_url}}/v/2/digitalsign/list-dokumen-akad"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MjA5NDI=
+            description: prakarsaId base64
+          - name: isBeforeDisbursement
+            value: "1"
+            description: Flag Dokumen [ 0 = sebelum pencairan | 1 = sesudah pencairan ]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 Jul 2023 06:53:06 GMT
+        - name: Content-Length
+          value: "148"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Status Prakarsa != 8",
+              "message": "Maaf, Dokumen belum dapat dilihat. Silahkan menunggu update status selanjutnya.",
+              "status": 500
+          }
+  - name: empty data
+    request:
+      url: "{{base_url}}/v/2/digitalsign/list-dokumen-akad"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MzEzMjg=
+            description: prakarsaId base64
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Sat, 22 May 2021 06:53:21 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Accept-Encoding
+        - name: Content-Encoding
+          value: gzip
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Error Record Not Found",
+              "message": "Data Tidak Ditemukan",
+              "status": 404
+          }
+  - name: error status digitalsign status <> 11 (isBefore = 0)
+    request:
+      url: "{{base_url}}/v/2/digitalsign/list-dokumen-akad"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MjA5NDI=
+            description: KTP Number (Encode base64) {MANDATORY}
+          - name: isBeforeDisbursement
+            value: "0"
+            description: Flag Dokumen [ 0 = sebelum pencairan | 1 = sesudah pencairan ]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 27 Jul 2023 04:44:52 GMT
+        - name: Content-Length
+          value: "152"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Status digitalsign != 11",
+              "message": "Maaf, Dokumen belum dapat dilihat. Silahkan menunggu update status selanjutnya.",
+              "status": 500
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/2/digitalsign/list-dokumen-akad"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MzEzMjg=
+            description: prakrasaId base64
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }

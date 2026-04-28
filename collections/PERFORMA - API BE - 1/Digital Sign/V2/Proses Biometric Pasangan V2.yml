@@ -1,0 +1,715 @@
+info:
+  name: Proses Biometric Pasangan V2
+  type: http
+  seq: 9
+
+http:
+  method: POST
+  url: "{{base_url_dev}}/v/2/digitalsign/proses-biometric-pasangan"
+  body:
+    type: form-urlencoded
+    data:
+      - name: kodeProses
+        value: UmF5YVBpUGVyVG9w/lx5nmBcgN3n/SIGOwbFwMMGVaBq
+        description: Prakarsa ID (Encode AES) { MANDATORY }
+      - name: selfieBlob
+        value: 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
+        description: Blob File (base64) { MANDATORY }
+      - name: selfieMimetype
+        value: image/jpeg
+        description: MimeType File [ image/jpeg | image/png ] { MANDATORY }
+  auth:
+    type: bearer
+    token: "{{tokenJWT}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: unauthorized
+    request:
+      url: "{{base_url}}/v/2/digitalsign/proses-biometric-pasangan"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: UmF5YVBpUGVyVG9w/lx+n2wXjR0uqNEIGTXN2gBk4OJN
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+          - name: selfieBlob
+            value: ""
+            description: Blob File (base64) { MANDATORY }
+          - name: selfieMimetype
+            value: ""
+            description: MimeType File [ image/jpeg | image/png ] { MANDATORY }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 20 Jul 2023 05:48:32 GMT
+        - name: Content-Length
+          value: "73"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "message": "Token is expired"
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/2/digitalsign/proses-biometric-pasangan"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: UmF5YVBpUGVyVG9w/lx+n2wXjR0uqNEIGTXN2gBk4OJN
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+          - name: selfieBlob
+            value: ""
+            description: Blob File (base64) { MANDATORY }
+          - name: selfieMimetype
+            value: ""
+            description: MimeType File [ image/jpeg | image/png ] { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 25 Jun 2021 08:48:50 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/2/digitalsign/proses-biometric-pasangan"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MjA5NDI=
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+          - name: selfieBlob
+            value: "{{selfieBase64JPG}}"
+            description: Blob File (base64) { MANDATORY }
+          - name: selfieMimetype
+            value: image/jpeg
+            description: MimeType File [ image/jpeg | image/png ] { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 25 Jun 2021 08:48:50 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect ....."
+          }
+  - name: parameter validation
+    request:
+      url: "{{base_url}}/v/2/digitalsign/proses-biometric-pasangan"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MjA5NDI=
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+          - name: selfieBlob
+            value: "{{selfieBase64JPG}}"
+            description: Blob File (base64) { MANDATORY }
+          - name: selfieMimetype
+            value: image/jpeg
+            description: MimeType File [ image/jpeg | image/png ] { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 20 Jul 2023 05:44:00 GMT
+        - name: Content-Length
+          value: "134"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "...",
+              "message": "...",
+              "status": 400
+          }
+  - name: error status digital sign != 7 (Pasangan)
+    request:
+      url: "{{base_url}}/v/2/digitalsign/proses-biometric-pasangan"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MjA5NDI=
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+          - name: selfieBlob
+            value: "{{selfieBase64JPG}}"
+            description: Blob File (base64) { MANDATORY }
+          - name: selfieMimetype
+            value: image/jpeg
+            description: MimeType File [ image/jpeg | image/png ] { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 28 Jul 2023 13:23:09 GMT
+        - name: Content-Length
+          value: "162"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Status Digital Sign != 7",
+              "message": "Maaf, Proses liveness tidak bisa dilakukan. Silahkan menunggu update status selanjutnya",
+              "status": 500
+          }
+  - name: error status prakarsa != 8
+    request:
+      url: "{{base_url}}/v/2/digitalsign/proses-biometric-pasangan"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MjA5NDI=
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+          - name: status
+            value: "2"
+            description: Status Liveness [ 1 = lolos | 2 = tidak lolos ] { MANDATORY }
+          - name: selfieBlob
+            value: "{{selfieBase64JPG}}"
+            description: Blob File (base64) { MANDATORY }
+          - name: selfieMimetype
+            value: image/jpeg
+            description: MimeType File [ image/jpeg | image/png ] { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 28 Jul 2023 13:25:13 GMT
+        - name: Content-Length
+          value: "146"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Status Prakarasa != 8 ",
+              "message": "Maaf, Proses liveness tidak bisa dilakukan. Silahkan menunggu update status selanjutnya",
+              "status": 500
+          }
+  - name: error kesempatan biometric sudah 3x
+    request:
+      url: "{{base_url}}/v/2/digitalsign/proses-biometric-pasangan"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MjA5NDI=
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+          - name: selfieBlob
+            value: "{{selfieBase64JPG}}"
+            description: Blob File (base64) { MANDATORY }
+          - name: selfieMimetype
+            value: image/jpeg
+            description: MimeType File [ image/jpeg | image/png ] { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 28 Jul 2023 13:27:05 GMT
+        - name: Content-Length
+          value: "233"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Kesempatan biometric habis",
+              "message": "Kesempatan kamu sudah habis karena sudah mencobanya sebanyak 3 kali. Namun tidak perlu khawatir, kamu dapat menunggu 10 menit kedepan untuk mencobanya kembali.",
+              "status": 500
+          }
+  - name: error biometric masih dalam waktu tunggu
+    request:
+      url: "{{base_url}}/v/2/digitalsign/proses-biometric-pasangan"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MjA5NDI=
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+          - name: selfieBlob
+            value: "{{selfieBase64JPG}}"
+            description: Blob File (base64) { MANDATORY }
+          - name: selfieMimetype
+            value: image/jpeg
+            description: MimeType File [ image/jpeg | image/png ] { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 28 Jul 2023 13:28:14 GMT
+        - name: Content-Length
+          value: "233"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Masih dalam masa waktu tunggu biometric",
+              "message": "Kesempatan kamu sudah habis karena sudah mencobanya sebanyak 3 kali. Namun tidak perlu khawatir, kamu dapat menunggu 10 menit kedepan untuk mencobanya kembali.",
+              "status": 500
+          }
+  - name: error biometric tidak lolos & masih ada kesempatan
+    request:
+      url: "{{base_url}}/v/2/digitalsign/proses-biometric-pasangan"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MjA5NDI=
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+          - name: selfieBlob
+            value: "{{selfieBase64JPG}}"
+            description: Blob File (base64) { MANDATORY }
+          - name: selfieMimetype
+            value: image/jpeg
+            description: MimeType File [ image/jpeg | image/png ] { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 28 Jul 2023 13:31:25 GMT
+        - name: Content-Length
+          value: "148"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Biometric tidak lolos dan masih memiliki kesempatan",
+              "message": "Foto Selfie belum sesuai! Kamu masih memiliki kesempatan 1 kali lagi, silakan mencobanya kembali.",
+              "status": 201
+          }
+  - name: lolos biometric
+    request:
+      url: "{{base_url}}/v/2/digitalsign/proses-biometric-pasangan"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MjA5NDI=
+            description: Prakarsa ID (Encode Base64) { MANDATORY }
+          - name: selfieBlob
+            value: "{{selfieBase64JPG}}"
+            description: Blob File (base64) { MANDATORY }
+          - name: selfieMimetype
+            value: image/jpeg
+            description: MimeType File [ image/jpeg | image/png ] { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Sat, 29 Jul 2023 07:36:18 GMT
+        - name: Content-Length
+          value: "73"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Data Tersimpan",
+              "message": "Data Berhasil Disimpan",
+              "status": 200
+          }
+  - name: error status digital sign != 7 (Pasangan)
+    request:
+      url: "{{base_url}}/v/2/digitalsign/proses-biometric-pasangan"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MjA5NDI=
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+          - name: selfieBlob
+            value: "{{selfieBase64JPG}}"
+            description: Blob File (base64) { MANDATORY }
+          - name: selfieMimetype
+            value: image/jpeg
+            description: MimeType File [ image/jpeg | image/png ] { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 28 Jul 2023 13:23:09 GMT
+        - name: Content-Length
+          value: "162"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Status Digital Sign != 7",
+              "message": "Maaf, Proses liveness tidak bisa dilakukan. Silahkan menunggu update status selanjutnya",
+              "status": 500
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/2/digitalsign/proses-biometric-pasangan"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MjA5NDI=
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+          - name: selfieBlob
+            value: "{{selfieBase64JPG}}"
+            description: Blob File (base64) { MANDATORY }
+          - name: selfieMimetype
+            value: image/jpeg
+            description: MimeType File [ image/jpeg | image/png ] { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 25 Jun 2021 08:48:50 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect ....."
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/2/digitalsign/proses-biometric-pasangan"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: UmF5YVBpUGVyVG9w/lx+n2wXjR0uqNEIGTXN2gBk4OJN
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+          - name: selfieBlob
+            value: ""
+            description: Blob File (base64) { MANDATORY }
+          - name: selfieMimetype
+            value: ""
+            description: MimeType File [ image/jpeg | image/png ] { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 25 Jun 2021 08:48:50 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: error kesempatan biometric sudah 3x
+    request:
+      url: "{{base_url}}/v/2/digitalsign/proses-biometric-pasangan"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MjA5NDI=
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+          - name: selfieBlob
+            value: "{{selfieBase64JPG}}"
+            description: Blob File (base64) { MANDATORY }
+          - name: selfieMimetype
+            value: image/jpeg
+            description: MimeType File [ image/jpeg | image/png ] { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 28 Jul 2023 13:27:05 GMT
+        - name: Content-Length
+          value: "233"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Kesempatan biometric habis",
+              "message": "Kesempatan kamu sudah habis karena sudah mencobanya sebanyak 3 kali. Namun tidak perlu khawatir, kamu dapat menunggu 10 menit kedepan untuk mencobanya kembali.",
+              "status": 500
+          }
+  - name: error biometric tidak lolos & masih ada kesempatan
+    request:
+      url: "{{base_url}}/v/2/digitalsign/proses-biometric-pasangan"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MjA5NDI=
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+          - name: selfieBlob
+            value: "{{selfieBase64JPG}}"
+            description: Blob File (base64) { MANDATORY }
+          - name: selfieMimetype
+            value: image/jpeg
+            description: MimeType File [ image/jpeg | image/png ] { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 28 Jul 2023 13:31:25 GMT
+        - name: Content-Length
+          value: "148"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Biometric tidak lolos dan masih memiliki kesempatan",
+              "message": "Foto Selfie belum sesuai! Kamu masih memiliki kesempatan 1 kali lagi, silakan mencobanya kembali.",
+              "status": 201
+          }
+  - name: lolos biometric
+    request:
+      url: "{{base_url}}/v/2/digitalsign/proses-biometric-pasangan"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MjA5NDI=
+            description: Prakarsa ID (Encode Base64) { MANDATORY }
+          - name: selfieBlob
+            value: "{{selfieBase64JPG}}"
+            description: Blob File (base64) { MANDATORY }
+          - name: selfieMimetype
+            value: image/jpeg
+            description: MimeType File [ image/jpeg | image/png ] { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Sat, 29 Jul 2023 07:36:18 GMT
+        - name: Content-Length
+          value: "73"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Data Tersimpan",
+              "message": "Data Berhasil Disimpan",
+              "status": 200
+          }
+  - name: error status prakarsa != 8
+    request:
+      url: "{{base_url}}/v/2/digitalsign/proses-biometric-pasangan"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MjA5NDI=
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+          - name: status
+            value: "2"
+            description: Status Liveness [ 1 = lolos | 2 = tidak lolos ] { MANDATORY }
+          - name: selfieBlob
+            value: "{{selfieBase64JPG}}"
+            description: Blob File (base64) { MANDATORY }
+          - name: selfieMimetype
+            value: image/jpeg
+            description: MimeType File [ image/jpeg | image/png ] { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 28 Jul 2023 13:25:13 GMT
+        - name: Content-Length
+          value: "146"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Status Prakarasa != 8 ",
+              "message": "Maaf, Proses liveness tidak bisa dilakukan. Silahkan menunggu update status selanjutnya",
+              "status": 500
+          }
+  - name: unauthorized
+    request:
+      url: "{{base_url}}/v/2/digitalsign/proses-biometric-pasangan"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: UmF5YVBpUGVyVG9w/lx+n2wXjR0uqNEIGTXN2gBk4OJN
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+          - name: selfieBlob
+            value: ""
+            description: Blob File (base64) { MANDATORY }
+          - name: selfieMimetype
+            value: ""
+            description: MimeType File [ image/jpeg | image/png ] { MANDATORY }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 20 Jul 2023 05:48:32 GMT
+        - name: Content-Length
+          value: "73"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "message": "Token is expired"
+          }
+  - name: error biometric masih dalam waktu tunggu
+    request:
+      url: "{{base_url}}/v/2/digitalsign/proses-biometric-pasangan"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MjA5NDI=
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+          - name: selfieBlob
+            value: "{{selfieBase64JPG}}"
+            description: Blob File (base64) { MANDATORY }
+          - name: selfieMimetype
+            value: image/jpeg
+            description: MimeType File [ image/jpeg | image/png ] { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 28 Jul 2023 13:28:14 GMT
+        - name: Content-Length
+          value: "233"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Masih dalam masa waktu tunggu biometric",
+              "message": "Kesempatan kamu sudah habis karena sudah mencobanya sebanyak 3 kali. Namun tidak perlu khawatir, kamu dapat menunggu 10 menit kedepan untuk mencobanya kembali.",
+              "status": 500
+          }
+  - name: parameter validation
+    request:
+      url: "{{base_url}}/v/2/digitalsign/proses-biometric-pasangan"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MjA5NDI=
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+          - name: selfieBlob
+            value: "{{selfieBase64JPG}}"
+            description: Blob File (base64) { MANDATORY }
+          - name: selfieMimetype
+            value: image/jpeg
+            description: MimeType File [ image/jpeg | image/png ] { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 20 Jul 2023 05:44:00 GMT
+        - name: Content-Length
+          value: "134"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "...",
+              "message": "...",
+              "status": 400
+          }

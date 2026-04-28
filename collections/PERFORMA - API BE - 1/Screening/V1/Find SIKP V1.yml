@@ -1,0 +1,560 @@
+info:
+  name: Find SIKP V1
+  type: http
+  seq: 10
+
+http:
+  method: POST
+  url: "{{base_url}}/v/1/screening/find-sikp"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "999951"
+        description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+      - name: prakarsaId
+        value: "30946"
+        description: Prakarsa ID { MANDATORY }
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/screening/find-sikp"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999951"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: prakarsaId
+            value: "30946"
+            description: Prakarsa ID { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data": null
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/screening/find-sikp"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999951"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: prakarsaId
+            value: "30946"
+            description: Prakarsa ID { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 08 Jun 2021 04:20:19 GMT
+        - name: Content-Length
+          value: "204"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "id": 3,
+                  "screeningId": 3,
+                  "status": 1,
+                  "statusCode": "1",
+                  "messages": "NIK 3175091506730016 belum terdaftar di SIKP",
+                  "updatedAt": "08-06-2021"
+              },
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/screening/find-sikp"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999951"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: prakarsaId
+            value: "30946"
+            description: Prakarsa ID { MANDATORY }
+    response:
+      status: 401
+      statusText: Unauthorized
+      body:
+        type: text
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{base_url}}/v/1/screening/find-sikp"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999951"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: prakarsaId
+            value: "30946"
+            description: Prakarsa ID { MANDATORY }
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 21 Jul 2022 10:53:41 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: empty message
+    request:
+      url: "{{base_url}}/v/1/screening/find-sikp"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999951"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: prakarsaId
+            value: "30946"
+            description: Prakarsa ID { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 08 Jun 2021 04:20:59 GMT
+        - name: Content-Length
+          value: "160"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "id": 3,
+                  "screeningId": 3,
+                  "status": 1,
+                  "statusCode": "1",
+                  "messages": "",
+                  "updatedAt": "08-06-2021"
+              },
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: prakarsa not found
+    request:
+      url: "{{base_url}}/v/1/screening/find-sikp"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999951"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: prakarsaId
+            value: "30946"
+            description: Prakarsa ID { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 30 Jun 2021 02:29:53 GMT
+        - name: Content-Length
+          value: "95"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Error record not found",
+              "message": "Prakarsa Tidak Ditemukan",
+              "status": 500
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/screening/find-sikp"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999951"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: prakarsaId
+            value: "30946"
+            description: Prakarsa ID { MANDATORY }
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: empty data
+    request:
+      url: "{{base_url}}/v/1/screening/find-sikp"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999951"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: prakarsaId
+            value: "30946"
+            description: Prakarsa ID { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 08 Jun 2021 04:20:01 GMT
+        - name: Content-Length
+          value: "101"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Error record not found",
+              "message": "Screening SIKP Tidak Ditemukan",
+              "status": 404
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/screening/find-sikp"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999951"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: prakarsaId
+            value: "30946"
+            description: Prakarsa ID { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data": null
+          }
+  - name: empty data
+    request:
+      url: "{{base_url}}/v/1/screening/find-sikp"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999951"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: prakarsaId
+            value: "30946"
+            description: Prakarsa ID { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 08 Jun 2021 04:20:01 GMT
+        - name: Content-Length
+          value: "101"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Error record not found",
+              "message": "Screening SIKP Tidak Ditemukan",
+              "status": 404
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/screening/find-sikp"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999951"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: prakarsaId
+            value: "30946"
+            description: Prakarsa ID { MANDATORY }
+    response:
+      status: 401
+      statusText: Unauthorized
+      body:
+        type: text
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{base_url}}/v/1/screening/find-sikp"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999951"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: prakarsaId
+            value: "30946"
+            description: Prakarsa ID { MANDATORY }
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 21 Jul 2022 10:53:41 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: prakarsa not found
+    request:
+      url: "{{base_url}}/v/1/screening/find-sikp"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999951"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: prakarsaId
+            value: "30946"
+            description: Prakarsa ID { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 30 Jun 2021 02:29:53 GMT
+        - name: Content-Length
+          value: "95"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Error record not found",
+              "message": "Prakarsa Tidak Ditemukan",
+              "status": 500
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/screening/find-sikp"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999951"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: prakarsaId
+            value: "30946"
+            description: Prakarsa ID { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 08 Jun 2021 04:20:19 GMT
+        - name: Content-Length
+          value: "204"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "id": 3,
+                  "screeningId": 3,
+                  "status": 1,
+                  "statusCode": "1",
+                  "messages": "NIK 3175091506730016 belum terdaftar di SIKP",
+                  "updatedAt": "08-06-2021"
+              },
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: empty message
+    request:
+      url: "{{base_url}}/v/1/screening/find-sikp"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999951"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: prakarsaId
+            value: "30946"
+            description: Prakarsa ID { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 08 Jun 2021 04:20:59 GMT
+        - name: Content-Length
+          value: "160"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "id": 3,
+                  "screeningId": 3,
+                  "status": 1,
+                  "statusCode": "1",
+                  "messages": "",
+                  "updatedAt": "08-06-2021"
+              },
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/screening/find-sikp"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999951"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: prakarsaId
+            value: "30946"
+            description: Prakarsa ID { MANDATORY }
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }

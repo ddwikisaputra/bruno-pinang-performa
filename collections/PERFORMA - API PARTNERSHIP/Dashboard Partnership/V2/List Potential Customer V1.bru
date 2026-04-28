@@ -1,0 +1,638 @@
+meta {
+  name: List Potential Customer V1
+  type: http
+  seq: 9
+}
+
+post {
+  url: {{url}}/v/1/partnerships/potential-customer-list
+  body: formUrlEncoded
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+body:form-urlencoded {
+  userId: 1
+  startIndex: 0
+  recordCount: 5
+  partnershipId: 4
+  partnershipCode: OMS1
+  ~textSearch: johannes
+}
+
+settings {
+  encodeUrl: true
+}
+
+example {
+  name: success
+  
+  request: {
+    url: {{url}}/v/1/partnerships/potential-customer-list
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      startIndex: 0
+      recordCount: 10
+      partnershipId: 1
+      partnershipCode: PST2021
+      ~textSearch: joko
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 03:03:58 GMT
+      Content-Length: 82
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": [
+                {
+                    "id": 300,
+                    "referenceId": "642d8c25-2335-44b6-b6cc-1e0542b1c2c5",
+                    "ktpNumber": "3603282904960006",
+                    "name": "APRIYANI",
+                    "prakarsaId": 673,
+                    "branchCode": "9999",
+                    "partnershipId": 4,
+                    "status": 1,
+                    "statusText": "Proses Prakarsa",
+                    "ktpPictureSelfiePath": "prakarsa/ktp-selfie/2021/12/14/IMG_PARTNERSHIP_20211214133600.png",
+                    "ktpPictureSelfieBase64": "base64 string",
+                    "ktpPictureSelfieMimetype": "mimetype",
+                    "createdAt": "15-12-2021 13:01:32",
+                    "updatedAt": "15-12-2021 13:03:20"
+                },
+                {
+                    "id": 298,
+                    "referenceId": "b710e2ec-bb5a-4d8f-9b9b-0c2494e781d6",
+                    "ktpNumber": "3175032412770003",
+                    "name": "DECKY DWI SUSANTO SE",
+                    "prakarsaId": 672,
+                    "branchCode": "9999",
+                    "partnershipId": 4,
+                    "status": 1,
+                    "statusText": "Proses Prakarsa",
+                    "ktpPictureSelfiePath": "prakarsa/ktp-selfie/2021/12/14/IMG_PARTNERSHIP_20211214133600.png",
+                    "ktpPictureSelfieBase64": "base64 string",
+                    "ktpPictureSelfieMimetype": "mimetype",
+                    "createdAt": "15-12-2021 09:57:35",
+                    "updatedAt": "15-12-2021 11:15:07"
+                },
+                {
+                    "id": 299,
+                    "referenceId": "50d54306-1107-403c-a506-c291c3eb0bda",
+                    "ktpNumber": "3671078107960003",
+                    "name": "JULIAN JASA PRATAMA",
+                    "prakarsaId": 671,
+                    "branchCode": "9999",
+                    "partnershipId": 4,
+                    "status": 1,
+                    "statusText": "Proses Prakarsa",
+                    "ktpPictureSelfiePath": "",
+                    "ktpPictureSelfieBase64": "",
+                    "ktpPictureSelfieMimetype": "",
+                    "createdAt": "15-12-2021 10:46:06",
+                    "updatedAt": "15-12-2021 10:46:59"
+                }
+            ],
+            "desc": "Data Valid",
+            "message": "Data ditemukan",
+            "status": 200
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: error database connection
+  
+  request: {
+    url: {{url}}/v/1/partnerships/potential-customer-list
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      startIndex: 0
+      recordCount: 10
+      partnershipId: 1
+      partnershipCode: PST2021
+      ~textSearch: joko
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 02:53:38 GMT
+      Content-Length: 111
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+            "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+            "status": 400
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: empty data
+  
+  request: {
+    url: {{url}}/v/1/partnerships/potential-customer-list
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      startIndex: 0
+      recordCount: 10
+      partnershipId: 1
+      partnershipCode: AA
+      ~textSearch: joko
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Wed, 24 Nov 2021 18:18:31 GMT
+      Content-Length: 657
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "desc": "Data Potential Customer tidak ditemukan",
+            "message": "Potential Customer Tidak Ditemukan",
+            "status": 404
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: general error
+  
+  request: {
+    url: {{url}}/v/1/partnerships/potential-customer-list
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      startIndex: 0
+      recordCount: 10
+      partnershipId: 1
+      partnershipCode: PST2021
+      ~textSearch: joko
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 02:53:38 GMT
+      Content-Length: 111
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "desc": "Could not connect .....",
+            "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+            "status": 500
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: error parameter validation
+  
+  request: {
+    url: {{url}}/v/1/partnerships/potential-customer-list
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      startIndex: 0
+      recordCount: 10
+      partnershipId: 1
+      ~textSearch: joko
+      ~partnershipCode: PST2021
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 02:53:38 GMT
+      Content-Length: 111
+    }
+  
+    status: {
+      code: 400
+      text: Bad Request
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "desc": "Parameter ... kosong",
+            "message": "Maaf, Parameter ... tidak boleh kosong",
+            "status": 500
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: unautorized
+  
+  request: {
+    url: {{url}}/v/1/partnerships/potential-customer-list
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      startIndex: 0
+      recordCount: 10
+      partnershipId: 1
+      partnershipCode: PST2021
+      ~textSearch: joko
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 02:44:34 GMT
+      Content-Length: 82
+    }
+  
+    status: {
+      code: 401
+      text: Unauthorized
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "code": 401,
+            "message": "Error Message"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: general error
+  
+  request: {
+    url: {{url}}/v/1/partnerships/potential-customer-list
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      startIndex: 0
+      recordCount: 10
+      partnershipId: 1
+      partnershipCode: PST2021
+      ~textSearch: joko
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 02:53:38 GMT
+      Content-Length: 111
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "desc": "Could not connect .....",
+            "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+            "status": 500
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: error parameter validation
+  
+  request: {
+    url: {{url}}/v/1/partnerships/potential-customer-list
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      startIndex: 0
+      recordCount: 10
+      partnershipId: 1
+      ~textSearch: joko
+      ~partnershipCode: PST2021
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 02:53:38 GMT
+      Content-Length: 111
+    }
+  
+    status: {
+      code: 400
+      text: Bad Request
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "desc": "Parameter ... kosong",
+            "message": "Maaf, Parameter ... tidak boleh kosong",
+            "status": 500
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: success
+  
+  request: {
+    url: {{url}}/v/1/partnerships/potential-customer-list
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      startIndex: 0
+      recordCount: 10
+      partnershipId: 1
+      partnershipCode: PST2021
+      ~textSearch: joko
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 03:03:58 GMT
+      Content-Length: 82
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": [
+                {
+                    "id": 300,
+                    "referenceId": "642d8c25-2335-44b6-b6cc-1e0542b1c2c5",
+                    "ktpNumber": "3603282904960006",
+                    "name": "APRIYANI",
+                    "prakarsaId": 673,
+                    "branchCode": "9999",
+                    "partnershipId": 4,
+                    "status": 1,
+                    "statusText": "Proses Prakarsa",
+                    "ktpPictureSelfiePath": "prakarsa/ktp-selfie/2021/12/14/IMG_PARTNERSHIP_20211214133600.png",
+                    "ktpPictureSelfieBase64": "base64 string",
+                    "ktpPictureSelfieMimetype": "mimetype",
+                    "createdAt": "15-12-2021 13:01:32",
+                    "updatedAt": "15-12-2021 13:03:20"
+                },
+                {
+                    "id": 298,
+                    "referenceId": "b710e2ec-bb5a-4d8f-9b9b-0c2494e781d6",
+                    "ktpNumber": "3175032412770003",
+                    "name": "DECKY DWI SUSANTO SE",
+                    "prakarsaId": 672,
+                    "branchCode": "9999",
+                    "partnershipId": 4,
+                    "status": 1,
+                    "statusText": "Proses Prakarsa",
+                    "ktpPictureSelfiePath": "prakarsa/ktp-selfie/2021/12/14/IMG_PARTNERSHIP_20211214133600.png",
+                    "ktpPictureSelfieBase64": "base64 string",
+                    "ktpPictureSelfieMimetype": "mimetype",
+                    "createdAt": "15-12-2021 09:57:35",
+                    "updatedAt": "15-12-2021 11:15:07"
+                },
+                {
+                    "id": 299,
+                    "referenceId": "50d54306-1107-403c-a506-c291c3eb0bda",
+                    "ktpNumber": "3671078107960003",
+                    "name": "JULIAN JASA PRATAMA",
+                    "prakarsaId": 671,
+                    "branchCode": "9999",
+                    "partnershipId": 4,
+                    "status": 1,
+                    "statusText": "Proses Prakarsa",
+                    "ktpPictureSelfiePath": "",
+                    "ktpPictureSelfieBase64": "",
+                    "ktpPictureSelfieMimetype": "",
+                    "createdAt": "15-12-2021 10:46:06",
+                    "updatedAt": "15-12-2021 10:46:59"
+                }
+            ],
+            "desc": "Data Valid",
+            "message": "Data ditemukan",
+            "status": 200
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: unautorized
+  
+  request: {
+    url: {{url}}/v/1/partnerships/potential-customer-list
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      startIndex: 0
+      recordCount: 10
+      partnershipId: 1
+      partnershipCode: PST2021
+      ~textSearch: joko
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 02:44:34 GMT
+      Content-Length: 82
+    }
+  
+    status: {
+      code: 401
+      text: Unauthorized
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "code": 401,
+            "message": "Error Message"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: empty data
+  
+  request: {
+    url: {{url}}/v/1/partnerships/potential-customer-list
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      startIndex: 0
+      recordCount: 10
+      partnershipId: 1
+      partnershipCode: AA
+      ~textSearch: joko
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Wed, 24 Nov 2021 18:18:31 GMT
+      Content-Length: 657
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "desc": "Data Potential Customer tidak ditemukan",
+            "message": "Potential Customer Tidak Ditemukan",
+            "status": 404
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: error database connection
+  
+  request: {
+    url: {{url}}/v/1/partnerships/potential-customer-list
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      startIndex: 0
+      recordCount: 10
+      partnershipId: 1
+      partnershipCode: PST2021
+      ~textSearch: joko
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 02:53:38 GMT
+      Content-Length: 111
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+            "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+            "status": 400
+        }
+      '''
+    }
+  }
+}

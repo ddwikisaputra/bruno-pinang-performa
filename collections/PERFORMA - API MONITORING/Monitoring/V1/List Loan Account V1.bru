@@ -1,0 +1,423 @@
+meta {
+  name: List Loan Account V1
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{url}}/v/1/monitoring/list-loan-account
+  body: formUrlEncoded
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+body:form-urlencoded {
+  userId: 999951
+  id: 30951
+  filterStatus: 89
+}
+
+settings {
+  encodeUrl: true
+}
+
+example {
+  name: general error
+  
+  request: {
+    url: {{url}}/v/1/monitoring/list-loan-account
+    method: GET
+    mode: none
+    headers: {
+      Content-Type: application/x-www-form-urlencoded
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Thu, 29 Jul 2021 07:05:21 GMT
+      Content-Length: 287
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "status": 500,
+            "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+            "desc": "Could not connect .....",
+            "data": null
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: error data not found
+  
+  request: {
+    url: {{url}}/v/1/monitoring/list-loan-account
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 999941
+      id: 802
+      filterStatus: 1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Wed, 25 May 2022 07:21:34 GMT
+      Content-Length: 104
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "desc": "Error record not found",
+            "message": "Status Pembayaran Tidak Ditemukan",
+            "status": 404
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: success
+  
+  request: {
+    url: {{url}}/v/1/monitoring/list-loan-account
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 999941
+      id: 802
+      filterStatus: 1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Mon, 30 May 2022 18:53:18 GMT
+      Content-Length: 770
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": [
+                {
+                    "id": 802,
+                    "idPaymentStatus": 21,
+                    "loanType": 2,
+                    "facilityType": "Merchant Financing",
+                    "installmentPattern": 7,
+                    "loanTerm": 7,
+                    "status": -3,
+                    "statusText": "Telat -80 Hari",
+                    "loanAmount": 2500000,
+                    "outstanding": 2500000,
+                    "mainPayment": 2500000,
+                    "ratePayment": 281667,
+                    "pinaltyPayment": 50173,
+                    "dueDate": "2022-03-18",
+                    "jumlahHariBunga": -80,
+                    "jumlahHariDenda": -80,
+                    "daysCount": -80,
+                    "totalPayment": 2831840
+                },
+                {
+                    "id": 802,
+                    "idPaymentStatus": 23,
+                    "loanType": 2,
+                    "facilityType": "Merchant Financing",
+                    "installmentPattern": 7,
+                    "loanTerm": 7,
+                    "status": -3,
+                    "statusText": "Telat -74 Hari",
+                    "loanAmount": 530000,
+                    "outstanding": 530000,
+                    "mainPayment": 530000,
+                    "ratePayment": 83476,
+                    "pinaltyPayment": 39827,
+                    "dueDate": "2022-03-24",
+                    "jumlahHariBunga": -74,
+                    "jumlahHariDenda": -74,
+                    "daysCount": -74,
+                    "totalPayment": 653303
+                },
+                {
+                    "id": 802,
+                    "idPaymentStatus": 24,
+                    "loanType": 2,
+                    "facilityType": "Merchant Financing",
+                    "installmentPattern": 7,
+                    "loanTerm": 7,
+                    "status": -3,
+                    "statusText": "Telat -74 Hari",
+                    "loanAmount": 535000,
+                    "outstanding": 535000,
+                    "mainPayment": 535000,
+                    "ratePayment": 16451,
+                    "pinaltyPayment": 3787,
+                    "dueDate": "2022-03-24",
+                    "jumlahHariBunga": -74,
+                    "jumlahHariDenda": -74,
+                    "daysCount": -74,
+                    "totalPayment": 555238
+                },
+                {
+                    "id": 802,
+                    "idPaymentStatus": 25,
+                    "loanType": 2,
+                    "facilityType": "Merchant Financing",
+                    "installmentPattern": 7,
+                    "loanTerm": 7,
+                    "status": -3,
+                    "statusText": "Telat -73 Hari",
+                    "loanAmount": 520000,
+                    "outstanding": 520000,
+                    "mainPayment": 520000,
+                    "ratePayment": 73233,
+                    "pinaltyPayment": 38045,
+                    "dueDate": "2022-03-25",
+                    "jumlahHariBunga": -73,
+                    "jumlahHariDenda": -73,
+                    "daysCount": -73,
+                    "totalPayment": 631278
+                },
+                {
+                    "id": 802,
+                    "idPaymentStatus": 26,
+                    "loanType": 2,
+                    "facilityType": "Merchant Financing",
+                    "installmentPattern": 7,
+                    "loanTerm": 7,
+                    "status": -3,
+                    "statusText": "Telat -73 Hari",
+                    "loanAmount": 509000,
+                    "outstanding": 509000,
+                    "mainPayment": 509000,
+                    "ratePayment": 71685,
+                    "pinaltyPayment": 37241,
+                    "dueDate": "2022-03-25",
+                    "jumlahHariBunga": -73,
+                    "jumlahHariDenda": -73,
+                    "daysCount": -73,
+                    "totalPayment": 617926
+                },
+                {
+                    "id": 802,
+                    "idPaymentStatus": 22,
+                    "loanType": 2,
+                    "facilityType": "Merchant Financing",
+                    "installmentPattern": 14,
+                    "loanTerm": 14,
+                    "status": -3,
+                    "statusText": "Telat -68 Hari",
+                    "loanAmount": 500000,
+                    "outstanding": 500000,
+                    "mainPayment": 500000,
+                    "ratePayment": 57666,
+                    "pinaltyPayment": 28457,
+                    "dueDate": "2022-03-30",
+                    "jumlahHariBunga": -68,
+                    "jumlahHariDenda": -68,
+                    "daysCount": -68,
+                    "totalPayment": 586123
+                },
+                {
+                    "id": 802,
+                    "idPaymentStatus": 19,
+                    "loanType": 2,
+                    "facilityType": "Merchant Financing",
+                    "installmentPattern": 30,
+                    "loanTerm": 30,
+                    "status": -3,
+                    "statusText": "Telat -58 Hari",
+                    "loanAmount": 3000000,
+                    "outstanding": 3000000,
+                    "mainPayment": 3000000,
+                    "ratePayment": 386000,
+                    "pinaltyPayment": 176833,
+                    "dueDate": "2022-04-09",
+                    "jumlahHariBunga": -58,
+                    "jumlahHariDenda": -58,
+                    "daysCount": -58,
+                    "totalPayment": 3562833
+                },
+                {
+                    "id": 802,
+                    "idPaymentStatus": 20,
+                    "loanType": 2,
+                    "facilityType": "Merchant Financing",
+                    "installmentPattern": 30,
+                    "loanTerm": 30,
+                    "status": -3,
+                    "statusText": "Telat -58 Hari",
+                    "loanAmount": 1250000,
+                    "outstanding": 1250000,
+                    "mainPayment": 1250000,
+                    "ratePayment": 147499,
+                    "pinaltyPayment": 66255,
+                    "dueDate": "2022-04-09",
+                    "jumlahHariBunga": -58,
+                    "jumlahHariDenda": -58,
+                    "daysCount": -58,
+                    "totalPayment": 1463754
+                }
+            ],
+            "desc": "Data Valid",
+            "message": "Data ditemukan",
+            "status": 200
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: unautorized
+  
+  request: {
+    url: {{url}}/v/1/monitoring/list-loan-account
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 999941
+      id: 802
+      filterStatus: 1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Wed, 25 May 2022 07:06:28 GMT
+      Content-Length: 106
+    }
+  
+    status: {
+      code: 401
+      text: Unauthorized
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "code": 401,
+            "desc": "Expired",
+            "message": "Invalid Token || Token Is Expired"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: error parameter validation
+  
+  request: {
+    url: {{url}}/v/1/monitoring/list-loan-account
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      id: 802
+      filterStatus: 1
+      ~userId: 999941
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Wed, 25 May 2022 07:06:28 GMT
+      Content-Length: 106
+    }
+  
+    status: {
+      code: 400
+      text: Bad Request
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "desc": "Parameter ... Belum Terisi",
+            "message": "Maaf, Parameter ... Belum Dipilih",
+            "status": 500
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: error database connection
+  
+  request: {
+    url: {{url}}/v/1/monitoring/list-loan-account
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 999941
+      id: 802
+      filterStatus: 1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Wed, 25 May 2022 07:06:28 GMT
+      Content-Length: 106
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+            "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+            "status": 400
+        }
+      '''
+    }
+  }
+}

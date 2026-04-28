@@ -1,0 +1,38 @@
+name: DDB - MIDDLEWARE (.NET)
+variables:
+  - name: base_url_dev
+    value: http://172.16.31.95:4343
+  - name: base_url_dev_old
+    value: http://172.31.1.95:4343
+  - name: base_url_local
+    value: http://localhost:54494
+  - name: base_url_prod
+    value: https://ib.bankraya.co.id:4343
+  - name: username_otp_dev
+    value: agrolink
+  - name: password_otp_dev
+    value: agrolink
+  - name: appname_otp_dev
+    value: PINANG-PERFORMA
+  - name: client_otp_dev
+    value: asb
+  - name: grantttype_otp_dev
+    value: password
+  - name: base_url_otp_dev
+    value: http://10.99.0.112:4343
+  - name: base_url_dev_new
+    value: https://api-pinang-performa.dev.internal.rayain.net
+  - name: username_top_dev_new
+    value: ""
+  - name: password_otp_dev_new
+    value: ""
+  - name: tokenOTP
+    value: ""
+  - name: base_url_otp_prod
+    value: ""
+  - name: username_otp_prod
+    value: ""
+  - name: password_otp_prod
+    value: ""
+  - name: grantttype_otp_prod
+    value: ""

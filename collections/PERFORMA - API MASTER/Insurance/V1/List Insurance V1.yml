@@ -1,0 +1,236 @@
+info:
+  name: List Insurance V1
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{url-prod}}/v/1/master/insurance-list"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "001317"
+        description: UserId Login | MANDATORY
+      - name: productType
+        value: "40002"
+        description: Core Banking Code (40002 = Angsuran Tetap | 40003 = KMK Transaksional) | MANDATORY
+  auth:
+    type: bearer
+    token: UmF5YVBpUGVyVG9wtk843jG/7RB5In2KHO843o1PCIi6N/9g1KDYjEHKFfrcgR+Er9FaSjiWfvpaYJ3wHKHqKfZA3sulxsHQ7T9P45sD+L32owynMK34Vzs1FExeNhzfaFhvSDwdMqm5zWJE5ch+60VTtVXgCB40OQ==
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: access forbidden (403)
+    request:
+      url: "{{base_url}}/v/1/master/insurance-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: UserId Login | MANDATORY
+          - name: productType
+            value: "40004"
+            description: Core Banking Code (40002 = Angsuran Tetap | 40003 = KMK Transaksional) | OPTIONAL
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Sun, 31 Jul 2022 08:40:30 GMT
+        - name: Content-Length
+          value: "73"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: not found
+    request:
+      url: "{{base_url}}/v/1/master/insurance-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: UserId Login | MANDATORY
+          - name: productType
+            value: "40004"
+            description: Core Banking Code (40002 = Angsuran Tetap | 40003 = KMK Transaksional) | OPTIONAL
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Sat, 22 May 2021 06:53:21 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Accept-Encoding
+        - name: Content-Encoding
+          value: gzip
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Error Record Not Found",
+              "message": "Data Asuransi Tidak Ditemukan",
+              "status": 404
+          }
+  - name: Unauthorized
+    request:
+      url: "{{base_url}}/v/1/master/insurance-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: UserId Login | MANDATORY
+          - name: productType
+            value: "40004"
+            description: Core Banking Code (40002 = Angsuran Tetap | 40003 = KMK Transaksional) | OPTIONAL
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 01 Aug 2022 02:53:30 GMT
+        - name: Content-Length
+          value: "75"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: bad request
+    request:
+      url: "{{base_url}}/v/1/master/insurance-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: UserId Login | MANDATORY
+          - name: productType
+            value: "40004"
+            description: Core Banking Code (40002 = Angsuran Tetap | 40003 = KMK Transaksional) | OPTIONAL
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 01 Aug 2022 02:53:09 GMT
+        - name: Content-Length
+          value: "103"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Parameter ... belum terisi",
+              "message": "Maaf, parameter ... belum dipilih",
+              "status": 500
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/master/insurance-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: UserId Login | MANDATORY
+          - name: productType
+            value: "40004"
+            description: Core Banking Code (40002 = Angsuran Tetap | 40003 = KMK Transaksional) | OPTIONAL
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 01 Aug 2022 03:17:41 GMT
+        - name: Content-Length
+          value: "227"
+      body:
+        type: json
+        data: |-
+          {
+              "data": [
+                  {
+                      "id": 2,
+                      "insuranceName": "testDua",
+                      "productType": "40002",
+                      "percentage": "40002"
+                  },
+                  {
+                      "id": 3,
+                      "insuranceName": "testTiga",
+                      "productType": "40002",
+                      "percentage": "40002"
+                  }
+              ],
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/master/insurance-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: UserId Login | MANDATORY
+          - name: productType
+            value: "40004"
+            description: Core Banking Code (40002 = Angsuran Tetap | 40003 = KMK Transaksional) | OPTIONAL
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Sun, 31 Jul 2022 08:40:30 GMT
+        - name: Content-Length
+          value: "73"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect ....."
+          }

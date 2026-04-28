@@ -1,0 +1,91 @@
+info:
+  name: Employee Inquiry
+  type: http
+  seq: 9
+
+http:
+  method: GET
+  url: "{{baseUrl}}/api/digiagri/employee/inquiry/{{userId}}"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Success Response
+    request:
+      url: "{{baseUrl}}/api/digiagri/employee/inquiry/{{userId}}"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Thu, 09 Oct 2025 03:05:19 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "295"
+        - name: Connection
+          value: keep-alive
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "statusCode": "00",
+              "statusDescription": "Sukses",
+              "data": {
+                  "userId": "999991",
+                  "userName": "AO Maxima 4",
+                  "branchCode": "9999",
+                  "branchAddress": "BRI Agro State Building South Wakanda",
+                  "orgId": "9999",
+                  "organization": "Pinang Ritel",
+                  "jabatan": "Account Officer",
+                  "loginTicket": "",
+                  "accessLevel": "10",
+                  "foto": ""
+              }
+          }
+  - name: User ID Not Found
+    request:
+      url: "{{baseUrl}}/api/digiagri/employee/inquiry/{{userId}}"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Thu, 09 Oct 2025 03:05:45 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "221"
+        - name: Connection
+          value: keep-alive
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "statusCode": "99",
+              "statusDescription": "User ID Tidak Ditemukan",
+              "data": {
+                  "userId": "",
+                  "userName": "",
+                  "branchCode": "",
+                  "branchAddress": "",
+                  "orgId": "",
+                  "organization": "",
+                  "jabatan": "",
+                  "loginTicket": "",
+                  "accessLevel": "",
+                  "foto": ""
+              }
+          }

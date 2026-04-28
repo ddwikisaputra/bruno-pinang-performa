@@ -1,0 +1,568 @@
+info:
+  name: Find V2
+  type: http
+  seq: 11
+
+http:
+  method: POST
+  url: "{{base_url_prod}}/v/2/prakarsa/find"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "{{userId}}"
+        description: "[Encode]Personal Number BRI Agro (UserID Login) { MANDATORY }"
+      - name: prakarsaId
+        value: "5704"
+        description: Prakarsa ID { MANDATORY }
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/prakarsa/find"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999951"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: prakarsaId
+            value: "30946"
+            description: Prakarsa ID { MANDATORY }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Sun, 23 May 2021 04:47:59 GMT
+        - name: Content-Length
+          value: "907"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "message": "Invalid Token || Token Is Expired",
+              "desc": "Expired"
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{base_url}}/v/1/prakarsa/find"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999951"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: prakarsaId
+            value: "30946"
+            description: Prakarsa ID { MANDATORY }
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 18 Jul 2022 08:26:15 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/prakarsa/find"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999951"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: prakarsaId
+            value: "30946"
+            description: Prakarsa ID { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Sun, 23 May 2021 17:14:00 GMT
+        - name: Content-Length
+          value: "230"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/prakarsa/find"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999951"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: prakarsaId
+            value: "30946"
+            description: Prakarsa ID { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Sun, 23 May 2021 04:47:59 GMT
+        - name: Content-Length
+          value: "907"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data": null
+          }
+  - name: empty data
+    request:
+      url: "{{base_url}}/v/1/prakarsa/find"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999951"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: prakarsaId
+            value: "-1"
+            description: Prakarsa ID { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Sun, 23 May 2021 04:49:55 GMT
+        - name: Content-Length
+          value: "95"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Error record not found",
+              "message": "Data Tidak Ditemukan",
+              "status": 404
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/2/prakarsa/find"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: UmF5YVBpUGVyVG9w9FR0lGD8PJZ01laNFpB91ptV5mkFfw==
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: prakarsaId
+            value: "31328"
+            description: Prakarsa ID { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 03 Jan 2023 03:41:12 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "id": 31328,
+                  "ktpNumber": "UmF5YVBpUGVyVG9w/l96m2T0lUNqKW+KHO473lcdpThBjd4dGhfx8Nb0dY4=",
+                  "ktpDate": "2018-05-02",
+                  "name": "UmF5YVBpUGVyVG9whQw/3y3t9BU2bTHdR794tr/ndG45RPafmXuXoJM+4A==",
+                  "placeOfBirth": "Jakarta",
+                  "birthDate": "2000-11-17",
+                  "motherMaidenName": "Winarni",
+                  "gender": "Laki-Laki",
+                  "religion": "Islam",
+                  "dependents": 0,
+                  "lastEducation": "D3",
+                  "maritalStatus": "Belum Kawin",
+                  "familyRelationshipStatus": "Anak",
+                  "mobileNumber": "UmF5YVBpUGVyVG9w9VR4mWb8kUxoL22K/jbf1fve/+kV5cJzqzwcmw==",
+                  "ktpPicturePath": "prakarsa/ktp/2023/7/5/IMG_20230705114754.jpg",
+                  "ktpPictureBase64": "string base64",
+                  "ktpPictureMimetype": "image/jpeg",
+                  "ktpPictureSelfiePath": "prakarsa/ktp-selfie/2023/7/5/IMG_20230705114754.jpg",
+                  "ktpPictureSelfieBase64": "string base64",
+                  "ktpPictureSelfieMimeType": "image/jpeg",
+                  "latitude": "-6.2365997",
+                  "longitude": "106.7805858",
+                  "address": "Kebayoran Lama, Kebayoran Lama, South Jakarta City, Jakarta, Indonesia",
+                  "postalCode": "12240",
+                  "provinceCode": "03",
+                  "provinceName": "DKI Jakarta",
+                  "cityCode": "0394",
+                  "cityName": "Jakarta Selatan",
+                  "districtCode": "317405",
+                  "districtName": "Kebayoran Lama",
+                  "villageCode": "3174051001",
+                  "villageName": "Kebayoran Lama Utara",
+                  "rt": "003",
+                  "rw": "009",
+                  "email": "UmF5YVBpUGVyVG9wpQw/3y3j1BU2bTHdR7943o0tQ8e3MfQn2Y7Bge97rjGEk8iN1FjSLeHlDA==",
+                  "flagPrakarsa": 1,
+                  "flagUsaha": 1,
+                  "isSuplesi": 0,
+                  "suplesiPrakarsaId": 0,
+                  "status": 5,
+                  "flagResidenceAddress": 1,
+                  "residenceAddress": "Kebayoran Lama, Kebayoran Lama, South Jakarta City, Jakarta, Indonesia",
+                  "residentialOwnership": "Milik Keluarga",
+                  "longStay": 123,
+                  "partnerKtpNumber": "UmF5YVBpUGVyVG9wKnG7Rp5D6MKFawa0c57EJw==",
+                  "partnerName": "UmF5YVBpUGVyVG9wKnG7Rp5D6MKFawa0c57EJw==",
+                  "genderPartner": "",
+                  "birthDatePartner": "",
+                  "placeOfBirthPartner": "",
+                  "emailPartner": "",
+                  "mobileNumberPartner": "",
+                  "ktpPicturePartnerPath": "",
+                  "ktpPicturePartnerBase64": "",
+                  "ktpPicturePartnerMimetype": "",
+                  "latitudeBusiness": "",
+                  "longitudeBusiness": "",
+                  "ktpNumberFlag": 1,
+                  "nameFlag": 1,
+                  "placeOfBirthFlag": 1,
+                  "birthDateFlag": 1,
+                  "motherMaidenNameFlag": 1,
+                  "partnerKtpNumberFlag": 0,
+                  "partnerNameFlag": 0,
+                  "birthDatePartnerFlag": 0,
+                  "placeOfBirthPartnerFlag": 0,
+                  "motherMaidenNamePartnerFlag": 0,
+                  "updatedAt": "10-10-2023"
+              },
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{base_url}}/v/1/prakarsa/find"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999951"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: prakarsaId
+            value: "30946"
+            description: Prakarsa ID { MANDATORY }
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 18 Jul 2022 08:26:15 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/2/prakarsa/find"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: UmF5YVBpUGVyVG9w9FR0lGD8PJZ01laNFpB91ptV5mkFfw==
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: prakarsaId
+            value: "31328"
+            description: Prakarsa ID { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 03 Jan 2023 03:41:12 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "id": 31328,
+                  "ktpNumber": "UmF5YVBpUGVyVG9w/l96m2T0lUNqKW+KHO473lcdpThBjd4dGhfx8Nb0dY4=",
+                  "ktpDate": "2018-05-02",
+                  "name": "UmF5YVBpUGVyVG9whQw/3y3t9BU2bTHdR794tr/ndG45RPafmXuXoJM+4A==",
+                  "placeOfBirth": "Jakarta",
+                  "birthDate": "2000-11-17",
+                  "motherMaidenName": "Winarni",
+                  "gender": "Laki-Laki",
+                  "religion": "Islam",
+                  "dependents": 0,
+                  "lastEducation": "D3",
+                  "maritalStatus": "Belum Kawin",
+                  "familyRelationshipStatus": "Anak",
+                  "mobileNumber": "UmF5YVBpUGVyVG9w9VR4mWb8kUxoL22K/jbf1fve/+kV5cJzqzwcmw==",
+                  "ktpPicturePath": "prakarsa/ktp/2023/7/5/IMG_20230705114754.jpg",
+                  "ktpPictureBase64": "string base64",
+                  "ktpPictureMimetype": "image/jpeg",
+                  "ktpPictureSelfiePath": "prakarsa/ktp-selfie/2023/7/5/IMG_20230705114754.jpg",
+                  "ktpPictureSelfieBase64": "string base64",
+                  "ktpPictureSelfieMimeType": "image/jpeg",
+                  "latitude": "-6.2365997",
+                  "longitude": "106.7805858",
+                  "address": "Kebayoran Lama, Kebayoran Lama, South Jakarta City, Jakarta, Indonesia",
+                  "postalCode": "12240",
+                  "provinceCode": "03",
+                  "provinceName": "DKI Jakarta",
+                  "cityCode": "0394",
+                  "cityName": "Jakarta Selatan",
+                  "districtCode": "317405",
+                  "districtName": "Kebayoran Lama",
+                  "villageCode": "3174051001",
+                  "villageName": "Kebayoran Lama Utara",
+                  "rt": "003",
+                  "rw": "009",
+                  "email": "UmF5YVBpUGVyVG9wpQw/3y3j1BU2bTHdR7943o0tQ8e3MfQn2Y7Bge97rjGEk8iN1FjSLeHlDA==",
+                  "flagPrakarsa": 1,
+                  "flagUsaha": 1,
+                  "isSuplesi": 0,
+                  "suplesiPrakarsaId": 0,
+                  "status": 5,
+                  "flagResidenceAddress": 1,
+                  "residenceAddress": "Kebayoran Lama, Kebayoran Lama, South Jakarta City, Jakarta, Indonesia",
+                  "residentialOwnership": "Milik Keluarga",
+                  "longStay": 123,
+                  "partnerKtpNumber": "UmF5YVBpUGVyVG9wKnG7Rp5D6MKFawa0c57EJw==",
+                  "partnerName": "UmF5YVBpUGVyVG9wKnG7Rp5D6MKFawa0c57EJw==",
+                  "genderPartner": "",
+                  "birthDatePartner": "",
+                  "placeOfBirthPartner": "",
+                  "emailPartner": "",
+                  "mobileNumberPartner": "",
+                  "ktpPicturePartnerPath": "",
+                  "ktpPicturePartnerBase64": "",
+                  "ktpPicturePartnerMimetype": "",
+                  "latitudeBusiness": "",
+                  "longitudeBusiness": "",
+                  "ktpNumberFlag": 1,
+                  "nameFlag": 1,
+                  "placeOfBirthFlag": 1,
+                  "birthDateFlag": 1,
+                  "motherMaidenNameFlag": 1,
+                  "partnerKtpNumberFlag": 0,
+                  "partnerNameFlag": 0,
+                  "birthDatePartnerFlag": 0,
+                  "placeOfBirthPartnerFlag": 0,
+                  "motherMaidenNamePartnerFlag": 0,
+                  "updatedAt": "10-10-2023"
+              },
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: empty data
+    request:
+      url: "{{base_url}}/v/1/prakarsa/find"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999951"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: prakarsaId
+            value: "-1"
+            description: Prakarsa ID { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Sun, 23 May 2021 04:49:55 GMT
+        - name: Content-Length
+          value: "95"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Error record not found",
+              "message": "Data Tidak Ditemukan",
+              "status": 404
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/prakarsa/find"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999951"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: prakarsaId
+            value: "30946"
+            description: Prakarsa ID { MANDATORY }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Sun, 23 May 2021 04:47:59 GMT
+        - name: Content-Length
+          value: "907"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "message": "Invalid Token || Token Is Expired",
+              "desc": "Expired"
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/prakarsa/find"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999951"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: prakarsaId
+            value: "30946"
+            description: Prakarsa ID { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Sun, 23 May 2021 04:47:59 GMT
+        - name: Content-Length
+          value: "907"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data": null
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/prakarsa/find"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999951"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: prakarsaId
+            value: "30946"
+            description: Prakarsa ID { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Sun, 23 May 2021 17:14:00 GMT
+        - name: Content-Length
+          value: "230"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }

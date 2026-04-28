@@ -1,0 +1,338 @@
+info:
+  name: Approve Member Pipeline V2
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: "{{base_url}}/v/2/pipeline/approve-member-pipeline"
+  body:
+    type: form-urlencoded
+    data:
+      - name: id
+        value: "10065"
+        description: Pipeline Prakarsa Id
+      - name: userId
+        value: UmF5YVBpUGVyVG9w9FR0lGX4dLl699KtcRLj0L6t4OmrCQ==
+        description: "[ENCODE] Personal Number BRI Agro (UserID Login)"
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/pipeline/approve-member-pipeline"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "1"
+            description: ID Pipeline
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:32:34 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/pipeline/approve-member-pipeline"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "1"
+            description: ID Pipeline
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:32:34 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect ....."
+          }
+  - name: validasi ktp sedang dalam proses prakarsa
+    request:
+      url: "{{base_url}}/v/1/pipeline/approve-member-pipeline"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "-11"
+            description: ID Pipeline
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:32:34 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Member Pipeline sedang dalam proses pengajuan Prakarsa.",
+              "message": "Maaf, Member sedang dalam proses Prakarsa. Silahkan tunggu sampai proses Prakarsa selesai.",
+              "status": 500
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/2/pipeline/approve-member-pipeline"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "1"
+            description: ID Pipeline
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:35:05 GMT
+        - name: Content-Length
+          value: "141"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Data Tersimpan",
+              "message": "Data Pipeline berhasil disetujui",
+              "status": 200
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/pipeline/approve-member-pipeline"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "1"
+            description: ID Pipeline
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:32:34 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/pipeline/approve-member-pipeline"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "1"
+            description: ID Pipeline
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:32:34 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect ....."
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/pipeline/approve-member-pipeline"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "1"
+            description: ID Pipeline
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:32:34 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: validasi ktp sedang dalam proses prakarsa
+    request:
+      url: "{{base_url}}/v/1/pipeline/approve-member-pipeline"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "-11"
+            description: ID Pipeline
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:32:34 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Member Pipeline sedang dalam proses pengajuan Prakarsa.",
+              "message": "Maaf, Member sedang dalam proses Prakarsa. Silahkan tunggu sampai proses Prakarsa selesai.",
+              "status": 500
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/pipeline/approve-member-pipeline"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "1"
+            description: ID Pipeline
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:32:34 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/2/pipeline/approve-member-pipeline"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "1"
+            description: ID Pipeline
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:35:05 GMT
+        - name: Content-Length
+          value: "141"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Data Tersimpan",
+              "message": "Data Pipeline berhasil disetujui",
+              "status": 200
+          }

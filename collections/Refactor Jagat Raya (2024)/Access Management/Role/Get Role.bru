@@ -1,0 +1,166 @@
+meta {
+  name: Get Role
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{BASE_URL}}/v1/role/detail
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: 
+}
+
+body:json {
+  {
+      "payload": "{{REQUEST_BODY}}"
+  }
+}
+
+script:pre-request {
+  const payload = {
+      "id": "f3a73df5-53fc-4454-80e5-c360a536fa3d"
+  }
+  
+  const result = _.encrypt(JSON.stringify(payload))
+  bru.setEnvVar("REQUEST_BODY", result);
+}
+
+script:post-response {
+  const responseJSON = res.getBody()
+  if (responseJSON.status) {
+      const data = _.decrypt(responseJSON.data)
+      const result = JSON.parse(JSON.parse(data))
+      console.log("Result", result)
+  }
+}
+
+settings {
+  encodeUrl: true
+}
+
+example {
+  name: Success
+  
+  request: {
+    url: {{BASE_URL}}/v1/role/detail
+    method: POST
+    mode: json
+    body:json: {
+      {
+          "payload": "{{REQUEST_BODY}}"
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Mon, 22 Apr 2024 00:11:36 GMT
+      Content-Length: 366
+    }
+  
+    status: {
+      code: 200
+      text: 200
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": "ifBGTkI3UVdWYg6bTH08Gxb5m8muzrvCUVX+DK45eLZY8T2Di5sR6CRbDZVs+FXh4tg0hJy/pXPkNPdnUj3xL8/ii2KqWL6NjMKO3he6NrZAB6N7k1Eu+U6x0wgq1Mn/3WFLSd93IkyvsQbqd00PVl3QRIiwfqfmu2o4GIO+0qeClW9/rIAoL/CweOeDq8oWZpu8KvxWKinX9nK9kW7rfqwgp7/pEDRpxyzEU/Ga9BDyLPGkj2kzWyWxoditGxKCJ8aOtdFmCKBneKIy3u4g9tXjy2OC9dILRCWQlNCzx74=",
+            "message": "Permintaan berhasil diproses",
+            "status": true
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Success (Decrypted)
+  
+  request: {
+    url: {{BASE_URL}}/v1/role/detail
+    method: POST
+    mode: json
+    body:json: {
+      {
+          "payload": "{{REQUEST_BODY}}"
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Mon, 22 Apr 2024 00:11:36 GMT
+      Content-Length: 366
+    }
+  
+    status: {
+      code: 200
+      text: 200
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": {
+                "id": "f3a73df5-53fc-4454-80e5-c360a536fa3d",
+                "name": "king",
+                "description": "",
+                "application_id": "RYM",
+                "application_name": "Rayment"
+            },
+            "message": "Permintaan berhasil diproses",
+            "status": true
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Not Found
+  
+  request: {
+    url: {{BASE_URL}}/v1/role/detail
+    method: POST
+    mode: json
+    body:json: {
+      {
+          "payload": "{{REQUEST_BODY}}"
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Mon, 22 Apr 2024 01:37:54 GMT
+      Content-Length: 61
+    }
+  
+    status: {
+      code: 200
+      text: 500
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "message": "Data tidak ditemukan",
+            "status": false
+        }
+      '''
+    }
+  }
+}

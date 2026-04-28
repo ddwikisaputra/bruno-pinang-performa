@@ -1,0 +1,140 @@
+info:
+  name: sicd verify
+  type: http
+  seq: 5
+
+http:
+  method: GET
+  url: "{{base_url_dev}}/api/digiagri/sicdverify?userId=999941&NIK=3171051211950001&flavor=STAGING"
+  params:
+    - name: userId
+      value: "999941"
+      type: query
+    - name: NIK
+      value: "3171051211950001"
+      type: query
+    - name: flavor
+      value: STAGING
+      type: query
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: success
+    request:
+      url: "{{base_url}}/api/digiagri/sicdverify/{{userId}}/{{noKTP}}"
+      method: GET
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "statusCode": "1",
+              "statusDescription": "Successfully get SICD data for NIK : 3275042305890013",
+              "data": [
+                  {
+                      "statusPengajuan": "Lolos",
+                      "statusPinjaman": "Close pada 01/04/2020"
+                  },
+                  {
+                      "statusPengajuan": "Lolos",
+                      "statusPinjaman": "Close pada 25/12/2020"
+                  },
+                  {
+                      "statusPengajuan": "Lolos",
+                      "statusPinjaman": "Aktif"
+                  },
+                  {
+                      "statusPengajuan": "Lolos",
+                      "statusPinjaman": "Aktif"
+                  }
+              ]
+          }
+  - name: gagal tertolak
+    request:
+      url: http://202.77.121.68:4343/api/digiagri/sicdverify/000426/3171051211950001
+      method: GET
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "statusCode": "2",
+              "statusDescription": "Pengajuan nasabah pernah tertolak dalam 1 bulan terakhir",
+              "data": [
+                  {
+                      "tanggalPengajuan": "25/06/2021",
+                      "statusPengajuan": "Tolak",
+                      "statusPinjaman": "Prakarsa Disetujui, Tetapi Ditolak Nasabah"
+                  }
+              ]
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/api/digiagri/sicdverify?userId=999941&NIK=3171051211950001&flavor=DEV"
+      method: GET
+      params:
+        - name: userId
+          value: "999941"
+          type: query
+        - name: NIK
+          value: "3171051211950001"
+          type: query
+        - name: flavor
+          value: DEV
+          type: query
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: no-cache
+        - name: Pragma
+          value: no-cache
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Expires
+          value: "-1"
+        - name: Content-Security-Policy
+          value: default-src *;  script-src * 'unsafe-inline' 'unsafe-eval'; style-src  * 'unsafe-inline' 'unsafe-eval';
+        - name: Strict-Transport-Security
+          value: max-age=31536000
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-XSS-Protection
+          value: 1;mode=block
+        - name: x-permitted-cross-domain-policies
+          value: none
+        - name: Access-Control-Allow-Origin
+          value: http://202.77.121.68:4343
+        - name: Access-Control-Allow-Headers
+          value: Content-Type
+        - name: Access-Control-Allow-Methods
+          value: POST,GET,OPTIONS
+        - name: SERVER
+          value: ""
+        - name: Date
+          value: Thu, 16 Feb 2023 02:39:19 GMT
+        - name: Content-Length
+          value: "218"
+      body:
+        type: json
+        data: |-
+          {
+              "statusCode": "2",
+              "statusDescription": "Pinjaman tidak dapat diproses, nasabah masih mempunyai pinjaman dengan status aktif",
+              "data": [
+                  {
+                      "tanggalPengajuan": "08/11/2022",
+                      "statusPengajuan": "Lolos",
+                      "statusPinjaman": "Aktif"
+                  }
+              ]
+          }

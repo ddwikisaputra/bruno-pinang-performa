@@ -1,0 +1,114 @@
+info:
+  name: OTP Auth
+  type: http
+  seq: 9
+
+http:
+  method: POST
+  url: "{{base_url}}/api/digiagri/otp/auth"
+  body:
+    type: form-urlencoded
+    data:
+      - name: serverId
+        value: RAYA3755687839
+        description: Server Id (Response OTP Request)
+      - name: token
+        value: "840653"
+        description: Token (By SMS)
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Token Already Used
+    request:
+      url: "{{base_url}}/api/digiagri/otp/auth"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: serverId
+            value: RAYA3755687839
+            description: Server Id (Response OTP Request)
+          - name: token
+            value: "840653"
+            description: Token (By SMS)
+    response:
+      body:
+        type: text
+        data: "{\r
+
+          \    \"statusCode\": \"-1\",\r
+
+          \    \"statusDescription\": \"Token Already Used\"\r
+
+          }"
+  - name: Token Expired
+    request:
+      url: "{{base_url}}/api/digiagri/otp/auth"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: serverId
+            value: RAYA3755687839
+            description: Server Id (Response OTP Request)
+          - name: token
+            value: "840653"
+            description: Token (By SMS)
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "statusCode": "2",
+              "statusDescription": "Session Expired"
+          }
+  - name: Token Salah
+    request:
+      url: "{{base_url}}/api/digiagri/otp/auth"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: serverId
+            value: RAYA3755687839
+            description: Server Id (Response OTP Request)
+          - name: token
+            value: "840653"
+            description: Token (By SMS)
+    response:
+      body:
+        type: text
+        data: "{\r
+
+          \    \"statusCode\": \"3\",\r
+
+          \    \"statusDescription\": \"Invalid Token\"\r
+
+          }"
+  - name: Success
+    request:
+      url: "{{base_url}}/api/digiagri/otp/auth"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: serverId
+            value: RAYA3755687839
+            description: Server Id (Response OTP Request)
+          - name: token
+            value: "840653"
+            description: Token (By SMS)
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "statusCode": "1",
+              "statusDescription": "Authenticate Success"
+          }

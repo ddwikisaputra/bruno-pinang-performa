@@ -1,0 +1,99 @@
+meta {
+  name: Organization
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{BASE_URL}}/v1/organization/list
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: 
+}
+
+body:json {
+  {
+      "payload": "{{REQUEST_BODY}}"
+  }
+}
+
+script:pre-request {
+  const payload = {
+      "q": "a", // search by organization name or id
+      "cost_center": false, // true means division 
+      "page": 1,
+      "limit": -1 // isi -1 untuk menampilkan semua data
+  }
+  
+  const result = _.encrypt(JSON.stringify(payload))
+  bru.setEnvVar("REQUEST_BODY", result);
+}
+
+script:post-response {
+  const responseJSON = res.getBody()
+  if (responseJSON.status) {
+      const data = _.decrypt(responseJSON.data)
+      const parseData = JSON.parse(data)
+      const parseData2 = JSON.parse(parseData)
+      console.log('/v1/organization/list', parseData2)
+  }
+}
+
+settings {
+  encodeUrl: true
+}
+
+example {
+  name: Organization
+  
+  request: {
+    url: {{BASE_URL}}/v1/organization/list
+    method: POST
+    mode: json
+    body:json: {
+      {
+          "q": "App", // search by organization name or id
+          "cost_center": true, // true means division 
+          "page": 1,
+          "limit": -1 // isi -1 untuk menampilkan semua data
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Thu, 04 Apr 2024 07:31:48 GMT
+      Content-Length: 205
+    }
+  
+    status: {
+      code: 200
+      text: 200
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": {
+                "current_page": 1,
+                "total_page": 1,
+                "total_data": 1,
+                "data": [
+                    {
+                        "id": "13",
+                        "name": "Divisi Application Development, Architecture & Governance"
+                    }
+                ]
+            },
+            "message": "Permintaan berhasil diproses",
+            "status": true
+        }
+      '''
+    }
+  }
+}

@@ -1,0 +1,85 @@
+info:
+  name: Account Expense
+  type: http
+  seq: 5
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/digiagri/loan/account/expense"
+  body:
+    type: form-urlencoded
+    data:
+      - name: accountNumber
+        value: "001001000528317"
+      - name: adminFee
+        value: "150000.0000"
+      - name: insuranceFee
+        value: "2280000.0000"
+      - name: insuranceType
+        value: MIKROBRISMA
+      - name: kodeCabang
+        value: "0010"
+      - name: prakarsaId
+        value: "1273"
+      - name: provisionFee
+        value: "950000.0000"
+      - name: userId
+        value: "999906"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Success Response
+    request:
+      url: "{{baseUrl}}/api/digiagri/loan/account/expense"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: accountNumber
+            value: "001001000528317"
+          - name: adminFee
+            value: "150000.0000"
+          - name: insuranceFee
+            value: "2280000.0000"
+          - name: insuranceType
+            value: MIKROBRISMA
+          - name: kodeCabang
+            value: "0010"
+          - name: prakarsaId
+            value: "1273"
+          - name: provisionFee
+            value: "950000.0000"
+          - name: userId
+            value: "999906"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Thu, 09 Oct 2025 05:59:57 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "162"
+        - name: Connection
+          value: keep-alive
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "statusCode": "1",
+              "statusDescription": "Debet Biaya Sukses",
+              "result": {
+                  "adminJournalSeq": "9612128",
+                  "provisionJournalSeq": "9612127",
+                  "insuranceJournalSeq": "9612126"
+              }
+          }

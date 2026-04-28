@@ -1,0 +1,35 @@
+meta {
+  name: Share Encrypt (V)
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{BASE_URL}}/v1/security/share/encrypt
+  body: json
+  auth: none
+}
+
+headers {
+  Jagat-Raya-API-Key: {{API_KEY}}
+}
+
+body:json {
+  {
+      "callback_token": "BDw3ooutG6ouVC4acTflMujB3"
+  }
+}
+
+script:post-response {
+  const responseJSON = res.getBody()
+  if (responseJSON.status) {
+      const data = _.decrypt(responseJSON.data)
+      const parseData = JSON.parse(data)
+      const parseData2 = JSON.parse(parseData)
+      console.log('/v1/employee/profile', parseData2)
+  }
+}
+
+settings {
+  encodeUrl: true
+}

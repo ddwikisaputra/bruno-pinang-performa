@@ -1,0 +1,106 @@
+meta {
+  name: Verifikasi SICD
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{url-prod}}/v/1/middler/sicd/verification
+  body: formUrlEncoded
+  auth: basic
+}
+
+auth:basic {
+  username: {{BasicAuthUsername}}
+  password: {{BasicAuthPassword}}
+}
+
+body:form-urlencoded {
+  userId: OTk5OTk5
+  ktpNumber: MTM3MTA2MjUwMTk1MDAwOQ==
+}
+
+settings {
+  encodeUrl: true
+}
+
+example {
+  name: 500 : Server Error
+  
+  request: {
+    url: {{url}}/v/1/middler/sicd/verification
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: OTk5OTk5
+      ktpNumber: MTM3MTA2MjUwMTk1MDAwOQ==
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Tue, 02 Jan 2024 04:32:59 GMT
+      Content-Length: 374
+    }
+  
+    status: {
+      code: 500
+      text: Internal Server Error
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "desc": "Post \"http://172.31.1.74:7001\": dial tcp 172.31.1.74:7001: connectex: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.",
+            "message": "Maaf, Server Sedang Dalam Perbaikan. Silahkan coba beberapa saat lagi.",
+            "status": 500
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: 200 : SICD Losos
+  
+  request: {
+    url: {{url}}/v/1/middler/sicd/verification
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: OTk5OTk5
+      ktpNumber: MTM3MTA2MjUwMTk1MDAwOQ==
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Tue, 02 Jan 2024 04:31:25 GMT
+      Content-Length: 175
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": {
+                "statusCode": 1,
+                "statusDescription": "SICD lolos, nasabah dapat diproses ke tahap analisa pinjaman"
+            },
+            "desc": "Success Process.",
+            "message": "Data Ditemukan.",
+            "status": 200
+        }
+      '''
+    }
+  }
+}

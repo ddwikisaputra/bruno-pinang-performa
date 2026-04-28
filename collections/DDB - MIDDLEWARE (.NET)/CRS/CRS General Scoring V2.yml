@@ -1,0 +1,110 @@
+info:
+  name: CRS General Scoring V2
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{base_url}}/api/digiagri/v2/aiforesee/score"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "999941"
+        description: User ID Aplikasi
+      - name: name
+        value: Dwiki Saputra
+        description: Nama nasabah
+      - name: ktp
+        value: "3171051211950001"
+        description: KTP Nasabah
+      - name: phone
+        value: "081776527371"
+        description: No. HP Nasabah
+      - name: loanNumber
+        value: ORI--1
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: success
+    request:
+      url: "{{base_url}}/api/digiagri/v2/aiforesee/score"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: User ID Aplikasi
+          - name: name
+            value: Dwiki Saputra
+            description: Nama nasabah
+          - name: ktp
+            value: "3171051211950001"
+            description: KTP Nasabah
+          - name: phone
+            value: "081776527371"
+            description: No. HP Nasabah
+          - name: loanNumber
+            value: ORI-99
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: no-cache
+        - name: Pragma
+          value: no-cache
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Expires
+          value: "-1"
+        - name: X-SourceFiles
+          value: =?UTF-8?B?QzpcVXNlcnNcQlJJQUdSTy1QQ1xzb3VyY2VccmVwb3NcYXBpLWRldmVsb3BtZW50XEFncm9XZWJBUElcYXBpXGRpZ2lhZ3JpXHYyXGFpZm9yZXNlZVxzY29yZQ==?=
+        - name: Content-Security-Policy
+          value: default-src *;  script-src * 'unsafe-inline' 'unsafe-eval'; style-src  * 'unsafe-inline' 'unsafe-eval';
+        - name: Strict-Transport-Security
+          value: max-age=31536000
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-XSS-Protection
+          value: 1;mode=block
+        - name: x-permitted-cross-domain-policies
+          value: none
+        - name: Access-Control-Allow-Origin
+          value: http://202.77.121.68:4343
+        - name: Access-Control-Allow-Headers
+          value: Content-Type
+        - name: Access-Control-Allow-Methods
+          value: POST,GET,OPTIONS
+        - name: SERVER
+          value: ""
+        - name: Date
+          value: Wed, 11 Oct 2023 07:32:33 GMT
+        - name: Content-Length
+          value: "300"
+      body:
+        type: json
+        data: |-
+          {
+              "statusCode": "1",
+              "statusDescription": "request success",
+              "result": {
+                  "transaction_id": "673bae97-dc0f-4c95-a47f-2d27b168e4c6",
+                  "name": "Dwiki Saputra",
+                  "id_card_no": "3171051211950001",
+                  "phone_no": "081776527371",
+                  "loan_no": "ORI-99",
+                  "probability_to_default": "0.03811",
+                  "grade": "A+",
+                  "date": "2023-10-11 14:32:10"
+              }
+          }

@@ -1,0 +1,65 @@
+meta {
+  name: Refresh Token
+  type: http
+  seq: 28
+}
+
+post {
+  url: {{BASE_URL}}/v1/auth/refresh
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: 
+}
+
+script:post-response {
+  const responseJSON = res.getBody()
+  if (responseJSON.status) {
+      const data = _.decrypt(responseJSON.data)
+      const result = JSON.parse(JSON.parse(data))
+      bru.setEnvVar("TOKEN", result.access_token)
+      bru.setEnvVar("REFRESH_TOKEN", result.refresh_token)
+      console.log("access_token : ", result.access_token)
+      console.log("refresh_token : ", result.refresh_token)
+  }
+}
+
+settings {
+  encodeUrl: true
+}
+
+example {
+  name: Success
+  
+  request: {
+    url: {{BASE_URL}}/v1/auth/refresh-token
+    method: POST
+    mode: none
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Thu, 23 Nov 2023 11:52:54 GMT
+      Content-Length: 1114
+    }
+  
+    status: {
+      code: 200
+      text: 200
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": "htcajgAYgHsGSIT8E0jL4SgzTb9iVRP8Gei0Cg11BZPSPcbjORJ+QJgPuqKKKoH/xEe5yJa5m5Mn+3xVszG6g3iQlnvtJGI9RQn6X2BhNn+bkwnxht87OV0pqTQ6Wri+gkfzXwHNgOKk36Ru23kfkJXkg06v6xeYZ9dcxa6/2W/tgNApMJ5BR2RUOzOfcfB8lSPqaSyILpdOx3/BYzCuMN46EOoYNDdOjvHj3YeMR9ZU2WCjRtzwPF6DoObq30BLwyulozZpA0sXisfhvntvl3d8ZGJeN2VqLyLqIFBJGvUsDyXG2qY9Pmglln9zSO2genFwRn7Z44cG2Dip9a0ye1azLhGhTEaYBvUwdMe+YCP75pf2zBIDJPOp6YfIxwqxr2G9xgwk9R+RmyZsZTVzrGBB0H5H4OHF5cbvXLyqwunpNNcugAYKDUaQCPS8PSBEgPFHOh/NPQXQUvixjmvPrx1ZZfMOZIujWZFUMR41KCYq0V6t9hkjk9/1hXvYrN/cnmU8RKpTqnKRtkE106GDGMLjD9Y8E4cdyOMLCwE2bY9KHoPWu2/xseQeeFdDm58Yn1PXS8zGClsOaSJZsVa7m46L0LLFTDl3dt1vUNtys8a9cpptW/XfubHOyDAJm7yV/iIz3AN8Ja52JUQY/VXF0EOGHIPb7h9zLOsipo0LdjUP0GCmN0WTUlGzWk2Zqb/QAD/+7glqNSxhpoxVD2Eby0COOYG+h69jV+BPMeCZsFrxVSebQuOmVz+s3iecjp7jAA7Rc4HYvjsQQSpGVfbyykG2DZyDZRnlkGduHFyDfK6RvO5tD9WP7+IG+f9a/UjpQYh5/8nh+mG2a756/ps5zEDwI4p1iftMBqLzOVHPGFFsR/J85DBCFiyPdau53zI8xCiBihgdDuepIFi04/RKE55uOcZ1vtwFEn3nrdqLwOT7bL8IBSn/qVta1Tr2WWEyhc2eV5upwpPmhEzvy0UXAh43IGzK7V9R0ssv/bz///LhndU4DeNkSLIoXZIXmGfIqiWZ7oaF4DN/mbhncKxceA==",
+            "message": "Permintaan berhasil diproses",
+            "status": true
+        }
+      '''
+    }
+  }
+}

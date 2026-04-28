@@ -1,0 +1,108 @@
+info:
+  name: "[Digiagri OTP] Token Request"
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/digiagri/otp/request"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: partnership
+      - name: tokenType
+        value: PASSWORD
+      - name: transactionDetail
+        value: FORGET PASSWORD
+      - name: emailAddress
+        value: ibrahim.senoaji@bankraya.co.id
+      - name: phone
+        value: "085155017225"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Success Response
+    request:
+      url: "{{baseUrl}}/api/digiagri/otp/request"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: partnership
+          - name: tokenType
+            value: PASSWORD
+          - name: transactionDetail
+            value: FORGET PASSWORD
+          - name: emailAddress
+            value: ibrahim.senoaji@bankraya.co.id
+          - name: phone
+            value: "085155017225"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Thu, 09 Oct 2025 03:19:55 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "87"
+        - name: Connection
+          value: keep-alive
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "statusCode": "1",
+              "statusDescription": "RAYA0551417154",
+              "expTime": "2025-10-09 10:29:55"
+          }
+  - name: Failed Response
+    request:
+      url: "{{baseUrl}}/api/digiagri/otp/request"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: partnership
+          - name: tokenType
+            value: PASSWOR
+          - name: transactionDetail
+            value: FORGET PASSWORD
+          - name: emailAddress
+            value: ibrahim.senoaji@bankraya.co.id
+          - name: phone
+            value: "085155017225"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Thu, 09 Oct 2025 03:20:12 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "72"
+        - name: Connection
+          value: keep-alive
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "statusCode": "-1",
+              "statusDescription": "Request OTP Gagal",
+              "expTime": ""
+          }

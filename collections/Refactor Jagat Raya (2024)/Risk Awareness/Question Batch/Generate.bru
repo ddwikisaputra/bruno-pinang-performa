@@ -1,0 +1,28 @@
+meta {
+  name: Generate
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{BASE_URL}}/v1/risk-awareness/batch/question/generate
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: 
+}
+
+script:post-response {
+  const responseJSON = res.getBody()
+  if (responseJSON.status) {
+      const data = _.decrypt(responseJSON.data)
+      const result = JSON.parse(JSON.parse(data))
+      console.log("/v1/risk-awareness/batch/generate", result)
+  }
+}
+
+settings {
+  encodeUrl: true
+}

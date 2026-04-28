@@ -1,0 +1,343 @@
+meta {
+  name: List AGF V1
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{url}}/v/1/monitoring/list-agf
+  body: formUrlEncoded
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+body:form-urlencoded {
+  id: 1
+  statusPaymentId: 43
+  userId: 999961
+}
+
+settings {
+  encodeUrl: true
+}
+
+example {
+  name: success
+  
+  request: {
+    url: {{url}}/v/1/monitoring/list-agf
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      id: 1
+      statusPaymentId: 43
+      userId: 999941
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Mon, 30 May 2022 18:53:18 GMT
+      Content-Length: 770
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": [
+                [
+                    {
+                        "id": 898,
+                        "paymentStatusId": 43,
+                        "loanAccountNumber": "001001008231100",
+                        "savingAccountNumber": "001201000422315",
+                        "datePayment": "2018-11-17",
+                        "pinalty": 0,
+                        "pinaltyDaysCount": 0,
+                        "ratePayment": 1251,
+                        "principalPayment": 0,
+                        "totalPayment": 1251
+                    },
+                    {
+                        "id": 898,
+                        "paymentStatusId": 43,
+                        "loanAccountNumber": "001001008231100",
+                        "savingAccountNumber": "001201000422315",
+                        "datePayment": "2018-11-13",
+                        "pinalty": 0,
+                        "pinaltyDaysCount": 0,
+                        "ratePayment": 12083,
+                        "principalPayment": 0,
+                        "totalPayment": 12083
+                    }
+                ],
+                [
+                    {
+                        "id": 898,
+                        "paymentStatusId": 43,
+                        "loanAccountNumber": "001001008231100",
+                        "savingAccountNumber": "001201000422315",
+                        "datePayment": "2018-10-27",
+                        "pinalty": 0,
+                        "pinaltyDaysCount": 0,
+                        "ratePayment": 500000,
+                        "principalPayment": 0,
+                        "totalPayment": 500000
+                    }
+                ]
+            ],
+            "desc": "Data Valid",
+            "message": "Data ditemukan",
+            "status": 200
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: error parameter validation
+  
+  request: {
+    url: {{url}}/v/1/monitoring/list-agf
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      statusPaymentId: 2
+      userId: 999941
+      ~id: 1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Wed, 25 May 2022 07:06:28 GMT
+      Content-Length: 106
+    }
+  
+    status: {
+      code: 400
+      text: Bad Request
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "desc": "Parameter ... Belum Terisi",
+            "message": "Maaf, Parameter ... Belum Dipilih",
+            "status": 500
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: error database connection
+  
+  request: {
+    url: {{url}}/v/1/monitoring/list-agf
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      id: 1
+      statusPaymentId: 2
+      userId: 999941
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Wed, 25 May 2022 07:06:28 GMT
+      Content-Length: 106
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+            "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+            "status": 400
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: unautorized
+  
+  request: {
+    url: {{url}}/v/1/monitoring/list-agf
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      id: 1
+      statusPaymentId: 2
+      userId: 999941
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Wed, 25 May 2022 07:06:28 GMT
+      Content-Length: 106
+    }
+  
+    status: {
+      code: 401
+      text: Unauthorized
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "code": 401,
+            "desc": "Expired",
+            "message": "Invalid Token || Token Is Expired"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: error data not found
+  
+  request: {
+    url: {{url}}/v/1/monitoring/list-agf
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      id: 1
+      statusPaymentId: -1
+      userId: 999941
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Wed, 25 May 2022 07:21:34 GMT
+      Content-Length: 104
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "desc": "Error record not found",
+            "message": "Status Pembayaran Tidak Ditemukan",
+            "status": 404
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: general error
+  
+  request: {
+    url: {{url}}/v/1/monitoring/list-agf
+    method: GET
+    mode: none
+    headers: {
+      Content-Type: application/x-www-form-urlencoded
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Thu, 29 Jul 2021 07:05:21 GMT
+      Content-Length: 287
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "status": 500,
+            "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+            "desc": "Could not connect .....",
+            "data": null
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: data AGF kosong
+  
+  request: {
+    url: {{url}}/v/1/monitoring/list-agf
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      id: 1
+      statusPaymentId: 7
+      userId: 999941
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Mon, 30 May 2022 19:09:24 GMT
+      Content-Length: 120
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "desc": "Data Valid",
+            "message": "Data ditemukan",
+            "status": 404
+        }
+      '''
+    }
+  }
+}

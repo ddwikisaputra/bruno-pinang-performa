@@ -1,0 +1,40 @@
+meta {
+  name: Confirm Force Logout
+  type: http
+  seq: 6
+}
+
+post {
+  url: {{BASE_URL}}/v1/auth/logout/force/confirm
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+      "payload": "{{REQUEST_BODY}}"
+  }
+  
+}
+
+script:pre-request {
+  const payload = {
+      "p":"H4M9klU+D57NygyXrRRhYa6V5RrVXTSBvFWVn74cS01yEuiphwF6wgOYUus+krY+tPWuzSX4T6ShLL5GVShCDZWA5BcH4VgLIexK/9jGOmZvOxfQ6/SJYlVQcbRGW642XtPjq6v/KOcR0Jd+A1UF95N7GaI7YD0mDJ0ZVftealE="
+  }
+  
+  const result = _.encrypt(JSON.stringify(payload))
+  bru.setEnvVar("REQUEST_BODY", result);
+}
+
+script:post-response {
+  const responseJSON = res.getBody()
+  if (responseJSON.status) {
+      const data = _.decrypt(responseJSON.data)
+      const result = JSON.parse(JSON.parse(data))
+      console.log(result)
+  }
+}
+
+settings {
+  encodeUrl: true
+}

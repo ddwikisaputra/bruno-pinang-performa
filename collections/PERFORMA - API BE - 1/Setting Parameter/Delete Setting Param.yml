@@ -1,0 +1,366 @@
+info:
+  name: Delete Setting Param
+  type: http
+  seq: 4
+
+http:
+  method: POST
+  url: "{{base_url_local}}/v/1/master/delete-setting-param"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "{{userId}}"
+      - name: id
+        value: "128"
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: unautorized
+    request:
+      url: "{{base_url_local}}/v/1/master/delete-setting-param"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "{{userId}}"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: id
+            value: "126"
+            description: Offset Data {Default 0}
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Sat, 22 May 2021 06:53:21 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Accept-Encoding
+        - name: Content-Encoding
+          value: gzip
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: general error
+    request:
+      url: "{{base_url_local}}/v/1/master/delete-setting-param"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "{{userId}}"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: id
+            value: "126"
+            description: Offset Data {Default 0}
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Sat, 22 May 2021 06:53:21 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Accept-Encoding
+        - name: Content-Encoding
+          value: gzip
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data" : null
+          }
+  - name: success
+    request:
+      url: "{{base_url_local}}/v/1/master/delete-setting-param"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "{{userId}}"
+          - name: id
+            value: "126"
+    response:
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: "{\r
+
+          \    \"desc\": \"Data Terhapus\",\r
+
+          \    \"message\": \"Data setting param berhasil dihapus\",\r
+
+          \    \"status\": 200\r
+
+          }"
+  - name: empty data
+    request:
+      url: "{{base_url_local}}/v/1/master/delete-setting-param"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "{{userId}}"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: id
+            value: "126"
+            description: Offset Data {Default 0}
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Sat, 22 May 2021 06:53:21 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Accept-Encoding
+        - name: Content-Encoding
+          value: gzip
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Data Setting Param tidak ditemukan",
+              "message": "Setting Param Tidak Ditemukan",
+              "status": 404
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url_local}}/v/1/master/delete-setting-param"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "{{userId}}"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: id
+            value: "126"
+            description: Offset Data {Default 0}
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: success
+    request:
+      url: "{{base_url_local}}/v/1/master/delete-setting-param"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "{{userId}}"
+          - name: id
+            value: "126"
+    response:
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: "{\r
+
+          \    \"desc\": \"Data Terhapus\",\r
+
+          \    \"message\": \"Data setting param berhasil dihapus\",\r
+
+          \    \"status\": 200\r
+
+          }"
+  - name: empty data
+    request:
+      url: "{{base_url_local}}/v/1/master/delete-setting-param"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "{{userId}}"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: id
+            value: "126"
+            description: Offset Data {Default 0}
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Sat, 22 May 2021 06:53:21 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Accept-Encoding
+        - name: Content-Encoding
+          value: gzip
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Data Setting Param tidak ditemukan",
+              "message": "Setting Param Tidak Ditemukan",
+              "status": 404
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url_local}}/v/1/master/delete-setting-param"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "{{userId}}"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: id
+            value: "126"
+            description: Offset Data {Default 0}
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Sat, 22 May 2021 06:53:21 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Accept-Encoding
+        - name: Content-Encoding
+          value: gzip
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: general error
+    request:
+      url: "{{base_url_local}}/v/1/master/delete-setting-param"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "{{userId}}"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: id
+            value: "126"
+            description: Offset Data {Default 0}
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Sat, 22 May 2021 06:53:21 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Accept-Encoding
+        - name: Content-Encoding
+          value: gzip
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data" : null
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url_local}}/v/1/master/delete-setting-param"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "{{userId}}"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: id
+            value: "126"
+            description: Offset Data {Default 0}
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }

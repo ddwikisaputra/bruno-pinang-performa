@@ -1,0 +1,589 @@
+info:
+  name: List Branch V1
+  type: http
+  seq: 5
+
+http:
+  method: POST
+  url: "{{url}}/v/1/master/branch-list"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "001317"
+        description: User ID Login { MANDATORY }
+      - name: textSearch
+        value: joko
+        description: Text Pencarian Data { OPTIONAL }
+        disabled: true
+      - name: startIndex
+        value: "0"
+        description: Offset Data {Default 0} { MANDATORY }
+      - name: recordCount
+        value: "5"
+        description: Limit Data {Default 1000} { MANDATORY }
+  auth:
+    type: bearer
+    token: UmF5YVBpUGVyVG9wtk843jG/7RB5In2KHO843o1PCIi6N/9g1KDYjEHKFfrcgR+EpdFaSjiVePpZZZ32G6HoL/hA3sulxsHQ7T9P45sD+L32owynMK3yVzs1FE9YNh/aaF5oSD4bPKm56kEeDsojG7l0TJE72vBsZw==
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: success
+    request:
+      url: "{{url_master}}/v/1/master/branch-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: textSearch
+            value: joko
+            description: Text Pencarian Data { OPTIONAL }
+            disabled: true
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0} { MANDATORY }
+          - name: recordCount
+            value: "10"
+            description: Limit Data {Default 1000} { MANDATORY }
+          - name: partnershipCode
+            value: PST2021
+            description: Kode Partnership (Login Session) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 03:03:58 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "data": [
+                  {
+                      "branchCode": "1314",
+                      "brancChorrespondenceCode": "ALK",
+                      "branchName": "AIR MOLEK",
+                      "branchLevel": "2",
+                      "branchHead": "1310"
+                  },
+                  {
+                      "branchCode": "2310",
+                      "brancChorrespondenceCode": "BLP",
+                      "branchName": "BALIKPAPAN",
+                      "branchLevel": "1",
+                      "branchHead": "2310"
+                  },
+                  {
+                      "branchCode": "1711",
+                      "brancChorrespondenceCode": "BDJ",
+                      "branchName": "BANDAR JAYA",
+                      "branchLevel": "2",
+                      "branchHead": "1710"
+                  },
+                  {
+                      "branchCode": "0110",
+                      "brancChorrespondenceCode": "BDG",
+                      "branchName": "BANDUNG",
+                      "branchLevel": "1",
+                      "branchHead": "0110"
+                  },
+                  {
+                      "branchCode": "0311",
+                      "brancChorrespondenceCode": "BYM",
+                      "branchName": "BANYUMANIK",
+                      "branchLevel": "2",
+                      "branchHead": "0310"
+                  },
+                  {
+                      "branchCode": "0025",
+                      "brancChorrespondenceCode": "BKS",
+                      "branchName": "BEKASI",
+                      "branchLevel": "2",
+                      "branchHead": "0020"
+                  },
+                  {
+                      "branchCode": "0510",
+                      "brancChorrespondenceCode": "BTR",
+                      "branchName": "BINTARO",
+                      "branchLevel": "1",
+                      "branchHead": "0510"
+                  },
+                  {
+                      "branchCode": "0120",
+                      "brancChorrespondenceCode": "BGR",
+                      "branchName": "BOGOR",
+                      "branchLevel": "1",
+                      "branchHead": "0120"
+                  },
+                  {
+                      "branchCode": "0130",
+                      "brancChorrespondenceCode": "CKR",
+                      "branchName": "CIKARANG",
+                      "branchLevel": "1",
+                      "branchHead": "0130"
+                  },
+                  {
+                      "branchCode": "1315",
+                      "brancChorrespondenceCode": "DAL",
+                      "branchName": "DALU DALU",
+                      "branchLevel": "2",
+                      "branchHead": "1310"
+                  },
+                  {
+                      "branchCode": "0027",
+                      "brancChorrespondenceCode": "DPK",
+                      "branchName": "DEPOK",
+                      "branchLevel": "2",
+                      "branchHead": "0020"
+                  },
+                  {
+                      "branchCode": "0412",
+                      "brancChorrespondenceCode": "GRK",
+                      "branchName": "GRESIK",
+                      "branchLevel": "2",
+                      "branchHead": "0410"
+                  },
+                  {
+                      "branchCode": "0023",
+                      "brancChorrespondenceCode": "DTN",
+                      "branchName": "JAKARTA DEPTAN",
+                      "branchLevel": "2",
+                      "branchHead": "0020"
+                  },
+                  {
+                      "branchCode": "0022",
+                      "brancChorrespondenceCode": "JMS",
+                      "branchName": "JAKARTA JAMSOSTEK",
+                      "branchLevel": "2",
+                      "branchHead": "0020"
+                  },
+                  {
+                      "branchCode": "0021",
+                      "brancChorrespondenceCode": "KBY",
+                      "branchName": "JAKARTA KEBAYORAN LAMA",
+                      "branchLevel": "2",
+                      "branchHead": "0020"
+                  },
+                  {
+                      "branchCode": "0026",
+                      "brancChorrespondenceCode": "KLG",
+                      "branchName": "JAKARTA KELAPA GADING",
+                      "branchLevel": "2",
+                      "branchHead": "0020"
+                  },
+                  {
+                      "branchCode": "0020",
+                      "brancChorrespondenceCode": "KNG",
+                      "branchName": "JAKARTA KUNINGAN",
+                      "branchLevel": "1",
+                      "branchHead": "0020"
+                  },
+                  {
+                      "branchCode": "1410",
+                      "brancChorrespondenceCode": "JMB",
+                      "branchName": "JAMBI",
+                      "branchLevel": "1",
+                      "branchHead": "1410"
+                  },
+                  {
+                      "branchCode": "0010",
+                      "brancChorrespondenceCode": "KCU",
+                      "branchName": "KANTOR CABANG UTAMA",
+                      "branchLevel": "1",
+                      "branchHead": "0010"
+                  },
+                  {
+                      "branchCode": "1316",
+                      "brancChorrespondenceCode": "TLS",
+                      "branchName": "KANTOR KAS TELUK SONO",
+                      "branchLevel": "2",
+                      "branchHead": "1310"
+                  },
+                  {
+                      "branchCode": "0012",
+                      "brancChorrespondenceCode": "KPO",
+                      "branchName": "KANTOR PUSAT OPERASIONAL",
+                      "branchLevel": "1",
+                      "branchHead": "0012"
+                  },
+                  {
+                      "branchCode": "1311",
+                      "brancChorrespondenceCode": "KSK",
+                      "branchName": "KASIKAN",
+                      "branchLevel": "2",
+                      "branchHead": "1310"
+                  },
+                  {
+                      "branchCode": "0028",
+                      "brancChorrespondenceCode": "CPT",
+                      "branchName": "KCP CIPUTAT",
+                      "branchLevel": "2",
+                      "branchHead": "0020"
+                  },
+                  {
+                      "branchCode": "0031",
+                      "brancChorrespondenceCode": "HPI",
+                      "branchName": "KCP HARAPAN INDAH",
+                      "branchLevel": "2",
+                      "branchHead": "0020"
+                  },
+                  {
+                      "branchCode": "0029",
+                      "brancChorrespondenceCode": "TBT",
+                      "branchName": "KCP TEBET",
+                      "branchLevel": "2",
+                      "branchHead": "0020"
+                  },
+                  {
+                      "branchCode": "0032",
+                      "brancChorrespondenceCode": "TBT",
+                      "branchName": "KCP TEBET",
+                      "branchLevel": "2",
+                      "branchHead": "0020"
+                  },
+                  {
+                      "branchCode": "1710",
+                      "brancChorrespondenceCode": "LPG",
+                      "branchName": "LAMPUNG",
+                      "branchLevel": "1",
+                      "branchHead": "1710"
+                  },
+                  {
+                      "branchCode": "1312",
+                      "brancChorrespondenceCode": "LBD",
+                      "branchName": "LUBUK DALAM",
+                      "branchLevel": "2",
+                      "branchHead": "1310"
+                  },
+                  {
+                      "branchCode": "3210",
+                      "brancChorrespondenceCode": "MKS",
+                      "branchName": "MAKASSAR",
+                      "branchLevel": "1",
+                      "branchHead": "3210"
+                  },
+                  {
+                      "branchCode": "1110",
+                      "brancChorrespondenceCode": "MDN",
+                      "branchName": "MEDAN",
+                      "branchLevel": "1",
+                      "branchHead": "1110"
+                  },
+                  {
+                      "branchCode": "1111",
+                      "brancChorrespondenceCode": "ARH",
+                      "branchName": "MEDAN AR HAKIM",
+                      "branchLevel": "2",
+                      "branchHead": "1110"
+                  },
+                  {
+                      "branchCode": "1510",
+                      "brancChorrespondenceCode": "PLB",
+                      "branchName": "PALEMBANG",
+                      "branchLevel": "1",
+                      "branchHead": "1510"
+                  },
+                  {
+                      "branchCode": "1310",
+                      "brancChorrespondenceCode": "PKU",
+                      "branchName": "PEKANBARU",
+                      "branchLevel": "1",
+                      "branchHead": "1310"
+                  },
+                  {
+                      "branchCode": "1121",
+                      "brancChorrespondenceCode": "PTS",
+                      "branchName": "PEMATANG SIANTAR",
+                      "branchLevel": "2",
+                      "branchHead": "1120"
+                  },
+                  {
+                      "branchCode": "2010",
+                      "brancChorrespondenceCode": "PNK",
+                      "branchName": "PONTIANAK",
+                      "branchLevel": "1",
+                      "branchHead": "2010"
+                  },
+                  {
+                      "branchCode": "1120",
+                      "brancChorrespondenceCode": "RTP",
+                      "branchName": "RANTAU PRAPAT",
+                      "branchLevel": "1",
+                      "branchHead": "1120"
+                  },
+                  {
+                      "branchCode": "0310",
+                      "brancChorrespondenceCode": "SMG",
+                      "branchName": "SEMARANG",
+                      "branchLevel": "1",
+                      "branchHead": "0310"
+                  },
+                  {
+                      "branchCode": "0411",
+                      "brancChorrespondenceCode": "SDJ",
+                      "branchName": "SIDOARJO",
+                      "branchLevel": "2",
+                      "branchHead": "0410"
+                  },
+                  {
+                      "branchCode": "0320",
+                      "brancChorrespondenceCode": "SLO",
+                      "branchName": "SOLO",
+                      "branchLevel": "1",
+                      "branchHead": "0320"
+                  },
+                  {
+                      "branchCode": "0410",
+                      "brancChorrespondenceCode": "SBY",
+                      "branchName": "SURABAYA",
+                      "branchLevel": "1",
+                      "branchHead": "0410"
+                  },
+                  {
+                      "branchCode": "0024",
+                      "brancChorrespondenceCode": "TNG",
+                      "branchName": "TANGERANG",
+                      "branchLevel": "2",
+                      "branchHead": "0020"
+                  },
+                  {
+                      "branchCode": "1112",
+                      "brancChorrespondenceCode": "TBG",
+                      "branchName": "TEBING TINGGI",
+                      "branchLevel": "2",
+                      "branchHead": "1110"
+                  },
+                  {
+                      "branchCode": "1313",
+                      "brancChorrespondenceCode": "UJB",
+                      "branchName": "UJUNG BATU",
+                      "branchLevel": "2",
+                      "branchHead": "1310"
+                  }
+              ],
+              "desc": "Succes Branch List Master",
+              "message": "Branch List Master berhasil",
+              "status": 200
+          }
+  - name: error parameter validation
+    request:
+      url: "{{url_master}}/v/1/master/branch-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: textSearch
+            value: joko
+            description: Text Pencarian Data { OPTIONAL }
+            disabled: true
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0} { MANDATORY }
+          - name: recordCount
+            value: "10"
+            description: Limit Data {Default 1000} { MANDATORY }
+          - name: partnershipCode
+            value: PST2021
+            description: Kode Partnership (Login Session) { MANDATORY }
+            disabled: true
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Parameter ... kosong",
+              "message": "Maaf, Parameter ... tidak boleh kosong",
+              "status": 500
+          }
+  - name: general error
+    request:
+      url: "{{url_master}}/v/1/master/branch-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: textSearch
+            value: joko
+            description: Text Pencarian Data { OPTIONAL }
+            disabled: true
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0} { MANDATORY }
+          - name: recordCount
+            value: "10"
+            description: Limit Data {Default 1000} { MANDATORY }
+          - name: partnershipCode
+            value: PST2021
+            description: Kode Partnership (Login Session) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Could not connect .....",
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "status": 500
+          }
+  - name: error database connection
+    request:
+      url: "{{url_master}}/v/1/master/branch-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: textSearch
+            value: joko
+            description: Text Pencarian Data { OPTIONAL }
+            disabled: true
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0} { MANDATORY }
+          - name: recordCount
+            value: "10"
+            description: Limit Data {Default 10} { MANDATORY }
+          - name: partnershipCode
+            value: PST2021
+            description: Kode Partnership (Login Session) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: unautorized
+    request:
+      url: "{{url_master}}/v/1/master/branch-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: textSearch
+            value: joko
+            description: Text Pencarian Data { OPTIONAL }
+            disabled: true
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0} { MANDATORY }
+          - name: recordCount
+            value: "10"
+            description: Limit Data {Default 1000} { MANDATORY }
+          - name: partnershipCode
+            value: PST2021
+            description: Kode Partnership (Login Session) { MANDATORY }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:44:34 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: empty data
+    request:
+      url: "{{url_master}}/v/1/master/branch-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: textSearch
+            value: joko
+            description: Text Pencarian Data { OPTIONAL }
+            disabled: true
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0} { MANDATORY }
+          - name: recordCount
+            value: "10"
+            description: Limit Data {Default 1000} { MANDATORY }
+          - name: partnershipCode
+            value: PST2021
+            description: Kode Partnership (Login Session) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 24 Nov 2021 18:18:31 GMT
+        - name: Content-Length
+          value: "657"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Succes Branch List Master",
+              "message": "Branch List Master berhasil",
+              "status": 200
+          }

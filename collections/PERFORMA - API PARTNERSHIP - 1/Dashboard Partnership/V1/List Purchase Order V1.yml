@@ -1,0 +1,731 @@
+info:
+  name: List Purchase Order V1
+  type: http
+  seq: 10
+
+http:
+  method: POST
+  url: "{{url}}/v/1/partnerships/po-list"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "1"
+        description: User ID Login { MANDATORY }
+      - name: textSearch
+        value: Dwiki
+        description: Text Pencarian Data { OPTIONAL }
+        disabled: true
+      - name: startIndex
+        value: "0"
+        description: Offset Data {Default 0} { MANDATORY }
+      - name: recordCount
+        value: "10"
+        description: Limit Data {Default 10} { MANDATORY }
+      - name: partnershipCode
+        value: OMS1
+        description: Kode Partnership (Login Session) { MANDATORY } [PUSAT = PST2021]
+      - name: transactionalType
+        value: "1"
+        description: Tipe Transaksional ( 1 => Pre | 2 => Post ) { Default NULL } { OPTIONAL }
+  auth:
+    type: bearer
+    token: "{{tokenPartnership}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: success
+    request:
+      url: "{{url}}/v/1/partnerships/po-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: textSearch
+            value: joko
+            description: Text Pencarian Data { OPTIONAL }
+            disabled: true
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0} { MANDATORY }
+          - name: recordCount
+            value: "10"
+            description: Limit Data {Default 10} { MANDATORY }
+          - name: partnershipCode
+            value: PST2021
+            description: Kode Partnership (Login Session) { MANDATORY }
+          - name: transactionalType
+            value: "1"
+            description: Tipe Transaksional ( 1 => Pre | 2 => Post ) { Default NULL } { OPTIONAL }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 03:03:58 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "data": [
+                  {
+                      "id": 3,
+                      "poNumber": "P0003",
+                      "transactionalType": 1,
+                      "partnershipCode": "OMS1",
+                      "name": "Jafar",
+                      "branchCode": "0011",
+                      "loanAmount": 7000000,
+                      "status": 0,
+                      "statusText": "Menunggu Persetujuan PO",
+                      "createdAt": "24-11-2021 17:57:11",
+                      "updatedAt": "24-11-2021 17:57:13"
+                  },
+                  {
+                      "id": 2,
+                      "poNumber": "P0002",
+                      "transactionalType": 1,
+                      "partnershipCode": "AGF1",
+                      "name": "Mahmudin",
+                      "branchCode": "0010",
+                      "loanAmount": 6000000,
+                      "status": 0,
+                      "statusText": "Menunggu Persetujuan PO",
+                      "createdAt": "24-11-2021 17:54:03",
+                      "updatedAt": "24-11-2021 17:54:26"
+                  }
+              ],
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: general error
+    request:
+      url: "{{url}}/v/1/partnerships/po-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: textSearch
+            value: joko
+            description: Text Pencarian Data { OPTIONAL }
+            disabled: true
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0} { MANDATORY }
+          - name: recordCount
+            value: "10"
+            description: Limit Data {Default 10} { MANDATORY }
+          - name: partnershipCode
+            value: PST2021
+            description: Kode Partnership (Login Session) { MANDATORY }
+          - name: transactionalType
+            value: "1"
+            description: Tipe Transaksional ( 1 => Pre | 2 => Post ) { Default NULL } { OPTIONAL }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Could not connect .....",
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "status": 500
+          }
+  - name: error database connection
+    request:
+      url: "{{url}}/v/1/partnerships/po-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: textSearch
+            value: joko
+            description: Text Pencarian Data { OPTIONAL }
+            disabled: true
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0} { MANDATORY }
+          - name: recordCount
+            value: "10"
+            description: Limit Data {Default 10} { MANDATORY }
+          - name: partnershipCode
+            value: PST2021
+            description: Kode Partnership (Login Session) { MANDATORY }
+          - name: transactionalType
+            value: "1"
+            description: Tipe Transaksional ( 1 => Pre | 2 => Post ) { Default NULL } { OPTIONAL }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: error parameter validation
+    request:
+      url: "{{url}}/v/1/partnerships/po-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: textSearch
+            value: joko
+            description: Text Pencarian Data { OPTIONAL }
+            disabled: true
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0} { MANDATORY }
+          - name: recordCount
+            value: "10"
+            description: Limit Data {Default 10} { MANDATORY }
+          - name: partnershipCode
+            value: PST2021
+            description: Kode Partnership (Login Session) { MANDATORY }
+            disabled: true
+          - name: transactionalType
+            value: "1"
+            description: Tipe Transaksional ( 1 => Pre | 2 => Post ) { Default NULL } { OPTIONAL }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Parameter ... kosong",
+              "message": "Maaf, Parameter ... tidak boleh kosong",
+              "status": 500
+          }
+  - name: empty data
+    request:
+      url: "{{url}}/v/1/partnerships/po-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: textSearch
+            value: joko
+            description: Text Pencarian Data { OPTIONAL }
+            disabled: true
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0} { MANDATORY }
+          - name: recordCount
+            value: "10"
+            description: Limit Data {Default 10} { MANDATORY }
+          - name: partnershipCode
+            value: AA
+            description: Kode Partnership (Login Session) { MANDATORY }
+          - name: transactionalType
+            value: "1"
+            description: Tipe Transaksional ( 1 => Pre | 2 => Post ) { Default NULL } { OPTIONAL }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 24 Nov 2021 18:18:31 GMT
+        - name: Content-Length
+          value: "657"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Data Purchase Order tidak ditemukan",
+              "message": "Purchase Order Tidak Ditemukan",
+              "status": 404
+          }
+  - name: unautorized
+    request:
+      url: "{{url}}/v/1/partnerships/po-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: textSearch
+            value: joko
+            description: Text Pencarian Data { OPTIONAL }
+            disabled: true
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0} { MANDATORY }
+          - name: recordCount
+            value: "10"
+            description: Limit Data {Default 10} { MANDATORY }
+          - name: partnershipCode
+            value: PST2021
+            description: Kode Partnership (Login Session) { MANDATORY }
+          - name: transactionalType
+            value: "1"
+            description: Tipe Transaksional ( 1 => Pre | 2 => Post ) { Default NULL } { OPTIONAL }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:44:34 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{url}}/v/1/partnerships/po-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "15"
+            description: User ID Login { MANDATORY }
+          - name: textSearch
+            value: Dwiki
+            description: Text Pencarian Data { OPTIONAL }
+            disabled: true
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0} { MANDATORY }
+          - name: recordCount
+            value: "10"
+            description: Limit Data {Default 10} { MANDATORY }
+          - name: partnershipCode
+            value: IMK1
+            description: Kode Partnership (Login Session) { MANDATORY } [PUSAT = PST2021]
+          - name: transactionalType
+            value: "1"
+            description: Tipe Transaksional ( 1 => Pre | 2 => Post ) { Default NULL } { OPTIONAL }
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Server
+          value: nginx/1.18.0 (Ubuntu)
+        - name: Date
+          value: Mon, 25 Jul 2022 03:18:52 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "67"
+        - name: Connection
+          value: keep-alive
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: success
+    request:
+      url: "{{url}}/v/1/partnerships/po-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: textSearch
+            value: joko
+            description: Text Pencarian Data { OPTIONAL }
+            disabled: true
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0} { MANDATORY }
+          - name: recordCount
+            value: "10"
+            description: Limit Data {Default 10} { MANDATORY }
+          - name: partnershipCode
+            value: PST2021
+            description: Kode Partnership (Login Session) { MANDATORY }
+          - name: transactionalType
+            value: "1"
+            description: Tipe Transaksional ( 1 => Pre | 2 => Post ) { Default NULL } { OPTIONAL }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 03:03:58 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "data": [
+                  {
+                      "id": 3,
+                      "poNumber": "P0003",
+                      "transactionalType": 1,
+                      "partnershipCode": "OMS1",
+                      "name": "Jafar",
+                      "branchCode": "0011",
+                      "loanAmount": 7000000,
+                      "status": 0,
+                      "statusText": "Menunggu Persetujuan PO",
+                      "createdAt": "24-11-2021 17:57:11",
+                      "updatedAt": "24-11-2021 17:57:13"
+                  },
+                  {
+                      "id": 2,
+                      "poNumber": "P0002",
+                      "transactionalType": 1,
+                      "partnershipCode": "AGF1",
+                      "name": "Mahmudin",
+                      "branchCode": "0010",
+                      "loanAmount": 6000000,
+                      "status": 0,
+                      "statusText": "Menunggu Persetujuan PO",
+                      "createdAt": "24-11-2021 17:54:03",
+                      "updatedAt": "24-11-2021 17:54:26"
+                  }
+              ],
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: general error
+    request:
+      url: "{{url}}/v/1/partnerships/po-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: textSearch
+            value: joko
+            description: Text Pencarian Data { OPTIONAL }
+            disabled: true
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0} { MANDATORY }
+          - name: recordCount
+            value: "10"
+            description: Limit Data {Default 10} { MANDATORY }
+          - name: partnershipCode
+            value: PST2021
+            description: Kode Partnership (Login Session) { MANDATORY }
+          - name: transactionalType
+            value: "1"
+            description: Tipe Transaksional ( 1 => Pre | 2 => Post ) { Default NULL } { OPTIONAL }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Could not connect .....",
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "status": 500
+          }
+  - name: error database connection
+    request:
+      url: "{{url}}/v/1/partnerships/po-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: textSearch
+            value: joko
+            description: Text Pencarian Data { OPTIONAL }
+            disabled: true
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0} { MANDATORY }
+          - name: recordCount
+            value: "10"
+            description: Limit Data {Default 10} { MANDATORY }
+          - name: partnershipCode
+            value: PST2021
+            description: Kode Partnership (Login Session) { MANDATORY }
+          - name: transactionalType
+            value: "1"
+            description: Tipe Transaksional ( 1 => Pre | 2 => Post ) { Default NULL } { OPTIONAL }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: error parameter validation
+    request:
+      url: "{{url}}/v/1/partnerships/po-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: textSearch
+            value: joko
+            description: Text Pencarian Data { OPTIONAL }
+            disabled: true
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0} { MANDATORY }
+          - name: recordCount
+            value: "10"
+            description: Limit Data {Default 10} { MANDATORY }
+          - name: partnershipCode
+            value: PST2021
+            description: Kode Partnership (Login Session) { MANDATORY }
+            disabled: true
+          - name: transactionalType
+            value: "1"
+            description: Tipe Transaksional ( 1 => Pre | 2 => Post ) { Default NULL } { OPTIONAL }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Parameter ... kosong",
+              "message": "Maaf, Parameter ... tidak boleh kosong",
+              "status": 500
+          }
+  - name: empty data
+    request:
+      url: "{{url}}/v/1/partnerships/po-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: textSearch
+            value: joko
+            description: Text Pencarian Data { OPTIONAL }
+            disabled: true
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0} { MANDATORY }
+          - name: recordCount
+            value: "10"
+            description: Limit Data {Default 10} { MANDATORY }
+          - name: partnershipCode
+            value: AA
+            description: Kode Partnership (Login Session) { MANDATORY }
+          - name: transactionalType
+            value: "1"
+            description: Tipe Transaksional ( 1 => Pre | 2 => Post ) { Default NULL } { OPTIONAL }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 24 Nov 2021 18:18:31 GMT
+        - name: Content-Length
+          value: "657"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Data Purchase Order tidak ditemukan",
+              "message": "Purchase Order Tidak Ditemukan",
+              "status": 404
+          }
+  - name: unautorized
+    request:
+      url: "{{url}}/v/1/partnerships/po-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: textSearch
+            value: joko
+            description: Text Pencarian Data { OPTIONAL }
+            disabled: true
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0} { MANDATORY }
+          - name: recordCount
+            value: "10"
+            description: Limit Data {Default 10} { MANDATORY }
+          - name: partnershipCode
+            value: PST2021
+            description: Kode Partnership (Login Session) { MANDATORY }
+          - name: transactionalType
+            value: "1"
+            description: Tipe Transaksional ( 1 => Pre | 2 => Post ) { Default NULL } { OPTIONAL }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:44:34 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{url}}/v/1/partnerships/po-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "15"
+            description: User ID Login { MANDATORY }
+          - name: textSearch
+            value: Dwiki
+            description: Text Pencarian Data { OPTIONAL }
+            disabled: true
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0} { MANDATORY }
+          - name: recordCount
+            value: "10"
+            description: Limit Data {Default 10} { MANDATORY }
+          - name: partnershipCode
+            value: IMK1
+            description: Kode Partnership (Login Session) { MANDATORY } [PUSAT = PST2021]
+          - name: transactionalType
+            value: "1"
+            description: Tipe Transaksional ( 1 => Pre | 2 => Post ) { Default NULL } { OPTIONAL }
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Server
+          value: nginx/1.18.0 (Ubuntu)
+        - name: Date
+          value: Mon, 25 Jul 2022 03:18:52 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "67"
+        - name: Connection
+          value: keep-alive
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }

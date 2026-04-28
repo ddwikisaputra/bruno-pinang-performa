@@ -1,0 +1,52 @@
+meta {
+  name: Shareable - Get Employee List
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{BASE_URL}}/v1/employee/share/list
+  body: json
+  auth: none
+}
+
+headers {
+  Jagat-Raya-API-Key: {{API_KEY}}
+}
+
+body:json {
+  {
+      "payload": "{{REQUEST_BODY}}"
+  }
+}
+
+script:pre-request {
+  const payload = {
+      "limit": 10,
+      "page": 1,
+      "q": null,
+      "capability_id": null,
+      "list_jabatan_id": null,
+      "list_branch_id": ["0010"],
+      "list_organization_id": null,
+      "list_status": null
+  }
+  
+  const result = _.encrypt(JSON.stringify(payload))
+  bru.setEnvVar("REQUEST_BODY", result);
+}
+
+script:post-response {
+  const responseJSON = res.getBody()
+  if (responseJSON.status) {
+      const data = _.decrypt(responseJSON.data)
+      const parseData = JSON.parse(data)
+      console.log(parseData)
+      const parseData2 = JSON.parse(parseData)
+      console.log('/v1/employee/list', parseData2)
+  }
+}
+
+settings {
+  encodeUrl: true
+}

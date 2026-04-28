@@ -1,0 +1,107 @@
+info:
+  name: Reset Data
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: "{{base_url_apps_dev}}/api/gateway/legacy/v4/opening-account/reset"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Cookie
+      value: service=spr-be
+  body:
+    type: json
+    data: |-
+      {
+          "phoneNumber": "+6281776527371",
+          "nik": "3171051211950001",
+          "version": 1   // 1 2
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Error
+    request:
+      url: "{{base_url_apps_dev}}/api/gateway/v4/opening-account/reset"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Cookie
+          value: service=spr-be
+      body:
+        type: json
+        data: |-
+          {
+              "phoneNumber": "+6281776527371",
+              "nik": "3171051211950001",
+              "version": 2   
+          }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Date
+          value: Tue, 12 Aug 2025 06:21:40 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "245"
+        - name: Cache-Control
+          value: no-store, no-cache, must-revalidate
+        - name: Content-Security-Policy
+          value: "default-src: 'self'"
+        - name: Pragma
+          value: no-cache
+        - name: Set-Cookie
+          value: service=spr-be; HttpOnly; Secure
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: DENY
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+        - name: Access-Control-Allow-Origin
+          value: "*"
+        - name: Access-Control-Allow-Credentials
+          value: "true"
+        - name: Access-Control-Allow-Methods
+          value: GET, PUT, POST, DELETE, PATCH, OPTIONS
+        - name: Access-Control-Allow-Headers
+          value: DNT,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization,x-pin-token,X-Signature,X-App-Version,isNewHandleRestrictedAreaVPN,RCS-Token
+        - name: Access-Control-Max-Age
+          value: "1728000"
+        - name: Via
+          value: 1.1 google
+        - name: Alt-Svc
+          value: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      body:
+        type: json
+        data: |-
+          {
+              "code": "99",
+              "message": "INTERNAL_SERVER_ERROR",
+              "data": null,
+              "errors": {
+                  "detail": "Post \"http://172.16.31.95:4343/api/v2/digital/inquiryNIKCif\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"
+              },
+              "serverTime": 1754979700
+          }
+
+docs: |-
+  Generated from cURL: curl --location 'https://apps.dev.rayain.net/api/gateway/v4/opening-account/reset' \
+  --header 'Content-Type: application/json' \
+  --header 'Cookie: service=spr-be' \
+  --data '{
+      "phoneNumber": "+6281776527371",
+      "nik": "3171051211950001",
+      "version": 2   
+  }'

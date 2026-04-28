@@ -1,0 +1,305 @@
+info:
+  name: Logout Partnership V1
+  type: http
+  seq: 12
+
+http:
+  method: POST
+  url: "{{url}}/v/1/partnerships/logout"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "1"
+        description: User ID Login { MANDATORY }
+      - name: partnershipCode
+        value: OMS1
+        description: Kode Partnership { MANDATORY }
+      - name: ticketNumber
+        value: T01TMS0yMDI0MTIwOTE1NTE1NA==
+        description: Login Tiket { MANDATORY }
+  auth:
+    type: bearer
+    token: "{{tokenPartnership}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Success
+    request:
+      url: "{{base-url-local}}/v/1/partnerships/logout"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership { MANDATORY }
+          - name: ticketNumber
+            value: T01TMS0yMDI0MTIwOTE1NTE1NA==
+            description: Login Tiket { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 24 Dec 2024 02:03:10 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 200,
+              "message": "Logout berhasil",
+              "desc": "Logout berhasil"
+          }
+  - name: Error - Parameter Validation Required
+    request:
+      url: "{{base-url-local}}/v/1/partnerships/logout"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership { MANDATORY }
+          - name: ticketNumber
+            value: T01TMS0yMDI0MTIwOTE1NTE1NA==
+            description: Login Tiket { MANDATORY }
+            disabled: true
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 24 Dec 2024 02:05:47 GMT
+        - name: Content-Length
+          value: "133"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Validation failed on field ... with tag 'required'",
+              "message": "Maaf, ... Tidak Boleh Kosong",
+              "status": 400
+          }
+  - name: Error - Token Expired or Invalid
+    request:
+      url: "{{base-url-local}}/v/1/partnerships/logout"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership { MANDATORY }
+          - name: ticketNumber
+            value: T01TMS0yMDI0MTIwOTE1NTE1NA==
+            description: Login Tiket { MANDATORY }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 24 Dec 2024 02:11:40 GMT
+        - name: Content-Length
+          value: "75"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: Error - Database Connection
+    request:
+      url: "{{base-url-local}}/v/1/partnerships/logout"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership { MANDATORY }
+          - name: ticketNumber
+            value: T01TMS0yMDI0MTIwOTE1NTE1NA==
+            description: Login Tiket { MANDATORY }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 24 Dec 2024 02:29:31 GMT
+        - name: Content-Length
+          value: "71"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 400,
+              "desc": "Database Error",
+              "message": "Error koneksi database"
+          }
+  - name: Error - Database Connection
+    request:
+      url: "{{base-url-local}}/v/1/partnerships/logout"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership { MANDATORY }
+          - name: ticketNumber
+            value: T01TMS0yMDI0MTIwOTE1NTE1NA==
+            description: Login Tiket { MANDATORY }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 24 Dec 2024 02:29:31 GMT
+        - name: Content-Length
+          value: "71"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 400,
+              "desc": "Database Error",
+              "message": "Error koneksi database"
+          }
+  - name: Error - Token Expired or Invalid
+    request:
+      url: "{{base-url-local}}/v/1/partnerships/logout"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership { MANDATORY }
+          - name: ticketNumber
+            value: T01TMS0yMDI0MTIwOTE1NTE1NA==
+            description: Login Tiket { MANDATORY }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 24 Dec 2024 02:11:40 GMT
+        - name: Content-Length
+          value: "75"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: Success
+    request:
+      url: "{{base-url-local}}/v/1/partnerships/logout"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership { MANDATORY }
+          - name: ticketNumber
+            value: T01TMS0yMDI0MTIwOTE1NTE1NA==
+            description: Login Tiket { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 24 Dec 2024 02:03:10 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 200,
+              "message": "Logout berhasil",
+              "desc": "Logout berhasil"
+          }
+  - name: Error - Parameter Validation Required
+    request:
+      url: "{{base-url-local}}/v/1/partnerships/logout"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership { MANDATORY }
+          - name: ticketNumber
+            value: T01TMS0yMDI0MTIwOTE1NTE1NA==
+            description: Login Tiket { MANDATORY }
+            disabled: true
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 24 Dec 2024 02:05:47 GMT
+        - name: Content-Length
+          value: "133"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Validation failed on field ... with tag 'required'",
+              "message": "Maaf, ... Tidak Boleh Kosong",
+              "status": 400
+          }

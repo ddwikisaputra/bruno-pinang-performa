@@ -1,0 +1,47 @@
+info:
+  name: "[Prescreening] v2 Request"
+  type: http
+  seq: 6
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/digiagri/v2/prescreening/request"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "999911"
+      - name: nik
+        value: "3216054405840006"
+      - name: name
+        value: MIYAH
+      - name: birthDate
+        value: 1984-05-04
+      - name: jenisKelamin
+        value: F
+      - name: prakarsaId
+        value: "1007"
+      - name: callbackUrl
+        value: http://bridgtl-pm-be-api-chart:9009/v/1/screening/slik-callback/1007
+      - name: birthPlace
+        value: Bekasi
+      - name: npwp
+        value: "123123123123123"
+      - name: motherMaidenName
+        value: Menih
+      - name: address
+        value: Q227+9C4, Margahayu, Bekasi Timur, Bekasi, West Java, Indonesia
+      - name: city
+        value: Kab. Bekasi
+      - name: postalCode
+        value: "17520"
+      - name: type
+        value: Debitur
+      - name: lobType
+        value: ""
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

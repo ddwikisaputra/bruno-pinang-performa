@@ -1,0 +1,154 @@
+meta {
+  name: Get Role By Capability Identities
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{BASE_URL}}/v1/role/detail/capability
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: 
+}
+
+body:json {
+  {
+      "payload": "{{REQUEST_BODY}}"
+  }
+}
+
+script:pre-request {
+  const payload = {
+      "capability_identities":[
+          'JGT-000001',
+          'JGT-000002',
+          'RYM-000004',
+          'RYM-000005',
+          'RYM-000003',
+          'RYM-000002',
+          'RYM-000001',
+          'RYM-000006',
+          'RYM-000010',
+          'RYM-000012',
+          'RYM-000013',
+          'RYM-000014',
+          'RYM-000015',
+          'RYM-000016',
+          'RYM-000018',
+          'RYM-000019',
+          'RYM-000020',
+          'RYM-000021',
+          'RYM-000022',
+          'RYM-000023',
+          'RYM-000024',
+          'RYM-000025',
+          'RYM-000027',
+          'RYM-000031',
+          'RYM-000032',
+          'RYM-000033',
+          'RYM-000009',
+          'RYM-000042',
+          'RYM-000043',
+          'RYM-000044']
+      // , // ['RYM-00001','RYM-00002','RYM-00003']
+      // "application_id":"" // 'ARY','JGT','RYM' (optional)
+      ,
+      "is_visible": true// boolean (optional)
+  }
+  
+  const result = _.encrypt(JSON.stringify(payload))
+  bru.setEnvVar("REQUEST_BODY", result);
+}
+
+script:post-response {
+  const responseJSON = res.getBody()
+  if (responseJSON.status) {
+      const data = _.decrypt(responseJSON.data)
+      const response = _.parsingJson(data)
+  }
+}
+
+settings {
+  encodeUrl: true
+}
+
+example {
+  name: Error Not Found
+  
+  request: {
+    url: {{BASE_URL}}/v1/role/detail/capability
+    method: POST
+    mode: json
+    body:json: {
+      {
+          "payload": "{{REQUEST_BODY}}"
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Tue, 22 Oct 2024 06:24:00 GMT
+      Content-Length: 61
+    }
+  
+    status: {
+      code: 200
+      text: 500
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "message": "Data tidak ditemukan",
+            "status": false
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Success
+  
+  request: {
+    url: {{BASE_URL}}/v1/role/detail/capability
+    method: POST
+    mode: json
+    body:json: {
+      {
+          "payload": "{{REQUEST_BODY}}"
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Mon, 28 Oct 2024 09:12:24 GMT
+      Content-Length: 450
+    }
+  
+    status: {
+      code: 200
+      text: 200
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": "OxDi5KG+/nwy8EjjUeDY/In2U6TxZiEXjC46toYbvRla0vrihg0S0GaABCal5hw5r20mGXMqAs7pf9X3Eyeiu0NWMeBUjLUfg2sPn0FvWyvuu0t3KtyP2Wmmi17vgoMyRboz8EVaP7gtterpinj6LKVF3ub+jQHe+e22YG/UlKjC3L0zWxKFz06DoEEBJZohMff75wigBUAY+KjCLl2Kxl6lKKzf0+Xskltm/MANNe5m0IRRLNlp1wKE87/ZFtIRKwCj4oxa0XpK/KXmcb+rnCYhrwWKQ2P5bBSq3jCQIIV0f5G6patsAt65Gb6xjWu5siAwhDQ1zGS7fNwVQPDo+pM6zSyD68RB0jPkFf6p9AnZ5qs+ZnUiM/jpk5jto1qy",
+            "message": "Permintaan berhasil diproses",
+            "status": true
+        }
+      '''
+    }
+  }
+}

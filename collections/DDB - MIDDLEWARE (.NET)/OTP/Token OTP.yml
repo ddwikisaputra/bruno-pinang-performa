@@ -1,0 +1,130 @@
+info:
+  name: Token OTP
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{base_url_otp_dev}}/token"
+  body:
+    type: form-urlencoded
+    data:
+      - name: username
+        value: "{{username_otp_dev}}"
+      - name: password
+        value: "{{password_otp_dev}}"
+      - name: grant_type
+        value: "{{grantttype_otp_dev}}"
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        var jsonData = res.getBody();
+        bru.setGlobalEnvVar("tokenOTP", jsonData.access_token);
+        bru.setEnvVar("tokenOTP", jsonData.access_token)
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: success - new url
+    request:
+      url: "{{base_url_dev_new}}/token"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: username
+            value: "{{username_top_dev_new}}"
+          - name: password
+            value: "{{password_otp_dev_new}}"
+          - name: grant_type
+            value: "{{grantttype_otp_dev}}"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Tue, 30 Sep 2025 04:34:50 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "289"
+        - name: Connection
+          value: keep-alive
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "ResponseCode": "00",
+              "ResponseMessage": "Permintaan berhasil diproses",
+              "Data": {
+                  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTkyOTMyODYsInVzZXJuYW1lIjoiY0dsdVlXNW5MWEJsY21admNtMWgifQ.K8Qn2ykUxcJ3w7yIPZaQ848Jl6VXSteeapww7bPBztU",
+                  "token_type": "Bearer",
+                  "expires_in": 86399
+              }
+          }
+  - name: success - old url
+    request:
+      url: "{{base_url_dev}}/token"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: username
+            value: "{{username_otp_dev}}"
+          - name: password
+            value: "{{password_otp_dev}}"
+          - name: grant_type
+            value: "{{grantttype_otp_dev}}"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: no-cache
+        - name: Pragma
+          value: no-cache
+        - name: Content-Type
+          value: application/json
+        - name: Expires
+          value: "-1"
+        - name: Content-Security-Policy
+          value: default-src *;  script-src * 'unsafe-inline' 'unsafe-eval'; style-src  * 'unsafe-inline' 'unsafe-eval';
+        - name: Strict-Transport-Security
+          value: max-age=31536000
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-XSS-Protection
+          value: 1;mode=block
+        - name: x-permitted-cross-domain-policies
+          value: none
+        - name: Access-Control-Allow-Origin
+          value: http://202.77.121.68:4343
+        - name: Access-Control-Allow-Headers
+          value: Content-Type
+        - name: Access-Control-Allow-Methods
+          value: POST,GET,OPTIONS
+        - name: SERVER
+          value: ""
+        - name: Date
+          value: Tue, 30 Sep 2025 08:02:47 GMT
+        - name: Content-Length
+          value: "380"
+      body:
+        type: json
+        data: |-
+          {
+              "access_token": "ahBDeYCqPb9RHwOCE-GN4Gh8nrNBa6P9ye09nUemloibunN47MSm0YkMbUpYhW2X2rHbikm5dCIrOg-YR9IXocMUAg1KzjK2cH2g3xsHifk1zAoaCp1OKy4qj0ngZJ_kZInVOc9OkXiJW8iYfjm8cygGU6qe654cgv7A_Nc7OV-g43Vbzq72Wni4DFUnhnz6InwPDEEY5UY95mdNRB_HEBDitLXkera2AqoZ4zzJH6c4kSbsQgN8SC2KS3yKXKNyCA8tYuENr6qEYAlBz-Sevela44UO2YXvzkfOC3t4jG-VfI5_ppia1ePiq3LVKM30",
+              "token_type": "bearer",
+              "expires_in": 86399
+          }

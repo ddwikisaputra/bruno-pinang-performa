@@ -1,0 +1,156 @@
+meta {
+  name: (List) Get Role Akses Parameters
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{BASE_URL}}/v1/role/parameter/list
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: 
+}
+
+body:json {
+  {
+      "payload": "{{REQUEST_BODY}}"
+  }
+}
+
+script:pre-request {
+  const payload = {
+      "role_id": "f3a73df5-53fc-4454-80e5-c360a536fa3d",
+      "role_parameter_group_id":["8452aaaa-5dba-4851-8a50-7b0bce1d8c8a"],
+      "limit": 10,
+      "page": 1,
+  }
+  
+  const result = _.encrypt(JSON.stringify(payload))
+  bru.setEnvVar("REQUEST_BODY", result);
+}
+
+script:post-response {
+  const responseJSON = res.getBody()
+  if (responseJSON.status) {
+      const data = _.decrypt(responseJSON.data)
+      const parseData = JSON.parse(data)
+      const parseData2 = JSON.parse(parseData)
+      console.log(parseData2)
+  }
+}
+
+settings {
+  encodeUrl: true
+}
+
+example {
+  name: Success
+  
+  request: {
+    url: {{BASE_URL}}/v1/access-management/role-param
+    method: POST
+    mode: json
+    body:json: {
+      {
+          "role_id": "cbfa5412-7fe4-4fc5-aea7-906eeffa15b9"
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Mon, 04 Dec 2023 06:43:27 GMT
+      Content-Length: 695
+    }
+  
+    status: {
+      code: 200
+      text: 200
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": [
+                {
+                    "role_parameter_group_id": "c1428134-90ae-421a-859f-fbe28baa4a6c",
+                    "label": "001676, Divisi Application Development, Architecture & Governance",
+                    "parameters": [
+                        {
+                            "id": "d85a6b19-05da-44eb-b83f-2068cc903a27",
+                            "param_type": "employee",
+                            "label": "001676",
+                            "value": "001676"
+                        },
+                        {
+                            "id": "67282b13-ba8e-41ac-9330-563d68dff67c",
+                            "param_type": "organization",
+                            "label": "Divisi Application Development, Architecture & Governance",
+                            "value": "13"
+                        }
+                    ]
+                },
+                {
+                    "role_parameter_group_id": "eb1c00ef-cd15-4f37-aa33-b6b8fb51e506",
+                    "label": "001676",
+                    "parameters": [
+                        {
+                            "id": "fd45c21b-0f92-41a0-a0ac-b356b7620ddd",
+                            "param_type": "employee",
+                            "label": "001676",
+                            "value": "001676"
+                        }
+                    ]
+                }
+            ],
+            "message": "Permintaan berhasil diproses",
+            "status": true
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Not Found
+  
+  request: {
+    url: {{BASE_URL}}/v1/access-management/role-param
+    method: POST
+    mode: json
+    body:json: {
+      {
+          "role_id": "cbfa5412-7fe4-4fc5-aea7-906eeffa15ba"
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Mon, 04 Dec 2023 06:43:17 GMT
+      Content-Length: 61
+    }
+  
+    status: {
+      code: 200
+      text: 500
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "message": "Data tidak ditemukan",
+            "status": false
+        }
+      '''
+    }
+  }
+}

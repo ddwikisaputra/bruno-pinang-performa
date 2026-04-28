@@ -1,0 +1,19 @@
+meta {
+  name: Testing V1
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{url}}/v/1/partnerships/testing
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{tokenPartnership}}
+}
+
+settings {
+  encodeUrl: true
+}

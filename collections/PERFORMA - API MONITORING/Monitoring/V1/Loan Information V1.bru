@@ -1,0 +1,346 @@
+meta {
+  name: Loan Information V1
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{url}}/v/1/monitoring/loan-information
+  body: formUrlEncoded
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+body:form-urlencoded {
+  userId: 001317
+  id: 20942
+  statusPaymentId: 72
+}
+
+settings {
+  encodeUrl: true
+}
+
+example {
+  name: unautorized
+  
+  request: {
+    url: {{url}}/v/1/monitoring/loan-information
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      id: 
+      statusPaymentId: 2
+      userId: 1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Wed, 25 May 2022 07:06:28 GMT
+      Content-Length: 106
+    }
+  
+    status: {
+      code: 401
+      text: Unauthorized
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "code": 401,
+            "desc": "Expired",
+            "message": "Invalid Token || Token Is Expired"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: error data not found
+  
+  request: {
+    url: {{url}}/v/1/monitoring/loan-information
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      id: 1
+      statusPaymentId: -1
+      userId: 1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Wed, 25 May 2022 07:21:34 GMT
+      Content-Length: 104
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "desc": "Error record not found",
+            "message": "Informasi Pinjaman Tidak Ditemukan",
+            "status": 404
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: error database connection
+  
+  request: {
+    url: {{url}}/v/1/monitoring/loan-information
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      id: 
+      statusPaymentId: 2
+      userId: 1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Wed, 25 May 2022 07:06:28 GMT
+      Content-Length: 106
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+            "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+            "status": 400
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: success angsuran tetap
+  
+  request: {
+    url: {{url}}/v/1/monitoring/loan-information
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 999941
+      id: 802
+      statusPaymentId: 18
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 03 Jun 2022 11:08:23 GMT
+      Content-Length: 460
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": {
+                "id": 802,
+                "idPaymentStatus": 18,
+                "loanType": 0,
+                "loanAmount": 1000000,
+                "outstanding": 1000000,
+                "dueDate": "2022-03-24",
+                "loanTerm": "24 Bulan",
+                "jumlahHariBunga": 0,
+                "jumlahHariDenda": 0,
+                "daysCount": -57,
+                "tunggakan": 0,
+                "denda": 0,
+                "totalTunggakan": 0,
+                "nextDueDate": "",
+                "nextBilling": 0,
+                "plafond": 0,
+                "usedPlafond": 0,
+                "remainingPlafond": 0,
+                "totalActiveLoan": 0,
+                "status": 2,
+                "statusText": "Lunas"
+            },
+            "desc": "Data Valid",
+            "message": "Data ditemukan",
+            "status": 200
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: error parameter validation
+  
+  request: {
+    url: {{url}}/v/1/monitoring/loan-information
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      id: 
+      statusPaymentId: 2
+      userId: 1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Wed, 25 May 2022 07:06:28 GMT
+      Content-Length: 106
+    }
+  
+    status: {
+      code: 400
+      text: Bad Request
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "desc": "Parameter ... Belum Terisi",
+            "message": "Maaf, Parameter ... Belum Dipilih",
+            "status": 500
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: success angsuran transaksional murni or financing
+  
+  request: {
+    url: {{url}}/v/1/monitoring/loan-information
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      id: 1
+      statusPaymentId: 76
+      userId: 1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Wed, 25 May 2022 08:10:25 GMT
+      Content-Length: 393
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": {
+                "id": 30943,
+                "idPaymentStatus": 76,
+                "loanType": 2,
+                "loanAmount": 1250000,
+                "outstanding": 0,
+                "dueDate": "2019-01-17 00:00:00",
+                "loanTerm": "1 Bulan",
+                "jumlahHariBunga": -1224,
+                "jumlahHariDenda": -1224,
+                "daysCount": -1224,
+                "tunggakan": 1271875,
+                "denda": 9398,
+                "totalTunggakan": 1281273,
+                "nextDueDate": "",
+                "nextBilling": 0,
+                "plafond": 67000000,
+                "usedPlafond": 9344000,
+                "remainingPlafond": 57656000,
+                "totalActiveLoan": 10844416,
+                "status": -3,
+                "statusText": "Telat -1224 Hari"
+            },
+            "desc": "Data Valid",
+            "message": "Data ditemukan",
+            "status": 200
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: general error
+  
+  request: {
+    url: {{url}}/v/1/monitoring/lkn-detail
+    method: GET
+    mode: none
+    headers: {
+      Content-Type: application/x-www-form-urlencoded
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Thu, 29 Jul 2021 07:05:21 GMT
+      Content-Length: 287
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "status": 500,
+            "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+            "desc": "Could not connect .....",
+            "data": null
+        }
+      '''
+    }
+  }
+}

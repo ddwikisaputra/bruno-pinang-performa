@@ -1,0 +1,677 @@
+info:
+  name: List Potential Customer V1
+  type: http
+  seq: 9
+
+http:
+  method: POST
+  url: "{{url}}/v/1/partnerships/potential-customer-list"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "1"
+        description: User ID Login { MANDATORY }
+      - name: textSearch
+        value: johannes
+        description: Text Pencarian Data { OPTIONAL }
+        disabled: true
+      - name: startIndex
+        value: "0"
+        description: Offset Data {Default 0} { MANDATORY }
+      - name: recordCount
+        value: "5"
+        description: Limit Data {Default 10} { MANDATORY }
+      - name: partnershipId
+        value: "4"
+        description: Id Partnership (Login Session) { MANDATORY }
+      - name: partnershipCode
+        value: OMS1
+        description: Kode Partnership (Login Session) { MANDATORY } [PUSAT = PST2021]
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: success
+    request:
+      url: "{{url}}/v/1/partnerships/potential-customer-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: textSearch
+            value: joko
+            description: Text Pencarian Data { OPTIONAL }
+            disabled: true
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0} { MANDATORY }
+          - name: recordCount
+            value: "10"
+            description: Limit Data {Default 10} { MANDATORY }
+          - name: partnershipId
+            value: "1"
+            description: Id Partnership (Login Session) { MANDATORY }
+          - name: partnershipCode
+            value: PST2021
+            description: Kode Partnership (Login Session) { MANDATORY } [PUSAT = PST2021]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 03:03:58 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "data": [
+                  {
+                      "id": 300,
+                      "referenceId": "642d8c25-2335-44b6-b6cc-1e0542b1c2c5",
+                      "ktpNumber": "3603282904960006",
+                      "name": "APRIYANI",
+                      "prakarsaId": 673,
+                      "branchCode": "9999",
+                      "partnershipId": 4,
+                      "status": 1,
+                      "statusText": "Proses Prakarsa",
+                      "ktpPictureSelfiePath": "prakarsa/ktp-selfie/2021/12/14/IMG_PARTNERSHIP_20211214133600.png",
+                      "ktpPictureSelfieBase64": "base64 string",
+                      "ktpPictureSelfieMimetype": "mimetype",
+                      "createdAt": "15-12-2021 13:01:32",
+                      "updatedAt": "15-12-2021 13:03:20"
+                  },
+                  {
+                      "id": 298,
+                      "referenceId": "b710e2ec-bb5a-4d8f-9b9b-0c2494e781d6",
+                      "ktpNumber": "3175032412770003",
+                      "name": "DECKY DWI SUSANTO SE",
+                      "prakarsaId": 672,
+                      "branchCode": "9999",
+                      "partnershipId": 4,
+                      "status": 1,
+                      "statusText": "Proses Prakarsa",
+                      "ktpPictureSelfiePath": "prakarsa/ktp-selfie/2021/12/14/IMG_PARTNERSHIP_20211214133600.png",
+                      "ktpPictureSelfieBase64": "base64 string",
+                      "ktpPictureSelfieMimetype": "mimetype",
+                      "createdAt": "15-12-2021 09:57:35",
+                      "updatedAt": "15-12-2021 11:15:07"
+                  },
+                  {
+                      "id": 299,
+                      "referenceId": "50d54306-1107-403c-a506-c291c3eb0bda",
+                      "ktpNumber": "3671078107960003",
+                      "name": "JULIAN JASA PRATAMA",
+                      "prakarsaId": 671,
+                      "branchCode": "9999",
+                      "partnershipId": 4,
+                      "status": 1,
+                      "statusText": "Proses Prakarsa",
+                      "ktpPictureSelfiePath": "",
+                      "ktpPictureSelfieBase64": "",
+                      "ktpPictureSelfieMimetype": "",
+                      "createdAt": "15-12-2021 10:46:06",
+                      "updatedAt": "15-12-2021 10:46:59"
+                  }
+              ],
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: error database connection
+    request:
+      url: "{{url}}/v/1/partnerships/potential-customer-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: textSearch
+            value: joko
+            description: Text Pencarian Data { OPTIONAL }
+            disabled: true
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0} { MANDATORY }
+          - name: recordCount
+            value: "10"
+            description: Limit Data {Default 10} { MANDATORY }
+          - name: partnershipId
+            value: "1"
+            description: Id Partnership (Login Session) { MANDATORY }
+          - name: partnershipCode
+            value: PST2021
+            description: Kode Partnership (Login Session) { MANDATORY } [PUSAT = PST2021]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: empty data
+    request:
+      url: "{{url}}/v/1/partnerships/potential-customer-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: textSearch
+            value: joko
+            description: Text Pencarian Data { OPTIONAL }
+            disabled: true
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0} { MANDATORY }
+          - name: recordCount
+            value: "10"
+            description: Limit Data {Default 10} { MANDATORY }
+          - name: partnershipId
+            value: "1"
+            description: Id Partnership (Login Session) { MANDATORY }
+          - name: partnershipCode
+            value: AA
+            description: Kode Partnership (Login Session) { MANDATORY } [PUSAT = PST2021]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 24 Nov 2021 18:18:31 GMT
+        - name: Content-Length
+          value: "657"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Data Potential Customer tidak ditemukan",
+              "message": "Potential Customer Tidak Ditemukan",
+              "status": 404
+          }
+  - name: general error
+    request:
+      url: "{{url}}/v/1/partnerships/potential-customer-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: textSearch
+            value: joko
+            description: Text Pencarian Data { OPTIONAL }
+            disabled: true
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0} { MANDATORY }
+          - name: recordCount
+            value: "10"
+            description: Limit Data {Default 10} { MANDATORY }
+          - name: partnershipId
+            value: "1"
+            description: Id Partnership (Login Session) { MANDATORY }
+          - name: partnershipCode
+            value: PST2021
+            description: Kode Partnership (Login Session) { MANDATORY } [PUSAT = PST2021]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Could not connect .....",
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "status": 500
+          }
+  - name: error parameter validation
+    request:
+      url: "{{url}}/v/1/partnerships/potential-customer-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: textSearch
+            value: joko
+            description: Text Pencarian Data { OPTIONAL }
+            disabled: true
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0} { MANDATORY }
+          - name: recordCount
+            value: "10"
+            description: Limit Data {Default 10} { MANDATORY }
+          - name: partnershipId
+            value: "1"
+            description: Id Partnership (Login Session) { MANDATORY }
+          - name: partnershipCode
+            value: PST2021
+            description: Kode Partnership (Login Session) { MANDATORY } [PUSAT = PST2021]
+            disabled: true
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Parameter ... kosong",
+              "message": "Maaf, Parameter ... tidak boleh kosong",
+              "status": 500
+          }
+  - name: unautorized
+    request:
+      url: "{{url}}/v/1/partnerships/potential-customer-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: textSearch
+            value: joko
+            description: Text Pencarian Data { OPTIONAL }
+            disabled: true
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0} { MANDATORY }
+          - name: recordCount
+            value: "10"
+            description: Limit Data {Default 10} { MANDATORY }
+          - name: partnershipId
+            value: "1"
+            description: Id Partnership (Login Session) { MANDATORY }
+          - name: partnershipCode
+            value: PST2021
+            description: Kode Partnership (Login Session) { MANDATORY } [PUSAT = PST2021]
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:44:34 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "message": "Error Message"
+          }
+  - name: success
+    request:
+      url: "{{url}}/v/1/partnerships/potential-customer-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: textSearch
+            value: joko
+            description: Text Pencarian Data { OPTIONAL }
+            disabled: true
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0} { MANDATORY }
+          - name: recordCount
+            value: "10"
+            description: Limit Data {Default 10} { MANDATORY }
+          - name: partnershipId
+            value: "1"
+            description: Id Partnership (Login Session) { MANDATORY }
+          - name: partnershipCode
+            value: PST2021
+            description: Kode Partnership (Login Session) { MANDATORY } [PUSAT = PST2021]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 03:03:58 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "data": [
+                  {
+                      "id": 300,
+                      "referenceId": "642d8c25-2335-44b6-b6cc-1e0542b1c2c5",
+                      "ktpNumber": "3603282904960006",
+                      "name": "APRIYANI",
+                      "prakarsaId": 673,
+                      "branchCode": "9999",
+                      "partnershipId": 4,
+                      "status": 1,
+                      "statusText": "Proses Prakarsa",
+                      "ktpPictureSelfiePath": "prakarsa/ktp-selfie/2021/12/14/IMG_PARTNERSHIP_20211214133600.png",
+                      "ktpPictureSelfieBase64": "base64 string",
+                      "ktpPictureSelfieMimetype": "mimetype",
+                      "createdAt": "15-12-2021 13:01:32",
+                      "updatedAt": "15-12-2021 13:03:20"
+                  },
+                  {
+                      "id": 298,
+                      "referenceId": "b710e2ec-bb5a-4d8f-9b9b-0c2494e781d6",
+                      "ktpNumber": "3175032412770003",
+                      "name": "DECKY DWI SUSANTO SE",
+                      "prakarsaId": 672,
+                      "branchCode": "9999",
+                      "partnershipId": 4,
+                      "status": 1,
+                      "statusText": "Proses Prakarsa",
+                      "ktpPictureSelfiePath": "prakarsa/ktp-selfie/2021/12/14/IMG_PARTNERSHIP_20211214133600.png",
+                      "ktpPictureSelfieBase64": "base64 string",
+                      "ktpPictureSelfieMimetype": "mimetype",
+                      "createdAt": "15-12-2021 09:57:35",
+                      "updatedAt": "15-12-2021 11:15:07"
+                  },
+                  {
+                      "id": 299,
+                      "referenceId": "50d54306-1107-403c-a506-c291c3eb0bda",
+                      "ktpNumber": "3671078107960003",
+                      "name": "JULIAN JASA PRATAMA",
+                      "prakarsaId": 671,
+                      "branchCode": "9999",
+                      "partnershipId": 4,
+                      "status": 1,
+                      "statusText": "Proses Prakarsa",
+                      "ktpPictureSelfiePath": "",
+                      "ktpPictureSelfieBase64": "",
+                      "ktpPictureSelfieMimetype": "",
+                      "createdAt": "15-12-2021 10:46:06",
+                      "updatedAt": "15-12-2021 10:46:59"
+                  }
+              ],
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: error database connection
+    request:
+      url: "{{url}}/v/1/partnerships/potential-customer-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: textSearch
+            value: joko
+            description: Text Pencarian Data { OPTIONAL }
+            disabled: true
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0} { MANDATORY }
+          - name: recordCount
+            value: "10"
+            description: Limit Data {Default 10} { MANDATORY }
+          - name: partnershipId
+            value: "1"
+            description: Id Partnership (Login Session) { MANDATORY }
+          - name: partnershipCode
+            value: PST2021
+            description: Kode Partnership (Login Session) { MANDATORY } [PUSAT = PST2021]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: empty data
+    request:
+      url: "{{url}}/v/1/partnerships/potential-customer-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: textSearch
+            value: joko
+            description: Text Pencarian Data { OPTIONAL }
+            disabled: true
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0} { MANDATORY }
+          - name: recordCount
+            value: "10"
+            description: Limit Data {Default 10} { MANDATORY }
+          - name: partnershipId
+            value: "1"
+            description: Id Partnership (Login Session) { MANDATORY }
+          - name: partnershipCode
+            value: AA
+            description: Kode Partnership (Login Session) { MANDATORY } [PUSAT = PST2021]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 24 Nov 2021 18:18:31 GMT
+        - name: Content-Length
+          value: "657"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Data Potential Customer tidak ditemukan",
+              "message": "Potential Customer Tidak Ditemukan",
+              "status": 404
+          }
+  - name: general error
+    request:
+      url: "{{url}}/v/1/partnerships/potential-customer-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: textSearch
+            value: joko
+            description: Text Pencarian Data { OPTIONAL }
+            disabled: true
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0} { MANDATORY }
+          - name: recordCount
+            value: "10"
+            description: Limit Data {Default 10} { MANDATORY }
+          - name: partnershipId
+            value: "1"
+            description: Id Partnership (Login Session) { MANDATORY }
+          - name: partnershipCode
+            value: PST2021
+            description: Kode Partnership (Login Session) { MANDATORY } [PUSAT = PST2021]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Could not connect .....",
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "status": 500
+          }
+  - name: error parameter validation
+    request:
+      url: "{{url}}/v/1/partnerships/potential-customer-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: textSearch
+            value: joko
+            description: Text Pencarian Data { OPTIONAL }
+            disabled: true
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0} { MANDATORY }
+          - name: recordCount
+            value: "10"
+            description: Limit Data {Default 10} { MANDATORY }
+          - name: partnershipId
+            value: "1"
+            description: Id Partnership (Login Session) { MANDATORY }
+          - name: partnershipCode
+            value: PST2021
+            description: Kode Partnership (Login Session) { MANDATORY } [PUSAT = PST2021]
+            disabled: true
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Parameter ... kosong",
+              "message": "Maaf, Parameter ... tidak boleh kosong",
+              "status": 500
+          }
+  - name: unautorized
+    request:
+      url: "{{url}}/v/1/partnerships/potential-customer-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: textSearch
+            value: joko
+            description: Text Pencarian Data { OPTIONAL }
+            disabled: true
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0} { MANDATORY }
+          - name: recordCount
+            value: "10"
+            description: Limit Data {Default 10} { MANDATORY }
+          - name: partnershipId
+            value: "1"
+            description: Id Partnership (Login Session) { MANDATORY }
+          - name: partnershipCode
+            value: PST2021
+            description: Kode Partnership (Login Session) { MANDATORY } [PUSAT = PST2021]
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:44:34 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "message": "Error Message"
+          }

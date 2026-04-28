@@ -1,0 +1,96 @@
+info:
+  name: Mail Service_1
+  type: http
+  seq: 7
+
+http:
+  method: POST
+  url: "{{base_url_dev}}/api/digiagri/mail/service"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "000426"
+      - name: emailType
+        value: PIKRO
+      - name: emailAddress
+        value: reisvaynard@gmail.com
+      - name: emailUsername
+        value: Ibrahim Senoaji
+      - name: emailSubject
+        value: Test
+      - name: emailContentTitle
+        value: Testing Email
+      - name: emailContentBody
+        value: "1234567890"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Gagal
+    request:
+      url: "{{base_url}}/api/digiagri/mail/service"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000426"
+          - name: emailType
+            value: PIKRO
+          - name: emailAddress
+            value: reisvaynard@gmail.com
+          - name: emailUsername
+            value: Ibrahim Senoaji
+          - name: emailSubject
+            value: Test
+          - name: emailContentTitle
+            value: Testing Email
+          - name: emailContentBody
+            value: "1234567890"
+    response:
+      body:
+        type: text
+        data: "{\r
+
+          \    \"statusCode\": \"-1\",\r
+
+          \    \"statusDescription\": \"Email Gagal Terkirim, silahkan coba kembali\"\r
+
+          }"
+  - name: Success
+    request:
+      url: "{{base_url}}/api/digiagri/mail/service"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000426"
+          - name: emailType
+            value: PIKRO
+          - name: emailAddress
+            value: reisvaynard@gmail.com
+          - name: emailUsername
+            value: Ibrahim Senoaji
+          - name: emailSubject
+            value: Test
+          - name: emailContentTitle
+            value: Testing Email
+          - name: emailContentBody
+            value: "1234567890"
+    response:
+      body:
+        type: text
+        data: "{\r
+
+          \    \"statusCode\": \"1\",\r
+
+          \    \"statusDescription\": \"Email Terkirim\"\r
+
+          }"

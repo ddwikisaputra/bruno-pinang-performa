@@ -1,0 +1,626 @@
+info:
+  name: Returned ADK V2
+  type: http
+  seq: 4
+
+http:
+  method: POST
+  url: "{{base_url_dev}}/v/2/prakarsa/returned-adk/31377"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "{{userId}}"
+        description: userId [MANDATORY] [AES]
+      - name: reasonType
+        value: "1"
+        description: "[MANDATORY] [1=Pre-Screening, 2=CRS]"
+      - name: reason
+        value: ABC
+        description: "[MANDATORY]"
+      - name: returnType
+        value: OPK
+        description: "[MANDATORY] [OPK]"
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Error - Unauthorized / Expired
+    request:
+      url: "{{base_url_local}}/v/2/prakarsa/returned-adk/31459"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: UmF5YVBpUGVyVG9w9FR0lGH8cGJNF4M8yVwLukqMUy12WA==
+            description: userId [MANDATORY] [AES]
+          - name: reasonType
+            value: "1"
+            description: "[MANDATORY] [1=Pre-Screening, 2=CRS]"
+          - name: reason
+            value: "Data Belum Sesuai "
+            description: "[MANDATORY]"
+          - name: returnType
+            value: OPK
+            description: "[MANDATORY] [OPK]"
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 22 Nov 2024 05:45:20 GMT
+        - name: Content-Length
+          value: "75"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: Error - Access Forbidden
+    request:
+      url: "{{base_url_local}}/v/2/prakarsa/returned-adk/31459"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: UmF5YVBpUGVyVG9w9FR0lGH8cGJNF4M8yVwLukqMUy12WA==1
+            description: userId [MANDATORY] [AES]
+          - name: reasonType
+            value: "1"
+            description: "[MANDATORY] [1=Pre-Screening, 2=CRS]"
+          - name: reason
+            value: "Data Belum Sesuai "
+            description: "[MANDATORY]"
+          - name: returnType
+            value: OPK
+            description: "[MANDATORY] [OPK]"
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 22 Nov 2024 05:48:56 GMT
+        - name: Content-Length
+          value: "68"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memiliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: Error - Status Prakarsa != 7
+    request:
+      url: "{{base_url_local}}/v/2/prakarsa/returned-adk/31459"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: UmF5YVBpUGVyVG9w9FR0lGH8cGJNF4M8yVwLukqMUy12WA==
+            description: userId [MANDATORY] [AES]
+          - name: reasonType
+            value: "1"
+            description: "[MANDATORY] [1=Pre-Screening, 2=CRS]"
+          - name: reason
+            value: "Data Belum Sesuai "
+            description: "[MANDATORY]"
+          - name: returnType
+            value: OPK
+            description: "[MANDATORY] [OPK]"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 22 Nov 2024 05:53:07 GMT
+        - name: Content-Length
+          value: "171"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Status != 7 (bukan menuggu hasil putusan OPK)",
+              "message": "Maaf, Proses pengembalian tidak bisa dilakukan. Silahkan monitor status terakhir Prakarsa",
+              "status": 400
+          }
+  - name: Error - Parameter Reason Type
+    request:
+      url: "{{base_url_local}}/v/2/prakarsa/returned-adk/31459"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: UmF5YVBpUGVyVG9w9FR0lGH8cGJNF4M8yVwLukqMUy12WA==
+            description: userId [MANDATORY] [AES]
+          - name: reasonType
+            value: ""
+            description: "[MANDATORY] [1=Pre-Screening, 2=CRS]"
+          - name: reason
+            value: "Data Belum Sesuai "
+            description: "[MANDATORY]"
+          - name: returnType
+            value: OPK
+            description: "[MANDATORY] [OPK]"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 22 Nov 2024 06:19:18 GMT
+        - name: Content-Length
+          value: "89"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 400,
+              "desc": "Format Parameter reasonType tidak sesuai",
+              "message": "parameter reason type hanya boleh 1 atau 2"
+          }
+  - name: Error - Parameter Reason Empty
+    request:
+      url: "{{base_url_local}}/v/2/prakarsa/returned-adk/31459"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: UmF5YVBpUGVyVG9w9FR0lGH8cGJNF4M8yVwLukqMUy12WA==
+            description: userId [MANDATORY] [AES]
+          - name: reasonType
+            value: "1"
+            description: "[MANDATORY] [1=Pre-Screening, 2=CRS]"
+          - name: reason
+            value: "2"
+            description: "[MANDATORY]"
+          - name: returnType
+            value: OPK
+            description: "[MANDATORY] [OPK]"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 22 Nov 2024 06:28:14 GMT
+        - name: Content-Length
+          value: "86"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 400,
+              "desc": "Format parameter reason tidak sesuai",
+              "message": "parameter reason tidak boleh kosong"
+          }
+  - name: Error - Parameter Return Type
+    request:
+      url: "{{base_url_local}}/v/2/prakarsa/returned-adk/31459"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: UmF5YVBpUGVyVG9w9FR0lGH8cGJNF4M8yVwLukqMUy12WA==
+            description: userId [MANDATORY] [AES]
+          - name: reasonType
+            value: "1"
+            description: "[MANDATORY] [1=Pre-Screening, 2=CRS]"
+          - name: reason
+            value: "123"
+            description: "[MANDATORY]"
+          - name: returnType
+            value: OPK1
+            description: "[MANDATORY] [OPK]"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 22 Nov 2024 07:39:05 GMT
+        - name: Content-Length
+          value: "122"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 400,
+              "desc": "Format Parameter returnType tidak sesuai",
+              "message": "Tipe Pengembalian hanya boleh CBL, RBO atau OPK"
+          }
+  - name: Error - Parameter Return Type Empty
+    request:
+      url: "{{base_url_local}}/v/2/prakarsa/returned-adk/31459"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: UmF5YVBpUGVyVG9w9FR0lGH8cGJNF4M8yVwLukqMUy12WA==
+            description: userId [MANDATORY] [AES]
+          - name: reasonType
+            value: "1"
+            description: "[MANDATORY] [1=Pre-Screening, 2=CRS]"
+          - name: reason
+            value: "123"
+            description: "[MANDATORY]"
+          - name: returnType
+            value: ""
+            description: "[MANDATORY] [OPK]"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 22 Nov 2024 07:40:38 GMT
+        - name: Content-Length
+          value: "98"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 400,
+              "desc": "Parameter returnType kosong",
+              "message": "Tipe Pengembalian tidak boleh kosong"
+          }
+  - name: Success - Berhasil
+    request:
+      url: "{{base_url_local}}/v/2/prakarsa/returned-adk/31459"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: UmF5YVBpUGVyVG9w9FR0lGH8cGJNF4M8yVwLukqMUy12WA==
+            description: userId [MANDATORY] [AES]
+          - name: reasonType
+            value: "1"
+            description: "[MANDATORY] [1=Pre-Screening, 2=CRS]"
+          - name: reason
+            value: "123"
+            description: "[MANDATORY]"
+          - name: returnType
+            value: OPK
+            description: "[MANDATORY] [OPK]"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 22 Nov 2024 10:34:33 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Data Tersimpan",
+              "message": "Data prakarsa berhasil disimpan",
+              "status": 200
+          }
+  - name: Error - Unauthorized / Expired
+    request:
+      url: "{{base_url_local}}/v/2/prakarsa/returned-adk/31459"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: UmF5YVBpUGVyVG9w9FR0lGH8cGJNF4M8yVwLukqMUy12WA==
+            description: userId [MANDATORY] [AES]
+          - name: reasonType
+            value: "1"
+            description: "[MANDATORY] [1=Pre-Screening, 2=CRS]"
+          - name: reason
+            value: "Data Belum Sesuai "
+            description: "[MANDATORY]"
+          - name: returnType
+            value: OPK
+            description: "[MANDATORY] [OPK]"
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 22 Nov 2024 05:45:20 GMT
+        - name: Content-Length
+          value: "75"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: Success - Berhasil
+    request:
+      url: "{{base_url_local}}/v/2/prakarsa/returned-adk/31459"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: UmF5YVBpUGVyVG9w9FR0lGH8cGJNF4M8yVwLukqMUy12WA==
+            description: userId [MANDATORY] [AES]
+          - name: reasonType
+            value: "1"
+            description: "[MANDATORY] [1=Pre-Screening, 2=CRS]"
+          - name: reason
+            value: "123"
+            description: "[MANDATORY]"
+          - name: returnType
+            value: OPK
+            description: "[MANDATORY] [OPK]"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 22 Nov 2024 10:34:33 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Data Tersimpan",
+              "message": "Data prakarsa berhasil disimpan",
+              "status": 200
+          }
+  - name: Error - Status Prakarsa != 7
+    request:
+      url: "{{base_url_local}}/v/2/prakarsa/returned-adk/31459"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: UmF5YVBpUGVyVG9w9FR0lGH8cGJNF4M8yVwLukqMUy12WA==
+            description: userId [MANDATORY] [AES]
+          - name: reasonType
+            value: "1"
+            description: "[MANDATORY] [1=Pre-Screening, 2=CRS]"
+          - name: reason
+            value: "Data Belum Sesuai "
+            description: "[MANDATORY]"
+          - name: returnType
+            value: OPK
+            description: "[MANDATORY] [OPK]"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 22 Nov 2024 05:53:07 GMT
+        - name: Content-Length
+          value: "171"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Status != 7 (bukan menuggu hasil putusan OPK)",
+              "message": "Maaf, Proses pengembalian tidak bisa dilakukan. Silahkan monitor status terakhir Prakarsa",
+              "status": 400
+          }
+  - name: Error - Parameter Reason Empty
+    request:
+      url: "{{base_url_local}}/v/2/prakarsa/returned-adk/31459"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: UmF5YVBpUGVyVG9w9FR0lGH8cGJNF4M8yVwLukqMUy12WA==
+            description: userId [MANDATORY] [AES]
+          - name: reasonType
+            value: "1"
+            description: "[MANDATORY] [1=Pre-Screening, 2=CRS]"
+          - name: reason
+            value: "2"
+            description: "[MANDATORY]"
+          - name: returnType
+            value: OPK
+            description: "[MANDATORY] [OPK]"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 22 Nov 2024 06:28:14 GMT
+        - name: Content-Length
+          value: "86"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 400,
+              "desc": "Format parameter reason tidak sesuai",
+              "message": "parameter reason tidak boleh kosong"
+          }
+  - name: Error - Parameter Return Type
+    request:
+      url: "{{base_url_local}}/v/2/prakarsa/returned-adk/31459"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: UmF5YVBpUGVyVG9w9FR0lGH8cGJNF4M8yVwLukqMUy12WA==
+            description: userId [MANDATORY] [AES]
+          - name: reasonType
+            value: "1"
+            description: "[MANDATORY] [1=Pre-Screening, 2=CRS]"
+          - name: reason
+            value: "123"
+            description: "[MANDATORY]"
+          - name: returnType
+            value: OPK1
+            description: "[MANDATORY] [OPK]"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 22 Nov 2024 07:39:05 GMT
+        - name: Content-Length
+          value: "122"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 400,
+              "desc": "Format Parameter returnType tidak sesuai",
+              "message": "Tipe Pengembalian hanya boleh CBL, RBO atau OPK"
+          }
+  - name: Error - Parameter Reason Type
+    request:
+      url: "{{base_url_local}}/v/2/prakarsa/returned-adk/31459"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: UmF5YVBpUGVyVG9w9FR0lGH8cGJNF4M8yVwLukqMUy12WA==
+            description: userId [MANDATORY] [AES]
+          - name: reasonType
+            value: ""
+            description: "[MANDATORY] [1=Pre-Screening, 2=CRS]"
+          - name: reason
+            value: "Data Belum Sesuai "
+            description: "[MANDATORY]"
+          - name: returnType
+            value: OPK
+            description: "[MANDATORY] [OPK]"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 22 Nov 2024 06:19:18 GMT
+        - name: Content-Length
+          value: "89"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 400,
+              "desc": "Format Parameter reasonType tidak sesuai",
+              "message": "parameter reason type hanya boleh 1 atau 2"
+          }
+  - name: Error - Parameter Return Type Empty
+    request:
+      url: "{{base_url_local}}/v/2/prakarsa/returned-adk/31459"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: UmF5YVBpUGVyVG9w9FR0lGH8cGJNF4M8yVwLukqMUy12WA==
+            description: userId [MANDATORY] [AES]
+          - name: reasonType
+            value: "1"
+            description: "[MANDATORY] [1=Pre-Screening, 2=CRS]"
+          - name: reason
+            value: "123"
+            description: "[MANDATORY]"
+          - name: returnType
+            value: ""
+            description: "[MANDATORY] [OPK]"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 22 Nov 2024 07:40:38 GMT
+        - name: Content-Length
+          value: "98"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 400,
+              "desc": "Parameter returnType kosong",
+              "message": "Tipe Pengembalian tidak boleh kosong"
+          }
+  - name: Error - Access Forbidden
+    request:
+      url: "{{base_url_local}}/v/2/prakarsa/returned-adk/31459"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: UmF5YVBpUGVyVG9w9FR0lGH8cGJNF4M8yVwLukqMUy12WA==1
+            description: userId [MANDATORY] [AES]
+          - name: reasonType
+            value: "1"
+            description: "[MANDATORY] [1=Pre-Screening, 2=CRS]"
+          - name: reason
+            value: "Data Belum Sesuai "
+            description: "[MANDATORY]"
+          - name: returnType
+            value: OPK
+            description: "[MANDATORY] [OPK]"
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 22 Nov 2024 05:48:56 GMT
+        - name: Content-Length
+          value: "68"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memiliki Akses",
+              "message": "403 Forbidden"
+          }

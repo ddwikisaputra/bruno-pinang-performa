@@ -1,0 +1,67 @@
+info:
+  name: Over Booking
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{base_url}}/api/digiagri/transaction/overbooking"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "000426"
+        description: User ID AO
+      - name: kodeCabang
+        value: "0020"
+        description: Uker yang melakukan transaksi (Branch Code AO atau CBL)
+      - name: rekeningSumber
+        value: "001001000312994"
+        description: Rekening sumber transaksi (GL, Giro, Saving)
+      - name: rekeningTujuan
+        value: "001001000371401"
+        description: Rekening tujuan transaksi (GL, Giro, Saving)
+      - name: nominal
+        value: "3000"
+        description: Jumlah Transaksi
+      - name: typeOverbooking
+        value: express
+        description: Tipe Overbooking [default | express]
+      - name: nomorInvoice
+        value: SMG22122200004-1
+        description: Nomor Invoice (Khusus tipe Express)
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: success
+    request:
+      url: "{{base_url}}/api/digiagri/transaction/overbooking"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000426"
+            description: User ID AO
+          - name: kodeCabang
+            value: "0010"
+            description: Uker yang melakukan transaksi (Branch Code AO atau CBL)
+          - name: rekeningSumber
+            value: "001001000001315"
+            description: Rekening sumber transaksi (GL, Giro, Saving)
+          - name: rekeningTujuan
+            value: "001001000132301"
+            description: Rekening tujuan transaksi (GL, Giro, Saving)
+          - name: nominal
+            value: "1"
+            description: Jumlah Transaksi
+    response:
+      body:
+        type: text
+        data: ""

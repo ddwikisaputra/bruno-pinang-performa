@@ -1,0 +1,205 @@
+meta {
+  name: Get Token
+  type: http
+  seq: 1
+}
+
+post {
+  url: https://brigate.privateopen.sandbox.bri.co.id/gateway/Oauth2/1.0/accessToken
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+      "client_id": "b4d20eb8-f9df-4527-8894-0e0928929ff7",
+      "client_secret": "3f7410d7-8281-4b08-896d-90c7b3d47d11",
+      "grant_type": "client_credentials"
+  }
+}
+
+script:post-response {
+  var data = res.getBody();
+  bru.setEnvVar("access_token", data.access_token);
+}
+
+settings {
+  encodeUrl: true
+}
+
+example {
+  name: 200
+  
+  request: {
+    url: {{base_url}}/v1/authentications/oauth2/token
+    method: POST
+    mode: json
+    body:json: {
+      {
+         "clientId" : "c63232af593619fdac304ab50fe74666",
+         "clientSecret" : "$2a$10$nDtT7dGSkJQTtc6udyVu1exSbmDNJkD.P1DUwVj8uWHugDsMBQ.wy"
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Date: Wed, 12 Feb 2025 06:25:42 GMT
+      Content-Type: application/json
+      Content-Length: 429
+      X-Xss-Protection: 0
+      X-Content-Type-Options: nosniff
+      X-Frame-Options: SAMEORIGIN
+      Cross-Origin-Embedder-Policy: require-corp
+      Cross-Origin-Opener-Policy: same-origin
+      Cross-Origin-Resource-Policy: same-origin
+      Origin-Agent-Cluster: ?1
+      Referrer-Policy: no-referrer
+      X-Dns-Prefetch-Control: off
+      X-Download-Options: noopen
+      X-Permitted-Cross-Domain-Policies: none
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "responseCode": "00",
+            "responseMessage": "Success",
+            "responseData": {
+                "accessToken": "eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHBJZCI6IjY5ODFlMTNhLTM5OWMtNDI4Yy05NWVmLWJiOTE4MjliNzI4YSIsImF1ZCI6ImJyIiwiZXhwIjoxNzM5MzQ1MTQyLCJpc3MiOiJiciJ9.-scrK2LoyPlLx6o_tzRCZLtDEjC26Ie2_In30sA3l9v-HrxdBhrgVgQ9k57uxpqvufNsAnO4QphF1nwYEHz5hA",
+                "accessTokenType": "Bearer",
+                "expiredAt": "2025-02-12T14:25:42+07:00",
+                "expiredIn": 3599
+            },
+            "responseErrors": null
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: 400
+  
+  request: {
+    url: {{base_url}}/v1/authentications/oauth2/token
+    method: POST
+    mode: json
+    body:json: {
+      {
+      
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Date: Wed, 12 Feb 2025 06:44:10 GMT
+      Content-Type: application/json
+      Content-Length: 253
+      X-Xss-Protection: 0
+      X-Content-Type-Options: nosniff
+      X-Frame-Options: SAMEORIGIN
+      Cross-Origin-Embedder-Policy: require-corp
+      Cross-Origin-Opener-Policy: same-origin
+      Cross-Origin-Resource-Policy: same-origin
+      Origin-Agent-Cluster: ?1
+      Referrer-Policy: no-referrer
+      X-Dns-Prefetch-Control: off
+      X-Download-Options: noopen
+      X-Permitted-Cross-Domain-Policies: none
+    }
+  
+    status: {
+      code: 400
+      text: Bad Request
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "responseCode": "02",
+            "responseMessage": "ClientID wajib diisi",
+            "responseData": null,
+            "responseErrors": [
+                {
+                    "type": "validation",
+                    "key": "ClientID",
+                    "message": "ClientID wajib diisi"
+                },
+                {
+                    "type": "validation",
+                    "key": "ClientSecret",
+                    "message": "ClientSecret wajib diisi"
+                }
+            ]
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: 404
+  
+  request: {
+    url: {{base_url}}/v1/authentications/oauth2/token
+    method: POST
+    mode: json
+    body:json: {
+      {
+         "clientId" : "test",
+         "clientSecret" : "test"
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Date: Wed, 12 Feb 2025 06:43:25 GMT
+      Content-Type: application/json
+      Content-Length: 197
+      X-Xss-Protection: 0
+      X-Content-Type-Options: nosniff
+      X-Frame-Options: SAMEORIGIN
+      Cross-Origin-Embedder-Policy: require-corp
+      Cross-Origin-Opener-Policy: same-origin
+      Cross-Origin-Resource-Policy: same-origin
+      Origin-Agent-Cluster: ?1
+      Referrer-Policy: no-referrer
+      X-Dns-Prefetch-Control: off
+      X-Download-Options: noopen
+      X-Permitted-Cross-Domain-Policies: none
+    }
+  
+    status: {
+      code: 404
+      text: Not Found
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "responseCode": "02",
+            "responseMessage": "clientId or clientSecret not found",
+            "responseData": null,
+            "responseErrors": [
+                {
+                    "type": "message",
+                    "key": "message",
+                    "message": "clientId or clientSecret not found"
+                }
+            ]
+        }
+      '''
+    }
+  }
+}

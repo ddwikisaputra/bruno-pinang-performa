@@ -1,0 +1,336 @@
+info:
+  name: Rejected V1
+  type: http
+  seq: 5
+
+http:
+  method: POST
+  url: "{{base_url}}/v/1/potential-customers/rejected/77"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "000203"
+        description: Personal Number BRI Agro (UserID Login)
+      - name: reason
+        value: Tidak Sesuai
+        description: Alasan Penolakan
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/potential-customers/rejected/{{Id}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000203"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: reason
+            value: Tidak Sesuai
+            description: Alasan Penolakan
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 13 Jul 2021 07:18:51 GMT
+        - name: Content-Length
+          value: "92"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Data Tersimpan",
+              "message": "Data potential customer berhasil disimpan",
+              "status": 200
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/potential-customers/rejected/{{Id}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000203"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: reason
+            value: Tidak Sesuai
+            description: Alasan Penolakan
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 13 Jul 2021 07:13:53 GMT
+        - name: Content-Length
+          value: "92"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/potential-customers/rejected/{{Id}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000203"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: reason
+            value: Tidak Sesuai
+            description: Alasan Penolakan
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 13 Jul 2021 07:13:53 GMT
+        - name: Content-Length
+          value: "92"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect ....."
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/potential-customers/rejected/{{Id}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000203"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: reason
+            value: Tidak Sesuai
+            description: Alasan Penolakan
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 13 Jul 2021 07:13:53 GMT
+        - name: Content-Length
+          value: "92"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "message": "signature is invalid || Token is expired"
+          }
+  - name: potential customer not found
+    request:
+      url: "{{base_url}}/v/1/potential-customers/rejected/-1"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000203"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: reason
+            value: Tidak Sesuai
+            description: Alasan Penolakan
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 13 Jul 2021 07:18:19 GMT
+        - name: Content-Length
+          value: "93"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Error record not found",
+              "message": "Potential Customer Tidak Ditemukan",
+              "status": 500
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/potential-customers/rejected/{{Id}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000203"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: reason
+            value: Tidak Sesuai
+            description: Alasan Penolakan
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 13 Jul 2021 07:13:53 GMT
+        - name: Content-Length
+          value: "92"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "message": "signature is invalid || Token is expired"
+          }
+  - name: potential customer not found
+    request:
+      url: "{{base_url}}/v/1/potential-customers/rejected/-1"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000203"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: reason
+            value: Tidak Sesuai
+            description: Alasan Penolakan
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 13 Jul 2021 07:18:19 GMT
+        - name: Content-Length
+          value: "93"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Error record not found",
+              "message": "Potential Customer Tidak Ditemukan",
+              "status": 500
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/potential-customers/rejected/{{Id}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000203"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: reason
+            value: Tidak Sesuai
+            description: Alasan Penolakan
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 13 Jul 2021 07:13:53 GMT
+        - name: Content-Length
+          value: "92"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/potential-customers/rejected/{{Id}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000203"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: reason
+            value: Tidak Sesuai
+            description: Alasan Penolakan
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 13 Jul 2021 07:13:53 GMT
+        - name: Content-Length
+          value: "92"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect ....."
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/potential-customers/rejected/{{Id}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000203"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: reason
+            value: Tidak Sesuai
+            description: Alasan Penolakan
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 13 Jul 2021 07:18:51 GMT
+        - name: Content-Length
+          value: "92"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Data Tersimpan",
+              "message": "Data potential customer berhasil disimpan",
+              "status": 200
+          }

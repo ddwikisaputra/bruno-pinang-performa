@@ -1,0 +1,849 @@
+meta {
+  name: Cancel Received Purchase Order V1
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{url}}/v/1/partnerships/po-cancel-received
+  body: formUrlEncoded
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+body:form-urlencoded {
+  referenceId: 00000051
+  from: RAYAAPPS
+  partnershipCode: OMS1
+  userId: 009
+  reason: Barang tidak diterima
+}
+
+settings {
+  encodeUrl: true
+}
+
+example {
+  name: general error
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-cancel-received
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      referenceId: 00000051
+      from: RAYAAPPS
+      partnershipCode: OMS1
+      userId: 009
+      reason: Barang tidak diterima
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 02:53:38 GMT
+      Content-Length: 111
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "Could not connect .....",
+            "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+            "status": 500
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: success
+  
+  request: {
+    url: {{base-url-local}}/v/1/partnerships/po-cancel-received
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      referenceId: 00000051
+      from: RAYAAPPS
+      partnershipCode: OMS1
+      userId: 009
+      reason: Barang tidak diterima
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 03:03:58 GMT
+      Content-Length: 82
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "Data Tersimpan",
+            "message": "Purchase Order berhasil disimpan",
+            "status": 200
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Unauthorized
+  
+  request: {
+    url: {{base-url-local}}/v/1/partnerships/po-cancel-received
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      referenceId: 202312
+      from: RAYAAPPS
+      partnershipCode: OMS1
+      userId: 1
+      reason: Barang tidak diterima
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 20 Dec 2024 07:06:53 GMT
+      Content-Length: 75
+    }
+  
+    status: {
+      code: 401
+      text: Unauthorized
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "code": 401,
+            "desc": "Expired",
+            "message": "Invalid Token || Token Is Expired"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Validation PO sudah ditolak
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-cancel-received
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      referenceId: 202312
+      from: RAYAAPPS
+      partnershipCode: OMS1
+      userId: 1
+      reason: Barang tidak diterima
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 20 Dec 2024 07:15:07 GMT
+      Content-Length: 165
+    }
+  
+    status: {
+      code: 500
+      text: Internal Server Error
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "status": 500,
+            "message": "Maaf, Pengajuan anda sudah ditolak. Silahkan cek kembali status pengajuan anda.",
+            "messageLocal": "PO Status < 0 (semua status ditolak)"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Validation Status dalam pengajuan
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-cancel-received
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      referenceId: 202312
+      from: RAYAAPPS
+      partnershipCode: OMS1
+      userId: 1
+      reason: Barang tidak diterima
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 20 Dec 2024 07:18:44 GMT
+      Content-Length: 181
+    }
+  
+    status: {
+      code: 500
+      text: Internal Server Error
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "status": 500,
+            "message": "Maaf, Pengajuan anda sedang dalam proses. Silahkan tunggu hingga proses pengajuan selesai.",
+            "messageLocal": "PO Status != 2 (sedang dalam proses pengajuan)"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Validation PO bukan Merchant Financing
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-cancel-received
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      referenceId: 202312
+      from: RAYAAPPS
+      partnershipCode: OMS1
+      userId: 1
+      reason: Barang tidak diterima
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 20 Dec 2024 07:25:00 GMT
+      Content-Length: 125
+    }
+  
+    status: {
+      code: 500
+      text: Internal Server Error
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "status": 500,
+            "message": "Maaf, PO tersebut tidak bertipe Merchant Financing.",
+            "messageLocal": "Tipe bukan Merchant Financing"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Validation Sudah Cair
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-cancel-received
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      referenceId: 202312
+      from: RAYAAPPS
+      partnershipCode: OMS1
+      userId: 1
+      reason: Barang tidak diterima
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 20 Dec 2024 07:26:20 GMT
+      Content-Length: 161
+    }
+  
+    status: {
+      code: 500
+      text: Internal Server Error
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "status": 500,
+            "message": "Maaf, Pengajuan anda sudah berhasil dicairkan. Silahkan cek kembali status pengajuan anda.",
+            "messageLocal": "PO Status = 3 (sudah cair)"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Database Connection
+  
+  request: {
+    url: {{base-url-local}}/v/1/partnerships/po-cancel-received
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      referenceId: 202312
+      from: RAYAAPPS
+      partnershipCode: OMS1
+      userId: 1
+      reason: Barang tidak diterima
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 20 Dec 2024 07:42:22 GMT
+      Content-Length: 136
+    }
+  
+    status: {
+      code: 400
+      text: Bad Request
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "code": 400,
+            "desc": "Database Error",
+            "message": "Error koneksi database"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Validation Parameter Required
+  
+  request: {
+    url: {{base-url-local}}/v/1/partnerships/po-cancel-received
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      from: RAYAAPPS
+      partnershipCode: OMS1
+      userId: 1
+      reason: Barang tidak diterima
+      ~referenceId: 202312
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 20 Dec 2024 07:43:29 GMT
+      Content-Length: 131
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "Validation failed on field ... with tag 'required'",
+            "message": "Maaf, ... Tidak Boleh Kosong",
+            "status": 400
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Validation Automation
+  
+  request: {
+    url: localhost:7007/v/1/partnerships/po-cancel-received
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      from: RAYAAPPS
+      partnershipCode: OMS1
+      userId: 1
+      reason: Barang tidak diterima
+      referenceId: 202312
+      ~referenceId: 202312
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Mon, 23 Dec 2024 11:26:33 GMT
+      Content-Length: 158
+    }
+  
+    status: {
+      code: 500
+      text: Internal Server Error
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "status": 500,
+            "message": "Maaf, Pembatalan tidak dapat dilakukan. Silahkan lanjutkan proses approval.",
+            "messageLocal": "Salah satu automation sudah terbentuk."
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Validation Parameter Required
+  
+  request: {
+    url: {{base-url-local}}/v/1/partnerships/po-cancel-received
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      from: RAYAAPPS
+      partnershipCode: OMS1
+      userId: 1
+      reason: Barang tidak diterima
+      ~referenceId: 202312
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 20 Dec 2024 07:43:29 GMT
+      Content-Length: 131
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "Validation failed on field ... with tag 'required'",
+            "message": "Maaf, ... Tidak Boleh Kosong",
+            "status": 400
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Database Connection
+  
+  request: {
+    url: {{base-url-local}}/v/1/partnerships/po-cancel-received
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      referenceId: 202312
+      from: RAYAAPPS
+      partnershipCode: OMS1
+      userId: 1
+      reason: Barang tidak diterima
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 20 Dec 2024 07:42:22 GMT
+      Content-Length: 136
+    }
+  
+    status: {
+      code: 400
+      text: Bad Request
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "code": 400,
+            "desc": "Database Error",
+            "message": "Error koneksi database"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: general error
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-cancel-received
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      referenceId: 00000051
+      from: RAYAAPPS
+      partnershipCode: OMS1
+      userId: 009
+      reason: Barang tidak diterima
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 02:53:38 GMT
+      Content-Length: 111
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "Could not connect .....",
+            "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+            "status": 500
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Validation Automation
+  
+  request: {
+    url: localhost:7007/v/1/partnerships/po-cancel-received
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      from: RAYAAPPS
+      partnershipCode: OMS1
+      userId: 1
+      reason: Barang tidak diterima
+      referenceId: 202312
+      ~referenceId: 202312
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Mon, 23 Dec 2024 11:26:33 GMT
+      Content-Length: 158
+    }
+  
+    status: {
+      code: 500
+      text: Internal Server Error
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "status": 500,
+            "message": "Maaf, Pembatalan tidak dapat dilakukan. Silahkan lanjutkan proses approval.",
+            "messageLocal": "Salah satu automation sudah terbentuk."
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Validation PO bukan Merchant Financing
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-cancel-received
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      referenceId: 202312
+      from: RAYAAPPS
+      partnershipCode: OMS1
+      userId: 1
+      reason: Barang tidak diterima
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 20 Dec 2024 07:25:00 GMT
+      Content-Length: 125
+    }
+  
+    status: {
+      code: 500
+      text: Internal Server Error
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "status": 500,
+            "message": "Maaf, PO tersebut tidak bertipe Merchant Financing.",
+            "messageLocal": "Tipe bukan Merchant Financing"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: success
+  
+  request: {
+    url: {{base-url-local}}/v/1/partnerships/po-cancel-received
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      referenceId: 00000051
+      from: RAYAAPPS
+      partnershipCode: OMS1
+      userId: 009
+      reason: Barang tidak diterima
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 03:03:58 GMT
+      Content-Length: 82
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "Data Tersimpan",
+            "message": "Purchase Order berhasil disimpan",
+            "status": 200
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Unauthorized
+  
+  request: {
+    url: {{base-url-local}}/v/1/partnerships/po-cancel-received
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      referenceId: 202312
+      from: RAYAAPPS
+      partnershipCode: OMS1
+      userId: 1
+      reason: Barang tidak diterima
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 20 Dec 2024 07:06:53 GMT
+      Content-Length: 75
+    }
+  
+    status: {
+      code: 401
+      text: Unauthorized
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "code": 401,
+            "desc": "Expired",
+            "message": "Invalid Token || Token Is Expired"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Validation PO sudah ditolak
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-cancel-received
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      referenceId: 202312
+      from: RAYAAPPS
+      partnershipCode: OMS1
+      userId: 1
+      reason: Barang tidak diterima
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 20 Dec 2024 07:15:07 GMT
+      Content-Length: 165
+    }
+  
+    status: {
+      code: 500
+      text: Internal Server Error
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "status": 500,
+            "message": "Maaf, Pengajuan anda sudah ditolak. Silahkan cek kembali status pengajuan anda.",
+            "messageLocal": "PO Status < 0 (semua status ditolak)"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Validation Status dalam pengajuan
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-cancel-received
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      referenceId: 202312
+      from: RAYAAPPS
+      partnershipCode: OMS1
+      userId: 1
+      reason: Barang tidak diterima
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 20 Dec 2024 07:18:44 GMT
+      Content-Length: 181
+    }
+  
+    status: {
+      code: 500
+      text: Internal Server Error
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "status": 500,
+            "message": "Maaf, Pengajuan anda sedang dalam proses. Silahkan tunggu hingga proses pengajuan selesai.",
+            "messageLocal": "PO Status != 2 (sedang dalam proses pengajuan)"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Validation Sudah Cair
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-cancel-received
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      referenceId: 202312
+      from: RAYAAPPS
+      partnershipCode: OMS1
+      userId: 1
+      reason: Barang tidak diterima
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 20 Dec 2024 07:26:20 GMT
+      Content-Length: 161
+    }
+  
+    status: {
+      code: 500
+      text: Internal Server Error
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "status": 500,
+            "message": "Maaf, Pengajuan anda sudah berhasil dicairkan. Silahkan cek kembali status pengajuan anda.",
+            "messageLocal": "PO Status = 3 (sudah cair)"
+        }
+      '''
+    }
+  }
+}

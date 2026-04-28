@@ -1,0 +1,240 @@
+info:
+  name: Login Partnership V1
+  type: http
+  seq: 11
+
+http:
+  method: POST
+  url: "{{base-url-staging}}/v/1/partnerships/login"
+  body:
+    type: form-urlencoded
+    data:
+      - name: email
+        value: oms@gmail.com
+        description: Email Partnership { MANDATORY }
+      - name: password
+        value: MA==
+        description: Password Partnership (encode base64) { MANDATORY }
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        var jsonData = res.getBody();
+        bru.setGlobalEnvVar("tokenPartnership", jsonData.data.accessToken)
+        bru.setEnvVar("tokenPartnership", jsonData.data.accessToken)
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Error - Parameter Validation Required
+    request:
+      url: "{{base-url-local}}/v/1/partnerships/login"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: email
+            value: oms@gmail.com
+            description: Email Partnership { MANDATORY }
+          - name: password
+            value: MA==
+            description: Password Partnership (encode base64) { MANDATORY }
+            disabled: true
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 24 Dec 2024 02:08:11 GMT
+        - name: Content-Length
+          value: "125"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Validation failed on field ... with tag 'required'",
+              "message": "Maaf, ... Tidak Boleh Kosong",
+              "status": 400
+          }
+  - name: Error - Validation Email
+    request:
+      url: "{{base-url-local}}/v/1/partnerships/login"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: email
+            value: oms
+            description: Email Partnership { MANDATORY }
+          - name: password
+            value: MA==
+            description: Password Partnership (encode base64) { MANDATORY }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 24 Dec 2024 02:09:38 GMT
+        - name: Content-Length
+          value: "109"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Validation failed on field Email with tag 'email'",
+              "message": "Maaf, Email Tidak Valid",
+              "status": 400
+          }
+  - name: Error - Database Connection
+    request:
+      url: "{{base-url-local}}/v/1/partnerships/login"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: email
+            value: oms@gmail.com
+            description: Email Partnership { MANDATORY }
+          - name: password
+            value: MA===
+            description: Password Partnership (encode base64) { MANDATORY }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 24 Dec 2024 00:22:39 GMT
+        - name: Content-Length
+          value: "131"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "status": 500,
+              "message": "Server sedang dalam perbaikan. Silahkan menghubungi administrator.",
+              "desc": "No DB Connection"
+          }
+  - name: Error - Email or Password invalid
+    request:
+      url: "{{base-url-local}}/v/1/partnerships/login"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: email
+            value: majoo@gmail.com
+            description: Email Partnership { MANDATORY }
+          - name: password
+            value: MA==A
+            description: Password Partnership (encode base64) { MANDATORY }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 22 Nov 2022 08:52:48 GMT
+        - name: Content-Length
+          value: "139"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Email & Password is not valid",
+              "message": "Pastikan kamu menggunakan email dan password yang sesuai",
+              "status": 401
+          }
+  - name: Error - Email or Password invalid 3x
+    request:
+      url: "{{base-url-local}}/v/1/partnerships/login"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: email
+            value: majoo@gmail.com
+            description: Email Partnership { MANDATORY }
+          - name: password
+            value: MA==A
+            description: Password Partnership (encode base64) { MANDATORY }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Date
+          value: Wed, 23 Nov 2022 02:08:52 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "194"
+        - name: Connection
+          value: keep-alive
+        - name: Strict-Transport-Security
+          value: max-age=15724800; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Email & Password is not valid 3x",
+              "message": "Sudah 3 kali salah, mohon menunggu selama 60 menit. Pastikan kamu menggunakan email dan password yang sesuai",
+              "status": 401
+          }
+  - name: Success
+    request:
+      url: "{{base-url-local}}/v/1/partnerships/login"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: email
+            value: oms@gmail.com
+            description: Email Partnership { MANDATORY }
+          - name: password
+            value: MA==
+            description: Password Partnership (encode base64) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Date
+          value: Mon, 08 Dec 2025 02:52:40 GMT
+        - name: Content-Length
+          value: "471"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "id": 1,
+                  "name": "Admin OMS",
+                  "email": "oms@gmail.com",
+                  "partnershipId": 4,
+                  "partnershipCode": "OMS1",
+                  "partnershipName": "OMS",
+                  "ticketNumber": "T01TMS0yMDI1MTIwODA5NTIzOQ==",
+                  "accessLevel": 90,
+                  "merchantEntryPoint": "",
+                  "accessToken": "UmF5YVBpUGVyVG9wtk843jG/7RB5In2LDvIpg9UKTcSXLLozmNOcnE7FFvjDhQqUp8VSRyqeevBGYp/zDqP8fbgSm5ul2vDNvWAJkN8T97L1oROjJb3xSjM4BkRbPADdalt9G2Oe0im67LRegPCuIRaV0zI=",
+                  "productType": "partner"
+              },
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }

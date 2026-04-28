@@ -1,0 +1,700 @@
+info:
+  name: Credit Contract Confirmation V1
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: "{{base_url}}/v/1/prakarsa/credit-contract-confirmation/700"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "999961"
+        description: Personal Number BRI Agro (UserID Login)
+      - name: savingAccountNumber
+        value: "001001000001315"
+        description: Nomor Rekening Simpanan Digital Nasabah
+      - name: savingAccountName
+        value: DWIKI SAPUTRA
+        description: Nama Rekening Simpanan Digital Nasabah
+      - name: savingAccountType
+        value: TABUNGAN AGROTAMA DIGITAL
+        description: Tipe Rekening Simpanan Nasabah
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: error process automation facility
+    request:
+      url: "{{base_url}}/v/1/prakarsa/credit-contract-confirmation/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: savingAccountNumber
+            value: "001001000001315"
+            description: Nomor Rekening Simpanan Digital Nasabah
+          - name: savingAccountName
+            value: Dwiki Saputra
+            description: Nama Rekening Simpanan Digital Nasabah
+          - name: savingAccountType
+            value: Agrotama Digital
+            description: Tipe Rekening Simpanan Nasabah
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 08 Oct 2021 10:08:09 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Error CURL Automation Facility",
+              "message": "Maaf, Server pembuatan Fasilitas otomatis sedang dalam gangguan. Silahkan coba beberapa saat lagi.",
+              "status": 500
+          }
+  - name: error process automation collateral
+    request:
+      url: "{{base_url}}/v/1/prakarsa/credit-contract-confirmation/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: savingAccountNumber
+            value: "001001000001315"
+            description: Nomor Rekening Simpanan Digital Nasabah
+          - name: savingAccountName
+            value: Dwiki Saputra
+            description: Nama Rekening Simpanan Digital Nasabah
+          - name: savingAccountType
+            value: Agrotama Digital
+            description: Tipe Rekening Simpanan Nasabah
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 08 Oct 2021 10:08:09 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Error CURL Automation Collateral",
+              "message": "Maaf, Server pembuatan Agunan otomatis sedang dalam gangguan. Silahkan coba beberapa saat lagi.",
+              "status": 500
+          }
+  - name: prakarsa not found
+    request:
+      url: "{{base_url}}/v/1/prakarsa/credit-contract-confirmation/-1"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: savingAccountNumber
+            value: "001001000001315"
+            description: Nomor Rekening Simpanan Digital Nasabah
+          - name: savingAccountName
+            value: Dwiki Saputra
+            description: Nama Rekening Simpanan Digital Nasabah
+          - name: savingAccountType
+            value: Agrotama Digital
+            description: Tipe Rekening Simpanan Nasabah
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 25 Jun 2021 08:43:58 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Error record not found",
+              "message": "Prakarsa Tidak Ditemukan",
+              "status": 500
+          }
+  - name: validasi status
+    request:
+      url: "{{base_url}}/v/1/prakarsa/credit-contract-confirmation/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: savingAccountNumber
+            value: "001001000001315"
+            description: Nomor Rekening Simpanan Digital Nasabah
+          - name: savingAccountName
+            value: Dwiki Saputra
+            description: Nama Rekening Simpanan Digital Nasabah
+          - name: savingAccountType
+            value: Agrotama Digital
+            description: Tipe Rekening Simpanan Nasabah
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 25 Jun 2021 08:43:58 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Status < 7 (dibawah Proses Akad Kredit)",
+              "message": "Maaf, Proses konfirmasi dokumen akad kredit tidak bisa dilakukan. Silahkan monitor status terakhir Prakarsa",
+              "status": 500
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/prakarsa/credit-contract-confirmation/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: savingAccountNumber
+            value: "001001000001315"
+            description: Nomor Rekening Simpanan Digital Nasabah
+          - name: savingAccountName
+            value: Dwiki Saputra
+            description: Nama Rekening Simpanan Digital Nasabah
+          - name: savingAccountType
+            value: Agrotama Digital
+            description: Tipe Rekening Simpanan Nasabah
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 25 Jun 2021 08:43:58 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Data Tersimpan",
+              "message": "Data prakarsa berhasil disimpan",
+              "status": 200
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/prakarsa/credit-contract-confirmation/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: savingAccountNumber
+            value: "001001000001315"
+            description: Nomor Rekening Simpanan Digital Nasabah
+          - name: savingAccountName
+            value: Dwiki Saputra
+            description: Nama Rekening Simpanan Digital Nasabah
+          - name: savingAccountType
+            value: Agrotama Digital
+            description: Tipe Rekening Simpanan Nasabah
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 25 Jun 2021 08:43:58 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/prakarsa/credit-contract-confirmation/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: savingAccountNumber
+            value: "001001000001315"
+            description: Nomor Rekening Simpanan Digital Nasabah
+          - name: savingAccountName
+            value: Dwiki Saputra
+            description: Nama Rekening Simpanan Digital Nasabah
+          - name: savingAccountType
+            value: Agrotama Digital
+            description: Tipe Rekening Simpanan Nasabah
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 25 Jun 2021 08:43:58 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Tidak Memliki Akses",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/prakarsa/credit-contract-confirmation/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: savingAccountNumber
+            value: "001001000001315"
+            description: Nomor Rekening Simpanan Digital Nasabah
+          - name: savingAccountName
+            value: Dwiki Saputra
+            description: Nama Rekening Simpanan Digital Nasabah
+          - name: savingAccountType
+            value: Agrotama Digital
+            description: Tipe Rekening Simpanan Nasabah
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 25 Jun 2021 08:43:58 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect ....."
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{base_url}}/v/1/prakarsa/credit-contract-confirmation/30946"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: savingAccountNumber
+            value: "001001000001315"
+            description: Nomor Rekening Simpanan Digital Nasabah
+          - name: savingAccountName
+            value: DWIKI SAPUTRA
+            description: Nama Rekening Simpanan Digital Nasabah
+          - name: savingAccountType
+            value: TABUNGAN AGROTAMA DIGITAL
+            description: Tipe Rekening Simpanan Nasabah
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 19 Jul 2022 08:06:26 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/prakarsa/credit-contract-confirmation/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: savingAccountNumber
+            value: "001001000001315"
+            description: Nomor Rekening Simpanan Digital Nasabah
+          - name: savingAccountName
+            value: Dwiki Saputra
+            description: Nama Rekening Simpanan Digital Nasabah
+          - name: savingAccountType
+            value: Agrotama Digital
+            description: Tipe Rekening Simpanan Nasabah
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 25 Jun 2021 08:43:58 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect ....."
+          }
+  - name: validasi status
+    request:
+      url: "{{base_url}}/v/1/prakarsa/credit-contract-confirmation/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: savingAccountNumber
+            value: "001001000001315"
+            description: Nomor Rekening Simpanan Digital Nasabah
+          - name: savingAccountName
+            value: Dwiki Saputra
+            description: Nama Rekening Simpanan Digital Nasabah
+          - name: savingAccountType
+            value: Agrotama Digital
+            description: Tipe Rekening Simpanan Nasabah
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 25 Jun 2021 08:43:58 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Status < 7 (dibawah Proses Akad Kredit)",
+              "message": "Maaf, Proses konfirmasi dokumen akad kredit tidak bisa dilakukan. Silahkan monitor status terakhir Prakarsa",
+              "status": 500
+          }
+  - name: error process automation facility
+    request:
+      url: "{{base_url}}/v/1/prakarsa/credit-contract-confirmation/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: savingAccountNumber
+            value: "001001000001315"
+            description: Nomor Rekening Simpanan Digital Nasabah
+          - name: savingAccountName
+            value: Dwiki Saputra
+            description: Nama Rekening Simpanan Digital Nasabah
+          - name: savingAccountType
+            value: Agrotama Digital
+            description: Tipe Rekening Simpanan Nasabah
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 08 Oct 2021 10:08:09 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Error CURL Automation Facility",
+              "message": "Maaf, Server pembuatan Fasilitas otomatis sedang dalam gangguan. Silahkan coba beberapa saat lagi.",
+              "status": 500
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/prakarsa/credit-contract-confirmation/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: savingAccountNumber
+            value: "001001000001315"
+            description: Nomor Rekening Simpanan Digital Nasabah
+          - name: savingAccountName
+            value: Dwiki Saputra
+            description: Nama Rekening Simpanan Digital Nasabah
+          - name: savingAccountType
+            value: Agrotama Digital
+            description: Tipe Rekening Simpanan Nasabah
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 25 Jun 2021 08:43:58 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Tidak Memliki Akses",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: error process automation collateral
+    request:
+      url: "{{base_url}}/v/1/prakarsa/credit-contract-confirmation/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: savingAccountNumber
+            value: "001001000001315"
+            description: Nomor Rekening Simpanan Digital Nasabah
+          - name: savingAccountName
+            value: Dwiki Saputra
+            description: Nama Rekening Simpanan Digital Nasabah
+          - name: savingAccountType
+            value: Agrotama Digital
+            description: Tipe Rekening Simpanan Nasabah
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 08 Oct 2021 10:08:09 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Error CURL Automation Collateral",
+              "message": "Maaf, Server pembuatan Agunan otomatis sedang dalam gangguan. Silahkan coba beberapa saat lagi.",
+              "status": 500
+          }
+  - name: prakarsa not found
+    request:
+      url: "{{base_url}}/v/1/prakarsa/credit-contract-confirmation/-1"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: savingAccountNumber
+            value: "001001000001315"
+            description: Nomor Rekening Simpanan Digital Nasabah
+          - name: savingAccountName
+            value: Dwiki Saputra
+            description: Nama Rekening Simpanan Digital Nasabah
+          - name: savingAccountType
+            value: Agrotama Digital
+            description: Tipe Rekening Simpanan Nasabah
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 25 Jun 2021 08:43:58 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Error record not found",
+              "message": "Prakarsa Tidak Ditemukan",
+              "status": 500
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/prakarsa/credit-contract-confirmation/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: savingAccountNumber
+            value: "001001000001315"
+            description: Nomor Rekening Simpanan Digital Nasabah
+          - name: savingAccountName
+            value: Dwiki Saputra
+            description: Nama Rekening Simpanan Digital Nasabah
+          - name: savingAccountType
+            value: Agrotama Digital
+            description: Tipe Rekening Simpanan Nasabah
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 25 Jun 2021 08:43:58 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/prakarsa/credit-contract-confirmation/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: savingAccountNumber
+            value: "001001000001315"
+            description: Nomor Rekening Simpanan Digital Nasabah
+          - name: savingAccountName
+            value: Dwiki Saputra
+            description: Nama Rekening Simpanan Digital Nasabah
+          - name: savingAccountType
+            value: Agrotama Digital
+            description: Tipe Rekening Simpanan Nasabah
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 25 Jun 2021 08:43:58 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Data Tersimpan",
+              "message": "Data prakarsa berhasil disimpan",
+              "status": 200
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{base_url}}/v/1/prakarsa/credit-contract-confirmation/30946"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: savingAccountNumber
+            value: "001001000001315"
+            description: Nomor Rekening Simpanan Digital Nasabah
+          - name: savingAccountName
+            value: DWIKI SAPUTRA
+            description: Nama Rekening Simpanan Digital Nasabah
+          - name: savingAccountType
+            value: TABUNGAN AGROTAMA DIGITAL
+            description: Tipe Rekening Simpanan Nasabah
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 19 Jul 2022 08:06:26 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }

@@ -1,0 +1,360 @@
+info:
+  name: Bidang Pekerjaan
+  type: http
+  seq: 2
+
+http:
+  method: GET
+  url: "{{base_url}}/raya/data-master/bidang-pekerjaan"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: success
+    request:
+      url: "{{base_url}}/raya/data-master/bidang-pekerjaan"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Mon, 02 Jun 2025 02:30:11 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Origin
+        - name: Vary
+          value: Origin
+        - name: Vary
+          value: Access-Control-Request-Method
+        - name: Vary
+          value: Access-Control-Request-Headers
+        - name: X-Krakend
+          value: Version 2.7.2
+        - name: X-Krakend-Completed
+          value: "false"
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+        - name: Access-Control-Allow-Origin
+          value: "*"
+        - name: X-Kong-Upstream-Latency
+          value: "99"
+        - name: X-Kong-Proxy-Latency
+          value: "16"
+        - name: Via
+          value: kong/3.3.1
+      body:
+        type: json
+        data: |-
+          {
+              "ResponseCode": "00",
+              "ResponseDesc": "Sukses",
+              "Data": [
+                  {
+                      "ItemValue": "0000",
+                      "ItemText": "BELUM DIKETAHUI"
+                  },
+                  {
+                      "ItemValue": "0001",
+                      "ItemText": "WIRASWASTA"
+                  },
+                  {
+                      "ItemValue": "0002",
+                      "ItemText": "PEMERINTAHAN"
+                  },
+                  {
+                      "ItemValue": "0003",
+                      "ItemText": "SWASTA"
+                  },
+                  {
+                      "ItemValue": "0004",
+                      "ItemText": "BANK"
+                  },
+                  {
+                      "ItemValue": "0005",
+                      "ItemText": "LAINNYA"
+                  },
+                  {
+                      "ItemValue": "0006",
+                      "ItemText": "PERDAGANGAN & JASA"
+                  },
+                  {
+                      "ItemValue": "0007",
+                      "ItemText": "PERSEROAN TERBATAS (PT)"
+                  },
+                  {
+                      "ItemValue": "0008",
+                      "ItemText": "KOPERASI"
+                  },
+                  {
+                      "ItemValue": "0009",
+                      "ItemText": "ASURANSI"
+                  },
+                  {
+                      "ItemValue": "0010",
+                      "ItemText": "PERKEBUNAN"
+                  },
+                  {
+                      "ItemValue": "0011",
+                      "ItemText": "PERTANIAN"
+                  },
+                  {
+                      "ItemValue": "0012",
+                      "ItemText": "COMMANDITER VENOTSCHAP (CV)"
+                  },
+                  {
+                      "ItemValue": "0013",
+                      "ItemText": "JASA"
+                  },
+                  {
+                      "ItemValue": "0014",
+                      "ItemText": "FA"
+                  },
+                  {
+                      "ItemValue": "0015",
+                      "ItemText": "DANA PENSIUN"
+                  },
+                  {
+                      "ItemValue": "0016",
+                      "ItemText": "BUMN"
+                  },
+                  {
+                      "ItemValue": "0017",
+                      "ItemText": "BUMD"
+                  },
+                  {
+                      "ItemValue": "0018",
+                      "ItemText": "BHMN"
+                  },
+                  {
+                      "ItemValue": "0019",
+                      "ItemText": "PERSERO"
+                  },
+                  {
+                      "ItemValue": "0020",
+                      "ItemText": "PERJAN"
+                  },
+                  {
+                      "ItemValue": "0021",
+                      "ItemText": "PERUM"
+                  },
+                  {
+                      "ItemValue": "0022",
+                      "ItemText": "PERUSAHAAN DAERAH"
+                  },
+                  {
+                      "ItemValue": "0023",
+                      "ItemText": "EKSPLORASI"
+                  },
+                  {
+                      "ItemValue": "0024",
+                      "ItemText": "EKSPOR IMPOR"
+                  },
+                  {
+                      "ItemValue": "0025",
+                      "ItemText": "INDUSTRI"
+                  },
+                  {
+                      "ItemValue": "0026",
+                      "ItemText": "KEHUTANAN"
+                  },
+                  {
+                      "ItemValue": "0027",
+                      "ItemText": "KELAUTAN"
+                  },
+                  {
+                      "ItemValue": "0028",
+                      "ItemText": "LOGGING"
+                  },
+                  {
+                      "ItemValue": "0029",
+                      "ItemText": "ORGANISASI MASA (ORMAS)"
+                  },
+                  {
+                      "ItemValue": "0030",
+                      "ItemText": "PENDIDIKAN"
+                  },
+                  {
+                      "ItemValue": "0031",
+                      "ItemText": "PERDAGANGAN"
+                  },
+                  {
+                      "ItemValue": "0032",
+                      "ItemText": "PERIKANAN"
+                  },
+                  {
+                      "ItemValue": "0033",
+                      "ItemText": "YAYASAN"
+                  },
+                  {
+                      "ItemValue": "0034",
+                      "ItemText": "ELECTRONIC BANKING"
+                  },
+                  {
+                      "ItemValue": "0035",
+                      "ItemText": "INTERNET BANKING"
+                  },
+                  {
+                      "ItemValue": "0036",
+                      "ItemText": "TRANSFER DANA"
+                  },
+                  {
+                      "ItemValue": "0037",
+                      "ItemText": "KARTU KREDIT TERMASUK KTA"
+                  },
+                  {
+                      "ItemValue": "0038",
+                      "ItemText": "TRAVELERS CHECK DAN BANK DRAFT"
+                  },
+                  {
+                      "ItemValue": "0039",
+                      "ItemText": "PRIVATE BANKING"
+                  },
+                  {
+                      "ItemValue": "0040",
+                      "ItemText": "CUSTODIAN"
+                  },
+                  {
+                      "ItemValue": "0041",
+                      "ItemText": "SAFE DEPOSIT BOX"
+                  },
+                  {
+                      "ItemValue": "0042",
+                      "ItemText": "REKSADANA"
+                  },
+                  {
+                      "ItemValue": "0043",
+                      "ItemText": "JUAL BELI VALUTA ASING"
+                  },
+                  {
+                      "ItemValue": "0044",
+                      "ItemText": "LETTER OF CREDIT (LC)"
+                  },
+                  {
+                      "ItemValue": "0045",
+                      "ItemText": "PEDAGANG BRG MEWAH/EMAS/BERLIA"
+                  },
+                  {
+                      "ItemValue": "0046",
+                      "ItemText": "USAHA BARANG-BARANG ANTIK"
+                  },
+                  {
+                      "ItemValue": "0047",
+                      "ItemText": "AGEN PERJALANAN"
+                  },
+                  {
+                      "ItemValue": "0048",
+                      "ItemText": "DEALER MOBIL, KAPAL"
+                  },
+                  {
+                      "ItemValue": "0049",
+                      "ItemText": "TEMPAT HIBURAN,KASINO/EXE.CLUB"
+                  },
+                  {
+                      "ItemValue": "0050",
+                      "ItemText": "USAHA DI NEGARA NCCT/TAX HAVEN"
+                  },
+                  {
+                      "ItemValue": "0051",
+                      "ItemText": "AKUNTAN, PENGACARA DAN NOTARIS"
+                  },
+                  {
+                      "ItemValue": "0052",
+                      "ItemText": "CATERING"
+                  },
+                  {
+                      "ItemValue": "0053",
+                      "ItemText": "SURVEYOR"
+                  },
+                  {
+                      "ItemValue": "0054",
+                      "ItemText": "KONSULTAN"
+                  },
+                  {
+                      "ItemValue": "0055",
+                      "ItemText": "KONSTRUKSI"
+                  },
+                  {
+                      "ItemValue": "0056",
+                      "ItemText": "BADAN USAHA UNIT DESA (BUUD)"
+                  },
+                  {
+                      "ItemValue": "0057",
+                      "ItemText": "DEBITUR KELOMPOK"
+                  },
+                  {
+                      "ItemValue": "0058",
+                      "ItemText": "EKSPEDISI MUATAN KAPAL LAUT (EMKL)"
+                  },
+                  {
+                      "ItemValue": "0059",
+                      "ItemText": "FIRMA"
+                  },
+                  {
+                      "ItemValue": "0060",
+                      "ItemText": "GABUNGAN KOPERASI"
+                  },
+                  {
+                      "ItemValue": "0061",
+                      "ItemText": "INDUK KOPERASI"
+                  },
+                  {
+                      "ItemValue": "0062",
+                      "ItemText": "KOPERASI UNIT DESA"
+                  },
+                  {
+                      "ItemValue": "0063",
+                      "ItemText": "LIMITED"
+                  },
+                  {
+                      "ItemValue": "0064",
+                      "ItemText": "MASKAPAI ANDIL INDONESIA"
+                  },
+                  {
+                      "ItemValue": "0065",
+                      "ItemText": "NAMLOOSE VENOTSCHAAP"
+                  },
+                  {
+                      "ItemValue": "0066",
+                      "ItemText": "PERSEKUTUAN PERDATA"
+                  },
+                  {
+                      "ItemValue": "0067",
+                      "ItemText": "PERUSAHAAN UMUM"
+                  },
+                  {
+                      "ItemValue": "0068",
+                      "ItemText": "PRIMER KOPERASI"
+                  },
+                  {
+                      "ItemValue": "0069",
+                      "ItemText": "PUSAT KOPERASI"
+                  },
+                  {
+                      "ItemValue": "0070",
+                      "ItemText": "PUSAT KOPERASI UNIT DESA"
+                  },
+                  {
+                      "ItemValue": "0071",
+                      "ItemText": "UNIT DAGANG KREDIT PEDESAAN"
+                  },
+                  {
+                      "ItemValue": "0072",
+                      "ItemText": "LAINNYA BADAN USAHA"
+                  },
+                  {
+                      "ItemValue": "0073",
+                      "ItemText": "USAHA DAGANG"
+                  }
+              ]
+          }

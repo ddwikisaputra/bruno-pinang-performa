@@ -1,0 +1,391 @@
+info:
+  name: Request OTP Partnerhip V1
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{url}}/v/1/partnerships/request-otp"
+  body:
+    type: form-urlencoded
+    data:
+      - name: email
+        value: dwiki.saputra@bankraya.co.id
+        description: Email Partnership { MANDATORY }
+      - name: mobileNumber
+        value: "+6285153315772"
+        description: Nomor Telepon untuk send OTP { MANDATORY }
+  auth:
+    type: basic
+    username: UmF5YVBpUGVyVG9wvQQ9yCaZywQnor3oTiEnI7QBWZVTYFT2
+    password: UmF5YVBpUGVyVG9w/18dnAT+9iY6YT7toW1oEEdcvgxwAkuWwDSb
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: general error
+    request:
+      url: "{{url}}/v/1/partnerships/verify-account"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: email
+            value: oms@gmail.com
+            description: Email Partnership { MANDATORY }
+          - name: mobileNumber
+            value: "+6281776527556"
+            description: Nomor Telepon untuk send OTP { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Could not connect .....",
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "status": 500
+          }
+  - name: success
+    request:
+      url: "{{url}}/v/1/partnerships/verify-account"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: email
+            value: oms@gmail.com
+            description: Email Partnership { MANDATORY }
+          - name: mobileNumber
+            value: "+6281776527556"
+            description: Nomor Telepon untuk send OTP { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 03:03:58 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Data Valid",
+              "message": "User ditemukan",
+              "status": 200
+          }
+  - name: validasi parameter
+    request:
+      url: "{{url}}/v/1/partnerships/verify-account"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: email
+            value: oms@gmail.com
+            description: Email Partnership { MANDATORY }
+          - name: mobileNumber
+            value: "+6281776527556"
+            description: Nomor Telepon untuk send OTP { MANDATORY }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Parameter ... kosong",
+              "message": "Maaf, Parameter ... tidak boleh kosong",
+              "status": 500
+          }
+  - name: error database connection
+    request:
+      url: "{{url}}/v/1/partnerships/verify-account"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: email
+            value: oms@gmail.com
+            description: Email Partnership { MANDATORY }
+          - name: mobileNumber
+            value: "+6281776527556"
+            description: Nomor Telepon untuk send OTP { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: unautorized
+    request:
+      url: "{{url}}/v/1/partnerships/verify-account"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: email
+            value: oms@gmail.com
+            description: Email Partnership { MANDATORY }
+          - name: mobileNumber
+            value: "+6281776527556"
+            description: Nomor Telepon untuk send OTP { MANDATORY }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:44:34 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: ""
+  - name: validasi email not found
+    request:
+      url: "{{url}}/v/1/partnerships/verify-account"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: email
+            value: a@gmail.com
+            description: Email Partnership { MANDATORY }
+          - name: mobileNumber
+            value: "+6281776527556"
+            description: Nomor Telepon untuk send OTP { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 09 Mar 2022 01:43:33 GMT
+        - name: Content-Length
+          value: "90"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Data User tidak ditemukan",
+              "message": "Maaf, Email tidak terdaftar.",
+              "status": 404
+          }
+  - name: general error
+    request:
+      url: "{{url}}/v/1/partnerships/verify-account"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: email
+            value: oms@gmail.com
+            description: Email Partnership { MANDATORY }
+          - name: mobileNumber
+            value: "+6281776527556"
+            description: Nomor Telepon untuk send OTP { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Could not connect .....",
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "status": 500
+          }
+  - name: success
+    request:
+      url: "{{url}}/v/1/partnerships/verify-account"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: email
+            value: oms@gmail.com
+            description: Email Partnership { MANDATORY }
+          - name: mobileNumber
+            value: "+6281776527556"
+            description: Nomor Telepon untuk send OTP { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 03:03:58 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Data Valid",
+              "message": "User ditemukan",
+              "status": 200
+          }
+  - name: validasi parameter
+    request:
+      url: "{{url}}/v/1/partnerships/verify-account"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: email
+            value: oms@gmail.com
+            description: Email Partnership { MANDATORY }
+          - name: mobileNumber
+            value: "+6281776527556"
+            description: Nomor Telepon untuk send OTP { MANDATORY }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Parameter ... kosong",
+              "message": "Maaf, Parameter ... tidak boleh kosong",
+              "status": 500
+          }
+  - name: error database connection
+    request:
+      url: "{{url}}/v/1/partnerships/verify-account"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: email
+            value: oms@gmail.com
+            description: Email Partnership { MANDATORY }
+          - name: mobileNumber
+            value: "+6281776527556"
+            description: Nomor Telepon untuk send OTP { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: unautorized
+    request:
+      url: "{{url}}/v/1/partnerships/verify-account"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: email
+            value: oms@gmail.com
+            description: Email Partnership { MANDATORY }
+          - name: mobileNumber
+            value: "+6281776527556"
+            description: Nomor Telepon untuk send OTP { MANDATORY }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:44:34 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: ""
+  - name: validasi email not found
+    request:
+      url: "{{url}}/v/1/partnerships/verify-account"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: email
+            value: a@gmail.com
+            description: Email Partnership { MANDATORY }
+          - name: mobileNumber
+            value: "+6281776527556"
+            description: Nomor Telepon untuk send OTP { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 09 Mar 2022 01:43:33 GMT
+        - name: Content-Length
+          value: "90"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Data User tidak ditemukan",
+              "message": "Maaf, Email tidak terdaftar.",
+              "status": 404
+          }

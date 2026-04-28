@@ -1,0 +1,364 @@
+info:
+  name: Login Partnerhip V2 (X)
+  type: http
+  seq: 8
+
+http:
+  method: POST
+  url: "{{base_url}}/v/2/partnerships/login-partnership"
+  body:
+    type: form-urlencoded
+    data:
+      - name: email
+        value: UmF5YVBpUGVyVG9wogA+7TOgxR03NjzVQWVaaoKhtRKGd4fhgyjMeCA=
+        description: "[ENCODE] Email Login Partnership { Default NULL }"
+      - name: password
+        value: UmF5YVBpUGVyVG9wgCxwkBceIOK96mO338hXSYi6TXc=
+        description: "[ENCODE] Password Login Partnership { Default NULL }"
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/partnerships/login-partnership"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: email
+            value: oms@gmail.com
+            description: Email Login Partnership { Default NULL }
+          - name: password
+            value: MA==
+            description: Password Login Partnership { Default NULL }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:32:34 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/partnerships/login-partnership"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: email
+            value: oms@gmail.com
+            description: Email Login Partnership { Default NULL }
+          - name: password
+            value: MA==
+            description: Password Login Partnership { Default NULL }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:32:34 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data": null
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/partnerships/login-partnership"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: email
+            value: oms@gmail.com
+            description: Email Login Partnership { Default NULL }
+          - name: password
+            value: MA==
+            description: Password Login Partnership { Default NULL }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:35:05 GMT
+        - name: Content-Length
+          value: "141"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "id": 4,
+                  "code": "OMS1",
+                  "name": "OMS",
+                  "type": "partner",
+                  "email": "oms@gmail.com",
+                  "status": 0,
+                  "createdAt": "",
+                  "updatedAt": ""
+              },
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: empty data
+    request:
+      url: "{{base_url}}/v/1/partnerships/login-partnership"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: email
+            value: oms@gmail.com
+            description: Email Login Partnership { Default NULL }
+          - name: password
+            value: MA==
+            description: Password Login Partnership { Default NULL }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:32:34 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Data User Partnership tidak ditemukan",
+              "message": "Maaf, User tidak ditemukan.",
+              "status": 404
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/partnerships/login-partnership"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: email
+            value: oms@gmail.com
+            description: Email Login Partnership { Default NULL }
+          - name: password
+            value: MA==
+            description: Password Login Partnership { Default NULL }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:32:34 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/partnerships/login-partnership"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: email
+            value: oms@gmail.com
+            description: Email Login Partnership { Default NULL }
+          - name: password
+            value: MA==
+            description: Password Login Partnership { Default NULL }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:32:34 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/partnerships/login-partnership"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: email
+            value: oms@gmail.com
+            description: Email Login Partnership { Default NULL }
+          - name: password
+            value: MA==
+            description: Password Login Partnership { Default NULL }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:32:34 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data": null
+          }
+  - name: empty data
+    request:
+      url: "{{base_url}}/v/1/partnerships/login-partnership"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: email
+            value: oms@gmail.com
+            description: Email Login Partnership { Default NULL }
+          - name: password
+            value: MA==
+            description: Password Login Partnership { Default NULL }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:32:34 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Data User Partnership tidak ditemukan",
+              "message": "Maaf, User tidak ditemukan.",
+              "status": 404
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/partnerships/login-partnership"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: email
+            value: oms@gmail.com
+            description: Email Login Partnership { Default NULL }
+          - name: password
+            value: MA==
+            description: Password Login Partnership { Default NULL }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:35:05 GMT
+        - name: Content-Length
+          value: "141"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "id": 4,
+                  "code": "OMS1",
+                  "name": "OMS",
+                  "type": "partner",
+                  "email": "oms@gmail.com",
+                  "status": 0,
+                  "createdAt": "",
+                  "updatedAt": ""
+              },
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/partnerships/login-partnership"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: email
+            value: oms@gmail.com
+            description: Email Login Partnership { Default NULL }
+          - name: password
+            value: MA==
+            description: Password Login Partnership { Default NULL }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:32:34 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }

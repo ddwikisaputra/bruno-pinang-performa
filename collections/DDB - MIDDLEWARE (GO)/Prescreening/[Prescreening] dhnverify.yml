@@ -1,0 +1,52 @@
+info:
+  name: "[Prescreening] dhnverify"
+  type: http
+  seq: 3
+
+http:
+  method: GET
+  url: "{{baseUrl}}/api/digiagri/dhnverify/{{userId}}/{{NIK}}"
+  auth:
+    type: bearer
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NzUxNTQxODAsImlzcyI6Imh0dHBzOi8vYXBpLXBheW1lbnR2YS5kZXYuaW50ZXJuYWwucmF5YWluLm5ldCIsImF1ZCI6Imh0dHBzOi8vYXBpLXBheW1lbnR2YS5kZXYuaW50ZXJuYWwucmF5YWluLm5ldCJ9.aHOQVf7wU-n05LmklksH5Z-RB8RND3R01PgZLFoLrs0
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Success Response
+    request:
+      url: "{{baseUrl}}/api/digiagri/dhnverify/{{userId}}/{{NIK}}"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Thu, 09 Oct 2025 04:34:28 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "217"
+        - name: Connection
+          value: keep-alive
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "statusCode": "1",
+              "statusDescription": "Inquiry Success, Nasabah Tidak Masuk dalam DHN",
+              "data": [
+                  {
+                      "responseStatus": "00",
+                      "namaNasabah": "AMIN JAYA MAKMUR SENTOSA, PT",
+                      "namaBank": "PANIN BANK",
+                      "tglAkhirSanksi": "17032020"
+                  }
+              ]
+          }

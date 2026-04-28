@@ -1,0 +1,88 @@
+info:
+  name: Verify OTP
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: "{{base_url_dev}}/api/verotp"
+  body:
+    type: form-urlencoded
+    data:
+      - name: client
+        value: "{{client_otp_dev}}"
+      - name: serverId
+        value: "{{serverId}}"
+      - name: otp
+        value: "70652"
+      - name: remark
+        value: PINANG PERFORMA
+  auth:
+    type: bearer
+    token: "{{tokenOTP}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: gagal 2x verifikasi
+    request:
+      url: "{{base_url_otp_dev}}/api/verotp"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: client
+            value: "{{client_otp_dev}}"
+          - name: serverId
+            value: "{{serverId}}"
+          - name: otp
+            value: "33201"
+          - name: remark
+            value: PINANG PERFORMA
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: no-cache
+        - name: Pragma
+          value: no-cache
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Expires
+          value: "-1"
+        - name: Content-Security-Policy
+          value: default-src *;  script-src * 'unsafe-inline' 'unsafe-eval'; style-src  * 'unsafe-inline' 'unsafe-eval';
+        - name: Strict-Transport-Security
+          value: max-age=31536000
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-XSS-Protection
+          value: 1;mode=block
+        - name: x-permitted-cross-domain-policies
+          value: none
+        - name: Access-Control-Allow-Origin
+          value: http://202.77.121.68:4343
+        - name: Access-Control-Allow-Headers
+          value: Content-Type
+        - name: Access-Control-Allow-Methods
+          value: POST,GET,OPTIONS
+        - name: SERVER
+          value: ""
+        - name: Date
+          value: Fri, 19 Apr 2024 08:30:18 GMT
+        - name: Content-Length
+          value: "79"
+      body:
+        type: json
+        data: |-
+          {
+              "status": "01",
+              "desc": "Verifikasi OTP Gagal, silahkan request kirim ulang OTP"
+          }

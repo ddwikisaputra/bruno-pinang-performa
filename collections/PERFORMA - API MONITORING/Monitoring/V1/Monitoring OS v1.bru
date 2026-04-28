@@ -1,0 +1,82 @@
+meta {
+  name: Monitoring OS v1
+  type: http
+  seq: 7
+}
+
+post {
+  url: {{url}}/v/1/monitoring/pencapaian-os
+  body: formUrlEncoded
+  auth: bearer
+}
+
+auth:bearer {
+  token: UmF5YVBpUGVyVG9wtk843jG/7RB5In2DFecy3IhPCIi6N/9g1KDYjEHKFfrchh+Eo9FYRDiVe/paZJ32GKHqK/hA3sulxsHQ7T9P45sD+L32owygMK30Vzk7FE9ZNhzbaF5rSDwfPKm5EOmKD5hmeDCkfrilzW7BWg==
+}
+
+body:form-urlencoded {
+  userId: 999932
+  branchCode: 0020
+}
+
+settings {
+  encodeUrl: true
+}
+
+example {
+  name: SUCCESS
+  
+  request: {
+    url: {{url}}/v/1/monitoring/pencapaian-os
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 999951
+      branchCode: 0020
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Tue, 28 Mar 2023 07:55:37 GMT
+      Content-Length: 672
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": {
+                "posisiHariIni": "2023-02-20",
+                "posisiTahunLalu": "2022-12-31",
+                "posisiBulanLalu": "2023-01-31",
+                "osHariIni": 1221172370.12,
+                "osBulanLalu": 1126121178.6,
+                "osTahunLalu": 1070850059.91,
+                "persentaseKenaikanTahunLalu": 114.0376,
+                "persentaseKenaikanBulanLalu": 108.4405,
+                "deltaTahunLalu": 150322310.21,
+                "deltaBulanLalu": 95051191.52,
+                "posisiRkaOSBulanIni": "2023-02",
+                "posisiRkaOSTahunIni": "2023-12",
+                "rkaOsTargetBulanIni": 1659000000,
+                "rkaOsTargetTahunIni": 4463000000,
+                "rkaOSPersentaseTargetBulanIni": 73.6089,
+                "rkaOSPersentaseTargetTahunIni": 27.3621,
+                "deltaRkaOsTargetBulanIni": -437827629.88,
+                "deltaRkaOsTargetTahunIni": -3241827629.88
+            },
+            "desc": "Data Valid",
+            "message": "Data Ditemukan",
+            "status": 200
+        }
+      '''
+    }
+  }
+}

@@ -1,0 +1,524 @@
+info:
+  name: Update SKPP V2
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: "{{base_url}}/v/2/document/update-skpp/31183"
+  body:
+    type: form-urlencoded
+    data:
+      - name: skppDate
+        value: 2021-09-02
+        description: Tanggal SKPP (Y-m-d-> 2021-01-01) {MANDATORY}
+      - name: customerStatus
+        value: Nasabah Baru Dong A
+        description: Status Nasabah (Nasabah Baru | Perpanjangan | Suplesi | Restrukturisasi) {MANDATORY}
+      - name: branchName
+        value: Kantor Cabang Kuningan
+        description: Nama Kantor Cabang {MANDATORY}
+      - name: userId
+        value: UmF5YVBpUGVyVG9w9FR0lGf/X53F2Tzm25VqShsrhmuQHg==
+        description: "[Encode]Personal Number BRI Agro (UserID Login) { MANDATORY }"
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/document/update-skpp/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: skppDate
+            value: 2021-08-31
+            description: Tanggal SKPP (Y-m-d-> 2021-01-01) {MANDATORY}
+          - name: customerStatus
+            value: Nasabah Baru
+            description: Status Nasabah (Nasabah Baru | Perpanjangan | Suplesi | Restrukturisasi) {MANDATORY}
+          - name: branchName
+            value: Kantor Cabang Kuningan
+            description: Nama Kantor Cabang {MANDATORY}
+          - name: userId
+            value: "999951"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/document/update-skpp/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: skppDate
+            value: 2021-08-31
+            description: Tanggal SKPP (Y-m-d-> 2021-01-01) {MANDATORY}
+          - name: customerStatus
+            value: Nasabah Baru
+            description: Status Nasabah (Nasabah Baru | Perpanjangan | Suplesi | Restrukturisasi) {MANDATORY}
+          - name: branchName
+            value: Kantor Cabang Kuningan
+            description: Nama Kantor Cabang {MANDATORY}
+          - name: userId
+            value: "999951"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+    response:
+      status: 401
+      statusText: Unauthorized
+      body:
+        type: text
+        data: |-
+          {
+              "code": 401,
+              "desc": "Tidak Memliki Akses",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: validasi data existing
+    request:
+      url: "{{base_url}}/v/1/document/update-skpp/-1"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: skppDate
+            value: 2021-08-31
+            description: Tanggal SKPP (Y-m-d-> 2021-01-01) {MANDATORY}
+          - name: customerStatus
+            value: Nasabah Baru
+            description: Status Nasabah (Nasabah Baru | Perpanjangan | Suplesi | Restrukturisasi) {MANDATORY}
+          - name: branchName
+            value: Kantor Cabang Kuningan
+            description: Nama Kantor Cabang {MANDATORY}
+          - name: userId
+            value: "999951"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "data": null,
+              "desc": "Error record not found",
+              "message": "SKPP Tidak Ditemukan",
+              "status": 500
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{base_url}}/v/1/document/update-skpp/30946"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: skppDate
+            value: 2021-09-02
+            description: Tanggal SKPP (Y-m-d-> 2021-01-01) {MANDATORY}
+          - name: customerStatus
+            value: Nasabah Baru Dong A
+            description: Status Nasabah (Nasabah Baru | Perpanjangan | Suplesi | Restrukturisasi) {MANDATORY}
+          - name: branchName
+            value: Kantor Cabang Kuningan
+            description: Nama Kantor Cabang {MANDATORY}
+          - name: userId
+            value: "999951"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 22 Jul 2022 01:49:58 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: parameter validation
+    request:
+      url: "{{base_url}}/v/1/document/update-skpp/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: skppDate
+            value: 2021-08-31
+            description: Tanggal SKPP (Y-m-d-> 2021-01-01) {MANDATORY}
+            disabled: true
+          - name: customerStatus
+            value: Nasabah Baru
+            description: Status Nasabah (Nasabah Baru | Perpanjangan | Suplesi | Restrukturisasi) {MANDATORY}
+          - name: branchName
+            value: Kantor Cabang Kuningan
+            description: Nama Kantor Cabang {MANDATORY}
+          - name: userId
+            value: "999951"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "data": null,
+              "desc": "Menyesuaikan field kosong",
+              "message": "Menyesuaikan field kosong",
+              "status": 400
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/prakarsa/update-usaha/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: skppDate
+            value: 2021-08-31
+            description: Tanggal SKPP (Y-m-d-> 2021-01-01) {MANDATORY}
+          - name: customerStatus
+            value: Nasabah Baru
+            description: Status Nasabah (Nasabah Baru | Perpanjangan | Suplesi | Restrukturisasi) {MANDATORY}
+          - name: branchName
+            value: Kantor Cabang Kuningan
+            description: Nama Kantor Cabang {MANDATORY}
+          - name: userId
+            value: "999951"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Mon, 24 May 2021 07:47:44 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "97"
+        - name: Connection
+          value: keep-alive
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "letterNumber": "5/SKPP/PPA/XI/2021"
+              },
+              "desc": "Data Tersimpan",
+              "message": "Data document SKPP berhasil disimpan",
+              "status": 200
+          }
+  - name: success v2
+    request:
+      url: "{{base_url}}/v/2/document/update-skpp/31183"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: skppDate
+            value: 2021-09-02
+            description: Tanggal SKPP (Y-m-d-> 2021-01-01) {MANDATORY}
+          - name: customerStatus
+            value: Nasabah Baru Dong A
+            description: Status Nasabah (Nasabah Baru | Perpanjangan | Suplesi | Restrukturisasi) {MANDATORY}
+          - name: branchName
+            value: Kantor Cabang Kuningan
+            description: Nama Kantor Cabang {MANDATORY}
+          - name: userId
+            value: UmF5YVBpUGVyVG9w9FR0lGf/X53F2Tzm25VqShsrhmuQHg==
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 04 Jan 2023 08:45:38 GMT
+        - name: Content-Length
+          value: "134"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "letterNumber": "31/SKPP/KNG/XII/2022"
+              },
+              "desc": "Data Tersimpan",
+              "message": "Data document SKPP berhasil disimpan",
+              "status": 200
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/document/update-skpp/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: skppDate
+            value: 2021-08-31
+            description: Tanggal SKPP (Y-m-d-> 2021-01-01) {MANDATORY}
+          - name: customerStatus
+            value: Nasabah Baru
+            description: Status Nasabah (Nasabah Baru | Perpanjangan | Suplesi | Restrukturisasi) {MANDATORY}
+          - name: branchName
+            value: Kantor Cabang Kuningan
+            description: Nama Kantor Cabang {MANDATORY}
+          - name: userId
+            value: "999951"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+    response:
+      status: 401
+      statusText: Unauthorized
+      body:
+        type: text
+        data: |-
+          {
+              "code": 401,
+              "desc": "Tidak Memliki Akses",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: success v2
+    request:
+      url: "{{base_url}}/v/2/document/update-skpp/31183"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: skppDate
+            value: 2021-09-02
+            description: Tanggal SKPP (Y-m-d-> 2021-01-01) {MANDATORY}
+          - name: customerStatus
+            value: Nasabah Baru Dong A
+            description: Status Nasabah (Nasabah Baru | Perpanjangan | Suplesi | Restrukturisasi) {MANDATORY}
+          - name: branchName
+            value: Kantor Cabang Kuningan
+            description: Nama Kantor Cabang {MANDATORY}
+          - name: userId
+            value: UmF5YVBpUGVyVG9w9FR0lGf/X53F2Tzm25VqShsrhmuQHg==
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 04 Jan 2023 08:45:38 GMT
+        - name: Content-Length
+          value: "134"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "letterNumber": "31/SKPP/KNG/XII/2022"
+              },
+              "desc": "Data Tersimpan",
+              "message": "Data document SKPP berhasil disimpan",
+              "status": 200
+          }
+  - name: parameter validation
+    request:
+      url: "{{base_url}}/v/1/document/update-skpp/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: skppDate
+            value: 2021-08-31
+            description: Tanggal SKPP (Y-m-d-> 2021-01-01) {MANDATORY}
+            disabled: true
+          - name: customerStatus
+            value: Nasabah Baru
+            description: Status Nasabah (Nasabah Baru | Perpanjangan | Suplesi | Restrukturisasi) {MANDATORY}
+          - name: branchName
+            value: Kantor Cabang Kuningan
+            description: Nama Kantor Cabang {MANDATORY}
+          - name: userId
+            value: "999951"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "data": null,
+              "desc": "Menyesuaikan field kosong",
+              "message": "Menyesuaikan field kosong",
+              "status": 400
+          }
+  - name: validasi data existing
+    request:
+      url: "{{base_url}}/v/1/document/update-skpp/-1"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: skppDate
+            value: 2021-08-31
+            description: Tanggal SKPP (Y-m-d-> 2021-01-01) {MANDATORY}
+          - name: customerStatus
+            value: Nasabah Baru
+            description: Status Nasabah (Nasabah Baru | Perpanjangan | Suplesi | Restrukturisasi) {MANDATORY}
+          - name: branchName
+            value: Kantor Cabang Kuningan
+            description: Nama Kantor Cabang {MANDATORY}
+          - name: userId
+            value: "999951"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "data": null,
+              "desc": "Error record not found",
+              "message": "SKPP Tidak Ditemukan",
+              "status": 500
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/document/update-skpp/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: skppDate
+            value: 2021-08-31
+            description: Tanggal SKPP (Y-m-d-> 2021-01-01) {MANDATORY}
+          - name: customerStatus
+            value: Nasabah Baru
+            description: Status Nasabah (Nasabah Baru | Perpanjangan | Suplesi | Restrukturisasi) {MANDATORY}
+          - name: branchName
+            value: Kantor Cabang Kuningan
+            description: Nama Kantor Cabang {MANDATORY}
+          - name: userId
+            value: "999951"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{base_url}}/v/1/document/update-skpp/30946"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: skppDate
+            value: 2021-09-02
+            description: Tanggal SKPP (Y-m-d-> 2021-01-01) {MANDATORY}
+          - name: customerStatus
+            value: Nasabah Baru Dong A
+            description: Status Nasabah (Nasabah Baru | Perpanjangan | Suplesi | Restrukturisasi) {MANDATORY}
+          - name: branchName
+            value: Kantor Cabang Kuningan
+            description: Nama Kantor Cabang {MANDATORY}
+          - name: userId
+            value: "999951"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 22 Jul 2022 01:49:58 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/prakarsa/update-usaha/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: skppDate
+            value: 2021-08-31
+            description: Tanggal SKPP (Y-m-d-> 2021-01-01) {MANDATORY}
+          - name: customerStatus
+            value: Nasabah Baru
+            description: Status Nasabah (Nasabah Baru | Perpanjangan | Suplesi | Restrukturisasi) {MANDATORY}
+          - name: branchName
+            value: Kantor Cabang Kuningan
+            description: Nama Kantor Cabang {MANDATORY}
+          - name: userId
+            value: "999951"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Mon, 24 May 2021 07:47:44 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "97"
+        - name: Connection
+          value: keep-alive
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "letterNumber": "5/SKPP/PPA/XI/2021"
+              },
+              "desc": "Data Tersimpan",
+              "message": "Data document SKPP berhasil disimpan",
+              "status": 200
+          }

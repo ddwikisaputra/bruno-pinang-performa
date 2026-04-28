@@ -1,0 +1,118 @@
+info:
+  name: Account Create
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/digiagri/loan/account/create"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "999941"
+      - name: kodeCabang
+        value: "0010"
+      - name: noCIF
+        value: "0000121436"
+      - name: nominal
+        value: "500000"
+      - name: nama
+        value: HARIS ARDIYANTO
+      - name: produk
+        value: "40002"
+      - name: sukuBunga
+        value: "0.20"
+      - name: jangkaWaktu
+        value: "12"
+      - name: penjadwalanAngsuran
+        value: N
+      - name: nomorFasilitas
+        value: 0020/0000120287/PK2/022
+      - name: frekuensiBayarBunga
+        value: "1"
+      - name: tanggalPencairan
+        value: 11/01/2033
+      - name: tanggalBillingSelanjutnya
+        value: 11/02/2033
+      - name: tanggalJatuhTempo
+        value: 11/01/2033
+      - name: biayaProvisi
+        value: "1000"
+      - name: biayaAsuransiKerugian
+        value: "500"
+      - name: biayaAdministrasi
+        value: "500"
+  auth:
+    type: bearer
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTk1NDc3MTEsInVzZXJuYW1lIjoiWVdkeWIyeHBibXM9In0.ghpDdFysGycv7lQfc7hM4YSz9WSvUHW9lwlhU6Top3s
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Account Create
+    request:
+      url: "{{baseUrl}}/api/digiagri/loan/account/create"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+          - name: kodeCabang
+            value: "0010"
+          - name: noCIF
+            value: "0000121436"
+          - name: nominal
+            value: "500000"
+          - name: nama
+            value: HARIS ARDIYANTO
+          - name: produk
+            value: "40002"
+          - name: sukuBunga
+            value: "0.20"
+          - name: jangkaWaktu
+            value: "12"
+          - name: penjadwalanAngsuran
+            value: N
+          - name: nomorFasilitas
+            value: 0020/0000120287/PK2/021
+          - name: frekuensiBayarBunga
+            value: "1"
+          - name: tanggalPencairan
+            value: 11/01/2030
+          - name: tanggalBillingSelanjutnya
+            value: 11/02/2030
+          - name: tanggalJatuhTempo
+            value: 11/01/2030
+          - name: biayaProvisi
+            value: "1000"
+          - name: biayaAsuransiKerugian
+            value: "500"
+          - name: biayaAdministrasi
+            value: "500"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Thu, 09 Oct 2025 06:24:56 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "95"
+        - name: Connection
+          value: keep-alive
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "statusCode": "99",
+              "statusDescription": "Tanggal Pembukaan melebihi Tanggal Tersedia Fasilitas"
+          }

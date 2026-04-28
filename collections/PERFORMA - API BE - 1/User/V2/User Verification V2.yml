@@ -1,0 +1,428 @@
+info:
+  name: User Verification V2
+  type: http
+  seq: 7
+
+http:
+  method: POST
+  url: "{{base_url}}/v/2/user/user-verification"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: UmF5YVBpUGVyVG9w9FR0lGD8PJZ01laNFpB91ptV5mkFfw==
+        description: Personal Number BRI Agro (UserID untuk i-SDM)
+      - name: password
+        value: UmF5YVBpUGVyVG9wgCxwkBceIOK96mO338hXSYi6TXc=
+        description: Password untuk i-SDM (decode base64)
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: verification failed
+    request:
+      url: "{{base_url}}/v/1/user/user-verification"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: json
+        data: "{\r
+
+          \    \"userId\": \"84848484\",\r
+
+          \    \"password\": \"MA==\"\r
+
+          }"
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "desc": "User ID & Password is not valid",
+              "message": "Maaf, password tidak sesuai.",
+              "status": 500
+          }
+  - name: parameter null
+    request:
+      url: "{{base_url}}/v/1/user/user-verification"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: "{\r
+
+          \    \"userId\": null,\r
+
+          \    \"password\": \"xxxx\"\r
+
+          }"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "status": 400,
+              "message": "Data Tidak Sesuai",
+              "desc": "Validation Error"
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/user/user-verification"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: "{\r
+
+          \    \"userId\": \"84848484\",\r
+
+          \    \"password\": \"MA==\"\r
+
+          }"
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "code": 401,
+              "desc": "Tidak Memliki Akses",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/user/login-sso"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: "{\r
+
+          \    \"userId\": \"84848484\",\r
+
+          \    \"password\": \"MA==\",\r
+
+          \    \"ipAddress\": \"127.0.0.1\"\r
+
+          }"
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect ....."
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{base_url}}/v/1/user/user-verification"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999951"
+            description: Personal Number BRI Agro (UserID untuk i-SDM)
+          - name: password
+            value: MA==
+            description: Password untuk i-SDM (decode base64)
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 18 Jul 2022 07:37:42 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/2/user/user-verification"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: "{\r
+
+          \    \"userId\": \"000426\",\r
+
+          \    \"password\": \"MA==\"\r
+
+          }"
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: "{\r
+
+          \    \"desc\": \"Password Sesuai\",\r
+
+          \    \"message\": \"Verification Success\",\r
+
+          \    \"status\": 200\r
+
+          }"
+  - name: success v2
+    request:
+      url: "{{base_url}}/v/2/user/user-verification"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: UmF5YVBpUGVyVG9w9FR0lGD8PJZ01laNFpB91ptV5mkFfw==
+            description: Personal Number BRI Agro (UserID untuk i-SDM)
+          - name: password
+            value: UmF5YVBpUGVyVG9wgCxwkBceIOK96mO338hXSYi6TXc=
+            description: Password untuk i-SDM (decode base64)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 03 Jan 2023 03:10:09 GMT
+        - name: Content-Length
+          value: "72"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Password Sesuai",
+              "message": "Verification Success",
+              "status": 200
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/user/user-verification"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: "{\r
+
+          \    \"userId\": \"84848484\",\r
+
+          \    \"password\": \"MA==\"\r
+
+          }"
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "code": 401,
+              "desc": "Tidak Memliki Akses",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: verification failed
+    request:
+      url: "{{base_url}}/v/1/user/user-verification"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: json
+        data: "{\r
+
+          \    \"userId\": \"84848484\",\r
+
+          \    \"password\": \"MA==\"\r
+
+          }"
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "desc": "User ID & Password is not valid",
+              "message": "Maaf, password tidak sesuai.",
+              "status": 500
+          }
+  - name: parameter null
+    request:
+      url: "{{base_url}}/v/1/user/user-verification"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: "{\r
+
+          \    \"userId\": null,\r
+
+          \    \"password\": \"xxxx\"\r
+
+          }"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "status": 400,
+              "message": "Data Tidak Sesuai",
+              "desc": "Validation Error"
+          }
+  - name: success v2
+    request:
+      url: "{{base_url}}/v/2/user/user-verification"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: UmF5YVBpUGVyVG9w9FR0lGD8PJZ01laNFpB91ptV5mkFfw==
+            description: Personal Number BRI Agro (UserID untuk i-SDM)
+          - name: password
+            value: UmF5YVBpUGVyVG9wgCxwkBceIOK96mO338hXSYi6TXc=
+            description: Password untuk i-SDM (decode base64)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 03 Jan 2023 03:10:09 GMT
+        - name: Content-Length
+          value: "72"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Password Sesuai",
+              "message": "Verification Success",
+              "status": 200
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/user/login-sso"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: "{\r
+
+          \    \"userId\": \"84848484\",\r
+
+          \    \"password\": \"MA==\",\r
+
+          \    \"ipAddress\": \"127.0.0.1\"\r
+
+          }"
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect ....."
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{base_url}}/v/1/user/user-verification"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999951"
+            description: Personal Number BRI Agro (UserID untuk i-SDM)
+          - name: password
+            value: MA==
+            description: Password untuk i-SDM (decode base64)
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 18 Jul 2022 07:37:42 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/2/user/user-verification"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: "{\r
+
+          \    \"userId\": \"000426\",\r
+
+          \    \"password\": \"MA==\"\r
+
+          }"
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: "{\r
+
+          \    \"desc\": \"Password Sesuai\",\r
+
+          \    \"message\": \"Verification Success\",\r
+
+          \    \"status\": 200\r
+
+          }"

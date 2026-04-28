@@ -1,0 +1,132 @@
+info:
+  name: Check Facility
+  type: http
+  seq: 6
+
+http:
+  method: POST
+  url: "{{base_url}}/api/digiagri/loan/check/facility"
+  body:
+    type: form-urlencoded
+    data:
+      - name: loanTerm
+        value: "7"
+      - name: facilityNumber
+        value: 0020/0000097888/PK2/001
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Inquiry Failed
+    request:
+      url: "{{base_url_dev}}/api/digiagri/loan/check/facility"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: loanTerm
+            value: "7"
+          - name: facilityNumber
+            value: 0020/0000097888/PK2/001
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: no-cache
+        - name: Pragma
+          value: no-cache
+        - name: Content-Length
+          value: "65"
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Expires
+          value: "-1"
+        - name: Server
+          value: ""
+        - name: Content-Security-Policy
+          value: default-src *;  script-src * 'unsafe-inline' 'unsafe-eval'; style-src  * 'unsafe-inline' 'unsafe-eval';
+        - name: Strict-Transport-Security
+          value: max-age=31536000
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-XSS-Protection
+          value: 1;mode=block
+        - name: x-permitted-cross-domain-policies
+          value: none
+        - name: Access-Control-Allow-Origin
+          value: http://202.77.121.68:4343
+        - name: Access-Control-Allow-Headers
+          value: Content-Type
+        - name: Access-Control-Allow-Methods
+          value: POST,GET,OPTIONS
+        - name: Date
+          value: Wed, 18 Dec 2024 02:10:11 GMT
+      body:
+        type: json
+        data: |-
+          {
+              "statusCode": "-1",
+              "statusDescription": "Facility Inquiry Failed"
+          }
+  - name: Inquiry Success
+    request:
+      url: "{{base_url_dev}}/api/digiagri/loan/check/facility"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: loanTerm
+            value: "7"
+          - name: facilityNumber
+            value: 0010/0000121842/PK3/004
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: no-cache
+        - name: Pragma
+          value: no-cache
+        - name: Content-Length
+          value: "52"
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Expires
+          value: "-1"
+        - name: Server
+          value: ""
+        - name: Content-Security-Policy
+          value: default-src *;  script-src * 'unsafe-inline' 'unsafe-eval'; style-src  * 'unsafe-inline' 'unsafe-eval';
+        - name: Strict-Transport-Security
+          value: max-age=31536000
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-XSS-Protection
+          value: 1;mode=block
+        - name: x-permitted-cross-domain-policies
+          value: none
+        - name: Access-Control-Allow-Origin
+          value: http://202.77.121.68:4343
+        - name: Access-Control-Allow-Headers
+          value: Content-Type
+        - name: Access-Control-Allow-Methods
+          value: POST,GET,OPTIONS
+        - name: Date
+          value: Wed, 18 Dec 2024 02:20:32 GMT
+      body:
+        type: json
+        data: |-
+          {
+              "statusCode": "1",
+              "statusDescription": "Facility OK"
+          }

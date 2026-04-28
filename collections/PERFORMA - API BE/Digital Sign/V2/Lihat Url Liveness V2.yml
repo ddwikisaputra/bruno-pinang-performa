@@ -1,0 +1,398 @@
+info:
+  name: Lihat Url Liveness V2
+  type: http
+  seq: 5
+
+http:
+  method: POST
+  url: "{{base_url_dev}}/v/2/digitalsign/lihat-url-liveness"
+  body:
+    type: form-urlencoded
+    data:
+      - name: kodeProses
+        value: UmF5YVBpUGVyVG9w/lx5nmBcgN3n/SIGOwbFwMMGVaBq
+        description: Prakarsa ID (Encode AES) {MANDATORY}
+      - name: typeLiveness
+        value: Debitur
+        description: Debitur / Pasangan {MANDATORY}
+  auth:
+    type: bearer
+    token: "{{tokenJWT}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: unauthorized
+    request:
+      url: "{{base_url}}/v/2/digitalsign/lihat-url-liveness"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: UmF5YVBpUGVyVG9w/lx+n2wXjR0uqNEIGTXN2gBk4OJN
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+          - name: typeLiveness
+            value: ""
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 20 Jul 2023 05:48:32 GMT
+        - name: Content-Length
+          value: "73"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "message": "Token is expired"
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/2/digitalsign/lihat-url-liveness"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: UmF5YVBpUGVyVG9w/lx+n2wXjR0uqNEIGTXN2gBk4OJN
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+          - name: typeLiveness
+            value: ""
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 25 Jun 2021 08:48:50 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400,
+              "data": null
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/2/digitalsign/lihat-url-liveness"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: UmF5YVBpUGVyVG9w/lx+n2wXjR0uqNEIGTXN2gBk4OJN
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+          - name: typeLiveness
+            value: ""
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 25 Jun 2021 08:48:50 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data": null
+          }
+  - name: parameter validation
+    request:
+      url: "{{base_url}}/v/2/digitalsign/lihat-url-liveness"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: UmF5YVBpUGVyVG9w/lx+n2ys5jyVCOSa3qs+fZCnPjeFSg==
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+          - name: typeLiveness
+            value: ""
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 20 Jul 2023 05:44:00 GMT
+        - name: Content-Length
+          value: "134"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "...",
+              "message": "...",
+              "status": 400,
+              "data": null
+          }
+  - name: error masih dalam waktu tunggu liveness
+    request:
+      url: "{{base_url}}/v/2/digitalsign/lihat-url-liveness"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MjA5NDI=
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+          - name: typeLiveness
+            value: Debitur
+            description: Debitur / Pasangan {MANDATORY}
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 25 Jul 2023 10:27:44 GMT
+        - name: Content-Length
+          value: "245"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Masih dalam masa waktu tunggu liveness",
+              "message": "Kesempatan kamu sudah habis karena sudah mencobanya sebanyak 3 kali. Namun tidak perlu khawatir, kamu dapat menunggu 10 menit kedepan untuk mencobanya kembali",
+              "status": 500
+          }
+  - name: success
+    request:
+      url: "{{base_url_local}}/v/2/digitalsign/lihat-url-liveness"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: UmF5YVBpUGVyVG9w+l19Lii1/b4CXiNqcFL2cIIZeA==
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+          - name: typeLiveness
+            value: "0"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 24 Jul 2023 03:00:12 GMT
+        - name: Content-Length
+          value: "827"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "UmF5YVBpUGVyVG9wpRk53Sf3i1sobDiXTa57wcofTdyvKPl6yc/FylSeQriH01vX9ogBHXabL7AYOc6mTfu3d649m439j4eNq2wYk9kMoK2goxOnKKr0V2s6DRxCaB6Jag5vUT0ePb+iW1/AgX3PwJY0n4kAPdyMpMbCB9x7SIdacPJdGSGwIxNuDyMeknsxx/jVFD/6jJo8pRPVCqPQYj9QdiO9LH0Xu26Ca/teasVNO0aJzpVrVKl8T+AAX2JYMjT0Stn2eDGmAokLH8LMcqYTi0zRsFUxedV+ja5XTxr6nOlfFosxfa/+V6HBBXMga/4SychzQiN8QfYFBehwn4Vjv4sr/EI6qetbNo7DAuIOjRaXUoxbD5s791UUHBkPxyAu0X44Ny+xbIfo2FilYM7/f+EMNNyOarn7jMg2h0PDuhvkB23H1hqJYCvHPq3J0sYHZNoPKuB1egoAz0Fmj3qAT5vhF1K7aqQqCbjbvfkXlteism0HgDXo7PCmZpFLbXE2p2pw8zGnt0mUnboLJJalPDbcRPxhRudyqUVczHF3QC0M6mBWQKzJQEUZjTstTN96Bpyd3DXpWmedGO8Sr5GcFJHJzWLZ90yTlCTjNTI/nABqcWfQYmD3xP6Y94NNCSJ8V1u30RxsdOmlo4TJ+dCRTUYCu+QHJ92wFuGts4ORWQ0zgdxIINJvETgB76ncLycFHf7TU0NsoK1e/HApMeZW3lA2/ONynuJIyHMZJwXGPSDOE+te7DMulNEuZhxZqvHXe9geKKqXoViEVT5z5ilLKWuLr4Wzds/wVnpOPERdb5yOHPHMLCb/aS24E4aZw6LpVhw1yMMwy+fwr+pbegaQK9wpsrsDwkfLXUhsr6Os83puZcgmLEe384bVAnqAm0ikm/WkXGgBIII74ppBN8O/bV/+ixUy/ANDu99XltuWhyDR0KeV5OM4byUWEdTdPvtCC90PHsixTIZ95R4VVwNc17l+PlP0McS1a8kbABB3GjTTQpOv4dZV5U0+bA==",
+              "desc": "URL liveness tersedia",
+              "message": "URL liveness berhasil",
+              "status": 200
+          }
+  - name: parameter validation
+    request:
+      url: "{{base_url}}/v/2/digitalsign/lihat-url-liveness"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: UmF5YVBpUGVyVG9w/lx+n2ys5jyVCOSa3qs+fZCnPjeFSg==
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+          - name: typeLiveness
+            value: ""
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 20 Jul 2023 05:44:00 GMT
+        - name: Content-Length
+          value: "134"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "...",
+              "message": "...",
+              "status": 400,
+              "data": null
+          }
+  - name: error masih dalam waktu tunggu liveness
+    request:
+      url: "{{base_url}}/v/2/digitalsign/lihat-url-liveness"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: MjA5NDI=
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+          - name: typeLiveness
+            value: Debitur
+            description: Debitur / Pasangan {MANDATORY}
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 25 Jul 2023 10:27:44 GMT
+        - name: Content-Length
+          value: "245"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Masih dalam masa waktu tunggu liveness",
+              "message": "Kesempatan kamu sudah habis karena sudah mencobanya sebanyak 3 kali. Namun tidak perlu khawatir, kamu dapat menunggu 10 menit kedepan untuk mencobanya kembali",
+              "status": 500
+          }
+  - name: success
+    request:
+      url: "{{base_url_local}}/v/2/digitalsign/lihat-url-liveness"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: UmF5YVBpUGVyVG9w+l19Lii1/b4CXiNqcFL2cIIZeA==
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+          - name: typeLiveness
+            value: "0"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 24 Jul 2023 03:00:12 GMT
+        - name: Content-Length
+          value: "827"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "UmF5YVBpUGVyVG9wpRk53Sf3i1sobDiXTa57wcofTdyvKPl6yc/FylSeQriH01vX9ogBHXabL7AYOc6mTfu3d649m439j4eNq2wYk9kMoK2goxOnKKr0V2s6DRxCaB6Jag5vUT0ePb+iW1/AgX3PwJY0n4kAPdyMpMbCB9x7SIdacPJdGSGwIxNuDyMeknsxx/jVFD/6jJo8pRPVCqPQYj9QdiO9LH0Xu26Ca/teasVNO0aJzpVrVKl8T+AAX2JYMjT0Stn2eDGmAokLH8LMcqYTi0zRsFUxedV+ja5XTxr6nOlfFosxfa/+V6HBBXMga/4SychzQiN8QfYFBehwn4Vjv4sr/EI6qetbNo7DAuIOjRaXUoxbD5s791UUHBkPxyAu0X44Ny+xbIfo2FilYM7/f+EMNNyOarn7jMg2h0PDuhvkB23H1hqJYCvHPq3J0sYHZNoPKuB1egoAz0Fmj3qAT5vhF1K7aqQqCbjbvfkXlteism0HgDXo7PCmZpFLbXE2p2pw8zGnt0mUnboLJJalPDbcRPxhRudyqUVczHF3QC0M6mBWQKzJQEUZjTstTN96Bpyd3DXpWmedGO8Sr5GcFJHJzWLZ90yTlCTjNTI/nABqcWfQYmD3xP6Y94NNCSJ8V1u30RxsdOmlo4TJ+dCRTUYCu+QHJ92wFuGts4ORWQ0zgdxIINJvETgB76ncLycFHf7TU0NsoK1e/HApMeZW3lA2/ONynuJIyHMZJwXGPSDOE+te7DMulNEuZhxZqvHXe9geKKqXoViEVT5z5ilLKWuLr4Wzds/wVnpOPERdb5yOHPHMLCb/aS24E4aZw6LpVhw1yMMwy+fwr+pbegaQK9wpsrsDwkfLXUhsr6Os83puZcgmLEe384bVAnqAm0ikm/WkXGgBIII74ppBN8O/bV/+ixUy/ANDu99XltuWhyDR0KeV5OM4byUWEdTdPvtCC90PHsixTIZ95R4VVwNc17l+PlP0McS1a8kbABB3GjTTQpOv4dZV5U0+bA==",
+              "desc": "URL liveness tersedia",
+              "message": "URL liveness berhasil",
+              "status": 200
+          }
+  - name: unauthorized
+    request:
+      url: "{{base_url}}/v/2/digitalsign/lihat-url-liveness"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: UmF5YVBpUGVyVG9w/lx+n2wXjR0uqNEIGTXN2gBk4OJN
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+          - name: typeLiveness
+            value: ""
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 20 Jul 2023 05:48:32 GMT
+        - name: Content-Length
+          value: "73"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "message": "Token is expired"
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/2/digitalsign/lihat-url-liveness"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: UmF5YVBpUGVyVG9w/lx+n2wXjR0uqNEIGTXN2gBk4OJN
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+          - name: typeLiveness
+            value: ""
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 25 Jun 2021 08:48:50 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400,
+              "data": null
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/2/digitalsign/lihat-url-liveness"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: UmF5YVBpUGVyVG9w/lx+n2wXjR0uqNEIGTXN2gBk4OJN
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+          - name: typeLiveness
+            value: ""
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 25 Jun 2021 08:48:50 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data": null
+          }

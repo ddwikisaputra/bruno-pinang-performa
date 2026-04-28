@@ -1,0 +1,381 @@
+info:
+  name: credit scoring bnpl
+  type: http
+  seq: 4
+
+http:
+  method: POST
+  url: https://api-cso.internal.bankraya.co.id/credit-service/api/cs/v3.2/pinang/bnpl
+  body:
+    type: json
+    data: "{\r
+
+      \    \"nik\":\"3326091301950002\",\r
+
+      \    \"name\":\"DENI NUR AZIZ\",\r
+
+      \    \"user_id\":\"144669\",\r
+
+      \    \"birth_date\":\"1995-01-13\",\r
+
+      \    \"birth_place\":\"PEKALONGAN\",\r
+
+      \    \"npwp\":\"\",\r
+
+      \    \"mother_name\":\"Kartini\",\r
+
+      \    \"address\":\"Jl Kemiri Jaya Gg. Rambutan 2 RT 6 RW 1, Kelurahan Beji, Kecamatan Beji, Kota Depok\",\r
+
+      \    \"city\":\"Kota Depok\",\r
+
+      \    \"postal_code\":\"16421\",\r
+
+      \    \"cif\":\"0000290994\",\r
+
+      \    \"gender\":\"1\",\r
+
+      \    \"callback\":\"https://api-bnpl.internal.bankraya.co.id/v/1/scoring/callback-process\"\r
+
+      }"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: lolos
+    request:
+      url: http://be-credit-scoring.dev.internal.rayain.net/api/v3.2/performa/merchant-financing/1406011809860003
+      method: POST
+      body:
+        type: json
+        data: "// TIDAK LOLOS\r
+
+          // {\r
+
+          //     \"Id\": \"AB123\",\r
+
+          //     \"Nama\": \"Mahfud\",\r
+
+          //     \"NIK\": \"P12320210\",\r
+
+          //     \"Merchant Name\": \"Nama Merchant\",\r
+
+          //     \"Length of Stay\": 8,\r
+
+          //     \"Amount 1 Bulan Sebelum Meminjam\": 100000,\r
+
+          //     \"Amount 2 Bulan Sebelum Meminjam\": 100000,\r
+
+          //     \"Amount 3 Bulan Sebelum Meminjam\": 100000,\r
+
+          //     \"Amount 4 Bulan Sebelum Meminjam\": 200000,\r
+
+          //     \"Amount 5 Bulan Sebelum Meminjam\": 200000,\r
+
+          //     \"Amount 6 Bulan Sebelum Meminjam\": 100000,\r
+
+          //     \"Amount 7 Bulan Sebelum Meminjam\": 1000000,\r
+
+          //     \"Amount 8 Bulan Sebelum Meminjam\": 100000,\r
+
+          //     \"Amount 9 Bulan Sebelum Meminjam\": 200000,\r
+
+          //     \"Amount 10 Bulan Sebelum Meminjam\": 100000,\r
+
+          //     \"Amount 11 Bulan Sebelum Meminjam\": 1000000,\r
+
+          //     \"Amount 12 Bulan Sebelum Meminjam\": 200000,\r
+
+          //     \"Frekuensi 1 Bulan Sebelum Meminjam\": 5,\r
+
+          //     \"Frekuensi 2 Bulan Sebelum Meminjam\": 7,\r
+
+          //     \"Frekuensi 3 Bulan Sebelum Meminjam\": 3,\r
+
+          //     \"Frekuensi 4 Bulan Sebelum Meminjam\": 2,\r
+
+          //     \"Frekuensi 5 Bulan Sebelum Meminjam\": 5,\r
+
+          //     \"Frekuensi 6 Bulan Sebelum Meminjam\": 3,\r
+
+          //     \"Frekuensi 7 Bulan Sebelum Meminjam\": 5,\r
+
+          //     \"Frekuensi 8 Bulan Sebelum Meminjam\": 7,\r
+
+          //     \"Frekuensi 9 Bulan Sebelum Meminjam\": 3,\r
+
+          //     \"Frekuensi 10 Bulan Sebelum Meminjam\": 2,\r
+
+          //     \"Frekuensi 11 Bulan Sebelum Meminjam\": 5,\r
+
+          //     \"Frekuensi 12 Bulan Sebelum Meminjam\": 3\r
+
+          // }\r
+
+          // LOLOS\r
+
+          {\r
+
+          \    \"Id\": \"AB123\",\r
+
+          \    \"Nama\": \"Mahfud\",\r
+
+          \    \"NIK\": \"P12320210\",\r
+
+          \    \"Merchant Name\": \"Nama Merchant\",\r
+
+          \    \"Length of Stay\": 8,\r
+
+          \    \"Amount 1 Bulan Sebelum Meminjam\": 100000,\r
+
+          \    \"Amount 2 Bulan Sebelum Meminjam\": 1000000,\r
+
+          \    \"Amount 3 Bulan Sebelum Meminjam\": 100000,\r
+
+          \    \"Amount 4 Bulan Sebelum Meminjam\": 200000,\r
+
+          \    \"Amount 5 Bulan Sebelum Meminjam\": 200000,\r
+
+          \    \"Amount 6 Bulan Sebelum Meminjam\": 100000,\r
+
+          \    \"Amount 7 Bulan Sebelum Meminjam\": 1000000,\r
+
+          \    \"Amount 8 Bulan Sebelum Meminjam\": 100000,\r
+
+          \    \"Amount 9 Bulan Sebelum Meminjam\": 200000,\r
+
+          \    \"Amount 10 Bulan Sebelum Meminjam\": 100000,\r
+
+          \    \"Amount 11 Bulan Sebelum Meminjam\": 1000000,\r
+
+          \    \"Amount 12 Bulan Sebelum Meminjam\": 200000,\r
+
+          \    \"Frekuensi 1 Bulan Sebelum Meminjam\": 5,\r
+
+          \    \"Frekuensi 2 Bulan Sebelum Meminjam\": 7,\r
+
+          \    \"Frekuensi 3 Bulan Sebelum Meminjam\": 3,\r
+
+          \    \"Frekuensi 4 Bulan Sebelum Meminjam\": 2,\r
+
+          \    \"Frekuensi 5 Bulan Sebelum Meminjam\": 5,\r
+
+          \    \"Frekuensi 6 Bulan Sebelum Meminjam\": 3,\r
+
+          \    \"Frekuensi 7 Bulan Sebelum Meminjam\": 5,\r
+
+          \    \"Frekuensi 8 Bulan Sebelum Meminjam\": 7,\r
+
+          \    \"Frekuensi 9 Bulan Sebelum Meminjam\": 3,\r
+
+          \    \"Frekuensi 10 Bulan Sebelum Meminjam\": 2,\r
+
+          \    \"Frekuensi 11 Bulan Sebelum Meminjam\": 5,\r
+
+          \    \"Frekuensi 12 Bulan Sebelum Meminjam\": 3\r
+
+          }"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Tue, 20 May 2025 09:27:33 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "131"
+        - name: Connection
+          value: keep-alive
+        - name: Access-Control-Allow-Origin
+          value: "*"
+        - name: Access-Control-Allow-Methods
+          value: GET, POST, PUT, DELETE
+        - name: Access-Control-Allow-Headers
+          value: Content-Type, Authorization
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "Bin Score": "[400, 500]",
+              "Lolos": "True",
+              "NIK": "P12320210",
+              "Nama": "Mahfud",
+              "Plafond": 10000000,
+              "Score": 455,
+              "Tenor": 12,
+              "id": "AB123"
+          }
+  - name: tidak lolos
+    request:
+      url: http://be-credit-scoring.dev.internal.rayain.net/api/v3.2/performa/merchant-financing/1406011809860003
+      method: POST
+      body:
+        type: json
+        data: "// TIDAK LOLOS\r
+
+          {\r
+
+          \    \"Id\": \"AB123\",\r
+
+          \    \"Nama\": \"Mahfud\",\r
+
+          \    \"NIK\": \"P12320210\",\r
+
+          \    \"Merchant Name\": \"Nama Merchant\",\r
+
+          \    \"Length of Stay\": 8,\r
+
+          \    \"Amount 1 Bulan Sebelum Meminjam\": 100000,\r
+
+          \    \"Amount 2 Bulan Sebelum Meminjam\": 100000,\r
+
+          \    \"Amount 3 Bulan Sebelum Meminjam\": 100000,\r
+
+          \    \"Amount 4 Bulan Sebelum Meminjam\": 200000,\r
+
+          \    \"Amount 5 Bulan Sebelum Meminjam\": 200000,\r
+
+          \    \"Amount 6 Bulan Sebelum Meminjam\": 100000,\r
+
+          \    \"Amount 7 Bulan Sebelum Meminjam\": 1000000,\r
+
+          \    \"Amount 8 Bulan Sebelum Meminjam\": 100000,\r
+
+          \    \"Amount 9 Bulan Sebelum Meminjam\": 200000,\r
+
+          \    \"Amount 10 Bulan Sebelum Meminjam\": 100000,\r
+
+          \    \"Amount 11 Bulan Sebelum Meminjam\": 1000000,\r
+
+          \    \"Amount 12 Bulan Sebelum Meminjam\": 200000,\r
+
+          \    \"Frekuensi 1 Bulan Sebelum Meminjam\": 5,\r
+
+          \    \"Frekuensi 2 Bulan Sebelum Meminjam\": 7,\r
+
+          \    \"Frekuensi 3 Bulan Sebelum Meminjam\": 3,\r
+
+          \    \"Frekuensi 4 Bulan Sebelum Meminjam\": 2,\r
+
+          \    \"Frekuensi 5 Bulan Sebelum Meminjam\": 5,\r
+
+          \    \"Frekuensi 6 Bulan Sebelum Meminjam\": 3,\r
+
+          \    \"Frekuensi 7 Bulan Sebelum Meminjam\": 5,\r
+
+          \    \"Frekuensi 8 Bulan Sebelum Meminjam\": 7,\r
+
+          \    \"Frekuensi 9 Bulan Sebelum Meminjam\": 3,\r
+
+          \    \"Frekuensi 10 Bulan Sebelum Meminjam\": 2,\r
+
+          \    \"Frekuensi 11 Bulan Sebelum Meminjam\": 5,\r
+
+          \    \"Frekuensi 12 Bulan Sebelum Meminjam\": 3\r
+
+          }\r
+
+          \r
+
+          // LOLOS\r
+
+          // {\r
+
+          //     \"Id\": \"AB123\",\r
+
+          //     \"Nama\": \"Mahfud\",\r
+
+          //     \"NIK\": \"P12320210\",\r
+
+          //     \"Merchant Name\": \"Nama Merchant\",\r
+
+          //     \"Length of Stay\": 8,\r
+
+          //     \"Amount 1 Bulan Sebelum Meminjam\": 100000,\r
+
+          //     \"Amount 2 Bulan Sebelum Meminjam\": 1000000,\r
+
+          //     \"Amount 3 Bulan Sebelum Meminjam\": 100000,\r
+
+          //     \"Amount 4 Bulan Sebelum Meminjam\": 200000,\r
+
+          //     \"Amount 5 Bulan Sebelum Meminjam\": 200000,\r
+
+          //     \"Amount 6 Bulan Sebelum Meminjam\": 100000,\r
+
+          //     \"Amount 7 Bulan Sebelum Meminjam\": 1000000,\r
+
+          //     \"Amount 8 Bulan Sebelum Meminjam\": 100000,\r
+
+          //     \"Amount 9 Bulan Sebelum Meminjam\": 200000,\r
+
+          //     \"Amount 10 Bulan Sebelum Meminjam\": 100000,\r
+
+          //     \"Amount 11 Bulan Sebelum Meminjam\": 1000000,\r
+
+          //     \"Amount 12 Bulan Sebelum Meminjam\": 200000,\r
+
+          //     \"Frekuensi 1 Bulan Sebelum Meminjam\": 5,\r
+
+          //     \"Frekuensi 2 Bulan Sebelum Meminjam\": 7,\r
+
+          //     \"Frekuensi 3 Bulan Sebelum Meminjam\": 3,\r
+
+          //     \"Frekuensi 4 Bulan Sebelum Meminjam\": 2,\r
+
+          //     \"Frekuensi 5 Bulan Sebelum Meminjam\": 5,\r
+
+          //     \"Frekuensi 6 Bulan Sebelum Meminjam\": 3,\r
+
+          //     \"Frekuensi 7 Bulan Sebelum Meminjam\": 5,\r
+
+          //     \"Frekuensi 8 Bulan Sebelum Meminjam\": 7,\r
+
+          //     \"Frekuensi 9 Bulan Sebelum Meminjam\": 3,\r
+
+          //     \"Frekuensi 10 Bulan Sebelum Meminjam\": 2,\r
+
+          //     \"Frekuensi 11 Bulan Sebelum Meminjam\": 5,\r
+
+          //     \"Frekuensi 12 Bulan Sebelum Meminjam\": 3\r
+
+          // }"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Tue, 20 May 2025 09:29:34 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "129"
+        - name: Connection
+          value: keep-alive
+        - name: Access-Control-Allow-Origin
+          value: "*"
+        - name: Access-Control-Allow-Methods
+          value: GET, POST, PUT, DELETE
+        - name: Access-Control-Allow-Headers
+          value: Content-Type, Authorization
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "Bin Score": "[0, 400]",
+              "Lolos": "False",
+              "NIK": "P12320210",
+              "Nama": "Mahfud",
+              "Plafond": 8000000,
+              "Score": 365,
+              "Tenor": 12,
+              "id": "AB123"
+          }

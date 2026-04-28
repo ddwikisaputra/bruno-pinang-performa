@@ -1,0 +1,70 @@
+meta {
+  name: Create
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{BASE_URL}}/v1/risk-awareness/batch/question/create
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: 
+}
+
+body:json {
+  {
+      "payload": "{{REQUEST_BODY}}"
+  }
+}
+
+script:pre-request {
+  const payload = {
+      "batch_id": "8e13ab50-d141-47ab-99be-cbc290d2565e",
+      "title": "Ukuran Pintu Orang Malaysia?",
+      "answer_label": "A",
+      "answer_note": "notes aja",
+      "choices": [ // disesuaikan dengan settingan .env
+          {
+              "choice_label": "A",
+              "choice_title": "1"
+          },
+          {
+              "choice_label": "B",
+              "choice_title": "80cm"
+          },
+          {
+              "choice_label": "C",
+              "choice_title": "31cm"
+          },
+          {
+              "choice_label": "D",
+              "choice_title": "18cm"
+          }
+          ,
+          {
+              "choice_label": "E",
+              "choice_title": "900cm"
+          }
+      ]
+  }
+  
+  const result = _.encrypt(JSON.stringify(payload))
+  bru.setEnvVar("REQUEST_BODY", result);
+}
+
+script:post-response {
+  const responseJSON = res.getBody()
+  if (responseJSON.status) {
+      const data = _.decrypt(responseJSON.data)
+      const parseData = JSON.parse(data)
+      const parseData2 = JSON.parse(parseData)
+      console.log('/v1/risk-awareness/batch/question/create', parseData2)
+  }
+}
+
+settings {
+  encodeUrl: true
+}

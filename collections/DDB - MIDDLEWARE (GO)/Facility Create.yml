@@ -1,0 +1,117 @@
+info:
+  name: Facility Create
+  type: http
+  seq: 13
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/digiagri/facility/create"
+  body:
+    type: form-urlencoded
+    data:
+      - name: agunanList
+        value: AG123
+      - name: insType
+        value: Life
+      - name: jenisPenggunaan
+        value: "1"
+      - name: kodeCabang
+        value: "0010"
+      - name: kodeFasilitas
+        value: PK3
+      - name: kodeLokasi
+        value: "3402"
+      - name: nama
+        value: Teressa Yumna
+      - name: noAkadAwal
+        value: AKD-2025-0010
+      - name: noCIF
+        value: "0000121436"
+      - name: nominal
+        value: "55000000"
+      - name: sektorEkonomi
+        value: Perdagangan
+      - name: tanggalAkadAwal
+        value: 10/10/2025
+      - name: tanggalPembukaan
+        value: 10/10/2025
+      - name: tanggalTersedia
+        value: 10/12/2025
+      - name: tanggalMulai
+        value: 11/10/2025
+      - name: tanggalJatuhTempo
+        value: 11/10/2030
+      - name: userId
+        value: "999915"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Success Create Facility
+    request:
+      url: "{{baseUrl}}/api/digiagri/facility/create"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: agunanList
+            value: AG123,AG124
+          - name: insType
+            value: Life
+          - name: jenisPenggunaan
+            value: "1"
+          - name: kodeCabang
+            value: "0020"
+          - name: kodeFasilitas
+            value: PK2
+          - name: kodeLokasi
+            value: "3402"
+          - name: nama
+            value: Teressa Yumna
+          - name: noAkadAwal
+            value: AKD-2025-0010
+          - name: noCIF
+            value: "0000120287"
+          - name: nominal
+            value: "55000000"
+          - name: sektorEkonomi
+            value: Perdagangan
+          - name: tanggalAkadAwal
+            value: 10/10/2025
+          - name: tanggalJatuhTempo
+            value: 10/12/2030
+          - name: tanggalMulai
+            value: 11/10/2025
+          - name: tanggalPembukaan
+            value: 10/10/2025
+          - name: tanggalTersedia
+            value: 10/11/2025
+          - name: userId
+            value: "999915"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Thu, 09 Oct 2025 06:07:01 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "91"
+        - name: Connection
+          value: keep-alive
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "statusCode": "1",
+              "statusDescription": "Success",
+              "nomorFasilitas": "0020/0000120287/PK2/016"
+          }

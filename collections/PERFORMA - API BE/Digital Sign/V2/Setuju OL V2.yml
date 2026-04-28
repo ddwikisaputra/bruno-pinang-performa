@@ -1,0 +1,359 @@
+info:
+  name: Setuju OL V2
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: "{{base_url_dev}}/v/2/digitalsign/setuju-ol"
+  body:
+    type: form-urlencoded
+    data:
+      - name: kodeProses
+        value: UmF5YVBpUGVyVG9w/lx5nmBcgN3n/SIGOwbFwMMGVaBq
+        description: Prakarsa ID (Encode AES) {MANDATORY}
+  auth:
+    type: bearer
+    token: "{{tokenJWT}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: unauthorized
+    request:
+      url: "{{base_url}}/v/2/digitalsign/setuju-ol"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: UmF5YVBpUGVyVG9w/lx+n2wXjR0uqNEIGTXN2gBk4OJN
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 20 Jul 2023 05:48:32 GMT
+        - name: Content-Length
+          value: "73"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "message": "Token is expired"
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/2/digitalsign/setuju-ol"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: UmF5YVBpUGVyVG9w/lx+n2wXjR0uqNEIGTXN2gBk4OJN
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 25 Jun 2021 08:48:50 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/2/digitalsign/setuju-ol"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: UmF5YVBpUGVyVG9w/lx+n2wXjR0uqNEIGTXN2gBk4OJN
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 25 Jun 2021 08:48:50 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect ....."
+          }
+  - name: parameter validation
+    request:
+      url: "{{base_url}}/v/2/digitalsign/setuju-ol"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: UmF5YVBpUGVyVG9w/lx+n2ys5jyVCOSa3qs+fZCnPjeFSg==
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 20 Jul 2023 05:44:00 GMT
+        - name: Content-Length
+          value: "134"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "...",
+              "message": "...",
+              "status": 400
+          }
+  - name: persetujuan gagal
+    request:
+      url: "{{base_url}}/v/2/digitalsign/setuju-ol"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: UmF5YVBpUGVyVG9w/lx+n2wXjR0uqNEIGTXN2gBk4OJN
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 20 Jul 2023 05:48:32 GMT
+        - name: Content-Length
+          value: "73"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Gagal simpan ke database (row affected)",
+              "message": "Maaf, Data Gagal Disimpan",
+              "status": 500
+          }
+  - name: persetujuan berhasil
+    request:
+      url: "{{base_url}}/v/2/digitalsign/setuju-ol"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: UmF5YVBpUGVyVG9w+l19Lii1/b4CXiNqcFL2cIIZeA==
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 20 Jul 2023 05:48:32 GMT
+        - name: Content-Length
+          value: "73"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Data Tersimpan",
+              "message": "Data Berhasil Disimpan",
+              "status": 200
+          }
+  - name: persetujuan gagal
+    request:
+      url: "{{base_url}}/v/2/digitalsign/setuju-ol"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: UmF5YVBpUGVyVG9w/lx+n2wXjR0uqNEIGTXN2gBk4OJN
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 20 Jul 2023 05:48:32 GMT
+        - name: Content-Length
+          value: "73"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Gagal simpan ke database (row affected)",
+              "message": "Maaf, Data Gagal Disimpan",
+              "status": 500
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/2/digitalsign/setuju-ol"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: UmF5YVBpUGVyVG9w/lx+n2wXjR0uqNEIGTXN2gBk4OJN
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 25 Jun 2021 08:48:50 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect ....."
+          }
+  - name: unauthorized
+    request:
+      url: "{{base_url}}/v/2/digitalsign/setuju-ol"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: UmF5YVBpUGVyVG9w/lx+n2wXjR0uqNEIGTXN2gBk4OJN
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 20 Jul 2023 05:48:32 GMT
+        - name: Content-Length
+          value: "73"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "message": "Token is expired"
+          }
+  - name: parameter validation
+    request:
+      url: "{{base_url}}/v/2/digitalsign/setuju-ol"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: UmF5YVBpUGVyVG9w/lx+n2ys5jyVCOSa3qs+fZCnPjeFSg==
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 20 Jul 2023 05:44:00 GMT
+        - name: Content-Length
+          value: "134"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "...",
+              "message": "...",
+              "status": 400
+          }
+  - name: persetujuan berhasil
+    request:
+      url: "{{base_url}}/v/2/digitalsign/setuju-ol"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: UmF5YVBpUGVyVG9w+l19Lii1/b4CXiNqcFL2cIIZeA==
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 20 Jul 2023 05:48:32 GMT
+        - name: Content-Length
+          value: "73"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Data Tersimpan",
+              "message": "Data Berhasil Disimpan",
+              "status": 200
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/2/digitalsign/setuju-ol"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: UmF5YVBpUGVyVG9w/lx+n2wXjR0uqNEIGTXN2gBk4OJN
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 25 Jun 2021 08:48:50 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }

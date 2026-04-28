@@ -1,0 +1,136 @@
+meta {
+  name: Genetate Payment Status
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{base-url-dev}}/v/1/monitoring/generate-payment-status/001001119230102/transactional
+  body: none
+  auth: basic
+}
+
+auth:basic {
+  username: UmF5YVBpUGVyVG9wvQQ9yCaZywQnor3oTiEnI7QBWZVTYFT2
+  password: UmF5YVBpUGVyVG9w/18dnAT+9iY6YT7toW1oEEdcvgxwAkuWwDSb
+}
+
+settings {
+  encodeUrl: true
+}
+
+example {
+  name: success transactional
+  
+  request: {
+    url: {{url}}/v/1/monitoring/testing
+    method: GET
+    mode: none
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Tue, 17 May 2022 01:04:23 GMT
+      Content-Length: 150
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": {
+                "referenceId": "",
+                "nomorRekening": "002001003518102",
+                "loanType": "2",
+                "nomorPOPencairan": "INV/AGRIAKU/07/2024/4",
+                "nominalPengajuan": "670000",
+                "tenor": "30 Hari",
+                "tanggalJatuhTempo": "2025-12-21 00:00:00",
+                "outstanding": "670000",
+                "tunggakanPokok": "0",
+                "tunggakanBunga": "13958",
+                "jumlahHariBunga": "0",
+                "tunggakanDenda": "0",
+                "jumlahHariDenda": "0",
+                "daysCount": "30",
+                "tanggalJatuhTempoFasilitas": "2026-01-24",
+                "tanggalBillingSelanjutnya": "2025-12-21",
+                "status": "1",
+                "pokokPaid": "0",
+                "bungaPaid": "0",
+                "dendaPaid": "0"
+            },
+            "desc": "Berhasil",
+            "message": "Generate Payment Status Berhasil",
+            "status": 200,
+            "statusCode": "1",
+            "statusDescription": "Inquiry Success"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: success tetap
+  
+  request: {
+    url: {{base-url-local}}/v/1/monitoring/generate-payment-status/001001008788107/tetap
+    method: GET
+    mode: none
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Tue, 09 Jul 2024 08:29:00 GMT
+      Content-Length: 607
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": {
+                "referenceId": "",
+                "nomorRekening": "001001008788107",
+                "loanType": "0",
+                "nomorPOPencairan": "",
+                "nominalPengajuan": "20000000",
+                "tenor": "24 Bulan",
+                "tanggalJatuhTempo": "2026-07-10 00:00:00",
+                "outstanding": "0",
+                "tunggakanPokok": "0",
+                "tunggakanBunga": "0",
+                "jumlahHariBunga": "0",
+                "tunggakanDenda": "0",
+                "jumlahHariDenda": "0",
+                "daysCount": "231",
+                "tanggalJatuhTempoFasilitas": "2026-07-10",
+                "tanggalBillingSelanjutnya": "2024-08-10",
+                "status": "1",
+                "pokokPaid": "0",
+                "bungaPaid": "0",
+                "dendaPaid": "0"
+            },
+            "desc": "Berhasil",
+            "message": "Generate Payment Status Berhasil",
+            "status": 200,
+            "statusCode": "1",
+            "statusDescription": "Inquiry Success"
+        }
+      '''
+    }
+  }
+}

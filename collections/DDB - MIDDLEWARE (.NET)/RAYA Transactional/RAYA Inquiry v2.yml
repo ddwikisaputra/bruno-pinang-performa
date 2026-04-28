@@ -1,0 +1,205 @@
+info:
+  name: RAYA Inquiry v2
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{base_url}}/api/digiagri/transactional/raya/v2/inquiry"
+  body:
+    type: form-urlencoded
+    data:
+      - name: cifNum
+        value: "0000118826"
+        description: Nomor CIF nasabah
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Success
+    request:
+      url: "{{base_url}}/api/digiagri/transactional/raya/v2/inquiry"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: cifNum
+            value: "0000119306"
+            description: Nomor CIF nasabah
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "statusCode": "1",
+              "statusDescription": "Inquiry Sukses",
+              "data": [
+                  {
+                      "nomorFasilitas": "0010/0000119306/PK1/001",
+                      "nominalFasilitas": "50000000.00",
+                      "nominalFasilitasDigunakan": "2600003.00",
+                      "tanggalPembukaan": "2018-07-01",
+                      "tanggalJatuhTempo": "2023-10-17",
+                      "transactionalType": "0",
+                      "rekening": [
+                          {
+                              "nomorRekening": "001001008223107",
+                              "nomorRekeningDisbursement": null,
+                              "plafond": "550000.00",
+                              "status": "1",
+                              "saldo": "550000.00",
+                              "bungaBerjalan": "0.00",
+                              "tanggalPembukaan": "2018-10-20",
+                              "tanggalJatuhTempo": "2018-10-27",
+                              "sukuBunga": "0.30000",
+                              "totalBunga": "3208.33",
+                              "penalti": "0.00",
+                              "jangkaWaktuPinjaman": null,
+                              "tanggalPengajuan": null,
+                              "tanggalPencairan": null,
+                              "tanggalPenolakan": null,
+                              "tanggalPelunasan": null,
+                              "keterangan": null,
+                              "listAGF": null
+                          },
+                          {
+                              "nomorRekening": "001001008225109",
+                              "nomorRekeningDisbursement": "001201000426319",
+                              "plafond": "500001.00",
+                              "status": "5",
+                              "saldo": "500001.00",
+                              "bungaBerjalan": "0",
+                              "tanggalPembukaan": "2018-10-20 12:05:00",
+                              "tanggalJatuhTempo": "2018-10-27 12:05:00",
+                              "sukuBunga": "0.30000",
+                              "totalBunga": "2917",
+                              "penalti": "0.00",
+                              "jangkaWaktuPinjaman": "7",
+                              "tanggalPengajuan": "2018-10-20 12:05:25",
+                              "tanggalPencairan": "2018-10-20 12:05:00",
+                              "tanggalPenolakan": null,
+                              "tanggalPelunasan": null,
+                              "keterangan": "Telat -1255 Hari",
+                              "listAGF": null
+                          },
+                          {
+                              "nomorRekening": "001001008226105",
+                              "nomorRekeningDisbursement": "001201000426319",
+                              "plafond": "500002.00",
+                              "status": "5",
+                              "saldo": "500002.00",
+                              "bungaBerjalan": "0",
+                              "tanggalPembukaan": "2018-10-20 13:00:00",
+                              "tanggalJatuhTempo": "2018-10-27 13:00:00",
+                              "sukuBunga": "0.30000",
+                              "totalBunga": "2917",
+                              "penalti": "0.00",
+                              "jangkaWaktuPinjaman": "7",
+                              "tanggalPengajuan": "2018-10-20 13:00:24",
+                              "tanggalPencairan": "2018-10-20 13:00:00",
+                              "tanggalPenolakan": null,
+                              "tanggalPelunasan": null,
+                              "keterangan": "Telat -1255 Hari",
+                              "listAGF": null
+                          },
+                          {
+                              "nomorRekening": "001001008227101",
+                              "nomorRekeningDisbursement": "001201000426319",
+                              "plafond": "250000.00",
+                              "status": "5",
+                              "saldo": "250000.00",
+                              "bungaBerjalan": "0",
+                              "tanggalPembukaan": "2018-10-20 13:30:00",
+                              "tanggalJatuhTempo": "2018-10-27 13:30:00",
+                              "sukuBunga": "0.30000",
+                              "totalBunga": "1459",
+                              "penalti": "0.00",
+                              "jangkaWaktuPinjaman": "7",
+                              "tanggalPengajuan": "2018-10-20 13:30:30",
+                              "tanggalPencairan": "2018-10-20 13:30:00",
+                              "tanggalPenolakan": null,
+                              "tanggalPelunasan": null,
+                              "keterangan": "Telat -1255 Hari",
+                              "listAGF": null
+                          },
+                          {
+                              "nomorRekening": "001001008228107",
+                              "nomorRekeningDisbursement": "001201000426319",
+                              "plafond": "300000.00",
+                              "status": "5",
+                              "saldo": "300000.00",
+                              "bungaBerjalan": "0",
+                              "tanggalPembukaan": "2018-10-20 13:40:00",
+                              "tanggalJatuhTempo": "2018-11-19 13:40:00",
+                              "sukuBunga": "0.30000",
+                              "totalBunga": "7500",
+                              "penalti": "0.00",
+                              "jangkaWaktuPinjaman": "30",
+                              "tanggalPengajuan": "2018-10-20 13:40:49",
+                              "tanggalPencairan": "2018-10-20 13:40:00",
+                              "tanggalPenolakan": null,
+                              "tanggalPelunasan": null,
+                              "keterangan": "Telat -1232 Hari",
+                              "listAGF": null
+                          },
+                          {
+                              "nomorRekening": "001001008221105",
+                              "nomorRekeningDisbursement": null,
+                              "plafond": "500000.00",
+                              "status": "1",
+                              "saldo": "500000.00",
+                              "bungaBerjalan": "2500.02",
+                              "tanggalPembukaan": "2018-10-14",
+                              "tanggalJatuhTempo": "2018-10-28",
+                              "sukuBunga": "0.30000",
+                              "totalBunga": "5833.33",
+                              "penalti": "0.00",
+                              "jangkaWaktuPinjaman": null,
+                              "tanggalPengajuan": null,
+                              "tanggalPencairan": null,
+                              "tanggalPenolakan": null,
+                              "tanggalPelunasan": null,
+                              "keterangan": null,
+                              "listAGF": null
+                          }
+                      ]
+                  }
+              ],
+              "dataBunga": [
+                  {
+                      "min": "1",
+                      "max": "20000000",
+                      "bunga": "30"
+                  },
+                  {
+                      "min": "20000001",
+                      "max": "100000000",
+                      "bunga": "24"
+                  }
+              ]
+          }
+  - name: Gagal
+    request:
+      url: "{{base_url}}/api/digiagri/transactional/raya/v2/inquiry"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: cifNum
+            value: xxxxxxx
+            description: Nomor CIF nasabah
+    response:
+      body:
+        type: text
+        data: "{\r
+
+          \    \"statusCode\": \"2\",\r
+
+          \    \"statusDescription\": \"Inquiry Gagal\"\r
+
+          }"

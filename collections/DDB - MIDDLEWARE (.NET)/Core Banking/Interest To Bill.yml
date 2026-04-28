@@ -1,0 +1,24 @@
+info:
+  name: Interest To Bill
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{URL}}/loan/interest-to-bill"
+  body:
+    type: json
+    data: |-
+      {
+          "NomorRekening":"002001002951103"
+      }
+  auth:
+    type: basic
+    username: pinang-mikro
+    password: "0"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

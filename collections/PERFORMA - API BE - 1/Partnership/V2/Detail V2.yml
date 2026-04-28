@@ -1,0 +1,747 @@
+info:
+  name: Detail V2
+  type: http
+  seq: 15
+
+http:
+  method: POST
+  url: "{{base_url_local}}/v/2/partnerships/detail"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "{{userId}}"
+        description: "[ENCODE] Personal Number BRI Agro (UserID Login) | MANDATORY"
+      - name: id
+        value: "6"
+        description: Id Partnership| MANDATORY
+      - name: isLoanType
+        value: "1"
+        description: "Preload Data Loan Type | [ 1 = FOR LOANTYPE] | OPTIONAL "
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: unautorized
+    request:
+      url: "{{base_url_local}}/v/1/partnerships/detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "-1"
+            description: ID Member
+            disabled: true
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 22 Feb 2022 08:01:21 GMT
+        - name: Content-Length
+          value: "93"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: access forbidden
+    request:
+      url: "{{base_url_local}}/v/2/partnerships/detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: UmF5YVBpUGVyVG9w9FR0lGH8cGJNF4M8yVwLukqMUy12WA==
+            description: "[ENCODE] Personal Number BRI Agro (UserID Login) | MANDATORY"
+          - name: id
+            value: "6"
+            description: Id Partnership| MANDATORY
+          - name: isLoanType
+            value: "1"
+            description: "Preload Data Loan Type | [ 1 = FOR LOANTYPE] | OPTIONAL "
+            disabled: true
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 14 Feb 2025 07:59:06 GMT
+        - name: Content-Length
+          value: "68"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memiliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/partnerships/detail"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "8"
+            description: ID Member
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Jul 2021 07:34:14 GMT
+        - name: Content-Length
+          value: "105"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect ....."
+          }
+  - name: parameter validation
+    request:
+      url: "{{base_url_local}}/v/2/partnerships/detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "{{userId}}"
+            description: "[ENCODE] Personal Number BRI Agro (UserID Login) | MANDATORY"
+          - name: id
+            value: "6"
+            description: Id Partnership| MANDATORY
+            disabled: true
+          - name: isLoanType
+            value: "1"
+            description: "Preload Data Loan Type | [ 1 = FOR LOANTYPE] | OPTIONAL "
+            disabled: true
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 14 Feb 2025 02:48:42 GMT
+        - name: Content-Length
+          value: "91"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Parameter ...",
+              "message": "Maaf, ...",
+              "status": 400
+          }
+  - name: not found
+    request:
+      url: "{{base_url}}/v/1/partnerships/detail"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "8"
+          - name: userId
+            value: "999941"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Jul 2021 07:34:14 GMT
+        - name: Content-Length
+          value: "105"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Data .... Kosong",
+              "message": ".... Tidak Ditemukan",
+              "status": 404
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/partnerships/detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "54"
+            description: ID Member
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: isLoanType
+            value: "1"
+            description: "Preload Data Loan Type | [ 1 = FOR LOANTYPE] | OPTIONAL "
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 01 Sep 2022 14:40:16 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "id": 125,
+                  "code": "POR-552",
+                  "commodity": "",
+                  "name": "PORORODUAUPDATE",
+                  "type": "partner",
+                  "address": "Jl Candi Sewu No. 10",
+                  "postalCode": "65141",
+                  "provinceCode": "12",
+                  "provinceName": "Jawa Timur",
+                  "cityCode": "1293",
+                  "cityName": "Kota Malang",
+                  "districtCode": "357305",
+                  "districtName": "Lowokwaru",
+                  "villageCode": "3573051007",
+                  "villageName": "Jatimulyo",
+                  "rt": "010",
+                  "rw": "011",
+                  "email": "UmF5YVBpUGVyVG9wvQI/wiailjQ8dT7TQPBogNdeCHqSdAFLZjdXLny2H8/p",
+                  "picName": "UmF5YVBpUGVyVG9wgAQmzHSU0RAzeX/qXr9/jtcM6uwQ9S+/j4aQVjcyKsWwgA==",
+                  "picMobileNumber": "UmF5YVBpUGVyVG9w5lt/lWX8l0NjL2eLH9ynJJthYIdItC/5MJyAWVE=",
+                  "branchCode": "0010",
+                  "status": 0,
+                  "licenseNumber": "22t233ttqt3",
+                  "licenseExpired": "2024-12-30T00:00:00Z",
+                  "pksType": "lifetime",
+                  "pksNumber": "BANK RAYA/PKS-08/RAC/04/22",
+                  "pksExpired": "2024-12-02T00:00:00Z",
+                  "economicSectorId": 1,
+                  "economicSectorName": "Administrasi Pemerintahan, Pertahanan Dan Jaminan Sosial Wajib",
+                  "economicSubsectorId": 564,
+                  "economicSubsectorName": "Jaminan Sosial Wajib",
+                  "savingAccountNumber": "UmF5YVBpUGVyVG9w/V18nWT8lERrK2iLGO461MwgZabbdevxqtXkoNFjuA==",
+                  "savingAccountName": "UmF5YVBpUGVyVG9wiSgU7HSE6jAaSlCgjE//sLwlL5aJU2L+2F8=",
+                  "savingAccountType": "UmF5YVBpUGVyVG9wiiQf4jT9YRpYOkJVnqAhDnkpAIY=",
+                  "picExpress": "UmF5YVBpUGVyVG9w9FR0lGD8PJZ01laNFpB91ptV5mkFfw==",
+                  "isAgf": 1,
+                  "picLead": "UmF5YVBpUGVyVG9wiSgU7LLCEcMk7AajGt7ryMJq5zA=",
+                  "pnPicLead": "",
+                  "disbursementTo": "",
+                  "settelementTo": "",
+                  "pathFile": "partnerships/license-document/2022/12/20/IMG_20221220191634.png",
+                  "base64File": "string base64",
+                  "mimeFile": "image/png",
+                  "createdAt": "20-12-2022",
+                  "updatedAt": "20-12-2022",
+                  "dataLoanTypeChild": [
+                      {
+                          "id": 302,
+                          "productType": "40004",
+                          "loanTypeParentId": 391,
+                          "loanTypeSubparentId": 110,
+                          "loanTypeName": "MAJOO MERCHANT FINANCING",
+                          "loanTypeCode": "CHILD-MMF-652",
+                          "transactionType": 2,
+                          "isCustom": 0,
+                          "provisionFee": 1,
+                          "status": 0,
+                          "dataInterestRates": [
+                              {
+                                  "plafondStart": 0,
+                                  "plafondEnd": 25000000,
+                                  "loanTermStart": 1,
+                                  "loanTermEnd": 90,
+                                  "loanTermType": 1,
+                                  "interestRate": 25
+                              },
+                              {
+                                  "plafondStart": 25000001,
+                                  "plafondEnd": 50000000,
+                                  "loanTermStart": 1,
+                                  "loanTermEnd": 90,
+                                  "loanTermType": 1,
+                                  "interestRate": 24
+                              },
+                              {
+                                  "plafondStart": 50000001,
+                                  "plafondEnd": 75000000,
+                                  "loanTermStart": 1,
+                                  "loanTermEnd": 90,
+                                  "loanTermType": 1,
+                                  "interestRate": 23
+                              },
+                              {
+                                  "plafondStart": 75000001,
+                                  "plafondEnd": 100000000,
+                                  "loanTermStart": 1,
+                                  "loanTermEnd": 90,
+                                  "loanTermType": 1,
+                                  "interestRate": 22
+                              }
+                          ],
+                          "dataInstallmentPatterns": [
+                              {
+                                  "installmentPattern": "7 hari",
+                                  "installmentPatternType": 2
+                              },
+                              {
+                                  "installmentPattern": "14 hari",
+                                  "installmentPatternType": 2
+                              },
+                              {
+                                  "installmentPattern": "21 hari",
+                                  "installmentPatternType": 2
+                              },
+                              {
+                                  "installmentPattern": "25 hari",
+                                  "installmentPatternType": 2
+                              },
+                              {
+                                  "installmentPattern": "30 hari",
+                                  "installmentPatternType": 2
+                              },
+                              {
+                                  "installmentPattern": "2 hari",
+                                  "installmentPatternType": 2
+                              }
+                          ],
+                          "dataAdministrationFees": [
+                              {
+                                  "nominalStart": 0,
+                                  "nominalEnd": 10000000,
+                                  "adminFee": 0
+                              },
+                              {
+                                  "nominalStart": 10000001,
+                                  "nominalEnd": 25000000,
+                                  "adminFee": 0
+                              },
+                              {
+                                  "nominalStart": 25000001,
+                                  "nominalEnd": 50000000,
+                                  "adminFee": 0
+                              },
+                              {
+                                  "nominalStart": 50000001,
+                                  "nominalEnd": 75000000,
+                                  "adminFee": 0
+                              },
+                              {
+                                  "nominalStart": 75000001,
+                                  "nominalEnd": 100000000,
+                                  "adminFee": 0
+                              }
+                          ],
+                          "dataInsurance": {
+                              "id": 1,
+                              "insuranceName": "BRISMA",
+                              "productType": "40003",
+                              "percentage": 1.2,
+                              "status": 0
+                          }
+                      }
+                  ]
+              },
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/partnerships/detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "54"
+            description: ID Member
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: isLoanType
+            value: "1"
+            description: "Preload Data Loan Type | [ 1 = FOR LOANTYPE] | OPTIONAL "
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 01 Sep 2022 14:40:16 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "id": 125,
+                  "code": "POR-552",
+                  "commodity": "",
+                  "name": "PORORODUAUPDATE",
+                  "type": "partner",
+                  "address": "Jl Candi Sewu No. 10",
+                  "postalCode": "65141",
+                  "provinceCode": "12",
+                  "provinceName": "Jawa Timur",
+                  "cityCode": "1293",
+                  "cityName": "Kota Malang",
+                  "districtCode": "357305",
+                  "districtName": "Lowokwaru",
+                  "villageCode": "3573051007",
+                  "villageName": "Jatimulyo",
+                  "rt": "010",
+                  "rw": "011",
+                  "email": "UmF5YVBpUGVyVG9wvQI/wiailjQ8dT7TQPBogNdeCHqSdAFLZjdXLny2H8/p",
+                  "picName": "UmF5YVBpUGVyVG9wgAQmzHSU0RAzeX/qXr9/jtcM6uwQ9S+/j4aQVjcyKsWwgA==",
+                  "picMobileNumber": "UmF5YVBpUGVyVG9w5lt/lWX8l0NjL2eLH9ynJJthYIdItC/5MJyAWVE=",
+                  "branchCode": "0010",
+                  "status": 0,
+                  "licenseNumber": "22t233ttqt3",
+                  "licenseExpired": "2024-12-30T00:00:00Z",
+                  "pksType": "lifetime",
+                  "pksNumber": "BANK RAYA/PKS-08/RAC/04/22",
+                  "pksExpired": "2024-12-02T00:00:00Z",
+                  "economicSectorId": 1,
+                  "economicSectorName": "Administrasi Pemerintahan, Pertahanan Dan Jaminan Sosial Wajib",
+                  "economicSubsectorId": 564,
+                  "economicSubsectorName": "Jaminan Sosial Wajib",
+                  "savingAccountNumber": "UmF5YVBpUGVyVG9w/V18nWT8lERrK2iLGO461MwgZabbdevxqtXkoNFjuA==",
+                  "savingAccountName": "UmF5YVBpUGVyVG9wiSgU7HSE6jAaSlCgjE//sLwlL5aJU2L+2F8=",
+                  "savingAccountType": "UmF5YVBpUGVyVG9wiiQf4jT9YRpYOkJVnqAhDnkpAIY=",
+                  "picExpress": "UmF5YVBpUGVyVG9w9FR0lGD8PJZ01laNFpB91ptV5mkFfw==",
+                  "isAgf": 1,
+                  "picLead": "UmF5YVBpUGVyVG9wiSgU7LLCEcMk7AajGt7ryMJq5zA=",
+                  "pnPicLead": "",
+                  "disbursementTo": "",
+                  "settelementTo": "",
+                  "pathFile": "partnerships/license-document/2022/12/20/IMG_20221220191634.png",
+                  "base64File": "string base64",
+                  "mimeFile": "image/png",
+                  "createdAt": "20-12-2022",
+                  "updatedAt": "20-12-2022",
+                  "dataLoanTypeChild": [
+                      {
+                          "id": 302,
+                          "productType": "40004",
+                          "loanTypeParentId": 391,
+                          "loanTypeSubparentId": 110,
+                          "loanTypeName": "MAJOO MERCHANT FINANCING",
+                          "loanTypeCode": "CHILD-MMF-652",
+                          "transactionType": 2,
+                          "isCustom": 0,
+                          "provisionFee": 1,
+                          "status": 0,
+                          "dataInterestRates": [
+                              {
+                                  "plafondStart": 0,
+                                  "plafondEnd": 25000000,
+                                  "loanTermStart": 1,
+                                  "loanTermEnd": 90,
+                                  "loanTermType": 1,
+                                  "interestRate": 25
+                              },
+                              {
+                                  "plafondStart": 25000001,
+                                  "plafondEnd": 50000000,
+                                  "loanTermStart": 1,
+                                  "loanTermEnd": 90,
+                                  "loanTermType": 1,
+                                  "interestRate": 24
+                              },
+                              {
+                                  "plafondStart": 50000001,
+                                  "plafondEnd": 75000000,
+                                  "loanTermStart": 1,
+                                  "loanTermEnd": 90,
+                                  "loanTermType": 1,
+                                  "interestRate": 23
+                              },
+                              {
+                                  "plafondStart": 75000001,
+                                  "plafondEnd": 100000000,
+                                  "loanTermStart": 1,
+                                  "loanTermEnd": 90,
+                                  "loanTermType": 1,
+                                  "interestRate": 22
+                              }
+                          ],
+                          "dataInstallmentPatterns": [
+                              {
+                                  "installmentPattern": "7 hari",
+                                  "installmentPatternType": 2
+                              },
+                              {
+                                  "installmentPattern": "14 hari",
+                                  "installmentPatternType": 2
+                              },
+                              {
+                                  "installmentPattern": "21 hari",
+                                  "installmentPatternType": 2
+                              },
+                              {
+                                  "installmentPattern": "25 hari",
+                                  "installmentPatternType": 2
+                              },
+                              {
+                                  "installmentPattern": "30 hari",
+                                  "installmentPatternType": 2
+                              },
+                              {
+                                  "installmentPattern": "2 hari",
+                                  "installmentPatternType": 2
+                              }
+                          ],
+                          "dataAdministrationFees": [
+                              {
+                                  "nominalStart": 0,
+                                  "nominalEnd": 10000000,
+                                  "adminFee": 0
+                              },
+                              {
+                                  "nominalStart": 10000001,
+                                  "nominalEnd": 25000000,
+                                  "adminFee": 0
+                              },
+                              {
+                                  "nominalStart": 25000001,
+                                  "nominalEnd": 50000000,
+                                  "adminFee": 0
+                              },
+                              {
+                                  "nominalStart": 50000001,
+                                  "nominalEnd": 75000000,
+                                  "adminFee": 0
+                              },
+                              {
+                                  "nominalStart": 75000001,
+                                  "nominalEnd": 100000000,
+                                  "adminFee": 0
+                              }
+                          ],
+                          "dataInsurance": {
+                              "id": 1,
+                              "insuranceName": "BRISMA",
+                              "productType": "40003",
+                              "percentage": 1.2,
+                              "status": 0
+                          }
+                      }
+                  ]
+              },
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: not found
+    request:
+      url: "{{base_url}}/v/1/partnerships/detail"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "8"
+          - name: userId
+            value: "999941"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Jul 2021 07:34:14 GMT
+        - name: Content-Length
+          value: "105"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Data .... Kosong",
+              "message": ".... Tidak Ditemukan",
+              "status": 404
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url_local}}/v/1/partnerships/detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "-1"
+            description: ID Member
+            disabled: true
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 22 Feb 2022 08:01:21 GMT
+        - name: Content-Length
+          value: "93"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: parameter validation
+    request:
+      url: "{{base_url_local}}/v/2/partnerships/detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "{{userId}}"
+            description: "[ENCODE] Personal Number BRI Agro (UserID Login) | MANDATORY"
+          - name: id
+            value: "6"
+            description: Id Partnership| MANDATORY
+            disabled: true
+          - name: isLoanType
+            value: "1"
+            description: "Preload Data Loan Type | [ 1 = FOR LOANTYPE] | OPTIONAL "
+            disabled: true
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 14 Feb 2025 02:48:42 GMT
+        - name: Content-Length
+          value: "91"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Parameter ...",
+              "message": "Maaf, ...",
+              "status": 400
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/partnerships/detail"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "8"
+            description: ID Member
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Jul 2021 07:34:14 GMT
+        - name: Content-Length
+          value: "105"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect ....."
+          }
+  - name: access forbidden
+    request:
+      url: "{{base_url_local}}/v/2/partnerships/detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: UmF5YVBpUGVyVG9w9FR0lGH8cGJNF4M8yVwLukqMUy12WA==
+            description: "[ENCODE] Personal Number BRI Agro (UserID Login) | MANDATORY"
+          - name: id
+            value: "6"
+            description: Id Partnership| MANDATORY
+          - name: isLoanType
+            value: "1"
+            description: "Preload Data Loan Type | [ 1 = FOR LOANTYPE] | OPTIONAL "
+            disabled: true
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 14 Feb 2025 07:59:06 GMT
+        - name: Content-Length
+          value: "68"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memiliki Akses",
+              "message": "403 Forbidden"
+          }

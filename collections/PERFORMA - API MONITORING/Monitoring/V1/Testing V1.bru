@@ -1,0 +1,54 @@
+meta {
+  name: Testing V1
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{url}}/v/1/monitoring/testing
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+settings {
+  encodeUrl: true
+}
+
+example {
+  name: success
+  
+  request: {
+    url: {{url}}/v/1/monitoring/testing
+    method: GET
+    mode: none
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Tue, 17 May 2022 01:04:23 GMT
+      Content-Length: 150
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": "Welcome To PINANG MIKRO MONITORING",
+            "desc": "Behasil Konek API MONITORING",
+            "message": "Welcome To API Pinang Mikro Monitoring V1",
+            "status": 200
+        }
+      '''
+    }
+  }
+}

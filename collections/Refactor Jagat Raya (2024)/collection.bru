@@ -1,0 +1,73 @@
+meta {
+  name: Refactor Jagat Raya (2024)
+}
+
+auth {
+  mode: none
+}
+
+vars:pre-request {
+  BASE_URL: 
+  JAGAT_RAYA_API_KEY: 
+  REQUEST_BODY: 
+  TOKEN: 
+  REFRESH_TOKEN: 
+  API_KEY: 
+}
+
+script:pre-request {
+  // const CryptoJS = require("crypto-js");
+  
+  // globalThis.encrypt = function (plain) {
+  //     const iv = CryptoJS.lib.WordArray.random(16);
+  //     const salt = CryptoJS.lib.WordArray.random(64);
+  //     const key = CryptoJS.PBKDF2(bru.getEnvVar("SECRET_KEY"), salt, {
+  //         keySize: 256 / 32,
+  //         iterations: 2145,
+  //         hasher: CryptoJS.algo.SHA512,
+  //     });
+  
+  //     const encrypted = CryptoJS.AES.encrypt(plain, key, { iv }).ciphertext;
+  
+  //     const combinedHex =
+  //         CryptoJS.enc.Hex.stringify(salt) +
+  //         CryptoJS.enc.Hex.stringify(iv) +
+  //         CryptoJS.enc.Hex.stringify(encrypted);
+  
+  //     return CryptoJS.enc.Base64.stringify(CryptoJS.enc.Hex.parse(combinedHex));
+  // }
+}
+
+script:post-response {
+  // // 1. IMPORT AND EXPOSE THE LIBRARY GLOBALLY
+  // function decrypt(encrypted) {
+  //     if (!encrypted) return null;
+  
+  //     // 2. USE THE GLOBAL REFERENCE EXPLICITLY INSIDE THE FUNCTION
+  //     const combinedHex = CryptoJS.enc.Hex.stringify(CryptoJS.enc.Base64.parse(encrypted));
+  
+  //     const saltHex = combinedHex.substring(0, 64 * 2);
+  //     const ivHex = combinedHex.substring(64 * 2, 64 * 2 + 16 * 2);
+  //     const encryptedHex = combinedHex.substring(64 * 2 + 16 * 2);
+  
+  //     const salt = CryptoJS.enc.Hex.parse(saltHex);
+  //     const iv = CryptoJS.enc.Hex.parse(ivHex);
+  //     const ciphertext = CryptoJS.enc.Hex.parse(encryptedHex);
+  
+  //     const key = CryptoJS.PBKDF2(bru.getEnvVar("SECRET_KEY"), salt, {
+  //         keySize: 256 / 32,
+  //         iterations: 2145,
+  //         hasher: CryptoJS.algo.SHA512,
+  //     });
+  
+  //     const decrypted = CryptoJS.AES.decrypt({ ciphertext }, key, {
+  //         iv,
+  //         mode: CryptoJS.mode.CBC,
+  //         padding: CryptoJS.pad.Pkcs7,
+  //     });
+  
+  //     return decrypted.toString(CryptoJS.enc.Utf8);
+  // }
+  
+  // // 3. EXPOSE THE DECRYP
+}

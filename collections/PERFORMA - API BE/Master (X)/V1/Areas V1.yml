@@ -1,0 +1,573 @@
+info:
+  name: Areas V1
+  type: http
+  seq: 2
+
+http:
+  method: GET
+  url: "{{base_url}}/v/1/master/areas/10520"
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/master/areas/{{postal_code}}"
+      method: GET
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: empty data city
+    request:
+      url: "{{base_url}}/v/1/master/areas/13120"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 20 May 2021 03:21:01 GMT
+        - name: Content-Length
+          value: "381"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "cities":null,
+                  "districts": [
+                      {
+                          "districtCode": "317501",
+                          "district": "MATRAMAN"
+                      }
+                  ],
+                  "provinces": [
+                      {
+                          "provinceCode": "3",
+                          "province": "DKI JAKARTA"
+                      }
+                  ],
+                  "villages": [
+                      {
+                          "villageCode": "3175011006",
+                          "village": "UTAN KAYU SELAT KEL"
+                      },
+                      {
+                          "villageCode": "3175011002",
+                          "village": "UTAN KAYU UTARA KEL"
+                      }
+                  ]
+              },
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/master/areas/11420"
+      method: GET
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: empty data district
+    request:
+      url: "{{base_url}}/v/1/master/areas/13120"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 20 May 2021 03:21:01 GMT
+        - name: Content-Length
+          value: "381"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "cities": [
+                      {
+                          "cityCode": "0395",
+                          "city": "JAKARTA TIMUR"
+                      }
+                  ],
+                  "districts": null,
+                  "provinces": [
+                      {
+                          "provinceCode": "3",
+                          "province": "DKI JAKARTA"
+                      }
+                  ],
+                  "villages": [
+                      {
+                          "villageCode": "3175011006",
+                          "village": "UTAN KAYU SELAT KEL"
+                      },
+                      {
+                          "villageCode": "3175011002",
+                          "village": "UTAN KAYU UTARA KEL"
+                      }
+                  ]
+              },
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/master/areas/{{postal_code}}"
+      method: GET
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "data" : null,
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect ....."
+          }
+  - name: empty data village
+    request:
+      url: "{{base_url}}/v/1/master/areas/13120"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 20 May 2021 03:21:01 GMT
+        - name: Content-Length
+          value: "381"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "cities": [
+                      {
+                          "cityCode": "0395",
+                          "city": "JAKARTA TIMUR"
+                      }
+                  ],
+                  "districts": [
+                      {
+                          "districtCode": "317501",
+                          "district": "MATRAMAN"
+                      }
+                  ],
+                  "provinces": [
+                      {
+                          "provinceCode": "3",
+                          "province": "DKI JAKARTA"
+                      }
+                  ],
+                  "villages": null
+              },
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: empty data province
+    request:
+      url: "{{base_url}}/v/1/master/areas/13120"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 20 May 2021 03:21:01 GMT
+        - name: Content-Length
+          value: "381"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "cities": [
+                      {
+                          "cityCode": "0395",
+                          "city": "JAKARTA TIMUR"
+                      }
+                  ],
+                  "districts": [
+                      {
+                          "districtCode": "317501",
+                          "district": "MATRAMAN"
+                      }
+                  ],
+                  "provinces": null,
+                  "villages": [
+                      {
+                          "villageCode": "3175011006",
+                          "village": "UTAN KAYU SELAT KEL"
+                      },
+                      {
+                          "villageCode": "3175011002",
+                          "village": "UTAN KAYU UTARA KEL"
+                      }
+                  ]
+              },
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/master/areas/13120"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 20 May 2021 03:21:01 GMT
+        - name: Content-Length
+          value: "381"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "cities": [
+                      {
+                          "cityCode": "0395",
+                          "city": "JAKARTA TIMUR"
+                      }
+                  ],
+                  "districts": [
+                      {
+                          "districtCode": "317501",
+                          "district": "MATRAMAN"
+                      }
+                  ],
+                  "provinces": [
+                      {
+                          "provinceCode": "3",
+                          "province": "DKI JAKARTA"
+                      }
+                  ],
+                  "villages": [
+                      {
+                          "villageCode": "3175011006",
+                          "village": "UTAN KAYU SELAT KEL"
+                      },
+                      {
+                          "villageCode": "3175011002",
+                          "village": "UTAN KAYU UTARA KEL"
+                      }
+                  ]
+              },
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/master/areas/{{postal_code}}"
+      method: GET
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: empty data province
+    request:
+      url: "{{base_url}}/v/1/master/areas/13120"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 20 May 2021 03:21:01 GMT
+        - name: Content-Length
+          value: "381"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "cities": [
+                      {
+                          "cityCode": "0395",
+                          "city": "JAKARTA TIMUR"
+                      }
+                  ],
+                  "districts": [
+                      {
+                          "districtCode": "317501",
+                          "district": "MATRAMAN"
+                      }
+                  ],
+                  "provinces": null,
+                  "villages": [
+                      {
+                          "villageCode": "3175011006",
+                          "village": "UTAN KAYU SELAT KEL"
+                      },
+                      {
+                          "villageCode": "3175011002",
+                          "village": "UTAN KAYU UTARA KEL"
+                      }
+                  ]
+              },
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/master/areas/11420"
+      method: GET
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: empty data city
+    request:
+      url: "{{base_url}}/v/1/master/areas/13120"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 20 May 2021 03:21:01 GMT
+        - name: Content-Length
+          value: "381"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "cities":null,
+                  "districts": [
+                      {
+                          "districtCode": "317501",
+                          "district": "MATRAMAN"
+                      }
+                  ],
+                  "provinces": [
+                      {
+                          "provinceCode": "3",
+                          "province": "DKI JAKARTA"
+                      }
+                  ],
+                  "villages": [
+                      {
+                          "villageCode": "3175011006",
+                          "village": "UTAN KAYU SELAT KEL"
+                      },
+                      {
+                          "villageCode": "3175011002",
+                          "village": "UTAN KAYU UTARA KEL"
+                      }
+                  ]
+              },
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: empty data district
+    request:
+      url: "{{base_url}}/v/1/master/areas/13120"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 20 May 2021 03:21:01 GMT
+        - name: Content-Length
+          value: "381"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "cities": [
+                      {
+                          "cityCode": "0395",
+                          "city": "JAKARTA TIMUR"
+                      }
+                  ],
+                  "districts": null,
+                  "provinces": [
+                      {
+                          "provinceCode": "3",
+                          "province": "DKI JAKARTA"
+                      }
+                  ],
+                  "villages": [
+                      {
+                          "villageCode": "3175011006",
+                          "village": "UTAN KAYU SELAT KEL"
+                      },
+                      {
+                          "villageCode": "3175011002",
+                          "village": "UTAN KAYU UTARA KEL"
+                      }
+                  ]
+              },
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: empty data village
+    request:
+      url: "{{base_url}}/v/1/master/areas/13120"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 20 May 2021 03:21:01 GMT
+        - name: Content-Length
+          value: "381"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "cities": [
+                      {
+                          "cityCode": "0395",
+                          "city": "JAKARTA TIMUR"
+                      }
+                  ],
+                  "districts": [
+                      {
+                          "districtCode": "317501",
+                          "district": "MATRAMAN"
+                      }
+                  ],
+                  "provinces": [
+                      {
+                          "provinceCode": "3",
+                          "province": "DKI JAKARTA"
+                      }
+                  ],
+                  "villages": null
+              },
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/master/areas/{{postal_code}}"
+      method: GET
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "data" : null,
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect ....."
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/master/areas/13120"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 20 May 2021 03:21:01 GMT
+        - name: Content-Length
+          value: "381"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "cities": [
+                      {
+                          "cityCode": "0395",
+                          "city": "JAKARTA TIMUR"
+                      }
+                  ],
+                  "districts": [
+                      {
+                          "districtCode": "317501",
+                          "district": "MATRAMAN"
+                      }
+                  ],
+                  "provinces": [
+                      {
+                          "provinceCode": "3",
+                          "province": "DKI JAKARTA"
+                      }
+                  ],
+                  "villages": [
+                      {
+                          "villageCode": "3175011006",
+                          "village": "UTAN KAYU SELAT KEL"
+                      },
+                      {
+                          "villageCode": "3175011002",
+                          "village": "UTAN KAYU UTARA KEL"
+                      }
+                  ]
+              },
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }

@@ -1,0 +1,156 @@
+meta {
+  name: Update Role Akses Parameter
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{BASE_URL}}/v1/role/parameter/update
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: 
+}
+
+body:json {
+  {
+      "payload": "{{REQUEST_BODY}}"
+  }
+}
+
+script:pre-request {
+  const payload = {
+      "role_parameter_group_id": "04431b04-b2a0-474e-97d7-c5c5a105d801",
+      "role_id": "f3a73df5-53fc-4454-80e5-c360a536fa3d",
+      "parameters": [
+          {
+              "type": "employee",
+              "label": "Rifaldi Ananta",
+              "value": "1730"
+          }
+      ]
+  }
+  
+  const result = _.encrypt(JSON.stringify(payload))
+  bru.setEnvVar("REQUEST_BODY", result);
+}
+
+script:post-response {
+  const responseJSON = res.getBody()
+  if (responseJSON.status) {
+      const data = _.decrypt(responseJSON.data)
+      const parseData = JSON.parse(data)
+      const parseData2 = JSON.parse(parseData)
+      console.log(parseData2)
+  }
+}
+
+settings {
+  encodeUrl: true
+}
+
+example {
+  name: Success
+  
+  request: {
+    url: {{BASE_URL}}/v1/access-management/role-param/update
+    method: POST
+    mode: json
+    body:json: {
+      {
+          "role_parameter_group_id": "044407d4-2b59-4403-aa60-bea21b0bb47e",
+          "role_id": "edbbfe50-4ede-447c-a1be-cd2a90d7912a",
+          "parameters": [
+              {
+                  "param_type": "employee",
+                  "label": "001676",
+                  "value": "001676"
+              },
+              {
+                  "param_type": "organization",
+                  "label": "Divisi Application Development, Architecture & Governance",
+                  "value": "13"
+              }
+          ]
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Thu, 07 Dec 2023 07:11:22 GMT
+      Content-Length: 62
+    }
+  
+    status: {
+      code: 200
+      text: 200
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "message": "Data berhasil disimpan",
+            "status": true
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Data tidak ditemukan
+  
+  request: {
+    url: {{BASE_URL}}/v1/access-management/role-param/update
+    method: POST
+    mode: json
+    body:json: {
+      {
+          "role_parameter_group_id": "asdsad",
+          "role_id": "edbbfe50-4ede-447c-a1be-cd2a90d7912a",
+          "parameters": [
+              {
+                  "param_type": "employee",
+                  "label": "001676",
+                  "value": "001676"
+              },
+              {
+                  "param_type": "organization",
+                  "label": "Divisi Application Development, Architecture & Governance",
+                  "value": "13"
+              }
+          ]
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Thu, 07 Dec 2023 07:02:58 GMT
+      Content-Length: 61
+    }
+  
+    status: {
+      code: 200
+      text: 500
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "message": "Data tidak ditemukan",
+            "status": false
+        }
+      '''
+    }
+  }
+}

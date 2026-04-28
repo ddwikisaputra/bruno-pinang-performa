@@ -1,0 +1,1128 @@
+info:
+  name: List Loan Type Subparent V1
+  type: http
+  seq: 7
+
+http:
+  method: POST
+  url: "{{url-prod}}/v/1/master/loan-type-subparent-list"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "001317"
+        description: UserId Login | MANDATORY
+      - name: loanTypeParentId
+        value: "0"
+        description: Loan Type Parent ID | DEFAULT = 0 | 0 = All List | OPTIONAL
+        disabled: true
+      - name: filterStatus
+        value: "0"
+        description: Filtering Status | 0 = Include Enabled & Disabled | 1 = Only Enabled | 2 = Only Disabled | 3 = Only Deleted | 4 - all status | Default = 0 | OPTIONAL
+        disabled: true
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Unauthorized (401)
+    request:
+      url: "{{base_url}}/v/1/master/loan-type-subparent-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: UserId Login | MANDATORY
+          - name: loanTypeParentId
+            value: "1"
+            description: Loan Type Parent ID | [0 = All List] | OPTIONAL
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 23 Aug 2022 10:53:41 GMT
+        - name: Content-Length
+          value: "103"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{base_url}}/v/1/master/loan-type-subparent-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "99994"
+            description: UserId Login | MANDATORY
+          - name: loanTypeParentId
+            value: A
+            description: Loan Type Parent ID | [0 = All List] | OPTIONAL
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 23 Aug 2022 10:55:32 GMT
+        - name: Content-Length
+          value: "68"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memiliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: not found
+    request:
+      url: "{{base_url}}/v/1/master/loan-type-subparent-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: UserId Login | MANDATORY
+          - name: loanTypeParentId
+            value: "1"
+            description: Loan Type Parent ID | [0 = All List] | OPTIONAL
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 23 Aug 2022 10:53:41 GMT
+        - name: Content-Length
+          value: "103"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Error Record Not Found",
+              "message": "Data .... Tidak Ditemukan",
+              "status": 404
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/master/loan-type-subparent-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: UserId Login | MANDATORY
+          - name: loanTypeParentId
+            value: "1"
+            description: Loan Type Parent ID | [0 = All List] | OPTIONAL
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 23 Aug 2022 10:53:41 GMT
+        - name: Content-Length
+          value: "103"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 500
+          }
+  - name: bad request
+    request:
+      url: "{{base_url}}/v/1/master/loan-type-subparent-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: UserId Login | MANDATORY
+          - name: loanTypeParentId
+            value: A
+            description: Loan Type Parent ID | [0 = All List] | OPTIONAL
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 23 Aug 2022 10:54:37 GMT
+        - name: Content-Length
+          value: "161"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Format Parameter .... tidak sesuai",
+              "message": "Maaf, Paramenter .... hanya boleh menggunakan angka",
+              "status": 400
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/master/loan-type-subparent-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: UserId Login | MANDATORY
+          - name: loanTypeParentId
+            value: "1"
+            description: Loan Type Parent ID | [0 = All List] | OPTIONAL
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 23 Aug 2022 10:53:41 GMT
+        - name: Content-Length
+          value: "103"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect ....."
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/master/loan-type-subparent-list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: UserId Login | MANDATORY
+          - name: loanTypeParentId
+            value: "0"
+            description: Loan Type Parent ID | [0 = All List] | OPTIONAL
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 23 Aug 2022 10:52:47 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "data": [
+                  {
+                      "id": 23,
+                      "loanTypeParentId": 26,
+                      "loanTypeName": "bambang",
+                      "loanTypeCode": "SUB-BAM-24",
+                      "provisionFee": 1,
+                      "status": -1,
+                      "dataInterestRates": [
+                          {
+                              "plafondStart": 600000,
+                              "plafondEnd": 1000000,
+                              "loanTermStart": 1,
+                              "loanTermEnd": 2,
+                              "loanTermType": 1,
+                              "interestRate": 0.1
+                          },
+                          {
+                              "plafondStart": 1100000,
+                              "plafondEnd": 1500000,
+                              "loanTermStart": 3,
+                              "loanTermEnd": 4,
+                              "loanTermType": 1,
+                              "interestRate": 0.5
+                          }
+                      ],
+                      "dataInsurance": {
+                          "id": 1,
+                          "insuranceName": "testSatu",
+                          "productType": "40003",
+                          "percentage": 0.2,
+                          "status": 0
+                      }
+                  },
+                  {
+                      "id": 25,
+                      "loanTypeParentId": 26,
+                      "loanTypeName": "bambang",
+                      "loanTypeCode": "SUB-BAM-86",
+                      "provisionFee": 10.12,
+                      "status": 0,
+                      "dataInterestRates": [
+                          {
+                              "plafondStart": 500000,
+                              "plafondEnd": 1000000,
+                              "loanTermStart": 1,
+                              "loanTermEnd": 7,
+                              "loanTermType": 1,
+                              "interestRate": 12.1
+                          }
+                      ],
+                      "dataInsurance": {
+                          "id": 1,
+                          "insuranceName": "testSatu",
+                          "productType": "40003",
+                          "percentage": 0.2,
+                          "status": 0
+                      }
+                  },
+                  {
+                      "id": 30,
+                      "loanTypeParentId": 26,
+                      "loanTypeName": "LEE BO NA",
+                      "loanTypeCode": "SUB-LBN-5",
+                      "provisionFee": 10.12,
+                      "status": 0,
+                      "dataInterestRates": [
+                          {
+                              "plafondStart": 500000,
+                              "plafondEnd": 1000000,
+                              "loanTermStart": 1,
+                              "loanTermEnd": 7,
+                              "loanTermType": 1,
+                              "interestRate": 12.1
+                          }
+                      ],
+                      "dataInsurance": {
+                          "id": 1,
+                          "insuranceName": "testSatu",
+                          "productType": "40003",
+                          "percentage": 0.2,
+                          "status": 0
+                      }
+                  },
+                  {
+                      "id": 28,
+                      "loanTypeParentId": 26,
+                      "loanTypeName": "LEE BO NAAQ",
+                      "loanTypeCode": "SUB-LBN-98",
+                      "provisionFee": 10.12,
+                      "status": 0,
+                      "dataInterestRates": [
+                          {
+                              "plafondStart": 500000,
+                              "plafondEnd": 1000000,
+                              "loanTermStart": 1,
+                              "loanTermEnd": 7,
+                              "loanTermType": 1,
+                              "interestRate": 12.1
+                          }
+                      ],
+                      "dataInsurance": {
+                          "id": 1,
+                          "insuranceName": "testSatu",
+                          "productType": "40003",
+                          "percentage": 0.2,
+                          "status": 0
+                      }
+                  },
+                  {
+                      "id": 31,
+                      "loanTypeParentId": 26,
+                      "loanTypeName": "LEE BO NAS",
+                      "loanTypeCode": "SUB-LBN-79",
+                      "provisionFee": 10.12,
+                      "status": 0,
+                      "dataInterestRates": [
+                          {
+                              "plafondStart": 500000,
+                              "plafondEnd": 1000000,
+                              "loanTermStart": 1,
+                              "loanTermEnd": 7,
+                              "loanTermType": 1,
+                              "interestRate": 12.1
+                          }
+                      ],
+                      "dataInsurance": {
+                          "id": 1,
+                          "insuranceName": "testSatu",
+                          "productType": "40003",
+                          "percentage": 0.2,
+                          "status": 0
+                      }
+                  },
+                  {
+                      "id": 21,
+                      "loanTypeParentId": 2,
+                      "loanTypeName": "Mechant Financing 2",
+                      "loanTypeCode": "KMK_MDL_KRJ-MER-FIN-2",
+                      "provisionFee": 2,
+                      "status": 0,
+                      "dataInterestRates": [
+                          {
+                              "plafondStart": 500000,
+                              "plafondEnd": 25000000,
+                              "loanTermStart": 1,
+                              "loanTermEnd": 30,
+                              "loanTermType": 1,
+                              "interestRate": 25
+                          },
+                          {
+                              "plafondStart": 25000001,
+                              "plafondEnd": 50000000,
+                              "loanTermStart": 1,
+                              "loanTermEnd": 30,
+                              "loanTermType": 1,
+                              "interestRate": 24
+                          },
+                          {
+                              "plafondStart": 50000001,
+                              "plafondEnd": 75000000,
+                              "loanTermStart": 1,
+                              "loanTermEnd": 30,
+                              "loanTermType": 1,
+                              "interestRate": 23
+                          },
+                          {
+                              "plafondStart": 75000001,
+                              "plafondEnd": 100000000,
+                              "loanTermStart": 1,
+                              "loanTermEnd": 30,
+                              "loanTermType": 1,
+                              "interestRate": 22
+                          }
+                      ],
+                      "dataInsurance": {
+                          "id": 10,
+                          "insuranceName": "ASKRINDO",
+                          "productType": "40003",
+                          "percentage": 5,
+                          "status": 10
+                      }
+                  },
+                  {
+                      "id": 1,
+                      "loanTypeParentId": 2,
+                      "loanTypeName": "Merchant Financing",
+                      "loanTypeCode": "KMK-MDL-KJR-MER-FIN-1",
+                      "provisionFee": 1,
+                      "status": 0,
+                      "dataInterestRates": [
+                          {
+                              "plafondStart": 500000,
+                              "plafondEnd": 25000000,
+                              "loanTermStart": 1,
+                              "loanTermEnd": 30,
+                              "loanTermType": 1,
+                              "interestRate": 25
+                          },
+                          {
+                              "plafondStart": 25000001,
+                              "plafondEnd": 50000000,
+                              "loanTermStart": 1,
+                              "loanTermEnd": 30,
+                              "loanTermType": 1,
+                              "interestRate": 24
+                          },
+                          {
+                              "plafondStart": 50000001,
+                              "plafondEnd": 75000000,
+                              "loanTermStart": 1,
+                              "loanTermEnd": 30,
+                              "loanTermType": 1,
+                              "interestRate": 23
+                          },
+                          {
+                              "plafondStart": 75000001,
+                              "plafondEnd": 100000000,
+                              "loanTermStart": 1,
+                              "loanTermEnd": 30,
+                              "loanTermType": 1,
+                              "interestRate": 22
+                          }
+                      ],
+                      "dataInsurance": {
+                          "id": 5,
+                          "insuranceName": "BRISMA",
+                          "productType": "40003",
+                          "percentage": 1.2,
+                          "status": 0
+                      }
+                  },
+                  {
+                      "id": 32,
+                      "loanTypeParentId": 26,
+                      "loanTypeName": "PARK SHIN HYE",
+                      "loanTypeCode": "SUB-PSH-1",
+                      "provisionFee": 10.12,
+                      "status": 0,
+                      "dataInterestRates": [
+                          {
+                              "plafondStart": 500000,
+                              "plafondEnd": 1000000,
+                              "loanTermStart": 1,
+                              "loanTermEnd": 7,
+                              "loanTermType": 1,
+                              "interestRate": 12.1
+                          }
+                      ],
+                      "dataInsurance": {
+                          "id": 1,
+                          "insuranceName": "testSatu",
+                          "productType": "40003",
+                          "percentage": 0.2,
+                          "status": 0
+                      }
+                  },
+                  {
+                      "id": 33,
+                      "loanTypeParentId": 24,
+                      "loanTypeName": "PARK SHIN HYEE",
+                      "loanTypeCode": "SUB-PSH-86",
+                      "provisionFee": 10.12,
+                      "status": 0,
+                      "dataInterestRates": [
+                          {
+                              "plafondStart": 500000,
+                              "plafondEnd": 1000000,
+                              "loanTermStart": 1,
+                              "loanTermEnd": 7,
+                              "loanTermType": 1,
+                              "interestRate": 12.1
+                          }
+                      ],
+                      "dataInsurance": {
+                          "id": 2,
+                          "insuranceName": "testDua",
+                          "productType": "40002",
+                          "percentage": 10,
+                          "status": 0
+                      }
+                  },
+                  {
+                      "id": 35,
+                      "loanTypeParentId": 26,
+                      "loanTypeName": "PARK SHIN HYEEEEEE",
+                      "loanTypeCode": "SUB-PSH-88",
+                      "provisionFee": 10.12,
+                      "status": 0,
+                      "dataInterestRates": [
+                          {
+                              "plafondStart": 500000,
+                              "plafondEnd": 1000000,
+                              "loanTermStart": 1,
+                              "loanTermEnd": 7,
+                              "loanTermType": 1,
+                              "interestRate": 12.1
+                          }
+                      ],
+                      "dataInsurance": {
+                          "id": 1,
+                          "insuranceName": "testSatu",
+                          "productType": "40003",
+                          "percentage": 0.2,
+                          "status": 0
+                      }
+                  },
+                  {
+                      "id": 36,
+                      "loanTypeParentId": 26,
+                      "loanTypeName": "PARK SHIN HYEEEEEEEEE",
+                      "loanTypeCode": "SUB-PSH-18",
+                      "provisionFee": 0,
+                      "status": 0,
+                      "dataInterestRates": [
+                          {
+                              "plafondStart": 500000,
+                              "plafondEnd": 1000000,
+                              "loanTermStart": 1,
+                              "loanTermEnd": 7,
+                              "loanTermType": 1,
+                              "interestRate": 12.1
+                          }
+                      ],
+                      "dataInsurance": {
+                          "id": 1,
+                          "insuranceName": "testSatu",
+                          "productType": "40003",
+                          "percentage": 0.2,
+                          "status": 0
+                      }
+                  },
+                  {
+                      "id": 11,
+                      "loanTypeParentId": 26,
+                      "loanTypeName": "Saturday Morning part 2",
+                      "loanTypeCode": "SUB-SMP-23",
+                      "provisionFee": 1,
+                      "status": 0,
+                      "dataInterestRates": [
+                          {
+                              "plafondStart": 600000,
+                              "plafondEnd": 1000000,
+                              "loanTermStart": 1,
+                              "loanTermEnd": 2,
+                              "loanTermType": 1,
+                              "interestRate": 0.1
+                          },
+                          {
+                              "plafondStart": 1100000,
+                              "plafondEnd": 1500000,
+                              "loanTermStart": 3,
+                              "loanTermEnd": 4,
+                              "loanTermType": 1,
+                              "interestRate": 0.5
+                          }
+                      ],
+                      "dataInsurance": {
+                          "id": 4,
+                          "insuranceName": "insuranceTest",
+                          "productType": "40003",
+                          "percentage": 0.9,
+                          "status": -1
+                      }
+                  },
+                  {
+                      "id": 13,
+                      "loanTypeParentId": 26,
+                      "loanTypeName": "Saturday Morning PART 3",
+                      "loanTypeCode": "SUB-SMP-23",
+                      "provisionFee": 1,
+                      "status": 0,
+                      "dataInterestRates": [
+                          {
+                              "plafondStart": 600000,
+                              "plafondEnd": 1000000,
+                              "loanTermStart": 1,
+                              "loanTermEnd": 2,
+                              "loanTermType": 1,
+                              "interestRate": 0.1
+                          },
+                          {
+                              "plafondStart": 1100000,
+                              "plafondEnd": 1500000,
+                              "loanTermStart": 3,
+                              "loanTermEnd": 4,
+                              "loanTermType": 1,
+                              "interestRate": 0.5
+                          }
+                      ],
+                      "dataInsurance": {
+                          "id": 4,
+                          "insuranceName": "insuranceTest",
+                          "productType": "40003",
+                          "percentage": 0.9,
+                          "status": -1
+                      }
+                  },
+                  {
+                      "id": 10,
+                      "loanTypeParentId": 25,
+                      "loanTypeName": "Saturday Morning Update",
+                      "loanTypeCode": "SUB-SMO-23",
+                      "provisionFee": 1,
+                      "status": 0,
+                      "dataInterestRates": [
+                          {
+                              "plafondStart": 600000,
+                              "plafondEnd": 1000000,
+                              "loanTermStart": 1,
+                              "loanTermEnd": 2,
+                              "loanTermType": 1,
+                              "interestRate": 0.1
+                          },
+                          {
+                              "plafondStart": 1100000,
+                              "plafondEnd": 1500000,
+                              "loanTermStart": 3,
+                              "loanTermEnd": 4,
+                              "loanTermType": 1,
+                              "interestRate": 0.5
+                          }
+                      ],
+                      "dataInsurance": {
+                          "id": 4,
+                          "insuranceName": "insuranceTest",
+                          "productType": "40003",
+                          "percentage": 0.9,
+                          "status": -1
+                      }
+                  },
+                  {
+                      "id": 12,
+                      "loanTypeParentId": 26,
+                      "loanTypeName": "Saturday Morning Update PART5",
+                      "loanTypeCode": "SUB-SMP-23",
+                      "provisionFee": 1,
+                      "status": -1,
+                      "dataInterestRates": [
+                          {
+                              "plafondStart": 600000,
+                              "plafondEnd": 1000000,
+                              "loanTermStart": 1,
+                              "loanTermEnd": 2,
+                              "loanTermType": 1,
+                              "interestRate": 0.1
+                          },
+                          {
+                              "plafondStart": 1100000,
+                              "plafondEnd": 1500000,
+                              "loanTermStart": 3,
+                              "loanTermEnd": 4,
+                              "loanTermType": 1,
+                              "interestRate": 0.5
+                          }
+                      ],
+                      "dataInsurance": {
+                          "id": 4,
+                          "insuranceName": "insuranceTest",
+                          "productType": "40003",
+                          "percentage": 0.9,
+                          "status": -1
+                      }
+                  },
+                  {
+                      "id": 15,
+                      "loanTypeParentId": 26,
+                      "loanTypeName": "Saturday Morning Update PART5",
+                      "loanTypeCode": "SUB-SMU-23",
+                      "provisionFee": 1,
+                      "status": 0,
+                      "dataInterestRates": [
+                          {
+                              "plafondStart": 600000,
+                              "plafondEnd": 1000000,
+                              "loanTermStart": 1,
+                              "loanTermEnd": 2,
+                              "loanTermType": 1,
+                              "interestRate": 0.1
+                          },
+                          {
+                              "plafondStart": 1100000,
+                              "plafondEnd": 1500000,
+                              "loanTermStart": 3,
+                              "loanTermEnd": 4,
+                              "loanTermType": 1,
+                              "interestRate": 0.5
+                          }
+                      ],
+                      "dataInsurance": {
+                          "id": 4,
+                          "insuranceName": "insuranceTest",
+                          "productType": "40003",
+                          "percentage": 0.9,
+                          "status": -1
+                      }
+                  },
+                  {
+                      "id": 16,
+                      "loanTypeParentId": 26,
+                      "loanTypeName": "Saturday Morning Update PART5",
+                      "loanTypeCode": "SUB-SMU-20",
+                      "provisionFee": 1,
+                      "status": 0,
+                      "dataInterestRates": [
+                          {
+                              "plafondStart": 600000,
+                              "plafondEnd": 1000000,
+                              "loanTermStart": 1,
+                              "loanTermEnd": 2,
+                              "loanTermType": 1,
+                              "interestRate": 0.1
+                          },
+                          {
+                              "plafondStart": 1100000,
+                              "plafondEnd": 1500000,
+                              "loanTermStart": 3,
+                              "loanTermEnd": 4,
+                              "loanTermType": 1,
+                              "interestRate": 0.5
+                          }
+                      ],
+                      "dataInsurance": {
+                          "id": 4,
+                          "insuranceName": "insuranceTest",
+                          "productType": "40003",
+                          "percentage": 0.9,
+                          "status": -1
+                      }
+                  },
+                  {
+                      "id": 17,
+                      "loanTypeParentId": 26,
+                      "loanTypeName": "Saturday Morning Update PART5",
+                      "loanTypeCode": "SUB-SMU-47",
+                      "provisionFee": 1,
+                      "status": 0,
+                      "dataInterestRates": [
+                          {
+                              "plafondStart": 600000,
+                              "plafondEnd": 1000000,
+                              "loanTermStart": 1,
+                              "loanTermEnd": 2,
+                              "loanTermType": 1,
+                              "interestRate": 0.1
+                          },
+                          {
+                              "plafondStart": 1100000,
+                              "plafondEnd": 1500000,
+                              "loanTermStart": 3,
+                              "loanTermEnd": 4,
+                              "loanTermType": 1,
+                              "interestRate": 0.5
+                          }
+                      ],
+                      "dataInsurance": {
+                          "id": 4,
+                          "insuranceName": "insuranceTest",
+                          "productType": "40003",
+                          "percentage": 0.9,
+                          "status": -1
+                      }
+                  },
+                  {
+                      "id": 18,
+                      "loanTypeParentId": 26,
+                      "loanTypeName": "Saturday Morning Update PART5",
+                      "loanTypeCode": "SUB-SMU-13",
+                      "provisionFee": 1,
+                      "status": 0,
+                      "dataInterestRates": [
+                          {
+                              "plafondStart": 600000,
+                              "plafondEnd": 1000000,
+                              "loanTermStart": 1,
+                              "loanTermEnd": 2,
+                              "loanTermType": 1,
+                              "interestRate": 0.1
+                          },
+                          {
+                              "plafondStart": 1100000,
+                              "plafondEnd": 1500000,
+                              "loanTermStart": 3,
+                              "loanTermEnd": 4,
+                              "loanTermType": 1,
+                              "interestRate": 0.5
+                          }
+                      ],
+                      "dataInsurance": {
+                          "id": 4,
+                          "insuranceName": "insuranceTest",
+                          "productType": "40003",
+                          "percentage": 0.9,
+                          "status": -1
+                      }
+                  },
+                  {
+                      "id": 14,
+                      "loanTypeParentId": 25,
+                      "loanTypeName": "Saturday Morning Update PART5-UPDATE",
+                      "loanTypeCode": "SUB-SMU-78",
+                      "provisionFee": 17,
+                      "status": 0,
+                      "dataInterestRates": [
+                          {
+                              "plafondStart": 6000007,
+                              "plafondEnd": 10000007,
+                              "loanTermStart": 17,
+                              "loanTermEnd": 27,
+                              "loanTermType": 17,
+                              "interestRate": 0.17
+                          },
+                          {
+                              "plafondStart": 11000007,
+                              "plafondEnd": 15000007,
+                              "loanTermStart": 37,
+                              "loanTermEnd": 47,
+                              "loanTermType": 17,
+                              "interestRate": 0.57
+                          }
+                      ],
+                      "dataInsurance": {
+                          "id": 4,
+                          "insuranceName": "insuranceTest",
+                          "productType": "40003",
+                          "percentage": 0.9,
+                          "status": -1
+                      }
+                  },
+                  {
+                      "id": 8,
+                      "loanTypeParentId": 0,
+                      "loanTypeName": "test create sore",
+                      "loanTypeCode": "SUB-TCS-23",
+                      "provisionFee": 1,
+                      "status": 0,
+                      "dataInterestRates": [
+                          {
+                              "plafondStart": 600000,
+                              "plafondEnd": 1000000,
+                              "loanTermStart": 1,
+                              "loanTermEnd": 2,
+                              "loanTermType": 1,
+                              "interestRate": 0.1
+                          },
+                          {
+                              "plafondStart": 1100000,
+                              "plafondEnd": 1500000,
+                              "loanTermStart": 3,
+                              "loanTermEnd": 4,
+                              "loanTermType": 1,
+                              "interestRate": 0.5
+                          }
+                      ],
+                      "dataInsurance": {
+                          "id": 4,
+                          "insuranceName": "insuranceTest",
+                          "productType": "40003",
+                          "percentage": 0.9,
+                          "status": -1
+                      }
+                  },
+                  {
+                      "id": 9,
+                      "loanTypeParentId": 26,
+                      "loanTypeName": "test create sore2",
+                      "loanTypeCode": "SUB-TCS-23",
+                      "provisionFee": 1,
+                      "status": 0,
+                      "dataInterestRates": [
+                          {
+                              "plafondStart": 600000,
+                              "plafondEnd": 1000000,
+                              "loanTermStart": 1,
+                              "loanTermEnd": 2,
+                              "loanTermType": 1,
+                              "interestRate": 0.1
+                          },
+                          {
+                              "plafondStart": 1100000,
+                              "plafondEnd": 1500000,
+                              "loanTermStart": 3,
+                              "loanTermEnd": 4,
+                              "loanTermType": 1,
+                              "interestRate": 0.5
+                          }
+                      ],
+                      "dataInsurance": {
+                          "id": 4,
+                          "insuranceName": "insuranceTest",
+                          "productType": "40003",
+                          "percentage": 0.9,
+                          "status": -1
+                      }
+                  },
+                  {
+                      "id": 7,
+                      "loanTypeParentId": 0,
+                      "loanTypeName": "test_create",
+                      "loanTypeCode": "SUB-TES-23",
+                      "provisionFee": 1,
+                      "status": 0,
+                      "dataInterestRates": [
+                          {
+                              "plafondStart": 600000,
+                              "plafondEnd": 1000000,
+                              "loanTermStart": 1,
+                              "loanTermEnd": 2,
+                              "loanTermType": 1,
+                              "interestRate": 0.1
+                          },
+                          {
+                              "plafondStart": 1100000,
+                              "plafondEnd": 1500000,
+                              "loanTermStart": 3,
+                              "loanTermEnd": 4,
+                              "loanTermType": 1,
+                              "interestRate": 0.5
+                          }
+                      ],
+                      "dataInsurance": {
+                          "id": 4,
+                          "insuranceName": "insuranceTest",
+                          "productType": "40003",
+                          "percentage": 0.9,
+                          "status": -1
+                      }
+                  },
+                  {
+                      "id": 2,
+                      "loanTypeParentId": 0,
+                      "loanTypeName": "test_create",
+                      "loanTypeCode": "TES20",
+                      "provisionFee": 1,
+                      "status": 0,
+                      "dataInterestRates": null,
+                      "dataInsurance": {
+                          "id": 4,
+                          "insuranceName": "insuranceTest",
+                          "productType": "40003",
+                          "percentage": 0.9,
+                          "status": -1
+                      }
+                  },
+                  {
+                      "id": 3,
+                      "loanTypeParentId": 0,
+                      "loanTypeName": "test_create2",
+                      "loanTypeCode": "TES20",
+                      "provisionFee": 1,
+                      "status": 0,
+                      "dataInterestRates": [
+                          {
+                              "plafondStart": 600000,
+                              "plafondEnd": 1000000,
+                              "loanTermStart": 1,
+                              "loanTermEnd": 2,
+                              "loanTermType": 1,
+                              "interestRate": 0.1
+                          },
+                          {
+                              "plafondStart": 1100000,
+                              "plafondEnd": 1500000,
+                              "loanTermStart": 3,
+                              "loanTermEnd": 4,
+                              "loanTermType": 1,
+                              "interestRate": 0.5
+                          }
+                      ],
+                      "dataInsurance": {
+                          "id": 4,
+                          "insuranceName": "insuranceTest",
+                          "productType": "40003",
+                          "percentage": 0.9,
+                          "status": -1
+                      }
+                  },
+                  {
+                      "id": 4,
+                      "loanTypeParentId": 0,
+                      "loanTypeName": "test_create3",
+                      "loanTypeCode": "TES20",
+                      "provisionFee": 1,
+                      "status": 0,
+                      "dataInterestRates": [
+                          {
+                              "plafondStart": 600000,
+                              "plafondEnd": 1000000,
+                              "loanTermStart": 1,
+                              "loanTermEnd": 2,
+                              "loanTermType": 1,
+                              "interestRate": 0.1
+                          },
+                          {
+                              "plafondStart": 1100000,
+                              "plafondEnd": 1500000,
+                              "loanTermStart": 3,
+                              "loanTermEnd": 4,
+                              "loanTermType": 1,
+                              "interestRate": 0.5
+                          }
+                      ],
+                      "dataInsurance": {
+                          "id": 4,
+                          "insuranceName": "insuranceTest",
+                          "productType": "40003",
+                          "percentage": 0.9,
+                          "status": -1
+                      }
+                  },
+                  {
+                      "id": 5,
+                      "loanTypeParentId": 0,
+                      "loanTypeName": "test_create4",
+                      "loanTypeCode": "TES20",
+                      "provisionFee": 1,
+                      "status": 0,
+                      "dataInterestRates": [
+                          {
+                              "plafondStart": 600000,
+                              "plafondEnd": 1000000,
+                              "loanTermStart": 1,
+                              "loanTermEnd": 2,
+                              "loanTermType": 1,
+                              "interestRate": 0.1
+                          },
+                          {
+                              "plafondStart": 1100000,
+                              "plafondEnd": 1500000,
+                              "loanTermStart": 3,
+                              "loanTermEnd": 4,
+                              "loanTermType": 1,
+                              "interestRate": 0.5
+                          }
+                      ],
+                      "dataInsurance": {
+                          "id": 4,
+                          "insuranceName": "insuranceTest",
+                          "productType": "40003",
+                          "percentage": 0.9,
+                          "status": -1
+                      }
+                  },
+                  {
+                      "id": 6,
+                      "loanTypeParentId": 0,
+                      "loanTypeName": "test_create5",
+                      "loanTypeCode": "TES20",
+                      "provisionFee": 1,
+                      "status": 0,
+                      "dataInterestRates": [
+                          {
+                              "plafondStart": 600000,
+                              "plafondEnd": 1000000,
+                              "loanTermStart": 1,
+                              "loanTermEnd": 2,
+                              "loanTermType": 1,
+                              "interestRate": 0.1
+                          },
+                          {
+                              "plafondStart": 1100000,
+                              "plafondEnd": 1500000,
+                              "loanTermStart": 3,
+                              "loanTermEnd": 4,
+                              "loanTermType": 1,
+                              "interestRate": 0.5
+                          }
+                      ],
+                      "dataInsurance": {
+                          "id": 4,
+                          "insuranceName": "insuranceTest",
+                          "productType": "40003",
+                          "percentage": 0.9,
+                          "status": -1
+                      }
+                  }
+              ],
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }

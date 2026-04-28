@@ -1,0 +1,526 @@
+info:
+  name: Login SSO V1
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: "{{base_url_dev}}/v/1/user/login-sso"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "001317"
+        description: Personal Number BRI Agro (UserID untuk i-SDM)
+      - name: password
+        value: YnJpRHdpa2kyMDIx
+        description: Password untuk i-SDM (encode base64)
+      - name: ipAddress
+        value: 127.0.0.1
+        description: IP device dari Apps
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        var jsonData = res.getBody();
+        bru.setGlobalEnvVar("token", jsonData.data.accessToken)
+        bru.setEnvVar("token", jsonData.data.accessToken)
+        bru.setGlobalEnvVar("userId", jsonData.data.userId)
+        bru.setEnvVar('userId', jsonData.data.userId)
+        bru.setGlobalEnvVar("loginTicket", jsonData.data.loginTicket)
+        bru.setEnvVar('loginTicket', jsonData.data.loginTicket)
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/user/login-sso"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999923"
+            description: Personal Number BRI Agro (UserID untuk i-SDM)
+          - name: password
+            value: MA==
+            description: Password untuk i-SDM (decode base64)
+          - name: ipAddress
+            value: 127.0.0.1
+            description: IP device dari Apps
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "code": 401,
+              "desc": "Tidak Memliki Akses",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: username / password salah
+    request:
+      url: "{{base_url}}/v/1/user/login-sso"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999923"
+            description: Personal Number BRI Agro (UserID untuk i-SDM)
+          - name: password
+            value: MA==
+            description: Password untuk i-SDM (decode base64)
+          - name: ipAddress
+            value: 127.0.0.1
+            description: IP device dari Apps
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "status": 401,
+              "message": "Kombinasi id & password tidak valid",
+              "desc": "Kombinasi id & password tidak valid",
+              "data": null
+          }
+  - name: parameter null
+    request:
+      url: "{{base_url}}/v/1/user/login-sso"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999923"
+            description: Personal Number BRI Agro (UserID untuk i-SDM)
+          - name: password
+            value: MA==
+            description: Password untuk i-SDM (decode base64)
+          - name: ipAddress
+            value: 127.0.0.1
+            description: IP device dari Apps
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "status": 400,
+              "message": "Data Tidak Sesuai",
+              "desc": "Validation Error",
+              "data": null
+          }
+  - name: user tidak ada
+    request:
+      url: "{{base_url}}/v/1/user/login-sso"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999923"
+            description: Personal Number BRI Agro (UserID untuk i-SDM)
+          - name: password
+            value: MA==
+            description: Password untuk i-SDM (decode base64)
+          - name: ipAddress
+            value: 127.0.0.1
+            description: IP device dari Apps
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "status": 404,
+              "message": "User tidak ditemukan",
+              "desc": "User tidak ditemukan",
+              "data": null
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/user/login-sso"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999923"
+            description: Personal Number BRI Agro (UserID untuk i-SDM)
+          - name: password
+            value: MA==
+            description: Password untuk i-SDM (decode base64)
+          - name: ipAddress
+            value: 127.0.0.1
+            description: IP device dari Apps
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect ....."
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/user/login-sso"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999923"
+            description: Personal Number BRI Agro (UserID untuk i-SDM)
+          - name: password
+            value: MA==
+            description: Password untuk i-SDM (decode base64)
+          - name: ipAddress
+            value: 127.0.0.1
+            description: IP device dari Apps
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: "{\r
+
+          \    \"status\": 200,\r
+
+          \    \"message\": \"Login berhasil\",\r
+
+          \    \"desc\": \"Login berhasil\",\r
+
+          \    \"data\": {\r
+
+          \        \"userId\": \"000426\",\r
+
+          \        \"userName\": \"R. Ibrahim Senoaji\",\r
+
+          \        \"branchCode\": \"0012\",\r
+
+          \        \"orgId\": \"9013\",\r
+
+          \        \"organization\": \"Divisi Teknologi Informasi\",\r
+
+          \        \"job\": \"Programmer\",\r
+
+          \        \"loginTicket\": \"22601\",\r
+
+          \        \"accessLevel\": \"10\",\r
+
+          \        \"photo\": \"stringBase64\",\r
+
+          \        \"accessToken\": \"UmF5YVBpUGVyVG9wtk843jG/7RB5In2DFecy3YlPCIi6N/9g1KDYjEHKFfrchx+EoNFaRziVdvpcbJ30HqHoIPdA3sulxsHQ7T9P45sD+L32owyhMK33Vzs4FE9WNhrTaFxtSD4UM6m5MmmrHdEQ0a5I92kMPjIFZA==\"\r
+
+          \    }\r
+
+          }"
+  - name: timeout
+    request:
+      url: "{{base_url}}/v/1/user/login-sso"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID untuk i-SDM)
+          - name: password
+            value: MA==
+            description: Password untuk i-SDM (decode base64)
+          - name: ipAddress
+            value: 127.0.0.1
+            description: IP device dari Apps
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 17 Nov 2022 03:19:53 GMT
+        - name: Content-Length
+          value: "422"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Status Code : - | Error : Post \"http://xxx.xx.x.xx:xxxx/api/digiagri/loginsso\": dial tcp xxx.xx.x.xx:xxxx: connectex: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.",
+              "message": "Maaf, Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 500
+          }
+  - name: timeout
+    request:
+      url: "{{base_url}}/v/1/user/login-sso"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID untuk i-SDM)
+          - name: password
+            value: MA==
+            description: Password untuk i-SDM (decode base64)
+          - name: ipAddress
+            value: 127.0.0.1
+            description: IP device dari Apps
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 17 Nov 2022 03:19:53 GMT
+        - name: Content-Length
+          value: "422"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Status Code : - | Error : Post \"http://xxx.xx.x.xx:xxxx/api/digiagri/loginsso\": dial tcp xxx.xx.x.xx:xxxx: connectex: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.",
+              "message": "Maaf, Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 500
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/user/login-sso"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999923"
+            description: Personal Number BRI Agro (UserID untuk i-SDM)
+          - name: password
+            value: MA==
+            description: Password untuk i-SDM (decode base64)
+          - name: ipAddress
+            value: 127.0.0.1
+            description: IP device dari Apps
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "code": 401,
+              "desc": "Tidak Memliki Akses",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: user tidak ada
+    request:
+      url: "{{base_url}}/v/1/user/login-sso"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999923"
+            description: Personal Number BRI Agro (UserID untuk i-SDM)
+          - name: password
+            value: MA==
+            description: Password untuk i-SDM (decode base64)
+          - name: ipAddress
+            value: 127.0.0.1
+            description: IP device dari Apps
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "status": 404,
+              "message": "User tidak ditemukan",
+              "desc": "User tidak ditemukan",
+              "data": null
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/user/login-sso"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999923"
+            description: Personal Number BRI Agro (UserID untuk i-SDM)
+          - name: password
+            value: MA==
+            description: Password untuk i-SDM (decode base64)
+          - name: ipAddress
+            value: 127.0.0.1
+            description: IP device dari Apps
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: "{\r
+
+          \    \"status\": 200,\r
+
+          \    \"message\": \"Login berhasil\",\r
+
+          \    \"desc\": \"Login berhasil\",\r
+
+          \    \"data\": {\r
+
+          \        \"userId\": \"000426\",\r
+
+          \        \"userName\": \"R. Ibrahim Senoaji\",\r
+
+          \        \"branchCode\": \"0012\",\r
+
+          \        \"orgId\": \"9013\",\r
+
+          \        \"organization\": \"Divisi Teknologi Informasi\",\r
+
+          \        \"job\": \"Programmer\",\r
+
+          \        \"loginTicket\": \"22601\",\r
+
+          \        \"accessLevel\": \"10\",\r
+
+          \        \"photo\": \"stringBase64\",\r
+
+          \        \"accessToken\": \"UmF5YVBpUGVyVG9wtk843jG/7RB5In2DFecy3YlPCIi6N/9g1KDYjEHKFfrchx+EoNFaRziVdvpcbJ30HqHoIPdA3sulxsHQ7T9P45sD+L32owyhMK33Vzs4FE9WNhrTaFxtSD4UM6m5MmmrHdEQ0a5I92kMPjIFZA==\"\r
+
+          \    }\r
+
+          }"
+  - name: username / password salah
+    request:
+      url: "{{base_url}}/v/1/user/login-sso"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999923"
+            description: Personal Number BRI Agro (UserID untuk i-SDM)
+          - name: password
+            value: MA==
+            description: Password untuk i-SDM (decode base64)
+          - name: ipAddress
+            value: 127.0.0.1
+            description: IP device dari Apps
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "status": 401,
+              "message": "Kombinasi id & password tidak valid",
+              "desc": "Kombinasi id & password tidak valid",
+              "data": null
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/user/login-sso"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999923"
+            description: Personal Number BRI Agro (UserID untuk i-SDM)
+          - name: password
+            value: MA==
+            description: Password untuk i-SDM (decode base64)
+          - name: ipAddress
+            value: 127.0.0.1
+            description: IP device dari Apps
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect ....."
+          }
+  - name: parameter null
+    request:
+      url: "{{base_url}}/v/1/user/login-sso"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999923"
+            description: Personal Number BRI Agro (UserID untuk i-SDM)
+          - name: password
+            value: MA==
+            description: Password untuk i-SDM (decode base64)
+          - name: ipAddress
+            value: 127.0.0.1
+            description: IP device dari Apps
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "status": 400,
+              "message": "Data Tidak Sesuai",
+              "desc": "Validation Error",
+              "data": null
+          }

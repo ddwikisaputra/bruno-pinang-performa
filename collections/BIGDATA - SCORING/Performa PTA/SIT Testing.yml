@@ -1,0 +1,36 @@
+info:
+  name: SIT Testing
+  type: http
+  seq: 4
+
+http:
+  method: POST
+  url: localhost:8003/api/v3.2/performa/bulanan/test-123
+  body:
+    type: json
+    data: "{\r
+
+      \    \"netto_income\": 15000000,\r
+
+      \    \"liquidation_value\": 200000000,\r
+
+      \    \"installment\": 3000000,\r
+
+      \    \"plafond\": 100000000,\r
+
+      \    \"business_income\": 20000000,\r
+
+      \    \"flag_status_debitur\": 1,\r
+
+      \    \"open_month\": \"202403\"\r
+
+      }\r\n"
+  auth:
+    type: bearer
+    token: "{{bearer_token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

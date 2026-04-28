@@ -1,0 +1,149 @@
+meta {
+  name: Jabatan
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{BASE_URL}}/v1/jabatan/list
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: 
+}
+
+body:json {
+  {
+      "payload": "{{REQUEST_BODY}}"
+  }
+}
+
+script:pre-request {
+  const payload = {
+      "q": "010", // Optional
+      "page": 1,
+      "limit": -1
+  }
+  
+  const result = _.encrypt(JSON.stringify(payload))
+  bru.setEnvVar("REQUEST_BODY", result);
+}
+
+script:post-response {
+  const responseJSON = res.getBody()
+  if (responseJSON.status) {
+      const data = _.decrypt(responseJSON.data)
+      const parseData = JSON.parse(data)
+      const parseData2 = JSON.parse(parseData)
+      console.log('/v1/jabatan/list', parseData2)
+  }
+}
+
+settings {
+  encodeUrl: true
+}
+
+example {
+  name: Jabatan Success
+  
+  request: {
+    url: {{BASE_URL}}/v1/jabatan/list
+    method: POST
+    mode: json
+    body:json: {
+      {
+          "q": "account", // Optional
+          "page": 1,
+          "limit": -1
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Wed, 03 Apr 2024 07:11:50 GMT
+      Content-Length: 868
+    }
+  
+    status: {
+      code: 200
+      text: 200
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": {
+                "current_page": 1,
+                "total_page": 1,
+                "total_data": 14,
+                "data": [
+                    {
+                        "id": "010",
+                        "name": "Account Officer"
+                    },
+                    {
+                        "id": "1065",
+                        "name": "Account Officer (TOB CB Semarang)"
+                    },
+                    {
+                        "id": "199",
+                        "name": "Account Officer NPL KC Solo"
+                    },
+                    {
+                        "id": "1068",
+                        "name": "Account Officer Supplier Ritel Community Branch"
+                    },
+                    {
+                        "id": "013",
+                        "name": "Assistant Account Officer"
+                    },
+                    {
+                        "id": "174",
+                        "name": "Jr. Account Officer Konsumer"
+                    },
+                    {
+                        "id": "142",
+                        "name": "Jr. Account Officer TOB"
+                    },
+                    {
+                        "id": "197",
+                        "name": "Jr. Account Officer TOB KC Semarang"
+                    },
+                    {
+                        "id": "011",
+                        "name": "Junior Account Officer"
+                    },
+                    {
+                        "id": "198",
+                        "name": "Junior Account Officer (TOB KC Solo)"
+                    },
+                    {
+                        "id": "064",
+                        "name": "Junior Staff (Account Officer)"
+                    },
+                    {
+                        "id": "012",
+                        "name": "Senior Account Officer"
+                    },
+                    {
+                        "id": "149",
+                        "name": "Senior Account Officer (TOB CB Bandung)"
+                    },
+                    {
+                        "id": "1067",
+                        "name": "Senior Account Officer (TOB KCP Gresik)"
+                    }
+                ]
+            },
+            "message": "Permintaan berhasil diproses",
+            "status": true
+        }
+      '''
+    }
+  }
+}

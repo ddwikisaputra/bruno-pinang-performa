@@ -1,0 +1,845 @@
+info:
+  name: Cancel Received Purchase Order V1
+  type: http
+  seq: 4
+
+http:
+  method: POST
+  url: "{{url}}/v/1/partnerships/po-cancel-received"
+  body:
+    type: form-urlencoded
+    data:
+      - name: referenceId
+        value: "00000051"
+        description: Kode Referensi { MANDATORY }
+      - name: from
+        value: RAYAAPPS
+        description: Konfirmasi Dari { MANDATORY } [Huruf KAPITAL]
+      - name: partnershipCode
+        value: OMS1
+        description: Kode Partnership (Login Session) { MANDATORY }
+      - name: userId
+        value: "009"
+        description: User ID Login { MANDATORY }
+      - name: reason
+        value: Barang tidak diterima
+        description: Alasan Pembatalan { MANDATORY }
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: general error
+    request:
+      url: "{{url}}/v/1/partnerships/po-cancel-received"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: referenceId
+            value: "00000051"
+            description: Kode Referensi { MANDATORY }
+          - name: from
+            value: RAYAAPPS
+            description: Konfirmasi Dari { MANDATORY } [Huruf KAPITAL]
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+          - name: userId
+            value: "009"
+            description: User ID Login { MANDATORY }
+          - name: reason
+            value: Barang tidak diterima
+            description: Alasan Pembatalan { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Could not connect .....",
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "status": 500
+          }
+  - name: success
+    request:
+      url: "{{base-url-local}}/v/1/partnerships/po-cancel-received"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: referenceId
+            value: "00000051"
+            description: Kode Referensi { MANDATORY }
+          - name: from
+            value: RAYAAPPS
+            description: Konfirmasi Dari { MANDATORY } [Huruf KAPITAL]
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+          - name: userId
+            value: "009"
+            description: User ID Login { MANDATORY }
+          - name: reason
+            value: Barang tidak diterima
+            description: Alasan Pembatalan { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 03:03:58 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Data Tersimpan",
+              "message": "Purchase Order berhasil disimpan",
+              "status": 200
+          }
+  - name: Error - Unauthorized
+    request:
+      url: "{{base-url-local}}/v/1/partnerships/po-cancel-received"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: referenceId
+            value: "202312"
+            description: Kode Referensi { MANDATORY }
+          - name: from
+            value: RAYAAPPS
+            description: Konfirmasi Dari { MANDATORY } [Huruf KAPITAL]
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: reason
+            value: Barang tidak diterima
+            description: Alasan Pembatalan { MANDATORY }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 20 Dec 2024 07:06:53 GMT
+        - name: Content-Length
+          value: "75"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: Error - Validation PO sudah ditolak
+    request:
+      url: "{{url}}/v/1/partnerships/po-cancel-received"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: referenceId
+            value: "202312"
+            description: Kode Referensi { MANDATORY }
+          - name: from
+            value: RAYAAPPS
+            description: Konfirmasi Dari { MANDATORY } [Huruf KAPITAL]
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: reason
+            value: Barang tidak diterima
+            description: Alasan Pembatalan { MANDATORY }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 20 Dec 2024 07:15:07 GMT
+        - name: Content-Length
+          value: "165"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Maaf, Pengajuan anda sudah ditolak. Silahkan cek kembali status pengajuan anda.",
+              "messageLocal": "PO Status < 0 (semua status ditolak)"
+          }
+  - name: Error - Validation Status dalam pengajuan
+    request:
+      url: "{{url}}/v/1/partnerships/po-cancel-received"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: referenceId
+            value: "202312"
+            description: Kode Referensi { MANDATORY }
+          - name: from
+            value: RAYAAPPS
+            description: Konfirmasi Dari { MANDATORY } [Huruf KAPITAL]
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: reason
+            value: Barang tidak diterima
+            description: Alasan Pembatalan { MANDATORY }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 20 Dec 2024 07:18:44 GMT
+        - name: Content-Length
+          value: "181"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Maaf, Pengajuan anda sedang dalam proses. Silahkan tunggu hingga proses pengajuan selesai.",
+              "messageLocal": "PO Status != 2 (sedang dalam proses pengajuan)"
+          }
+  - name: Error - Validation PO bukan Merchant Financing
+    request:
+      url: "{{url}}/v/1/partnerships/po-cancel-received"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: referenceId
+            value: "202312"
+            description: Kode Referensi { MANDATORY }
+          - name: from
+            value: RAYAAPPS
+            description: Konfirmasi Dari { MANDATORY } [Huruf KAPITAL]
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: reason
+            value: Barang tidak diterima
+            description: Alasan Pembatalan { MANDATORY }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 20 Dec 2024 07:25:00 GMT
+        - name: Content-Length
+          value: "125"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Maaf, PO tersebut tidak bertipe Merchant Financing.",
+              "messageLocal": "Tipe bukan Merchant Financing"
+          }
+  - name: Error - Validation Sudah Cair
+    request:
+      url: "{{url}}/v/1/partnerships/po-cancel-received"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: referenceId
+            value: "202312"
+            description: Kode Referensi { MANDATORY }
+          - name: from
+            value: RAYAAPPS
+            description: Konfirmasi Dari { MANDATORY } [Huruf KAPITAL]
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: reason
+            value: Barang tidak diterima
+            description: Alasan Pembatalan { MANDATORY }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 20 Dec 2024 07:26:20 GMT
+        - name: Content-Length
+          value: "161"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Maaf, Pengajuan anda sudah berhasil dicairkan. Silahkan cek kembali status pengajuan anda.",
+              "messageLocal": "PO Status = 3 (sudah cair)"
+          }
+  - name: Error - Database Connection
+    request:
+      url: "{{base-url-local}}/v/1/partnerships/po-cancel-received"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: referenceId
+            value: "202312"
+            description: Kode Referensi { MANDATORY }
+          - name: from
+            value: RAYAAPPS
+            description: Konfirmasi Dari { MANDATORY } [Huruf KAPITAL]
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: reason
+            value: Barang tidak diterima
+            description: Alasan Pembatalan { MANDATORY }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 20 Dec 2024 07:42:22 GMT
+        - name: Content-Length
+          value: "136"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 400,
+              "desc": "Database Error",
+              "message": "Error koneksi database"
+          }
+  - name: Error - Validation Parameter Required
+    request:
+      url: "{{base-url-local}}/v/1/partnerships/po-cancel-received"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: referenceId
+            value: "202312"
+            description: Kode Referensi { MANDATORY }
+            disabled: true
+          - name: from
+            value: RAYAAPPS
+            description: Konfirmasi Dari { MANDATORY } [Huruf KAPITAL]
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: reason
+            value: Barang tidak diterima
+            description: Alasan Pembatalan { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 20 Dec 2024 07:43:29 GMT
+        - name: Content-Length
+          value: "131"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Validation failed on field ... with tag 'required'",
+              "message": "Maaf, ... Tidak Boleh Kosong",
+              "status": 400
+          }
+  - name: Error - Validation Automation
+    request:
+      url: localhost:7007/v/1/partnerships/po-cancel-received
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: referenceId
+            value: "202312"
+            description: Kode Referensi { MANDATORY }
+            disabled: true
+          - name: from
+            value: RAYAAPPS
+            description: Konfirmasi Dari { MANDATORY } [Huruf KAPITAL]
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: reason
+            value: Barang tidak diterima
+            description: Alasan Pembatalan { MANDATORY }
+          - name: referenceId
+            value: "202312"
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 23 Dec 2024 11:26:33 GMT
+        - name: Content-Length
+          value: "158"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Maaf, Pembatalan tidak dapat dilakukan. Silahkan lanjutkan proses approval.",
+              "messageLocal": "Salah satu automation sudah terbentuk."
+          }
+  - name: Error - Validation Parameter Required
+    request:
+      url: "{{base-url-local}}/v/1/partnerships/po-cancel-received"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: referenceId
+            value: "202312"
+            description: Kode Referensi { MANDATORY }
+            disabled: true
+          - name: from
+            value: RAYAAPPS
+            description: Konfirmasi Dari { MANDATORY } [Huruf KAPITAL]
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: reason
+            value: Barang tidak diterima
+            description: Alasan Pembatalan { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 20 Dec 2024 07:43:29 GMT
+        - name: Content-Length
+          value: "131"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Validation failed on field ... with tag 'required'",
+              "message": "Maaf, ... Tidak Boleh Kosong",
+              "status": 400
+          }
+  - name: Error - Database Connection
+    request:
+      url: "{{base-url-local}}/v/1/partnerships/po-cancel-received"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: referenceId
+            value: "202312"
+            description: Kode Referensi { MANDATORY }
+          - name: from
+            value: RAYAAPPS
+            description: Konfirmasi Dari { MANDATORY } [Huruf KAPITAL]
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: reason
+            value: Barang tidak diterima
+            description: Alasan Pembatalan { MANDATORY }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 20 Dec 2024 07:42:22 GMT
+        - name: Content-Length
+          value: "136"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 400,
+              "desc": "Database Error",
+              "message": "Error koneksi database"
+          }
+  - name: general error
+    request:
+      url: "{{url}}/v/1/partnerships/po-cancel-received"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: referenceId
+            value: "00000051"
+            description: Kode Referensi { MANDATORY }
+          - name: from
+            value: RAYAAPPS
+            description: Konfirmasi Dari { MANDATORY } [Huruf KAPITAL]
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+          - name: userId
+            value: "009"
+            description: User ID Login { MANDATORY }
+          - name: reason
+            value: Barang tidak diterima
+            description: Alasan Pembatalan { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Could not connect .....",
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "status": 500
+          }
+  - name: Error - Validation Automation
+    request:
+      url: localhost:7007/v/1/partnerships/po-cancel-received
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: referenceId
+            value: "202312"
+            description: Kode Referensi { MANDATORY }
+            disabled: true
+          - name: from
+            value: RAYAAPPS
+            description: Konfirmasi Dari { MANDATORY } [Huruf KAPITAL]
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: reason
+            value: Barang tidak diterima
+            description: Alasan Pembatalan { MANDATORY }
+          - name: referenceId
+            value: "202312"
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 23 Dec 2024 11:26:33 GMT
+        - name: Content-Length
+          value: "158"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Maaf, Pembatalan tidak dapat dilakukan. Silahkan lanjutkan proses approval.",
+              "messageLocal": "Salah satu automation sudah terbentuk."
+          }
+  - name: Error - Validation PO bukan Merchant Financing
+    request:
+      url: "{{url}}/v/1/partnerships/po-cancel-received"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: referenceId
+            value: "202312"
+            description: Kode Referensi { MANDATORY }
+          - name: from
+            value: RAYAAPPS
+            description: Konfirmasi Dari { MANDATORY } [Huruf KAPITAL]
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: reason
+            value: Barang tidak diterima
+            description: Alasan Pembatalan { MANDATORY }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 20 Dec 2024 07:25:00 GMT
+        - name: Content-Length
+          value: "125"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Maaf, PO tersebut tidak bertipe Merchant Financing.",
+              "messageLocal": "Tipe bukan Merchant Financing"
+          }
+  - name: success
+    request:
+      url: "{{base-url-local}}/v/1/partnerships/po-cancel-received"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: referenceId
+            value: "00000051"
+            description: Kode Referensi { MANDATORY }
+          - name: from
+            value: RAYAAPPS
+            description: Konfirmasi Dari { MANDATORY } [Huruf KAPITAL]
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+          - name: userId
+            value: "009"
+            description: User ID Login { MANDATORY }
+          - name: reason
+            value: Barang tidak diterima
+            description: Alasan Pembatalan { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 03:03:58 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Data Tersimpan",
+              "message": "Purchase Order berhasil disimpan",
+              "status": 200
+          }
+  - name: Error - Unauthorized
+    request:
+      url: "{{base-url-local}}/v/1/partnerships/po-cancel-received"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: referenceId
+            value: "202312"
+            description: Kode Referensi { MANDATORY }
+          - name: from
+            value: RAYAAPPS
+            description: Konfirmasi Dari { MANDATORY } [Huruf KAPITAL]
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: reason
+            value: Barang tidak diterima
+            description: Alasan Pembatalan { MANDATORY }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 20 Dec 2024 07:06:53 GMT
+        - name: Content-Length
+          value: "75"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: Error - Validation PO sudah ditolak
+    request:
+      url: "{{url}}/v/1/partnerships/po-cancel-received"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: referenceId
+            value: "202312"
+            description: Kode Referensi { MANDATORY }
+          - name: from
+            value: RAYAAPPS
+            description: Konfirmasi Dari { MANDATORY } [Huruf KAPITAL]
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: reason
+            value: Barang tidak diterima
+            description: Alasan Pembatalan { MANDATORY }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 20 Dec 2024 07:15:07 GMT
+        - name: Content-Length
+          value: "165"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Maaf, Pengajuan anda sudah ditolak. Silahkan cek kembali status pengajuan anda.",
+              "messageLocal": "PO Status < 0 (semua status ditolak)"
+          }
+  - name: Error - Validation Status dalam pengajuan
+    request:
+      url: "{{url}}/v/1/partnerships/po-cancel-received"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: referenceId
+            value: "202312"
+            description: Kode Referensi { MANDATORY }
+          - name: from
+            value: RAYAAPPS
+            description: Konfirmasi Dari { MANDATORY } [Huruf KAPITAL]
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: reason
+            value: Barang tidak diterima
+            description: Alasan Pembatalan { MANDATORY }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 20 Dec 2024 07:18:44 GMT
+        - name: Content-Length
+          value: "181"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Maaf, Pengajuan anda sedang dalam proses. Silahkan tunggu hingga proses pengajuan selesai.",
+              "messageLocal": "PO Status != 2 (sedang dalam proses pengajuan)"
+          }
+  - name: Error - Validation Sudah Cair
+    request:
+      url: "{{url}}/v/1/partnerships/po-cancel-received"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: referenceId
+            value: "202312"
+            description: Kode Referensi { MANDATORY }
+          - name: from
+            value: RAYAAPPS
+            description: Konfirmasi Dari { MANDATORY } [Huruf KAPITAL]
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: reason
+            value: Barang tidak diterima
+            description: Alasan Pembatalan { MANDATORY }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 20 Dec 2024 07:26:20 GMT
+        - name: Content-Length
+          value: "161"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Maaf, Pengajuan anda sudah berhasil dicairkan. Silahkan cek kembali status pengajuan anda.",
+              "messageLocal": "PO Status = 3 (sudah cair)"
+          }

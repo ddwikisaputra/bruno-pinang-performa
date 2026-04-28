@@ -1,0 +1,47 @@
+info:
+  name: Saving Account Saldo
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: "{{base_url}}/api/digiagri/saving/account/saldo"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: nasabah-1034
+      - name: accountNumber
+        value: "001001007890317"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: success
+    request:
+      url: "{{base_url}}/api/digiagri/saving/account/inquiry"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000426"
+          - name: accountNumber
+            value: "001001000132301"
+    response:
+      body:
+        type: text
+        data: "{\r
+
+          \    \"statusCode\": \"1\",\r
+
+          \    \"statusDescription\": \"Cek Saldo Sukses\",\r
+
+          \    \"Balance\": \"100.000.000,00\"\r
+
+          }"

@@ -1,0 +1,524 @@
+meta {
+  name: Detail User Registration V1
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{base-url-local}}/v/1/partnerships/detail-user-registration
+  body: formUrlEncoded
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{tokenPartnership}}
+}
+
+body:form-urlencoded {
+  userId: 1031212312312
+  id: 1
+}
+
+settings {
+  encodeUrl: true
+}
+
+example {
+  name: Unauthorized
+  
+  request: {
+    url: {{base-url-local}}/v/1/partnerships/detail-user-registration
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1031212312312
+      id: 1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Wed, 29 Jan 2025 06:17:02 GMT
+      Content-Length: 75
+    }
+  
+    status: {
+      code: 401
+      text: Unauthorized
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "code": 401,
+            "desc": "Expired",
+            "message": "Invalid Token || Token Is Expired"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Empty Data
+  
+  request: {
+    url: {{base-url-local}}/v/1/partnerships/detail-user-registration
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1031212312312
+      id: 10000
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Wed, 29 Jan 2025 06:19:37 GMT
+      Content-Length: 120
+    }
+  
+    status: {
+      code: 404
+      text: Not Found
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "status": 404,
+            "message": "User Registration Tidak Ditemukan",
+            "desc": "Data User Registration tidak ditemukan"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Success
+  
+  request: {
+    url: {{base-url-local}}/v/1/partnerships/detail-user-registration
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1031212312312
+      id: 2
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Wed, 29 Jan 2025 06:21:30 GMT
+      Content-Length: 412
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": {
+                "id": 2,
+                "name": "tes",
+                "email": "tes@gmail.com",
+                "mobileNumber": "+6282288194042",
+                "position": "pemilik",
+                "partnershipCode": "RAN20",
+                "partnershipName": "",
+                "level": 10,
+                "userId": 49,
+                "status": 1,
+                "statusText": "Disetujui",
+                "approvedBy": "999941",
+                "rejectedBy": "",
+                "createdAt": "30-03-2022 19:01:19",
+                "updatedAt": "23-01-2025 07:04:18",
+                "actionAt": "23-01-2025 07:04:18"
+            },
+            "status": 200,
+            "message": "Data ditemukan",
+            "desc": "Data Valid"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: General Error
+  
+  request: {
+    url: {{base-url-local}}/v/1/partnerships/detail-user-registration
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1031212312312
+      id: 2
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Wed, 29 Jan 2025 08:00:43 GMT
+      Content-Length: 189
+    }
+  
+    status: {
+      code: 400
+      text: Bad Request
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "status": 400,
+            "message": "Maaf, Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+            "desc": "Maaf, Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi."
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Database error
+  
+  request: {
+    url: {{base-url-local}}/v/1/partnerships/detail-user-registration
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1031212312312
+      id: 2
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Wed, 29 Jan 2025 08:17:15 GMT
+      Content-Length: 180
+    }
+  
+    status: {
+      code: 500
+      text: Internal Server Error
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "status": 500,
+            "message": "User Registration Tidak Ditemukan",
+            "desc": "unable to open tcp connection with host '10.100.0.47:1433': dial tcp 10.100.0.47:1433: i/o timeout"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Parameter error validation
+  
+  request: {
+    url: {{url}}/v/1/partnerships/detail-user-registration
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 99941
+      ~id: 1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 02:53:38 GMT
+      Content-Length: 111
+    }
+  
+    status: {
+      code: 400
+      text: Bad Request
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "desc": "Parameter ... kosong",
+            "message": "Maaf, Parameter ... tidak boleh kosong",
+            "status": 500
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Empty Data
+  
+  request: {
+    url: {{base-url-local}}/v/1/partnerships/detail-user-registration
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1031212312312
+      id: 10000
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Wed, 29 Jan 2025 06:19:37 GMT
+      Content-Length: 120
+    }
+  
+    status: {
+      code: 404
+      text: Not Found
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "status": 404,
+            "message": "User Registration Tidak Ditemukan",
+            "desc": "Data User Registration tidak ditemukan"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Parameter error validation
+  
+  request: {
+    url: {{url}}/v/1/partnerships/detail-user-registration
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 99941
+      ~id: 1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 02:53:38 GMT
+      Content-Length: 111
+    }
+  
+    status: {
+      code: 400
+      text: Bad Request
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "desc": "Parameter ... kosong",
+            "message": "Maaf, Parameter ... tidak boleh kosong",
+            "status": 500
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Database error
+  
+  request: {
+    url: {{base-url-local}}/v/1/partnerships/detail-user-registration
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1031212312312
+      id: 2
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Wed, 29 Jan 2025 08:17:15 GMT
+      Content-Length: 180
+    }
+  
+    status: {
+      code: 500
+      text: Internal Server Error
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "status": 500,
+            "message": "User Registration Tidak Ditemukan",
+            "desc": "unable to open tcp connection with host '10.100.0.47:1433': dial tcp 10.100.0.47:1433: i/o timeout"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Success
+  
+  request: {
+    url: {{base-url-local}}/v/1/partnerships/detail-user-registration
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1031212312312
+      id: 2
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Wed, 29 Jan 2025 06:21:30 GMT
+      Content-Length: 412
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": {
+                "id": 2,
+                "name": "tes",
+                "email": "tes@gmail.com",
+                "mobileNumber": "+6282288194042",
+                "position": "pemilik",
+                "partnershipCode": "RAN20",
+                "partnershipName": "",
+                "level": 10,
+                "userId": 49,
+                "status": 1,
+                "statusText": "Disetujui",
+                "approvedBy": "999941",
+                "rejectedBy": "",
+                "createdAt": "30-03-2022 19:01:19",
+                "updatedAt": "23-01-2025 07:04:18",
+                "actionAt": "23-01-2025 07:04:18"
+            },
+            "status": 200,
+            "message": "Data ditemukan",
+            "desc": "Data Valid"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Unauthorized
+  
+  request: {
+    url: {{base-url-local}}/v/1/partnerships/detail-user-registration
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1031212312312
+      id: 1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Wed, 29 Jan 2025 06:17:02 GMT
+      Content-Length: 75
+    }
+  
+    status: {
+      code: 401
+      text: Unauthorized
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "code": 401,
+            "desc": "Expired",
+            "message": "Invalid Token || Token Is Expired"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: General Error
+  
+  request: {
+    url: {{base-url-local}}/v/1/partnerships/detail-user-registration
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1031212312312
+      id: 2
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Wed, 29 Jan 2025 08:00:43 GMT
+      Content-Length: 189
+    }
+  
+    status: {
+      code: 400
+      text: Bad Request
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "status": 400,
+            "message": "Maaf, Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+            "desc": "Maaf, Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi."
+        }
+      '''
+    }
+  }
+}

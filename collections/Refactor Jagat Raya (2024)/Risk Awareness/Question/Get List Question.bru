@@ -1,0 +1,169 @@
+meta {
+  name: Get List Question
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{BASE_URL}}/v1/risk-awareness/batch/question/list
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: 
+}
+
+body:json {
+  {
+      "payload": "{{REQUEST_BODY}}"
+  }
+}
+
+script:pre-request {
+  const payload = {
+      "batch_id": "958a552e-80b9-4926-8c86-4d6236a5ce1f",
+      //"q": "Mengapa manajemen risiko", //(optional)
+      "page": 1,
+      "limit": -1 // isi -1 untuk menampilkan semua data
+  }
+  
+  const result = _.encrypt(JSON.stringify(payload))
+  bru.setEnvVar("REQUEST_BODY", result);
+}
+
+script:post-response {
+  const responseJSON = res.getBody()
+  if (responseJSON.status) {
+      const data = _.decrypt(responseJSON.data)
+      const parseData = JSON.parse(data)
+      const parseData2 = JSON.parse(parseData)
+      console.log('/v1/risk-awareness/batch/question/list', parseData2)
+  }
+}
+
+settings {
+  encodeUrl: true
+}
+
+example {
+  name: Error - Data Not Found
+  
+  request: {
+    url: {{BASE_URL}}/v1/risk-awareness/batch/question/delete
+    method: POST
+    mode: json
+    body:json: {
+      {
+          "payload": "{{REQUEST_BODY}}"
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Thu, 04 Jul 2024 03:54:29 GMT
+      Content-Length: 61
+    }
+  
+    status: {
+      code: 200
+      text: 500
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "message": "Data tidak ditemukan",
+            "status": false
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Success
+  
+  request: {
+    url: {{BASE_URL}}/v1/risk-awareness/batch/question/list
+    method: POST
+    mode: json
+    body:json: {
+      {
+          "payload": "{{REQUEST_BODY}}"
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 05 Jul 2024 10:00:47 GMT
+      Transfer-Encoding: chunked
+    }
+  
+    status: {
+      code: 200
+      text: 200
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": "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",
+            "message": "Permintaan berhasil diproses",
+            "status": true
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Validation
+  
+  request: {
+    url: {{BASE_URL}}/v1/risk-awareness/batch/question/list
+    method: POST
+    mode: json
+    body:json: {
+      {
+          "payload": "{{REQUEST_BODY}}"
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 05 Jul 2024 10:02:18 GMT
+      Content-Length: 118
+    }
+  
+    status: {
+      code: 200
+      text: 400
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": [
+                {
+                    "field": "BATCH_ID",
+                    "message": "Batch ID harus diisi"
+                }
+            ],
+            "message": "Terjadi kesalahan validasi",
+            "status": false
+        }
+      '''
+    }
+  }
+}

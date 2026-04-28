@@ -1,0 +1,727 @@
+meta {
+  name: Approved Delivery Purchase Order V1
+  type: http
+  seq: 3
+}
+
+post {
+  url: localhost:7007/v/1/partnerships/po-delivery-approved
+  body: formUrlEncoded
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{tokenPartnership}}
+}
+
+body:form-urlencoded {
+  userId: 1
+  id: 567
+  partnershipCode: OMS1
+}
+
+settings {
+  encodeUrl: true
+}
+
+example {
+  name: general error
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-delivery-approved
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      id: 1
+      partnershipCode: OMS1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 02:53:38 GMT
+      Content-Length: 111
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "Could not connect .....",
+            "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+            "status": 500
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Parameter Validation Required
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-delivery-approved
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      id: 567
+      partnershipCode: OMS1
+      ~userId: 1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 20 Dec 2024 01:55:11 GMT
+      Content-Length: 121
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "Validation failed on field UserId with tag 'required'",
+            "message": "Maaf, Userid Tidak Boleh Kosong",
+            "status": 400
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Unauthorized 401
+  
+  request: {
+    url: {{base-url-local}}/v/1/partnerships/po-delivery-approved
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      id: 567
+      partnershipCode: OMS1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 20 Dec 2024 02:20:53 GMT
+      Content-Length: 75
+    }
+  
+    status: {
+      code: 401
+      text: Unauthorized
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "code": 401,
+            "desc": "Expired",
+            "message": "Invalid Token || Token Is Expired"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Access Forbidden 403
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-delivery-approved
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 10
+      id: 567
+      partnershipCode: OMS1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 20 Dec 2024 02:29:47 GMT
+      Content-Length: 67
+    }
+  
+    status: {
+      code: 403
+      text: Forbidden
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "code": 403,
+            "desc": "Tidak Memliki Akses",
+            "message": "403 Forbidden"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Validation PO Status != 1
+  
+  request: {
+    url: localhost:7007/v/1/partnerships/po-delivery-approved
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      id: 567
+      partnershipCode: OMS1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 20 Dec 2024 02:33:05 GMT
+      Content-Length: 173
+    }
+  
+    status: {
+      code: 500
+      text: Internal Server Error
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "status": 500,
+            "message": "Maaf, Pengajuan anda sedang dalam proses. Silahkan tunggu hingga proses pengajuan selesai.",
+            "desc": "PO Status != 1 (sedang dalam proses pengajuan)"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Database Connection
+  
+  request: {
+    url: {{base-url-local}}/v/1/partnerships/po-delivery-approved
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      id: 567
+      partnershipCode: OMS1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 20 Dec 2024 06:46:14 GMT
+      Content-Length: 71
+    }
+  
+    status: {
+      code: 400
+      text: Bad Request
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "code": 400,
+            "desc": "Database Error",
+            "message": "Error koneksi database"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Forbidden Access
+  
+  request: {
+    url: {{base-url-local}}/v/1/partnerships/po-delivery-approved
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      id: 567
+      partnershipCode: OMS1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Tue, 24 Dec 2024 04:37:47 GMT
+      Content-Length: 67
+    }
+  
+    status: {
+      code: 403
+      text: Forbidden
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "code": 403,
+            "desc": "Tidak Memliki Akses",
+            "message": "403 Forbidden"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - PO Status not 1
+  
+  request: {
+    url: {{base-url-local}}/v/1/partnerships/po-delivery-approved
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      id: 567
+      partnershipCode: OMS1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Tue, 24 Dec 2024 04:39:32 GMT
+      Content-Length: 173
+    }
+  
+    status: {
+      code: 500
+      text: Internal Server Error
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "status": 500,
+            "message": "Maaf, Pengajuan anda sedang dalam proses. Silahkan tunggu hingga proses pengajuan selesai.",
+            "desc": "PO Status != 1 (sedang dalam proses pengajuan)"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Success
+  
+  request: {
+    url: {{base-url-local}}/v/1/partnerships/po-delivery-approved
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      id: 567
+      partnershipCode: OMS1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 20 Dec 2024 02:31:15 GMT
+      Content-Length: 100
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "status": 200,
+            "message": "Data pengiriman purchase order berhasil disetujui",
+            "desc": "Data Tersimpan"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Database Connection
+  
+  request: {
+    url: {{base-url-local}}/v/1/partnerships/po-delivery-approved
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      id: 567
+      partnershipCode: OMS1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 20 Dec 2024 06:46:14 GMT
+      Content-Length: 71
+    }
+  
+    status: {
+      code: 400
+      text: Bad Request
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "code": 400,
+            "desc": "Database Error",
+            "message": "Error koneksi database"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Validation PO Status != 1
+  
+  request: {
+    url: localhost:7007/v/1/partnerships/po-delivery-approved
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      id: 567
+      partnershipCode: OMS1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 20 Dec 2024 02:33:05 GMT
+      Content-Length: 173
+    }
+  
+    status: {
+      code: 500
+      text: Internal Server Error
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "status": 500,
+            "message": "Maaf, Pengajuan anda sedang dalam proses. Silahkan tunggu hingga proses pengajuan selesai.",
+            "desc": "PO Status != 1 (sedang dalam proses pengajuan)"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: general error
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-delivery-approved
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      id: 1
+      partnershipCode: OMS1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 02:53:38 GMT
+      Content-Length: 111
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "Could not connect .....",
+            "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+            "status": 500
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Parameter Validation Required
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-delivery-approved
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      id: 567
+      partnershipCode: OMS1
+      ~userId: 1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 20 Dec 2024 01:55:11 GMT
+      Content-Length: 121
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "Validation failed on field UserId with tag 'required'",
+            "message": "Maaf, Userid Tidak Boleh Kosong",
+            "status": 400
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Success
+  
+  request: {
+    url: {{base-url-local}}/v/1/partnerships/po-delivery-approved
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      id: 567
+      partnershipCode: OMS1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 20 Dec 2024 02:31:15 GMT
+      Content-Length: 100
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "status": 200,
+            "message": "Data pengiriman purchase order berhasil disetujui",
+            "desc": "Data Tersimpan"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Access Forbidden 403
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-delivery-approved
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 10
+      id: 567
+      partnershipCode: OMS1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 20 Dec 2024 02:29:47 GMT
+      Content-Length: 67
+    }
+  
+    status: {
+      code: 403
+      text: Forbidden
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "code": 403,
+            "desc": "Tidak Memliki Akses",
+            "message": "403 Forbidden"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Forbidden Access
+  
+  request: {
+    url: {{base-url-local}}/v/1/partnerships/po-delivery-approved
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      id: 567
+      partnershipCode: OMS1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Tue, 24 Dec 2024 04:37:47 GMT
+      Content-Length: 67
+    }
+  
+    status: {
+      code: 403
+      text: Forbidden
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "code": 403,
+            "desc": "Tidak Memliki Akses",
+            "message": "403 Forbidden"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - PO Status not 1
+  
+  request: {
+    url: {{base-url-local}}/v/1/partnerships/po-delivery-approved
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      id: 567
+      partnershipCode: OMS1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Tue, 24 Dec 2024 04:39:32 GMT
+      Content-Length: 173
+    }
+  
+    status: {
+      code: 500
+      text: Internal Server Error
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "status": 500,
+            "message": "Maaf, Pengajuan anda sedang dalam proses. Silahkan tunggu hingga proses pengajuan selesai.",
+            "desc": "PO Status != 1 (sedang dalam proses pengajuan)"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Unauthorized 401
+  
+  request: {
+    url: {{base-url-local}}/v/1/partnerships/po-delivery-approved
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 1
+      id: 567
+      partnershipCode: OMS1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 20 Dec 2024 02:20:53 GMT
+      Content-Length: 75
+    }
+  
+    status: {
+      code: 401
+      text: Unauthorized
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "code": 401,
+            "desc": "Expired",
+            "message": "Invalid Token || Token Is Expired"
+        }
+      '''
+    }
+  }
+}

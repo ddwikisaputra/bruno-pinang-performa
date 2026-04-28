@@ -1,0 +1,37 @@
+meta {
+  name: Sync Collectability
+  type: http
+  seq: 8
+}
+
+post {
+  url: {{BASE_URL}}/v1/loan/sync/collectability
+  body: text
+  auth: bearer
+}
+
+headers {
+  ~Jagat-Raya-API-Key: W/vywbrSM25roLEI0KaUP1rm+dIV7w3yeirAYeP7r0MWRA0wKuKMNaQ8UHLzQ0N52uqC7eeYPlF9xN/TvF36Wm+l/56RtRMxZRYYFDgGl7SOGMYJEHRlKVnw55thzQ3Tr72lu0HwDEeJSoe9pvR5eQ==
+}
+
+auth:bearer {
+  token: 
+}
+
+body:text {
+  {
+      "payload": "{{REQUEST_BODY}}"
+  }
+}
+
+script:pre-request {
+  const payload = {}
+  
+  const result = _.encrypt(JSON.stringify(payload))
+  bru.setEnvVar("REQUEST_BODY", result);
+  
+}
+
+settings {
+  encodeUrl: true
+}

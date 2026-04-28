@@ -1,0 +1,164 @@
+info:
+  name: Jabatan
+  type: http
+  seq: 3
+
+http:
+  method: GET
+  url: "{{base_url}}/raya/data-master/jabatan"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: success
+    request:
+      url: "{{base_url}}/raya/data-master/jabatan"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Mon, 02 Jun 2025 02:30:42 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "1409"
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Origin
+        - name: Vary
+          value: Origin
+        - name: Vary
+          value: Access-Control-Request-Method
+        - name: Vary
+          value: Access-Control-Request-Headers
+        - name: X-Krakend
+          value: Version 2.7.2
+        - name: X-Krakend-Completed
+          value: "false"
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+        - name: Access-Control-Allow-Origin
+          value: "*"
+        - name: X-Kong-Upstream-Latency
+          value: "44"
+        - name: X-Kong-Proxy-Latency
+          value: "9"
+        - name: Via
+          value: kong/3.3.1
+      body:
+        type: json
+        data: |-
+          {
+              "ResponseCode": "00",
+              "ResponseDesc": "Sukses",
+              "Data": [
+                  {
+                      "ItemValue": "01",
+                      "ItemText": "Pemilik, Direktur Utama/Presiden Dir."
+                  },
+                  {
+                      "ItemValue": "02",
+                      "ItemText": "Pemilik, Direktur"
+                  },
+                  {
+                      "ItemValue": "03",
+                      "ItemText": "Pemilik, Komisaris Utama/Presiden Kom."
+                  },
+                  {
+                      "ItemValue": "04",
+                      "ItemText": "Pemilik, Komisaris"
+                  },
+                  {
+                      "ItemValue": "06",
+                      "ItemText": "Pemilik, Kuasa Direksi"
+                  },
+                  {
+                      "ItemValue": "07",
+                      "ItemText": "Pemilik, Bukan Pengurus"
+                  },
+                  {
+                      "ItemValue": "08",
+                      "ItemText": "Pemilik, Grup"
+                  },
+                  {
+                      "ItemValue": "09",
+                      "ItemText": "Pemilik, Masyarakat"
+                  },
+                  {
+                      "ItemValue": "10",
+                      "ItemText": "Pemilik, Ketua Umum"
+                  },
+                  {
+                      "ItemValue": "11",
+                      "ItemText": "Pemilik, Ketua"
+                  },
+                  {
+                      "ItemValue": "12",
+                      "ItemText": "Pemilik, Sekretaris"
+                  },
+                  {
+                      "ItemValue": "13",
+                      "ItemText": "Pemilik, Bendahara"
+                  },
+                  {
+                      "ItemValue": "51",
+                      "ItemText": "Pengurus, Direktur Utama/Presiden Dir."
+                  },
+                  {
+                      "ItemValue": "52",
+                      "ItemText": "Pengurus, Direktur"
+                  },
+                  {
+                      "ItemValue": "53",
+                      "ItemText": "Pengurus, Komisaris Utama/Presiden Kom"
+                  },
+                  {
+                      "ItemValue": "54",
+                      "ItemText": "Pengurus, Komisaris"
+                  },
+                  {
+                      "ItemValue": "55",
+                      "ItemText": "Pengurus, Kuasa Direksi"
+                  },
+                  {
+                      "ItemValue": "56",
+                      "ItemText": "Pengurus, Grup"
+                  },
+                  {
+                      "ItemValue": "57",
+                      "ItemText": "Pengurus, Ketua Umum"
+                  },
+                  {
+                      "ItemValue": "58",
+                      "ItemText": "Pengurus, Ketua"
+                  },
+                  {
+                      "ItemValue": "59",
+                      "ItemText": "Pengurus, Sekretaris"
+                  },
+                  {
+                      "ItemValue": "60",
+                      "ItemText": "Pengurus, Bendahara"
+                  },
+                  {
+                      "ItemValue": "61",
+                      "ItemText": "Pengurus, Lainnya"
+                  },
+                  {
+                      "ItemValue": "62",
+                      "ItemText": "Pengurus,Bendahara Parpol"
+                  },
+                  {
+                      "ItemValue": "99",
+                      "ItemText": "Lainnya"
+                  }
+              ]
+          }

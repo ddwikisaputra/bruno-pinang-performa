@@ -1,0 +1,101 @@
+info:
+  name: "[Partnership] Inquiry Detail"
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: "{{baseUrl}}/api/digiagri/partnership/inquiry/detail/{{searchParam}}"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Inquiry Success
+    request:
+      url: "{{baseUrl}}/api/digiagri/partnership/inquiry/detail/{{searchParam}}"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Thu, 09 Oct 2025 04:11:25 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "430"
+        - name: Connection
+          value: keep-alive
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "statusCode": "1",
+              "statusDescription": "Inquiry Success",
+              "data": {
+                  "referenceId": "00000307",
+                  "nomorRekening": "002001002691101",
+                  "loanType": "1",
+                  "nomorPOPencairan": "PO/SUP/21/07/0007",
+                  "nominalPengajuan": "1366039",
+                  "outstanding": "1366039",
+                  "status": "2",
+                  "tenor": "7 Hari",
+                  "tanggalJatuhTempo": "2022-07-10 14:00:00",
+                  "tunggakanPokok": "0",
+                  "tunggakanBunga": "0",
+                  "jumlahHariBunga": "0",
+                  "tunggakanDenda": "0",
+                  "jumlahHariDenda": "0",
+                  "daysCount": "-1187"
+              }
+          }
+  - name: Rekening Not Found
+    request:
+      url: "{{baseUrl}}/api/digiagri/partnership/inquiry/detail/{{searchParam}}"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Thu, 09 Oct 2025 04:11:41 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "370"
+        - name: Connection
+          value: keep-alive
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "statusCode": "-2",
+              "statusDescription": "Rekening Tidak Ditemukan : 002001002691222(L)",
+              "data": {
+                  "referenceId": "",
+                  "nomorRekening": "",
+                  "loanType": "",
+                  "nomorPOPencairan": "",
+                  "nominalPengajuan": "",
+                  "outstanding": "",
+                  "status": "",
+                  "tenor": "",
+                  "tanggalJatuhTempo": "",
+                  "tunggakanPokok": "",
+                  "tunggakanBunga": "",
+                  "jumlahHariBunga": "",
+                  "tunggakanDenda": "",
+                  "jumlahHariDenda": "",
+                  "daysCount": ""
+              }
+          }

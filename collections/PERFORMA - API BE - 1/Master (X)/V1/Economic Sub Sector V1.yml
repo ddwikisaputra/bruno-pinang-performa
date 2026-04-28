@@ -1,0 +1,239 @@
+info:
+  name: Economic Sub Sector V1
+  type: http
+  seq: 9
+
+http:
+  method: GET
+  url: "{{base_url}}/v/1/master/economic-sub-sector/1"
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/master/economic-sub-sector/1"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data": null
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/master/economic-sub-sector/1"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 09 Jun 2021 04:36:20 GMT
+        - name: Content-Length
+          value: "114"
+      body:
+        type: json
+        data: |-
+          {
+              "data": [
+                  {
+                      "id": 562,
+                      "subSectorName": "Administrasi Pemerintahan, Dan Kebijaksanaan Ekonomi Dan Sosial"
+                  },
+                  {
+                      "id": 561,
+                      "subSectorName": "Administrasi Pemerintahan, Pertahanan Dan Jaminan Sosial Wajib"
+                  },
+                  {
+                      "id": 563,
+                      "subSectorName": "Hubungan Luar Negeri, Pertahanan, Dan Keamanan"
+                  },
+                  {
+                      "id": 564,
+                      "subSectorName": "Jaminan Sosial Wajib"
+                  }
+              ],
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: empty data
+    request:
+      url: "{{base_url}}/v/1/master/economic-sub-sector/-1"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 09 Jun 2021 04:36:20 GMT
+        - name: Content-Length
+          value: "114"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Data Sub Sektor Ekonomi Kosong",
+              "message": "Sub  Sektor Ekonomi Tidak Ditemukan",
+              "status": 404
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/master/economic-sub-sector/1"
+      method: GET
+    response:
+      status: 401
+      statusText: Unauthorized
+      body:
+        type: text
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/master/economic-sub-sector/1"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/master/economic-sub-sector/1"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data": null
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/master/economic-sub-sector/1"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 09 Jun 2021 04:36:20 GMT
+        - name: Content-Length
+          value: "114"
+      body:
+        type: json
+        data: |-
+          {
+              "data": [
+                  {
+                      "id": 562,
+                      "subSectorName": "Administrasi Pemerintahan, Dan Kebijaksanaan Ekonomi Dan Sosial"
+                  },
+                  {
+                      "id": 561,
+                      "subSectorName": "Administrasi Pemerintahan, Pertahanan Dan Jaminan Sosial Wajib"
+                  },
+                  {
+                      "id": 563,
+                      "subSectorName": "Hubungan Luar Negeri, Pertahanan, Dan Keamanan"
+                  },
+                  {
+                      "id": 564,
+                      "subSectorName": "Jaminan Sosial Wajib"
+                  }
+              ],
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/master/economic-sub-sector/1"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/master/economic-sub-sector/1"
+      method: GET
+    response:
+      status: 401
+      statusText: Unauthorized
+      body:
+        type: text
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: empty data
+    request:
+      url: "{{base_url}}/v/1/master/economic-sub-sector/-1"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 09 Jun 2021 04:36:20 GMT
+        - name: Content-Length
+          value: "114"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Data Sub Sektor Ekonomi Kosong",
+              "message": "Sub  Sektor Ekonomi Tidak Ditemukan",
+              "status": 404
+          }

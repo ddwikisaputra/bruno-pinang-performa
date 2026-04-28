@@ -1,0 +1,136 @@
+info:
+  name: dukcapil verify element fix
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{base_url_dev}}/api/digiagri/dukcapilverifyelementwithresult"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: OTk5OTQx
+        description: User ID Aplikasi (Base64)
+      - name: noKTP
+        value: MzIwNjEyMDUwNjg1MDAwMg==
+        description: Nomor KTP (Base64)
+      - name: namaLengkap
+        value: RHdpa2kgU2FwdXRyYQ==
+        description: Nama Lengkap sesuai KTP (Base64)
+      - name: tempatLahir
+        value: SmFrYXJ0YQ==
+        description: Tempat Lahir sesuai KTP (Base64)
+      - name: tanggalLahir
+        value: MTItMTEtMTk5NQ==
+        description: Tanggal Lahir sesuai KTP (dd-MM-yyyy) (Base64)
+      - name: namaLengkapIbuKandung
+        value: UnVtaXlhdGk=
+        description: Nama Gadis Ibu Kandung (Base64)
+      - name: type
+        value: RGViaXR1cg==
+        description: Debitur / Pasangan (Base64)
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: success
+    request:
+      url: "{{base_url}}/api/digiagri/dukcapilverifyelementwithresult"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: User ID Aplikasi
+          - name: noKTP
+            value: MzE3MTA1NjQwODk1MDAwNA==
+            description: Nomor KTP
+          - name: namaLengkap
+            value: Vml2aSBIYXBzYXJp
+            description: Nama Lengkap sesuai KTP
+          - name: tempatLahir
+            value: SmFrYXJ0YQ==
+            description: Tempat Lahir sesuai KTP
+          - name: tanggalLahir
+            value: 12-11-1995
+            description: Tanggal Lahir sesuai KTP (dd-MM-yyyy)
+          - name: namaLengkapIbuKandung
+            value: Rumiyati
+            description: Nama Gadis Ibu Kandung
+          - name: type
+            value: Debitur
+            description: Debitur / Pasangan
+    response:
+      body:
+        type: text
+        data: "{\r
+
+          \    \"statusCode\": \"1\",\r
+
+          \    \"statusDescription\": \"Verify Success\",\r
+
+          \    \"data\": {\r
+
+          \        \"ktpNumber\": \"1\",\r
+
+          \        \"name\": \"1\",\r
+
+          \        \"placeOfBirth\": \"1\",\r
+
+          \        \"birthDate\": \"1\",\r
+
+          \        \"motherMaidenName\": \"1\"\r
+
+          \    }\r
+
+          }"
+  - name: data tidak sesuai
+    request:
+      url: http://202.77.121.68:4343/api/digiagri/dukcapilverifyelementwithresult
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000426"
+            description: User ID Aplikasi
+          - name: noKTP
+            value: "3175091506730016"
+            description: Nomor KTP
+          - name: namaLengkap
+            value: c
+            description: Nama Lengkap sesuai KTP
+          - name: tempatLahir
+            value: SOLO
+            description: Tempat Lahir sesuai KTP
+          - name: tanggalLahir
+            value: 23-05-1989
+            description: Tanggal Lahir sesuai KTP (dd-MM-yyyy)
+          - name: namaLengkapIbuKandung
+            value: DIAH
+            description: Nama Gadis Ibu Kandung
+          - name: type
+            value: Debitur
+            description: Debitur / Pasangan
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "statusCode": "2",
+              "statusDescription": "Verify Gagal",
+              "data": {
+                  "ktpNumber": "1",
+                  "name": "0",
+                  "placeOfBirth": "0",
+                  "birthDate": "0",
+                  "motherMaidenName": "0"
+              }
+          }

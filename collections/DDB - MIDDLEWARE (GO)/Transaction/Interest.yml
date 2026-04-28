@@ -1,0 +1,152 @@
+info:
+  name: Interest
+  type: http
+  seq: 2
+
+http:
+  method: GET
+  url: "{{baseUrl}}/api/digiagri/transactional/interest"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Success Response
+    request:
+      url: "{{baseUrl}}/api/digiagri/transactional/interest"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Thu, 09 Oct 2025 03:54:33 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "statusCode": "1",
+              "statusDescription": "Success",
+              "data": [
+                  {
+                      "accountNumber": "002001002824102",
+                      "result": "Validation Error, Bunga berjalan tidak ditemukan"
+                  },
+                  {
+                      "accountNumber": "001001008111106",
+                      "result": "Validation Error, Bunga berjalan tidak ditemukan"
+                  },
+                  {
+                      "accountNumber": "002001002837105",
+                      "result": "Validation Error, Bunga berjalan tidak ditemukan"
+                  },
+                  {
+                      "accountNumber": "001001007977101",
+                      "result": "Validation Error, Bunga berjalan tidak ditemukan"
+                  },
+                  {
+                      "accountNumber": "001001007976105",
+                      "result": "Validation Error, Bunga berjalan tidak ditemukan"
+                  },
+                  {
+                      "accountNumber": "002001002819107",
+                      "result": "Validation Error, Bunga berjalan tidak ditemukan"
+                  },
+                  {
+                      "accountNumber": "031001004202103",
+                      "result": "Validation Error, Bunga berjalan tidak ditemukan"
+                  },
+                  {
+                      "accountNumber": "002001002840108",
+                      "result": "Validation Error, Bunga berjalan tidak ditemukan"
+                  },
+                  {
+                      "accountNumber": "001001007978107",
+                      "result": "Validation Error, Bunga berjalan tidak ditemukan"
+                  },
+                  {
+                      "accountNumber": "001001008046107",
+                      "result": "Validation Error, Bunga berjalan tidak ditemukan"
+                  },
+                  {
+                      "accountNumber": "001001008125105",
+                      "result": "Validation Error, Bunga berjalan tidak ditemukan"
+                  },
+                  {
+                      "accountNumber": "002001002839107",
+                      "result": "Validation Error, Bunga berjalan tidak ditemukan"
+                  },
+                  {
+                      "accountNumber": "001001008192102",
+                      "result": "Validation Error, Bunga berjalan tidak ditemukan"
+                  },
+                  {
+                      "accountNumber": "001001008188103",
+                      "result": "Validation Error, Bunga berjalan tidak ditemukan"
+                  },
+                  {
+                      "accountNumber": "002001002841104",
+                      "result": "Validation Error, Bunga berjalan tidak ditemukan"
+                  },
+                  {
+                      "accountNumber": "001001008201105",
+                      "result": "Validation Error, Bunga berjalan tidak ditemukan"
+                  },
+                  {
+                      "accountNumber": "002001002818101",
+                      "result": "Validation Error, Bunga berjalan tidak ditemukan"
+                  },
+                  {
+                      "accountNumber": "002001002823106",
+                      "result": "Validation Error, Bunga berjalan tidak ditemukan"
+                  },
+                  {
+                      "accountNumber": "001001007975109",
+                      "result": "Validation Error, Bunga berjalan tidak ditemukan"
+                  },
+                  {
+                      "accountNumber": "001001007939103",
+                      "result": "Validation Error, Bunga berjalan tidak ditemukan"
+                  },
+                  {
+                      "accountNumber": "031001004201107",
+                      "result": "Validation Error, Bunga berjalan tidak ditemukan"
+                  },
+                  {
+                      "accountNumber": "002001002810103",
+                      "result": "Validation Error, Bunga berjalan tidak ditemukan"
+                  },
+                  {
+                      "accountNumber": "001001008040101",
+                      "result": "Validation Error, Bunga berjalan tidak ditemukan"
+                  },
+                  {
+                      "accountNumber": "001001007963102",
+                      "result": "Validation Error, Bunga berjalan tidak ditemukan"
+                  },
+                  {
+                      "accountNumber": "001001007940104",
+                      "result": "Validation Error, Bunga berjalan tidak ditemukan"
+                  },
+                  {
+                      "accountNumber": "002001002809102",
+                      "result": "Validation Error, Bunga berjalan tidak ditemukan"
+                  },
+                  {
+                      "accountNumber": "002001002821104",
+                      "result": "Validation Error, Bunga berjalan tidak ditemukan"
+                  }
+              ]
+          }

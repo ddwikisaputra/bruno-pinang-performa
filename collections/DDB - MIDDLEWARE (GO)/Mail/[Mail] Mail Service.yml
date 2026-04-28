@@ -1,0 +1,78 @@
+info:
+  name: "[Mail] Mail Service"
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/digiagri/mail/service"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "000426"
+      - name: emailType
+        value: PIKRO
+      - name: emailAddress
+        value: firmansyah720.fs@gmail.com
+      - name: emailUsername
+        value: Rizki Firmansyah
+      - name: emailSubject
+        value: Test
+      - name: emailContentTitle
+        value: Testing Email
+      - name: emailContentBody
+        value: "1234567890"
+  auth:
+    type: bearer
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NzUxNTQxODAsImlzcyI6Imh0dHBzOi8vYXBpLXBheW1lbnR2YS5kZXYuaW50ZXJuYWwucmF5YWluLm5ldCIsImF1ZCI6Imh0dHBzOi8vYXBpLXBheW1lbnR2YS5kZXYuaW50ZXJuYWwucmF5YWluLm5ldCJ9.aHOQVf7wU-n05LmklksH5Z-RB8RND3R01PgZLFoLrs0
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Success Response
+    request:
+      url: "{{baseUrl}}/api/digiagri/mail/service"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000426"
+          - name: emailType
+            value: PIKRO
+          - name: emailAddress
+            value: firmansyah720.fs@gmail.com
+          - name: emailUsername
+            value: Rizki Firmansyah
+          - name: emailSubject
+            value: Test
+          - name: emailContentTitle
+            value: Testing Email
+          - name: emailContentBody
+            value: "1234567890"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Thu, 09 Oct 2025 03:45:39 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "55"
+        - name: Connection
+          value: keep-alive
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "statusCode": "1",
+              "statusDescription": "Email Terkirim"
+          }

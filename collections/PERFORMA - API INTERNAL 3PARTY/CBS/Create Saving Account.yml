@@ -1,0 +1,342 @@
+info:
+  name: Create Saving Account
+  type: http
+  seq: 4
+
+http:
+  method: POST
+  url: "{{url}}/v/1/3party/cbs/create-saving-account"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: OTk5OTQx
+        description: User Id [ENCODE BASE64] [MANDATORY]
+      - name: ktpNumber
+        value: MTEwMTA4MDgwNTkwMDAwMw==
+        description: Nomor KTP [ENCODE BASE64] [MANDATORY]
+      - name: cif
+        value: "0000000438"
+        description: Nomor CIF [MANDATORY]
+      - name: branchCode
+        value: "0010"
+        description: Kode Cabang [MANDATORY]
+      - name: mobileNumber
+        value: "+6289604391335"
+        description: Nomor Handphone [MANDATORY]
+      - name: email
+        value: ibrahim.senoaji@bankraya.co.id
+        description: Email [MANDATORY]
+      - name: name
+        value: R. Ibrahim Senoaji
+        description: Nama Nasabah [MANDATORY]
+      - name: placeOfBirth
+        value: Solo
+        description: Tempat Lahir [MANDATORY]
+      - name: birthDate
+        value: 1989-05-23
+        description: "Tanggal Lahir [FORMAT : yyyy-MM-dd] [MANDATORY]"
+      - name: gender
+        value: Laki-Laki
+        description: Perempuan || Laki-Laki [MANDATORY]
+      - name: religion
+        value: Islam
+        description: Agama Nasabah [ Budha || Hindu || Islam || Kristen || Katolik || Konghucu || lainnya ] [MANDATORY]
+      - name: lastEducation
+        value: S1
+        description: Pendidikan Terakhir Nasabah [ SMP || SMU || SMA || D1 || D2 || D3 || D4 || S1 || S2 || S3 || Tidak Sekolah || Belum Tamat || Lainnya ] [MANDATORY]
+      - name: maritalStatus
+        value: Kawin
+        description: Kawin || Belum Kawin || Cerai Hidup || Cerai Mati || Duda || Janda [MANDATORY]
+      - name: motherMaidenName
+        value: RR Dyah Agustin
+        description: Nama Gadis Ibu Kandung [MANDATORY]
+      - name: npwp
+        value: ""
+        description: Nomor Peseta Wajib Pajak [OPTIONAL]
+      - name: address
+        value: Pekayon Jaya
+        description: Alamat Nasabah [MANDATORY]
+      - name: rt
+        value: "009"
+        description: RT [MANDATORY]
+      - name: rw
+        value: "012"
+        description: RW [MANDATORY]
+      - name: provinceCode
+        value: "01"
+        description: Kode Provinsi [MANDATORY]
+      - name: cityCode
+        value: "0198"
+        description: Kode Kota [MANDATORY]
+      - name: districtCode
+        value: "327504"
+        description: Kode Kecamatan [MANDATORY]
+      - name: villageCode
+        value: "3275041001"
+        description: Kode Kelurahan [MANDATORY]
+      - name: postalCode
+        value: "17148"
+        description: Kode Pos [MANDATORY]
+      - name: referralCode
+        value: ""
+        description: Kode Referral [OPTIONAL]
+      - name: workplaceName
+        value: Bank Raya Indonesia
+        description: Nama Tempat Kerja [MANDATORY]
+      - name: workplaceContact
+        value: ""
+        description: Tempat Kerja [MANDATORY]
+      - name: workplacePostalCode
+        value: "12760"
+        description: Kode Pos Tempat Kerja [MANDATORY]
+      - name: ktpBase64
+        value: ""
+        description: Ktp base64 encode [OPTIOANAL]
+      - name: selfieBase64
+        value: ""
+        description: Selfie base64 encode  [OPTIOANAL]
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Nomor Telepon Sudah Terdaftar
+    request:
+      url: "{{url}}/v/1/3party/cbs/create-saving-account"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: OTk5OTQx
+            description: User Id [ENCODE BASE64] [MANDATORY]
+          - name: ktpNumber
+            value: MTEwMTA4MDgwNTkwMDAwMw==
+            description: Nomor KTP [ENCODE BASE64] [MANDATORY]
+          - name: cif
+            value: "0000000438"
+            description: Nomor CIF [MANDATORY]
+          - name: branchCode
+            value: "0010"
+            description: Kode Cabang [MANDATORY]
+          - name: mobileNumber
+            value: "+6289604391335"
+            description: Nomor Handphone [MANDATORY]
+          - name: email
+            value: ibrahim.senoaji@bankraya.co.id
+            description: Email [MANDATORY]
+          - name: name
+            value: R. Ibrahim Senoaji
+            description: Nama Nasabah [MANDATORY]
+          - name: placeOfBirth
+            value: Solo
+            description: Tempat Lahir [MANDATORY]
+          - name: birthDate
+            value: 1989-05-23
+            description: "Tanggal Lahir [FORMAT : yyyy-MM-dd] [MANDATORY]"
+          - name: gender
+            value: Laki-Laki
+            description: Perempuan || Laki-Laki [MANDATORY]
+          - name: religion
+            value: Islam
+            description: Agama Nasabah [ Budha || Hindu || Islam || Kristen || Katolik || Konghucu || lainnya ] [MANDATORY]
+          - name: lastEducation
+            value: S1
+            description: Pendidikan Terakhir Nasabah [ SMP || SMU || SMA || D1 || D2 || D3 || D4 || S1 || S2 || S3 || Tidak Sekolah || Belum Tamat || Lainnya ] [MANDATORY]
+          - name: maritalStatus
+            value: Kawin
+            description: Kawin || Belum Kawin || Cerai Hidup || Cerai Mati || Duda || Janda [MANDATORY]
+          - name: motherMaidenName
+            value: RR Dyah Agustin
+            description: Nama Gadis Ibu Kandung [MANDATORY]
+          - name: npwp
+            value: ""
+            description: Nomor Peseta Wajib Pajak [OPTIONAL]
+          - name: address
+            value: Pekayon Jaya
+            description: Alamat Nasabah [MANDATORY]
+          - name: rt
+            value: "009"
+            description: RT [MANDATORY]
+          - name: rw
+            value: "012"
+            description: RW [MANDATORY]
+          - name: provinceCode
+            value: "01"
+            description: Kode Provinsi [MANDATORY]
+          - name: cityCode
+            value: "0198"
+            description: Kode Kota [MANDATORY]
+          - name: districtCode
+            value: "327504"
+            description: Kode Kecamatan [MANDATORY]
+          - name: villageCode
+            value: "3275041001"
+            description: Kode Kelurahan [MANDATORY]
+          - name: postalCode
+            value: "17148"
+            description: Kode Pos [MANDATORY]
+          - name: referralCode
+            value: ""
+            description: Kode Referral [OPTIONAL]
+          - name: workplaceName
+            value: Bank Raya Indonesia
+            description: Nama Tempat Kerja [MANDATORY]
+          - name: workplaceContact
+            value: ""
+            description: Tempat Kerja [MANDATORY]
+          - name: workplacePostalCode
+            value: "12760"
+            description: Kode Pos Tempat Kerja [MANDATORY]
+          - name: ktpBase64
+            value: ""
+            description: Ktp base64 encode [OPTIOANAL]
+          - name: selfieBase64
+            value: ""
+            description: Selfie base64 encode  [OPTIOANAL]
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 01 May 2023 10:45:21 GMT
+        - name: Content-Length
+          value: "114"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Nomor telepon sudah terdaftar",
+              "message": "Maaf, Nomor Telepon sudah terdaftar.",
+              "status": 400
+          }
+  - name: Success
+    request:
+      url: "{{url}}/v/1/3party/cbs/create-saving-account"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: OTk5OTQx
+            description: User Id [ENCODE BASE64] [MANDATORY]
+          - name: ktpNumber
+            value: MTEwMTA4MDgwNTkwMDAwMw==
+            description: Nomor KTP [ENCODE BASE64] [MANDATORY]
+          - name: cif
+            value: "0000000438"
+            description: Nomor CIF [MANDATORY]
+          - name: branchCode
+            value: "0010"
+            description: Kode Cabang [MANDATORY]
+          - name: mobileNumber
+            value: "+6289604391335"
+            description: Nomor Handphone [MANDATORY]
+          - name: email
+            value: ibrahim.senoaji@bankraya.co.id
+            description: Email [MANDATORY]
+          - name: name
+            value: R. Ibrahim Senoaji
+            description: Nama Nasabah [MANDATORY]
+          - name: placeOfBirth
+            value: Solo
+            description: Tempat Lahir [MANDATORY]
+          - name: birthDate
+            value: 1989-05-23
+            description: "Tanggal Lahir [FORMAT : yyyy-MM-dd] [MANDATORY]"
+          - name: gender
+            value: Laki-Laki
+            description: Perempuan || Laki-Laki [MANDATORY]
+          - name: religion
+            value: Islam
+            description: Agama Nasabah [ Budha || Hindu || Islam || Kristen || Katolik || Konghucu || lainnya ] [MANDATORY]
+          - name: lastEducation
+            value: S1
+            description: Pendidikan Terakhir Nasabah [ SMP || SMU || SMA || D1 || D2 || D3 || D4 || S1 || S2 || S3 || Tidak Sekolah || Belum Tamat || Lainnya ] [MANDATORY]
+          - name: maritalStatus
+            value: Kawin
+            description: Kawin || Belum Kawin || Cerai Hidup || Cerai Mati || Duda || Janda [MANDATORY]
+          - name: motherMaidenName
+            value: RR Dyah Agustin
+            description: Nama Gadis Ibu Kandung [MANDATORY]
+          - name: npwp
+            value: ""
+            description: Nomor Peseta Wajib Pajak [OPTIONAL]
+          - name: address
+            value: Pekayon Jaya
+            description: Alamat Nasabah [MANDATORY]
+          - name: rt
+            value: "009"
+            description: RT [MANDATORY]
+          - name: rw
+            value: "012"
+            description: RW [MANDATORY]
+          - name: provinceCode
+            value: "01"
+            description: Kode Provinsi [MANDATORY]
+          - name: cityCode
+            value: "0198"
+            description: Kode Kota [MANDATORY]
+          - name: districtCode
+            value: "327504"
+            description: Kode Kecamatan [MANDATORY]
+          - name: villageCode
+            value: "3275041001"
+            description: Kode Kelurahan [MANDATORY]
+          - name: postalCode
+            value: "17148"
+            description: Kode Pos [MANDATORY]
+          - name: referralCode
+            value: ""
+            description: Kode Referral [OPTIONAL]
+          - name: workplaceName
+            value: Bank Raya Indonesia
+            description: Nama Tempat Kerja [MANDATORY]
+          - name: workplaceContact
+            value: ""
+            description: Tempat Kerja [MANDATORY]
+          - name: workplacePostalCode
+            value: "12760"
+            description: Kode Pos Tempat Kerja [MANDATORY]
+          - name: ktpBase64
+            value: ""
+            description: Ktp base64 encode [OPTIOANAL]
+          - name: selfieBase64
+            value: ""
+            description: Selfie base64 encode  [OPTIOANAL]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 01 May 2023 10:45:58 GMT
+        - name: Content-Length
+          value: "251"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "statusCode": 1,
+                  "statusDescription": "Success",
+                  "data": {
+                      "mobileNumber": "+6289604391335",
+                      "savingAccountNumber": "001001005072311",
+                      "password": "Ribra23r@y@",
+                      "pin": "202111"
+                  }
+              },
+              "desc": "Success Process.",
+              "message": "Data Berhasil Disimpan.",
+              "status": 200
+          }

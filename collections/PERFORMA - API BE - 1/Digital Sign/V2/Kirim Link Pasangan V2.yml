@@ -1,0 +1,381 @@
+info:
+  name: Kirim Link Pasangan V2
+  type: http
+  seq: 10
+
+http:
+  method: POST
+  url: "{{base_url_local}}/v/2/digitalsign/kirim-link"
+  body:
+    type: form-urlencoded
+    data:
+      - name: kodeProses
+        value: UmF5YVBpUGVyVG9w/lx5mm1m4sp5FKVpfKk7vmTd7xtw
+        description: Prakarsa ID (Encode AES) {MANDATORY}
+  auth:
+    type: bearer
+    token: "{{tokenJWT}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: unauthorized
+    request:
+      url: "{{base_url}}/v/2/digitalsign/lihat-url-liveness"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: UmF5YVBpUGVyVG9w/lx+n2wXjR0uqNEIGTXN2gBk4OJN
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+          - name: typeLiveness
+            value: ""
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 20 Jul 2023 05:48:32 GMT
+        - name: Content-Length
+          value: "73"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "message": "Token is expired"
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/2/digitalsign/lihat-url-liveness"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: UmF5YVBpUGVyVG9w/lx+n2wXjR0uqNEIGTXN2gBk4OJN
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+          - name: typeLiveness
+            value: ""
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 25 Jun 2021 08:48:50 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400,
+              "data": null
+          }
+  - name: parameter validation
+    request:
+      url: "{{base_url}}/v/2/digitalsign/lihat-url-liveness"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: UmF5YVBpUGVyVG9w/lx+n2ys5jyVCOSa3qs+fZCnPjeFSg==
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+          - name: typeLiveness
+            value: ""
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 20 Jul 2023 05:44:00 GMT
+        - name: Content-Length
+          value: "134"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "...",
+              "message": "...",
+              "status": 400,
+              "data": null
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/2/digitalsign/lihat-url-liveness"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: UmF5YVBpUGVyVG9w/lx+n2wXjR0uqNEIGTXN2gBk4OJN
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+          - name: typeLiveness
+            value: ""
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 25 Jun 2021 08:48:50 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Maaf, Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "desc": "Could not connect .....",
+              "data": null
+          }
+  - name: error send link out of quota
+    request:
+      url: "{{base_url_local}}/v/2/digitalsign/kirim-link"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: UmF5YVBpUGVyVG9w/lx5mmG2k+Nw7+zoLsPud8+i3U7W
+            description: Prakarsa ID (Encode AES) {MANDATORY}
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 23 Jan 2025 04:10:30 GMT
+        - name: Content-Length
+          value: "184"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Send Link Gagal",
+              "message": "Maaf, proses kirim link tidak dapat dilakukan karena sudah melebihi batas maksimal, silahkan coba kembali pada 23 Januari 2025 11:13",
+              "status": 500
+          }
+  - name: success
+    request:
+      url: "{{base_url_local}}/v/2/digitalsign/kirim-link"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: UmF5YVBpUGVyVG9w/lx5mmG2k+Nw7+zoLsPud8+i3U7W
+            description: Prakarsa ID (Encode AES) {MANDATORY}
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 23 Jan 2025 04:23:40 GMT
+        - name: Content-Length
+          value: "141"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Link berhasil dikirim",
+              "message": "Silahkan cek sms/email masuk pasangan anda untuk melakukan proses verifikasi wajah.",
+              "status": 200
+          }
+  - name: parameter validation
+    request:
+      url: "{{base_url}}/v/2/digitalsign/lihat-url-liveness"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: UmF5YVBpUGVyVG9w/lx+n2ys5jyVCOSa3qs+fZCnPjeFSg==
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+          - name: typeLiveness
+            value: ""
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 20 Jul 2023 05:44:00 GMT
+        - name: Content-Length
+          value: "134"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "...",
+              "message": "...",
+              "status": 400,
+              "data": null
+          }
+  - name: unauthorized
+    request:
+      url: "{{base_url}}/v/2/digitalsign/lihat-url-liveness"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: UmF5YVBpUGVyVG9w/lx+n2wXjR0uqNEIGTXN2gBk4OJN
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+          - name: typeLiveness
+            value: ""
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 20 Jul 2023 05:48:32 GMT
+        - name: Content-Length
+          value: "73"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "message": "Token is expired"
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/2/digitalsign/lihat-url-liveness"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: UmF5YVBpUGVyVG9w/lx+n2wXjR0uqNEIGTXN2gBk4OJN
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+          - name: typeLiveness
+            value: ""
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 25 Jun 2021 08:48:50 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Maaf, Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "desc": "Could not connect .....",
+              "data": null
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/2/digitalsign/lihat-url-liveness"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: UmF5YVBpUGVyVG9w/lx+n2wXjR0uqNEIGTXN2gBk4OJN
+            description: Prakarsa ID (Encode Base64) {MANDATORY}
+          - name: typeLiveness
+            value: ""
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 25 Jun 2021 08:48:50 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400,
+              "data": null
+          }
+  - name: success
+    request:
+      url: "{{base_url_local}}/v/2/digitalsign/kirim-link"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: UmF5YVBpUGVyVG9w/lx5mmG2k+Nw7+zoLsPud8+i3U7W
+            description: Prakarsa ID (Encode AES) {MANDATORY}
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 23 Jan 2025 04:23:40 GMT
+        - name: Content-Length
+          value: "141"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Link berhasil dikirim",
+              "message": "Silahkan cek sms/email masuk pasangan anda untuk melakukan proses verifikasi wajah.",
+              "status": 200
+          }
+  - name: error send link out of quota
+    request:
+      url: "{{base_url_local}}/v/2/digitalsign/kirim-link"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodeProses
+            value: UmF5YVBpUGVyVG9w/lx5mmG2k+Nw7+zoLsPud8+i3U7W
+            description: Prakarsa ID (Encode AES) {MANDATORY}
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 23 Jan 2025 04:10:30 GMT
+        - name: Content-Length
+          value: "184"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Send Link Gagal",
+              "message": "Maaf, proses kirim link tidak dapat dilakukan karena sudah melebihi batas maksimal, silahkan coba kembali pada 23 Januari 2025 11:13",
+              "status": 500
+          }

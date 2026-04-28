@@ -1,0 +1,148 @@
+info:
+  name: Find Saving Account
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{url}}/v/1/3party/cbs/find-saving-account"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: OTk5OTQx
+        description: User Id [ENCODE BASE64] [MANDATORY]
+      - name: cif
+        value: 0000118830==
+        description: CIF Number [MANDATORY]
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Data Ditemukan
+    request:
+      url: "{{url}}/v/1/3party/cbs/find-saving-account"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: OTk5OTQx
+            description: User Id [ENCODE BASE64] [MANDATORY]
+          - name: cif
+            value: 0000118830==
+            description: CIF Number [MANDATORY]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Sun, 26 Feb 2023 21:45:22 GMT
+        - name: Content-Length
+          value: "427"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "statusCode": 1,
+                  "statusDescription": "Success",
+                  "data": [
+                      {
+                          "AccountNumber": "001001000028317",
+                          "AccountName": "DWIKI SAPUTRA",
+                          "AccountDesc": "TABUNGAN RAYA"
+                      },
+                      {
+                          "AccountNumber": "001001000233310",
+                          "AccountName": "DWIKI SAPUTRA",
+                          "AccountDesc": "TABUNGAN RAYA"
+                      },
+                      {
+                          "AccountNumber": "001001004445309",
+                          "AccountName": "DWIKI SAPUTRA",
+                          "AccountDesc": "TABUNGAN RAYA"
+                      }
+                  ]
+              },
+              "desc": "Success Process.",
+              "message": "Data Berhasil Disimpan.",
+              "status": 200
+          }
+  - name: Data Tidak Ditemukan
+    request:
+      url: "{{url}}/v/1/3party/cbs/find-saving-account"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: OTk5OTQx
+            description: User Id [ENCODE BASE64] [MANDATORY]
+          - name: cif
+            value: "00001188130"
+            description: CIF Number [MANDATORY]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Sun, 26 Feb 2023 21:45:49 GMT
+        - name: Content-Length
+          value: "158"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "statusCode": 99,
+                  "statusDescription": "Inquiry Gagal!!! CIF Tidak Ditemukan"
+              },
+              "desc": "Success Process.",
+              "message": "Data Tidak Ditemukan.",
+              "status": 404
+          }
+  - name: CIF Tidak Mempunyai Rekening
+    request:
+      url: "{{url}}/v/1/3party/cbs/find-saving-account"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: OTk5OTQx
+            description: User Id [ENCODE BASE64] [MANDATORY]
+          - name: cif
+            value: "000011883"
+            description: CIF Number [MANDATORY]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Sun, 26 Feb 2023 21:46:43 GMT
+        - name: Content-Length
+          value: "149"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "statusCode": 1,
+                  "statusDescription": "CIF tidak mempunyai rekening"
+              },
+              "desc": "Success Process.",
+              "message": "Data Tidak Ditemukan.",
+              "status": 404
+          }

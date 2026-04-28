@@ -1,0 +1,323 @@
+meta {
+  name: Loan Expense
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{url-staging}}/v/1/middler/automation/loan-expense
+  body: formUrlEncoded
+  auth: basic
+}
+
+auth:basic {
+  username: {{BasicAuthUsername}}
+  password: {{BasicAuthPassword}}
+}
+
+body:form-urlencoded {
+  branchCode: 0010
+  prakarsaId: MzE0MzY=
+  accountNumber: 001001005390311
+  adminFee: 1000.0021
+  provisionFee: 2000.0022
+  insuranceFee: 3000.0023
+  insuranceType: MIKROADONAI
+  ~userId: OTk5OTYx
+}
+
+settings {
+  encodeUrl: true
+}
+
+example {
+  name: 400 : Bad Request
+  
+  request: {
+    url: {{url-local}}/v/1/middler/automation/loan-expense
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: OTk5OTYx
+      kodeCabang: 0010
+      prakarsaId: 31436
+      accountNumber: 001001005390311
+      adminFee: 1000.0021
+      provisionFee: 2000.0022
+      insuranceFee: 3000.0023
+      insuranceType: MIKROADONAI
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Thu, 27 Jun 2024 01:20:51 GMT
+      Content-Length: 129
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "Validation failed on field PrakarsaId with tag 'decode_base_64'",
+            "message": "Maaf, Prakarsa Id Tidak Valid",
+            "status": 400
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: 400 : Bad Request
+  
+  request: {
+    url: {{url-local}}/v/1/middler/automation/loan-expense
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: OTk5OTYx
+      branchCode: 
+      prakarsaId: MzE0MzY=
+      accountNumber: 001001005390311
+      adminFee: 1000.0021
+      provisionFee: 2000.0022
+      insuranceFee: 3000.0023
+      insuranceType: MIKROADONAI
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Thu, 27 Jun 2024 01:22:34 GMT
+      Content-Length: 130
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "Validation failed on field BranchCode with tag 'required'",
+            "message": "Maaf, Kode Cabang Tidak Boleh Kosong",
+            "status": 400
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: 500 : Inquiry Saving Account Error
+  
+  request: {
+    url: {{url-local}}/v/1/middler/automation/loan-expense
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: OTk5OTYx
+      branchCode: 0010
+      prakarsaId: MzE0MzY=
+      accountNumber: 001001005390377
+      adminFee: 1000.0021
+      provisionFee: 2000.0022
+      insuranceFee: 3000.0023
+      insuranceType: MIKROADONAI
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Thu, 27 Jun 2024 01:23:44 GMT
+      Content-Length: 135
+    }
+  
+    status: {
+      code: 500
+      text: Internal Server Error
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "desc": "record not found",
+            "message": "Maaf, Server Sedang Dalam Perbaikan. Silahkan coba beberapa saat lagi.",
+            "status": 500
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: 200 : Success Automation Loan Expense
+  
+  request: {
+    url: {{url-local}}/v/1/middler/automation/loan-expense
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: OTk5OTYx
+      branchCode: 0010
+      prakarsaId: MzE0MzY=
+      accountNumber: 001001005390311
+      adminFee: 1000.0021
+      provisionFee: 2000.0022
+      insuranceFee: 3000.0023
+      insuranceType: MIKROADONAI
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Thu, 27 Jun 2024 01:22:57 GMT
+      Content-Length: 246
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": {
+                "statusCode": "1",
+                "statusDescription": "Debet Biaya Sukses",
+                "result": {
+                    "adminJournalSeq": "9417523",
+                    "provisionJournalSeq": "9417317",
+                    "insuranceJournalSeq": "9417962"
+                }
+            },
+            "desc": "Success Process.",
+            "message": "Data Berhasil Disimpan.",
+            "status": 200
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: 200 : Insufficient Funds
+  
+  request: {
+    url: {{url-local}}/v/1/middler/automation/loan-expense
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: OTk5OTYx
+      branchCode: 0010
+      prakarsaId: MzE0MzY=
+      accountNumber: 001001005390311
+      adminFee: 1000.0021
+      provisionFee: 2000.0022
+      insuranceFee: 3000.0023
+      insuranceType: MIKROADONAI
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Thu, 27 Jun 2024 01:26:17 GMT
+      Content-Length: 400
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": {
+                "statusCode": "-2",
+                "statusDescription": "Saldo pada rekening 001001005390311 tidak mencukupi",
+                "result": {
+                    "adminJournalSeq": "Saldo Tidak Cukup,  Debet Biaya Administrasi Gagal",
+                    "provisionJournalSeq": "Saldo Tidak Cukup,  Debet Biaya Provisi Gagal",
+                    "insuranceJournalSeq": "Saldo Tidak Cukup,  Debet Biaya Asuransi Gagal"
+                }
+            },
+            "desc": "Success Process.",
+            "message": "Data Berhasil Disimpan.",
+            "status": 200
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: 200 : Unsuccessful Journal Sequence
+  
+  request: {
+    url: {{url-local}}/v/1/middler/automation/loan-expense
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: OTk5OTYx
+      branchCode: 0010
+      prakarsaId: MzE0MzY=
+      accountNumber: 001001005390311
+      adminFee: 1000.0021
+      provisionFee: 2000.0022
+      insuranceFee: 3000.0023
+      insuranceType: MIKROADONAI
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Thu, 27 Jun 2024 01:29:30 GMT
+      Content-Length: 253
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": {
+                "statusCode": "-1",
+                "statusDescription": " Debet Biaya Administrasi Gagal",
+                "result": {
+                    "adminJournalSeq": "",
+                    "provisionJournalSeq": "9417317",
+                    "insuranceJournalSeq": "9417962"
+                }
+            },
+            "desc": "Success Process.",
+            "message": "Data Berhasil Disimpan.",
+            "status": 200
+        }
+      '''
+    }
+  }
+}

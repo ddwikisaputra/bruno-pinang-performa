@@ -1,0 +1,222 @@
+info:
+  name: Partnership Loan Inquiry Detail
+  type: http
+  seq: 4
+
+http:
+  method: GET
+  url: "{{base_url}}/api/digiagri/partnership/inquiry/detail/011001031636107"
+  body:
+    type: multipart-form
+    data:
+      - name: "002001004357101"
+        type: text
+        value: ""
+        disabled: true
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Success
+    request:
+      url: "{{base_url}}/api/digiagri/partnership/inquiry/detail/?001001000132301"
+      method: GET
+      params:
+        - name: "001001000132301"
+          value: ""
+          type: query
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "statusCode": "1",
+              "statusDescription": "Inquiry Success",
+              "data": {
+                  "referenceId": "00000154",
+                  "nomorRekening": "002001002568104",
+                  "loanType": "2",
+                  "nomorPOPencairan": "PO/MER/18/5/0002",
+                  "nominalPengajuan": "1525000",
+                  "outstanding": "1525000",
+                  "status": "1",
+                  "tenor": "14 Hari",
+                  "tanggalJatuhTempo": "2022-06-01 16:33:00",
+                  "tunggakanPokok": "0",
+                  "tunggakanBunga": "5083",
+                  "jumlahHariBunga": "0",
+                  "tunggakanDenda": "0",
+                  "jumlahHariDenda": "0",
+                  "daysCount": "12",
+                  "tanggalJatuhTempoFasilitas": "2023-07-10"
+              }
+          }
+  - name: Rekening Tidak Ditemukan
+    request:
+      url: "{{base_url}}/api/digiagri/partnership/inquiry/detail/002001004373107"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: no-cache
+        - name: Pragma
+          value: no-cache
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Expires
+          value: "-1"
+        - name: Content-Security-Policy
+          value: default-src *;  script-src * 'unsafe-inline' 'unsafe-eval'; style-src  * 'unsafe-inline' 'unsafe-eval';
+        - name: Strict-Transport-Security
+          value: max-age=31536000
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: X-XSS-Protection
+          value: 1;mode=block
+        - name: x-permitted-cross-domain-policies
+          value: none
+        - name: Access-Control-Allow-Origin
+          value: http://202.77.121.68:4343
+        - name: Access-Control-Allow-Headers
+          value: Content-Type
+        - name: Access-Control-Allow-Methods
+          value: POST,GET,OPTIONS
+        - name: SERVER
+          value: ""
+        - name: Date
+          value: Wed, 08 Feb 2023 03:47:24 GMT
+        - name: Content-Length
+          value: "402"
+      body:
+        type: json
+        data: |-
+          {
+              "statusCode": "-2",
+              "statusDescription": "Rekening Tidak Ditemukan : 002001004373107(L)",
+              "data": {
+                  "referenceId": "",
+                  "nomorRekening": "",
+                  "loanType": "",
+                  "nomorPOPencairan": "",
+                  "nominalPengajuan": "",
+                  "outstanding": "",
+                  "status": "",
+                  "tenor": "",
+                  "tanggalJatuhTempo": "",
+                  "tunggakanPokok": "",
+                  "tunggakanBunga": "",
+                  "jumlahHariBunga": "",
+                  "tunggakanDenda": "",
+                  "jumlahHariDenda": "",
+                  "daysCount": "",
+                  "tanggalJatuhTempoFasilitas": ""
+              }
+          }
+  - name: Transactional - 002001004373107
+    request:
+      url: "{{base_url}}/api/digiagri/partnership/inquiry/detail/002001004373107"
+      method: GET
+    response:
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+              "statusCode": "1",
+              "statusDescription": "Inquiry Success",
+              "data": {
+                  "referenceId": "3",
+                  "nomorRekening": "002001004373107",
+                  "loanType": "2",
+                  "nomorPOPencairan": "JOG23020300010-1",
+                  "nominalPengajuan": "2019150",
+                  "outstanding": "2019150",
+                  "status": "3",
+                  "tenor": "7 Hari",
+                  "tanggalJatuhTempo": "2023-02-11 22:25:00",
+                  "tunggakanPokok": "0",
+                  "tunggakanBunga": "7011",
+                  "jumlahHariBunga": "0",
+                  "tunggakanDenda": "0",
+                  "jumlahHariDenda": "0",
+                  "daysCount": "2",
+                  "tanggalJatuhTempoFasilitas": "2023-03-24"
+              }
+          }
+  - name: Tetap - 002501004552109 (LUNAS)
+    request:
+      url: "{{base_url}}/api/digiagri/partnership/inquiry/detail/002001004373107"
+      method: GET
+    response:
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+              "statusCode": "1",
+              "statusDescription": "Inquiry Success",
+              "data": {
+                  "referenceId": null,
+                  "nomorRekening": "002501004552109",
+                  "loanType": "0",
+                  "nomorPOPencairan": null,
+                  "nominalPengajuan": "100000000",
+                  "outstanding": "0",
+                  "status": "2",
+                  "tenor": "12 Bulan",
+                  "tanggalJatuhTempo": "2022-11-18 00:00:00",
+                  "tunggakanPokok": "0",
+                  "tunggakanBunga": "0",
+                  "jumlahHariBunga": "0",
+                  "tunggakanDenda": "0",
+                  "jumlahHariDenda": "0",
+                  "daysCount": "0",
+                  "tanggalJatuhTempoFasilitas": "2022-11-18"
+              }
+          }
+  - name: Tetap - 131001016221108 (AKTIF)
+    request:
+      url: "{{base_url}}/api/digiagri/partnership/inquiry/detail/002001004373107"
+      method: GET
+    response:
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+              "statusCode": "1",
+              "statusDescription": "Inquiry Success",
+              "data": {
+                  "referenceId": null,
+                  "nomorRekening": "131001016221108",
+                  "loanType": "0",
+                  "nomorPOPencairan": null,
+                  "nominalPengajuan": "100000000",
+                  "outstanding": "100000000",
+                  "status": "1",
+                  "tenor": "24 Bulan",
+                  "tanggalJatuhTempo": "2025-02-09 00:00:00",
+                  "tunggakanPokok": "0",
+                  "tunggakanBunga": "0",
+                  "jumlahHariBunga": "0",
+                  "tunggakanDenda": "0",
+                  "jumlahHariDenda": "0",
+                  "daysCount": "731",
+                  "tanggalJatuhTempoFasilitas": "2025-02-09"
+              }
+          }

@@ -1,0 +1,25 @@
+meta {
+  name: Decrypt
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{BASE_URL}}/v1/security/decrypt
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: 
+}
+
+body:json {
+  {
+      "payload": "d9n2W6H/7/qfX4vqunBj5rYhiSZKYJ+fMIBYuU9vrU8It/mKjh4KhvSHHWfFjzHxYNxQeetoodIfNbRYxmzAMhzaL8YK3DQpH/mBJOkIZN7PxCH5uCFO5BDWrmDxXo7qdCHxUgcNP7h6Vd4TFv36DZesU680fIKJv5d4JP1O+2V1+iScqudfDgoP0GWZxDb2jpfftgz3x8BBhijPyS6NbYekgBTOHBiC2jy5BvlAWAfY9zMxFvoY0kaVg6r3OKhlx1+oYXwZckhFFvDnPQ4rAMMs/CRi+W6XcvpA1Ly/fIY="
+  }
+}
+
+settings {
+  encodeUrl: true
+}

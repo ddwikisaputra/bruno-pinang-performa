@@ -1,0 +1,23 @@
+info:
+  name: Inquiry Employee
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: http://172.31.1.91:1945/api/elearning/employee-inquiry
+  body:
+    type: form-urlencoded
+    data:
+      - name: id
+        value: "001317"
+  auth:
+    type: basic
+    username: elearning
+    password: TNiTtPYDb53Nkra
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

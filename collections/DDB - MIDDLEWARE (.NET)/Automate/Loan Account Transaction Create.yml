@@ -1,0 +1,184 @@
+info:
+  name: Loan Account Transaction Create
+  type: http
+  seq: 7
+
+http:
+  method: POST
+  url: "{{base_url}}/api/digiagri/loan/account/transactional/create"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "001096"
+        description: AO
+      - name: kodeCabang
+        value: "0020"
+        description: Kode Cabang AO
+      - name: noCIF
+        value: "000088316000"
+        description: CIF Number
+      - name: nominal
+        value: "100000"
+        description: Loan Amount
+      - name: nama
+        value: Kamal Hussein Radityo
+        description: Nama Nasabah
+      - name: sukuBunga
+        value: "0.25"
+        description: "Decimal Sesuai Setting Loan Type [Ex: 0.25]"
+      - name: jangkaWaktu
+        value: "14"
+        description: jangka waktu dalam bulan
+      - name: nomorFasilitas
+        value: 0020/0000149512/PK3/001
+        description: Nomor Fasilitas Transaksional
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Validation Error
+    request:
+      url: "{{base_url}}/api/digiagri/loan/account/create"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000426"
+            description: AO
+          - name: kodeCabang
+            value: "0010"
+            description: Kode Cabang AO
+          - name: noCIF
+            value: "438"
+            description: CIF Number
+          - name: nominal
+            value: j
+            description: Loan Amount
+          - name: nama
+            value: Ibrahim Senoaji
+            description: Nama Nasabah
+          - name: produk
+            value: "40002"
+            description: 40002 untuk Angsuran Tetap, 40003 untuk Transaksional
+          - name: sukuBunga
+            value: "0.18"
+            description: sesuai perhitungan FE dalam desimal
+          - name: jangkaWaktu
+            value: "12"
+            description: jangka waktu dalam bulan
+          - name: penjadwalanAngsuran
+            value: N
+            description: N untuk 40002, Y untuk Transaksional
+          - name: nomorFasilitas
+            value: 0010/000438/PK2/001
+            description: Nomor Fasilitas
+          - name: frekuensiBayarBunga
+            value: "1"
+            description: sesuai pola angsuran
+          - name: tanggalPencairan
+            value: 20/10/2021
+            description: tanggal akad
+          - name: tanggalJatuhTempo
+            value: 20/10/2022
+            description: Contact Logs -> Due Date (dd/MM/yyyy)
+          - name: tanggalBillingSelanjutnya
+            value: 20/11/2021
+            description: Tanggal akad M+1
+          - name: biayaProvisi
+            value: "100000"
+            description: Biaya Provisi
+          - name: biayaAsuransiKerugian
+            value: "100000"
+            description: Biaya Asuransi Kredit
+          - name: biayaAdministrasi
+            value: "100000"
+            description: Biaya Administrasi
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "statusCode": "99",
+              "statusDescription": "Validation Error",
+              "nomorRekening": "",
+              "Validation": "Validation Error : , Nominal tidak valid, Nomor Fasilitas tidak valid"
+          }
+  - name: Success
+    request:
+      url: "{{base_url}}/api/digiagri/loan/account/create"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000426"
+            description: AO
+          - name: kodeCabang
+            value: "0010"
+            description: Kode Cabang AO
+          - name: noCIF
+            value: "438"
+            description: CIF Number
+          - name: nominal
+            value: "100000000"
+            description: Loan Amount
+          - name: nama
+            value: Ibrahim Senoaji
+            description: Nama Nasabah
+          - name: produk
+            value: "40002"
+            description: 40002 untuk Angsuran Tetap, 40003 untuk Transaksional
+          - name: sukuBunga
+            value: "0.18"
+            description: sesuai perhitungan FE dalam desimal
+          - name: jangkaWaktu
+            value: "12"
+            description: jangka waktu dalam bulan
+          - name: penjadwalanAngsuran
+            value: N
+            description: N untuk 40002, Y untuk Transaksional
+          - name: nomorFasilitas
+            value: 0010/0000000438/PK2/001
+            description: Nomor Fasilitas
+          - name: frekuensiBayarBunga
+            value: "1"
+            description: sesuai pola angsuran
+          - name: tanggalPencairan
+            value: 03/10/2021
+            description: tanggal akad
+          - name: tanggalJatuhTempo
+            value: 03/10/2022
+            description: Contact Logs -> Due Date (dd/MM/yyyy)
+          - name: tanggalBillingSelanjutnya
+            value: 03/11/2021
+            description: Tanggal akad M+1
+          - name: biayaProvisi
+            value: "100000"
+            description: Biaya Provisi
+          - name: biayaAsuransiKerugian
+            value: "100000"
+            description: Biaya Asuransi Kredit
+          - name: biayaAdministrasi
+            value: "100000"
+            description: Biaya Administrasi
+    response:
+      body:
+        type: text
+        data: "{\r
+
+          \    \"statusCode\": \"1\",\r
+
+          \    \"statusDescription\": \"Success\",\r
+
+          \    \"nomorRekening\": \"001001008041107\",\r
+
+          \    \"Validation\": \"\"\r
+
+          }"

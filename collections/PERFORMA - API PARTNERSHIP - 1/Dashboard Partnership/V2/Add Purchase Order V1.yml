@@ -1,0 +1,1193 @@
+info:
+  name: Add Purchase Order V1
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{base-url-local}}/v/1/partnerships/po-add"
+  body:
+    type: form-urlencoded
+    data:
+      - name: partnershipCode
+        value: MJ1
+        description: Kode Partnership { MANDATORY }
+      - name: poNumber
+        value: INV-DWK-DEV/01/01/23/0002
+        description: Nomor PO { MANDATORY }
+      - name: transactionalType
+        value: "2"
+        description: Tipe Transaksional ( 1 => Supplier | 2 => Merchant) { MANDATORY }
+      - name: name
+        value: Dwiki Saputra
+        description: Nama Nasabah { MANDATORY }
+      - name: branchCode
+        value: "0020"
+        description: Kode Cabang { MANDATORY }
+      - name: cifNumber
+        value: "0000118826"
+        description: Nomor CIF { MANDATORY }
+      - name: facilityNumber
+        value: 0020/0000118826/PK3/018
+        description: Nomor Fasilitas { MANDATORY }
+      - name: savingAccountNumber
+        value: "001001002278316"
+        description: Nomot Digital Saving { MANDATORY }
+      - name: referenceId
+        value: "202312"
+        description: Id Referensi { OPTIONAL }
+      - name: prakarsaId
+        value: "31217"
+        description: Prakarsa Id { OPTIONAL }
+      - name: loanAmount
+        value: "100000"
+        description: Nominal Pencairan { OPTIONAL }
+      - name: rate
+        value: "0.25"
+        description: Bunga Pencairan { OPTIONAL }
+      - name: loanTerm
+        value: "7"
+        description: Jangka Waktu Pinjaman (Dalam Hari) { OPTIONAL }
+      - name: installmentPattern
+        value: "1"
+        description: Pola Angsuran { OPTIONAL }
+      - name: administrationFee
+        value: "0"
+        description: Biaya Administrasi { OPTIONAL }
+  auth:
+    type: bearer
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkMWdpdEFMQDRnUjEiOiJhZ3JpLWFwaSIsImV4cCI6MTY3MzE1MTUyMywib3JpZ19pYXQiOjE2NzI1NDY3MjN9.QggEigDAC3J-dJQDosDhUo2Q4BaL1KyfVlDupuf_GxE
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: validasi po sedang dalam proses (status != 0)
+    request:
+      url: "{{url}}/v/1/partnerships/po-add"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership { MANDATORY }
+          - name: poNumber
+            value: PO/003
+            description: Nomor PO { MANDATORY }
+          - name: transactionalType
+            value: "1"
+            description: Tipe Transaksional ( 1 => Pre | 2 => post) { MANDATORY }
+          - name: name
+            value: Jumadi
+            description: Nama Nasabah { MANDATORY }
+          - name: branchCode
+            value: "0010"
+            description: Kode Cabang { MANDATORY }
+          - name: cifNumber
+            value: CIF003
+            description: Nomor CIF { MANDATORY }
+          - name: facilityNumber
+            value: FC003
+            description: Nomor Fasilitas { MANDATORY }
+          - name: savingAccountNumber
+            value: DS003
+            description: Nomot Digital Saving { MANDATORY }
+          - name: referenceId
+            value: "3"
+            description: Id Referensi { OPTIONAL }
+          - name: prakarsaId
+            value: "3"
+            description: Prakarsa Id { OPTIONAL }
+          - name: loanAmount
+            value: "500000"
+            description: Nominal Pencairan { OPTIONAL }
+          - name: rate
+            value: "0.5"
+            description: Bunga Pencairan { OPTIONAL }
+          - name: loanTerm
+            value: "7"
+            description: Jangka Waktu Pinjaman (Dalam Hari) { OPTIONAL }
+          - name: installmentPattern
+            value: "1"
+            description: Pola Angsuran { OPTIONAL }
+          - name: administrationFee
+            value: "15000.00"
+            description: Biaya Administrasi { OPTIONAL }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx/1.20.1
+        - name: Date
+          value: Wed, 01 Dec 2021 04:04:12 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "88"
+        - name: Connection
+          value: keep-alive
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "PO Status != 0 (sedang dalam proses pengajuan)",
+              "message": "Maaf, Pengajuan anda sedang dalam proses. Silahkan tunggu sampai proses pengajuan selesai.",
+              "status": 500
+          }
+  - name: validasi jika PO sudah pernah dicairkan
+    request:
+      url: "{{url}}/v/1/partnerships/po-add"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership { MANDATORY }
+          - name: poNumber
+            value: PO/002
+            description: Nomor PO { MANDATORY }
+          - name: transactionalType
+            value: "1"
+            description: Tipe Transaksional ( 1 => Supplier | 2 => Merchant) { MANDATORY }
+          - name: name
+            value: Dwiki Saputra
+            description: Nama Nasabah { MANDATORY }
+          - name: branchCode
+            value: "9999"
+            description: Kode Cabang { MANDATORY }
+          - name: cifNumber
+            value: "0000118826"
+            description: Nomor CIF { MANDATORY }
+          - name: facilityNumber
+            value: 0010/0000118826/PK1/001
+            description: Nomor Fasilitas { MANDATORY }
+          - name: savingAccountNumber
+            value: "001001000001315"
+            description: Nomot Digital Saving { MANDATORY }
+          - name: referenceId
+            value: "2"
+            description: Id Referensi { OPTIONAL }
+          - name: prakarsaId
+            value: "781"
+            description: Prakarsa Id { OPTIONAL }
+          - name: loanAmount
+            value: "5500000"
+            description: Nominal Pencairan { OPTIONAL }
+          - name: rate
+            value: "0.5"
+            description: Bunga Pencairan { OPTIONAL }
+          - name: loanTerm
+            value: "14"
+            description: Jangka Waktu Pinjaman (Dalam Hari) { OPTIONAL }
+          - name: installmentPattern
+            value: "1"
+            description: Pola Angsuran { OPTIONAL }
+          - name: administrationFee
+            value: "0"
+            description: Biaya Administrasi { OPTIONAL }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 17 Feb 2022 07:00:27 GMT
+        - name: Content-Length
+          value: "197"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "PO Status == 2 (berhasil pencairan)",
+              "message": "Maaf, Pengajuan dengan Nomor PO tersebut sudah berhasil dicairkan. Silahkan melakukan pencairan menggunakan Nomor PO lainnya.",
+              "status": 500
+          }
+  - name: success
+    request:
+      url: "{{url}}/v/1/partnerships/po-add"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership { MANDATORY }
+          - name: poNumber
+            value: PO/003
+            description: Nomor PO { MANDATORY }
+          - name: transactionalType
+            value: "1"
+            description: Tipe Transaksional ( 1 => Pre | 2 => post) { MANDATORY }
+          - name: name
+            value: Jumadi
+            description: Nama Nasabah { MANDATORY }
+          - name: branchCode
+            value: "0010"
+            description: Kode Cabang { MANDATORY }
+          - name: cifNumber
+            value: CIF003
+            description: Nomor CIF { MANDATORY }
+          - name: facilityNumber
+            value: FC003
+            description: Nomor Fasilitas { MANDATORY }
+          - name: savingAccountNumber
+            value: DS003
+            description: Nomot Digital Saving { MANDATORY }
+          - name: referenceId
+            value: "3"
+            description: Id Referensi { OPTIONAL }
+          - name: prakarsaId
+            value: "3"
+            description: Prakarsa Id { OPTIONAL }
+          - name: loanAmount
+            value: "500000"
+            description: Nominal Pencairan { OPTIONAL }
+          - name: rate
+            value: "0.5"
+            description: Bunga Pencairan { OPTIONAL }
+          - name: loanTerm
+            value: "7"
+            description: Jangka Waktu Pinjaman (Dalam Hari) { OPTIONAL }
+          - name: installmentPattern
+            value: "1"
+            description: Pola Angsuran { OPTIONAL }
+          - name: administrationFee
+            value: "15000.00"
+            description: Biaya Administrasi { OPTIONAL }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 03:03:58 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Data Tersimpan",
+              "message": "Data purchase order berhasil disimpan",
+              "status": 200
+          }
+  - name: validasi jika PO sedang dalam proses
+    request:
+      url: "{{url}}/v/1/partnerships/po-add"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership { MANDATORY }
+          - name: poNumber
+            value: PO/002
+            description: Nomor PO { MANDATORY }
+          - name: transactionalType
+            value: "1"
+            description: Tipe Transaksional ( 1 => Supplier | 2 => Merchant) { MANDATORY }
+          - name: name
+            value: Dwiki Saputra
+            description: Nama Nasabah { MANDATORY }
+          - name: branchCode
+            value: "9999"
+            description: Kode Cabang { MANDATORY }
+          - name: cifNumber
+            value: "0000118826"
+            description: Nomor CIF { MANDATORY }
+          - name: facilityNumber
+            value: 0010/0000118826/PK1/001
+            description: Nomor Fasilitas { MANDATORY }
+          - name: savingAccountNumber
+            value: "001001000001315"
+            description: Nomot Digital Saving { MANDATORY }
+          - name: referenceId
+            value: "2"
+            description: Id Referensi { OPTIONAL }
+          - name: prakarsaId
+            value: "781"
+            description: Prakarsa Id { OPTIONAL }
+          - name: loanAmount
+            value: "5500000"
+            description: Nominal Pencairan { OPTIONAL }
+          - name: rate
+            value: "0.5"
+            description: Bunga Pencairan { OPTIONAL }
+          - name: loanTerm
+            value: "14"
+            description: Jangka Waktu Pinjaman (Dalam Hari) { OPTIONAL }
+          - name: installmentPattern
+            value: "1"
+            description: Pola Angsuran { OPTIONAL }
+          - name: administrationFee
+            value: "0"
+            description: Biaya Administrasi { OPTIONAL }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 17 Feb 2022 06:59:42 GMT
+        - name: Content-Length
+          value: "172"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "PO Status 0-2 (sedang dalam proses pengajuan)",
+              "message": "Maaf, Pengajuan anda sedang dalam proses. Silahkan tunggu sampai proses pengajuan selesai.",
+              "status": 500
+          }
+  - name: error parameter validation
+    request:
+      url: "{{url}}/v/1/partnerships/po-add"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership { MANDATORY }
+          - name: poNumber
+            value: PO/003
+            description: Nomor PO { MANDATORY }
+          - name: transactionalType
+            value: "1"
+            description: Tipe Transaksional ( 1 => Pre | 2 => post) { MANDATORY }
+          - name: name
+            value: Jumadi
+            description: Nama Nasabah { MANDATORY }
+          - name: branchCode
+            value: "0010"
+            description: Kode Cabang { MANDATORY }
+          - name: cifNumber
+            value: CIF003
+            description: Nomor CIF { MANDATORY }
+          - name: facilityNumber
+            value: FC003
+            description: Nomor Fasilitas { MANDATORY }
+          - name: savingAccountNumber
+            value: DS003
+            description: Nomot Digital Saving { MANDATORY }
+          - name: referenceId
+            value: "3"
+            description: Id Referensi { OPTIONAL }
+          - name: prakarsaId
+            value: "3"
+            description: Prakarsa Id { OPTIONAL }
+          - name: loanAmount
+            value: "500000"
+            description: Nominal Pencairan { OPTIONAL }
+          - name: rate
+            value: "0.5"
+            description: Bunga Pencairan { OPTIONAL }
+          - name: loanTerm
+            value: "7"
+            description: Jangka Waktu Pinjaman (Dalam Hari) { OPTIONAL }
+          - name: installmentPattern
+            value: "1"
+            description: Pola Angsuran { OPTIONAL }
+          - name: administrationFee
+            value: "15000.00"
+            description: Biaya Administrasi { OPTIONAL }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Parameter ... kosong",
+              "message": "Maaf, Parameter ... tidak boleh kosong",
+              "status": 500
+          }
+  - name: general error
+    request:
+      url: "{{url}}/v/1/partnerships/po-add"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership { MANDATORY }
+          - name: poNumber
+            value: PO/003
+            description: Nomor PO { MANDATORY }
+          - name: transactionalType
+            value: "1"
+            description: Tipe Transaksional ( 1 => Pre | 2 => post) { MANDATORY }
+          - name: name
+            value: Jumadi
+            description: Nama Nasabah { MANDATORY }
+          - name: branchCode
+            value: "0010"
+            description: Kode Cabang { MANDATORY }
+          - name: cifNumber
+            value: CIF003
+            description: Nomor CIF { MANDATORY }
+          - name: facilityNumber
+            value: FC003
+            description: Nomor Fasilitas { MANDATORY }
+          - name: savingAccountNumber
+            value: DS003
+            description: Nomot Digital Saving { MANDATORY }
+          - name: referenceId
+            value: "3"
+            description: Id Referensi { OPTIONAL }
+          - name: prakarsaId
+            value: "3"
+            description: Prakarsa Id { OPTIONAL }
+          - name: loanAmount
+            value: "500000"
+            description: Nominal Pencairan { OPTIONAL }
+          - name: rate
+            value: "0.5"
+            description: Bunga Pencairan { OPTIONAL }
+          - name: loanTerm
+            value: "7"
+            description: Jangka Waktu Pinjaman (Dalam Hari) { OPTIONAL }
+          - name: installmentPattern
+            value: "1"
+            description: Pola Angsuran { OPTIONAL }
+          - name: administrationFee
+            value: "15000.00"
+            description: Biaya Administrasi { OPTIONAL }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Could not connect .....",
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "status": 500
+          }
+  - name: error database connection
+    request:
+      url: "{{url}}/v/1/partnerships/po-add"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership { MANDATORY }
+          - name: poNumber
+            value: PO/003
+            description: Nomor PO { MANDATORY }
+          - name: transactionalType
+            value: "1"
+            description: Tipe Transaksional ( 1 => Pre | 2 => post) { MANDATORY }
+          - name: name
+            value: Jumadi
+            description: Nama Nasabah { MANDATORY }
+          - name: branchCode
+            value: "0010"
+            description: Kode Cabang { MANDATORY }
+          - name: cifNumber
+            value: CIF003
+            description: Nomor CIF { MANDATORY }
+          - name: facilityNumber
+            value: FC003
+            description: Nomor Fasilitas { MANDATORY }
+          - name: savingAccountNumber
+            value: DS003
+            description: Nomot Digital Saving { MANDATORY }
+          - name: referenceId
+            value: "3"
+            description: Id Referensi { OPTIONAL }
+          - name: prakarsaId
+            value: "3"
+            description: Prakarsa Id { OPTIONAL }
+          - name: loanAmount
+            value: "500000"
+            description: Nominal Pencairan { OPTIONAL }
+          - name: rate
+            value: "0.5"
+            description: Bunga Pencairan { OPTIONAL }
+          - name: loanTerm
+            value: "7"
+            description: Jangka Waktu Pinjaman (Dalam Hari) { OPTIONAL }
+          - name: installmentPattern
+            value: "1"
+            description: Pola Angsuran { OPTIONAL }
+          - name: administrationFee
+            value: "15000.00"
+            description: Biaya Administrasi { OPTIONAL }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: unautorized
+    request:
+      url: "{{url}}/v/1/partnerships/po-add"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership { MANDATORY }
+          - name: poNumber
+            value: PO/003
+            description: Nomor PO { MANDATORY }
+          - name: transactionalType
+            value: "1"
+            description: Tipe Transaksional ( 1 => Pre | 2 => post) { MANDATORY }
+          - name: name
+            value: Jumadi
+            description: Nama Nasabah { MANDATORY }
+          - name: branchCode
+            value: "0010"
+            description: Kode Cabang { MANDATORY }
+          - name: cifNumber
+            value: CIF003
+            description: Nomor CIF { MANDATORY }
+          - name: facilityNumber
+            value: FC003
+            description: Nomor Fasilitas { MANDATORY }
+          - name: savingAccountNumber
+            value: DS003
+            description: Nomot Digital Saving { MANDATORY }
+          - name: referenceId
+            value: "3"
+            description: Id Referensi { OPTIONAL }
+          - name: prakarsaId
+            value: "3"
+            description: Prakarsa Id { OPTIONAL }
+          - name: loanAmount
+            value: "500000"
+            description: Nominal Pencairan { OPTIONAL }
+          - name: rate
+            value: "0.5"
+            description: Bunga Pencairan { OPTIONAL }
+          - name: loanTerm
+            value: "7"
+            description: Jangka Waktu Pinjaman (Dalam Hari) { OPTIONAL }
+          - name: installmentPattern
+            value: "1"
+            description: Pola Angsuran { OPTIONAL }
+          - name: administrationFee
+            value: "15000.00"
+            description: Biaya Administrasi { OPTIONAL }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:44:34 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "message": "Error Message"
+          }
+  - name: general error
+    request:
+      url: "{{url}}/v/1/partnerships/po-add"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership { MANDATORY }
+          - name: poNumber
+            value: PO/003
+            description: Nomor PO { MANDATORY }
+          - name: transactionalType
+            value: "1"
+            description: Tipe Transaksional ( 1 => Pre | 2 => post) { MANDATORY }
+          - name: name
+            value: Jumadi
+            description: Nama Nasabah { MANDATORY }
+          - name: branchCode
+            value: "0010"
+            description: Kode Cabang { MANDATORY }
+          - name: cifNumber
+            value: CIF003
+            description: Nomor CIF { MANDATORY }
+          - name: facilityNumber
+            value: FC003
+            description: Nomor Fasilitas { MANDATORY }
+          - name: savingAccountNumber
+            value: DS003
+            description: Nomot Digital Saving { MANDATORY }
+          - name: referenceId
+            value: "3"
+            description: Id Referensi { OPTIONAL }
+          - name: prakarsaId
+            value: "3"
+            description: Prakarsa Id { OPTIONAL }
+          - name: loanAmount
+            value: "500000"
+            description: Nominal Pencairan { OPTIONAL }
+          - name: rate
+            value: "0.5"
+            description: Bunga Pencairan { OPTIONAL }
+          - name: loanTerm
+            value: "7"
+            description: Jangka Waktu Pinjaman (Dalam Hari) { OPTIONAL }
+          - name: installmentPattern
+            value: "1"
+            description: Pola Angsuran { OPTIONAL }
+          - name: administrationFee
+            value: "15000.00"
+            description: Biaya Administrasi { OPTIONAL }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Could not connect .....",
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "status": 500
+          }
+  - name: unautorized
+    request:
+      url: "{{url}}/v/1/partnerships/po-add"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership { MANDATORY }
+          - name: poNumber
+            value: PO/003
+            description: Nomor PO { MANDATORY }
+          - name: transactionalType
+            value: "1"
+            description: Tipe Transaksional ( 1 => Pre | 2 => post) { MANDATORY }
+          - name: name
+            value: Jumadi
+            description: Nama Nasabah { MANDATORY }
+          - name: branchCode
+            value: "0010"
+            description: Kode Cabang { MANDATORY }
+          - name: cifNumber
+            value: CIF003
+            description: Nomor CIF { MANDATORY }
+          - name: facilityNumber
+            value: FC003
+            description: Nomor Fasilitas { MANDATORY }
+          - name: savingAccountNumber
+            value: DS003
+            description: Nomot Digital Saving { MANDATORY }
+          - name: referenceId
+            value: "3"
+            description: Id Referensi { OPTIONAL }
+          - name: prakarsaId
+            value: "3"
+            description: Prakarsa Id { OPTIONAL }
+          - name: loanAmount
+            value: "500000"
+            description: Nominal Pencairan { OPTIONAL }
+          - name: rate
+            value: "0.5"
+            description: Bunga Pencairan { OPTIONAL }
+          - name: loanTerm
+            value: "7"
+            description: Jangka Waktu Pinjaman (Dalam Hari) { OPTIONAL }
+          - name: installmentPattern
+            value: "1"
+            description: Pola Angsuran { OPTIONAL }
+          - name: administrationFee
+            value: "15000.00"
+            description: Biaya Administrasi { OPTIONAL }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:44:34 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "message": "Error Message"
+          }
+  - name: validasi jika PO sudah pernah dicairkan
+    request:
+      url: "{{url}}/v/1/partnerships/po-add"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership { MANDATORY }
+          - name: poNumber
+            value: PO/002
+            description: Nomor PO { MANDATORY }
+          - name: transactionalType
+            value: "1"
+            description: Tipe Transaksional ( 1 => Supplier | 2 => Merchant) { MANDATORY }
+          - name: name
+            value: Dwiki Saputra
+            description: Nama Nasabah { MANDATORY }
+          - name: branchCode
+            value: "9999"
+            description: Kode Cabang { MANDATORY }
+          - name: cifNumber
+            value: "0000118826"
+            description: Nomor CIF { MANDATORY }
+          - name: facilityNumber
+            value: 0010/0000118826/PK1/001
+            description: Nomor Fasilitas { MANDATORY }
+          - name: savingAccountNumber
+            value: "001001000001315"
+            description: Nomot Digital Saving { MANDATORY }
+          - name: referenceId
+            value: "2"
+            description: Id Referensi { OPTIONAL }
+          - name: prakarsaId
+            value: "781"
+            description: Prakarsa Id { OPTIONAL }
+          - name: loanAmount
+            value: "5500000"
+            description: Nominal Pencairan { OPTIONAL }
+          - name: rate
+            value: "0.5"
+            description: Bunga Pencairan { OPTIONAL }
+          - name: loanTerm
+            value: "14"
+            description: Jangka Waktu Pinjaman (Dalam Hari) { OPTIONAL }
+          - name: installmentPattern
+            value: "1"
+            description: Pola Angsuran { OPTIONAL }
+          - name: administrationFee
+            value: "0"
+            description: Biaya Administrasi { OPTIONAL }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 17 Feb 2022 07:00:27 GMT
+        - name: Content-Length
+          value: "197"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "PO Status == 2 (berhasil pencairan)",
+              "message": "Maaf, Pengajuan dengan Nomor PO tersebut sudah berhasil dicairkan. Silahkan melakukan pencairan menggunakan Nomor PO lainnya.",
+              "status": 500
+          }
+  - name: error database connection
+    request:
+      url: "{{url}}/v/1/partnerships/po-add"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership { MANDATORY }
+          - name: poNumber
+            value: PO/003
+            description: Nomor PO { MANDATORY }
+          - name: transactionalType
+            value: "1"
+            description: Tipe Transaksional ( 1 => Pre | 2 => post) { MANDATORY }
+          - name: name
+            value: Jumadi
+            description: Nama Nasabah { MANDATORY }
+          - name: branchCode
+            value: "0010"
+            description: Kode Cabang { MANDATORY }
+          - name: cifNumber
+            value: CIF003
+            description: Nomor CIF { MANDATORY }
+          - name: facilityNumber
+            value: FC003
+            description: Nomor Fasilitas { MANDATORY }
+          - name: savingAccountNumber
+            value: DS003
+            description: Nomot Digital Saving { MANDATORY }
+          - name: referenceId
+            value: "3"
+            description: Id Referensi { OPTIONAL }
+          - name: prakarsaId
+            value: "3"
+            description: Prakarsa Id { OPTIONAL }
+          - name: loanAmount
+            value: "500000"
+            description: Nominal Pencairan { OPTIONAL }
+          - name: rate
+            value: "0.5"
+            description: Bunga Pencairan { OPTIONAL }
+          - name: loanTerm
+            value: "7"
+            description: Jangka Waktu Pinjaman (Dalam Hari) { OPTIONAL }
+          - name: installmentPattern
+            value: "1"
+            description: Pola Angsuran { OPTIONAL }
+          - name: administrationFee
+            value: "15000.00"
+            description: Biaya Administrasi { OPTIONAL }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: error parameter validation
+    request:
+      url: "{{url}}/v/1/partnerships/po-add"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership { MANDATORY }
+          - name: poNumber
+            value: PO/003
+            description: Nomor PO { MANDATORY }
+          - name: transactionalType
+            value: "1"
+            description: Tipe Transaksional ( 1 => Pre | 2 => post) { MANDATORY }
+          - name: name
+            value: Jumadi
+            description: Nama Nasabah { MANDATORY }
+          - name: branchCode
+            value: "0010"
+            description: Kode Cabang { MANDATORY }
+          - name: cifNumber
+            value: CIF003
+            description: Nomor CIF { MANDATORY }
+          - name: facilityNumber
+            value: FC003
+            description: Nomor Fasilitas { MANDATORY }
+          - name: savingAccountNumber
+            value: DS003
+            description: Nomot Digital Saving { MANDATORY }
+          - name: referenceId
+            value: "3"
+            description: Id Referensi { OPTIONAL }
+          - name: prakarsaId
+            value: "3"
+            description: Prakarsa Id { OPTIONAL }
+          - name: loanAmount
+            value: "500000"
+            description: Nominal Pencairan { OPTIONAL }
+          - name: rate
+            value: "0.5"
+            description: Bunga Pencairan { OPTIONAL }
+          - name: loanTerm
+            value: "7"
+            description: Jangka Waktu Pinjaman (Dalam Hari) { OPTIONAL }
+          - name: installmentPattern
+            value: "1"
+            description: Pola Angsuran { OPTIONAL }
+          - name: administrationFee
+            value: "15000.00"
+            description: Biaya Administrasi { OPTIONAL }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Parameter ... kosong",
+              "message": "Maaf, Parameter ... tidak boleh kosong",
+              "status": 500
+          }
+  - name: validasi po sedang dalam proses (status != 0)
+    request:
+      url: "{{url}}/v/1/partnerships/po-add"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership { MANDATORY }
+          - name: poNumber
+            value: PO/003
+            description: Nomor PO { MANDATORY }
+          - name: transactionalType
+            value: "1"
+            description: Tipe Transaksional ( 1 => Pre | 2 => post) { MANDATORY }
+          - name: name
+            value: Jumadi
+            description: Nama Nasabah { MANDATORY }
+          - name: branchCode
+            value: "0010"
+            description: Kode Cabang { MANDATORY }
+          - name: cifNumber
+            value: CIF003
+            description: Nomor CIF { MANDATORY }
+          - name: facilityNumber
+            value: FC003
+            description: Nomor Fasilitas { MANDATORY }
+          - name: savingAccountNumber
+            value: DS003
+            description: Nomot Digital Saving { MANDATORY }
+          - name: referenceId
+            value: "3"
+            description: Id Referensi { OPTIONAL }
+          - name: prakarsaId
+            value: "3"
+            description: Prakarsa Id { OPTIONAL }
+          - name: loanAmount
+            value: "500000"
+            description: Nominal Pencairan { OPTIONAL }
+          - name: rate
+            value: "0.5"
+            description: Bunga Pencairan { OPTIONAL }
+          - name: loanTerm
+            value: "7"
+            description: Jangka Waktu Pinjaman (Dalam Hari) { OPTIONAL }
+          - name: installmentPattern
+            value: "1"
+            description: Pola Angsuran { OPTIONAL }
+          - name: administrationFee
+            value: "15000.00"
+            description: Biaya Administrasi { OPTIONAL }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx/1.20.1
+        - name: Date
+          value: Wed, 01 Dec 2021 04:04:12 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "88"
+        - name: Connection
+          value: keep-alive
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "PO Status != 0 (sedang dalam proses pengajuan)",
+              "message": "Maaf, Pengajuan anda sedang dalam proses. Silahkan tunggu sampai proses pengajuan selesai.",
+              "status": 500
+          }
+  - name: validasi jika PO sedang dalam proses
+    request:
+      url: "{{url}}/v/1/partnerships/po-add"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership { MANDATORY }
+          - name: poNumber
+            value: PO/002
+            description: Nomor PO { MANDATORY }
+          - name: transactionalType
+            value: "1"
+            description: Tipe Transaksional ( 1 => Supplier | 2 => Merchant) { MANDATORY }
+          - name: name
+            value: Dwiki Saputra
+            description: Nama Nasabah { MANDATORY }
+          - name: branchCode
+            value: "9999"
+            description: Kode Cabang { MANDATORY }
+          - name: cifNumber
+            value: "0000118826"
+            description: Nomor CIF { MANDATORY }
+          - name: facilityNumber
+            value: 0010/0000118826/PK1/001
+            description: Nomor Fasilitas { MANDATORY }
+          - name: savingAccountNumber
+            value: "001001000001315"
+            description: Nomot Digital Saving { MANDATORY }
+          - name: referenceId
+            value: "2"
+            description: Id Referensi { OPTIONAL }
+          - name: prakarsaId
+            value: "781"
+            description: Prakarsa Id { OPTIONAL }
+          - name: loanAmount
+            value: "5500000"
+            description: Nominal Pencairan { OPTIONAL }
+          - name: rate
+            value: "0.5"
+            description: Bunga Pencairan { OPTIONAL }
+          - name: loanTerm
+            value: "14"
+            description: Jangka Waktu Pinjaman (Dalam Hari) { OPTIONAL }
+          - name: installmentPattern
+            value: "1"
+            description: Pola Angsuran { OPTIONAL }
+          - name: administrationFee
+            value: "0"
+            description: Biaya Administrasi { OPTIONAL }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 17 Feb 2022 06:59:42 GMT
+        - name: Content-Length
+          value: "172"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "PO Status 0-2 (sedang dalam proses pengajuan)",
+              "message": "Maaf, Pengajuan anda sedang dalam proses. Silahkan tunggu sampai proses pengajuan selesai.",
+              "status": 500
+          }
+  - name: success
+    request:
+      url: "{{url}}/v/1/partnerships/po-add"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership { MANDATORY }
+          - name: poNumber
+            value: PO/003
+            description: Nomor PO { MANDATORY }
+          - name: transactionalType
+            value: "1"
+            description: Tipe Transaksional ( 1 => Pre | 2 => post) { MANDATORY }
+          - name: name
+            value: Jumadi
+            description: Nama Nasabah { MANDATORY }
+          - name: branchCode
+            value: "0010"
+            description: Kode Cabang { MANDATORY }
+          - name: cifNumber
+            value: CIF003
+            description: Nomor CIF { MANDATORY }
+          - name: facilityNumber
+            value: FC003
+            description: Nomor Fasilitas { MANDATORY }
+          - name: savingAccountNumber
+            value: DS003
+            description: Nomot Digital Saving { MANDATORY }
+          - name: referenceId
+            value: "3"
+            description: Id Referensi { OPTIONAL }
+          - name: prakarsaId
+            value: "3"
+            description: Prakarsa Id { OPTIONAL }
+          - name: loanAmount
+            value: "500000"
+            description: Nominal Pencairan { OPTIONAL }
+          - name: rate
+            value: "0.5"
+            description: Bunga Pencairan { OPTIONAL }
+          - name: loanTerm
+            value: "7"
+            description: Jangka Waktu Pinjaman (Dalam Hari) { OPTIONAL }
+          - name: installmentPattern
+            value: "1"
+            description: Pola Angsuran { OPTIONAL }
+          - name: administrationFee
+            value: "15000.00"
+            description: Biaya Administrasi { OPTIONAL }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 03:03:58 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Data Tersimpan",
+              "message": "Data purchase order berhasil disimpan",
+              "status": 200
+          }

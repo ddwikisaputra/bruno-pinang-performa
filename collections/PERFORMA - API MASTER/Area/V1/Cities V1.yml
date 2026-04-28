@@ -1,0 +1,211 @@
+info:
+  name: Cities V1
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: "{{url}}/v/1/master/cities/03"
+  body:
+    type: multipart-form
+  auth:
+    type: bearer
+    token: UmF5YVBpUGVyVG9wtk843jG/7RB5In2DFecy3o9PCIi6N/9g1KDYjEHKFfrchh+EoNFaRziUd/paYJ31H6HuLvNA3sulxsHQ7T9P45sD+L32owygMK33Vzs4FE9fNhzfaF1sSDgaN6m5V1OPqHXDW5YUkaJHZyx4fw==
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: not found
+    request:
+      url: "{{url}}/v/1/master/cities/{{provinceId}}"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "status": 404,
+              "message": "Kota / Kabupaten Tidak Ditemukan",
+              "desc": "Data Kota tidak ditemukan",
+              "data": null
+          }
+  - name: validation param
+    request:
+      url: "{{url}}/v/1/master/cities/{{provinceId}}"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "status": 400,
+              "message": "Maaf, parameter provinsi belum dipilih",
+              "desc": "Parameter provinceId belum terisi",
+              "data" : null
+          }
+  - name: unautorized
+    request:
+      url: "{{url}}/v/1/master/cities/{{provinceId}}"
+      method: GET
+    response:
+      status: 401
+      statusText: Unauthorized
+      body:
+        type: text
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: success
+    request:
+      url: "{{url}}/v/1/master/cities/{{provinceId}}"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "data": [
+                  {
+                      "cityCode": "0111",
+                      "city": "Bandung"
+                  },
+                  {
+                      "cityCode": "0191",
+                      "city": "Bandung"
+                  },
+                  {
+                      "cityCode": "0122",
+                      "city": "Bandung Barat"
+                  },
+                  {
+                      "cityCode": "0180",
+                      "city": "Banjar"
+                  },
+                  {
+                      "cityCode": "0102",
+                      "city": "Bekasi"
+                  },
+                  {
+                      "cityCode": "0198",
+                      "city": "Bekasi"
+                  },
+                  {
+                      "cityCode": "0108",
+                      "city": "Bogor"
+                  },
+                  {
+                      "cityCode": "0192",
+                      "city": "Bogor"
+                  },
+                  {
+                      "cityCode": "0115",
+                      "city": "Ciamis"
+                  },
+                  {
+                      "cityCode": "0110",
+                      "city": "Cianjur"
+                  },
+                  {
+                      "cityCode": "0196",
+                      "city": "Cimahi"
+                  },
+                  {
+                      "cityCode": "0116",
+                      "city": "Cirebon"
+                  },
+                  {
+                      "cityCode": "0194",
+                      "city": "Cirebon"
+                  },
+                  {
+                      "cityCode": "0197",
+                      "city": "Depok"
+                  },
+                  {
+                      "cityCode": "0114",
+                      "city": "Garut"
+                  },
+                  {
+                      "cityCode": "0118",
+                      "city": "Indramayu"
+                  },
+                  {
+                      "cityCode": "0106",
+                      "city": "Karawang"
+                  },
+                  {
+                      "cityCode": "0117",
+                      "city": "Kuningan"
+                  },
+                  {
+                      "cityCode": "0119",
+                      "city": "Majalengka"
+                  },
+                  {
+                      "cityCode": "0123",
+                      "city": "Pangandaran"
+                  },
+                  {
+                      "cityCode": "0103",
+                      "city": "Purwakarta"
+                  },
+                  {
+                      "cityCode": "0121",
+                      "city": "Subang"
+                  },
+                  {
+                      "cityCode": "0109",
+                      "city": "Sukabumi"
+                  },
+                  {
+                      "cityCode": "0193",
+                      "city": "Sukabumi"
+                  },
+                  {
+                      "cityCode": "0112",
+                      "city": "Sumedang"
+                  },
+                  {
+                      "cityCode": "0113",
+                      "city": "Tasikmalaya"
+                  },
+                  {
+                      "cityCode": "0195",
+                      "city": "Tasikmalaya"
+                  }
+              ],
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: general error
+    request:
+      url: "{{url}}/v/1/master/cities/{{provinceId}}"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data" : null
+          }
+
+docs: "'province' diisi dari parameter 'code' yang didapat dari endpoint 'master-province'"

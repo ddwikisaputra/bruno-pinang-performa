@@ -1,0 +1,139 @@
+meta {
+  name: Notification
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{BASE_URL}}/v1/notification/private/email/create
+  body: json
+  auth: none
+}
+
+headers {
+  Jagat-Raya-API-Key: {{API_KEY}}
+}
+
+body:json {
+  {
+      "payload": "{{REQUEST_BODY}}"
+  }
+}
+
+script:pre-request {
+  var attachements_file = bru.getEnvVar("BASE64_FILE")
+  const payload = {
+      "creator": "001415", // the email address/personal number/organization id of sender
+     "recipients": ["001701"], //337 the list of email address/personal number/organization id/jabatan id of recipients
+     //"cc": ["001701"],  // the list of email address/personal number/organization id/jabatan id of carbon copy (*optional)
+     //"bcc":["001701"] , // the list of email address/personal number/organization id/jabatan id of blind carbon copy (*optional)
+      // "attachment": [
+      //         {
+      //             "base64_content" : attachements_file, // base64 of attachements
+      //             "name" : "coba @ foto", //"hanson.jpg" // name with extention
+      //             "mime_type" : "jpg",
+      //         },
+      //         {
+      //             "base64_content" : attachements_file, // base64 of attachements
+      //             "name" : "coba @ foto2", //"hanson.jpg" // name with extention
+      //             "mime_type" : "jpg",
+      //         }
+      // ], // (*optional)
+      "subject":`Pemberitahuan Masa Review Dokumen`,  // body of email (include html)
+      "body":`<!DOCTYPE html>
+  <html lang="id">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Pemberitahuan Masa Review Dokumen</title>
+      <style>
+          body {
+              font-family: Arial, sans-serif;
+              margin: 0;
+              padding: 0;
+              line-height: 1.6;
+              color: #333;
+              background-color: #ffffff;
+          }
+          .container {
+              max-width: 600px;
+              margin: 0 auto;
+              padding: 20px;
+          }
+          .header {
+              text-align: left;
+              padding-bottom: 20px;
+          }
+          .header img {
+              width: 120px; /* Lebih kecil untuk tampilan email */
+          }
+          .content {
+              font-size: 14px;
+              margin-bottom: 20px;
+          }
+          .footer {
+              font-size: 12px;
+              color: #666;
+              text-align: center;
+              border-top: 1px solid #ddd;
+              padding-top: 10px;
+          }
+          a {
+              color: #0077b6; /* Warna biru netral untuk link */
+              text-decoration: none;
+          }
+          ul {
+              padding-left: 20px;
+          }
+      </style>
+  </head>
+  <body>
+  
+  <div class="container">
+      <!-- Header dengan Logo -->
+      <div class="header">
+          <img src="https://bankraya.co.id/img/logo.png" alt="Logo Bank Raya">
+      </div>
+  
+      <!-- Isi Email -->
+      <div class="content">
+          <p>Yth. Bapak/Ibu,</p>
+          <p>Berdasarkan review kami, dokumen kelolaan Bapak/Ibu telah memasuki masa review. Mohon agar Bapak/Ibu melakukan pengecekan terhadap dokumen dimaksud dan selanjutnya berkoordinasi dengan Desk Procedure & Policy.</p>
+  
+          <p><strong>Daftar dokumen kelolaan yang telah habis masa review:</strong></p>
+          <ul>
+              <a href="http://10.99.0.25/files/1731387363_c9c77fa0e7c06e56fc3e.docx" target="_blank">Pedoman Pelaksanaan Penyelesaian Transaksi Gagal di ATM Link </a>
+          </ul>
+  
+          <p>Terima kasih atas perhatian dan kerja samanya.</p>
+      </div>
+  
+      <!-- Footer -->
+      <div class="footer">
+          <p>&copy; 2025 Semua Hak Dilindungi | <a href="https://bankraya.co.id">Bank Raya</a></p>
+          <p>Untuk informasi lebih lanjut atau bantuan, kunjungi kami di <a href="https://bankraya.co.id">www.bankraya.co.id</a></p>
+      </div>
+  </div>
+  
+  </body>
+  </html>`,
+      "application_id": "RYP", // the id of a n application which send/create the email
+  }
+  
+  const result = _.encrypt(JSON.stringify(payload))
+  bru.setEnvVar("REQUEST_BODY", result);
+}
+
+script:post-response {
+  const responseJSON = res.getBody()
+  if (responseJSON.status) {
+      const data = _.decrypt(responseJSON.data)
+      const parseData = JSON.parse(data)
+      const parseData2 = JSON.parse(parseData)
+      console.log('/v1/notification/private/email/create', parseData2)
+  }
+}
+
+settings {
+  encodeUrl: true
+}

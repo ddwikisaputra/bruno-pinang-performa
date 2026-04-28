@@ -1,0 +1,49 @@
+meta {
+  name: Get List Claim
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{BASE_URL}}/v1/claim/list/
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: 
+}
+
+body:json {
+  {
+      "payload": "{{REQUEST_BODY}}"
+  }
+}
+
+script:pre-request {
+  const payload = {
+    "q": null,
+    "page": 1,
+    "limit": 20,
+    "branch_id": null,
+    "max_created_at": null,
+    "min_created_at": null
+  }
+  const result = encrypt(JSON.stringify(payload))
+  bru.setEnvVar("REQUEST_BODY", result);
+}
+
+script:post-response {
+  const CryptoJS = require("crypto-js");
+  const responseJSON = res.getBody();
+  if (responseJSON.status) {
+      const data = decrypt(responseJSON.data)
+      const parseData = JSON.parse(data)
+      const parseData2 = JSON.parse(parseData)
+      console.log('/v1/claim/list', parseData2)
+  }
+}
+
+settings {
+  encodeUrl: true
+}

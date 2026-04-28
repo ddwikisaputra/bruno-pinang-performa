@@ -1,0 +1,35 @@
+meta {
+  name: Delete Document
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{BASE_URL}}/v1/loan/document/delete
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: 
+}
+
+body:json {
+  {
+      "payload": "{{REQUEST_BODY}}"
+  }
+}
+
+script:pre-request {
+  const payload = {
+      "loan_media_id": "001001008019100-RIMA-MLT-000002-20251120162702"
+  }
+  
+  const result = globalThis.encrypt(JSON.stringify(payload))
+  bru.setEnvVar("REQUEST_BODY", result);
+  
+}
+
+settings {
+  encodeUrl: true
+}

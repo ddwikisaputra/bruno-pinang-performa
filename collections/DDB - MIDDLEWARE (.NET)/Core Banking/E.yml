@@ -1,0 +1,34 @@
+info:
+  name: E
+  type: http
+  seq: 9
+
+http:
+  method: POST
+  url: http://172.31.1.91:8882/api/pinang/loan/create
+  body:
+    type: form-urlencoded
+    data:
+      - name: kodeCabang
+        value: "0010"
+      - name: nomorCIF
+        value: "0000118826"
+      - name: nominal
+        value: "660000"
+      - name: namaSesuaiId
+        value: Dwiki Saputra
+      - name: sukuBunga
+        value: "0.25"
+      - name: jangkaWaktu
+        value: "7"
+      - name: penalti
+        value: "0.5"
+      - name: nomorFasilitas
+        value: 0010/0000118826/PK3/003
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

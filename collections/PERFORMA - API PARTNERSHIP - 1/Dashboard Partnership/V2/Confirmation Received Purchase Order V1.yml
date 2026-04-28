@@ -1,0 +1,630 @@
+info:
+  name: Confirmation Received Purchase Order V1
+  type: http
+  seq: 6
+
+http:
+  method: POST
+  url: localhost:7007/v/1/partnerships/po-confirmation-received
+  body:
+    type: form-urlencoded
+    data:
+      - name: referenceId
+        value: "202312"
+        description: Kode Referensi { MANDATORY }
+      - name: from
+        value: RAYAAPPS
+        description: Konfirmasi Dari { MANDATORY } [Huruf KAPITAL]
+      - name: partnershipCode
+        value: OMS1
+        description: Kode Partnership (Login Session) { MANDATORY }
+      - name: userId
+        value: "1"
+        description: User ID Login { MANDATORY }
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: general error
+    request:
+      url: "{{url}}/v/1/partnerships/po-confirmation-received"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: referenceId
+            value: "00000051"
+            description: Kode Referensi { MANDATORY }
+          - name: from
+            value: RAYAAPPS
+            description: Konfirmasi Dari { MANDATORY } [Huruf KAPITAL]
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+          - name: userId
+            value: "009"
+            description: User ID Login { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Could not connect .....",
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "status": 500
+          }
+  - name: Success
+    request:
+      url: "{{base-url-local}}/v/1/partnerships/po-confirmation-received"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: referenceId
+            value: "202312"
+            description: Kode Referensi { MANDATORY }
+          - name: from
+            value: RAYAAPPS
+            description: Konfirmasi Dari { MANDATORY } [Huruf KAPITAL]
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 20 Dec 2024 02:38:42 GMT
+        - name: Content-Length
+          value: "91"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 200,
+              "message": "Purchase Order berhasil disimpan",
+              "messageLocal": "Data Tersimpan"
+          }
+  - name: Error - Validation PO Sudah Cair = 3
+    request:
+      url: localhost:7007/v/1/partnerships/po-confirmation-received
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: referenceId
+            value: "202312"
+            description: Kode Referensi { MANDATORY }
+          - name: from
+            value: RAYAAPPS
+            description: Konfirmasi Dari { MANDATORY } [Huruf KAPITAL]
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 20 Dec 2024 02:39:10 GMT
+        - name: Content-Length
+          value: "161"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Maaf, Pengajuan anda sudah berhasil dicairkan. Silahkan cek kembali status pengajuan anda.",
+              "messageLocal": "PO Status = 3 (sudah cair)"
+          }
+  - name: Error - Validation bukan Mechant Financing
+    request:
+      url: localhost:7007/v/1/partnerships/po-confirmation-received
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: referenceId
+            value: "202312"
+            description: Kode Referensi { MANDATORY }
+          - name: from
+            value: RAYAAPPS
+            description: Konfirmasi Dari { MANDATORY } [Huruf KAPITAL]
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 20 Dec 2024 02:42:48 GMT
+        - name: Content-Length
+          value: "125"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Maaf, PO tersebut tidak bertipe Merchant Financing.",
+              "messageLocal": "Tipe bukan Merchant Financing"
+          }
+  - name: Error - Validation PO Ditolak
+    request:
+      url: "{{url}}/v/1/partnerships/po-confirmation-received"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: referenceId
+            value: "202312"
+            description: Kode Referensi { MANDATORY }
+          - name: from
+            value: RAYAAPPS
+            description: Konfirmasi Dari { MANDATORY } [Huruf KAPITAL]
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 20 Dec 2024 02:45:38 GMT
+        - name: Content-Length
+          value: "165"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Maaf, Pengajuan anda sudah ditolak. Silahkan cek kembali status pengajuan anda.",
+              "messageLocal": "PO Status < 0 (semua status ditolak)"
+          }
+  - name: Error - Database Connection
+    request:
+      url: localhost:7007/v/1/partnerships/po-confirmation-received
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: referenceId
+            value: "202312"
+            description: Kode Referensi { MANDATORY }
+          - name: from
+            value: RAYAAPPS
+            description: Konfirmasi Dari { MANDATORY } [Huruf KAPITAL]
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 20 Dec 2024 05:41:29 GMT
+        - name: Content-Length
+          value: "128"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 400,
+              "message": "Maaf, Server sedang dalam gangguan. Silahkan coba beberapa saat lagi.",
+              "desc": "Error koneksi database"
+          }
+  - name: Error - Validation Param Required
+    request:
+      url: "{{base-url-local}}/v/1/partnerships/po-confirmation-received"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: referenceId
+            value: "202312"
+            description: Kode Referensi { MANDATORY }
+            disabled: true
+          - name: from
+            value: RAYAAPPS
+            description: Konfirmasi Dari { MANDATORY } [Huruf KAPITAL]
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 20 Dec 2024 05:42:30 GMT
+        - name: Content-Length
+          value: "131"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Validation failed on field ... with tag 'required'",
+              "message": "Maaf, ... Tidak Boleh Kosong",
+              "status": 400
+          }
+  - name: Error - Unauthorized
+    request:
+      url: localhost:7007/v/1/partnerships/po-confirmation-received
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: referenceId
+            value: "202312"
+            description: Kode Referensi { MANDATORY }
+            disabled: true
+          - name: from
+            value: RAYAAPPS
+            description: Konfirmasi Dari { MANDATORY } [Huruf KAPITAL]
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 20 Dec 2024 05:44:28 GMT
+        - name: Content-Length
+          value: "75"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: Error - Validation PO Ditolak
+    request:
+      url: "{{url}}/v/1/partnerships/po-confirmation-received"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: referenceId
+            value: "202312"
+            description: Kode Referensi { MANDATORY }
+          - name: from
+            value: RAYAAPPS
+            description: Konfirmasi Dari { MANDATORY } [Huruf KAPITAL]
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 20 Dec 2024 02:45:38 GMT
+        - name: Content-Length
+          value: "165"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Maaf, Pengajuan anda sudah ditolak. Silahkan cek kembali status pengajuan anda.",
+              "messageLocal": "PO Status < 0 (semua status ditolak)"
+          }
+  - name: Success
+    request:
+      url: "{{base-url-local}}/v/1/partnerships/po-confirmation-received"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: referenceId
+            value: "202312"
+            description: Kode Referensi { MANDATORY }
+          - name: from
+            value: RAYAAPPS
+            description: Konfirmasi Dari { MANDATORY } [Huruf KAPITAL]
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 20 Dec 2024 02:38:42 GMT
+        - name: Content-Length
+          value: "91"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 200,
+              "message": "Purchase Order berhasil disimpan",
+              "messageLocal": "Data Tersimpan"
+          }
+  - name: Error - Validation Param Required
+    request:
+      url: "{{base-url-local}}/v/1/partnerships/po-confirmation-received"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: referenceId
+            value: "202312"
+            description: Kode Referensi { MANDATORY }
+            disabled: true
+          - name: from
+            value: RAYAAPPS
+            description: Konfirmasi Dari { MANDATORY } [Huruf KAPITAL]
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 20 Dec 2024 05:42:30 GMT
+        - name: Content-Length
+          value: "131"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Validation failed on field ... with tag 'required'",
+              "message": "Maaf, ... Tidak Boleh Kosong",
+              "status": 400
+          }
+  - name: Error - Validation PO Sudah Cair = 3
+    request:
+      url: localhost:7007/v/1/partnerships/po-confirmation-received
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: referenceId
+            value: "202312"
+            description: Kode Referensi { MANDATORY }
+          - name: from
+            value: RAYAAPPS
+            description: Konfirmasi Dari { MANDATORY } [Huruf KAPITAL]
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 20 Dec 2024 02:39:10 GMT
+        - name: Content-Length
+          value: "161"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Maaf, Pengajuan anda sudah berhasil dicairkan. Silahkan cek kembali status pengajuan anda.",
+              "messageLocal": "PO Status = 3 (sudah cair)"
+          }
+  - name: Error - Unauthorized
+    request:
+      url: localhost:7007/v/1/partnerships/po-confirmation-received
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: referenceId
+            value: "202312"
+            description: Kode Referensi { MANDATORY }
+            disabled: true
+          - name: from
+            value: RAYAAPPS
+            description: Konfirmasi Dari { MANDATORY } [Huruf KAPITAL]
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 20 Dec 2024 05:44:28 GMT
+        - name: Content-Length
+          value: "75"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: general error
+    request:
+      url: "{{url}}/v/1/partnerships/po-confirmation-received"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: referenceId
+            value: "00000051"
+            description: Kode Referensi { MANDATORY }
+          - name: from
+            value: RAYAAPPS
+            description: Konfirmasi Dari { MANDATORY } [Huruf KAPITAL]
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+          - name: userId
+            value: "009"
+            description: User ID Login { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Could not connect .....",
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "status": 500
+          }
+  - name: Error - Database Connection
+    request:
+      url: localhost:7007/v/1/partnerships/po-confirmation-received
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: referenceId
+            value: "202312"
+            description: Kode Referensi { MANDATORY }
+          - name: from
+            value: RAYAAPPS
+            description: Konfirmasi Dari { MANDATORY } [Huruf KAPITAL]
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 20 Dec 2024 05:41:29 GMT
+        - name: Content-Length
+          value: "128"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 400,
+              "message": "Maaf, Server sedang dalam gangguan. Silahkan coba beberapa saat lagi.",
+              "desc": "Error koneksi database"
+          }
+  - name: Error - Validation bukan Mechant Financing
+    request:
+      url: localhost:7007/v/1/partnerships/po-confirmation-received
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: referenceId
+            value: "202312"
+            description: Kode Referensi { MANDATORY }
+          - name: from
+            value: RAYAAPPS
+            description: Konfirmasi Dari { MANDATORY } [Huruf KAPITAL]
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 20 Dec 2024 02:42:48 GMT
+        - name: Content-Length
+          value: "125"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Maaf, PO tersebut tidak bertipe Merchant Financing.",
+              "messageLocal": "Tipe bukan Merchant Financing"
+          }

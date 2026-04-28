@@ -1,0 +1,44 @@
+meta {
+  name: Login Basic Rifqi
+  type: http
+  seq: 19
+}
+
+post {
+  url: {{BASE_URL}}/v1/auth/login/basic
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+      "payload": "{{REQUEST_BODY}}"
+  }
+}
+
+script:pre-request {
+  const payload = {
+      "username": "001726",
+      "password": "MA=="
+  }
+  
+  const result = _.encrypt(JSON.stringify(payload))
+  bru.setEnvVar("REQUEST_BODY", result);
+}
+
+script:post-response {
+  const responseJSON = res.getBody()
+  if (responseJSON.status) {
+      const data = _.decrypt(responseJSON.data)
+      const result = JSON.parse(JSON.parse(data))
+      bru.setEnvVar("TOKEN", result.access_token)
+      bru.setEnvVar("REFRESH_TOKEN", result.refresh_token)
+      bru.setEnvVar("DATA_ENCRYPT", responseJSON.data)
+      console.log("Access_Token", result.access_token)
+      console.log("Refresh_Token", result.refresh_token)
+  }
+}
+
+settings {
+  encodeUrl: true
+}

@@ -1,0 +1,168 @@
+info:
+  name: Get Auth Bearer token
+  type: http
+  seq: 5
+
+http:
+  method: POST
+  url: "{{baseUrl}}/token"
+  body:
+    type: form-urlencoded
+    data:
+      - name: username
+        value: agrolink
+      - name: password
+        value: agrolink
+      - name: grant_type
+        value: password
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Success Response
+    request:
+      url: "{{baseUrl}}/token"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: username
+            value: agrolink
+          - name: password
+            value: agrolink
+          - name: grant_type
+            value: password
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Thu, 09 Oct 2025 02:58:41 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "278"
+        - name: Connection
+          value: keep-alive
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "ResponseCode": "00",
+              "ResponseMessage": "Permintaan berhasil diproses",
+              "Data": {
+                  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NjAwNjUxMjAsInVzZXJuYW1lIjoiWVdkeWIyeHBibXM9In0.VkyjTsSYktASlsjWWkCV3BOc14e-ti3WEsHMYN7H3Qw",
+                  "token_type": "Bearer",
+                  "expires_in": 86399
+              }
+          }
+  - name: Failed Unauthorized - wrong user / password
+    request:
+      url: "{{baseUrl}}/token"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: username
+            value: agrolink
+          - name: password
+            value: agrolin
+          - name: grant_type
+            value: password
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Thu, 09 Oct 2025 02:59:12 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "64"
+        - name: Connection
+          value: keep-alive
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "ResponseCode": "99",
+              "ResponseMessage": "unauthorized",
+              "Data": {}
+          }
+  - name: Failed Validation - Password must be filled
+    request:
+      url: "{{baseUrl}}/token"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: username
+            value: agrolink
+          - name: password
+            value: ""
+          - name: grant_type
+            value: password
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Date
+          value: Thu, 09 Oct 2025 02:59:51 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "65"
+        - name: Connection
+          value: keep-alive
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "StatusCode": "99",
+              "StatusDescription": "Password must be filled"
+          }
+  - name: Failed Validation - Username must be filled
+    request:
+      url: "{{baseUrl}}/token"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: username
+            value: ""
+          - name: password
+            value: agrolink
+          - name: grant_type
+            value: password
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Date
+          value: Thu, 09 Oct 2025 03:00:26 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "65"
+        - name: Connection
+          value: keep-alive
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "StatusCode": "99",
+              "StatusDescription": "Username must be filled"
+          }

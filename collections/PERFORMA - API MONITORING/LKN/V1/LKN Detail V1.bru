@@ -1,0 +1,308 @@
+meta {
+  name: LKN Detail V1
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{url}}/v/1/monitoring/lkn-detail
+  body: multipartForm
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+body:multipart-form {
+  userId: 999900
+  lknId: 1
+}
+
+settings {
+  encodeUrl: true
+}
+
+example {
+  name: parameter validation
+  
+  request: {
+    url: {{url}}/v/1/monitoring/lkn-detail
+    method: POST
+    mode: multipartForm
+    body:multipart-form: {
+      userId: 999941
+      ~lknId: 1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Tue, 17 May 2022 10:54:36 GMT
+      Content-Length: 123
+    }
+  
+    status: {
+      code: 400
+      text: Bad Request
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "desc": "Parameter ... belum terisi",
+            "message": "Maaf, parameter ... belum dipilih",
+            "status": 500
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: general error
+  
+  request: {
+    url: {{url}}/v/1/monitoring/lkn-detail
+    method: GET
+    mode: none
+    headers: {
+      Content-Type: application/x-www-form-urlencoded
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Thu, 29 Jul 2021 07:05:21 GMT
+      Content-Length: 287
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "status": 500,
+            "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+            "desc": "Could not connect .....",
+            "data": null
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: error database connection
+  
+  request: {
+    url: {{url}}/v/1/monitoring/lkn-detail
+    method: POST
+    mode: formUrlEncoded
+    headers: {
+      Content-Type: application/x-www-form-urlencoded
+    }
+  
+    body:form-urlencoded: {
+      userId: 999941
+      lknId: 1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Wed, 09 Jun 2021 04:30:36 GMT
+      Content-Length: 1233
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+            "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+            "status": 400
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: unautorized
+  
+  request: {
+    url: {{url}}/v/1/monitoring/lkn-detail
+    method: POST
+    mode: formUrlEncoded
+    headers: {
+      Content-Type: application/x-www-form-urlencoded
+    }
+  
+    body:form-urlencoded: {
+      userId: 999941
+      lknId: 1
+    }
+  }
+  
+  response: {
+    status: {
+      code: 401
+      text: Unauthorized
+    }
+  
+    body: {
+      type: text
+      content: '''
+        {
+            "code": 401,
+            "desc": "Expired",
+            "message": "Invalid Token || Token Is Expired"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: success
+  
+  request: {
+    url: {{url}}/v/1/monitoring/lkn-detail
+    method: POST
+    mode: multipartForm
+    body:multipart-form: {
+      userId: 999941
+      lknId: 1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Mon, 16 May 2022 01:34:32 GMT
+      Content-Length: 502
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": {
+                "id": 1,
+                "visitType": 1,
+                "visitTypeName": "Monitoring Berkala",
+                "visitLocation": "lenovo",
+                "visitDate": "2020-01-20T00:00:00Z",
+                "result": "lenovo",
+                "documentation": [
+                    {
+                        "filePath": "monitoring/lkn/2022/5/17/IMG_LKN_20220517101714-1.jpg",
+                        "fileBase64": "string base64",
+                        "fileMimeType": "image/jpeg"
+                    },
+                    {
+                        "filePath": "monitoring/lkn/2022/5/17/IMG_LKN_20220517101714-2.png",
+                        "fileBase64": "string base64",
+                        "fileMimeType": "image/png"
+                    }
+                ]
+            },
+            "desc": "Data Valid",
+            "message": "Data ditemukan",
+            "status": 200
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: not found
+  
+  request: {
+    url: {{url}}/v/1/monitoring/lkn-detail
+    method: GET
+    mode: none
+    headers: {
+      Content-Type: application/x-www-form-urlencoded
+    }
+  }
+  
+  response: {
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: text
+      content: '''
+        {
+            "data": null,
+            "desc": "Error record not found",
+            "message": "Data LKN Tidak Ditemukan",
+            "status": 404
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: access forbidden (403)
+  
+  request: {
+    url: {{url}}/v/1/monitoring/lkn-detail
+    method: POST
+    mode: multipartForm
+    body:multipart-form: {
+      userId: 999951
+      lknId: 1
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Mon, 25 Jul 2022 08:14:38 GMT
+      Content-Length: 67
+    }
+  
+    status: {
+      code: 403
+      text: Forbidden
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "code": 403,
+            "desc": "Tidak Memliki Akses",
+            "message": "403 Forbidden"
+        }
+      '''
+    }
+  }
+}

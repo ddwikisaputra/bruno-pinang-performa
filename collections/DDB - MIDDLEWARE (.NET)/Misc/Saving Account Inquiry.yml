@@ -1,0 +1,108 @@
+info:
+  name: Saving Account Inquiry
+  type: http
+  seq: 4
+
+http:
+  method: POST
+  url: "{{base_url}}/api/digiagri/saving/account/inquiry"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "000426"
+      - name: noCIF
+        value: "0000118830"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: gagal
+    request:
+      url: "{{base_url}}/api/digiagri/saving/account/inquiry"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000426"
+          - name: noCIF
+            value: "438"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "statusCode": "99",
+              "statusDescription": "Inquiry Gagal!"
+          }
+  - name: tidak ada rekening
+    request:
+      url: "{{base_url}}/api/digiagri/saving/account/inquiry"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000426"
+          - name: noCIF
+            value: "438"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "statusCode": "1",
+              "statusDescription": "Success",
+              "Data": []
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/api/digiagri/saving/account/inquiry"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000426"
+          - name: noCIF
+            value: "438"
+    response:
+      body:
+        type: text
+        data: "{\r
+
+          \    \"statusCode\": \"1\",\r
+
+          \    \"statusDescription\": \"Success\",\r
+
+          \    \"Data\": [\r
+
+          \        {\r
+
+          \            \"accountNumber\": \"001001007975319\",\r
+
+          \            \"accountName\": \"IBRAHIM SENOAJI\",\r
+
+          \            \"accountDesc\": \"TABUNGAN AGROTAMA DIGITAL\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"accountNumber\": \"001001007976315\",\r
+
+          \            \"accountName\": \"IBRAHIM SENOAJI\",\r
+
+          \            \"accountDesc\": \"TABUNGAN AGROTAMA DIGITAL\"\r
+
+          \        }\r
+
+          \    ]\r
+
+          }"

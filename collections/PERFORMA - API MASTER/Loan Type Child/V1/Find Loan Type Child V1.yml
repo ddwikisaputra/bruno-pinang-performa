@@ -1,0 +1,306 @@
+info:
+  name: Find Loan Type Child V1
+  type: http
+  seq: 5
+
+http:
+  method: POST
+  url: "{{url-dev}}/v/1/master/loan-type-child-detail"
+  params:
+    - name: ""
+      value: ""
+      type: query
+      disabled: true
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "001308"
+        description: UserId Login | MANDATORY
+      - name: id
+        value: "308"
+        description: Loan Type Child Id | MANDATORY
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Unauthorized (401)
+    request:
+      url: "{{url}}/v/1/master/loan-type-child-detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: UserId Login | MANDATORY
+          - name: id
+            value: "26"
+            description: Loan Type Parent Id | MANDATORY
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 01 Aug 2022 02:53:30 GMT
+        - name: Content-Length
+          value: "75"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: bad request
+    request:
+      url: "{{url}}/v/1/master/loan-type-child-detail"
+      method: POST
+      params:
+        - name: ""
+          value: ""
+          type: query
+          disabled: true
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: UserId Login | MANDATORY
+          - name: id
+            value: "26"
+            description: Loan Type Parent Id | MANDATORY
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 08 Aug 2022 10:34:06 GMT
+        - name: Content-Length
+          value: "603"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Parameter ... belum terisi",
+              "message": "Maaf, parameter ... belum diisi",
+              "status": 400
+          }
+  - name: success
+    request:
+      url: "{{url}}/v/1/master/loan-type-child-detail"
+      method: POST
+      params:
+        - name: ""
+          value: ""
+          type: query
+          disabled: true
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: UserId Login | MANDATORY
+          - name: id
+            value: "232"
+            description: Loan Type Parent Id | MANDATORY
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 16 Aug 2022 03:28:16 GMT
+        - name: Content-Length
+          value: "580"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "id": 232,
+                  "loanTypeName": "HULKQ",
+                  "loanTypeCode": "40003",
+                  "productType": "40003",
+                  "facilityCode": "PK3",
+                  "provisionFee": 1.1,
+                  "status": 0,
+                  "dataInterestRates": [
+                      {
+                          "plafondStart": 2,
+                          "plafondEnd": 3,
+                          "loanTermStart": 2,
+                          "loanTermEnd": 3,
+                          "loanTermType": 1,
+                          "interestRate": 1.2
+                      }
+                  ],
+                  "dataInstallmentPatterns": [
+                      {
+                          "installmentPattern": "1 bulan",
+                          "installmentPatternType": 2
+                      }
+                  ],
+                  "dataAdministrationFees": [
+                      {
+                          "nominalStart": 1000,
+                          "nominalEnd": 1111,
+                          "adminFee": 20000
+                      }
+                  ],
+                  "dataInsurance": {
+                      "insuranceName": "testSatu",
+                      "productType": "40003",
+                      "percentage": 0.2
+                  }
+              },
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{url}}/v/1/master/loan-type-child-detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: UserId Login | MANDATORY
+          - name: id
+            value: "26"
+            description: Loan Type Parent Id | MANDATORY
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Sun, 31 Jul 2022 08:40:30 GMT
+        - name: Content-Length
+          value: "73"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: general error
+    request:
+      url: "{{url}}/v/1/master/loan-type-child-detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: UserId Login | MANDATORY
+          - name: id
+            value: "26"
+            description: Loan Type Parent Id | MANDATORY
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Sun, 31 Jul 2022 08:40:30 GMT
+        - name: Content-Length
+          value: "73"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect ....."
+          }
+  - name: not found
+    request:
+      url: "{{url}}/v/1/master/loan-type-child-detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: UserId Login | MANDATORY
+          - name: id
+            value: "26"
+            description: Loan Type Parent Id | MANDATORY
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Sat, 22 May 2021 06:53:21 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Accept-Encoding
+        - name: Content-Encoding
+          value: gzip
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Error Record Not Found",
+              "message": "Loan Type Parent Tidak Ditemukan",
+              "status": 404
+          }
+  - name: error database connection
+    request:
+      url: "{{url}}/v/1/master/loan-type-child-detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: UserId Login | MANDATORY
+          - name: id
+            value: "26"
+            description: Loan Type Parent Id | MANDATORY
+    response:
+      statusText: undefined
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Sun, 31 Jul 2022 08:40:30 GMT
+        - name: Content-Length
+          value: "73"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }

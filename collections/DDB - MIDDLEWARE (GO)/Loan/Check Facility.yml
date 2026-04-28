@@ -1,0 +1,22 @@
+info:
+  name: Check Facility
+  type: http
+  seq: 4
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/digiagri/loan/check/facility"
+  body:
+    type: form-urlencoded
+    data:
+      - name: loanTerm
+        value: "1"
+      - name: facilityNumber
+        value: 0020/0000120287/PK2/021
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

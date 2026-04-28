@@ -1,0 +1,407 @@
+info:
+  name: CIF Create
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{base_url}}/api/digiagri/cif/create"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "999911"
+      - name: kodeCabang
+        value: "0010"
+      - name: noId
+        value: "3578185209960001"
+      - name: nama
+        value: Sephia Aldiariza Hernandha
+      - name: NPWP
+        value: 93.015.407.3-404.649
+      - name: email
+        value: srisantika@gmail.com
+      - name: tempatLahir
+        value: Medan
+      - name: tanggalLahir
+        value: 12/09/1996
+        description: dd/MM/yyyy
+      - name: jenisKelamin
+        value: F
+      - name: namaGadisIbuKandung
+        value: Gloria Tri Lestari Wardhani
+      - name: tanggalIdTerbit
+        value: 03/08/2012
+        description: dd/MM/yyyy
+      - name: pendidikanTerakhir
+        value: S1
+      - name: agama
+        value: KRI
+      - name: statusPerkawinan
+        value: F
+      - name: alamat
+        value: Jl. Prof. Herman Yohanes No.1212, Terban, Kec. Gondokusuman, Kota Yogyakarta, Daerah Istimewa Yogyakarta 55223, Indonesia
+      - name: rt
+        value: "007"
+      - name: rw
+        value: "005"
+      - name: kodePos
+        value: "65143"
+      - name: kelurahan
+        value: Cikalong
+      - name: kecamatan
+        value: Cibitung
+      - name: kota
+        value: Kota Malang
+      - name: kodeKota
+        value: "1293"
+      - name: propinsi
+        value: Jawa Timur
+      - name: noHP
+        value: "081217070127"
+      - name: namaTempatKerja
+        value: Sephia Aldiariza Hernandha
+      - name: bidangPekerjaan
+        value: "0047"
+        description: business_type
+      - name: alamatKerja
+        value: Jl. Prof. Herman Yohanes No.1212, Terban, Kec. Gondokusuman, Kota Yogyakarta, Daerah Istimewa Yogyakarta 55223, Indonesia
+      - name: rtKerja
+        value: "007"
+      - name: rwKerja
+        value: "005"
+      - name: kodePosKerja
+        value: "65119"
+      - name: kelurahanKerja
+        value: Kauman
+      - name: kecamatanKerja
+        value: Cibitung
+      - name: kotaKerja
+        value: Kota Malang
+      - name: propinsiKerja
+        value: Jawa Timur
+      - name: jumlahTanggungan
+        value: "0"
+      - name: noIdPasangan
+        value: "3573040810940007"
+      - name: namaPasangan
+        value: Alief Zul Helmy Fadhillah Akbar
+      - name: tanggalLahirPasangan
+        value: 08/10/1994
+      - name: hubunganDalamKeluarga
+        value: Anak
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: CIF sudah ada
+    request:
+      url: "{{base_url}}/api/digiagri/cif/create"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999911"
+          - name: kodeCabang
+            value: "0010"
+          - name: noId
+            value: "3275042305890013"
+          - name: nama
+            value: R. Ibrahim Senoaji
+          - name: NPWP
+            value: "454543200099"
+          - name: email
+            value: ibrahim.senoaji@work.briagro.co.id
+          - name: tempatLahir
+            value: solo
+          - name: tanggalLahir
+            value: 23/05/1989
+            description: dd/MM/yyyy
+          - name: jenisKelamin
+            value: M
+          - name: namaGadisIbuKandung
+            value: Dyah Agustin
+          - name: tanggalIdTerbit
+            value: 26/10/2016
+            description: dd/MM/yyyy
+          - name: pendidikanTerakhir
+            value: S1
+          - name: agama
+            value: ISL
+          - name: statusPerkawinan
+            value: K
+          - name: alamat
+            value: Jl PAKIS II E BLOK BB 50 / 11 PPI
+          - name: rt
+            value: "009"
+          - name: rw
+            value: "012"
+          - name: kodePos
+            value: "17148"
+          - name: kelurahan
+            value: Pekayonjaya
+          - name: kecamatan
+            value: Bekasi Selatan
+          - name: kota
+            value: Kota Bekasi
+          - name: kodeKota
+            value: "0198"
+          - name: propinsi
+            value: Jawa Barat
+          - name: noHP
+            value: "089604391382"
+          - name: namaTempatKerja
+            value: BRI AGRO
+          - name: bidangPekerjaan
+            value: "0004"
+            description: business_type
+          - name: alamatKerja
+            value: Jl PAKIS II E BLOK BB 50 / 11 PPI
+          - name: rtKerja
+            value: "009"
+          - name: rwKerja
+            value: "012"
+          - name: kodePosKerja
+            value: "17148"
+          - name: kelurahanKerja
+            value: Pekayonjaya
+          - name: kecamatanKerja
+            value: Bekasi Selatan
+          - name: kotaKerja
+            value: Kota Bekasi
+          - name: propinsiKerja
+            value: Jawa Barat
+          - name: jumlahTanggungan
+            value: "1"
+          - name: noIdPasangan
+            value: "3217095001890001"
+          - name: namaPasangan
+            value: Nowiyanni Rahayu
+          - name: tanggalLahirPasangan
+            value: 10/01/1989
+          - name: hubunganDalamKeluarga
+            value: Suami
+    response:
+      body:
+        type: text
+        data: "{\r
+
+          \    \"statusCode\": \"1\",\r
+
+          \    \"statusDescription\": \"CIF sudah ada\",\r
+
+          \    \"CIF\": \"0000000438\",\r
+
+          \    \"Validation\": \"\"\r
+
+          }"
+  - name: Validation Error
+    request:
+      url: "{{base_url}}/api/digiagri/cif/create"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999911"
+          - name: kodeCabang
+            value: "0010"
+          - name: noId
+            value: "3275042305890013"
+          - name: nama
+            value: R. Ibrahim Senoaji
+          - name: NPWP
+            value: "454543200099"
+          - name: email
+            value: ibrahim.senoaji@work.briagro.co.id
+          - name: tempatLahir
+            value: solo
+          - name: tanggalLahir
+            value: 23/05/1989
+            description: dd/MM/yyyy
+          - name: jenisKelamin
+            value: M
+          - name: namaGadisIbuKandung
+            value: Dyah Agustin
+          - name: tanggalIdTerbit
+            value: 26/10/2016
+            description: dd/MM/yyyy
+          - name: pendidikanTerakhir
+            value: S1
+          - name: agama
+            value: ISL
+          - name: statusPerkawinan
+            value: K
+          - name: alamat
+            value: Jl PAKIS II E BLOK BB 50 / 11 PPI
+          - name: rt
+            value: "009"
+          - name: rw
+            value: "012"
+          - name: kodePos
+            value: "17148"
+          - name: kelurahan
+            value: Pekayonjaya
+          - name: kecamatan
+            value: Bekasi Selatan
+          - name: kota
+            value: Kota Bekasi
+          - name: kodeKota
+            value: "0198"
+          - name: propinsi
+            value: Jawa Barat
+          - name: noHP
+            value: "089604391382"
+          - name: namaTempatKerja
+            value: BRI AGRO
+          - name: bidangPekerjaan
+            value: "0004"
+            description: business_type
+          - name: alamatKerja
+            value: Jl PAKIS II E BLOK BB 50 / 11 PPI
+          - name: rtKerja
+            value: "009"
+          - name: rwKerja
+            value: "012"
+          - name: kodePosKerja
+            value: "17148"
+          - name: kelurahanKerja
+            value: Pekayonjaya
+          - name: kecamatanKerja
+            value: Bekasi Selatan
+          - name: kotaKerja
+            value: Kota Bekasi
+          - name: propinsiKerja
+            value: Jawa Barat
+          - name: jumlahTanggungan
+            value: "1"
+          - name: noIdPasangan
+            value: "3217095001890001"
+          - name: namaPasangan
+            value: Nowiyanni Rahayu
+          - name: tanggalLahirPasangan
+            value: 10/01/1989
+          - name: hubunganDalamKeluarga
+            value: Lainnya
+    response:
+      body:
+        type: text
+        data: "{\r
+
+          \    \"statusCode\": \"99\",\r
+
+          \    \"statusDescription\": \"Validation Error\",\r
+
+          \    \"CIF\": \"\",\r
+
+          \    \"Validation\": \"Validation Error : , Hubungan Dalam Keluarga tidak valid. Allowed: { , Kepala Keluarga, Suami, Istri, Anak, Menantu, Cucu, Orang Tua, Mertua, Famili Lain, Pembantu }, Perjanjian Pisah Harta tidak valid\"\r
+
+          }"
+  - name: success
+    request:
+      url: "{{base_url}}/api/digiagri/cif/create"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999911"
+          - name: kodeCabang
+            value: "0010"
+          - name: noId
+            value: "3275042305890013"
+          - name: nama
+            value: R. Ibrahim Senoaji
+          - name: NPWP
+            value: "454543200099"
+          - name: email
+            value: ibrahim.senoaji@work.briagro.co.id
+          - name: tempatLahir
+            value: solo
+          - name: tanggalLahir
+            value: 23/05/1989
+            description: dd/MM/yyyy
+          - name: jenisKelamin
+            value: M
+          - name: namaGadisIbuKandung
+            value: Dyah Agustin
+          - name: tanggalIdTerbit
+            value: 26/10/2016
+            description: dd/MM/yyyy
+          - name: pendidikanTerakhir
+            value: S1
+          - name: agama
+            value: ISL
+          - name: statusPerkawinan
+            value: K
+          - name: alamat
+            value: Jl PAKIS II E BLOK BB 50 / 11 PPI
+          - name: rt
+            value: "009"
+          - name: rw
+            value: "012"
+          - name: kodePos
+            value: "17148"
+          - name: kelurahan
+            value: Pekayonjaya
+          - name: kecamatan
+            value: Bekasi Selatan
+          - name: kota
+            value: Kota Bekasi
+          - name: kodeKota
+            value: "0198"
+          - name: propinsi
+            value: Jawa Barat
+          - name: noHP
+            value: "089604391382"
+          - name: namaTempatKerja
+            value: BRI AGRO
+          - name: bidangPekerjaan
+            value: "0004"
+            description: business_type
+          - name: alamatKerja
+            value: Jl PAKIS II E BLOK BB 50 / 11 PPI
+          - name: rtKerja
+            value: "009"
+          - name: rwKerja
+            value: "012"
+          - name: kodePosKerja
+            value: "17148"
+          - name: kelurahanKerja
+            value: Pekayonjaya
+          - name: kecamatanKerja
+            value: Bekasi Selatan
+          - name: kotaKerja
+            value: Kota Bekasi
+          - name: propinsiKerja
+            value: Jawa Barat
+          - name: jumlahTanggungan
+            value: "0"
+          - name: noIdPasangan
+            value: ""
+          - name: namaPasangan
+            value: ""
+          - name: tanggalLahirPasangan
+            value: ""
+          - name: hubunganDalamKeluarga
+            value: Anak
+    response:
+      body:
+        type: text
+        data: "{\r
+
+          \    \"statusCode\": \"1\",\r
+
+          \    \"statusDescription\": \"Success\",\r
+
+          \    \"CIF\": \"118826\",\r
+
+          \    \"Validation\": \"\"\r
+
+          }"

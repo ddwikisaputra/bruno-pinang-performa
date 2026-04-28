@@ -1,0 +1,73 @@
+info:
+  name: Prakarsa Status
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/digiagri/partnership/prakarsa/status"
+  body:
+    type: form-urlencoded
+    data:
+      - name: approveDate
+        value: 2022-02-05 10:00:00.000
+      - name: disburseDate
+        value: 2022-02-05 10:00:00.000
+      - name: referenceId
+        value: "20"
+      - name: rekeningSumber
+        value: "001001008148103"
+      - name: rekeningTujuan
+        value: "001001000065407"
+      - name: status
+        value: S
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Success Response
+    request:
+      url: "{{baseUrl}}/api/digiagri/partnership/prakarsa/status"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: approveDate
+            value: 2022-02-05 10:00:00.000
+          - name: disburseDate
+            value: 2022-02-05 10:00:00.000
+          - name: referenceId
+            value: "20"
+          - name: rekeningSumber
+            value: "001001008148103"
+          - name: rekeningTujuan
+            value: "001001000065407"
+          - name: status
+            value: S
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Thu, 09 Oct 2025 04:13:24 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "91"
+        - name: Connection
+          value: keep-alive
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "statusCode": "1",
+              "statusDescription": "Update Status Prakarsa Berhasil",
+              "referenceId": "20"
+          }

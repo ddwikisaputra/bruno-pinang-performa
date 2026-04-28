@@ -1,0 +1,219 @@
+meta {
+  name: Update Role
+  type: http
+  seq: 6
+}
+
+post {
+  url: {{BASE_URL}}/v1/role/update
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: 
+}
+
+body:json {
+  {
+      "payload": "{{REQUEST_BODY}}"
+  }
+}
+
+script:pre-request {
+  const payload = {
+      "id": "f3a73df5-53fc-4454-80e5-c360a536fa3d",
+      "name": "admin-edited",
+      "description": "admin super duper dup dup dup",
+      "application_id": "RYM"
+  }
+  
+  const result = _.encrypt(JSON.stringify(payload))
+  bru.setEnvVar("REQUEST_BODY", result);
+}
+
+script:post-response {
+  const responseJSON = res.getBody()
+  if (responseJSON.status) {
+      const data = _.decrypt(responseJSON.data)
+      const result = JSON.parse(JSON.parse(data))
+      console.log("Result", result)
+  }
+}
+
+settings {
+  encodeUrl: true
+}
+
+example {
+  name: Success
+  
+  request: {
+    url: {{BASE_URL}}/v1/role/update
+    method: POST
+    mode: json
+    body:json: {
+      {
+          "payload": "{{REQUEST_BODY}}"
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 19 Apr 2024 00:57:07 GMT
+      Content-Length: 62
+    }
+  
+    status: {
+      code: 200
+      text: 200
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "message": "Data berhasil diupdate",
+            "status": true
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Not found
+  
+  request: {
+    url: {{BASE_URL}}/v1/role/update
+    method: POST
+    mode: json
+    body:json: {
+      {
+          "payload": "{{REQUEST_BODY}}"
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 19 Apr 2024 00:58:03 GMT
+      Content-Length: 61
+    }
+  
+    status: {
+      code: 200
+      text: 500
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "message": "Data tidak ditemukan",
+            "status": false
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Application Not Found
+  
+  request: {
+    url: {{BASE_URL}}/v1/role/update
+    method: POST
+    mode: json
+    body:json: {
+      {
+          "payload": "{{REQUEST_BODY}}"
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 19 Apr 2024 01:22:02 GMT
+      Content-Length: 65
+    }
+  
+    status: {
+      code: 200
+      text: 500
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "message": "Aplikasi tidak ditemukan",
+            "status": false
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Validation
+  
+  request: {
+    url: {{BASE_URL}}/v1/role/update
+    method: POST
+    mode: json
+    body:json: {
+      {
+          "payload": "{{REQUEST_BODY}}"
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 19 Apr 2024 02:42:32 GMT
+      Content-Length: 270
+    }
+  
+    status: {
+      code: 200
+      text: 400
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": [
+                {
+                    "field": "ID",
+                    "message": "ID harus diisi"
+                },
+                {
+                    "field": "NAME",
+                    "message": "Nama harus diisi"
+                },
+                {
+                    "field": "DESCRIPTION",
+                    "message": "Deskripsi harus diisi"
+                },
+                {
+                    "field": "APPLICATION_ID",
+                    "message": "Aplikasi harus diisi"
+                }
+            ],
+            "message": "Terjadi kesalahan validasi",
+            "status": false
+        }
+      '''
+    }
+  }
+}

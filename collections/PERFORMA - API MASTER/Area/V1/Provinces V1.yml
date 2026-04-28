@@ -1,0 +1,135 @@
+info:
+  name: Provinces V1
+  type: http
+  seq: 4
+
+http:
+  method: GET
+  url: "{{url}}/v/1/master/provinces"
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/master/provinces"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: "{\r
+
+          \    \"data\" : null,\r
+
+          \    \"status\": 500,\r
+
+          \    \"message\": \"Server sedang maintenance, silahkan coba beberapa saat lagi\",\r
+
+          \    \"desc\": \"Could not connect .....\"\r
+
+          }"
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/master/provinces"
+      method: GET
+    response:
+      status: 401
+      statusText: Unauthorized
+      body:
+        type: text
+        data: "{\r
+
+          \    \"code\": 401,\r
+
+          \    \"message\": \"signature is invalid || Token is expired\"\r
+
+          }"
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/master/provinces"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: "{\r
+
+          \    \"data\": [\r
+
+          \        {\r
+
+          \            \"provinceCode\": \"1\",\r
+
+          \            \"province\": \"Propinsi Jawa Barat\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"provinceCode\": \"32\",\r
+
+          \            \"province\": \"Provinsi Aceh\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"provinceCode\": \"2\",\r
+
+          \            \"province\": \"Provinsi Banten\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"provinceCode\": \"5\",\r
+
+          \            \"province\": \"Provinsi D.I Yogyakarta\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"provinceCode\": \"3\",\r
+
+          \            \"province\": \"Provinsi DKI Jakarta\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"provinceCode\": \"9\",\r
+
+          \            \"province\": \"Provinsi Jawa Tengah\"\r
+
+          \        },\r
+
+          \        {\r
+
+          \            \"provinceCode\": \"12\",\r
+
+          \            \"province\": \"Provinsi Jawa Timur\"\r
+
+          \        }\r
+
+          \    ],\r
+
+          \    \"desc\": \"Data Valid\",\r
+
+          \    \"message\": \"Data ditemukan\",\r
+
+          \    \"status\": 200\r
+
+          }"
+
+docs: Tanpa Parameter

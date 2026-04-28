@@ -1,0 +1,46 @@
+meta {
+  name: List
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{BASE_URL}}/v1/risk-awareness/batch/list
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: 
+}
+
+body:json {
+  {
+      "payload": "{{REQUEST_BODY}}"
+  }
+}
+
+script:pre-request {
+  const payload = {
+      //"q": "Kelambu", //Title Batch (optional)
+      "page": 1,
+      "limit": -1 // isi -1 untuk menampilkan semua data
+  }
+  
+  const result = _.encrypt(JSON.stringify(payload))
+  bru.setEnvVar("REQUEST_BODY", result);
+}
+
+script:post-response {
+  const responseJSON = res.getBody()
+  if (responseJSON.status) {
+      const data = _.decrypt(responseJSON.data)
+      const parseData = JSON.parse(data)
+      const parseData2 = JSON.parse(parseData)
+      console.log('/v1/risk-awareness/batch/list', parseData2)
+  }
+}
+
+settings {
+  encodeUrl: true
+}

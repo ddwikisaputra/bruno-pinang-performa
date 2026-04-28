@@ -1,0 +1,327 @@
+meta {
+  name: Create
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{BASE_URL}}/v1/risk-awareness/batch/create
+  body: multipartForm
+  auth: bearer
+}
+
+auth:bearer {
+  token: 
+}
+
+body:multipart-form {
+  title: Minggu Kelabu
+  start_date: 2026-09-16
+  finish_date: 2026-09-17
+  file: /Users/hansonsiagian/Downloads/Format pengumpulan soal Raya ARSy - with header no question.xlsx
+}
+
+script:post-response {
+  const responseJSON = res.getBody()
+  if (responseJSON.status) {
+      const data = _.decrypt(responseJSON.data)
+      const result = JSON.parse(JSON.parse(data))
+      console.log("/v1/risk-awareness/batch/create", result)
+  }
+}
+
+settings {
+  encodeUrl: true
+}
+
+example {
+  name: Success
+  
+  request: {
+    url: {{BASE_URL}}/v1/risk-awareness/batch/create
+    method: POST
+    mode: multipartForm
+    body:multipart-form: {
+      title: Minggu Kelabu
+      start_date: 2024-07-20
+      finish_date: 2024-07-29
+      file: /C:/Users/ASUS/Downloads/Data Kandidat (1).xlsx
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Thu, 27 Jun 2024 10:14:43 GMT
+      Content-Length: 252
+    }
+  
+    status: {
+      code: 200
+      text: 201
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": "4GX82erKwZnidoL1wPD79K2xiNMMKXejtJ8wG6lIwDvcAvdHU6akfd8nfNwHAb3UYDafDkQaMIN3W0USWQo9+skyYNOROPZd3RBJ8pPMWYs+6zuL0DHEvCSY9pxu851js5G2fQWKrGdmhwa6WcX3Er3kQa0f/3KKgdugNFFDpO0xbxI9M4NUR8vSlx144VP+",
+            "message": "Data berhasil disimpan",
+            "status": true
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Success - Decrypted
+  
+  request: {
+    url: {{BASE_URL}}/v1/risk-awareness/batch/create
+    method: POST
+    mode: multipartForm
+    body:multipart-form: {
+      title: Minggu Kelabu
+      start_date: 2024-07-20
+      finish_date: 2024-07-29
+      file: /C:/Users/ASUS/Downloads/Data Kandidat (1).xlsx
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Thu, 27 Jun 2024 10:14:43 GMT
+      Content-Length: 252
+    }
+  
+    status: {
+      code: 200
+      text: 201
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": {
+                "id": "92c1bdf4-0aad-448a-b315-59dc7ee0baba"
+            },
+            "message": "Data berhasil disimpan",
+            "status": true
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Tangal Batch Unavailable
+  
+  request: {
+    url: {{BASE_URL}}/v1/risk-awareness/batch/create
+    method: POST
+    mode: multipartForm
+    body:multipart-form: {
+      title: Minggu Kelabu
+      start_date: 2024-06-28
+      finish_date: 2024-06-30
+      file: /C:/Users/ASUS/Downloads/Data Kandidat (1).xlsx
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Thu, 27 Jun 2024 09:59:53 GMT
+      Content-Length: 100
+    }
+  
+    status: {
+      code: 200
+      text: 500
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "message": "batch tidak tersedia pada tanggal 2024-06-28 s/d 2024-06-30",
+            "status": false
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Excel No Content
+  
+  request: {
+    url: {{BASE_URL}}/v1/risk-awareness/batch/create
+    method: POST
+    mode: multipartForm
+    body:multipart-form: {
+      title: Minggu Kelabu
+      start_date: 2024-08-20
+      finish_date: 2024-08-29
+      file: /C:/Users/ASUS/Downloads/Data Kandidat (1).xlsx
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Thu, 27 Jun 2024 11:02:15 GMT
+      Content-Length: 74
+    }
+  
+    status: {
+      code: 200
+      text: 500
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "message": "Tidak ada konten dalam file excel",
+            "status": false
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Excel Missing Header
+  
+  request: {
+    url: {{BASE_URL}}/v1/risk-awareness/batch/create
+    method: POST
+    mode: multipartForm
+    body:multipart-form: {
+      title: Minggu Kelabu
+      start_date: 2024-08-20
+      finish_date: 2024-08-29
+      file: /C:/Users/ASUS/Downloads/Format pengumpulan soal Raya ARSy.xlsx
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Thu, 27 Jun 2024 11:02:50 GMT
+      Content-Length: 85
+    }
+  
+    status: {
+      code: 200
+      text: 500
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "message": "Tidak ada sheet yang ditemukan di file Excel",
+            "status": false
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Start Date < Current Date
+  
+  request: {
+    url: {{BASE_URL}}/v1/risk-awareness/batch/create
+    method: POST
+    mode: multipartForm
+    body:multipart-form: {
+      title: Selasa Senang
+      start_date: 2024-07-07
+      finish_date: 2024-09-14
+      file: /Users/rafqiagatha/Downloads/Format pengumpulan soal Raya ARSy.xlsx
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Tue, 09 Jul 2024 03:27:07 GMT
+      Content-Length: 148
+    }
+  
+    status: {
+      code: 200
+      text: 400
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": [
+                {
+                    "field": "START_DATE",
+                    "message": "Tanggal tidak boleh kurang dari tanggal sekarang"
+                }
+            ],
+            "message": "Terjadi kesalahan validasi",
+            "status": false
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Finish Date < Start Date
+  
+  request: {
+    url: {{BASE_URL}}/v1/risk-awareness/batch/create
+    method: POST
+    mode: multipartForm
+    body:multipart-form: {
+      title: Selasa Senang
+      start_date: 2024-12-02
+      finish_date: 2024-09-14
+      file: /Users/rafqiagatha/Downloads/Format pengumpulan soal Raya ARSy.xlsx
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Tue, 09 Jul 2024 03:27:47 GMT
+      Content-Length: 137
+    }
+  
+    status: {
+      code: 200
+      text: 400
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": [
+                {
+                    "field": "FINISH_DATE",
+                    "message": "Finish Date harus sesudah Start Date"
+                }
+            ],
+            "message": "Terjadi kesalahan validasi",
+            "status": false
+        }
+      '''
+    }
+  }
+}

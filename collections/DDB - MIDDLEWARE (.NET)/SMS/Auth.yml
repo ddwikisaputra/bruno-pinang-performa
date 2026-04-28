@@ -1,0 +1,22 @@
+info:
+  name: Auth
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{base_url_dev}}/api/auth"
+  body:
+    type: json
+    data: |-
+      {
+          "UserName":"PERFORMA",
+          "Password":"8eHvjE8EtBVUjdeM"
+          
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

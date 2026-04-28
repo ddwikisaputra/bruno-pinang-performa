@@ -1,0 +1,39 @@
+meta {
+  name: Advance Login Syam KP
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{BASE_URL}}/v1/auth/login/advance
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+      "username": "KP000001",
+      "password": "MA==",
+      "device_id": "1bda0767bd381930",
+      "device_name": "samsung (SM-G965F)",
+      "version": "1.0.3"
+  }
+}
+
+script:post-response {
+  const responseJSON = res.getBody()
+  console.log('responseJSON: ', responseJSON.status)
+  console.log('data: ', responseJSON.data)
+  if (responseJSON.status) {
+      const data = responseJSON.data
+      bru.setEnvVar("TOKEN", data.access_token)
+  //     // pm.environment.set("REFRESH_TOKEN", result.refresh_token)
+  //     // pm.environment.set("DATA_ENCRYPT", responseJSON.data)
+      // console.log("access_token : ", result.access_token)
+      // console.log("refresh_token : ", result.refresh_token)
+  }
+}
+
+settings {
+  encodeUrl: true
+}

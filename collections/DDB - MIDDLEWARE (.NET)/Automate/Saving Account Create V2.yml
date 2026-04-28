@@ -1,0 +1,215 @@
+info:
+  name: Saving Account Create V2
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: "{{base_url_dev}}/api/digiagri/v2/saving/account/create"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "999941"
+        description: user ID AO
+      - name: kodeCabang
+        value: "0010"
+        description: kode cabang AO
+      - name: noCIF
+        value: "0000118826"
+        description: nomor CIF Nasabah
+      - name: noHP
+        value: "+6287877278830"
+        description: nomor HP Nasabah
+      - name: email
+        value: d.dwikisaputra@gmail.com
+        description: email nasabah
+      - name: nama
+        value: Dwiki Saputra
+        description: nama nasabah
+      - name: alamat
+        value: Cempaka Putir Barat
+        description: alamat nasabah
+      - name: propinsi
+        value: 31-DKI Jakarta
+        description: "propinsi nasabah Exp : 32-JAWA BARAT"
+      - name: kota
+        value: 3171-Jakarta Pusat
+        description: "kota nasabah Exp : 3275-Kota Bekasi"
+      - name: kecamatan
+        value: 05-Cempaka Putih
+        description: "kecamatan nasabah Exp : 04-Bekasi Selatan"
+      - name: kelurahan
+        value: 1002-Cempaka Putih
+        description: "kelurahan nasabah Exp : 1001-Pekayonjaya"
+      - name: rt
+        value: "010"
+        description: rt nasabah
+      - name: rw
+        value: "002"
+        description: rw nasabah
+      - name: noId
+        value: "31710512119500012"
+        description: nomor ID / KTP Nasabah
+      - name: NPWP
+        value: ""
+        description: NPWP Nasabah
+      - name: referralCode
+        value: ""
+        description: kode referral
+      - name: tempatLahir
+        value: Jakarta
+        description: Tempat Lahir Nasabah
+      - name: tanggalLahir
+        value: 12/11/1995
+        description: "Tanggal Lahir Nasabah (format : dd/MM/yyyy)"
+      - name: jenisKelamin
+        value: Pria
+        description: Jenis Kelamin Nasabah (Pria / Wanita)
+      - name: statusPerkawinan
+        value: B-Belum Kawin
+        description: "status Perkawinan Nasabah Exp : K-Kawin"
+      - name: kodePos
+        value: "10520"
+        description: Kode Pos Nasabah
+      - name: namaGadisIbuKandung
+        value: Rumiyati
+        description: Nama Ibu Kandung Nasabah
+      - name: namaTempatKerja
+        value: Dwiki Saputra
+        description: Nama Tempat Kerja Nasabah
+      - name: telpKantor
+        value: ""
+        description: Nomor Telepon Tempat Kerja Nasabah
+      - name: kodePosTempatKerja
+        value: "12760"
+        description: Kode Pos Tempat Kerja Nasabah
+      - name: agama
+        value: ISL-Islam
+        description: "Agama Nasabah Exp : ISL-Islam"
+      - name: pendidikanTerakhir
+        value: D3-Diploma 3
+        description: "Pendidikan Terakhir Nasabah Exp : S1-Sarjana"
+      - name: photoFile
+        value: "{{KTPBase64New}}"
+        description: Base 64 Photo Nasabah
+      - name: ktpFile
+        value: "{{KTPBase64New}}"
+        description: Base 64 KTP Nasabah
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Success
+    request:
+      url: "{{base_url}}/api/digiagri/v2/saving/account/create"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000426"
+            description: user ID AO
+          - name: kodeCabang
+            value: "0010"
+            description: kode cabang AO
+          - name: noCIF
+            value: "0000000438"
+            description: nomor CIF Nasabah
+          - name: noHP
+            value: "089604391382"
+            description: nomor HP Nasabah
+          - name: email
+            value: ibrahim.senoaji@bankraya.co.id
+            description: email nasabah
+          - name: nama
+            value: R. Ibrahim Senoaji
+            description: nama nasabah
+          - name: alamat
+            value: Pekayon Jaya
+            description: alamat nasabah
+          - name: propinsi
+            value: 32-JAWA BARAT
+            description: "propinsi nasabah Exp : 32-JAWA BARAT"
+          - name: kota
+            value: 3275-Kota Bekasi
+            description: "kota nasabah Exp : 3275-Kota Bekasi"
+          - name: kecamatan
+            value: 04-Bekasi Selatan
+            description: "kecamatan nasabah Exp : 04-Bekasi Selatan"
+          - name: kelurahan
+            value: 1001-Pekayonjaya
+            description: "kelurahan nasabah Exp : 1001-Pekayonjaya"
+          - name: rt
+            value: "09"
+            description: rt nasabah
+          - name: rw
+            value: "12"
+            description: rw nasabah
+          - name: noId
+            value: "3275042305890013"
+            description: nomor ID / KTP Nasabah
+          - name: NPWP
+            value: ""
+            description: NPWP Nasabah
+          - name: referralCode
+            value: ""
+            description: kode referral
+          - name: tempatLahir
+            value: Solo
+            description: Tempat Lahir Nasabah
+          - name: tanggalLahir
+            value: 23/May/1989
+            description: "Tanggal Lahir Nasabah (format : dd/MM/yyyy)"
+          - name: jenisKelamin
+            value: Pria
+            description: Jenis Kelamin Nasabah (Pria / Wanita)
+          - name: statusPerkawinan
+            value: K-Kawin
+            description: "status Perkawinan Nasabah Exp : K-Kawin"
+          - name: kodePos
+            value: "17148"
+            description: Kode Pos Nasabah
+          - name: namaGadisIbuKandung
+            value: RR Dyah Agustin
+            description: Nama Ibu Kandung Nasabah
+          - name: namaTempatKerja
+            value: Bank Raya Indonesia
+            description: Nama Tempat Kerja Nasabah
+          - name: telpKantor
+            value: ""
+            description: Nomor Telepon Tempat Kerja Nasabah
+          - name: kodePosTempatKerja
+            value: "12760"
+            description: Kode Pos Tempat Kerja Nasabah
+          - name: agama
+            value: ISL-Islam
+            description: "Agama Nasabah Exp : ISL-Islam"
+          - name: pendidikanTerakhir
+            value: S1-Sarjana
+            description: "Pendidikan Terakhir Nasabah Exp : S1-Sarjana"
+          - name: photoFile
+            value: ""
+            description: Base 64 Photo Nasabah
+          - name: ktpFile
+            value: ""
+            description: Base 64 KTP Nasabah
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "statusCode": "1",
+              "statusDescription": "SUCCESS",
+              "data": {
+                  "phoneNumber": "089604391382",
+                  "accountNumber": "001001002251314",
+                  "password": "Ribra23r@y@",
+                  "pin": "287502"
+              }
+          }

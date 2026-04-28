@@ -1,0 +1,44 @@
+meta {
+  name: Get Employee Detail
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{BASE_URL}}/v1/employee/detail
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: 
+}
+
+body:json {
+  {
+      "payload": "{{REQUEST_BODY}}"
+  }
+}
+
+script:pre-request {
+  const payload = {
+      "personal_number": "001701"
+  }
+  
+  const result = _.encrypt(JSON.stringify(payload))
+  bru.setEnvVar("REQUEST_BODY", result);
+}
+
+script:post-response {
+  const responseJSON = res.getBody()
+  if (responseJSON.status) {
+      const data = _.decrypt(responseJSON.data)
+      const parseData = JSON.parse(data)
+      const parseData2 = JSON.parse(parseData)
+      console.log('/v1/employee/detail', parseData2)
+  }
+}
+
+settings {
+  encodeUrl: true
+}

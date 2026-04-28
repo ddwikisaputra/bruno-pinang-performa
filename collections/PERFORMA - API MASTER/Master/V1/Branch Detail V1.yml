@@ -1,0 +1,141 @@
+info:
+  name: Branch Detail V1
+  type: http
+  seq: 2
+
+http:
+  method: GET
+  url: "{{url}}/v/1/master/branch-detail/0110"
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: general error
+    request:
+      url: "{{url}}/v/1/master/branch-detail/{{branchCode}}"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 29 Jul 2021 07:05:21 GMT
+        - name: Content-Length
+          value: "287"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data": null
+          }
+  - name: unautorized
+    request:
+      url: "{{url}}/v/1/master/branch-detail/{{branchCode}}"
+      method: GET
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 29 Jul 2021 07:05:21 GMT
+        - name: Content-Length
+          value: "287"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: success
+    request:
+      url: "{{url}}/v/1/master/branch-detail/{{branchCode}}"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 29 Jul 2021 07:05:21 GMT
+        - name: Content-Length
+          value: "287"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "branchCode": "9999",
+                  "branchCorrespondenceCode": "WKD",
+                  "branchName": "WAKANDA",
+                  "branchLevel": "1",
+                  "branchAddress": "BRI Agro State Building South Wakanda",
+                  "branchPhone": "099 98765432",
+                  "branchHead": "9999"
+              },
+              "desc": "Branch Found",
+              "message": "Data branch berhasil ditemukan",
+              "status": 200
+          }
+  - name: error database connection
+    request:
+      url: "{{url}}/v/1/master/branch-detail/{{branchCode}}"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 29 Jul 2021 07:05:21 GMT
+        - name: Content-Length
+          value: "287"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: error branch not found
+    request:
+      url: "{{url}}/v/1/master/branch-detail/-1"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 29 Jul 2021 07:09:27 GMT
+        - name: Content-Length
+          value: "101"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Branch Not Found in API",
+              "message": "Maaf, branch tidak ditemukan.",
+              "status": 404
+          }

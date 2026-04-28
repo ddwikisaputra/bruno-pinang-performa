@@ -1,0 +1,36 @@
+info:
+  name: Disbursement
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{base_url}}/api/digiagri/transaction/disbursement"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "000426"
+        description: User ID AO
+      - name: kodeCabang
+        value: "0010"
+        description: Uker yang melakukan transaksi (Branch Code AO atau CBL)
+      - name: nomorFasilitas
+        value: 0010/0000118826/PK3/003
+        description: Nomor fasilitas kredit
+      - name: rekeningSumber
+        value: "001001008331104"
+        description: Rekening pinjaman yang akan dicairkan
+      - name: rekeningTujuan
+        value: 001001000312994 001001000312994
+        description: Rekening tujuan pencairan (Giro, Saving)
+      - name: nominal
+        value: "900000"
+        description: Jumlah Pencairan
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

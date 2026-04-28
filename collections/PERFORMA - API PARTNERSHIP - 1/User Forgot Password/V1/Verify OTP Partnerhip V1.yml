@@ -1,0 +1,635 @@
+info:
+  name: Verify OTP Partnerhip V1
+  type: http
+  seq: 4
+
+http:
+  method: POST
+  url: "{{url}}/v/1/partnerships/verify-otp"
+  body:
+    type: form-urlencoded
+    data:
+      - name: email
+        value: dwiki.saputra@bankraya.co.id
+        description: Email Partnership { MANDATORY }
+      - name: mobileNumber
+        value: "+6285153315772"
+        description: Nomor Telepon untuk send OTP { MANDATORY }
+      - name: serverId
+        value: AGRO8974353801
+        description: Sever ID Response pada Request OTP { MANDATORY }
+      - name: otp
+        value: "034558"
+        description: OTP input { MANDATORY }
+  auth:
+    type: basic
+    username: UmF5YVBpUGVyVG9wvQQ9yCaZywQnor3oTiEnI7QBWZVTYFT2
+    password: UmF5YVBpUGVyVG9w/18dnAT+9iY6YT7toW1oEEdcvgxwAkuWwDSb
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: validasi parameter
+    request:
+      url: "{{url}}/v/1/partnerships/verify-otp"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: email
+            value: oms@gmail.com
+            description: Email Partnership { MANDATORY }
+          - name: mobileNumber
+            value: "+6281776527556"
+            description: Nomor Telepon untuk send OTP { MANDATORY }
+          - name: serverId
+            value: RAYA4374289782
+            description: Sever ID Response pada Request OTP { MANDATORY }
+          - name: otp
+            value: "158372"
+            description: OTP input { MANDATORY }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Parameter ... kosong",
+              "message": "Maaf, Parameter ... tidak boleh kosong",
+              "status": 500
+          }
+  - name: unautorized
+    request:
+      url: "{{url}}/v/1/partnerships/verify-otp"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: email
+            value: oms@gmail.com
+            description: Email Partnership { MANDATORY }
+          - name: mobileNumber
+            value: "+6281776527556"
+            description: Nomor Telepon untuk send OTP { MANDATORY }
+          - name: serverId
+            value: RAYA4374289782
+            description: Sever ID Response pada Request OTP { MANDATORY }
+          - name: otp
+            value: "158372"
+            description: OTP input { MANDATORY }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:44:34 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: validasi otp kadaluarsa
+    request:
+      url: "{{url}}/v/1/partnerships/verify-otp"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: email
+            value: dwiki.saputra@bankraya.co.id
+            description: Email Partnership { MANDATORY }
+          - name: mobileNumber
+            value: "+6285153315772"
+            description: Nomor Telepon untuk send OTP { MANDATORY }
+          - name: serverId
+            value: RAYA0213162195
+            description: Sever ID Response pada Request OTP { MANDATORY }
+          - name: otp
+            value: "626058"
+            description: OTP input { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 11 Mar 2022 08:29:13 GMT
+        - name: Content-Length
+          value: "104"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Session Expired",
+              "message": "Maaf, OTP expired. Silahkan coba Resend OTP kembali.",
+              "status": 700
+          }
+  - name: error database connection
+    request:
+      url: "{{url}}/v/1/partnerships/verify-otp"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: email
+            value: oms@gmail.com
+            description: Email Partnership { MANDATORY }
+          - name: mobileNumber
+            value: "+6281776527556"
+            description: Nomor Telepon untuk send OTP { MANDATORY }
+          - name: serverId
+            value: RAYA4374289782
+            description: Sever ID Response pada Request OTP { MANDATORY }
+          - name: otp
+            value: "158372"
+            description: OTP input { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: general error
+    request:
+      url: "{{url}}/v/1/partnerships/verify-otp"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: email
+            value: oms@gmail.com
+            description: Email Partnership { MANDATORY }
+          - name: mobileNumber
+            value: "+6281776527556"
+            description: Nomor Telepon untuk send OTP { MANDATORY }
+          - name: serverId
+            value: RAYA4374289782
+            description: Sever ID Response pada Request OTP { MANDATORY }
+          - name: otp
+            value: "158372"
+            description: OTP input { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Could not connect .....",
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "status": 500
+          }
+  - name: success
+    request:
+      url: "{{url}}/v/1/partnerships/verify-otp"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: email
+            value: oms@gmail.com
+            description: Email Partnership { MANDATORY }
+          - name: mobileNumber
+            value: "+6281776527556"
+            description: Nomor Telepon untuk send OTP { MANDATORY }
+          - name: serverId
+            value: RAYA4374289782
+            description: Sever ID Response pada Request OTP { MANDATORY }
+          - name: otp
+            value: "158372"
+            description: OTP input { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 03:03:58 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Verify OTP berhasil",
+              "message": "Verifikasi OTP berhasil",
+              "status": 200
+          }
+  - name: validasi otp sudah pernah digunakan
+    request:
+      url: "{{url}}/v/1/partnerships/verify-otp"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: email
+            value: dwiki.saputra@bankraya.co.id
+            description: Email Partnership { MANDATORY }
+          - name: mobileNumber
+            value: "+6285153315772"
+            description: Nomor Telepon untuk send OTP { MANDATORY }
+          - name: serverId
+            value: AGRO8974353801
+            description: Sever ID Response pada Request OTP { MANDATORY }
+          - name: otp
+            value: "034558"
+            description: OTP input { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx/1.20.1
+        - name: Date
+          value: Fri, 11 Mar 2022 19:33:20 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "79"
+        - name: Connection
+          value: keep-alive
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Token sudah pernah digunakan",
+              "message": "Maaf, Server sedang dalam gangguan. Silahkan coba beberapa saat lagi.",
+              "status": 600
+          }
+  - name: validasi otp salah
+    request:
+      url: "{{url}}/v/1/partnerships/verify-otp"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: email
+            value: dwiki.saputra@bankraya.co.id
+            description: Email Partnership { MANDATORY }
+          - name: mobileNumber
+            value: "+6285153315772"
+            description: Nomor Telepon untuk send OTP { MANDATORY }
+          - name: serverId
+            value: RAYA3035283863
+            description: Sever ID Response pada Request OTP { MANDATORY }
+          - name: otp
+            value: "626058"
+            description: OTP input { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 11 Mar 2022 08:29:40 GMT
+        - name: Content-Length
+          value: "119"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Invalid Token",
+              "message": "Maaf, OTP yang anda masukan salah.",
+              "status": 800
+          }
+  - name: validasi parameter
+    request:
+      url: "{{url}}/v/1/partnerships/verify-otp"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: email
+            value: oms@gmail.com
+            description: Email Partnership { MANDATORY }
+          - name: mobileNumber
+            value: "+6281776527556"
+            description: Nomor Telepon untuk send OTP { MANDATORY }
+          - name: serverId
+            value: RAYA4374289782
+            description: Sever ID Response pada Request OTP { MANDATORY }
+          - name: otp
+            value: "158372"
+            description: OTP input { MANDATORY }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Parameter ... kosong",
+              "message": "Maaf, Parameter ... tidak boleh kosong",
+              "status": 500
+          }
+  - name: unautorized
+    request:
+      url: "{{url}}/v/1/partnerships/verify-otp"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: email
+            value: oms@gmail.com
+            description: Email Partnership { MANDATORY }
+          - name: mobileNumber
+            value: "+6281776527556"
+            description: Nomor Telepon untuk send OTP { MANDATORY }
+          - name: serverId
+            value: RAYA4374289782
+            description: Sever ID Response pada Request OTP { MANDATORY }
+          - name: otp
+            value: "158372"
+            description: OTP input { MANDATORY }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:44:34 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: validasi otp kadaluarsa
+    request:
+      url: "{{url}}/v/1/partnerships/verify-otp"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: email
+            value: dwiki.saputra@bankraya.co.id
+            description: Email Partnership { MANDATORY }
+          - name: mobileNumber
+            value: "+6285153315772"
+            description: Nomor Telepon untuk send OTP { MANDATORY }
+          - name: serverId
+            value: RAYA0213162195
+            description: Sever ID Response pada Request OTP { MANDATORY }
+          - name: otp
+            value: "626058"
+            description: OTP input { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 11 Mar 2022 08:29:13 GMT
+        - name: Content-Length
+          value: "104"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Session Expired",
+              "message": "Maaf, OTP expired. Silahkan coba Resend OTP kembali.",
+              "status": 700
+          }
+  - name: error database connection
+    request:
+      url: "{{url}}/v/1/partnerships/verify-otp"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: email
+            value: oms@gmail.com
+            description: Email Partnership { MANDATORY }
+          - name: mobileNumber
+            value: "+6281776527556"
+            description: Nomor Telepon untuk send OTP { MANDATORY }
+          - name: serverId
+            value: RAYA4374289782
+            description: Sever ID Response pada Request OTP { MANDATORY }
+          - name: otp
+            value: "158372"
+            description: OTP input { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: general error
+    request:
+      url: "{{url}}/v/1/partnerships/verify-otp"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: email
+            value: oms@gmail.com
+            description: Email Partnership { MANDATORY }
+          - name: mobileNumber
+            value: "+6281776527556"
+            description: Nomor Telepon untuk send OTP { MANDATORY }
+          - name: serverId
+            value: RAYA4374289782
+            description: Sever ID Response pada Request OTP { MANDATORY }
+          - name: otp
+            value: "158372"
+            description: OTP input { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Could not connect .....",
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "status": 500
+          }
+  - name: success
+    request:
+      url: "{{url}}/v/1/partnerships/verify-otp"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: email
+            value: oms@gmail.com
+            description: Email Partnership { MANDATORY }
+          - name: mobileNumber
+            value: "+6281776527556"
+            description: Nomor Telepon untuk send OTP { MANDATORY }
+          - name: serverId
+            value: RAYA4374289782
+            description: Sever ID Response pada Request OTP { MANDATORY }
+          - name: otp
+            value: "158372"
+            description: OTP input { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 03:03:58 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Verify OTP berhasil",
+              "message": "Verifikasi OTP berhasil",
+              "status": 200
+          }
+  - name: validasi otp sudah pernah digunakan
+    request:
+      url: "{{url}}/v/1/partnerships/verify-otp"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: email
+            value: dwiki.saputra@bankraya.co.id
+            description: Email Partnership { MANDATORY }
+          - name: mobileNumber
+            value: "+6285153315772"
+            description: Nomor Telepon untuk send OTP { MANDATORY }
+          - name: serverId
+            value: AGRO8974353801
+            description: Sever ID Response pada Request OTP { MANDATORY }
+          - name: otp
+            value: "034558"
+            description: OTP input { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx/1.20.1
+        - name: Date
+          value: Fri, 11 Mar 2022 19:33:20 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "79"
+        - name: Connection
+          value: keep-alive
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Token sudah pernah digunakan",
+              "message": "Maaf, Server sedang dalam gangguan. Silahkan coba beberapa saat lagi.",
+              "status": 600
+          }
+  - name: validasi otp salah
+    request:
+      url: "{{url}}/v/1/partnerships/verify-otp"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: email
+            value: dwiki.saputra@bankraya.co.id
+            description: Email Partnership { MANDATORY }
+          - name: mobileNumber
+            value: "+6285153315772"
+            description: Nomor Telepon untuk send OTP { MANDATORY }
+          - name: serverId
+            value: RAYA3035283863
+            description: Sever ID Response pada Request OTP { MANDATORY }
+          - name: otp
+            value: "626058"
+            description: OTP input { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 11 Mar 2022 08:29:40 GMT
+        - name: Content-Length
+          value: "119"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Invalid Token",
+              "message": "Maaf, OTP yang anda masukan salah.",
+              "status": 800
+          }

@@ -1,0 +1,286 @@
+info:
+  name: Performa Pro
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: https://api-cso.internal.bankraya.co.id/credit-scoring/api/v1/performapro/4f293fe0-286f-4eeb-96d3-100bcc3471ea
+  body:
+    type: json
+    data: |-
+      {
+          "uid": "1406011809860003-1187", //prakasa id
+          "angsuran_pendapatan_bersih": 34.8597, //angsuran perbulan (+bunga) / dgn laba bersih * 100% (persentase) (decimal)
+          "nilai_likuidasi_terhadap_plafon": 209.0250, //total nilai likuidasi / plafond * 100% (persentase) (decimal)
+          "lama_usaha": 7.5000, //decimal -> tahun
+          "lama_menetap": 7.5000, //decimal -> tahun
+          "kepemilikan_tempat_tinggal": "miliksendiri", //sesuai mapping
+          "usia": 35, // angka usia (decimal)
+          "bukti_kepemilikan_agunan": "shm_tidak_pengikatan", //sesuai mapping
+          "status_debitur": "lama", //crs -> rekomendasi pinjaman -> sesuai mapping
+          "inflasi_nasional": 10.5, //tidak usah dikirim x
+          "karakter_kondisi_usaha": "memiliki_pelanggan_tetap", //sesuai mapping -> pertanyaan
+          "karakter_output_barang_jasa": "tertentu_pangsa_besar", //sesuai mapping -> pertanyaan
+          "karakter_transaksi_usaha": "tidak_tercermin", //sesuai mapping -> pertanyaan
+          "karakter_manajemen_usaha": "dikelola_individu", //sesuai mapping -> pertanyaan
+          "tingkat_kepercayaan": "sesuai_kondisi_dapat_dibuktikan", //sesuai mapping -> pertanyaan
+          "karakter_perilaku_pribadi": "tidak_pernah_tersangkut_perkara_kriminal", //sesuai mapping -> pertanyaan
+          "kualitas_kreditur": "selalu_lancar" //sesuai requirement slik -> pertanyaan (24 bulan terakhir)
+          // "id_card_no": 3323195202900002,
+          // "loan_no": "ORI-5704",
+          // "name": "Wahyu Kusnimawanti",
+          // "phone_no": "+6285725797631",
+          // "userId": "999941"
+      }
+
+      // static token
+  auth:
+    type: bearer
+    token: 5mS0ybzVKFB229SCl2a8x66IdWmrkKehRdOkb8vTMAxCzGA5RlQzarIWspMXcWFx
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: REJECT
+    request:
+      url: "{{api-endpoint-cs-scoring}}/api/v1.0/performapro/{{uid}}"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+              "uid": "{{uid}}",
+              "angsuran_pendapatan_bersih": 50.14,
+              "nilai_likuidasi_terhadap_plafon": 143,
+              "lama_usaha": 5.4,
+              "lama_menetap": 5.4,
+              "kepemilikan_tempat_tinggal": "sewakontrak",
+              "usia": 44,
+              "bukti_kepemilikan_agunan": "lainnya",
+              "status_debitur": "baru",
+              "inflasi_nasional": 3.22,
+              "karakter_kondisi_usaha": "memiliki_pelanggan_tetap",
+              "karakter_output_barang_jasa": "umum_banyak_pesaing",
+              "karakter_transaksi_usaha": "tercermin_sebagian_kecil",
+              "karakter_manajemen_usaha": "memiliki_karyawan",
+              "tingkat_kepercayaan": "tidak_dapat_dibuktikan",
+              "karakter_perilaku_pribadi": "pernah_tersangkut_perkara_kriminal",
+              "kualitas_kreditur": "pernah_kol_2"
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: Werkzeug/2.3.7 Python/3.11.3
+        - name: Date
+          value: Fri, 20 Oct 2023 01:20:26 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "232"
+        - name: Connection
+          value: close
+      body:
+        type: json
+        data: |-
+          {
+              "approvals": {
+                  "approval_type": "APPROVAL",
+                  "approvals": []
+              },
+              "desc": "REJECT",
+              "flow": "",
+              "grade": 0,
+              "score": 298,
+              "status": "SUCCESS",
+              "tenor_max": 0,
+              "uid": "d71e90dd-fd65-42ae-a5c3-be28338aad04"
+          }
+  - name: APPROVE
+    request:
+      url: "{{api-endpoint-cs-scoring}}/api/v1.0/performapro/{{uid}}"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+              "uid": "{{uid}}",
+              "angsuran_pendapatan_bersih": 50.14,
+              "nilai_likuidasi_terhadap_plafon": 143,
+              "lama_usaha": 5.4,
+              "lama_menetap": 5.4,
+              "kepemilikan_tempat_tinggal": "sewakontrak",
+              "usia": 44,
+              "bukti_kepemilikan_agunan": "bpkb_pengikatan",
+              "status_debitur": "baru",
+              "inflasi_nasional": 3.22,
+              "karakter_kondisi_usaha": "memiliki_pelanggan_tetap",
+              "karakter_output_barang_jasa": "umum_banyak_pesaing",
+              "karakter_transaksi_usaha": "tercermin_sebagian_kecil",
+              "karakter_manajemen_usaha": "memiliki_karyawan",
+              "tingkat_kepercayaan": "tidak_dapat_dibuktikan",
+              "karakter_perilaku_pribadi": "pernah_tersangkut_perkara_kriminal",
+              "kualitas_kreditur": "pernah_kol_2"
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: Werkzeug/2.3.7 Python/3.11.3
+        - name: Date
+          value: Fri, 20 Oct 2023 01:22:01 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "233"
+        - name: Connection
+          value: close
+      body:
+        type: json
+        data: |-
+          {
+              "approvals": {
+                  "approval_type": "APPROVAL",
+                  "approvals": []
+              },
+              "desc": "APPROVE",
+              "flow": "",
+              "grade": 0,
+              "score": 598,
+              "status": "SUCCESS",
+              "tenor_max": 0,
+              "uid": "f5b0148d-4efa-4e6b-af4d-bec31f0acf70"
+          }
+  - name: Reject/ Error
+    request:
+      url: https://be-credit-scoring.dev.internal.rayain.net/api/v1.0/performapro/4f293fe0-286f-4eeb-96d3-100bcc3471ea
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+              "uid": "999941", //prakasa id
+              "angsuran_pendapatan_bersih": 10.9, //angsuran perbulan (+bunga) / dgn laba bersih * 100% (persentase) (decimal)
+              "nilai_likuidasi_terhadap_plafon": 10, //total nilai likuidasi / plafond * 100% (persentase) (decimal)
+              "lama_usaha": 11.9, //decimal
+              "lama_menetap": 10.9, //decimal
+              "kepemilikan_tempat_tinggal": "sewakontrak", //sesuai mapping
+              "usia": 28, // angka usia (decimal)
+              "bukti_kepemilikan_agunan": "shm_pengikatan", //sesuai mapping
+              "status_debitur": "baru", //crs -> rekomendasi pinjaman -> sesuai mapping
+              "inflasi_nasional": 10.5, //tidak usah dikirim x
+              "karakter_kondisi_usaha": "memiliki_pelanggan_tetap", //sesuai mapping -> pertanyaan
+              "karakter_output_barang_jasa": "umum_sedikit_pesaing", //sesuai mapping -> pertanyaan
+              "karakter_transaksi_usaha": "tercermin_sebagian_besar", //sesuai mapping -> pertanyaan
+              "karakter_manajemen_usaha": "memiliki_karyawan", //sesuai mapping -> pertanyaan
+              "tingkat_kepercayaan": "kurang_sesuai_kondisi_sebenarnya", //sesuai mapping -> pertanyaan
+              "karakter_perilaku_pribadi": "tidak_pernah_tersangkut_perkara_kriminal", //sesuai mapping -> pertanyaan
+              "kualitas_kreditur": "pernah_kol_2_>_1x" //sesuai requirement slik -> pertanyaan (24 bulan terakhir)
+              // "id_card_no": 3171051211950001,
+              // "loan_no": "ORI-99",
+              // "name": "Dwiki Saputra",
+              // "phone_no": "081776527371",
+              // "userId": "999941"
+          }
+
+          // static token
+    response:
+      status: 400
+      statusText: BAD REQUEST
+      headers:
+        - name: Date
+          value: Mon, 11 Dec 2023 04:04:56 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "209"
+        - name: Connection
+          value: keep-alive
+        - name: Strict-Transport-Security
+          value: max-age=15724800; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "approvals": {
+                  "approval_type": "APPROVAL",
+                  "approvals": []
+              },
+              "desc": "REJECT",
+              "flow": 0,
+              "grade": -1,
+              "score": -1,
+              "status": "FAILED TO VALIDATE JSON SCHEMA",
+              "tenor_max": -1,
+              "uid": "4f293fe0-286f-4eeb-96d3-100bcc3471ea"
+          }
+  - name: Reject Success
+    request:
+      url: https://be-credit-scoring.dev.internal.rayain.net/api/v1.0/performapro/4f293fe0-286f-4eeb-96d3-100bcc3471ea
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+              "uid": "999941", //prakasa id
+              "angsuran_pendapatan_bersih": 10.9, //angsuran perbulan (+bunga) / dgn laba bersih * 100% (persentase) (decimal)
+              "nilai_likuidasi_terhadap_plafon": 10, //total nilai likuidasi / plafond * 100% (persentase) (decimal)
+              "lama_usaha": 11.9, //decimal
+              "lama_menetap": 10.9, //decimal
+              "kepemilikan_tempat_tinggal": "sewakontrak", //sesuai mapping
+              "usia": 28, // angka usia (decimal)
+              "bukti_kepemilikan_agunan": "shm_pengikatan", //sesuai mapping
+              "status_debitur": "baru", //crs -> rekomendasi pinjaman -> sesuai mapping
+              "inflasi_nasional": 10.5, //tidak usah dikirim x
+              "karakter_kondisi_usaha": "memiliki_pelanggan_tetap", //sesuai mapping -> pertanyaan
+              "karakter_output_barang_jasa": "umum_sedikit_pesaing", //sesuai mapping -> pertanyaan
+              "karakter_transaksi_usaha": "tercermin_sebagian_besar", //sesuai mapping -> pertanyaan
+              "karakter_manajemen_usaha": "memiliki_karyawan", //sesuai mapping -> pertanyaan
+              "tingkat_kepercayaan": "kurang_sesuai_kondisi_sebenarnya", //sesuai mapping -> pertanyaan
+              "karakter_perilaku_pribadi": "tidak_pernah_tersangkut_perkara_kriminal", //sesuai mapping -> pertanyaan
+              "kualitas_kreditur": "pernah_kol_2_>_1x" //sesuai requirement slik -> pertanyaan (24 bulan terakhir)
+              // "id_card_no": 3171051211950001,
+              // "loan_no": "ORI-99",
+              // "name": "Dwiki Saputra",
+              // "phone_no": "081776527371",
+              // "userId": "999941"
+          }
+
+          // static token
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Mon, 11 Dec 2023 04:05:21 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "155"
+        - name: Connection
+          value: keep-alive
+        - name: Strict-Transport-Security
+          value: max-age=15724800; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "approvals": {
+                  "approval_type": "APPROVAL",
+                  "approvals": []
+              },
+              "desc": "REJECT",
+              "flow": 8,
+              "grade": "D",
+              "score": 390,
+              "status": "SUCCESS",
+              "tenor_max": 0,
+              "uid": "999941"
+          }

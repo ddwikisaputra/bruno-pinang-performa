@@ -1,0 +1,78 @@
+info:
+  name: Ver OTP
+  type: http
+  seq: 4
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/verotp"
+  headers:
+    - name: Content-Type
+      value: application/x-www-form-urlencoded
+    - name: Authorization
+      value: Bearer xi84HCxyrgsaWl9qtS1ypYTBDpsjQKOwhYpSGktSC3OnqDuTROf9A4b86QBsQbevWIvkHu01vds-hmk_lAjjQg1cd-D-6NI3JvN6RW_h_HedlG1XHeYxDrw_TIhGZiPP7yW3Mfo9hcCNwdDktGW5vlCpRbW2mdLXDVrugHPz5JYX-Rm-hZQfHS4htTH67QVzOFqJ_YfOVW3axBX7_pOtIa2ow-LmAlybaqEqGysD5IXigr0fcHebJY9hX5sjI9pHYtgcf9-raenBPmatM7H67F9eAgz0Wvakufpf06xlJr4r_GVEbj5g93y3Un5CedIG
+      disabled: true
+  body:
+    type: form-urlencoded
+    data:
+      - name: client
+        value: asb
+      - name: serverId
+        value: RAYA7227012590
+      - name: otp
+        value: "88470"
+      - name: remark
+        value: "-"
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Success Response
+    request:
+      url: "{{baseUrl}}/api/verotp"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+        - name: Authorization
+          value: Bearer xi84HCxyrgsaWl9qtS1ypYTBDpsjQKOwhYpSGktSC3OnqDuTROf9A4b86QBsQbevWIvkHu01vds-hmk_lAjjQg1cd-D-6NI3JvN6RW_h_HedlG1XHeYxDrw_TIhGZiPP7yW3Mfo9hcCNwdDktGW5vlCpRbW2mdLXDVrugHPz5JYX-Rm-hZQfHS4htTH67QVzOFqJ_YfOVW3axBX7_pOtIa2ow-LmAlybaqEqGysD5IXigr0fcHebJY9hX5sjI9pHYtgcf9-raenBPmatM7H67F9eAgz0Wvakufpf06xlJr4r_GVEbj5g93y3Un5CedIG
+          disabled: true
+      body:
+        type: form-urlencoded
+        data:
+          - name: client
+            value: asb
+          - name: serverId
+            value: RAYA7227012590
+          - name: otp
+            value: "88470"
+          - name: remark
+            value: "-"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Thu, 09 Oct 2025 03:41:24 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "48"
+        - name: Connection
+          value: keep-alive
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "status": "00",
+              "desc": "Verifikasi OTP Berhasil"
+          }

@@ -1,0 +1,21 @@
+opencollection: 1.0.0
+
+info:
+  name: DIGITAL SAVING - OPENING ACCOUNT (PINANG)
+
+request:
+  variables:
+    - name: base_url
+      value: https://apigw.dev.rayain.net
+    - name: base_url_prod
+      value: https://apigw.bankraya.co.id
+    - name: user_prod
+      value: pinang-flexi
+    - name: password_prod
+      value: fvlfaH4cvg6yG9D
+bundled: false
+extensions:
+  bruno:
+    ignore:
+      - node_modules
+      - .git

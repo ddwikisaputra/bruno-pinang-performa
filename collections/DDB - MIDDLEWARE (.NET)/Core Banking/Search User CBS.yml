@@ -1,0 +1,18 @@
+info:
+  name: Search User CBS
+  type: http
+  seq: 8
+
+http:
+  method: GET
+  url: http://172.31.1.91:8882/api/reference/searchusr/000300
+  auth:
+    type: basic
+    username: pinang-mikro
+    password: HfbZzxqYr3Y33SLg
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

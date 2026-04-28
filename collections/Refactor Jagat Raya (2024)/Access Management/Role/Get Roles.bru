@@ -1,0 +1,143 @@
+meta {
+  name: Get Roles
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{BASE_URL}}/v1/role/list
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: 
+}
+
+body:json {
+  {
+      "payload": "{{REQUEST_BODY}}"
+  }
+}
+
+script:pre-request {
+  const payload = {
+      "page": 1,
+      "limit": -1,
+      "application_id": "RYM"
+      // "is_visible": true
+  }
+  
+  const result = _.encrypt(JSON.stringify(payload))
+  bru.setEnvVar("REQUEST_BODY", result);
+}
+
+script:post-response {
+  const responseJSON = res.getBody()
+  if (responseJSON.status) {
+      const data = _.decrypt(responseJSON.data)
+      const result = JSON.parse(JSON.parse(data))
+      console.log("Result", result)
+  }
+}
+
+settings {
+  encodeUrl: true
+}
+
+example {
+  name: Success
+  
+  request: {
+    url: {{BASE_URL}}/v1/role/list
+    method: POST
+    mode: json
+    body:json: {
+      {
+          "payload": "{{REQUEST_BODY}}"
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Sat, 20 Apr 2024 02:10:49 GMT
+      Content-Length: 602
+    }
+  
+    status: {
+      code: 200
+      text: 200
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": "rMdp+YAQ7wLXF7UcXFSWZi/DHTyDkjofP7XXtKP5tCm/3kXggiNJG/4E3YtH8Ma55WoWz/T+6Em+piA1QkHPlMDNxUr0W/5Rs6IdybCP3lfvh/Pf82+YWN73tdjFtLQzx0ZU1N9wWWQvX38qPZvw3KliMUpK/SdW4iG6/T77mSgDr3TELHfd50ayJkhWRTxikpavfgDvbEY6dSzKnKZDkJ0/hyn/TyVAvU4HvX9EVnDn2xIpN0wI1Ez1UqEemBNn1G1LQQ3gqBiL6qLWxVJVGdeGtrY3zQm03h6eThJVbLwgAj8T/dsyNZ1ctrShvtNHTClyzncpOjLmU66pBOMua4mMP8oRTTLeCmVkI8F4jEEP5HoPzKP39lYKofaSA640r8BCS4EcOm9qz6lAfHmSraJIwMPuXq6krSsVLiEEGgRDuLFKnT5HFwABk3Y/wOewhvPsXSU/XTArFfE1uSIAAx0CjKmJRl0QakEhOismbH8AmMJ9NQxherOOy6xvI9BACWJ4unM9FPx9nubyREfr8A==",
+            "message": "Permintaan berhasil diproses",
+            "status": true
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Success (Decrypted)
+  
+  request: {
+    url: {{BASE_URL}}/v1/role/list
+    method: POST
+    mode: json
+    body:json: {
+      {
+          "payload": "{{REQUEST_BODY}}"
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Sat, 20 Apr 2024 02:10:49 GMT
+      Content-Length: 602
+    }
+  
+    status: {
+      code: 200
+      text: 200
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "data": {
+            "current_page": 1,
+            "total_page": 1,
+            "total_data": 2,
+            "data": [
+              {
+                "name": "king",
+                "description": "",
+                "application_id": "RYM",
+                "application_name": "Rayment"
+              },
+              {
+                "name": "admin-edited",
+                "description": "admin super duper dup dup dup",
+                "application_id": "RYM",
+                "application_name": "Rayment"
+              }
+            ]
+          },
+          "message": "Permintaan berhasil diproses",
+          "status": true
+        }
+            
+      '''
+    }
+  }
+}

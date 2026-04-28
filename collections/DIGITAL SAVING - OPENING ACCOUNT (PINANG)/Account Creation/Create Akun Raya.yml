@@ -1,0 +1,82 @@
+info:
+  name: Create Akun Raya
+  type: http
+  seq: 6
+
+http:
+  method: POST
+  url: "{{base_url}}/raya/opening-account/pinang/create-akun-raya/fdc66be0-dbbc-4a79-961f-9d27c8f9330e"
+  body:
+    type: json
+    data: |-
+      {
+          "redirectLink": "https://example-redirect.net"
+      }
+  auth:
+    type: basic
+    username: "{{username_dev}}"
+    password: "{{password_dev}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Successful
+    request:
+      url: "{{base_url_prod}}/raya/opening-account/pinang/create-akun-raya/4b9432d0-2c98-4185-afcb-837329705b49"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+              "redirectLink": ""
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Fri, 15 Sep 2023 15:45:09 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: x-krakend
+          value: Version 2.4.3
+        - name: x-krakend-completed
+          value: "false"
+        - name: strict-transport-security
+          value: max-age=31536000; includeSubDomains; preload; always
+        - name: alt-svc
+          value: h3=":443"; ma=86400
+        - name: cf-cache-status
+          value: DYNAMIC
+        - name: Content-Encoding
+          value: gzip
+        - name: x-kong-upstream-latency
+          value: "192"
+        - name: x-kong-proxy-latency
+          value: "18"
+        - name: via
+          value: kong/3.3.1, 1.1 google
+        - name: Set-Cookie
+          value: __cf_bm=r3zC7iJsotwxXLjUIVjV2GE7BFMAMLc5sc0RARnNJRw-1694792709-0-Adw2yOQrpB41Z2Ob41EGV5uqUO4Ou+ouCqxWogijpOpHJjk3fNnldwULnVotSD3vgOPqkqRGKlt4oOvI7H7wgDI=; path=/; expires=Fri, 15-Sep-23 16:15:09 GMT; domain=.bankraya.co.id; HttpOnly; Secure; SameSite=None
+        - name: Server
+          value: cloudflare
+        - name: CF-RAY
+          value: 8071febefbc04ab4-CGK
+      body:
+        type: json
+        data: |-
+          {
+              "responseCode": "2009200",
+              "responseMessage": "Successful",
+              "additionalInfo": {
+                  "url": "https://apps-webview.bankraya.co.id/buka-tabungan/partner/4b9432d0-2c98-4185-afcb-837329705b49?token=ab5c54f89066ae2a4c4785cfc3eed224622d13b9bf113df3ae29b3f6f5f2d552929bc2a85632639080f409b80d19ef0451e1ae1e1ff2c4a6e6b198892ff3b9ca"
+              }
+          }

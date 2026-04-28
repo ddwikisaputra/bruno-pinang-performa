@@ -1,0 +1,637 @@
+info:
+  name: Add Member Pipeline V2
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{base_url}}/v/2/pipeline/add-member-pipeline"
+  body:
+    type: form-urlencoded
+    data:
+      - name: partnershipMemberId
+        value: "98"
+        description: Member ID {MANDAROTY}
+      - name: pipelineId
+        value: "13"
+        description: "ID Pipeline {MADNATORY} "
+      - name: estimationLoan
+        value: "1200000"
+        description: Estimasi Pinjaman {MANDAROTY}
+      - name: userId
+        value: UmF5YVBpUGVyVG9w9FR0lGD8PJZ01laNFpB91ptV5mkFfw==
+        description: "[ENCODE] Personal Number BRI Agro (UserID Login)"
+      - name: installmentPattern
+        value: "24"
+        description: pola angsuran [MANDATORY]
+      - name: loanTermEstimation
+        value: "24"
+        description: perkiraan jangka waktu pinjaman [MANDATORY]
+      - name: businessType
+        value: QWEWRT
+        description: jenis usaha[Optional kecuali OMS1]
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: validasi pipeline employee by PN, Month, Year Today
+    request:
+      url: "{{base_url}}/v/1/pipeline/add-member-pipeline"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: partnershipMemberId
+            value: "8"
+            description: Member ID {MANDAROTY}
+          - name: pipelineId
+            value: "1"
+            description: "ID Pipeline {MADNATORY} "
+          - name: estimationLoan
+            value: "5000000"
+            description: Estimasi Pinjaman {MANDAROTY}
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 24 Feb 2022 11:34:04 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Pipeline Employee Setting tidak ditemukan.",
+              "message": "Maaf, Pipeline AO bulan ini belum tersedia. Silahkan kontak administrator.",
+              "status": 500
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/pipeline/add-member-pipeline"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: partnershipMemberId
+            value: "8"
+            description: Member ID {MANDAROTY}
+          - name: pipelineId
+            value: "1"
+            description: "ID Pipeline {MADNATORY} "
+          - name: estimationLoan
+            value: "500000"
+            description: Estimasi Pinjaman {MANDAROTY}
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:32:34 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/2/pipeline/add-member-pipeline"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: partnershipMemberId
+            value: "8"
+            description: Member ID {MANDAROTY}
+          - name: pipelineId
+            value: "1"
+            description: "ID Pipeline {MADNATORY} "
+          - name: estimationLoan
+            value: "500000"
+            description: Estimasi Pinjaman {MANDAROTY}
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:35:05 GMT
+        - name: Content-Length
+          value: "141"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Data Tersimpan",
+              "message": "Data Pipeline berhasil disimpan",
+              "status": 200
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/pipeline/add-member-pipeline"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: partnershipMemberId
+            value: "8"
+            description: Member ID {MANDAROTY}
+          - name: pipelineId
+            value: "1"
+            description: "ID Pipeline {MADNATORY} "
+          - name: estimationLoan
+            value: "500000"
+            description: Estimasi Pinjaman {MANDAROTY}
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:32:34 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: validasi params
+    request:
+      url: "{{base_url}}/v/1/pipeline/add-member-pipeline"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: partnershipMemberId
+            value: "8"
+            description: Member ID {MANDAROTY}
+            disabled: true
+          - name: pipelineId
+            value: "1"
+            description: "ID Pipeline {MADNATORY} "
+          - name: estimationLoan
+            value: "5000000"
+            description: Estimasi Pinjaman {MANDAROTY}
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 24 Feb 2022 11:34:04 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Parameter ... kosong",
+              "message": "... Belum Diisi",
+              "status": 500
+          }
+  - name: validasi ktp sedang proses prakarsa
+    request:
+      url: "{{base_url}}/v/1/pipeline/add-member-pipeline"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: partnershipMemberId
+            value: "8"
+            description: Member ID {MANDAROTY}
+          - name: pipelineId
+            value: "1"
+            description: "ID Pipeline {MADNATORY} "
+          - name: estimationLoan
+            value: "5000000"
+            description: Estimasi Pinjaman {MANDAROTY}
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 24 Feb 2022 11:34:04 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Member Partnership sedang dalam proses pengajuan Prakarsa.",
+              "message": "Maaf, Member sedang dalam proses Prakarsa. Silahkan tunggu sampai proses Prakarsa selesai.",
+              "status": 500
+          }
+  - name: validasi pipeline member by member id & pipeline bulan berjalan
+    request:
+      url: "{{base_url}}/v/1/pipeline/add-member-pipeline"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: partnershipMemberId
+            value: "8"
+            description: Member ID {MANDAROTY}
+          - name: pipelineId
+            value: "1"
+            description: "ID Pipeline {MADNATORY} "
+          - name: estimationLoan
+            value: "5000000"
+            description: Estimasi Pinjaman {MANDAROTY}
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 24 Feb 2022 11:34:04 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Member Partnership sudah terdaftar pada Pipelie Prakarsa.",
+              "message": "Maaf, Member tersebut sudah terdatar pada Pipeline. Silahkan pilih member lainnya.",
+              "status": 500
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/pipeline/add-member-pipeline"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: partnershipMemberId
+            value: "8"
+            description: Member ID {MANDAROTY}
+          - name: pipelineId
+            value: "1"
+            description: "ID Pipeline {MADNATORY} "
+          - name: estimationLoan
+            value: "500000"
+            description: Estimasi Pinjaman {MANDAROTY}
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:32:34 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect ....."
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/pipeline/add-member-pipeline"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: partnershipMemberId
+            value: "8"
+            description: Member ID {MANDAROTY}
+          - name: pipelineId
+            value: "1"
+            description: "ID Pipeline {MADNATORY} "
+          - name: estimationLoan
+            value: "500000"
+            description: Estimasi Pinjaman {MANDAROTY}
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:32:34 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect ....."
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/2/pipeline/add-member-pipeline"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: partnershipMemberId
+            value: "8"
+            description: Member ID {MANDAROTY}
+          - name: pipelineId
+            value: "1"
+            description: "ID Pipeline {MADNATORY} "
+          - name: estimationLoan
+            value: "500000"
+            description: Estimasi Pinjaman {MANDAROTY}
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:35:05 GMT
+        - name: Content-Length
+          value: "141"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Data Tersimpan",
+              "message": "Data Pipeline berhasil disimpan",
+              "status": 200
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/pipeline/add-member-pipeline"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: partnershipMemberId
+            value: "8"
+            description: Member ID {MANDAROTY}
+          - name: pipelineId
+            value: "1"
+            description: "ID Pipeline {MADNATORY} "
+          - name: estimationLoan
+            value: "500000"
+            description: Estimasi Pinjaman {MANDAROTY}
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:32:34 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: validasi pipeline member by member id & pipeline bulan berjalan
+    request:
+      url: "{{base_url}}/v/1/pipeline/add-member-pipeline"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: partnershipMemberId
+            value: "8"
+            description: Member ID {MANDAROTY}
+          - name: pipelineId
+            value: "1"
+            description: "ID Pipeline {MADNATORY} "
+          - name: estimationLoan
+            value: "5000000"
+            description: Estimasi Pinjaman {MANDAROTY}
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 24 Feb 2022 11:34:04 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Member Partnership sudah terdaftar pada Pipelie Prakarsa.",
+              "message": "Maaf, Member tersebut sudah terdatar pada Pipeline. Silahkan pilih member lainnya.",
+              "status": 500
+          }
+  - name: validasi params
+    request:
+      url: "{{base_url}}/v/1/pipeline/add-member-pipeline"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: partnershipMemberId
+            value: "8"
+            description: Member ID {MANDAROTY}
+            disabled: true
+          - name: pipelineId
+            value: "1"
+            description: "ID Pipeline {MADNATORY} "
+          - name: estimationLoan
+            value: "5000000"
+            description: Estimasi Pinjaman {MANDAROTY}
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 24 Feb 2022 11:34:04 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Parameter ... kosong",
+              "message": "... Belum Diisi",
+              "status": 500
+          }
+  - name: validasi pipeline employee by PN, Month, Year Today
+    request:
+      url: "{{base_url}}/v/1/pipeline/add-member-pipeline"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: partnershipMemberId
+            value: "8"
+            description: Member ID {MANDAROTY}
+          - name: pipelineId
+            value: "1"
+            description: "ID Pipeline {MADNATORY} "
+          - name: estimationLoan
+            value: "5000000"
+            description: Estimasi Pinjaman {MANDAROTY}
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 24 Feb 2022 11:34:04 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Pipeline Employee Setting tidak ditemukan.",
+              "message": "Maaf, Pipeline AO bulan ini belum tersedia. Silahkan kontak administrator.",
+              "status": 500
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/pipeline/add-member-pipeline"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: partnershipMemberId
+            value: "8"
+            description: Member ID {MANDAROTY}
+          - name: pipelineId
+            value: "1"
+            description: "ID Pipeline {MADNATORY} "
+          - name: estimationLoan
+            value: "500000"
+            description: Estimasi Pinjaman {MANDAROTY}
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:32:34 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: validasi ktp sedang proses prakarsa
+    request:
+      url: "{{base_url}}/v/1/pipeline/add-member-pipeline"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: partnershipMemberId
+            value: "8"
+            description: Member ID {MANDAROTY}
+          - name: pipelineId
+            value: "1"
+            description: "ID Pipeline {MADNATORY} "
+          - name: estimationLoan
+            value: "5000000"
+            description: Estimasi Pinjaman {MANDAROTY}
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 24 Feb 2022 11:34:04 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Member Partnership sedang dalam proses pengajuan Prakarsa.",
+              "message": "Maaf, Member sedang dalam proses Prakarsa. Silahkan tunggu sampai proses Prakarsa selesai.",
+              "status": 500
+          }

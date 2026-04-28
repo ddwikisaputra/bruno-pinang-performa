@@ -1,0 +1,567 @@
+info:
+  name: List Partnership User Registration V1
+  type: http
+  seq: 6
+
+http:
+  method: POST
+  url: "{{url}}/v/1/partnerships/list-partnership-user-registration"
+  body:
+    type: form-urlencoded
+    data:
+      - name: type
+        value: partner
+        description: Tipe Data (partner / community) { DEFAULT "partner" }
+      - name: startIndex
+        value: "0"
+        description: Offset Data {Default 0}
+      - name: recordCount
+        value: "5"
+        description: Limit Data {Default 5}
+      - name: textSearch
+        value: oms
+        description: Text Search { Default NULL }
+        disabled: true
+      - name: userId
+        value: "999941"
+        description: ID User Login
+  auth:
+    type: basic
+    username: "{{userBasicPartnership}}"
+    password: "{{passBasicPartnership}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: success
+    request:
+      url: "{{url}}/v/1/partnerships/list-partnership-user-registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: type
+            value: partner
+            description: Tipe Data (partner / community) { DEFAULT "partner" }
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "5"
+            description: Limit Data {Default 5}
+          - name: textSearch
+            value: tes
+            description: Text Search { Default NULL }
+            disabled: true
+          - name: userId
+            value: "999941"
+            description: ID User Login
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:35:05 GMT
+        - name: Content-Length
+          value: "141"
+      body:
+        type: json
+        data: |-
+          {
+              "data": [
+                  {
+                      "code": "ADA78",
+                      "name": "adada"
+                  },
+                  {
+                      "code": "ADA23",
+                      "name": "Adaka"
+                  },
+                  {
+                      "code": "AGJ1",
+                      "name": "Agriaku-Japfa"
+                  },
+                  {
+                      "code": "AGR23",
+                      "name": "Agroco"
+                  },
+                  {
+                      "code": "AJH23",
+                      "name": "ajhsjashjahs"
+                  }
+              ],
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: unautorized
+    request:
+      url: "{{url}}/v/1/partnerships/list-partnership-user-registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: type
+            value: partner
+            description: Tipe Data (partner / community) { DEFAULT "partner" }
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "5"
+            description: Limit Data {Default 5}
+          - name: textSearch
+            value: tes
+            description: Text Search { Default NULL }
+            disabled: true
+          - name: userId
+            value: "999941"
+            description: ID User Login
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:32:34 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: ""
+  - name: general error
+    request:
+      url: "{{url}}/v/1/partnerships/list-partnership-user-registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: type
+            value: partner
+            description: Tipe Data (partner / community) { DEFAULT "partner" }
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "5"
+            description: Limit Data {Default 5}
+          - name: textSearch
+            value: tes
+            description: Text Search { Default NULL }
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:32:34 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data": null
+          }
+  - name: empty data
+    request:
+      url: "{{url}}/v/1/partnerships/list-partnership-user-registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: type
+            value: partner
+            description: Tipe Data (partner / community) { DEFAULT "partner" }
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "5"
+            description: Limit Data {Default 5}
+          - name: textSearch
+            value: tes1
+            description: Text Search { Default NULL }
+          - name: userId
+            value: "999941"
+            description: ID User Login
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:32:34 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Data Partnership tidak ditemukan",
+              "message": "Partnership Tidak Ditemukan",
+              "status": 404
+          }
+  - name: error database connection
+    request:
+      url: "{{url}}/v/1/partnerships/list-partnership-user-registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: type
+            value: partner
+            description: Tipe Data (partner / community) { DEFAULT "partner" }
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "5"
+            description: Limit Data {Default 5}
+          - name: textSearch
+            value: tes
+            description: Text Search { Default NULL }
+            disabled: true
+          - name: userId
+            value: "999941"
+            description: ID User Login
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:32:34 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: Error Validation Parameters
+    request:
+      url: "{{base-url-local}}/v/1/partnerships/list-partnership-user-registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: type
+            value: partner
+            description: Tipe Data (partner / community) { DEFAULT "partner" }
+            disabled: true
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+            disabled: true
+          - name: recordCount
+            value: "10"
+            description: Limit Data {Default 5}
+          - name: textSearch
+            value: oms
+            description: Text Search { Default NULL }
+            disabled: true
+          - name: userId
+            value: "999941"
+            description: ID User Login
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 30 Jan 2025 11:39:28 GMT
+        - name: Content-Length
+          value: "107"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Validation failed on field Type with tag ...",
+              "message": "Maaf, ... Tidak Valid",
+              "status": 400
+          }
+  - name: success
+    request:
+      url: "{{url}}/v/1/partnerships/list-partnership-user-registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: type
+            value: partner
+            description: Tipe Data (partner / community) { DEFAULT "partner" }
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "5"
+            description: Limit Data {Default 5}
+          - name: textSearch
+            value: tes
+            description: Text Search { Default NULL }
+            disabled: true
+          - name: userId
+            value: "999941"
+            description: ID User Login
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:35:05 GMT
+        - name: Content-Length
+          value: "141"
+      body:
+        type: json
+        data: |-
+          {
+              "data": [
+                  {
+                      "code": "ADA78",
+                      "name": "adada"
+                  },
+                  {
+                      "code": "ADA23",
+                      "name": "Adaka"
+                  },
+                  {
+                      "code": "AGJ1",
+                      "name": "Agriaku-Japfa"
+                  },
+                  {
+                      "code": "AGR23",
+                      "name": "Agroco"
+                  },
+                  {
+                      "code": "AJH23",
+                      "name": "ajhsjashjahs"
+                  }
+              ],
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: unautorized
+    request:
+      url: "{{url}}/v/1/partnerships/list-partnership-user-registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: type
+            value: partner
+            description: Tipe Data (partner / community) { DEFAULT "partner" }
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "5"
+            description: Limit Data {Default 5}
+          - name: textSearch
+            value: tes
+            description: Text Search { Default NULL }
+            disabled: true
+          - name: userId
+            value: "999941"
+            description: ID User Login
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:32:34 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: ""
+  - name: general error
+    request:
+      url: "{{url}}/v/1/partnerships/list-partnership-user-registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: type
+            value: partner
+            description: Tipe Data (partner / community) { DEFAULT "partner" }
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "5"
+            description: Limit Data {Default 5}
+          - name: textSearch
+            value: tes
+            description: Text Search { Default NULL }
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:32:34 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data": null
+          }
+  - name: empty data
+    request:
+      url: "{{url}}/v/1/partnerships/list-partnership-user-registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: type
+            value: partner
+            description: Tipe Data (partner / community) { DEFAULT "partner" }
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "5"
+            description: Limit Data {Default 5}
+          - name: textSearch
+            value: tes1
+            description: Text Search { Default NULL }
+          - name: userId
+            value: "999941"
+            description: ID User Login
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:32:34 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Data Partnership tidak ditemukan",
+              "message": "Partnership Tidak Ditemukan",
+              "status": 404
+          }
+  - name: error database connection
+    request:
+      url: "{{url}}/v/1/partnerships/list-partnership-user-registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: type
+            value: partner
+            description: Tipe Data (partner / community) { DEFAULT "partner" }
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "5"
+            description: Limit Data {Default 5}
+          - name: textSearch
+            value: tes
+            description: Text Search { Default NULL }
+            disabled: true
+          - name: userId
+            value: "999941"
+            description: ID User Login
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:32:34 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: Error Validation Parameters
+    request:
+      url: "{{base-url-local}}/v/1/partnerships/list-partnership-user-registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: type
+            value: partner
+            description: Tipe Data (partner / community) { DEFAULT "partner" }
+            disabled: true
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+            disabled: true
+          - name: recordCount
+            value: "10"
+            description: Limit Data {Default 5}
+          - name: textSearch
+            value: oms
+            description: Text Search { Default NULL }
+            disabled: true
+          - name: userId
+            value: "999941"
+            description: ID User Login
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 30 Jan 2025 11:39:28 GMT
+        - name: Content-Length
+          value: "107"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Validation failed on field Type with tag ...",
+              "message": "Maaf, ... Tidak Valid",
+              "status": 400
+          }

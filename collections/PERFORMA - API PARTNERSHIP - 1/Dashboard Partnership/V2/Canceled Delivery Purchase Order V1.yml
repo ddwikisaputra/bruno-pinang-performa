@@ -1,0 +1,511 @@
+info:
+  name: Canceled Delivery Purchase Order V1
+  type: http
+  seq: 5
+
+http:
+  method: POST
+  url: "{{url}}/v/1/partnerships/po-delivery-canceled"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "15"
+        description: User ID Login { MANDATORY }
+      - name: id
+        value: "40"
+        description: ID PO { MANDATORY }
+      - name: partnershipCode
+        value: OMS1
+        description: Kode Partnership (Login Session) { MANDATORY }
+  auth:
+    type: bearer
+    token: "{{tokenPartnership}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: general error
+    request:
+      url: "{{url}}/v/1/partnerships/po-delivery-canceled"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: id
+            value: "1"
+            description: ID PO { MANDATORY }
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Could not connect .....",
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "status": 500
+          }
+  - name: Success
+    request:
+      url: "{{base-url-local}}/v/1/partnerships/po-delivery-canceled"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: id
+            value: "567"
+            description: ID PO { MANDATORY }
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 20 Dec 2024 02:45:05 GMT
+        - name: Content-Length
+          value: "109"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 200,
+              "message": "Data pengiriman purchase order berhasil dibatalkan",
+              "messageLocal": "Data Tersimpan"
+          }
+  - name: Error - Unauthorized
+    request:
+      url: "{{url}}/v/1/partnerships/po-delivery-canceled"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "10"
+            description: User ID Login { MANDATORY }
+          - name: id
+            value: "567"
+            description: ID PO { MANDATORY }
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 20 Dec 2024 05:45:24 GMT
+        - name: Content-Length
+          value: "75"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: Error - Forbidden Access
+    request:
+      url: "{{url}}/v/1/partnerships/po-delivery-canceled"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "10"
+            description: User ID Login { MANDATORY }
+          - name: id
+            value: "567"
+            description: ID PO { MANDATORY }
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 20 Dec 2024 05:46:12 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: Error - PO Status not 1
+    request:
+      url: "{{url}}/v/1/partnerships/po-delivery-canceled"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: id
+            value: "567"
+            description: ID PO { MANDATORY }
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 20 Dec 2024 05:47:02 GMT
+        - name: Content-Length
+          value: "181"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Maaf, Pengajuan anda sedang dalam proses. Silahkan tunggu hingga proses pengajuan selesai.",
+              "messageLocal": "PO Status != 1 (sedang dalam proses pengajuan)"
+          }
+  - name: Error - Validation Param Required
+    request:
+      url: "{{url}}/v/1/partnerships/po-delivery-canceled"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: id
+            value: "567"
+            description: ID PO { MANDATORY }
+            disabled: true
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 20 Dec 2024 06:18:47 GMT
+        - name: Content-Length
+          value: "113"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Validation failed on field Id with tag 'required'",
+              "message": "Maaf, Id Tidak Boleh Kosong",
+              "status": 400
+          }
+  - name: Error - Database connection
+    request:
+      url: "{{url}}/v/1/partnerships/po-delivery-canceled"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: id
+            value: "567"
+            description: ID PO { MANDATORY }
+            disabled: true
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 20 Dec 2024 06:44:56 GMT
+        - name: Content-Length
+          value: "71"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 400,
+              "desc": "Database Error",
+              "message": "Error koneksi database"
+          }
+  - name: Error - Database connection
+    request:
+      url: "{{url}}/v/1/partnerships/po-delivery-canceled"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: id
+            value: "567"
+            description: ID PO { MANDATORY }
+            disabled: true
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 20 Dec 2024 06:44:56 GMT
+        - name: Content-Length
+          value: "71"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 400,
+              "desc": "Database Error",
+              "message": "Error koneksi database"
+          }
+  - name: Error - Forbidden Access
+    request:
+      url: "{{url}}/v/1/partnerships/po-delivery-canceled"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "10"
+            description: User ID Login { MANDATORY }
+          - name: id
+            value: "567"
+            description: ID PO { MANDATORY }
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 20 Dec 2024 05:46:12 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: Error - PO Status not 1
+    request:
+      url: "{{url}}/v/1/partnerships/po-delivery-canceled"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: id
+            value: "567"
+            description: ID PO { MANDATORY }
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 20 Dec 2024 05:47:02 GMT
+        - name: Content-Length
+          value: "181"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Maaf, Pengajuan anda sedang dalam proses. Silahkan tunggu hingga proses pengajuan selesai.",
+              "messageLocal": "PO Status != 1 (sedang dalam proses pengajuan)"
+          }
+  - name: Success
+    request:
+      url: "{{base-url-local}}/v/1/partnerships/po-delivery-canceled"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: id
+            value: "567"
+            description: ID PO { MANDATORY }
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 20 Dec 2024 02:45:05 GMT
+        - name: Content-Length
+          value: "109"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 200,
+              "message": "Data pengiriman purchase order berhasil dibatalkan",
+              "messageLocal": "Data Tersimpan"
+          }
+  - name: Error - Unauthorized
+    request:
+      url: "{{url}}/v/1/partnerships/po-delivery-canceled"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "10"
+            description: User ID Login { MANDATORY }
+          - name: id
+            value: "567"
+            description: ID PO { MANDATORY }
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 20 Dec 2024 05:45:24 GMT
+        - name: Content-Length
+          value: "75"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: Error - Validation Param Required
+    request:
+      url: "{{url}}/v/1/partnerships/po-delivery-canceled"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: id
+            value: "567"
+            description: ID PO { MANDATORY }
+            disabled: true
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 20 Dec 2024 06:18:47 GMT
+        - name: Content-Length
+          value: "113"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Validation failed on field Id with tag 'required'",
+              "message": "Maaf, Id Tidak Boleh Kosong",
+              "status": 400
+          }
+  - name: general error
+    request:
+      url: "{{url}}/v/1/partnerships/po-delivery-canceled"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: id
+            value: "1"
+            description: ID PO { MANDATORY }
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Could not connect .....",
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "status": 500
+          }

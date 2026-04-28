@@ -1,0 +1,15 @@
+meta {
+  name: Update Profile Resiko
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{BASE_URL}}/v1/customer-risk-profile/update
+  body: json
+  auth: none
+}
+
+settings {
+  encodeUrl: true
+}

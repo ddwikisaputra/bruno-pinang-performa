@@ -1,0 +1,248 @@
+info:
+  name: Districts V1
+  type: http
+  seq: 7
+
+http:
+  method: GET
+  url: "{{base_url}}/v/1/master/districts/3210"
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: not found
+    request:
+      url: "{{base_url}}/v/1/master/districts/{{cityId}}"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "status": 404,
+              "message": "Kecamatan Tidak Ditemukan",
+              "desc": "Kecamatan Tidak Ditemukan",
+              "data": null
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/master/province/{{province_id}}kota-kabupaten/{{kota_kabupaten_id}}/kecamatan"
+      method: GET
+    response:
+      status: 401
+      statusText: Unauthorized
+      body:
+        type: text
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/master/districts/{{cityId}}"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "data": [
+                  {
+                      "districtCode": "317105",
+                      "district": " Cempaka Putih"
+                  },
+                  {
+                      "districtCode": "317101",
+                      "district": " Gambir"
+                  },
+                  {
+                      "districtCode": "317108",
+                      "district": " Johar Baru"
+                  },
+                  {
+                      "districtCode": "317103",
+                      "district": " Kemayoran"
+                  },
+                  {
+                      "districtCode": "317106",
+                      "district": " Menteng"
+                  },
+                  {
+                      "districtCode": "317102",
+                      "district": " Sawah Besar"
+                  },
+                  {
+                      "districtCode": "317104",
+                      "district": " Senen"
+                  },
+                  {
+                      "districtCode": "317107",
+                      "district": " Tanah Abang"
+                  }
+              ],
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/master/districts/{{cityId}}"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "data" : null,
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect ....."
+          }
+  - name: validation param
+    request:
+      url: "{{base_url}}/v/1/master/districts/{{cityId}}"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "data" : null,
+              "status": 500,
+              "message": "Maaf, parameter kota belum dipilih",
+              "desc": "Parameter ciyId belum terisi"
+          }
+  - name: validation param
+    request:
+      url: "{{base_url}}/v/1/master/districts/{{cityId}}"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "data" : null,
+              "status": 500,
+              "message": "Maaf, parameter kota belum dipilih",
+              "desc": "Parameter ciyId belum terisi"
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/master/districts/{{cityId}}"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "data": [
+                  {
+                      "districtCode": "317105",
+                      "district": " Cempaka Putih"
+                  },
+                  {
+                      "districtCode": "317101",
+                      "district": " Gambir"
+                  },
+                  {
+                      "districtCode": "317108",
+                      "district": " Johar Baru"
+                  },
+                  {
+                      "districtCode": "317103",
+                      "district": " Kemayoran"
+                  },
+                  {
+                      "districtCode": "317106",
+                      "district": " Menteng"
+                  },
+                  {
+                      "districtCode": "317102",
+                      "district": " Sawah Besar"
+                  },
+                  {
+                      "districtCode": "317104",
+                      "district": " Senen"
+                  },
+                  {
+                      "districtCode": "317107",
+                      "district": " Tanah Abang"
+                  }
+              ],
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: not found
+    request:
+      url: "{{base_url}}/v/1/master/districts/{{cityId}}"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "status": 404,
+              "message": "Kecamatan Tidak Ditemukan",
+              "desc": "Kecamatan Tidak Ditemukan",
+              "data": null
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/master/districts/{{cityId}}"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "data" : null,
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect ....."
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/master/province/{{province_id}}kota-kabupaten/{{kota_kabupaten_id}}/kecamatan"
+      method: GET
+    response:
+      status: 401
+      statusText: Unauthorized
+      body:
+        type: text
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+
+docs: |-
+  'province' diisi dari parameter 'code' yang didapat dari endpoint 'master-province'
+
+  'kota-kabupaten' diisi dari parameter 'dati2Code' yang didapat dari endpoint 'master-kota-kabupaten'

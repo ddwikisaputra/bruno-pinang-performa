@@ -1,0 +1,256 @@
+meta {
+  name: Create Facility
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{url-local}}/v/1/middler/automation/create-facility
+  body: formUrlEncoded
+  auth: basic
+}
+
+auth:basic {
+  username: {{BasicAuthUsername}}
+  password: {{BasicAuthPassword}}
+}
+
+body:form-urlencoded {
+  branchCode: 0010
+  sektorEkonomi: 850000
+  locationCode: 3301
+  usageType: 1
+  segmentasiKredit: 400
+  userId: OTk5OTQx
+  noAkadAwal: 69/eSPH-MER/KNG/VI/2025
+  insType: BRISMA
+  partnerDateOfBirth: 
+  cifNumber: 0000688881
+  nominal: 50000000
+  tanggalJatuhTempo: 2030-08-13
+  tanggalAkadAwal: 2030-05-13
+  tanggalTersedia: 2030-08-12
+  tanggalMulai: 2030-05-13
+  perjanjianPisahHarta: T
+  facilityCode: PK3
+  name: Harry Bla
+  tanggalPembukaan: 2030-05-13
+  maritalStatus: Belum Kawin
+  hubunganDenganPelapor: 9900
+  npwp: MTI3NTA0NTIwNDAzMDAwMQ==
+  ~collateralList: 0000010410
+  ~guarantorList: 127#0.80
+  ~partnerName: Test Jaja
+  ~partnerId: 3276091711000007
+}
+
+settings {
+  encodeUrl: true
+}
+
+example {
+  name: 400 : Bad Request
+  
+  request: {
+    url: {{url}}/v/1/middler/automation/create-facility
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: OTk5OTk5
+      branchCode: 0020
+      ktpNumber: MzE3MTA1MTIxMTk1MDAwMQ==
+      issueDateKtpNumber: 2012-01-01
+      name: bambang
+      flagNPWP: 1
+      npwp: 123456789
+      email: ggwp@gmail.com
+      placeOfBirth: sungai
+      dateOfBirth: 2012-01-01
+      gender: Laki-Laki
+      motherMaidenName: Mommy
+      highestEducation: S1
+      religion: Islam
+      maritalStatus: Menikah
+      dependents: 0
+      partnerKtpNumber: MzE3MTA1MTIxMTk1MDAwMQ==
+      partnerName: Aibo
+      partnerDateOfBirth: 2012-01-01a
+      familyRelationship: Suami
+      address: jalan rumah kebenaran nomor satu
+      rt: 001
+      rw: 001
+      postalCode: 91911
+      village: Dekat Sungai
+      district: Dalam Sungai
+      city: Kota Air
+      cityCode: 1212
+      province: Negara Air
+      mobileNumber: +62817765273711
+      workplaceName: Kantor Onta
+      occupationField: Pengelana Onta
+      workplaceAddress: Gurun Pasir
+      workplaceRT: 001
+      workplaceRW: 001
+      workplacePostalCode: 12121
+      workplaceVillage: Gurun Mendung
+      workplaceDistrict: Gurun Angin
+      workplaceCity: Kota Gurun
+      workplaceProvince: Negara Pasir
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Sun, 11 Feb 2024 11:19:35 GMT
+      Content-Length: 166
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "...'",
+            "message": "Maaf, ...",
+            "status": 400
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: 200 : PN Not Found
+  
+  request: {
+    url: {{url}}/v/1/middler/automation/create-facility
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: OTk5OTQx
+      branchCode: 0020
+      cifNumber: 0000688655
+      facilityCode: PK3
+      name: Dwiki Saputra
+      nominal: 200000
+      sektorEkonomi: 753000
+      locationCode: 0197
+      usageType: 1
+      noAkadAwal: 8/eSPH/KNG/III/2023
+      tanggalJatuhTempo: 2023-05-02
+      tanggalPembukaan: 2023-03-02
+      tanggalAkadAwal: 2023-03-02
+      tanggalTersedia: 2023-05-01
+      tanggalMulai: 2023-03-02
+      collateralList: 0000003657
+      insType: BRISMA
+      maritalStatus: Kawin
+      partnerId: MzE3MTA1NDIwODk3MDAwNQ==
+      partnerName: Jumroh
+      partnerDateOfBirth: 1997-09-03
+      perjanjianPisahHarta: T
+      guarantorList: 127#0.80
+      npwp: MzE5MTU1MTgxMTk1MDAxMA==
+      segmentasiKredit: 400
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 15 Nov 2024 00:41:38 GMT
+      Content-Length: 132
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": {
+                "statusCode": "99",
+                "statusDescription": "Failed"
+            },
+            "desc": "Success Process.",
+            "message": "Data Berhasil Disimpan.",
+            "status": 200
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: 200 : Success Create Facility
+  
+  request: {
+    url: {{url}}/v/1/middler/automation/create-facility
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: OTk5OTQx
+      branchCode: 0020
+      cifNumber: 0000688655
+      facilityCode: PK3
+      name: Dwiki Saputra
+      nominal: 200000
+      sektorEkonomi: 753000
+      locationCode: 0197
+      usageType: 1
+      noAkadAwal: 8/eSPH/KNG/III/2023
+      tanggalJatuhTempo: 2023-05-02
+      tanggalPembukaan: 2023-03-02
+      tanggalAkadAwal: 2023-03-02
+      tanggalTersedia: 2023-05-01
+      tanggalMulai: 2023-03-02
+      collateralList: 0000003657
+      insType: BRISMA
+      maritalStatus: Kawin
+      partnerId: MzE3MTA1NDIwODk3MDAwNQ==
+      partnerName: Jumroh
+      partnerDateOfBirth: 1997-09-03
+      perjanjianPisahHarta: T
+      guarantorList: 127#0.80
+      npwp: MzE5MTU1MTgxMTk1MDAxMA==
+      segmentasiKredit: 400
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 15 Nov 2024 00:37:56 GMT
+      Content-Length: 171
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": {
+                "statusCode": "00",
+                "statusDescription": "00",
+                "facilityNumber": "0020/0000688655/PK3/001"
+            },
+            "desc": "Success Process.",
+            "message": "Data Berhasil Disimpan.",
+            "status": 200
+        }
+      '''
+    }
+  }
+}

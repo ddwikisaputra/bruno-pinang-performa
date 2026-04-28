@@ -1,0 +1,161 @@
+meta {
+  name: Delete Role Akses Parameter
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{BASE_URL}}/v1/role/parameter/delete
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: 
+}
+
+body:json {
+  {
+      "payload": "{{REQUEST_BODY}}"
+  }
+}
+
+script:pre-request {
+  const payload = {
+      "role_parameter_group_id":"eb8a02cf-21b0-4398-9de5-f32442548c74"
+  }
+  
+  const result = _.encrypt(JSON.stringify(payload))
+  bru.setEnvVar("REQUEST_BODY", result);
+}
+
+script:post-response {
+  const responseJSON = res.getBody()
+  if (responseJSON.status) {
+      const data = _.decrypt(responseJSON.data)
+      const parseData = JSON.parse(data)
+      const parseData2 = JSON.parse(parseData)
+      console.log(parseData2)
+  }
+}
+
+settings {
+  encodeUrl: true
+}
+
+example {
+  name: Success
+  
+  request: {
+    url: {{BASE_URL}}/v1/access-management/role-param/delete
+    method: POST
+    mode: json
+    body:json: {
+      {
+          "id":"f3076031-2e80-48b0-8332-2f01b1a413e4"
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 01 Dec 2023 14:30:19 GMT
+      Content-Length: 61
+    }
+  
+    status: {
+      code: 200
+      text: 200
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "message": "Data berhasil dihapus",
+            "status": true
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Data Not Found
+  
+  request: {
+    url: {{BASE_URL}}/v1/access-management/role-param/delete
+    method: POST
+    mode: json
+    body:json: {
+      {
+          "id":"475ba4cb-343c-4e4d-a8ef-6e0350d2cd35"
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 01 Dec 2023 14:17:57 GMT
+      Content-Length: 61
+    }
+  
+    status: {
+      code: 200
+      text: 500
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "message": "Data tidak ditemukan",
+            "status": false
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Data Sudah DIhapus
+  
+  request: {
+    url: {{BASE_URL}}/v1/access-management/role-param/delete
+    method: POST
+    mode: json
+    body:json: {
+      {
+          "id":"f3076031-2e80-48b0-8332-2f01b1a413e4"
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 01 Dec 2023 14:36:10 GMT
+      Content-Length: 59
+    }
+  
+    status: {
+      code: 200
+      text: 500
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "message": "Data sudah dihapus",
+            "status": false
+        }
+      '''
+    }
+  }
+}

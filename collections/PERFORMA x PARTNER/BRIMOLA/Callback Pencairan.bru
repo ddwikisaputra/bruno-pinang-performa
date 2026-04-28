@@ -1,0 +1,26 @@
+meta {
+  name: Callback Pencairan
+  type: http
+  seq: 2
+}
+
+post {
+  url: https://brigate.privateopen.sandbox.bri.co.id/gateway/apiBrimola/1.0/callback-pencairan
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{access_token}}
+}
+
+body:json {
+  {
+      "nomorInvoice" : "04392/101010/Mar/25",
+      "kodePengajuanPencairan" : "Pencairan123123"
+  }
+}
+
+settings {
+  encodeUrl: true
+}

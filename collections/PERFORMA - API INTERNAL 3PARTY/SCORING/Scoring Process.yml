@@ -1,0 +1,301 @@
+info:
+  name: Scoring Process
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{url}}/v/1/3party/scoring/process"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: OTk5OTAw
+        description: Base64 UserId [MANDATORY]
+      - name: uid
+        value: 3201134811970003-1
+        description: unique id [MANDATORY]
+      - name: name
+        value: Deya Indarsih
+        description: Nama [MANDATORY]
+      - name: ktpNumber
+        value: MzIwMTEzNDgxMTk3MDAwMw==
+        description: Base64 Ktp Number[MANDATORY]
+      - name: phone
+        value: "+6281319968865"
+        description: "No Telepon (ex : +628xxxx) [MANDATORY]"
+      - name: loanNumber
+        value: MER-PRE-1
+        description: Prakarsa ID (ORI = for pta | EXP = for merchant financing | MER-PRE = for prewihtelist) [MANDATORY]
+      - name: scoringType
+        value: bigdata
+        description: Tipe Scoring (performa-pro | performa-bulanan | performa-musiman) [MANDATORY] -> DEFAULT aiforesee
+      - name: netIncome
+        value: "41.8292"
+        description: angsuran_pendapatan_bersih [MANDATORY for performa-pro | performa-bulanan | performa-musiman]
+      - name: liquidationPlafond
+        value: "215.7371"
+        description: nilai_likuidasi_terhadap_plafon [MANDATORY for performa-pro]
+      - name: longTimeBusiness
+        value: "5.0000"
+        description: lama_usaha [MANDATORY for performa-pro]
+      - name: longStay
+        value: "4.0000"
+        description: lama_menetap [MANDATORY for performa-pro]
+      - name: residentialOwnership
+        value: miliksendiri
+        description: kepemilikan_tempat_tinggal (miliksendiri | milik_orang_tua | mertua | rumahdinas | sewakontrak) [MANDATORY for performa-pro]
+      - name: collateralOwnership
+        value: shm_pengikatan
+        description: bukti_kepemilikan_agunan (shm_pengikatan | bpkb_pengikatan | shgu_pengikatan | shgb_pengikatan | shm_tidak_pengikatan | bpkb_tidak_pengikatan | shgu_tidak_pengikatan | shgb_tidak_pengikatan | letterc | girik | ajb | lainnya) [MANDATORY for performa-pro]
+      - name: debtorStatus
+        value: baru
+        description: status_debitur (baru | lama) [MANDATORY for bigdata]
+      - name: age
+        value: "37"
+        description: usia [MANDATORY for performa-pro]
+      - name: nationalInflation
+        value: "10.5"
+        description: inflasi_nasional [MANDATORY for performa-pro]
+      - name: characterBusinessConditions
+        value: memiliki_pelanggan_tetap
+        description: karakter_kondisi_usaha (memiliki_pelanggan_tetap | tidak_memiliki_pelanggan_tetap) [MANDATORY for performa-pro]
+      - name: characterOutputGoodsServices
+        value: umum_sedikit_pesaing
+        description: karakter_output_barang_jasa (umum_sedikit_pesaing | umum_banyak_pesaing | tertentu_pangsa_besar | tertentu_pangsa_terbatas)[MANDATORY for performa-pro]
+      - name: characterBusinessTransactions
+        value: tercermin_sebagian_besar
+        description: karakter_transaksi_usaha (tercermin_sebagian_besar | tercermin_sebagian_kecil | tidak_tercermin) [MANDATORY for bigdata]
+      - name: businessManagementCharacter
+        value: dikelola_individu
+        description: karakter_manajemen_usaha (dikelola_individu | memiliki_karyawan) [MANDATORY for performa-pro]
+      - name: levelConfidence
+        value: sesuai_kondisi_dapat_dibuktikan
+        description: tingkat_kepercayaan (sesuai_kondisi_dapat_dibuktikan | sesuai_kondisi_tidak_dibuktikan | kurang_sesuai_kondisi_sebenarnya | tidak_sesuai_kondisi_sebenarnya) [MANDATORY for performa-pro]
+      - name: personalBehaviorCharacter
+        value: tidak_pernah_tersangkut_perkara_kriminal
+        description: karakter_perilaku_pribadi (tidak_pernah_tersangkut_perkara_kriminal | pernah_tersangkut_perkara_kriminal)
+      - name: creditorQuality
+        value: selalu_lancar
+        description: kualitas_kreditur (selalu_lancar | tidak_pernah_punya_pinjaman | pernah_kol_2 | pernah_kol_2_>_1x | pernah_npl) [MANDATORY for performa-pro]
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: sucess bigdata
+    request:
+      url: "{{url}}/v/1/3party/scoring/process"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: OTk5OTQx
+            description: Base64 UserId [MANDATORY]
+          - name: name
+            value: Dwiki Saputra
+            description: Nama [MANDATORY]
+          - name: ktpNumber
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Base64 Ktp Number[MANDATORY]
+          - name: phone
+            value: "+6281776527371"
+            description: "No Telepon (ex : 08xxxx) [MANDATORY]"
+          - name: loanNumber
+            value: ORI-99
+            description: Prakarsa ID (ORI = for pta | EXP = for merchant financing) [MANDATORY]
+          - name: scoringType
+            value: bigdata
+            description: Tipe Scoring (aiforesee | bigdata) [MANDATORY] -> DEFAULT aiforesee
+          - name: netIncome
+            value: "10.9"
+            description: angsuran_pendapatan_bersih [MANDATORY for bigdata]
+          - name: liquidationPlafond
+            value: "10"
+            description: nilai_likuidasi_terhadap_plafon [MANDATORY for bigdata]
+          - name: longTimeBusiness
+            value: "11.9"
+            description: lama_usaha [MANDATORY for bigdata]
+          - name: longStay
+            value: "10.9"
+            description: lama_menetap [MANDATORY for bigdata]
+          - name: residentialOwnership
+            value: sewakontrak
+            description: kepemilikan_tempat_tinggal (miliksendiri | milik_orang_tua | mertua | rumahdinas | sewakontrak) [MANDATORY for bigdata]
+          - name: collateralOwnership
+            value: shm_pengikatan
+            description: bukti_kepemilikan_agunan (shm_pengikatan | bpkb_pengikatan | shgu_pengikatan | shgb_pengikatan | shm_tidak_pengikatan | bpkb_tidak_pengikatan | shgu_tidak_pengikatan | shgb_tidak_pengikatan | letterc | girik | ajb | lainnya) [MANDATORY for bigdata]
+          - name: debtorStatus
+            value: baru
+            description: status_debitur (baru | lama) [MANDATORY for bigdata]
+          - name: age
+            value: "28"
+            description: usia [MANDATORY for bigdata]
+          - name: nationalInflation
+            value: "10.5"
+            description: inflasi_nasional [MANDATORY for bigdata]
+          - name: characterBusinessConditions
+            value: memiliki_pelanggan_tetap
+            description: karakter_kondisi_usaha (memiliki_pelanggan_tetap | tidak_memiliki_pelanggan_tetap) [MANDATORY for bigdata]
+          - name: characterOutputGoodsServices
+            value: umum_sedikit_pesaing
+            description: karakter_output_barang_jasa (umum_sedikit_pesaing | umum_banyak_pesaing | tertentu_pangsa_besar | tertentu_pangsa_terbatas)[MANDATORY for bigdata]
+          - name: characterBusinessTransactions
+            value: tercermin_sebagian_besar
+            description: karakter_transaksi_usaha (tercermin_sebagian_besar | tercermin_sebagian_kecil | tidak_tercermin) [MANDATORY for bigdata]
+          - name: businessManagementCharacter
+            value: memiliki_karyawan
+            description: karakter_manajemen_usaha (dikelola_individu | memiliki_karyawan) [MANDATORY for bigdata]
+          - name: levelConfidence
+            value: kurang_sesuai_kondisi_sebenarnya
+            description: tingkat_kepercayaan (sesuai_kondisi_dapat_dibuktikan | sesuai_kondisi_tidak_dibuktikan | kurang_sesuai_kondisi_sebenarnya | tidak_sesuai_kondisi_sebenarnya) [MANDATORY for bigdata]
+          - name: personalBehaviorCharacter
+            value: tidak_pernah_tersangkut_perkara_kriminal
+            description: karakter_perilaku_pribadi (tidak_pernah_tersangkut_perkara_kriminal | pernah_tersangkut_perkara_kriminal)
+          - name: creditorQuality
+            value: pernah_npl
+            description: kualitas_kreditur (selalu_lancar | tidak_pernah_punya_pinjaman | pernah_kol_2 | pernah_kol_2_>_1x | pernah_npl) [MANDATORY for bigdata]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Tue, 12 Dec 2023 10:24:54 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "261"
+        - name: Connection
+          value: keep-alive
+        - name: Strict-Transport-Security
+          value: max-age=15724800; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "transactionId": "999941",
+                  "name": "Dwiki Saputra",
+                  "idCardNo": "3171051211950001",
+                  "phoneNo": "+6281776527371",
+                  "loanNo": "ORI-99",
+                  "probabilityToDefault": 340,
+                  "grade": "E+",
+                  "date": "",
+                  "flow": "9"
+              },
+              "desc": "Success Process.",
+              "message": "Data Ditemukan.",
+              "status": 200
+          }
+  - name: success aiforesee
+    request:
+      url: "{{url}}/v/1/3party/scoring/process"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: OTk5OTQx
+            description: Base64 UserId [MANDATORY]
+          - name: name
+            value: Dwiki Saputra
+            description: Nama [MANDATORY]
+          - name: ktpNumber
+            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            description: Base64 Ktp Number[MANDATORY]
+          - name: phone
+            value: "+6281776527371"
+            description: "No Telepon (ex : 08xxxx) [MANDATORY]"
+          - name: loanNumber
+            value: ORI-99
+            description: Prakarsa ID (ORI = for pta | EXP = for merchant financing) [MANDATORY]
+          - name: scoringType
+            value: aiforesee
+            description: Tipe Scoring (aiforesee | bigdata) [MANDATORY] -> DEFAULT aiforesee
+          - name: netIncome
+            value: "10.9"
+            description: angsuran_pendapatan_bersih [MANDATORY for bigdata]
+          - name: liquidationPlafond
+            value: "10"
+            description: nilai_likuidasi_terhadap_plafon [MANDATORY for bigdata]
+          - name: longTimeBusiness
+            value: "11.9"
+            description: lama_usaha [MANDATORY for bigdata]
+          - name: longStay
+            value: "10.9"
+            description: lama_menetap [MANDATORY for bigdata]
+          - name: residentialOwnership
+            value: sewakontrak
+            description: kepemilikan_tempat_tinggal (miliksendiri | milik_orang_tua | mertua | rumahdinas | sewakontrak) [MANDATORY for bigdata]
+          - name: collateralOwnership
+            value: shm_pengikatan
+            description: bukti_kepemilikan_agunan (shm_pengikatan | bpkb_pengikatan | shgu_pengikatan | shgb_pengikatan | shm_tidak_pengikatan | bpkb_tidak_pengikatan | shgu_tidak_pengikatan | shgb_tidak_pengikatan | letterc | girik | ajb | lainnya) [MANDATORY for bigdata]
+          - name: debtorStatus
+            value: baru
+            description: status_debitur (baru | lama) [MANDATORY for bigdata]
+          - name: age
+            value: "28"
+            description: usia [MANDATORY for bigdata]
+          - name: nationalInflation
+            value: "10.5"
+            description: inflasi_nasional [MANDATORY for bigdata]
+          - name: characterBusinessConditions
+            value: memiliki_pelanggan_tetap
+            description: karakter_kondisi_usaha (memiliki_pelanggan_tetap | tidak_memiliki_pelanggan_tetap) [MANDATORY for bigdata]
+          - name: characterOutputGoodsServices
+            value: umum_sedikit_pesaing
+            description: karakter_output_barang_jasa (umum_sedikit_pesaing | umum_banyak_pesaing | tertentu_pangsa_besar | tertentu_pangsa_terbatas)[MANDATORY for bigdata]
+          - name: characterBusinessTransactions
+            value: tercermin_sebagian_besar
+            description: karakter_transaksi_usaha (tercermin_sebagian_besar | tercermin_sebagian_kecil | tidak_tercermin) [MANDATORY for bigdata]
+          - name: businessManagementCharacter
+            value: memiliki_karyawan
+            description: karakter_manajemen_usaha (dikelola_individu | memiliki_karyawan) [MANDATORY for bigdata]
+          - name: levelConfidence
+            value: kurang_sesuai_kondisi_sebenarnya
+            description: tingkat_kepercayaan (sesuai_kondisi_dapat_dibuktikan | sesuai_kondisi_tidak_dibuktikan | kurang_sesuai_kondisi_sebenarnya | tidak_sesuai_kondisi_sebenarnya) [MANDATORY for bigdata]
+          - name: personalBehaviorCharacter
+            value: tidak_pernah_tersangkut_perkara_kriminal
+            description: karakter_perilaku_pribadi (tidak_pernah_tersangkut_perkara_kriminal | pernah_tersangkut_perkara_kriminal)
+          - name: creditorQuality
+            value: pernah_npl
+            description: kualitas_kreditur (selalu_lancar | tidak_pernah_punya_pinjaman | pernah_kol_2 | pernah_kol_2_>_1x | pernah_npl) [MANDATORY for bigdata]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Tue, 12 Dec 2023 10:28:47 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "311"
+        - name: Connection
+          value: keep-alive
+        - name: Strict-Transport-Security
+          value: max-age=15724800; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "transactionId": "9e584ce0-de99-422d-a69b-84f2444a9e94",
+                  "name": "Dwiki Saputra",
+                  "idCardNo": "3171051211950001",
+                  "phoneNo": "081776527371",
+                  "loanNo": "ORI-99",
+                  "probabilityToDefault": 0.03811,
+                  "grade": "A+",
+                  "date": "2023-12-12 17:28:46",
+                  "flow": ""
+              },
+              "desc": "Success Process.",
+              "message": "Data Ditemukan.",
+              "status": 200
+          }

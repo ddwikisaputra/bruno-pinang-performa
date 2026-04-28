@@ -1,0 +1,175 @@
+meta {
+  name: Create Role
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{BASE_URL}}/v1/role/create
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: 
+}
+
+body:json {
+  {
+      "payload": "{{REQUEST_BODY}}"
+  }
+}
+
+script:pre-request {
+  const payload = {
+      "name": "admin",
+      "description": "admin super duper",
+      "application_id": "RYMP"
+  }
+  
+  const result = _.encrypt(JSON.stringify(payload))
+  bru.setEnvVar("REQUEST_BODY", result);
+}
+
+script:post-response {
+  const responseJSON = res.getBody()
+  if (responseJSON.status) {
+      const data = _.decrypt(responseJSON.data)
+      const result = JSON.parse(JSON.parse(data))
+      console.log("Result", result)
+  }
+}
+
+settings {
+  encodeUrl: true
+}
+
+example {
+  name: Success
+  
+  request: {
+    url: {{BASE_URL}}/v1/role/create
+    method: POST
+    mode: json
+    body:json: {
+      {
+          "payload": "{{REQUEST_BODY}}"
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 19 Apr 2024 00:41:43 GMT
+      Content-Length: 62
+    }
+  
+    status: {
+      code: 200
+      text: 200
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "message": "Data berhasil disimpan",
+            "status": true
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Application Not Found
+  
+  request: {
+    url: {{BASE_URL}}/v1/role/create
+    method: POST
+    mode: json
+    body:json: {
+      {
+          "payload": "{{REQUEST_BODY}}"
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 19 Apr 2024 01:21:44 GMT
+      Content-Length: 65
+    }
+  
+    status: {
+      code: 200
+      text: 500
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": null,
+            "message": "Aplikasi tidak ditemukan",
+            "status": false
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - Validation
+  
+  request: {
+    url: {{BASE_URL}}/v1/role/create
+    method: POST
+    mode: json
+    body:json: {
+      {
+          "payload": "{{REQUEST_BODY}}"
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 19 Apr 2024 01:35:41 GMT
+      Content-Length: 236
+    }
+  
+    status: {
+      code: 200
+      text: 400
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": [
+                {
+                    "field": "NAME",
+                    "message": "Nama harus diisi"
+                },
+                {
+                    "field": "DESCRIPTION",
+                    "message": "Deskripsi harus diisi"
+                },
+                {
+                    "field": "APPLICATION_ID",
+                    "message": "Aplikasi harus diisi"
+                }
+            ],
+            "message": "Terjadi kesalahan validasi",
+            "status": false
+        }
+      '''
+    }
+  }
+}

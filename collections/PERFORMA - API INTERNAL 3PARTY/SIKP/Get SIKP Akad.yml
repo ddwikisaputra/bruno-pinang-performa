@@ -1,0 +1,114 @@
+info:
+  name: Get SIKP Akad
+  type: http
+  seq: 6
+
+http:
+  method: POST
+  url: "{{url}}/v/1/3party/sikp/get-akad"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: OTk5OTQx
+        description: User Id [ENCODE BASE64] [MANDATORY]
+      - name: loanAccountNumber
+        value: "011001030661108"
+        description: Loan Account Number [MANDATORY]
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Get SIKP Akad
+    request:
+      url: "{{url}}/v/1/3party/sikp/get-akad"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: OTk5OTQx
+            description: User Id [ENCODE BASE64] [MANDATORY]
+          - name: loanAccountNumber
+            value: "011001030661108"
+            description: Loan Account Number [MANDATORY]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Sun, 26 Feb 2023 19:25:44 GMT
+        - name: Content-Length
+          value: "737"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "loanId": "13070779",
+                  "bankCode": "494",
+                  "ktpNumber": "3217016205810015",
+                  "oldAccountNumber": "011001030661108",
+                  "newAccountNumber": "011001030661108",
+                  "ktNumbcontractStatuser": "1",
+                  "accountNumberStatus": "1",
+                  "contractNumber": "0110/0000142955/pk2/001",
+                  "contractDate": "2018-08-29 00:00:00",
+                  "dueDate": "2023-08-29 00:00:00",
+                  "contractAmount": "50000000",
+                  "guarantorCode": "2",
+                  "warrantyNumber": "KR2-2018-10.00-31-494-1-0-003332",
+                  "guaranteedValue": "35000000",
+                  "scheme": "31",
+                  "isActive": "1",
+                  "userUpload": "api494",
+                  "sector": "012192",
+                  "contractCode": "494011001030661108",
+                  "fileName": "AKAD_494_00000000_00000000.txt",
+                  "isApi": "1",
+                  "uploadDate": "2018-08-29 16:16:41",
+                  "interestArrearsId": "610"
+              },
+              "desc": "Success Process.",
+              "message": "Data Ditemukan.",
+              "status": 200
+          }
+  - name: Data Tidak Ditemukan
+    request:
+      url: "{{url}}/v/1/3party/sikp/get-akad"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: OTk5OTQx
+            description: User Id [ENCODE BASE64] [MANDATORY]
+          - name: loanAccountNumber
+            value: "0110010306611082"
+            description: Loan Account Number [MANDATORY]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Sun, 26 Feb 2023 19:26:53 GMT
+        - name: Content-Length
+          value: "86"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Success Process.",
+              "message": "Data Tidak Ditemukan.",
+              "status": 404
+          }

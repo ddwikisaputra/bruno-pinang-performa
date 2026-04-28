@@ -1,0 +1,46 @@
+meta {
+  name: Get Detail Loan Performa of Cover Batch
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{BASE_URL}}/v1/covering/loan/performa/detail
+  body: text
+  auth: bearer
+}
+
+auth:bearer {
+  token: 
+}
+
+body:text {
+  {
+      "payload": "{{REQUEST_BODY}}"
+  }
+}
+
+script:pre-request {
+  const payload = {
+    "loan_number" : "001001008019100",
+    "cover_batch_id": "COVER-202511-000025-000001"
+  }
+  
+  const result = encrypt(JSON.stringify(payload))
+  bru.setEnvVar("REQUEST_BODY", result);
+}
+
+script:post-response {
+  const CryptoJS = require("crypto-js");
+  const responseJSON = res.getBody();
+  if (responseJSON.status) {
+      const data = decrypt(responseJSON.data)
+      const parseData = JSON.parse(data)
+      const parseData2 = JSON.parse(parseData)
+      console.log('/v1/covering/loan/performa/detail', parseData2)
+  }
+}
+
+settings {
+  encodeUrl: true
+}

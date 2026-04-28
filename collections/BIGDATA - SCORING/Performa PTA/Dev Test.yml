@@ -1,0 +1,166 @@
+info:
+  name: Dev Test
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: http://be-credit-scoring.dev.internal.rayain.net/api/v3.2/performa/musiman/csaaata9r91c73abut8g
+  body:
+    type: json
+    data: "{\r
+
+      \    \"netto_income\": 10000000,\r
+
+      \    \"liquidation_value\": 120000000,\r
+
+      \    \"installment\": 25000000,\r
+
+      \    \"plafond\": 100000000,\r
+
+      \    \"business_income\": 15000000,\r
+
+      \    \"status_sertifikat_agunan\": 1,\r
+
+      \    \"flag_status_debitur\": 1,\r
+
+      \    \"open_month\": \"202410\"\r
+
+      }"
+  auth:
+    type: bearer
+    token: Z20QSDfPh0JpEY1yCiXQjb1B8Bj3yxwwQIPxa7mqYk6X9km3RUAqEDlw2JqYJrjU
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Success
+    request:
+      url: http://be-credit-scoring.dev.internal.rayain.net/api/v3.2/performa/musiman/csaaata9r91c73abut8g
+      method: POST
+      body:
+        type: json
+        data: "{\r
+
+          \    \"netto_income\": 10000000,\r
+
+          \    \"liquidation_value\": 120000000,\r
+
+          \    \"installment\": 25000000,\r
+
+          \    \"plafond\": 100000000,\r
+
+          \    \"business_income\": 15000000,\r
+
+          \    \"status_sertifikat_agunan\": 1,\r
+
+          \    \"flag_status_debitur\": 1,\r
+
+          \    \"open_month\": \"202410\"\r
+
+          }"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Tue, 04 Feb 2025 08:29:37 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "163"
+        - name: Connection
+          value: keep-alive
+        - name: Access-Control-Allow-Origin
+          value: "*"
+        - name: Access-Control-Allow-Methods
+          value: GET, POST, PUT, DELETE
+        - name: Access-Control-Allow-Headers
+          value: Content-Type, Authorization
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "calculated successfully",
+              "is_bad": 0,
+              "predict_proba": 0.011516915894364632,
+              "score_edges": [
+                  700,
+                  800
+              ],
+              "scores": 700.3369334131546,
+              "uid": "csaaata9r91c73abut8g"
+          }
+  - name: Error
+    request:
+      url: http://be-credit-scoring.dev.internal.rayain.net/api/v3.2/performa/musiman/csaaata9r91c73abut8g
+      method: POST
+      body:
+        type: json
+        data: "{\r
+
+          \    \"netto_income\": 10000000,\r
+
+          \    \"liquidation_value\": 120000000,\r
+
+          \    \"installment\": 25000000,\r
+
+          \    \"plafond\": 100000000,\r
+
+          \    \"business_income\": 15000000,\r
+
+          \    \"status_sertifikat_agunan\": 1,\r
+
+          \    \"flag_status_debitur\": 1,\r
+
+          \    \"open_month\": \"202410\"\r
+
+          }"
+    response:
+      status: 500
+      statusText: INTERNAL SERVER ERROR
+      headers:
+        - name: Date
+          value: Thu, 06 Feb 2025 08:19:34 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "130"
+        - name: Connection
+          value: keep-alive
+        - name: Access-Control-Allow-Origin
+          value: "*"
+        - name: Access-Control-Allow-Methods
+          value: GET, POST, PUT, DELETE
+        - name: Access-Control-Allow-Headers
+          value: Content-Type, Authorization
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Scoring error",
+              "is_bad": [
+                  1
+              ],
+              "predict_proba": [
+                  0
+              ],
+              "score_edges": [
+                  [
+                      400,
+                      300
+                  ]
+              ],
+              "scores": [
+                  0
+              ],
+              "uid": "csaaata9r91c73abut8g"
+          }

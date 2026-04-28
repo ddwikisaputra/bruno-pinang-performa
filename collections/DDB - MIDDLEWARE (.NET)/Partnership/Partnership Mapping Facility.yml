@@ -1,0 +1,108 @@
+info:
+  name: Partnership Mapping Facility
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{base_url}}/api/digiagri/partnership/facility/mapping"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "000426"
+        description: user Id AO
+      - name: prakarsaId
+        value: "200"
+        description: Id Prakarsa dari Pinang Mikro
+      - name: nomorFasilitas
+        value: 0010/0000000438/PK1/001
+        description: Nomor Fasilitas KMK Transaksional
+      - name: loanAmount
+        value: "20000000"
+        description: Nominal Pinjaman
+      - name: transType
+        value: "1"
+        description: Type pinjaman 1 (PRE/Supplier) / 2 (POST/Merchant)
+      - name: partnershipCode
+        value: OMS1
+        description: Kode Unik Partner
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Success
+    request:
+      url: "{{base_url}}/api/digiagri/partnership/facility/mapping"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000426"
+            description: user Id AO
+          - name: prakarsaId
+            value: "200"
+            description: Id Prakarsa dari Pinang Mikro
+          - name: nomorFasilitas
+            value: 0010/0000000438/PK1/001
+            description: Nomor Fasilitas KMK Transaksional
+          - name: loanAmount
+            value: "20000000"
+            description: Nominal Pinjaman
+          - name: transType
+            value: "1"
+            description: Type pinjaman 1 (PRE) / 2 (POST)
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Unik Partner
+    response:
+      body:
+        type: text
+        data: "{\r
+
+          \    \"statusCode\": \"1\",\r
+
+          \    \"statusDescription\": \"Input Mapping Fasilitas Berhasil\"\r
+
+          }"
+  - name: Gagal
+    request:
+      url: "{{base_url}}/api/digiagri/partnership/facility/mapping"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000426"
+            description: user Id AO
+          - name: prakarsaId
+            value: "200"
+            description: Id Prakarsa dari Pinang Mikro
+          - name: nomorFasilitas
+            value: 0010/0000000438/PK1/001
+            description: Nomor Fasilitas KMK Transaksional
+          - name: loanAmount
+            value: "20000000"
+            description: Nominal Pinjaman
+          - name: transType
+            value: "1"
+            description: Type pinjaman 1 (PRE) / 2 (POST)
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Unik Partner
+    response:
+      body:
+        type: text
+        data: "{\r
+
+          \    \"statusCode\": \"-1\",\r
+
+          \    \"statusDescription\": \"Terjadi kesalahan pada Sistem\"\r
+
+          }"

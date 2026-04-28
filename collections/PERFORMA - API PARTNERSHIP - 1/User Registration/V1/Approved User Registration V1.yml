@@ -1,0 +1,526 @@
+info:
+  name: Approved User Registration V1
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{base-url-local}}/v/1/partnerships/approved-user-registration"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "{{userId}}"
+        description: User ID Login / PN { MANDATORY }
+      - name: id
+        value: "1"
+        description: ID User Registration { MANDATORY }
+  auth:
+    type: bearer
+    token: "{{tokenPartnership}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Parameter error validation
+    request:
+      url: "{{url}}/v/1/partnerships/approved-user-registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999961"
+            description: User ID Login / PN { MANDATORY }
+          - name: id
+            value: "1"
+            description: ID PO { MANDATORY }
+            disabled: true
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Parameter ... kosong",
+              "message": "Maaf, Parameter ... tidak boleh kosong",
+              "status": 500
+          }
+  - name: Success
+    request:
+      url: "{{url}}/v/1/partnerships/approved-user-registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999961"
+            description: User ID Login / PN { MANDATORY }
+          - name: id
+            value: "1"
+            description: ID PO { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 03:03:58 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Data Tersimpan",
+              "message": "Data user registration berhasil disetujui",
+              "status": 200
+          }
+  - name: General error
+    request:
+      url: "{{url}}/v/1/partnerships/approved-user-registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999961"
+            description: User ID Login / PN { MANDATORY }
+          - name: id
+            value: "1"
+            description: ID PO { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Could not connect .....",
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "status": 500
+          }
+  - name: Database error
+    request:
+      url: "{{url}}/v/1/partnerships/approved-user-registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999961"
+            description: User ID Login / PN { MANDATORY }
+          - name: id
+            value: "1"
+            description: ID PO { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: Unauthorized
+    request:
+      url: "{{url}}/v/1/partnerships/approved-user-registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999961"
+            description: User ID Login / PN { MANDATORY }
+          - name: id
+            value: "1"
+            description: ID PO { MANDATORY }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:44:34 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: Validasi user tidak dapat disetujui
+    request:
+      url: "{{base-url-local}}/v/1/partnerships/approved-user-registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "{{userId}}"
+            description: User ID Login / PN { MANDATORY }
+          - name: id
+            value: "1"
+            description: ID User Registration { MANDATORY }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 29 Jan 2025 08:25:25 GMT
+        - name: Content-Length
+          value: "142"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Maaf, User tidak dapat disetujui. Silahkan cek kembali status pengajuan User terakhir.",
+              "messageLocal": "Status != 0"
+          }
+  - name: Validasi user sudah aktif
+    request:
+      url: "{{base-url-local}}/v/1/partnerships/approved-user-registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "{{userId}}"
+            description: User ID Login / PN { MANDATORY }
+          - name: id
+            value: "49"
+            description: ID User Registration { MANDATORY }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 29 Jan 2025 08:32:56 GMT
+        - name: Content-Length
+          value: "130"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 400,
+              "message": "Maaf, User tidak dapat disetujui. Email sudah terdaftar sebagai user aktif.",
+              "messageLocal": "User Aktif"
+          }
+  - name: Validasi user tidak dietemukan
+    request:
+      url: "{{base-url-local}}/v/1/partnerships/approved-user-registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "{{userId}}"
+            description: User ID Login / PN { MANDATORY }
+          - name: id
+            value: "490"
+            description: ID User Registration { MANDATORY }
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 29 Jan 2025 08:33:50 GMT
+        - name: Content-Length
+          value: "116"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 404,
+              "message": "User Registration Tidak Ditemukan",
+              "messageLocal": "Data User Registration tidak ditemukan"
+          }
+  - name: Parameter error validation
+    request:
+      url: "{{url}}/v/1/partnerships/approved-user-registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999961"
+            description: User ID Login / PN { MANDATORY }
+          - name: id
+            value: "1"
+            description: ID PO { MANDATORY }
+            disabled: true
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Parameter ... kosong",
+              "message": "Maaf, Parameter ... tidak boleh kosong",
+              "status": 500
+          }
+  - name: Success
+    request:
+      url: "{{url}}/v/1/partnerships/approved-user-registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999961"
+            description: User ID Login / PN { MANDATORY }
+          - name: id
+            value: "1"
+            description: ID PO { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 03:03:58 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Data Tersimpan",
+              "message": "Data user registration berhasil disetujui",
+              "status": 200
+          }
+  - name: Validasi user sudah aktif
+    request:
+      url: "{{base-url-local}}/v/1/partnerships/approved-user-registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "{{userId}}"
+            description: User ID Login / PN { MANDATORY }
+          - name: id
+            value: "49"
+            description: ID User Registration { MANDATORY }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 29 Jan 2025 08:32:56 GMT
+        - name: Content-Length
+          value: "130"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 400,
+              "message": "Maaf, User tidak dapat disetujui. Email sudah terdaftar sebagai user aktif.",
+              "messageLocal": "User Aktif"
+          }
+  - name: General error
+    request:
+      url: "{{url}}/v/1/partnerships/approved-user-registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999961"
+            description: User ID Login / PN { MANDATORY }
+          - name: id
+            value: "1"
+            description: ID PO { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Could not connect .....",
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "status": 500
+          }
+  - name: Validasi user tidak dapat disetujui
+    request:
+      url: "{{base-url-local}}/v/1/partnerships/approved-user-registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "{{userId}}"
+            description: User ID Login / PN { MANDATORY }
+          - name: id
+            value: "1"
+            description: ID User Registration { MANDATORY }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 29 Jan 2025 08:25:25 GMT
+        - name: Content-Length
+          value: "142"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Maaf, User tidak dapat disetujui. Silahkan cek kembali status pengajuan User terakhir.",
+              "messageLocal": "Status != 0"
+          }
+  - name: Database error
+    request:
+      url: "{{url}}/v/1/partnerships/approved-user-registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999961"
+            description: User ID Login / PN { MANDATORY }
+          - name: id
+            value: "1"
+            description: ID PO { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: Validasi user tidak dietemukan
+    request:
+      url: "{{base-url-local}}/v/1/partnerships/approved-user-registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "{{userId}}"
+            description: User ID Login / PN { MANDATORY }
+          - name: id
+            value: "490"
+            description: ID User Registration { MANDATORY }
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 29 Jan 2025 08:33:50 GMT
+        - name: Content-Length
+          value: "116"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 404,
+              "message": "User Registration Tidak Ditemukan",
+              "messageLocal": "Data User Registration tidak ditemukan"
+          }
+  - name: Unauthorized
+    request:
+      url: "{{url}}/v/1/partnerships/approved-user-registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999961"
+            description: User ID Login / PN { MANDATORY }
+          - name: id
+            value: "1"
+            description: ID PO { MANDATORY }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:44:34 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }

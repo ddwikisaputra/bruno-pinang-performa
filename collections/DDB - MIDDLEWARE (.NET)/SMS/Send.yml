@@ -1,0 +1,25 @@
+info:
+  name: Send
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{base_url_dev}}/api/sendsms/performa"
+  body:
+    type: json
+    data: |-
+      {
+          "application":"PINANGOTP",
+          "destinationNumber":"081776527371",
+          "message":"Tes"
+      }
+  auth:
+    type: bearer
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MzI4NDk0OTgsImlzcyI6Imh0dHBzOi8vYXBpLXBheW1lbnR2YS5kZXYuaW50ZXJuYWwucmF5YWluLm5ldCIsImF1ZCI6Imh0dHBzOi8vYXBpLXBheW1lbnR2YS5kZXYuaW50ZXJuYWwucmF5YWluLm5ldCJ9.Xr1vM_jRqxyRc4jtz_6GbAFeqdAwUvNHBJB7sVg1zAs
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -1,0 +1,134 @@
+meta {
+  name: Resources
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{BASE_URL}}/v1/search/resource
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: 
+}
+
+body:json {
+  {
+      "payload": "{{REQUEST_BODY}}"
+  }
+}
+
+script:pre-request {
+  const payload = {
+      "q": "fahmi",
+      "page": 1,
+      "limit": 10
+  }
+  
+  const result = _.encrypt(JSON.stringify(payload))
+  bru.setEnvVar("REQUEST_BODY", result);
+}
+
+script:post-response {
+  const responseJSON = res.getBody()
+  if (responseJSON.status) {
+      const data = _.decrypt(responseJSON.data)
+      const result = JSON.parse(JSON.parse(data))
+      console.log("Result", result)
+  }
+}
+
+settings {
+  encodeUrl: true
+}
+
+example {
+  name: Success
+  
+  request: {
+    url: {{BASE_URL}}/v1/search/resource
+    method: POST
+    mode: json
+    body:json: {
+      {
+          "payload": "{{REQUEST_BODY}}"
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Mon, 22 Apr 2024 03:14:47 GMT
+      Content-Length: 386
+    }
+  
+    status: {
+      code: 200
+      text: 200
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": "jVrokWcUMAM0jVPTo686/KnHgFPrW4txGKbvGYuqMSgy9ZokyZSN45tqKDVUo6VQYvgdKKS/i/PHTuZ0dDwyspVrI1lRrR6SmyZi1XqX1o23Dl5bPlMlNAC2jIIAnSSbIeqD9SzWNmR/c092BA0dMpStxCvrGxRNwosgGCw0b3T2Xfwfqao3WUUtlmHfHOQ9iCllRAdFoKKd30feIzHb5qDIU1d9zdtIDDRSFW4i9vOlTHLIDatl9ICthzn3QvwI531SyIkqfUgQ8F7r2jZC5C6pZl8o+QkHzml3urDCVt6qJriCY6attrWUNHrWZUDy",
+            "message": "Permintaan berhasil diproses",
+            "status": true
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Success (Decrypted)
+  
+  request: {
+    url: {{BASE_URL}}/v1/search/resource
+    method: POST
+    mode: json
+    body:json: {
+      {
+          "payload": "{{REQUEST_BODY}}"
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Mon, 22 Apr 2024 03:14:47 GMT
+      Content-Length: 386
+    }
+  
+    status: {
+      code: 200
+      text: 200
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": {
+                "current_page": 1,
+                "total_page": 1,
+                "total_data": 1,
+                "data": [
+                    {
+                        "id": "001676",
+                        "title": "Ahmad Yulia Rizqy Fahmi",
+                        "type": "employee"
+                    }
+                ]
+            },
+            "message": "Permintaan berhasil diproses",
+            "status": true
+        }
+      '''
+    }
+  }
+}

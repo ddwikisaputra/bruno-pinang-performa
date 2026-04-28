@@ -1,0 +1,19 @@
+meta {
+  name: REFRESH TOKEN (PINDAH KE API BE)
+  type: http
+  seq: 5
+}
+
+get {
+  url: {{url}}/refresh-token
+  body: formUrlEncoded
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkMWdpdEFMQDRnUjEiOiJhZ3JpLWFwaSIsImV4cCI6MTYyMDExNTU4Niwib3JpZ19pYXQiOjE2MjAxMTE5ODZ9.LV6PipHpGxd-qwEt37WezO7CX8JysPRVRdup8ZnG4Uc
+}
+
+settings {
+  encodeUrl: true
+}

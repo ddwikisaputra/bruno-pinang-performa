@@ -1,0 +1,611 @@
+info:
+  name: Bypass Digital Sign V2
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{base_url}}/v/2/prakarsa/bypass-digital-sign"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "{{userId}}"
+        description: User Id AES {MANDATORY}
+      - name: prakarsaId
+        value: "31328"
+        description: ID Prakarsa {MANDATORY}
+      - name: typeBypass
+        value: "1"
+        description: Flag Bypass [0 = tidak bypass | 1 bypass] {MANDATORY}
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/2/prakarsa/bypass-digital-sign"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "820"
+            description: ID Prakarsa
+          - name: from
+            value: pre-screening
+            description: Pembatalan dari [ 'pre-screening' | 'analisa-pinjaman' ]
+          - name: reason
+            value: Batal Proses Pre-Screening
+            description: Penjelasan Dibatalkan
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 24 Jun 2021 07:03:46 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{base_url}}/v/2/prakarsa/bypass-digital-sign"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "31032"
+            description: ID Prakarsa
+          - name: from
+            value: pre-screening
+            description: Pembatalan dari [ 'pre-screening' | 'analisa-pinjaman' ]
+          - name: reason
+            value: Batal Proses Pre-Screening
+            description: Penjelasan Dibatalkan
+          - name: userId
+            value: "999923"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 19 Jul 2022 06:13:43 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/2/prakarsa/bypass-digital-sign"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "820"
+            description: ID Prakarsa
+          - name: from
+            value: pre-screening
+            description: Pembatalan dari [ 'pre-screening' | 'analisa-pinjaman' ]
+          - name: reason
+            value: Batal Proses Pre-Screening
+            description: Penjelasan Dibatalkan
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: ""
+            value: ""
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 24 Jun 2021 07:03:46 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/2/prakarsa/bypass-digital-sign"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "820"
+            description: ID Prakarsa
+          - name: from
+            value: pre-screening
+            description: Pembatalan dari [ 'pre-screening' | 'analisa-pinjaman' ]
+          - name: reason
+            value: Batal Proses Pre-Screening
+            description: Penjelasan Dibatalkan
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 24 Jun 2021 07:03:46 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect ....."
+          }
+  - name: validasi prakarsa not found
+    request:
+      url: "{{base_url}}/v/2/prakarsa/bypass-digital-sign"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "-1"
+            description: ID Prakarsa
+          - name: from
+            value: pre-screening
+            description: Pembatalan dari [ 'pre-screening' | 'analisa-pinjaman' ]
+          - name: reason
+            value: Batal Proses Pre-Screening
+            description: Penjelasan Dibatalkan
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 08 Mar 2022 02:50:58 GMT
+        - name: Content-Length
+          value: "83"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Error record not found",
+              "message": "Prakarsa Tidak Ditemukan",
+              "status": 500
+          }
+  - name: error validasi status prakarsa <> 8
+    request:
+      url: "{{base_url}}/v/2/prakarsa/bypass-digital-sign"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "{{userId}}"
+            description: User Id AES {MANDATORY}
+          - name: prakarsaId
+            value: "20942"
+            description: ID Prakarsa {MANDATORY}
+          - name: typeBypass
+            value: "0"
+            description: Flag Bypass [0 = tidak bypass | 1 bypass] {MANDATORY}
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 26 Jul 2023 07:13:46 GMT
+        - name: Content-Length
+          value: "168"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Status < 8 (dibawah menunggu hasil putusan)",
+              "message": "Maaf, Proses Bypass tidak bisa dilakukan. Silahkan monitor status terakhir prakarsa",
+              "status": 500
+          }
+  - name: error tipe fasilitas bukan perfoma brilink
+    request:
+      url: "{{base_url}}/v/2/prakarsa/bypass-digital-sign"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "{{userId}}"
+            description: User Id AES {MANDATORY}
+          - name: prakarsaId
+            value: "20942"
+            description: ID Prakarsa {MANDATORY}
+          - name: typeBypass
+            value: "0"
+            description: Flag Bypass [0 = tidak bypass | 1 bypass] {MANDATORY}
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 26 Jul 2023 07:21:42 GMT
+        - name: Content-Length
+          value: "157"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Tipe fasilitas bukan Performa Brilink",
+              "message": "Maaf, Proses Bypass tidak bisa dilakukan. Tipe pinjaman anda bukan Performa Brilink",
+              "status": 500
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/2/prakarsa/bypass-digital-sign"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "{{userId}}"
+            description: User Id AES {MANDATORY}
+          - name: prakarsaId
+            value: "20942"
+            description: ID Prakarsa {MANDATORY}
+          - name: typeBypass
+            value: "1"
+            description: Flag Bypass [0 = tidak bypass | 1 bypass] {MANDATORY}
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 26 Jul 2023 07:24:04 GMT
+        - name: Content-Length
+          value: "73"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Data Tersimpan",
+              "message": "Data Berhasil Disimpan",
+              "status": 200
+          }
+  - name: error tipe fasilitas bukan perfoma brilink
+    request:
+      url: "{{base_url}}/v/2/prakarsa/bypass-digital-sign"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "{{userId}}"
+            description: User Id AES {MANDATORY}
+          - name: prakarsaId
+            value: "20942"
+            description: ID Prakarsa {MANDATORY}
+          - name: typeBypass
+            value: "0"
+            description: Flag Bypass [0 = tidak bypass | 1 bypass] {MANDATORY}
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 26 Jul 2023 07:21:42 GMT
+        - name: Content-Length
+          value: "157"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Tipe fasilitas bukan Performa Brilink",
+              "message": "Maaf, Proses Bypass tidak bisa dilakukan. Tipe pinjaman anda bukan Performa Brilink",
+              "status": 500
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/2/prakarsa/bypass-digital-sign"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "{{userId}}"
+            description: User Id AES {MANDATORY}
+          - name: prakarsaId
+            value: "20942"
+            description: ID Prakarsa {MANDATORY}
+          - name: typeBypass
+            value: "1"
+            description: Flag Bypass [0 = tidak bypass | 1 bypass] {MANDATORY}
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 26 Jul 2023 07:24:04 GMT
+        - name: Content-Length
+          value: "73"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Data Tersimpan",
+              "message": "Data Berhasil Disimpan",
+              "status": 200
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/2/prakarsa/bypass-digital-sign"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "820"
+            description: ID Prakarsa
+          - name: from
+            value: pre-screening
+            description: Pembatalan dari [ 'pre-screening' | 'analisa-pinjaman' ]
+          - name: reason
+            value: Batal Proses Pre-Screening
+            description: Penjelasan Dibatalkan
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 24 Jun 2021 07:03:46 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect ....."
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/2/prakarsa/bypass-digital-sign"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "820"
+            description: ID Prakarsa
+          - name: from
+            value: pre-screening
+            description: Pembatalan dari [ 'pre-screening' | 'analisa-pinjaman' ]
+          - name: reason
+            value: Batal Proses Pre-Screening
+            description: Penjelasan Dibatalkan
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: ""
+            value: ""
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 24 Jun 2021 07:03:46 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: validasi prakarsa not found
+    request:
+      url: "{{base_url}}/v/2/prakarsa/bypass-digital-sign"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "-1"
+            description: ID Prakarsa
+          - name: from
+            value: pre-screening
+            description: Pembatalan dari [ 'pre-screening' | 'analisa-pinjaman' ]
+          - name: reason
+            value: Batal Proses Pre-Screening
+            description: Penjelasan Dibatalkan
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 08 Mar 2022 02:50:58 GMT
+        - name: Content-Length
+          value: "83"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Error record not found",
+              "message": "Prakarsa Tidak Ditemukan",
+              "status": 500
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{base_url}}/v/2/prakarsa/bypass-digital-sign"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "31032"
+            description: ID Prakarsa
+          - name: from
+            value: pre-screening
+            description: Pembatalan dari [ 'pre-screening' | 'analisa-pinjaman' ]
+          - name: reason
+            value: Batal Proses Pre-Screening
+            description: Penjelasan Dibatalkan
+          - name: userId
+            value: "999923"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 19 Jul 2022 06:13:43 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: error validasi status prakarsa <> 8
+    request:
+      url: "{{base_url}}/v/2/prakarsa/bypass-digital-sign"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "{{userId}}"
+            description: User Id AES {MANDATORY}
+          - name: prakarsaId
+            value: "20942"
+            description: ID Prakarsa {MANDATORY}
+          - name: typeBypass
+            value: "0"
+            description: Flag Bypass [0 = tidak bypass | 1 bypass] {MANDATORY}
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 26 Jul 2023 07:13:46 GMT
+        - name: Content-Length
+          value: "168"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Status < 8 (dibawah menunggu hasil putusan)",
+              "message": "Maaf, Proses Bypass tidak bisa dilakukan. Silahkan monitor status terakhir prakarsa",
+              "status": 500
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/2/prakarsa/bypass-digital-sign"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "820"
+            description: ID Prakarsa
+          - name: from
+            value: pre-screening
+            description: Pembatalan dari [ 'pre-screening' | 'analisa-pinjaman' ]
+          - name: reason
+            value: Batal Proses Pre-Screening
+            description: Penjelasan Dibatalkan
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 24 Jun 2021 07:03:46 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }

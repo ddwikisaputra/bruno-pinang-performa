@@ -1,0 +1,140 @@
+info:
+  name: SendCustomer
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{base_url}}/cbasrest/rest/SendCustomer"
+  headers:
+    - name: API-KEY
+      value: "{{api-key}}"
+  body:
+    type: json
+    data: |-
+      {
+        "ReffNumber": "0000000",
+        "LOB": "MK",
+        "Product": "MK",
+        "CustType": "A",
+        "Name1": "ASTRID AGUSTINI",
+        "Name2": "",
+        "Name3": "",
+        "Name4": "",
+        "Name5": "",
+        "Name6": "",
+        "Name7": "",
+        "Name8": "",
+        "Name9": "",
+        "Gender": "0",
+        "Pob": "Bandung",
+        "Ktp": "3273095508940001",
+        "Npwp": "",
+        "Company": "0",
+        "MotherName": "Ety Daryati",
+        "Address": "Menara Bri Gatot Subroto",
+        "City": "Jakarta Selatan",
+        "Postal": "12870",
+        "Batch": "0",
+        "Dob": "22-09-1982"
+      }
+
+
+      //ReffNumber
+      //LOB
+      //Product
+      //CustType
+      //Name1
+      //Gender
+      //Pob
+      //Ktp
+      //Company
+      //MotherName
+      //Address
+      //City
+      //Postal
+      //Batch
+      //Dob
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Success
+    request:
+      url: "{{base_url}}/cbasrest/rest/SendCustomer"
+      method: POST
+      headers:
+        - name: API-KEY
+          value: "{{api-key}}"
+      body:
+        type: json
+        data: '{"ReffNumber":"0000000","LOB":"MK","Product":"MK","CustType":"A","Name1":"ASTRID AGUSTINI","Name2":"","Name3":"","Name4":"","Name5":"","Name6":"","Name7":"","Name8":"","Name9":"","Gender":"0","Pob":"Bandung","Ktp":"3273095508940001","Npwp":"","Company":"0","MotherName":"Ety Daryati","Address":"Menara Bri Gatot Subroto","City":"Jakarta Selatan","Postal":"12870","Batch":"0","Dob":"22-09-1982"}'
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: private
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Server
+          value: Microsoft-IIS/10.0
+        - name: Access-Control-Allow-Origin
+          value: "*"
+        - name: Set-Cookie
+          value: ASP.NET_SessionId=bvn13m5dux0jcw1s2cj0imda; path=/; HttpOnly; SameSite=Lax
+        - name: X-Powered-By
+          value: ASP.NET
+        - name: Date
+          value: Fri, 24 Nov 2023 00:08:13 GMT
+        - name: Content-Length
+          value: "63"
+      body:
+        type: json
+        data: |-
+          {
+              "CbasId": "MK2311240001",
+              "ErrorMsg": "",
+              "Flag": "1",
+              "Result": "1"
+          }
+  - name: Invalid APIKEY
+    request:
+      url: "{{base_url}}/cbasrest/rest/SendCustomer"
+      method: POST
+      headers:
+        - name: API-KEY
+          value: a
+      body:
+        type: json
+        data: '{"ReffNumber":"0000000","LOB":"MK","Product":"MK","CustType":"A","Name1":"ASTRID AGUSTINI","Name2":"","Name3":"","Name4":"","Name5":"","Name6":"","Name7":"","Name8":"","Name9":"","Gender":"0","Pob":"Bandung","Ktp":"3273095508940001","Npwp":"","Company":"0","MotherName":"Ety Daryati","Address":"Menara Bri Gatot Subroto","City":"Jakarta Selatan","Postal":"12870","Batch":"0","Dob":"22-09-1982"}'
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Cache-Control
+          value: private
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Server
+          value: Microsoft-IIS/10.0
+        - name: X-Powered-By
+          value: ASP.NET
+        - name: Date
+          value: Fri, 24 Nov 2023 01:07:37 GMT
+        - name: Content-Length
+          value: "66"
+      body:
+        type: json
+        data: |-
+          {
+              "CbasId": "",
+              "ErrorMsg": "Invalid API-KEY",
+              "Flag": "0",
+              "Result": "0"
+          }

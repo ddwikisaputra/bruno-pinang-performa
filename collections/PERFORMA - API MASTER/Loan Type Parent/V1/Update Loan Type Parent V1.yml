@@ -1,0 +1,861 @@
+info:
+  name: Update Loan Type Parent V1
+  type: http
+  seq: 8
+
+http:
+  method: POST
+  url: "{{url-local}}/v/1/master/loan-type-parent-update"
+  body:
+    type: form-urlencoded
+    data:
+      - name: id
+        value: 233A
+        description: Loan Type Parent Id | MANDATORY
+      - name: userId
+        value: "999999"
+        description: UserId Login | MANDATORY
+      - name: loanTypeName
+        value: TEACIS
+        description: Loan Type Name | MANDATORY
+      - name: insurance
+        value: "11"
+        description: insurance id [check on list insurance] | MANDATORY
+      - name: productType
+        value: "40002"
+        description: Core Banking Code (40002 = Angsuran Tetap | 40003 = KMK Transaksional) | MANDATORY
+      - name: provisionFee
+        value: "10.12"
+        description: "percentage value (decimal number) [ex : 0.2] | MANDATORY"
+      - name: plafondStart[]
+        value: "60"
+        description: Plafond Awal untuk range rate suku bunga | MANDATORY
+      - name: plafondEnd[]
+        value: "70"
+        description: Plafond Akhir untuk range rate suku bunga | MANDATORY
+      - name: loanTermStart[]
+        value: "6"
+        description: Tenor Awal | MANDATORY
+      - name: loanTermEnd[]
+        value: "7"
+        description: Tenor Akhir | MANDATORY
+      - name: interestRate[]
+        value: "10.11"
+        description: Persentasi Suku Bunga | MANDATORY
+      - name: installmentPattern[]
+        value: 6 bulan
+        description: "Pola Angsuran (ex : 3 bulan | 4 bulan | 6 bulan | 7 hari | 14 hari | 30 hari) | MANDATORY"
+      - name: installmentPatternType[]
+        value: "2"
+        description: Pola Angsuran Type( 1 = Angsuran Tetap | 2 = Sekali Lunas) | MANDATORY
+      - name: nominalStart[]
+        value: "650000"
+        description: Nominal Pinjaman Awal untuk range admin fee | MANDATORY
+      - name: nominalEnd[]
+        value: "1500000"
+        description: Nominal Pinjaman Akhir untuk range admin fee | MANDATORY
+      - name: adminFee[]
+        value: "550000"
+        description: Biaya Admin | MANDATORY
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/master/loan-type-parent-update"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "24"
+            description: Loan Type Parent Id | MANDATORY
+          - name: userId
+            value: "999941"
+            description: UserId Login | MANDATORY
+          - name: loanTypeName
+            value: morning_update
+            description: Loan Type Name | MANDATORY
+          - name: insurance
+            value: "3"
+            description: insurance id [check on list insurance] | MANDATORY
+          - name: productType
+            value: "40002"
+            description: Core Banking Code (40002 = Angsuran Tetap | 40003 = KMK Transaksional) | MANDATORY
+          - name: provisionFee
+            value: "10.12"
+            description: "percentage value (decimal number) [ex : 0.2] | MANDATORY"
+          - name: plafondStart[]
+            value: "650000"
+            description: Plafond Awal untuk range rate suku bunga | MANDATORY
+          - name: plafondEnd[]
+            value: "1500000"
+            description: Plafond Akhir untuk range rate suku bunga | MANDATORY
+          - name: loanTermStart[]
+            value: "6"
+            description: Tenor Awal | MANDATORY
+          - name: loanTermEnd[]
+            value: "7"
+            description: Tenor Akhir | MANDATORY
+          - name: interestRate[]
+            value: "10.11"
+            description: Persentasi Suku Bunga | MANDATORY
+          - name: installmentPattern[]
+            value: "6"
+            description: Pola Angsuran (3 bulanan | 4 bulanan | 6 bulanan) | MANDATORY
+          - name: installmentPatternType[]
+            value: "2"
+            description: Pola Angsuran Type( 1 = Angsuran Tetap | 2 = Sekali Lunas) | MANDATORY
+          - name: nominalStart[]
+            value: "650000"
+            description: Nominal Pinjaman Awal untuk range admin fee | MANDATORY
+          - name: nominalEnd[]
+            value: "1500000"
+            description: Nominal Pinjaman Akhir untuk range admin fee | MANDATORY
+          - name: adminFee[]
+            value: "550000"
+            description: Biaya Admin | MANDATORY
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "desc": "Data Tersimpan",
+              "message": "Data Berhasil Disimpan",
+              "status": 200
+          }
+  - name: timeout
+    request:
+      url: "{{base_url}}/v/1/master/loan-type-parent-update"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "24"
+            description: Loan Type Parent Id | MANDATORY
+          - name: userId
+            value: "999941"
+            description: UserId Login | MANDATORY
+          - name: loanTypeName
+            value: morning_update
+            description: Loan Type Name | MANDATORY
+          - name: insurance
+            value: "3"
+            description: insurance id [check on list insurance] | MANDATORY
+          - name: productType
+            value: "40002"
+            description: Core Banking Code (40002 = Angsuran Tetap | 40003 = KMK Transaksional) | MANDATORY
+          - name: provisionFee
+            value: "10.12"
+            description: "percentage value (decimal number) [ex : 0.2] | MANDATORY"
+          - name: plafondStart[]
+            value: "650000"
+            description: Plafond Awal untuk range rate suku bunga | MANDATORY
+          - name: plafondEnd[]
+            value: "1500000"
+            description: Plafond Akhir untuk range rate suku bunga | MANDATORY
+          - name: loanTermStart[]
+            value: "6"
+            description: Tenor Awal | MANDATORY
+          - name: loanTermEnd[]
+            value: "7"
+            description: Tenor Akhir | MANDATORY
+          - name: interestRate[]
+            value: "10.11"
+            description: Persentasi Suku Bunga | MANDATORY
+          - name: installmentPattern[]
+            value: "6"
+            description: Pola Angsuran (3 bulanan | 4 bulanan | 6 bulanan) | MANDATORY
+          - name: installmentPatternType[]
+            value: "2"
+            description: Pola Angsuran Type( 1 = Angsuran Tetap | 2 = Sekali Lunas) | MANDATORY
+          - name: nominalStart[]
+            value: "650000"
+            description: Nominal Pinjaman Awal untuk range admin fee | MANDATORY
+          - name: nominalEnd[]
+            value: "1500000"
+            description: Nominal Pinjaman Akhir untuk range admin fee | MANDATORY
+          - name: adminFee[]
+            value: "550000"
+            description: Biaya Admin | MANDATORY
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "desc": "context deadline exceeded (Client.Timeout exceeded while awaiting headers)",
+              "message": "Maaf, Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 500
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/master/loan-type-parent-update"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "24"
+            description: Loan Type Parent Id | MANDATORY
+          - name: userId
+            value: "999941"
+            description: UserId Login | MANDATORY
+          - name: loanTypeName
+            value: morning_update
+            description: Loan Type Name | MANDATORY
+          - name: insurance
+            value: "3"
+            description: insurance id [check on list insurance] | MANDATORY
+          - name: productType
+            value: "40002"
+            description: Core Banking Code (40002 = Angsuran Tetap | 40003 = KMK Transaksional) | MANDATORY
+          - name: provisionFee
+            value: "10.12"
+            description: "percentage value (decimal number) [ex : 0.2] | MANDATORY"
+          - name: plafondStart[]
+            value: "650000"
+            description: Plafond Awal untuk range rate suku bunga | MANDATORY
+          - name: plafondEnd[]
+            value: "1500000"
+            description: Plafond Akhir untuk range rate suku bunga | MANDATORY
+          - name: loanTermStart[]
+            value: "6"
+            description: Tenor Awal | MANDATORY
+          - name: loanTermEnd[]
+            value: "7"
+            description: Tenor Akhir | MANDATORY
+          - name: interestRate[]
+            value: "10.11"
+            description: Persentasi Suku Bunga | MANDATORY
+          - name: installmentPattern[]
+            value: "6"
+            description: Pola Angsuran (3 bulanan | 4 bulanan | 6 bulanan) | MANDATORY
+          - name: installmentPatternType[]
+            value: "2"
+            description: Pola Angsuran Type( 1 = Angsuran Tetap | 2 = Sekali Lunas) | MANDATORY
+          - name: nominalStart[]
+            value: "650000"
+            description: Nominal Pinjaman Awal untuk range admin fee | MANDATORY
+          - name: nominalEnd[]
+            value: "1500000"
+            description: Nominal Pinjaman Akhir untuk range admin fee | MANDATORY
+          - name: adminFee[]
+            value: "550000"
+            description: Biaya Admin | MANDATORY
+    response:
+      statusText: undefined
+      body:
+        type: text
+        data: |-
+          {
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{base_url}}/v/1/master/loan-type-parent-update"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "24"
+            description: Loan Type Parent Id | MANDATORY
+          - name: userId
+            value: "999941"
+            description: UserId Login | MANDATORY
+          - name: loanTypeName
+            value: morning_update
+            description: Loan Type Name | MANDATORY
+          - name: insurance
+            value: "3"
+            description: insurance id [check on list insurance] | MANDATORY
+          - name: productType
+            value: "40002"
+            description: Core Banking Code (40002 = Angsuran Tetap | 40003 = KMK Transaksional) | MANDATORY
+          - name: provisionFee
+            value: "10.12"
+            description: "percentage value (decimal number) [ex : 0.2] | MANDATORY"
+          - name: plafondStart[]
+            value: "650000"
+            description: Plafond Awal untuk range rate suku bunga | MANDATORY
+          - name: plafondEnd[]
+            value: "1500000"
+            description: Plafond Akhir untuk range rate suku bunga | MANDATORY
+          - name: loanTermStart[]
+            value: "6"
+            description: Tenor Awal | MANDATORY
+          - name: loanTermEnd[]
+            value: "7"
+            description: Tenor Akhir | MANDATORY
+          - name: interestRate[]
+            value: "10.11"
+            description: Persentasi Suku Bunga | MANDATORY
+          - name: installmentPattern[]
+            value: "6"
+            description: Pola Angsuran (3 bulanan | 4 bulanan | 6 bulanan) | MANDATORY
+          - name: installmentPatternType[]
+            value: "2"
+            description: Pola Angsuran Type( 1 = Angsuran Tetap | 2 = Sekali Lunas) | MANDATORY
+          - name: nominalStart[]
+            value: "650000"
+            description: Nominal Pinjaman Awal untuk range admin fee | MANDATORY
+          - name: nominalEnd[]
+            value: "1500000"
+            description: Nominal Pinjaman Akhir untuk range admin fee | MANDATORY
+          - name: adminFee[]
+            value: "550000"
+            description: Biaya Admin | MANDATORY
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/master/loan-type-parent-update"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "24"
+            description: Loan Type Parent Id | MANDATORY
+          - name: userId
+            value: "999941"
+            description: UserId Login | MANDATORY
+          - name: loanTypeName
+            value: morning_update
+            description: Loan Type Name | MANDATORY
+          - name: insurance
+            value: "3"
+            description: insurance id [check on list insurance] | MANDATORY
+          - name: productType
+            value: "40002"
+            description: Core Banking Code (40002 = Angsuran Tetap | 40003 = KMK Transaksional) | MANDATORY
+          - name: provisionFee
+            value: "10.12"
+            description: "percentage value (decimal number) [ex : 0.2] | MANDATORY"
+          - name: plafondStart[]
+            value: "650000"
+            description: Plafond Awal untuk range rate suku bunga | MANDATORY
+          - name: plafondEnd[]
+            value: "1500000"
+            description: Plafond Akhir untuk range rate suku bunga | MANDATORY
+          - name: loanTermStart[]
+            value: "6"
+            description: Tenor Awal | MANDATORY
+          - name: loanTermEnd[]
+            value: "7"
+            description: Tenor Akhir | MANDATORY
+          - name: interestRate[]
+            value: "10.11"
+            description: Persentasi Suku Bunga | MANDATORY
+          - name: installmentPattern[]
+            value: "6"
+            description: Pola Angsuran (3 bulanan | 4 bulanan | 6 bulanan) | MANDATORY
+          - name: installmentPatternType[]
+            value: "2"
+            description: Pola Angsuran Type( 1 = Angsuran Tetap | 2 = Sekali Lunas) | MANDATORY
+          - name: nominalStart[]
+            value: "650000"
+            description: Nominal Pinjaman Awal untuk range admin fee | MANDATORY
+          - name: nominalEnd[]
+            value: "1500000"
+            description: Nominal Pinjaman Akhir untuk range admin fee | MANDATORY
+          - name: adminFee[]
+            value: "550000"
+            description: Biaya Admin | MANDATORY
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect ....."
+          }
+  - name: "bad request #3"
+    request:
+      url: "{{base_url}}/v/1/master/loan-type-parent-update"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "24"
+            description: Loan Type Parent Id | MANDATORY
+          - name: userId
+            value: "999941"
+            description: UserId Login | MANDATORY
+          - name: loanTypeName
+            value: morning_update
+            description: Loan Type Name | MANDATORY
+          - name: insurance
+            value: "3"
+            description: insurance id [check on list insurance] | MANDATORY
+          - name: productType
+            value: "40002"
+            description: Core Banking Code (40002 = Angsuran Tetap | 40003 = KMK Transaksional) | MANDATORY
+          - name: provisionFee
+            value: "10.12"
+            description: "percentage value (decimal number) [ex : 0.2] | MANDATORY"
+          - name: plafondStart[]
+            value: "650000"
+            description: Plafond Awal untuk range rate suku bunga | MANDATORY
+          - name: plafondEnd[]
+            value: "1500000"
+            description: Plafond Akhir untuk range rate suku bunga | MANDATORY
+          - name: loanTermStart[]
+            value: "6"
+            description: Tenor Awal | MANDATORY
+          - name: loanTermEnd[]
+            value: "7"
+            description: Tenor Akhir | MANDATORY
+          - name: interestRate[]
+            value: "10.11"
+            description: Persentasi Suku Bunga | MANDATORY
+          - name: installmentPattern[]
+            value: "6"
+            description: Pola Angsuran (3 bulanan | 4 bulanan | 6 bulanan) | MANDATORY
+          - name: installmentPatternType[]
+            value: "2"
+            description: Pola Angsuran Type( 1 = Angsuran Tetap | 2 = Sekali Lunas) | MANDATORY
+          - name: nominalStart[]
+            value: "650000"
+            description: Nominal Pinjaman Awal untuk range admin fee | MANDATORY
+          - name: nominalEnd[]
+            value: "1500000"
+            description: Nominal Pinjaman Akhir untuk range admin fee | MANDATORY
+          - name: adminFee[]
+            value: "550000"
+            description: Biaya Admin | MANDATORY
+    response:
+      status: 400
+      statusText: Bad Request
+      body:
+        type: text
+        data: |-
+          {
+              "desc": "Error parameter .... > ....",
+              "message": "Maaf, .... harus lebih besar dari ....",
+              "status": 400
+          }
+  - name: not found
+    request:
+      url: "{{base_url}}/v/1/master/loan-type-parent-update"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "24"
+            description: Loan Type Parent Id | MANDATORY
+          - name: userId
+            value: "999941"
+            description: UserId Login | MANDATORY
+          - name: loanTypeName
+            value: morning_update
+            description: Loan Type Name | MANDATORY
+          - name: insurance
+            value: "3"
+            description: insurance id [check on list insurance] | MANDATORY
+          - name: productType
+            value: "40002"
+            description: Core Banking Code (40002 = Angsuran Tetap | 40003 = KMK Transaksional) | MANDATORY
+          - name: provisionFee
+            value: "10.12"
+            description: "percentage value (decimal number) [ex : 0.2] | MANDATORY"
+          - name: plafondStart[]
+            value: "650000"
+            description: Plafond Awal untuk range rate suku bunga | MANDATORY
+          - name: plafondEnd[]
+            value: "1500000"
+            description: Plafond Akhir untuk range rate suku bunga | MANDATORY
+          - name: loanTermStart[]
+            value: "6"
+            description: Tenor Awal | MANDATORY
+          - name: loanTermEnd[]
+            value: "7"
+            description: Tenor Akhir | MANDATORY
+          - name: interestRate[]
+            value: "10.11"
+            description: Persentasi Suku Bunga | MANDATORY
+          - name: installmentPattern[]
+            value: "6"
+            description: Pola Angsuran (3 bulanan | 4 bulanan | 6 bulanan) | MANDATORY
+          - name: installmentPatternType[]
+            value: "2"
+            description: Pola Angsuran Type( 1 = Angsuran Tetap | 2 = Sekali Lunas) | MANDATORY
+          - name: nominalStart[]
+            value: "650000"
+            description: Nominal Pinjaman Awal untuk range admin fee | MANDATORY
+          - name: nominalEnd[]
+            value: "1500000"
+            description: Nominal Pinjaman Akhir untuk range admin fee | MANDATORY
+          - name: adminFee[]
+            value: "550000"
+            description: Biaya Admin | MANDATORY
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "desc": "Error Record Not Found",
+              "message": "Loan Type Parent Tidak Ditemukan",
+              "status": 404
+          }
+  - name: "bad request #2"
+    request:
+      url: "{{base_url}}/v/1/master/loan-type-parent-update"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "24"
+            description: Loan Type Parent Id | MANDATORY
+          - name: userId
+            value: "999941"
+            description: UserId Login | MANDATORY
+          - name: loanTypeName
+            value: morning_update
+            description: Loan Type Name | MANDATORY
+          - name: insurance
+            value: "3"
+            description: insurance id [check on list insurance] | MANDATORY
+          - name: productType
+            value: "40002"
+            description: Core Banking Code (40002 = Angsuran Tetap | 40003 = KMK Transaksional) | MANDATORY
+          - name: provisionFee
+            value: "10.12"
+            description: "percentage value (decimal number) [ex : 0.2] | MANDATORY"
+          - name: plafondStart[]
+            value: "650000"
+            description: Plafond Awal untuk range rate suku bunga | MANDATORY
+          - name: plafondEnd[]
+            value: "1500000"
+            description: Plafond Akhir untuk range rate suku bunga | MANDATORY
+          - name: loanTermStart[]
+            value: "6"
+            description: Tenor Awal | MANDATORY
+          - name: loanTermEnd[]
+            value: "7"
+            description: Tenor Akhir | MANDATORY
+          - name: interestRate[]
+            value: "10.11"
+            description: Persentasi Suku Bunga | MANDATORY
+          - name: installmentPattern[]
+            value: "6"
+            description: Pola Angsuran (3 bulanan | 4 bulanan | 6 bulanan) | MANDATORY
+          - name: installmentPatternType[]
+            value: "2"
+            description: Pola Angsuran Type( 1 = Angsuran Tetap | 2 = Sekali Lunas) | MANDATORY
+          - name: nominalStart[]
+            value: "650000"
+            description: Nominal Pinjaman Awal untuk range admin fee | MANDATORY
+          - name: nominalEnd[]
+            value: "1500000"
+            description: Nominal Pinjaman Akhir untuk range admin fee | MANDATORY
+          - name: adminFee[]
+            value: "550000"
+            description: Biaya Admin | MANDATORY
+    response:
+      status: 400
+      statusText: Bad Request
+      body:
+        type: text
+        data: |-
+          {
+              "desc": "Status .... belum tersedia",
+              "message": "Maaf, .... yang dipilih belum tersedia",
+              "status": 404
+          }
+  - name: Unauthorized (401)
+    request:
+      url: "{{base_url}}/v/1/master/loan-type-parent-update"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "24"
+            description: Loan Type Parent Id | MANDATORY
+          - name: userId
+            value: "999941"
+            description: UserId Login | MANDATORY
+          - name: loanTypeName
+            value: morning_update
+            description: Loan Type Name | MANDATORY
+          - name: insurance
+            value: "3"
+            description: insurance id [check on list insurance] | MANDATORY
+          - name: productType
+            value: "40002"
+            description: Core Banking Code (40002 = Angsuran Tetap | 40003 = KMK Transaksional) | MANDATORY
+          - name: provisionFee
+            value: "10.12"
+            description: "percentage value (decimal number) [ex : 0.2] | MANDATORY"
+          - name: plafondStart[]
+            value: "650000"
+            description: Plafond Awal untuk range rate suku bunga | MANDATORY
+          - name: plafondEnd[]
+            value: "1500000"
+            description: Plafond Akhir untuk range rate suku bunga | MANDATORY
+          - name: loanTermStart[]
+            value: "6"
+            description: Tenor Awal | MANDATORY
+          - name: loanTermEnd[]
+            value: "7"
+            description: Tenor Akhir | MANDATORY
+          - name: interestRate[]
+            value: "10.11"
+            description: Persentasi Suku Bunga | MANDATORY
+          - name: installmentPattern[]
+            value: "6"
+            description: Pola Angsuran (3 bulanan | 4 bulanan | 6 bulanan) | MANDATORY
+          - name: installmentPatternType[]
+            value: "2"
+            description: Pola Angsuran Type( 1 = Angsuran Tetap | 2 = Sekali Lunas) | MANDATORY
+          - name: nominalStart[]
+            value: "650000"
+            description: Nominal Pinjaman Awal untuk range admin fee | MANDATORY
+          - name: nominalEnd[]
+            value: "1500000"
+            description: Nominal Pinjaman Akhir untuk range admin fee | MANDATORY
+          - name: adminFee[]
+            value: "550000"
+            description: Biaya Admin | MANDATORY
+    response:
+      status: 401
+      statusText: Unauthorized
+      body:
+        type: text
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: invalid parameter
+    request:
+      url: "{{base_url}}/v/1/master/loan-type-parent-update"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "24"
+            description: Loan Type Parent Id | MANDATORY
+          - name: userId
+            value: "999941"
+            description: UserId Login | MANDATORY
+          - name: loanTypeName
+            value: morning_update
+            description: Loan Type Name | MANDATORY
+          - name: insurance
+            value: "3"
+            description: insurance id [check on list insurance] | MANDATORY
+          - name: productType
+            value: "40002"
+            description: Core Banking Code (40002 = Angsuran Tetap | 40003 = KMK Transaksional) | MANDATORY
+          - name: provisionFee
+            value: "10.12"
+            description: "percentage value (decimal number) [ex : 0.2] | MANDATORY"
+          - name: plafondStart[]
+            value: "650000"
+            description: Plafond Awal untuk range rate suku bunga | MANDATORY
+          - name: plafondEnd[]
+            value: "1500000"
+            description: Plafond Akhir untuk range rate suku bunga | MANDATORY
+          - name: loanTermStart[]
+            value: "6"
+            description: Tenor Awal | MANDATORY
+          - name: loanTermEnd[]
+            value: "7"
+            description: Tenor Akhir | MANDATORY
+          - name: interestRate[]
+            value: "10.11"
+            description: Persentasi Suku Bunga | MANDATORY
+          - name: installmentPattern[]
+            value: "6"
+            description: Pola Angsuran (3 bulanan | 4 bulanan | 6 bulanan) | MANDATORY
+          - name: installmentPatternType[]
+            value: "2"
+            description: Pola Angsuran Type( 1 = Angsuran Tetap | 2 = Sekali Lunas) | MANDATORY
+          - name: nominalStart[]
+            value: "650000"
+            description: Nominal Pinjaman Awal untuk range admin fee | MANDATORY
+          - name: nominalEnd[]
+            value: "1500000"
+            description: Nominal Pinjaman Akhir untuk range admin fee | MANDATORY
+          - name: adminFee[]
+            value: "550000"
+            description: Biaya Admin | MANDATORY
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "desc": "Error Record Not Found",
+              "message": "Loan Type Parent Tidak Ditemukan",
+              "status": 404
+          }
+  - name: bad request
+    request:
+      url: "{{base_url}}/v/1/master/loan-type-parent-update"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "24"
+            description: Loan Type Parent Id | MANDATORY
+          - name: userId
+            value: "999941"
+            description: UserId Login | MANDATORY
+          - name: loanTypeName
+            value: morning_update
+            description: Loan Type Name | MANDATORY
+          - name: insurance
+            value: "3"
+            description: insurance id [check on list insurance] | MANDATORY
+          - name: productType
+            value: "40002"
+            description: Core Banking Code (40002 = Angsuran Tetap | 40003 = KMK Transaksional) | MANDATORY
+          - name: provisionFee
+            value: "10.12"
+            description: "percentage value (decimal number) [ex : 0.2] | MANDATORY"
+          - name: plafondStart[]
+            value: "650000"
+            description: Plafond Awal untuk range rate suku bunga | MANDATORY
+          - name: plafondEnd[]
+            value: "1500000"
+            description: Plafond Akhir untuk range rate suku bunga | MANDATORY
+          - name: loanTermStart[]
+            value: "6"
+            description: Tenor Awal | MANDATORY
+          - name: loanTermEnd[]
+            value: "7"
+            description: Tenor Akhir | MANDATORY
+          - name: interestRate[]
+            value: "10.11"
+            description: Persentasi Suku Bunga | MANDATORY
+          - name: installmentPattern[]
+            value: "6"
+            description: Pola Angsuran (3 bulanan | 4 bulanan | 6 bulanan) | MANDATORY
+          - name: installmentPatternType[]
+            value: "2"
+            description: Pola Angsuran Type( 1 = Angsuran Tetap | 2 = Sekali Lunas) | MANDATORY
+          - name: nominalStart[]
+            value: "650000"
+            description: Nominal Pinjaman Awal untuk range admin fee | MANDATORY
+          - name: nominalEnd[]
+            value: "1500000"
+            description: Nominal Pinjaman Akhir untuk range admin fee | MANDATORY
+          - name: adminFee[]
+            value: "550000"
+            description: Biaya Admin | MANDATORY
+    response:
+      status: 400
+      statusText: Bad Request
+      body:
+        type: text
+        data: |-
+          {
+              "desc": "Parameter ... belum terisi",
+              "message": "Maaf, parameter ... belum dipilih",
+              "status": 400
+          }
+  - name: Already Exist
+    request:
+      url: "{{base_url}}/v/1/master/loan-type-parent-update"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "24"
+            description: Loan Type Parent Id | MANDATORY
+          - name: userId
+            value: "999941"
+            description: UserId Login | MANDATORY
+          - name: loanTypeName
+            value: morning_update
+            description: Loan Type Name | MANDATORY
+          - name: insurance
+            value: "3"
+            description: insurance id [check on list insurance] | MANDATORY
+          - name: productType
+            value: "40002"
+            description: Core Banking Code (40002 = Angsuran Tetap | 40003 = KMK Transaksional) | MANDATORY
+          - name: provisionFee
+            value: "10.12"
+            description: "percentage value (decimal number) [ex : 0.2] | MANDATORY"
+          - name: plafondStart[]
+            value: "650000"
+            description: Plafond Awal untuk range rate suku bunga | MANDATORY
+          - name: plafondEnd[]
+            value: "1500000"
+            description: Plafond Akhir untuk range rate suku bunga | MANDATORY
+          - name: loanTermStart[]
+            value: "6"
+            description: Tenor Awal | MANDATORY
+          - name: loanTermEnd[]
+            value: "7"
+            description: Tenor Akhir | MANDATORY
+          - name: interestRate[]
+            value: "10.11"
+            description: Persentasi Suku Bunga | MANDATORY
+          - name: installmentPattern[]
+            value: "6"
+            description: Pola Angsuran (3 bulanan | 4 bulanan | 6 bulanan) | MANDATORY
+          - name: installmentPatternType[]
+            value: "2"
+            description: Pola Angsuran Type( 1 = Angsuran Tetap | 2 = Sekali Lunas) | MANDATORY
+          - name: nominalStart[]
+            value: "650000"
+            description: Nominal Pinjaman Awal untuk range admin fee | MANDATORY
+          - name: nominalEnd[]
+            value: "1500000"
+            description: Nominal Pinjaman Akhir untuk range admin fee | MANDATORY
+          - name: adminFee[]
+            value: "550000"
+            description: Biaya Admin | MANDATORY
+    response:
+      status: 400
+      statusText: Bad Request
+      body:
+        type: text
+        data: |-
+          {
+              "desc": "LoanTypeParentName already exist",
+              "message": "Maaf, Nama loan type sudah terdaftar.",
+              "status": 500
+          }

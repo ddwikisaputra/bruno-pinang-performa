@@ -1,0 +1,507 @@
+info:
+  name: Register V2
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{base_url}}/v/2/employees/register/99991111111"
+  body:
+    type: form-urlencoded
+    data:
+      - name: fullname
+        value: UmF5YVBpUGVyVG9wiwQmxHSDxR8yOAzTXrtsjsiz0OCXZV/H2IV9dDBHFgFD
+        description: "[ENCODE] Nama Lengkap User Login"
+      - name: branchCode
+        value: "0020"
+        description: Kantor Cabang User Login
+      - name: organizationId
+        value: "9999"
+        description: Organisasi ID User Login { MANDATORY }
+      - name: organizationName
+        value: Pinang Mikro
+        description: Organisasi User Login { MANDATORY }
+      - name: job
+        value: ADK
+        description: Pekerjaan User Login { MANDATORY }
+      - name: tokenType
+        value: web
+        description: Tipe Token [ apps | dashboard ] { MANDATORY }
+      - name: fcmToken
+        value: "09871234"
+        description: Token FCM { MANDATORY }
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/employees/register/{{personalNumber}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: fullname
+            value: Dwiki Saputra
+            description: Nama Lengkap User Login
+          - name: branchCode
+            value: "9999"
+            description: Kantor Cabang User Login
+          - name: organixationId
+            value: "1"
+            description: Organisasi ID User Login { OPTIONAL }
+          - name: organizationName
+            value: Testing
+            description: Organisasi User Login { OPTIONAL }
+          - name: job
+            value: Testing
+            description: Pekerjaan User Login { OPTIONAL }
+          - name: tokenType
+            value: dashboard
+            description: Tipe Token [ apps | dashboard ] { OPTIONAL }
+          - name: fcmToken
+            value: "09871234"
+            description: Token FCM { OPTIONAL }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 09 Aug 2021 06:23:53 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Data Tersimpan",
+              "message": "Data Employee berhasil disimpan",
+              "status": 200
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/employees/register/{{personalNumber}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: fullname
+            value: Dwiki Saputra
+            description: Nama Lengkap User Login
+          - name: branchCode
+            value: "9999"
+            description: Kantor Cabang User Login
+          - name: organixationId
+            value: "1"
+            description: Organisasi ID User Login { OPTIONAL }
+          - name: organizationName
+            value: Testing
+            description: Organisasi User Login { OPTIONAL }
+          - name: job
+            value: Testing
+            description: Pekerjaan User Login { OPTIONAL }
+          - name: tokenType
+            value: dashboard
+            description: Tipe Token [ apps | dashboard ] { OPTIONAL }
+          - name: fcmToken
+            value: "09871234"
+            description: Token FCM { OPTIONAL }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 09 Aug 2021 06:23:53 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect ....."
+          }
+  - name: missing params
+    request:
+      url: "{{base_url}}/v/1/employees/register/{{personalNumber}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: fullname
+            value: Dwiki Saputra
+            description: Nama Lengkap User Login
+          - name: branchCode
+            value: "9999"
+            description: Kantor Cabang User Login
+          - name: organixationId
+            value: "1"
+            description: Organisasi ID User Login { OPTIONAL }
+          - name: organizationName
+            value: Testing
+            description: Organisasi User Login { OPTIONAL }
+          - name: job
+            value: Testing
+            description: Pekerjaan User Login { OPTIONAL }
+          - name: tokenType
+            value: dashboard
+            description: Tipe Token [ apps | dashboard ] { OPTIONAL }
+          - name: fcmToken
+            value: "09871234"
+            description: Token FCM { OPTIONAL }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 09 Aug 2021 06:23:53 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 400,
+              "message": "Nomor KTP pasangan tidak boleh kosong",
+              "desc": "Parameter partnerKtpNumber kosong"
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/employees/register/{{personalNumber}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: fullname
+            value: Dwiki Saputra
+            description: Nama Lengkap User Login
+          - name: branchCode
+            value: "9999"
+            description: Kantor Cabang User Login
+          - name: organixationId
+            value: "1"
+            description: Organisasi ID User Login { OPTIONAL }
+          - name: organizationName
+            value: Testing
+            description: Organisasi User Login { OPTIONAL }
+          - name: job
+            value: Testing
+            description: Pekerjaan User Login { OPTIONAL }
+          - name: tokenType
+            value: dashboard
+            description: Tipe Token [ apps | dashboard ] { OPTIONAL }
+          - name: fcmToken
+            value: "09871234"
+            description: Token FCM { OPTIONAL }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 09 Aug 2021 06:23:53 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/employees/register/{{personalNumber}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: fullname
+            value: Dwiki Saputra
+            description: Nama Lengkap User Login
+          - name: branchCode
+            value: "9999"
+            description: Kantor Cabang User Login
+          - name: organizationId
+            value: "1"
+            description: Organisasi ID User Login { OPTIONAL }
+          - name: organizationName
+            value: Testing
+            description: Organisasi User Login { OPTIONAL }
+          - name: job
+            value: Testing
+            description: Pekerjaan User Login { OPTIONAL }
+          - name: tokenType
+            value: dashboard
+            description: Tipe Token [ apps | dashboard ] { OPTIONAL }
+            disabled: true
+          - name: fcmToken
+            value: "09871234"
+            description: Token FCM { OPTIONAL }
+            disabled: true
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 09 Aug 2021 06:23:53 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/employees/register/{{personalNumber}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: fullname
+            value: Dwiki Saputra
+            description: Nama Lengkap User Login
+          - name: branchCode
+            value: "9999"
+            description: Kantor Cabang User Login
+          - name: organixationId
+            value: "1"
+            description: Organisasi ID User Login { OPTIONAL }
+          - name: organizationName
+            value: Testing
+            description: Organisasi User Login { OPTIONAL }
+          - name: job
+            value: Testing
+            description: Pekerjaan User Login { OPTIONAL }
+          - name: tokenType
+            value: dashboard
+            description: Tipe Token [ apps | dashboard ] { OPTIONAL }
+          - name: fcmToken
+            value: "09871234"
+            description: Token FCM { OPTIONAL }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 09 Aug 2021 06:23:53 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Data Tersimpan",
+              "message": "Data Employee berhasil disimpan",
+              "status": 200
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/employees/register/{{personalNumber}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: fullname
+            value: Dwiki Saputra
+            description: Nama Lengkap User Login
+          - name: branchCode
+            value: "9999"
+            description: Kantor Cabang User Login
+          - name: organixationId
+            value: "1"
+            description: Organisasi ID User Login { OPTIONAL }
+          - name: organizationName
+            value: Testing
+            description: Organisasi User Login { OPTIONAL }
+          - name: job
+            value: Testing
+            description: Pekerjaan User Login { OPTIONAL }
+          - name: tokenType
+            value: dashboard
+            description: Tipe Token [ apps | dashboard ] { OPTIONAL }
+          - name: fcmToken
+            value: "09871234"
+            description: Token FCM { OPTIONAL }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 09 Aug 2021 06:23:53 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: missing params
+    request:
+      url: "{{base_url}}/v/1/employees/register/{{personalNumber}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: fullname
+            value: Dwiki Saputra
+            description: Nama Lengkap User Login
+          - name: branchCode
+            value: "9999"
+            description: Kantor Cabang User Login
+          - name: organixationId
+            value: "1"
+            description: Organisasi ID User Login { OPTIONAL }
+          - name: organizationName
+            value: Testing
+            description: Organisasi User Login { OPTIONAL }
+          - name: job
+            value: Testing
+            description: Pekerjaan User Login { OPTIONAL }
+          - name: tokenType
+            value: dashboard
+            description: Tipe Token [ apps | dashboard ] { OPTIONAL }
+          - name: fcmToken
+            value: "09871234"
+            description: Token FCM { OPTIONAL }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 09 Aug 2021 06:23:53 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 400,
+              "message": "Nomor KTP pasangan tidak boleh kosong",
+              "desc": "Parameter partnerKtpNumber kosong"
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/employees/register/{{personalNumber}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: fullname
+            value: Dwiki Saputra
+            description: Nama Lengkap User Login
+          - name: branchCode
+            value: "9999"
+            description: Kantor Cabang User Login
+          - name: organizationId
+            value: "1"
+            description: Organisasi ID User Login { OPTIONAL }
+          - name: organizationName
+            value: Testing
+            description: Organisasi User Login { OPTIONAL }
+          - name: job
+            value: Testing
+            description: Pekerjaan User Login { OPTIONAL }
+          - name: tokenType
+            value: dashboard
+            description: Tipe Token [ apps | dashboard ] { OPTIONAL }
+            disabled: true
+          - name: fcmToken
+            value: "09871234"
+            description: Token FCM { OPTIONAL }
+            disabled: true
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 09 Aug 2021 06:23:53 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/employees/register/{{personalNumber}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: fullname
+            value: Dwiki Saputra
+            description: Nama Lengkap User Login
+          - name: branchCode
+            value: "9999"
+            description: Kantor Cabang User Login
+          - name: organixationId
+            value: "1"
+            description: Organisasi ID User Login { OPTIONAL }
+          - name: organizationName
+            value: Testing
+            description: Organisasi User Login { OPTIONAL }
+          - name: job
+            value: Testing
+            description: Pekerjaan User Login { OPTIONAL }
+          - name: tokenType
+            value: dashboard
+            description: Tipe Token [ apps | dashboard ] { OPTIONAL }
+          - name: fcmToken
+            value: "09871234"
+            description: Token FCM { OPTIONAL }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 09 Aug 2021 06:23:53 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect ....."
+          }

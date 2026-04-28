@@ -1,0 +1,417 @@
+info:
+  name: Check Agen BriLink
+  type: http
+  seq: 18
+
+http:
+  method: POST
+  url: "{{base_url_dev}}/v/2/crs/check-brilink-agent"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "{{userId}}"
+      - name: prakarsaId
+        value: "31290"
+      - name: loanType
+        value: Pinang Performa Proj
+      - name: isUpdate
+        value: "2"
+        description: MANDATORY (1 | 0)
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: unautorized
+    request:
+      url: "{{base_url_local}}/v/2/crs/check-brilink-agent"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "{{userId}}"
+          - name: prakarsaId
+            value: "31290"
+          - name: loanType
+            value: Pinang Performa Pro
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 13 Mar 2025 06:19:41 GMT
+        - name: Content-Length
+          value: "75"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{base_url_local}}/v/2/crs/check-brilink-agent"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "{{userId}}"
+          - name: prakarsaId
+            value: "31290"
+          - name: loanType
+            value: Pinang Performa Pro
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 13 Mar 2025 06:04:32 GMT
+        - name: Content-Length
+          value: "68"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memiliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: general error
+    request:
+      url: "{{base_url_local}}/v/2/crs/check-brilink-agent"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "{{userId}}"
+          - name: prakarsaId
+            value: "31290"
+          - name: loanType
+            value: Pinang Performa Pro
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 13 Mar 2025 06:48:10 GMT
+        - name: Content-Length
+          value: "201"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Could not connect ...",
+              "message": "Server sedang dalam perbaikan. Silahkan menghubungi administrator.",
+              "status": 500
+          }
+  - name: error - kendala api bigdata
+    request:
+      url: "{{base_url_local}}/v/2/crs/check-brilink-agent"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "{{userId}}"
+          - name: prakarsaId
+            value: "31290"
+          - name: loanType
+            value: Pinang Performa Pro
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 13 Mar 2025 06:48:10 GMT
+        - name: Content-Length
+          value: "201"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Error cURL",
+              "message": "Sedang Ada Kendala Pengecekan Agen BRILink",
+              "status": 500
+          }
+  - name: success - agen tidak terdaftar
+    request:
+      url: "{{base_url_local}}/v/2/crs/check-brilink-agent"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "{{userId}}"
+          - name: prakarsaId
+            value: "31290"
+          - name: loanType
+            value: Pinang Performa Pro
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 12 Mar 2025 09:53:24 GMT
+        - name: Content-Length
+          value: "116"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "status": -1
+              },
+              "desc": "Data Invalid",
+              "message": "Debitur tidak terdaftar whitelist agen BRILink",
+              "status": 500
+          }
+  - name: success - agen terdaftar
+    request:
+      url: "{{base_url_local}}/v/2/crs/check-brilink-agent"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "{{userId}}"
+          - name: prakarsaId
+            value: "31290"
+          - name: loanType
+            value: Pinang Performa Pro
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 12 Mar 2025 09:53:24 GMT
+        - name: Content-Length
+          value: "116"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "status": 1
+              },
+              "desc": "Data Valid",
+              "message": "Agen terdaftar pada BRILink",
+              "status": 200
+          }
+  - name: success - agen terdaftar
+    request:
+      url: "{{base_url_local}}/v/2/crs/check-brilink-agent"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "{{userId}}"
+          - name: prakarsaId
+            value: "31290"
+          - name: loanType
+            value: Pinang Performa Pro
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 12 Mar 2025 09:53:24 GMT
+        - name: Content-Length
+          value: "116"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "status": 1
+              },
+              "desc": "Data Valid",
+              "message": "Agen terdaftar pada BRILink",
+              "status": 200
+          }
+  - name: error - kendala api bigdata
+    request:
+      url: "{{base_url_local}}/v/2/crs/check-brilink-agent"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "{{userId}}"
+          - name: prakarsaId
+            value: "31290"
+          - name: loanType
+            value: Pinang Performa Pro
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 13 Mar 2025 06:48:10 GMT
+        - name: Content-Length
+          value: "201"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Error cURL",
+              "message": "Sedang Ada Kendala Pengecekan Agen BRILink",
+              "status": 500
+          }
+  - name: general error
+    request:
+      url: "{{base_url_local}}/v/2/crs/check-brilink-agent"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "{{userId}}"
+          - name: prakarsaId
+            value: "31290"
+          - name: loanType
+            value: Pinang Performa Pro
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 13 Mar 2025 06:48:10 GMT
+        - name: Content-Length
+          value: "201"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Could not connect ...",
+              "message": "Server sedang dalam perbaikan. Silahkan menghubungi administrator.",
+              "status": 500
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{base_url_local}}/v/2/crs/check-brilink-agent"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "{{userId}}"
+          - name: prakarsaId
+            value: "31290"
+          - name: loanType
+            value: Pinang Performa Pro
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 13 Mar 2025 06:04:32 GMT
+        - name: Content-Length
+          value: "68"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memiliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url_local}}/v/2/crs/check-brilink-agent"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "{{userId}}"
+          - name: prakarsaId
+            value: "31290"
+          - name: loanType
+            value: Pinang Performa Pro
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 13 Mar 2025 06:19:41 GMT
+        - name: Content-Length
+          value: "75"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: success - agen tidak terdaftar
+    request:
+      url: "{{base_url_local}}/v/2/crs/check-brilink-agent"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "{{userId}}"
+          - name: prakarsaId
+            value: "31290"
+          - name: loanType
+            value: Pinang Performa Pro
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 12 Mar 2025 09:53:24 GMT
+        - name: Content-Length
+          value: "116"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "status": -1
+              },
+              "desc": "Data Invalid",
+              "message": "Debitur tidak terdaftar whitelist agen BRILink",
+              "status": 500
+          }

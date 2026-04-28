@@ -1,0 +1,186 @@
+info:
+  name: Find SPH V2
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{base_url_prod}}/v/2/document/find-sph"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "{{userId}}"
+        description: "[Encode]Personal Number BRI Agro (UserID Login) { MANDATORY }"
+      - name: prakarsaId
+        value: "5704"
+        description: Prakarsa ID { MANDATORY }
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/document/find-sph"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: prakarsaId
+            value: "30946"
+            description: Prakarsa ID { MANDATORY }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Sun, 23 May 2021 18:28:12 GMT
+        - name: Content-Length
+          value: "409"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Tidak Memliki Akses",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: error - access forbidden (403)
+    request:
+      url: "{{base_url}}/v/1/document/find-sph"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: prakarsaId
+            value: "30946"
+            description: Prakarsa ID { MANDATORY }
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 22 Jul 2022 01:55:34 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: error - data sph not found
+    request:
+      url: "{{base_url}}/v/1/document/find-sph"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: prakarsaId
+            value: "30946"
+            description: Prakarsa ID { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Sun, 23 May 2021 18:28:12 GMT
+        - name: Content-Length
+          value: "409"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Error record not found",
+              "message": "SPH Tidak Ditemukan",
+              "status": 404
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/document/find-sph"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: prakarsaId
+            value: "30946"
+            description: Prakarsa ID { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Sun, 23 May 2021 18:28:12 GMT
+        - name: Content-Length
+          value: "409"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "id": 10395,
+                  "prakarsaId": 31572,
+                  "letterNumber": "10/SPH/XMA/II/2021",
+                  "branchCode": "XMA",
+                  "month": "II",
+                  "year": "2021",
+                  "cblName": "ADK",
+                  "cblNik": "999941",
+                  "cblPosition": "Community Branch Leader",
+                  "branchAddress": "Cempaka Putih Timur",
+                  "cblLetterNumber": "SK-1212",
+                  "cblLetterDate": "2020-08-30",
+                  "districtCourtOffice": "Jakarta Pusat",
+                  "debtReceiptDate": "2020-08-29",
+                  "signatureBranch": "Kantor Cabang Kuningan",
+                  "signatureDate": "2020-08-30",
+                  "contractDate": "2021-09-08",
+                  "provisionFee": 100000,
+                  "administrationFee": 300000,
+                  "rate": 44.6,
+                  "jobPartner": "",
+                  "updatedAt": "29-10-2025"
+              },
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }

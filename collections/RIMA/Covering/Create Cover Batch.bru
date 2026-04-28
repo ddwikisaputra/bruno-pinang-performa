@@ -1,0 +1,35 @@
+meta {
+  name: Create Cover Batch
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{BASE_URL}}/v1/covering/batch/create/
+  body: text
+  auth: bearer
+}
+
+auth:bearer {
+  token: 
+}
+
+body:text {
+  {
+      "payload": "{{REQUEST_BODY}}"
+  }
+}
+
+script:pre-request {
+  const payload = {
+      "cover_batch_title" : "BATCH NIH",
+      "cover_batch_period": "2025-12-12"
+  }
+  
+  const result = encrypt(JSON.stringify(payload))
+  bru.setEnvVar("REQUEST_BODY", result);
+}
+
+settings {
+  encodeUrl: true
+}

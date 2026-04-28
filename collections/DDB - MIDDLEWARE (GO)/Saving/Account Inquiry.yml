@@ -1,0 +1,100 @@
+info:
+  name: Account Inquiry
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/digiagri/v2/saving/account/inquiry"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "000426"
+      - name: noCIF
+        value: "0000121071"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Success Response
+    request:
+      url: "{{baseUrl}}/api/digiagri/v2/saving/account/inquiry"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000426"
+          - name: noCIF
+            value: "0000121070"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Thu, 09 Oct 2025 03:46:32 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "251"
+        - name: Connection
+          value: keep-alive
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "statusCode": "1",
+              "statusDescription": "Success",
+              "Data": [
+                  {
+                      "accountName": "ASYA RAMADLANI",
+                      "accountNumber": "001001021487316",
+                      "accountDesc": "TABUNGAN RAYA"
+                  },
+                  {
+                      "accountName": "ASYA RAMADLANI",
+                      "accountNumber": "001201001234317",
+                      "accountDesc": "TABUNGAN RAYA"
+                  }
+              ]
+          }
+  - name: Cif Not Found
+    request:
+      url: "{{baseUrl}}/api/digiagri/v2/saving/account/inquiry"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000426"
+          - name: noCIF
+            value: "0000121000"
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Date
+          value: Thu, 09 Oct 2025 03:47:00 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "61"
+        - name: Connection
+          value: keep-alive
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "statusCode": "-1",
+              "statusDescription": "CIF tidak ditemukan"
+          }

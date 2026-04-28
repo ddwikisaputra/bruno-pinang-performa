@@ -1,0 +1,529 @@
+info:
+  name: Approved V2
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{base_url_local}}/v/2/prakarsa/approved/31480"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: UmF5YVBpUGVyVG9w9FR0lGX8gbKqENX7tm3SCQ3qhjy6xQ==
+        description: "[ENCODE]Personal Number BRI Agro (UserID Login)"
+  auth:
+    type: bearer
+    token: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiMzBiOGMyZjAtYTU2Mi00MTk1LWE0YjctZDc1Mjk0OTkzY2U5Iiwibm9faHAiOiIwODEzNjAzNjE3NjQifSwiZGlnaWFncmlfbG9naW5fZGF0YSI6eyJwbiI6Ijk5OTkxMSIsIm5hbWUiOiJBcmRpYW4iLCJicmFuY2hfY29kZSI6Ijk5OTkiLCJvcmdhbml6YXRpb25faWQiOiI5OTk5Iiwib3JnYW5pemF0aW9uX25hbWUiOiJQaW5hbmcgTWlrcm8iLCJvY2N1cGF0aW9uX25hbWUiOiJBY2NvdW50IE9mZmljZXIiLCJsb2dpbl90aWNrZXQiOiJ4eHh4eCIsImFjY2Vzc19sZXZlbCI6IjEwIiwicGhvdG8iOiIifSwicG4iOiI5OTk5MTEiLCJuaWsiOiIzNTc4MTUwODAyOTEwMDAxIiwiZmlyc3RfbG9naW4iOnRydWUsImlzcyI6ImJhbmtyYXlhLmNvLmlkIiwiZXhwIjoxNzQwNDkxODExfQ.N3zLB0KgTNWOEtMrZNOkF1JdoEgd6nqfXDeUT5-7LIV-2K8KMdIiayMRhWDhJ_tcrR_xpKOtEODSneP_rOi2Gw
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/prakarsa/approved/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 24 Jun 2021 06:56:24 GMT
+        - name: Content-Length
+          value: "172"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Tidak Memliki Akses",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: access forbidden
+    request:
+      url: "{{base_url}}/v/1/prakarsa/approved/30946"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000057"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 19 Jul 2022 06:45:47 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/prakarsa/approved/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 24 Jun 2021 06:56:24 GMT
+        - name: Content-Length
+          value: "172"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/prakarsa/approved/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 24 Jun 2021 06:56:24 GMT
+        - name: Content-Length
+          value: "172"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect ....."
+          }
+  - name: error prakarsa not found
+    request:
+      url: "{{base_url}}/v/1/prakarsa/approved/-1"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 24 Jun 2021 06:56:24 GMT
+        - name: Content-Length
+          value: "172"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Error record not found",
+              "message": "Prakarsa Tidak Ditemukan",
+              "status": 500
+          }
+  - name: error parameter validation
+    request:
+      url: "{{base_url}}/v/1/prakarsa/approved/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 24 Jun 2021 07:00:19 GMT
+        - name: Content-Length
+          value: "83"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Status < 5 (dibawah menuggu hasil putusan)",
+              "message": "Maaf, Proses persetujuan belum bisa digunakan. Silahkan monitor status terakhir Prakarsa",
+              "status": 500
+          }
+  - name: error validasi lama usaha < 12 Bulan (Performa Pro)
+    request:
+      url: "{{base_url}}/v/2/prakarsa/approved/31415"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "{{userId}}"
+            description: "[ENCODE]Personal Number BRI Agro (UserID Login)"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 01 Feb 2024 20:57:24 GMT
+        - name: Content-Length
+          value: "179"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Lama usaha minimal harus 12 bulan",
+              "message": "Syarat pengajuan pinjaman minimal 1 tahun, jika belum memenuhi kamu bisa kembalikan ke RM atau tolak pinjaman",
+              "status": 500
+          }
+  - name: error validasi coverage agunan tambahan (agunan tambahan < plafond)
+    request:
+      url: "{{base_url}}/v/2/prakarsa/approved/1191"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "{{userId}}"
+            description: "[ENCODE]Personal Number BRI Agro (UserID Login)"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 28 Feb 2024 06:37:14 GMT
+        - name: Content-Length
+          value: "148"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "error validasi coverage agunan",
+              "message": "Coverage Total Nilai Likuidasi Agunan Tambahan mininal 80% dari Plafond Pinjaman.",
+              "status": 500
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/prakarsa/approved/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 24 Jun 2021 07:01:39 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Data Tersimpan",
+              "message": "Data prakarsa berhasil disimpan",
+              "status": 200
+          }
+  - name: error validasi lama usaha < 12 Bulan (Performa Pro)
+    request:
+      url: "{{base_url}}/v/2/prakarsa/approved/31415"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "{{userId}}"
+            description: "[ENCODE]Personal Number BRI Agro (UserID Login)"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 01 Feb 2024 20:57:24 GMT
+        - name: Content-Length
+          value: "179"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Lama usaha minimal harus 12 bulan",
+              "message": "Syarat pengajuan pinjaman minimal 1 tahun, jika belum memenuhi kamu bisa kembalikan ke RM atau tolak pinjaman",
+              "status": 500
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/prakarsa/approved/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 24 Jun 2021 06:56:24 GMT
+        - name: Content-Length
+          value: "172"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Tidak Memliki Akses",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: error validasi coverage agunan tambahan (agunan tambahan < plafond)
+    request:
+      url: "{{base_url}}/v/2/prakarsa/approved/1191"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "{{userId}}"
+            description: "[ENCODE]Personal Number BRI Agro (UserID Login)"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 28 Feb 2024 06:37:14 GMT
+        - name: Content-Length
+          value: "148"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "error validasi coverage agunan",
+              "message": "Coverage Total Nilai Likuidasi Agunan Tambahan mininal 80% dari Plafond Pinjaman.",
+              "status": 500
+          }
+  - name: error prakarsa not found
+    request:
+      url: "{{base_url}}/v/1/prakarsa/approved/-1"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 24 Jun 2021 06:56:24 GMT
+        - name: Content-Length
+          value: "172"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Error record not found",
+              "message": "Prakarsa Tidak Ditemukan",
+              "status": 500
+          }
+  - name: error parameter validation
+    request:
+      url: "{{base_url}}/v/1/prakarsa/approved/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 24 Jun 2021 07:00:19 GMT
+        - name: Content-Length
+          value: "83"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Status < 5 (dibawah menuggu hasil putusan)",
+              "message": "Maaf, Proses persetujuan belum bisa digunakan. Silahkan monitor status terakhir Prakarsa",
+              "status": 500
+          }
+  - name: access forbidden
+    request:
+      url: "{{base_url}}/v/1/prakarsa/approved/30946"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000057"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 19 Jul 2022 06:45:47 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/prakarsa/approved/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 24 Jun 2021 06:56:24 GMT
+        - name: Content-Length
+          value: "172"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/prakarsa/approved/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 24 Jun 2021 07:01:39 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Data Tersimpan",
+              "message": "Data prakarsa berhasil disimpan",
+              "status": 200
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/prakarsa/approved/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 24 Jun 2021 06:56:24 GMT
+        - name: Content-Length
+          value: "172"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect ....."
+          }

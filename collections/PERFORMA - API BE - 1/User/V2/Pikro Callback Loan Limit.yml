@@ -1,0 +1,26 @@
+info:
+  name: Pikro Callback Loan Limit
+  type: http
+  seq: 6
+
+http:
+  method: POST
+  url: "{{base_url}}/pikro-callback-loan-limit/1"
+  body:
+    type: form-urlencoded
+    data:
+      - name: actionDate
+        value: 2021-09-22 13:50:02
+      - name: loanLimit
+        value: "100000000"
+      - name: loanTerm
+        value: "12"
+      - name: statusDescription
+        value: Pinjaman Anda telah disetujui sebesar Rp. 10000000 dengan jangka waktu 12. Segera hubungi BRI Agro terdekat.
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

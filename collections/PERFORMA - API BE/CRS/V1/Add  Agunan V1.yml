@@ -1,0 +1,1482 @@
+info:
+  name: Add  Agunan V1
+  type: http
+  seq: 12
+
+http:
+  method: POST
+  url: "{{base_url}}/v/1/crs/add-agunan"
+  body:
+    type: form-urlencoded
+    data:
+      - name: prakarsaId
+        value: "614"
+        description: ID Prakarsa
+      - name: userId
+        value: "999915"
+        description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+      - name: orderNumber
+        value: "1"
+        description: Agunan Ke- {MANDATORY} (1-3)
+      - name: collateralType
+        value: Kendaraan
+        description: Jenis Agunan { MANDATORY } [ 'Tanah Tanpa Bangunan' | 'Tanah dan Bangunan' | 'Kendaraan' | 'Persediaan' | 'Piutang Dagang' | 'Lainnya' ]
+      - name: collateralOwnership
+        value: BPKB
+        description: Kepemilikan Agunan { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG]
+      - name: collateralOwnerName
+        value: Dwiki Saputra
+        description: Nama Pemilik Agunan { OPTIONAL } [ ALL ]
+      - name: collateralNumber
+        value: "001"
+        description: Nomor Agunan { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG ]
+      - name: collateralLandArea
+        value: "300"
+        description: Luas Tanah { OPTIONAL } [ TTB ATAU TB]
+        disabled: true
+      - name: estimatedLandPrice
+        value: "100000000"
+        description: Estimasi Harga Tanah { OPTIONAL } [ TTB ATAU TB]
+        disabled: true
+      - name: estimatedCollateralValue
+        value: "2000000.30"
+        description: Estimasi Nilai Agunan { OPTIONAL } [ ALL ]
+      - name: liquidationValue
+        value: "500000.90"
+        description: Nilai Likuiditas Agunan { OPTIONAL } [ ALL ]
+      - name: collateralBuildingArea
+        value: "190"
+        description: Luas Bangunan { OPTIONAL } [ TB ]
+        disabled: true
+      - name: estimatedBuildingPrice
+        value: "2500000000"
+        description: Estimasi Harga Bangunan { OPTIONAL } [ TB ]
+        disabled: true
+      - name: collateralDescription
+        value: Mobil
+        description: Keterangan Kendaraan atau Agunan { OPTIONAL } [ KENDARAAN | PERSEDIAAN | PIUTANG DAGANG | LAINNYA ]
+      - name: vehicleAssemblyYear
+        value: "2018"
+        description: Tahun Perolehan Kendaraan { OPTIONAL } [ KENDARAAN ]
+        disabled: true
+      - name: collateralPictureFrontBlob
+        value: ""
+        description: Blob Agunan Depan (base64)  { OPTIONAL } [ ALL ]
+        disabled: true
+      - name: collateralPictureFrontMimeType
+        value: image/jpeg
+        description: MimeType Agunan Depan (image/jpeg | image/png)  { OPTIONAL } [ ALL ]
+        disabled: true
+      - name: collateralPictureSideBlob
+        value: ""
+        description: Blob Agunan Samping (base64)  { OPTIONAL } [ ALL ]
+        disabled: true
+      - name: collateralPictureFrontMimeType
+        value: image/jpeg
+        description: MimeType Agunan Samping (image/jpeg | image/png)  { OPTIONAL } [ ALL ]
+        disabled: true
+      - name: collateralPictureBackBlob
+        value: ""
+        description: Blob Agunan Belakang (base64)  { OPTIONAL } [ ALL ]
+        disabled: true
+      - name: collateralPictureBackMimeType
+        value: image/jpeg
+        description: MimeType Agunan Belakang (image/jpeg | image/png)  { OPTIONAL } [ ALL ]
+        disabled: true
+      - name: collateralOwnershipPicture1Blob
+        value: ""
+        description: Blob Surat Kepemilikan Agunan 1 (base64)  { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG ]
+        disabled: true
+      - name: collateralOwnershipPicture1MimeType
+        value: image/jpeg
+        description: MimeType Surat Kepemilikan Agunan 1 (image/jpeg | image/png)  { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG ]
+        disabled: true
+      - name: collateralOwnershipPicture2Blob
+        value: ""
+        description: Blob Surat Kepemilikan Agunan 2 (base64)  { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG ]
+        disabled: true
+      - name: collateralOwnershipPicture2MimeType
+        value: image/jpeg
+        description: MimeType Surat Kepemilikan Agunan 1 (image/jpeg | image/png)  { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG ]
+        disabled: true
+      - name: collateralInteriorPictureBlob
+        value: ""
+        description: Blob Interior (base64)  { OPTIONAL } [ TB ]
+        disabled: true
+      - name: collateralInteriorPictureMimeType
+        value: image/jpeg
+        description: MimeType Interior (image/jpeg | image/png)  { OPTIONAL } [ TB ]
+        disabled: true
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: access forbidden (403)
+    request:
+      url: "{{base_url}}/v/1/crs/add-agunan"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: prakarsaId
+            value: "30946"
+            description: ID Prakarsa
+          - name: userId
+            value: "999951"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: orderNumber
+            value: "1"
+            description: Agunan Ke- {MANDATORY} (1-3)
+          - name: collateralType
+            value: Kendaraan
+            description: Jenis Agunan { MANDATORY } [ 'Tanah Tanpa Bangunan' | 'Tanah dan Bangunan' | 'Kendaraan' | 'Persediaan' | 'Piutang Dagang' | 'Lainnya' ]
+          - name: collateralOwnership
+            value: BPKB
+            description: Kepemilikan Agunan { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG]
+          - name: collateralOwnerName
+            value: Dwiki Saputra
+            description: Nama Pemilik Agunan { OPTIONAL } [ ALL ]
+          - name: collateralNumber
+            value: "001"
+            description: Nomor Agunan { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG ]
+          - name: collateralLandArea
+            value: "300"
+            description: Luas Tanah { OPTIONAL } [ TTB ATAU TB]
+            disabled: true
+          - name: estimatedLandPrice
+            value: "100000000"
+            description: Estimasi Harga Tanah { OPTIONAL } [ TTB ATAU TB]
+            disabled: true
+          - name: estimatedCollateralValue
+            value: "2000000.30"
+            description: Estimasi Nilai Agunan { OPTIONAL } [ ALL ]
+          - name: liquidationValue
+            value: "500000.90"
+            description: Nilai Likuiditas Agunan { OPTIONAL } [ ALL ]
+          - name: collateralBuildingArea
+            value: "190"
+            description: Luas Bangunan { OPTIONAL } [ TB ]
+            disabled: true
+          - name: estimatedBuildingPrice
+            value: "2500000000"
+            description: Estimasi Harga Bangunan { OPTIONAL } [ TB ]
+            disabled: true
+          - name: collateralDescription
+            value: Mobil
+            description: Keterangan Kendaraan atau Agunan { OPTIONAL } [ KENDARAAN | PERSEDIAAN | PIUTANG DAGANG | LAINNYA ]
+          - name: vehicleAssemblyYear
+            value: "2018"
+            description: Tahun Perolehan Kendaraan { OPTIONAL } [ KENDARAAN ]
+            disabled: true
+          - name: collateralPictureFrontBlob
+            value: ""
+            description: Blob Agunan Depan (base64)  { OPTIONAL } [ ALL ]
+            disabled: true
+          - name: collateralPictureFrontMimeType
+            value: image/jpeg
+            description: MimeType Agunan Depan (image/jpeg | image/png)  { OPTIONAL } [ ALL ]
+            disabled: true
+          - name: collateralPictureSideBlob
+            value: ""
+            description: Blob Agunan Samping (base64)  { OPTIONAL } [ ALL ]
+            disabled: true
+          - name: collateralPictureFrontMimeType
+            value: image/jpeg
+            description: MimeType Agunan Samping (image/jpeg | image/png)  { OPTIONAL } [ ALL ]
+            disabled: true
+          - name: collateralPictureBackBlob
+            value: ""
+            description: Blob Agunan Belakang (base64)  { OPTIONAL } [ ALL ]
+            disabled: true
+          - name: collateralPictureBackMimeType
+            value: image/jpeg
+            description: MimeType Agunan Belakang (image/jpeg | image/png)  { OPTIONAL } [ ALL ]
+            disabled: true
+          - name: collateralOwnershipPicture1Blob
+            value: ""
+            description: Blob Surat Kepemilikan Agunan 1 (base64)  { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG ]
+            disabled: true
+          - name: collateralOwnershipPicture1MimeType
+            value: image/jpeg
+            description: MimeType Surat Kepemilikan Agunan 1 (image/jpeg | image/png)  { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG ]
+            disabled: true
+          - name: collateralOwnershipPicture2Blob
+            value: ""
+            description: Blob Surat Kepemilikan Agunan 2 (base64)  { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG ]
+            disabled: true
+          - name: collateralOwnershipPicture2MimeType
+            value: image/jpeg
+            description: MimeType Surat Kepemilikan Agunan 1 (image/jpeg | image/png)  { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG ]
+            disabled: true
+          - name: collateralInteriorPictureBlob
+            value: ""
+            description: Blob Interior (base64)  { OPTIONAL } [ TB ]
+            disabled: true
+          - name: collateralInteriorPictureMimeType
+            value: image/jpeg
+            description: MimeType Interior (image/jpeg | image/png)  { OPTIONAL } [ TB ]
+            disabled: true
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 20 Jul 2022 08:59:57 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/crs/add-agunan"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: prakarsaId
+            value: "332"
+            description: ID Prakarsa
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: orderNumber
+            value: "3"
+            description: Agunan Ke- {MANDATORY} (1-3)
+          - name: collateralType
+            value: Kendaraan
+            description: Jenis Agunan { MANDATORY } [ 'Tanah Tanpa Bangunan' | 'Tanah dan Bangunan' | 'Kendaraan' | 'Persediaan' | 'Piutang Dagang' | 'Lainnya' ]
+          - name: collateralOwnership
+            value: BPKB
+            description: Kepemilikan Agunan { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG]
+          - name: collateralOwnerName
+            value: Dwiki Saputra
+            description: Nama Pemilik Agunan { OPTIONAL } [ ALL ]
+          - name: collateralNumber
+            value: "001"
+            description: Nomor Agunan { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG ]
+          - name: collateralLandArea
+            value: "300"
+            description: Luas Tanah { OPTIONAL } [ TTB ATAU TB]
+            disabled: true
+          - name: estimatedLandPrice
+            value: "100000000"
+            description: Estimasi Harga Tanah { OPTIONAL } [ TTB ATAU TB]
+            disabled: true
+          - name: estimatedCollateralValue
+            value: "2000000.30"
+            description: Estimasi Nilai Agunan { OPTIONAL } [ ALL ]
+          - name: liquidationValue
+            value: "500000.90"
+            description: Nilai Likuiditas Agunan { OPTIONAL } [ ALL ]
+          - name: collateralBuildingArea
+            value: "190"
+            description: Luas Bangunan { OPTIONAL } [ TB ]
+            disabled: true
+          - name: estimatedBuildingPrice
+            value: "2500000000"
+            description: Estimasi Harga Bangunan { OPTIONAL } [ TB ]
+            disabled: true
+          - name: collateralDescription
+            value: Mobil
+            description: Keterangan Kendaraan atau Agunan { OPTIONAL } [ KENDARAAN | PERSEDIAAN | PIUTANG DAGANG | LAINNYA ]
+          - name: vehicleAssemblyYear
+            value: "2018"
+            description: Tahun Perolehan Kendaraan { OPTIONAL } [ KENDARAAN ]
+            disabled: true
+          - name: collateralPictureFrontBlob
+            value: "{{jpgBlob}}"
+            description: Blob Agunan Depan (base64)  { OPTIONAL } [ ALL ]
+          - name: collateralPictureFrontMimeType
+            value: image/jpeg
+            description: MimeType Agunan Depan (image/jpeg | image/png)  { OPTIONAL } [ ALL ]
+          - name: collateralPictureSideBlob
+            value: "{{jpgBlob}}"
+            description: Blob Agunan Samping (base64)  { OPTIONAL } [ ALL ]
+          - name: collateralPictureFrontMimeType
+            value: image/jpeg
+            description: MimeType Agunan Samping (image/jpeg | image/png)  { OPTIONAL } [ ALL ]
+          - name: collateralPictureBackBlob
+            value: "{{jpgBlob}}"
+            description: Blob Agunan Belakang (base64)  { OPTIONAL } [ ALL ]
+          - name: collateralPictureBackMimeType
+            value: image/jpeg
+            description: MimeType Agunan Belakang (image/jpeg | image/png)  { OPTIONAL } [ ALL ]
+          - name: collateralOwnershipPicture1Blob
+            value: "{{jpgBlob}}"
+            description: Blob Surat Kepemilikan Agunan 1 (base64)  { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG ]
+          - name: collateralOwnershipPicture1MimeType
+            value: image/jpeg
+            description: MimeType Surat Kepemilikan Agunan 1 (image/jpeg | image/png)  { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG ]
+          - name: collateralOwnershipPicture2Blob
+            value: "{{jpgBlob}}"
+            description: Blob Surat Kepemilikan Agunan 2 (base64)  { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG ]
+          - name: collateralOwnershipPicture2MimeType
+            value: image/jpeg
+            description: MimeType Surat Kepemilikan Agunan 1 (image/jpeg | image/png)  { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG ]
+          - name: collateralInteriorPictureBlob
+            value: "{{jpgBlob}}"
+            description: Blob Interior (base64)  { OPTIONAL } [ TB ]
+            disabled: true
+          - name: collateralInteriorPictureMimeType
+            value: image/jpeg
+            description: MimeType Interior (image/jpeg | image/png)  { OPTIONAL } [ TB ]
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 03 Sep 2021 02:16:32 GMT
+        - name: Content-Length
+          value: "80"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Data Tersimpan",
+              "message": "Data Agunan berhasil disimpan",
+              "status": 200
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/crs/add-agunan"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: prakarsaId
+            value: "332"
+            description: ID Prakarsa
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: orderNumber
+            value: "3"
+            description: Agunan Ke- {MANDATORY} (1-3)
+          - name: collateralType
+            value: Kendaraan
+            description: Jenis Agunan { MANDATORY } [ 'Tanah Tanpa Bangunan' | 'Tanah dan Bangunan' | 'Kendaraan' | 'Persediaan' | 'Piutang Dagang' | 'Lainnya' ]
+          - name: collateralOwnership
+            value: BPKB
+            description: Kepemilikan Agunan { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG]
+          - name: collateralOwnerName
+            value: Dwiki Saputra
+            description: Nama Pemilik Agunan { OPTIONAL } [ ALL ]
+          - name: collateralNumber
+            value: "001"
+            description: Nomor Agunan { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG ]
+          - name: collateralLandArea
+            value: "300"
+            description: Luas Tanah { OPTIONAL } [ TTB ATAU TB]
+            disabled: true
+          - name: estimatedLandPrice
+            value: "100000000"
+            description: Estimasi Harga Tanah { OPTIONAL } [ TTB ATAU TB]
+            disabled: true
+          - name: estimatedCollateralValue
+            value: "2000000.30"
+            description: Estimasi Nilai Agunan { OPTIONAL } [ ALL ]
+          - name: liquidationValue
+            value: "500000.90"
+            description: Nilai Likuiditas Agunan { OPTIONAL } [ ALL ]
+          - name: collateralBuildingArea
+            value: "190"
+            description: Luas Bangunan { OPTIONAL } [ TB ]
+            disabled: true
+          - name: estimatedBuildingPrice
+            value: "2500000000"
+            description: Estimasi Harga Bangunan { OPTIONAL } [ TB ]
+            disabled: true
+          - name: collateralDescription
+            value: Mobil
+            description: Keterangan Kendaraan atau Agunan { OPTIONAL } [ KENDARAAN | PERSEDIAAN | PIUTANG DAGANG | LAINNYA ]
+          - name: vehicleAssemblyYear
+            value: "2018"
+            description: Tahun Perolehan Kendaraan { OPTIONAL } [ KENDARAAN ]
+            disabled: true
+          - name: collateralPictureFrontBlob
+            value: "{{jpgBlob}}"
+            description: Blob Agunan Depan (base64)  { OPTIONAL } [ ALL ]
+          - name: collateralPictureFrontMimeType
+            value: image/jpeg
+            description: MimeType Agunan Depan (image/jpeg | image/png)  { OPTIONAL } [ ALL ]
+          - name: collateralPictureSideBlob
+            value: "{{jpgBlob}}"
+            description: Blob Agunan Samping (base64)  { OPTIONAL } [ ALL ]
+          - name: collateralPictureFrontMimeType
+            value: image/jpeg
+            description: MimeType Agunan Samping (image/jpeg | image/png)  { OPTIONAL } [ ALL ]
+          - name: collateralPictureBackBlob
+            value: "{{jpgBlob}}"
+            description: Blob Agunan Belakang (base64)  { OPTIONAL } [ ALL ]
+          - name: collateralPictureBackMimeType
+            value: image/jpeg
+            description: MimeType Agunan Belakang (image/jpeg | image/png)  { OPTIONAL } [ ALL ]
+          - name: collateralOwnershipPicture1Blob
+            value: "{{jpgBlob}}"
+            description: Blob Surat Kepemilikan Agunan 1 (base64)  { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG ]
+          - name: collateralOwnershipPicture1MimeType
+            value: image/jpeg
+            description: MimeType Surat Kepemilikan Agunan 1 (image/jpeg | image/png)  { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG ]
+          - name: collateralOwnershipPicture2Blob
+            value: "{{jpgBlob}}"
+            description: Blob Surat Kepemilikan Agunan 2 (base64)  { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG ]
+          - name: collateralOwnershipPicture2MimeType
+            value: image/jpeg
+            description: MimeType Surat Kepemilikan Agunan 1 (image/jpeg | image/png)  { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG ]
+          - name: collateralInteriorPictureBlob
+            value: "{{jpgBlob}}"
+            description: Blob Interior (base64)  { OPTIONAL } [ TB ]
+            disabled: true
+          - name: collateralInteriorPictureMimeType
+            value: image/jpeg
+            description: MimeType Interior (image/jpeg | image/png)  { OPTIONAL } [ TB ]
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 03 Sep 2021 02:16:32 GMT
+        - name: Content-Length
+          value: "80"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: error upload file
+    request:
+      url: "{{base_url}}/v/1/crs/add-agunan"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: prakarsaId
+            value: "332"
+            description: ID Prakarsa
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: orderNumber
+            value: "3"
+            description: Agunan Ke- {MANDATORY} (1-3)
+          - name: collateralType
+            value: Kendaraan
+            description: Jenis Agunan { MANDATORY } [ 'Tanah Tanpa Bangunan' | 'Tanah dan Bangunan' | 'Kendaraan' | 'Persediaan' | 'Piutang Dagang' | 'Lainnya' ]
+          - name: collateralOwnership
+            value: BPKB
+            description: Kepemilikan Agunan { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG]
+          - name: collateralOwnerName
+            value: Dwiki Saputra
+            description: Nama Pemilik Agunan { OPTIONAL } [ ALL ]
+          - name: collateralNumber
+            value: "001"
+            description: Nomor Agunan { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG ]
+          - name: collateralLandArea
+            value: "300"
+            description: Luas Tanah { OPTIONAL } [ TTB ATAU TB]
+            disabled: true
+          - name: estimatedLandPrice
+            value: "100000000"
+            description: Estimasi Harga Tanah { OPTIONAL } [ TTB ATAU TB]
+            disabled: true
+          - name: estimatedCollateralValue
+            value: "2000000.30"
+            description: Estimasi Nilai Agunan { OPTIONAL } [ ALL ]
+          - name: liquidationValue
+            value: "500000.90"
+            description: Nilai Likuiditas Agunan { OPTIONAL } [ ALL ]
+          - name: collateralBuildingArea
+            value: "190"
+            description: Luas Bangunan { OPTIONAL } [ TB ]
+            disabled: true
+          - name: estimatedBuildingPrice
+            value: "2500000000"
+            description: Estimasi Harga Bangunan { OPTIONAL } [ TB ]
+            disabled: true
+          - name: collateralDescription
+            value: Mobil
+            description: Keterangan Kendaraan atau Agunan { OPTIONAL } [ KENDARAAN | PERSEDIAAN | PIUTANG DAGANG | LAINNYA ]
+          - name: vehicleAssemblyYear
+            value: "2018"
+            description: Tahun Perolehan Kendaraan { OPTIONAL } [ KENDARAAN ]
+            disabled: true
+          - name: collateralPictureFrontBlob
+            value: "{{jpgBlob}}"
+            description: Blob Agunan Depan (base64)  { OPTIONAL } [ ALL ]
+          - name: collateralPictureFrontMimeType
+            value: image/jpeg
+            description: MimeType Agunan Depan (image/jpeg | image/png)  { OPTIONAL } [ ALL ]
+          - name: collateralPictureSideBlob
+            value: "{{jpgBlob}}"
+            description: Blob Agunan Samping (base64)  { OPTIONAL } [ ALL ]
+          - name: collateralPictureFrontMimeType
+            value: image/jpeg
+            description: MimeType Agunan Samping (image/jpeg | image/png)  { OPTIONAL } [ ALL ]
+          - name: collateralPictureBackBlob
+            value: "{{jpgBlob}}"
+            description: Blob Agunan Belakang (base64)  { OPTIONAL } [ ALL ]
+          - name: collateralPictureBackMimeType
+            value: image/jpeg
+            description: MimeType Agunan Belakang (image/jpeg | image/png)  { OPTIONAL } [ ALL ]
+          - name: collateralOwnershipPicture1Blob
+            value: "{{jpgBlob}}"
+            description: Blob Surat Kepemilikan Agunan 1 (base64)  { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG ]
+          - name: collateralOwnershipPicture1MimeType
+            value: image/jpeg
+            description: MimeType Surat Kepemilikan Agunan 1 (image/jpeg | image/png)  { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG ]
+          - name: collateralOwnershipPicture2Blob
+            value: "{{jpgBlob}}"
+            description: Blob Surat Kepemilikan Agunan 2 (base64)  { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG ]
+          - name: collateralOwnershipPicture2MimeType
+            value: image/jpeg
+            description: MimeType Surat Kepemilikan Agunan 1 (image/jpeg | image/png)  { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG ]
+          - name: collateralInteriorPictureBlob
+            value: "{{jpgBlob}}"
+            description: Blob Interior (base64)  { OPTIONAL } [ TB ]
+            disabled: true
+          - name: collateralInteriorPictureMimeType
+            value: image/jpeg
+            description: MimeType Interior (image/jpeg | image/png)  { OPTIONAL } [ TB ]
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 03 Sep 2021 02:16:32 GMT
+        - name: Content-Length
+          value: "80"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang dalam perbaikan. Silahkan mencoba beberapa saat lagi.",
+              "desc": "Menyesuaikan file yang diupload"
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/crs/add-agunan"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: prakarsaId
+            value: "332"
+            description: ID Prakarsa
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: orderNumber
+            value: "2"
+            description: Agunan Ke- {MANDATORY} (1-3)
+          - name: collateralType
+            value: Kendaraan
+            description: Jenis Agunan { MANDATORY } [ 'Tanah Tanpa Bangunan' | 'Tanah dan Bangunan' | 'Kendaraan' | 'Persediaan' | 'Piutang Dagang' | 'Lainnya' ]
+          - name: collateralOwnership
+            value: BPKB
+            description: Kepemilikan Agunan { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG]
+          - name: collateralOwnerName
+            value: Dwiki Saputra
+            description: Nama Pemilik Agunan { OPTIONAL } [ ALL ]
+          - name: collateralNumber
+            value: "001"
+            description: Nomor Agunan { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG ]
+          - name: collateralLandArea
+            value: "300"
+            description: Luas Tanah { OPTIONAL } [ TTB ATAU TB]
+            disabled: true
+          - name: estimatedLandPrice
+            value: "100000000"
+            description: Estimasi Harga Tanah { OPTIONAL } [ TTB ATAU TB]
+            disabled: true
+          - name: estimatedCollateralValue
+            value: "2000000.30"
+            description: Estimasi Nilai Agunan { OPTIONAL } [ ALL ]
+          - name: liquidationValue
+            value: "500000.90"
+            description: Nilai Likuiditas Agunan { OPTIONAL } [ ALL ]
+          - name: collateralBuildingArea
+            value: "190"
+            description: Luas Bangunan { OPTIONAL } [ TB ]
+            disabled: true
+          - name: estimatedBuildingPrice
+            value: "2500000000"
+            description: Estimasi Harga Bangunan { OPTIONAL } [ TB ]
+            disabled: true
+          - name: collateralDescription
+            value: Mobil
+            description: Keterangan Kendaraan atau Agunan { OPTIONAL } [ KENDARAAN | PERSEDIAAN | PIUTANG DAGANG | LAINNYA ]
+          - name: vehicleAssemblyYear
+            value: "2018"
+            description: Tahun Perolehan Kendaraan { OPTIONAL } [ KENDARAAN ]
+            disabled: true
+          - name: collateralPictureFrontBlob
+            value: "{{jpgBlob}}"
+            description: Blob Agunan Depan (base64)  { OPTIONAL } [ ALL ]
+          - name: collateralPictureFrontMimeType
+            value: image/jpeg
+            description: MimeType Agunan Depan (image/jpeg | image/png)  { OPTIONAL } [ ALL ]
+          - name: collateralPictureSideBlob
+            value: "{{jpgBlob}}"
+            description: Blob Agunan Samping (base64)  { OPTIONAL } [ ALL ]
+          - name: collateralPictureFrontMimeType
+            value: image/jpeg
+            description: MimeType Agunan Samping (image/jpeg | image/png)  { OPTIONAL } [ ALL ]
+          - name: collateralPictureBackBlob
+            value: "{{jpgBlob}}"
+            description: Blob Agunan Belakang (base64)  { OPTIONAL } [ ALL ]
+          - name: collateralPictureBackMimeType
+            value: image/jpeg
+            description: MimeType Agunan Belakang (image/jpeg | image/png)  { OPTIONAL } [ ALL ]
+          - name: collateralOwnershipPicture1Blob
+            value: "{{jpgBlob}}"
+            description: Blob Surat Kepemilikan Agunan 1 (base64)  { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG ]
+          - name: collateralOwnershipPicture1MimeType
+            value: image/jpeg
+            description: MimeType Surat Kepemilikan Agunan 1 (image/jpeg | image/png)  { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG ]
+          - name: collateralOwnershipPicture2Blob
+            value: "{{jpgBlob}}"
+            description: Blob Surat Kepemilikan Agunan 2 (base64)  { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG ]
+          - name: collateralOwnershipPicture2MimeType
+            value: image/jpeg
+            description: MimeType Surat Kepemilikan Agunan 1 (image/jpeg | image/png)  { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG ]
+          - name: collateralInteriorPictureBlob
+            value: "{{jpgBlob}}"
+            description: Blob Interior (base64)  { OPTIONAL } [ TB ]
+            disabled: true
+          - name: collateralInteriorPictureMimeType
+            value: image/jpeg
+            description: MimeType Interior (image/jpeg | image/png)  { OPTIONAL } [ TB ]
+            disabled: true
+    response:
+      status: 401
+      statusText: Unauthorized
+      body:
+        type: text
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/crs/add-agunan"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: prakarsaId
+            value: "332"
+            description: ID Prakarsa
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: orderNumber
+            value: "3"
+            description: Agunan Ke- {MANDATORY} (1-3)
+          - name: collateralType
+            value: Kendaraan
+            description: Jenis Agunan { MANDATORY } [ 'Tanah Tanpa Bangunan' | 'Tanah dan Bangunan' | 'Kendaraan' | 'Persediaan' | 'Piutang Dagang' | 'Lainnya' ]
+          - name: collateralOwnership
+            value: BPKB
+            description: Kepemilikan Agunan { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG]
+          - name: collateralOwnerName
+            value: Dwiki Saputra
+            description: Nama Pemilik Agunan { OPTIONAL } [ ALL ]
+          - name: collateralNumber
+            value: "001"
+            description: Nomor Agunan { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG ]
+          - name: collateralLandArea
+            value: "300"
+            description: Luas Tanah { OPTIONAL } [ TTB ATAU TB]
+            disabled: true
+          - name: estimatedLandPrice
+            value: "100000000"
+            description: Estimasi Harga Tanah { OPTIONAL } [ TTB ATAU TB]
+            disabled: true
+          - name: estimatedCollateralValue
+            value: "2000000.30"
+            description: Estimasi Nilai Agunan { OPTIONAL } [ ALL ]
+          - name: liquidationValue
+            value: "500000.90"
+            description: Nilai Likuiditas Agunan { OPTIONAL } [ ALL ]
+          - name: collateralBuildingArea
+            value: "190"
+            description: Luas Bangunan { OPTIONAL } [ TB ]
+            disabled: true
+          - name: estimatedBuildingPrice
+            value: "2500000000"
+            description: Estimasi Harga Bangunan { OPTIONAL } [ TB ]
+            disabled: true
+          - name: collateralDescription
+            value: Mobil
+            description: Keterangan Kendaraan atau Agunan { OPTIONAL } [ KENDARAAN | PERSEDIAAN | PIUTANG DAGANG | LAINNYA ]
+          - name: vehicleAssemblyYear
+            value: "2018"
+            description: Tahun Perolehan Kendaraan { OPTIONAL } [ KENDARAAN ]
+            disabled: true
+          - name: collateralPictureFrontBlob
+            value: "{{jpgBlob}}"
+            description: Blob Agunan Depan (base64)  { OPTIONAL } [ ALL ]
+          - name: collateralPictureFrontMimeType
+            value: image/jpeg
+            description: MimeType Agunan Depan (image/jpeg | image/png)  { OPTIONAL } [ ALL ]
+          - name: collateralPictureSideBlob
+            value: "{{jpgBlob}}"
+            description: Blob Agunan Samping (base64)  { OPTIONAL } [ ALL ]
+          - name: collateralPictureFrontMimeType
+            value: image/jpeg
+            description: MimeType Agunan Samping (image/jpeg | image/png)  { OPTIONAL } [ ALL ]
+          - name: collateralPictureBackBlob
+            value: "{{jpgBlob}}"
+            description: Blob Agunan Belakang (base64)  { OPTIONAL } [ ALL ]
+          - name: collateralPictureBackMimeType
+            value: image/jpeg
+            description: MimeType Agunan Belakang (image/jpeg | image/png)  { OPTIONAL } [ ALL ]
+          - name: collateralOwnershipPicture1Blob
+            value: "{{jpgBlob}}"
+            description: Blob Surat Kepemilikan Agunan 1 (base64)  { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG ]
+          - name: collateralOwnershipPicture1MimeType
+            value: image/jpeg
+            description: MimeType Surat Kepemilikan Agunan 1 (image/jpeg | image/png)  { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG ]
+          - name: collateralOwnershipPicture2Blob
+            value: "{{jpgBlob}}"
+            description: Blob Surat Kepemilikan Agunan 2 (base64)  { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG ]
+          - name: collateralOwnershipPicture2MimeType
+            value: image/jpeg
+            description: MimeType Surat Kepemilikan Agunan 1 (image/jpeg | image/png)  { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG ]
+          - name: collateralInteriorPictureBlob
+            value: "{{jpgBlob}}"
+            description: Blob Interior (base64)  { OPTIONAL } [ TB ]
+            disabled: true
+          - name: collateralInteriorPictureMimeType
+            value: image/jpeg
+            description: MimeType Interior (image/jpeg | image/png)  { OPTIONAL } [ TB ]
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 03 Sep 2021 02:16:32 GMT
+        - name: Content-Length
+          value: "80"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect ....."
+          }
+  - name: error upload file
+    request:
+      url: "{{base_url}}/v/1/crs/add-agunan"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: prakarsaId
+            value: "332"
+            description: ID Prakarsa
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: orderNumber
+            value: "3"
+            description: Agunan Ke- {MANDATORY} (1-3)
+          - name: collateralType
+            value: Kendaraan
+            description: Jenis Agunan { MANDATORY } [ 'Tanah Tanpa Bangunan' | 'Tanah dan Bangunan' | 'Kendaraan' | 'Persediaan' | 'Piutang Dagang' | 'Lainnya' ]
+          - name: collateralOwnership
+            value: BPKB
+            description: Kepemilikan Agunan { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG]
+          - name: collateralOwnerName
+            value: Dwiki Saputra
+            description: Nama Pemilik Agunan { OPTIONAL } [ ALL ]
+          - name: collateralNumber
+            value: "001"
+            description: Nomor Agunan { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG ]
+          - name: collateralLandArea
+            value: "300"
+            description: Luas Tanah { OPTIONAL } [ TTB ATAU TB]
+            disabled: true
+          - name: estimatedLandPrice
+            value: "100000000"
+            description: Estimasi Harga Tanah { OPTIONAL } [ TTB ATAU TB]
+            disabled: true
+          - name: estimatedCollateralValue
+            value: "2000000.30"
+            description: Estimasi Nilai Agunan { OPTIONAL } [ ALL ]
+          - name: liquidationValue
+            value: "500000.90"
+            description: Nilai Likuiditas Agunan { OPTIONAL } [ ALL ]
+          - name: collateralBuildingArea
+            value: "190"
+            description: Luas Bangunan { OPTIONAL } [ TB ]
+            disabled: true
+          - name: estimatedBuildingPrice
+            value: "2500000000"
+            description: Estimasi Harga Bangunan { OPTIONAL } [ TB ]
+            disabled: true
+          - name: collateralDescription
+            value: Mobil
+            description: Keterangan Kendaraan atau Agunan { OPTIONAL } [ KENDARAAN | PERSEDIAAN | PIUTANG DAGANG | LAINNYA ]
+          - name: vehicleAssemblyYear
+            value: "2018"
+            description: Tahun Perolehan Kendaraan { OPTIONAL } [ KENDARAAN ]
+            disabled: true
+          - name: collateralPictureFrontBlob
+            value: "{{jpgBlob}}"
+            description: Blob Agunan Depan (base64)  { OPTIONAL } [ ALL ]
+          - name: collateralPictureFrontMimeType
+            value: image/jpeg
+            description: MimeType Agunan Depan (image/jpeg | image/png)  { OPTIONAL } [ ALL ]
+          - name: collateralPictureSideBlob
+            value: "{{jpgBlob}}"
+            description: Blob Agunan Samping (base64)  { OPTIONAL } [ ALL ]
+          - name: collateralPictureFrontMimeType
+            value: image/jpeg
+            description: MimeType Agunan Samping (image/jpeg | image/png)  { OPTIONAL } [ ALL ]
+          - name: collateralPictureBackBlob
+            value: "{{jpgBlob}}"
+            description: Blob Agunan Belakang (base64)  { OPTIONAL } [ ALL ]
+          - name: collateralPictureBackMimeType
+            value: image/jpeg
+            description: MimeType Agunan Belakang (image/jpeg | image/png)  { OPTIONAL } [ ALL ]
+          - name: collateralOwnershipPicture1Blob
+            value: "{{jpgBlob}}"
+            description: Blob Surat Kepemilikan Agunan 1 (base64)  { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG ]
+          - name: collateralOwnershipPicture1MimeType
+            value: image/jpeg
+            description: MimeType Surat Kepemilikan Agunan 1 (image/jpeg | image/png)  { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG ]
+          - name: collateralOwnershipPicture2Blob
+            value: "{{jpgBlob}}"
+            description: Blob Surat Kepemilikan Agunan 2 (base64)  { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG ]
+          - name: collateralOwnershipPicture2MimeType
+            value: image/jpeg
+            description: MimeType Surat Kepemilikan Agunan 1 (image/jpeg | image/png)  { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG ]
+          - name: collateralInteriorPictureBlob
+            value: "{{jpgBlob}}"
+            description: Blob Interior (base64)  { OPTIONAL } [ TB ]
+            disabled: true
+          - name: collateralInteriorPictureMimeType
+            value: image/jpeg
+            description: MimeType Interior (image/jpeg | image/png)  { OPTIONAL } [ TB ]
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 03 Sep 2021 02:16:32 GMT
+        - name: Content-Length
+          value: "80"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang dalam perbaikan. Silahkan mencoba beberapa saat lagi.",
+              "desc": "Menyesuaikan file yang diupload"
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/crs/add-agunan"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: prakarsaId
+            value: "332"
+            description: ID Prakarsa
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: orderNumber
+            value: "2"
+            description: Agunan Ke- {MANDATORY} (1-3)
+          - name: collateralType
+            value: Kendaraan
+            description: Jenis Agunan { MANDATORY } [ 'Tanah Tanpa Bangunan' | 'Tanah dan Bangunan' | 'Kendaraan' | 'Persediaan' | 'Piutang Dagang' | 'Lainnya' ]
+          - name: collateralOwnership
+            value: BPKB
+            description: Kepemilikan Agunan { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG]
+          - name: collateralOwnerName
+            value: Dwiki Saputra
+            description: Nama Pemilik Agunan { OPTIONAL } [ ALL ]
+          - name: collateralNumber
+            value: "001"
+            description: Nomor Agunan { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG ]
+          - name: collateralLandArea
+            value: "300"
+            description: Luas Tanah { OPTIONAL } [ TTB ATAU TB]
+            disabled: true
+          - name: estimatedLandPrice
+            value: "100000000"
+            description: Estimasi Harga Tanah { OPTIONAL } [ TTB ATAU TB]
+            disabled: true
+          - name: estimatedCollateralValue
+            value: "2000000.30"
+            description: Estimasi Nilai Agunan { OPTIONAL } [ ALL ]
+          - name: liquidationValue
+            value: "500000.90"
+            description: Nilai Likuiditas Agunan { OPTIONAL } [ ALL ]
+          - name: collateralBuildingArea
+            value: "190"
+            description: Luas Bangunan { OPTIONAL } [ TB ]
+            disabled: true
+          - name: estimatedBuildingPrice
+            value: "2500000000"
+            description: Estimasi Harga Bangunan { OPTIONAL } [ TB ]
+            disabled: true
+          - name: collateralDescription
+            value: Mobil
+            description: Keterangan Kendaraan atau Agunan { OPTIONAL } [ KENDARAAN | PERSEDIAAN | PIUTANG DAGANG | LAINNYA ]
+          - name: vehicleAssemblyYear
+            value: "2018"
+            description: Tahun Perolehan Kendaraan { OPTIONAL } [ KENDARAAN ]
+            disabled: true
+          - name: collateralPictureFrontBlob
+            value: "{{jpgBlob}}"
+            description: Blob Agunan Depan (base64)  { OPTIONAL } [ ALL ]
+          - name: collateralPictureFrontMimeType
+            value: image/jpeg
+            description: MimeType Agunan Depan (image/jpeg | image/png)  { OPTIONAL } [ ALL ]
+          - name: collateralPictureSideBlob
+            value: "{{jpgBlob}}"
+            description: Blob Agunan Samping (base64)  { OPTIONAL } [ ALL ]
+          - name: collateralPictureFrontMimeType
+            value: image/jpeg
+            description: MimeType Agunan Samping (image/jpeg | image/png)  { OPTIONAL } [ ALL ]
+          - name: collateralPictureBackBlob
+            value: "{{jpgBlob}}"
+            description: Blob Agunan Belakang (base64)  { OPTIONAL } [ ALL ]
+          - name: collateralPictureBackMimeType
+            value: image/jpeg
+            description: MimeType Agunan Belakang (image/jpeg | image/png)  { OPTIONAL } [ ALL ]
+          - name: collateralOwnershipPicture1Blob
+            value: "{{jpgBlob}}"
+            description: Blob Surat Kepemilikan Agunan 1 (base64)  { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG ]
+          - name: collateralOwnershipPicture1MimeType
+            value: image/jpeg
+            description: MimeType Surat Kepemilikan Agunan 1 (image/jpeg | image/png)  { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG ]
+          - name: collateralOwnershipPicture2Blob
+            value: "{{jpgBlob}}"
+            description: Blob Surat Kepemilikan Agunan 2 (base64)  { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG ]
+          - name: collateralOwnershipPicture2MimeType
+            value: image/jpeg
+            description: MimeType Surat Kepemilikan Agunan 1 (image/jpeg | image/png)  { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG ]
+          - name: collateralInteriorPictureBlob
+            value: "{{jpgBlob}}"
+            description: Blob Interior (base64)  { OPTIONAL } [ TB ]
+            disabled: true
+          - name: collateralInteriorPictureMimeType
+            value: image/jpeg
+            description: MimeType Interior (image/jpeg | image/png)  { OPTIONAL } [ TB ]
+            disabled: true
+    response:
+      status: 401
+      statusText: Unauthorized
+      body:
+        type: text
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/crs/add-agunan"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: prakarsaId
+            value: "332"
+            description: ID Prakarsa
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: orderNumber
+            value: "3"
+            description: Agunan Ke- {MANDATORY} (1-3)
+          - name: collateralType
+            value: Kendaraan
+            description: Jenis Agunan { MANDATORY } [ 'Tanah Tanpa Bangunan' | 'Tanah dan Bangunan' | 'Kendaraan' | 'Persediaan' | 'Piutang Dagang' | 'Lainnya' ]
+          - name: collateralOwnership
+            value: BPKB
+            description: Kepemilikan Agunan { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG]
+          - name: collateralOwnerName
+            value: Dwiki Saputra
+            description: Nama Pemilik Agunan { OPTIONAL } [ ALL ]
+          - name: collateralNumber
+            value: "001"
+            description: Nomor Agunan { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG ]
+          - name: collateralLandArea
+            value: "300"
+            description: Luas Tanah { OPTIONAL } [ TTB ATAU TB]
+            disabled: true
+          - name: estimatedLandPrice
+            value: "100000000"
+            description: Estimasi Harga Tanah { OPTIONAL } [ TTB ATAU TB]
+            disabled: true
+          - name: estimatedCollateralValue
+            value: "2000000.30"
+            description: Estimasi Nilai Agunan { OPTIONAL } [ ALL ]
+          - name: liquidationValue
+            value: "500000.90"
+            description: Nilai Likuiditas Agunan { OPTIONAL } [ ALL ]
+          - name: collateralBuildingArea
+            value: "190"
+            description: Luas Bangunan { OPTIONAL } [ TB ]
+            disabled: true
+          - name: estimatedBuildingPrice
+            value: "2500000000"
+            description: Estimasi Harga Bangunan { OPTIONAL } [ TB ]
+            disabled: true
+          - name: collateralDescription
+            value: Mobil
+            description: Keterangan Kendaraan atau Agunan { OPTIONAL } [ KENDARAAN | PERSEDIAAN | PIUTANG DAGANG | LAINNYA ]
+          - name: vehicleAssemblyYear
+            value: "2018"
+            description: Tahun Perolehan Kendaraan { OPTIONAL } [ KENDARAAN ]
+            disabled: true
+          - name: collateralPictureFrontBlob
+            value: "{{jpgBlob}}"
+            description: Blob Agunan Depan (base64)  { OPTIONAL } [ ALL ]
+          - name: collateralPictureFrontMimeType
+            value: image/jpeg
+            description: MimeType Agunan Depan (image/jpeg | image/png)  { OPTIONAL } [ ALL ]
+          - name: collateralPictureSideBlob
+            value: "{{jpgBlob}}"
+            description: Blob Agunan Samping (base64)  { OPTIONAL } [ ALL ]
+          - name: collateralPictureFrontMimeType
+            value: image/jpeg
+            description: MimeType Agunan Samping (image/jpeg | image/png)  { OPTIONAL } [ ALL ]
+          - name: collateralPictureBackBlob
+            value: "{{jpgBlob}}"
+            description: Blob Agunan Belakang (base64)  { OPTIONAL } [ ALL ]
+          - name: collateralPictureBackMimeType
+            value: image/jpeg
+            description: MimeType Agunan Belakang (image/jpeg | image/png)  { OPTIONAL } [ ALL ]
+          - name: collateralOwnershipPicture1Blob
+            value: "{{jpgBlob}}"
+            description: Blob Surat Kepemilikan Agunan 1 (base64)  { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG ]
+          - name: collateralOwnershipPicture1MimeType
+            value: image/jpeg
+            description: MimeType Surat Kepemilikan Agunan 1 (image/jpeg | image/png)  { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG ]
+          - name: collateralOwnershipPicture2Blob
+            value: "{{jpgBlob}}"
+            description: Blob Surat Kepemilikan Agunan 2 (base64)  { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG ]
+          - name: collateralOwnershipPicture2MimeType
+            value: image/jpeg
+            description: MimeType Surat Kepemilikan Agunan 1 (image/jpeg | image/png)  { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG ]
+          - name: collateralInteriorPictureBlob
+            value: "{{jpgBlob}}"
+            description: Blob Interior (base64)  { OPTIONAL } [ TB ]
+            disabled: true
+          - name: collateralInteriorPictureMimeType
+            value: image/jpeg
+            description: MimeType Interior (image/jpeg | image/png)  { OPTIONAL } [ TB ]
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 03 Sep 2021 02:16:32 GMT
+        - name: Content-Length
+          value: "80"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Data Tersimpan",
+              "message": "Data Agunan berhasil disimpan",
+              "status": 200
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{base_url}}/v/1/crs/add-agunan"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: prakarsaId
+            value: "30946"
+            description: ID Prakarsa
+          - name: userId
+            value: "999951"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: orderNumber
+            value: "1"
+            description: Agunan Ke- {MANDATORY} (1-3)
+          - name: collateralType
+            value: Kendaraan
+            description: Jenis Agunan { MANDATORY } [ 'Tanah Tanpa Bangunan' | 'Tanah dan Bangunan' | 'Kendaraan' | 'Persediaan' | 'Piutang Dagang' | 'Lainnya' ]
+          - name: collateralOwnership
+            value: BPKB
+            description: Kepemilikan Agunan { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG]
+          - name: collateralOwnerName
+            value: Dwiki Saputra
+            description: Nama Pemilik Agunan { OPTIONAL } [ ALL ]
+          - name: collateralNumber
+            value: "001"
+            description: Nomor Agunan { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG ]
+          - name: collateralLandArea
+            value: "300"
+            description: Luas Tanah { OPTIONAL } [ TTB ATAU TB]
+            disabled: true
+          - name: estimatedLandPrice
+            value: "100000000"
+            description: Estimasi Harga Tanah { OPTIONAL } [ TTB ATAU TB]
+            disabled: true
+          - name: estimatedCollateralValue
+            value: "2000000.30"
+            description: Estimasi Nilai Agunan { OPTIONAL } [ ALL ]
+          - name: liquidationValue
+            value: "500000.90"
+            description: Nilai Likuiditas Agunan { OPTIONAL } [ ALL ]
+          - name: collateralBuildingArea
+            value: "190"
+            description: Luas Bangunan { OPTIONAL } [ TB ]
+            disabled: true
+          - name: estimatedBuildingPrice
+            value: "2500000000"
+            description: Estimasi Harga Bangunan { OPTIONAL } [ TB ]
+            disabled: true
+          - name: collateralDescription
+            value: Mobil
+            description: Keterangan Kendaraan atau Agunan { OPTIONAL } [ KENDARAAN | PERSEDIAAN | PIUTANG DAGANG | LAINNYA ]
+          - name: vehicleAssemblyYear
+            value: "2018"
+            description: Tahun Perolehan Kendaraan { OPTIONAL } [ KENDARAAN ]
+            disabled: true
+          - name: collateralPictureFrontBlob
+            value: ""
+            description: Blob Agunan Depan (base64)  { OPTIONAL } [ ALL ]
+            disabled: true
+          - name: collateralPictureFrontMimeType
+            value: image/jpeg
+            description: MimeType Agunan Depan (image/jpeg | image/png)  { OPTIONAL } [ ALL ]
+            disabled: true
+          - name: collateralPictureSideBlob
+            value: ""
+            description: Blob Agunan Samping (base64)  { OPTIONAL } [ ALL ]
+            disabled: true
+          - name: collateralPictureFrontMimeType
+            value: image/jpeg
+            description: MimeType Agunan Samping (image/jpeg | image/png)  { OPTIONAL } [ ALL ]
+            disabled: true
+          - name: collateralPictureBackBlob
+            value: ""
+            description: Blob Agunan Belakang (base64)  { OPTIONAL } [ ALL ]
+            disabled: true
+          - name: collateralPictureBackMimeType
+            value: image/jpeg
+            description: MimeType Agunan Belakang (image/jpeg | image/png)  { OPTIONAL } [ ALL ]
+            disabled: true
+          - name: collateralOwnershipPicture1Blob
+            value: ""
+            description: Blob Surat Kepemilikan Agunan 1 (base64)  { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG ]
+            disabled: true
+          - name: collateralOwnershipPicture1MimeType
+            value: image/jpeg
+            description: MimeType Surat Kepemilikan Agunan 1 (image/jpeg | image/png)  { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG ]
+            disabled: true
+          - name: collateralOwnershipPicture2Blob
+            value: ""
+            description: Blob Surat Kepemilikan Agunan 2 (base64)  { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG ]
+            disabled: true
+          - name: collateralOwnershipPicture2MimeType
+            value: image/jpeg
+            description: MimeType Surat Kepemilikan Agunan 1 (image/jpeg | image/png)  { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG ]
+            disabled: true
+          - name: collateralInteriorPictureBlob
+            value: ""
+            description: Blob Interior (base64)  { OPTIONAL } [ TB ]
+            disabled: true
+          - name: collateralInteriorPictureMimeType
+            value: image/jpeg
+            description: MimeType Interior (image/jpeg | image/png)  { OPTIONAL } [ TB ]
+            disabled: true
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 20 Jul 2022 08:59:57 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/crs/add-agunan"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: prakarsaId
+            value: "332"
+            description: ID Prakarsa
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: orderNumber
+            value: "3"
+            description: Agunan Ke- {MANDATORY} (1-3)
+          - name: collateralType
+            value: Kendaraan
+            description: Jenis Agunan { MANDATORY } [ 'Tanah Tanpa Bangunan' | 'Tanah dan Bangunan' | 'Kendaraan' | 'Persediaan' | 'Piutang Dagang' | 'Lainnya' ]
+          - name: collateralOwnership
+            value: BPKB
+            description: Kepemilikan Agunan { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG]
+          - name: collateralOwnerName
+            value: Dwiki Saputra
+            description: Nama Pemilik Agunan { OPTIONAL } [ ALL ]
+          - name: collateralNumber
+            value: "001"
+            description: Nomor Agunan { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG ]
+          - name: collateralLandArea
+            value: "300"
+            description: Luas Tanah { OPTIONAL } [ TTB ATAU TB]
+            disabled: true
+          - name: estimatedLandPrice
+            value: "100000000"
+            description: Estimasi Harga Tanah { OPTIONAL } [ TTB ATAU TB]
+            disabled: true
+          - name: estimatedCollateralValue
+            value: "2000000.30"
+            description: Estimasi Nilai Agunan { OPTIONAL } [ ALL ]
+          - name: liquidationValue
+            value: "500000.90"
+            description: Nilai Likuiditas Agunan { OPTIONAL } [ ALL ]
+          - name: collateralBuildingArea
+            value: "190"
+            description: Luas Bangunan { OPTIONAL } [ TB ]
+            disabled: true
+          - name: estimatedBuildingPrice
+            value: "2500000000"
+            description: Estimasi Harga Bangunan { OPTIONAL } [ TB ]
+            disabled: true
+          - name: collateralDescription
+            value: Mobil
+            description: Keterangan Kendaraan atau Agunan { OPTIONAL } [ KENDARAAN | PERSEDIAAN | PIUTANG DAGANG | LAINNYA ]
+          - name: vehicleAssemblyYear
+            value: "2018"
+            description: Tahun Perolehan Kendaraan { OPTIONAL } [ KENDARAAN ]
+            disabled: true
+          - name: collateralPictureFrontBlob
+            value: "{{jpgBlob}}"
+            description: Blob Agunan Depan (base64)  { OPTIONAL } [ ALL ]
+          - name: collateralPictureFrontMimeType
+            value: image/jpeg
+            description: MimeType Agunan Depan (image/jpeg | image/png)  { OPTIONAL } [ ALL ]
+          - name: collateralPictureSideBlob
+            value: "{{jpgBlob}}"
+            description: Blob Agunan Samping (base64)  { OPTIONAL } [ ALL ]
+          - name: collateralPictureFrontMimeType
+            value: image/jpeg
+            description: MimeType Agunan Samping (image/jpeg | image/png)  { OPTIONAL } [ ALL ]
+          - name: collateralPictureBackBlob
+            value: "{{jpgBlob}}"
+            description: Blob Agunan Belakang (base64)  { OPTIONAL } [ ALL ]
+          - name: collateralPictureBackMimeType
+            value: image/jpeg
+            description: MimeType Agunan Belakang (image/jpeg | image/png)  { OPTIONAL } [ ALL ]
+          - name: collateralOwnershipPicture1Blob
+            value: "{{jpgBlob}}"
+            description: Blob Surat Kepemilikan Agunan 1 (base64)  { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG ]
+          - name: collateralOwnershipPicture1MimeType
+            value: image/jpeg
+            description: MimeType Surat Kepemilikan Agunan 1 (image/jpeg | image/png)  { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG ]
+          - name: collateralOwnershipPicture2Blob
+            value: "{{jpgBlob}}"
+            description: Blob Surat Kepemilikan Agunan 2 (base64)  { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG ]
+          - name: collateralOwnershipPicture2MimeType
+            value: image/jpeg
+            description: MimeType Surat Kepemilikan Agunan 1 (image/jpeg | image/png)  { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG ]
+          - name: collateralInteriorPictureBlob
+            value: "{{jpgBlob}}"
+            description: Blob Interior (base64)  { OPTIONAL } [ TB ]
+            disabled: true
+          - name: collateralInteriorPictureMimeType
+            value: image/jpeg
+            description: MimeType Interior (image/jpeg | image/png)  { OPTIONAL } [ TB ]
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 03 Sep 2021 02:16:32 GMT
+        - name: Content-Length
+          value: "80"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect ....."
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/crs/add-agunan"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: prakarsaId
+            value: "332"
+            description: ID Prakarsa
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: orderNumber
+            value: "3"
+            description: Agunan Ke- {MANDATORY} (1-3)
+          - name: collateralType
+            value: Kendaraan
+            description: Jenis Agunan { MANDATORY } [ 'Tanah Tanpa Bangunan' | 'Tanah dan Bangunan' | 'Kendaraan' | 'Persediaan' | 'Piutang Dagang' | 'Lainnya' ]
+          - name: collateralOwnership
+            value: BPKB
+            description: Kepemilikan Agunan { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG]
+          - name: collateralOwnerName
+            value: Dwiki Saputra
+            description: Nama Pemilik Agunan { OPTIONAL } [ ALL ]
+          - name: collateralNumber
+            value: "001"
+            description: Nomor Agunan { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG ]
+          - name: collateralLandArea
+            value: "300"
+            description: Luas Tanah { OPTIONAL } [ TTB ATAU TB]
+            disabled: true
+          - name: estimatedLandPrice
+            value: "100000000"
+            description: Estimasi Harga Tanah { OPTIONAL } [ TTB ATAU TB]
+            disabled: true
+          - name: estimatedCollateralValue
+            value: "2000000.30"
+            description: Estimasi Nilai Agunan { OPTIONAL } [ ALL ]
+          - name: liquidationValue
+            value: "500000.90"
+            description: Nilai Likuiditas Agunan { OPTIONAL } [ ALL ]
+          - name: collateralBuildingArea
+            value: "190"
+            description: Luas Bangunan { OPTIONAL } [ TB ]
+            disabled: true
+          - name: estimatedBuildingPrice
+            value: "2500000000"
+            description: Estimasi Harga Bangunan { OPTIONAL } [ TB ]
+            disabled: true
+          - name: collateralDescription
+            value: Mobil
+            description: Keterangan Kendaraan atau Agunan { OPTIONAL } [ KENDARAAN | PERSEDIAAN | PIUTANG DAGANG | LAINNYA ]
+          - name: vehicleAssemblyYear
+            value: "2018"
+            description: Tahun Perolehan Kendaraan { OPTIONAL } [ KENDARAAN ]
+            disabled: true
+          - name: collateralPictureFrontBlob
+            value: "{{jpgBlob}}"
+            description: Blob Agunan Depan (base64)  { OPTIONAL } [ ALL ]
+          - name: collateralPictureFrontMimeType
+            value: image/jpeg
+            description: MimeType Agunan Depan (image/jpeg | image/png)  { OPTIONAL } [ ALL ]
+          - name: collateralPictureSideBlob
+            value: "{{jpgBlob}}"
+            description: Blob Agunan Samping (base64)  { OPTIONAL } [ ALL ]
+          - name: collateralPictureFrontMimeType
+            value: image/jpeg
+            description: MimeType Agunan Samping (image/jpeg | image/png)  { OPTIONAL } [ ALL ]
+          - name: collateralPictureBackBlob
+            value: "{{jpgBlob}}"
+            description: Blob Agunan Belakang (base64)  { OPTIONAL } [ ALL ]
+          - name: collateralPictureBackMimeType
+            value: image/jpeg
+            description: MimeType Agunan Belakang (image/jpeg | image/png)  { OPTIONAL } [ ALL ]
+          - name: collateralOwnershipPicture1Blob
+            value: "{{jpgBlob}}"
+            description: Blob Surat Kepemilikan Agunan 1 (base64)  { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG ]
+          - name: collateralOwnershipPicture1MimeType
+            value: image/jpeg
+            description: MimeType Surat Kepemilikan Agunan 1 (image/jpeg | image/png)  { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG ]
+          - name: collateralOwnershipPicture2Blob
+            value: "{{jpgBlob}}"
+            description: Blob Surat Kepemilikan Agunan 2 (base64)  { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG ]
+          - name: collateralOwnershipPicture2MimeType
+            value: image/jpeg
+            description: MimeType Surat Kepemilikan Agunan 1 (image/jpeg | image/png)  { OPTIONAL } [ KECUALI PERSEDIAAN DAN PIUTANG DAGANG ]
+          - name: collateralInteriorPictureBlob
+            value: "{{jpgBlob}}"
+            description: Blob Interior (base64)  { OPTIONAL } [ TB ]
+            disabled: true
+          - name: collateralInteriorPictureMimeType
+            value: image/jpeg
+            description: MimeType Interior (image/jpeg | image/png)  { OPTIONAL } [ TB ]
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 03 Sep 2021 02:16:32 GMT
+        - name: Content-Length
+          value: "80"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }

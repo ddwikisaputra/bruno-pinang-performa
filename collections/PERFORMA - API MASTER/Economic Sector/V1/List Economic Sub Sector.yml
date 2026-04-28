@@ -1,0 +1,154 @@
+info:
+  name: List Economic Sub Sector
+  type: http
+  seq: 4
+
+http:
+  method: POST
+  url: "{{url-dev}}/v/1/master/economic-sub-sector/1"
+  body:
+    type: form-urlencoded
+    data:
+      - name: filterStatus
+        value: enable
+        description: "[OPTIONAL] => string (all|enable|disable)"
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: unautorized
+    request:
+      url: "{{url-local}}/v/1/master/economic-sub-sector/1"
+      method: POST
+    response:
+      status: 401
+      statusText: Unauthorized
+      body:
+        type: text
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: error validation
+    request:
+      url: "{{url-local}}/v/1/master/economic-sub-sector/1"
+      method: POST
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "status": 400,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "data": null
+          }
+  - name: validation param
+    request:
+      url: "{{url-local}}/v/1/master/economic-sub-sector/{{economicSectorId}}"
+      method: POST
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |
+          {
+              "desc": "Filter status hanya dapat berupa enable, disable, atau all",
+              "message": "Validation Errors",
+              "status": 400
+          }
+  - name: not found
+    request:
+      url: "{{url-local}}/v/1/master/economic-sub-sector/-1"
+      method: POST
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 09 Jun 2021 04:36:20 GMT
+        - name: Content-Length
+          value: "114"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 404,
+              "desc": "Data Sub Sektor Ekonomi Kosong",
+              "message": "Sub  Sektor Ekonomi Tidak Ditemukan",
+              "data": null
+          }
+  - name: general error
+    request:
+      url: "{{url-local}}/v/1/master/economic-sub-sector/1"
+      method: POST
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data": null
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/master/economic-sub-sector/1"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 09 Jun 2021 04:36:20 GMT
+        - name: Content-Length
+          value: "114"
+      body:
+        type: json
+        data: |-
+          {
+              "data": [
+                  {
+                      "id": 562,
+                      "code": "751000",
+                      "subSectorName": "Administrasi Pemerintahan, Dan Kebijaksanaan Ekonomi Dan Sosial"
+                  },
+                  {
+                      "id": 561,
+                      "code": "750000",
+                      "subSectorName": "Administrasi Pemerintahan, Pertahanan Dan Jaminan Sosial Wajib"
+                  },
+                  {
+                      "id": 563,
+                      "code": "752000",
+                      "subSectorName": "Hubungan Luar Negeri, Pertahanan, Dan Keamanan"
+                  },
+                  {
+                      "id": 564,
+                      "code": "753000",
+                      "subSectorName": "Jaminan Sosial Wajib"
+                  }
+              ],
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }

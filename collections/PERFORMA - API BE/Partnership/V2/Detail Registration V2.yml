@@ -1,0 +1,486 @@
+info:
+  name: Detail Registration V2
+  type: http
+  seq: 5
+
+http:
+  method: POST
+  url: "{{base_url}}/v/2/partnerships/detail-registration"
+  body:
+    type: form-urlencoded
+    data:
+      - name: id
+        value: "1123"
+        description: ID Member
+      - name: userId
+        value: UmF5YVBpUGVyVG9w9FR0lGb/E2n8GOlXBFkcJsryMy/jOQ==
+        description: "[ENCODE] Personal Number BRI Agro (UserID Login)"
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/partnerships/detail-registration"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "8"
+          - name: userId
+            value: "999941"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Jul 2021 07:34:14 GMT
+        - name: Content-Length
+          value: "105"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/partnerships/detail-registration"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "8"
+            description: ID Member
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Jul 2021 07:34:14 GMT
+        - name: Content-Length
+          value: "105"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data": null
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/partnerships/detail-registration"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "8"
+            description: ID Member
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Jul 2021 07:36:59 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "id": 1,
+                  "commodity": "Toko Bangunan",
+                  "name": "Majoo",
+                  "type": "partner",
+                  "address": "Jl. Cimpedak",
+                  "postalCode": "10520",
+                  "provinceCode": "03",
+                  "provinceName": "DKI Jakarta",
+                  "cityCode": "0391",
+                  "cityName": "Jakarta Pusat",
+                  "districtCode": "317105",
+                  "districtName": "Cempaka Putih",
+                  "villageCode": "3171051002",
+                  "villageName": "Cempaka Putih Barat",
+                  "rt": "010",
+                  "rw": "011",
+                  "email": "UmF5YVBpUGVyVG9woAANyjmszRh1ezDXVY8GV6e+6xywGX7961nKRA==",
+                  "picName": "UmF5YVBpUGVyVG9wiRokxj3t9xUrbSvITfjD/Lc4uG4LaOFnerGXLcc=",
+                  "picMobileNumber": "UmF5YVBpUGVyVG9w9UHB1ZlE3ft8Ts2RafasboA=",
+                  "pksNumber": "001/PKS/MAJU JAYA/RAYA",
+                  "branchCode": "9999",
+                  "status": -1,
+                  "statusText": "Ditolak"
+              },
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: error validation param
+    request:
+      url: "{{base_url}}/v/1/partnerships/detail-registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "-1"
+            description: ID Member
+            disabled: true
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 22 Feb 2022 08:01:21 GMT
+        - name: Content-Length
+          value: "93"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Data tidak ditemukan.",
+              "desc": "Parameter ... kosong",
+              "data": null
+          }
+  - name: empty data
+    request:
+      url: "{{base_url}}/v/1/partnerships/detail-registration"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "-1"
+            description: ID Member
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Jul 2021 07:39:46 GMT
+        - name: Content-Length
+          value: "105"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Data Partnership tidak ditemukan",
+              "message": "Partnership Tidak Ditemukan",
+              "status": 404
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/partnerships/detail-registration"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "8"
+            description: ID Member
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Jul 2021 07:34:14 GMT
+        - name: Content-Length
+          value: "105"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/partnerships/detail-registration"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "8"
+            description: ID Member
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Jul 2021 07:34:14 GMT
+        - name: Content-Length
+          value: "105"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data": null
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/partnerships/detail-registration"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "8"
+          - name: userId
+            value: "999941"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Jul 2021 07:34:14 GMT
+        - name: Content-Length
+          value: "105"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/partnerships/detail-registration"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "8"
+            description: ID Member
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Jul 2021 07:36:59 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "id": 1,
+                  "commodity": "Toko Bangunan",
+                  "name": "Majoo",
+                  "type": "partner",
+                  "address": "Jl. Cimpedak",
+                  "postalCode": "10520",
+                  "provinceCode": "03",
+                  "provinceName": "DKI Jakarta",
+                  "cityCode": "0391",
+                  "cityName": "Jakarta Pusat",
+                  "districtCode": "317105",
+                  "districtName": "Cempaka Putih",
+                  "villageCode": "3171051002",
+                  "villageName": "Cempaka Putih Barat",
+                  "rt": "010",
+                  "rw": "011",
+                  "email": "UmF5YVBpUGVyVG9woAANyjmszRh1ezDXVY8GV6e+6xywGX7961nKRA==",
+                  "picName": "UmF5YVBpUGVyVG9wiRokxj3t9xUrbSvITfjD/Lc4uG4LaOFnerGXLcc=",
+                  "picMobileNumber": "UmF5YVBpUGVyVG9w9UHB1ZlE3ft8Ts2RafasboA=",
+                  "pksNumber": "001/PKS/MAJU JAYA/RAYA",
+                  "branchCode": "9999",
+                  "status": -1,
+                  "statusText": "Ditolak"
+              },
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: error validation param
+    request:
+      url: "{{base_url}}/v/1/partnerships/detail-registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "-1"
+            description: ID Member
+            disabled: true
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 22 Feb 2022 08:01:21 GMT
+        - name: Content-Length
+          value: "93"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Data tidak ditemukan.",
+              "desc": "Parameter ... kosong",
+              "data": null
+          }
+  - name: empty data
+    request:
+      url: "{{base_url}}/v/1/partnerships/detail-registration"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "-1"
+            description: ID Member
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Jul 2021 07:39:46 GMT
+        - name: Content-Length
+          value: "105"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Data Partnership tidak ditemukan",
+              "message": "Partnership Tidak Ditemukan",
+              "status": 404
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/partnerships/detail-registration"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: id
+            value: "8"
+            description: ID Member
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 12 Jul 2021 07:34:14 GMT
+        - name: Content-Length
+          value: "105"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }

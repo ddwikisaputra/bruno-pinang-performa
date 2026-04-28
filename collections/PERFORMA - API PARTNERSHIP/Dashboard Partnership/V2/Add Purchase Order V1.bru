@@ -1,0 +1,855 @@
+meta {
+  name: Add Purchase Order V1
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{base-url-local}}/v/1/partnerships/po-add
+  body: formUrlEncoded
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkMWdpdEFMQDRnUjEiOiJhZ3JpLWFwaSIsImV4cCI6MTY3MzE1MTUyMywib3JpZ19pYXQiOjE2NzI1NDY3MjN9.QggEigDAC3J-dJQDosDhUo2Q4BaL1KyfVlDupuf_GxE
+}
+
+body:form-urlencoded {
+  partnershipCode: MJ1
+  poNumber: INV-DWK-DEV/01/01/23/0002
+  transactionalType: 2
+  name: Dwiki Saputra
+  branchCode: 0020
+  cifNumber: 0000118826
+  facilityNumber: 0020/0000118826/PK3/018
+  savingAccountNumber: 001001002278316
+  referenceId: 202312
+  prakarsaId: 31217
+  loanAmount: 100000
+  rate: 0.25
+  loanTerm: 7
+  installmentPattern: 1
+  administrationFee: 0
+}
+
+settings {
+  encodeUrl: true
+}
+
+example {
+  name: validasi po sedang dalam proses (status != 0)
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-add
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      partnershipCode: OMS1
+      poNumber: PO/003
+      transactionalType: 1
+      name: Jumadi
+      branchCode: 0010
+      cifNumber: CIF003
+      facilityNumber: FC003
+      savingAccountNumber: DS003
+      referenceId: 3
+      prakarsaId: 3
+      loanAmount: 500000
+      rate: 0.5
+      loanTerm: 7
+      installmentPattern: 1
+      administrationFee: 15000.00
+    }
+  }
+  
+  response: {
+    headers: {
+      Server: nginx/1.20.1
+      Date: Wed, 01 Dec 2021 04:04:12 GMT
+      Content-Type: application/json; charset=utf-8
+      Content-Length: 88
+      Connection: keep-alive
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "PO Status != 0 (sedang dalam proses pengajuan)",
+            "message": "Maaf, Pengajuan anda sedang dalam proses. Silahkan tunggu sampai proses pengajuan selesai.",
+            "status": 500
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: validasi jika PO sudah pernah dicairkan
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-add
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      partnershipCode: OMS1
+      poNumber: PO/002
+      transactionalType: 1
+      name: Dwiki Saputra
+      branchCode: 9999
+      cifNumber: 0000118826
+      facilityNumber: 0010/0000118826/PK1/001
+      savingAccountNumber: 001001000001315
+      referenceId: 2
+      prakarsaId: 781
+      loanAmount: 5500000
+      rate: 0.5
+      loanTerm: 14
+      installmentPattern: 1
+      administrationFee: 0
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Thu, 17 Feb 2022 07:00:27 GMT
+      Content-Length: 197
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "PO Status == 2 (berhasil pencairan)",
+            "message": "Maaf, Pengajuan dengan Nomor PO tersebut sudah berhasil dicairkan. Silahkan melakukan pencairan menggunakan Nomor PO lainnya.",
+            "status": 500
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: success
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-add
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      partnershipCode: OMS1
+      poNumber: PO/003
+      transactionalType: 1
+      name: Jumadi
+      branchCode: 0010
+      cifNumber: CIF003
+      facilityNumber: FC003
+      savingAccountNumber: DS003
+      referenceId: 3
+      prakarsaId: 3
+      loanAmount: 500000
+      rate: 0.5
+      loanTerm: 7
+      installmentPattern: 1
+      administrationFee: 15000.00
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 03:03:58 GMT
+      Content-Length: 82
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "Data Tersimpan",
+            "message": "Data purchase order berhasil disimpan",
+            "status": 200
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: validasi jika PO sedang dalam proses
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-add
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      partnershipCode: OMS1
+      poNumber: PO/002
+      transactionalType: 1
+      name: Dwiki Saputra
+      branchCode: 9999
+      cifNumber: 0000118826
+      facilityNumber: 0010/0000118826/PK1/001
+      savingAccountNumber: 001001000001315
+      referenceId: 2
+      prakarsaId: 781
+      loanAmount: 5500000
+      rate: 0.5
+      loanTerm: 14
+      installmentPattern: 1
+      administrationFee: 0
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Thu, 17 Feb 2022 06:59:42 GMT
+      Content-Length: 172
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "PO Status 0-2 (sedang dalam proses pengajuan)",
+            "message": "Maaf, Pengajuan anda sedang dalam proses. Silahkan tunggu sampai proses pengajuan selesai.",
+            "status": 500
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: error parameter validation
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-add
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      partnershipCode: OMS1
+      poNumber: PO/003
+      transactionalType: 1
+      name: Jumadi
+      branchCode: 0010
+      cifNumber: CIF003
+      facilityNumber: FC003
+      savingAccountNumber: DS003
+      referenceId: 3
+      prakarsaId: 3
+      loanAmount: 500000
+      rate: 0.5
+      loanTerm: 7
+      installmentPattern: 1
+      administrationFee: 15000.00
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 02:53:38 GMT
+      Content-Length: 111
+    }
+  
+    status: {
+      code: 400
+      text: Bad Request
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "Parameter ... kosong",
+            "message": "Maaf, Parameter ... tidak boleh kosong",
+            "status": 500
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: general error
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-add
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      partnershipCode: OMS1
+      poNumber: PO/003
+      transactionalType: 1
+      name: Jumadi
+      branchCode: 0010
+      cifNumber: CIF003
+      facilityNumber: FC003
+      savingAccountNumber: DS003
+      referenceId: 3
+      prakarsaId: 3
+      loanAmount: 500000
+      rate: 0.5
+      loanTerm: 7
+      installmentPattern: 1
+      administrationFee: 15000.00
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 02:53:38 GMT
+      Content-Length: 111
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "Could not connect .....",
+            "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+            "status": 500
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: error database connection
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-add
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      partnershipCode: OMS1
+      poNumber: PO/003
+      transactionalType: 1
+      name: Jumadi
+      branchCode: 0010
+      cifNumber: CIF003
+      facilityNumber: FC003
+      savingAccountNumber: DS003
+      referenceId: 3
+      prakarsaId: 3
+      loanAmount: 500000
+      rate: 0.5
+      loanTerm: 7
+      installmentPattern: 1
+      administrationFee: 15000.00
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 02:53:38 GMT
+      Content-Length: 111
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+            "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+            "status": 400
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: unautorized
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-add
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      partnershipCode: OMS1
+      poNumber: PO/003
+      transactionalType: 1
+      name: Jumadi
+      branchCode: 0010
+      cifNumber: CIF003
+      facilityNumber: FC003
+      savingAccountNumber: DS003
+      referenceId: 3
+      prakarsaId: 3
+      loanAmount: 500000
+      rate: 0.5
+      loanTerm: 7
+      installmentPattern: 1
+      administrationFee: 15000.00
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 02:44:34 GMT
+      Content-Length: 82
+    }
+  
+    status: {
+      code: 401
+      text: Unauthorized
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "code": 401,
+            "message": "Error Message"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: general error
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-add
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      partnershipCode: OMS1
+      poNumber: PO/003
+      transactionalType: 1
+      name: Jumadi
+      branchCode: 0010
+      cifNumber: CIF003
+      facilityNumber: FC003
+      savingAccountNumber: DS003
+      referenceId: 3
+      prakarsaId: 3
+      loanAmount: 500000
+      rate: 0.5
+      loanTerm: 7
+      installmentPattern: 1
+      administrationFee: 15000.00
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 02:53:38 GMT
+      Content-Length: 111
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "Could not connect .....",
+            "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+            "status": 500
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: unautorized
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-add
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      partnershipCode: OMS1
+      poNumber: PO/003
+      transactionalType: 1
+      name: Jumadi
+      branchCode: 0010
+      cifNumber: CIF003
+      facilityNumber: FC003
+      savingAccountNumber: DS003
+      referenceId: 3
+      prakarsaId: 3
+      loanAmount: 500000
+      rate: 0.5
+      loanTerm: 7
+      installmentPattern: 1
+      administrationFee: 15000.00
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 02:44:34 GMT
+      Content-Length: 82
+    }
+  
+    status: {
+      code: 401
+      text: Unauthorized
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "code": 401,
+            "message": "Error Message"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: validasi jika PO sudah pernah dicairkan
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-add
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      partnershipCode: OMS1
+      poNumber: PO/002
+      transactionalType: 1
+      name: Dwiki Saputra
+      branchCode: 9999
+      cifNumber: 0000118826
+      facilityNumber: 0010/0000118826/PK1/001
+      savingAccountNumber: 001001000001315
+      referenceId: 2
+      prakarsaId: 781
+      loanAmount: 5500000
+      rate: 0.5
+      loanTerm: 14
+      installmentPattern: 1
+      administrationFee: 0
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Thu, 17 Feb 2022 07:00:27 GMT
+      Content-Length: 197
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "PO Status == 2 (berhasil pencairan)",
+            "message": "Maaf, Pengajuan dengan Nomor PO tersebut sudah berhasil dicairkan. Silahkan melakukan pencairan menggunakan Nomor PO lainnya.",
+            "status": 500
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: error database connection
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-add
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      partnershipCode: OMS1
+      poNumber: PO/003
+      transactionalType: 1
+      name: Jumadi
+      branchCode: 0010
+      cifNumber: CIF003
+      facilityNumber: FC003
+      savingAccountNumber: DS003
+      referenceId: 3
+      prakarsaId: 3
+      loanAmount: 500000
+      rate: 0.5
+      loanTerm: 7
+      installmentPattern: 1
+      administrationFee: 15000.00
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 02:53:38 GMT
+      Content-Length: 111
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+            "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+            "status": 400
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: error parameter validation
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-add
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      partnershipCode: OMS1
+      poNumber: PO/003
+      transactionalType: 1
+      name: Jumadi
+      branchCode: 0010
+      cifNumber: CIF003
+      facilityNumber: FC003
+      savingAccountNumber: DS003
+      referenceId: 3
+      prakarsaId: 3
+      loanAmount: 500000
+      rate: 0.5
+      loanTerm: 7
+      installmentPattern: 1
+      administrationFee: 15000.00
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 02:53:38 GMT
+      Content-Length: 111
+    }
+  
+    status: {
+      code: 400
+      text: Bad Request
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "Parameter ... kosong",
+            "message": "Maaf, Parameter ... tidak boleh kosong",
+            "status": 500
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: validasi po sedang dalam proses (status != 0)
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-add
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      partnershipCode: OMS1
+      poNumber: PO/003
+      transactionalType: 1
+      name: Jumadi
+      branchCode: 0010
+      cifNumber: CIF003
+      facilityNumber: FC003
+      savingAccountNumber: DS003
+      referenceId: 3
+      prakarsaId: 3
+      loanAmount: 500000
+      rate: 0.5
+      loanTerm: 7
+      installmentPattern: 1
+      administrationFee: 15000.00
+    }
+  }
+  
+  response: {
+    headers: {
+      Server: nginx/1.20.1
+      Date: Wed, 01 Dec 2021 04:04:12 GMT
+      Content-Type: application/json; charset=utf-8
+      Content-Length: 88
+      Connection: keep-alive
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "PO Status != 0 (sedang dalam proses pengajuan)",
+            "message": "Maaf, Pengajuan anda sedang dalam proses. Silahkan tunggu sampai proses pengajuan selesai.",
+            "status": 500
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: validasi jika PO sedang dalam proses
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-add
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      partnershipCode: OMS1
+      poNumber: PO/002
+      transactionalType: 1
+      name: Dwiki Saputra
+      branchCode: 9999
+      cifNumber: 0000118826
+      facilityNumber: 0010/0000118826/PK1/001
+      savingAccountNumber: 001001000001315
+      referenceId: 2
+      prakarsaId: 781
+      loanAmount: 5500000
+      rate: 0.5
+      loanTerm: 14
+      installmentPattern: 1
+      administrationFee: 0
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Thu, 17 Feb 2022 06:59:42 GMT
+      Content-Length: 172
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "PO Status 0-2 (sedang dalam proses pengajuan)",
+            "message": "Maaf, Pengajuan anda sedang dalam proses. Silahkan tunggu sampai proses pengajuan selesai.",
+            "status": 500
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: success
+  
+  request: {
+    url: {{url}}/v/1/partnerships/po-add
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      partnershipCode: OMS1
+      poNumber: PO/003
+      transactionalType: 1
+      name: Jumadi
+      branchCode: 0010
+      cifNumber: CIF003
+      facilityNumber: FC003
+      savingAccountNumber: DS003
+      referenceId: 3
+      prakarsaId: 3
+      loanAmount: 500000
+      rate: 0.5
+      loanTerm: 7
+      installmentPattern: 1
+      administrationFee: 15000.00
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Fri, 23 Jul 2021 03:03:58 GMT
+      Content-Length: 82
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "desc": "Data Tersimpan",
+            "message": "Data purchase order berhasil disimpan",
+            "status": 200
+        }
+      '''
+    }
+  }
+}

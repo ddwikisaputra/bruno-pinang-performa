@@ -1,0 +1,685 @@
+info:
+  name: List Qualitative Analysis V2
+  type: http
+  seq: 17
+
+http:
+  method: POST
+  url: "{{base_url}}/v/2/crs/list-qualitative-analysis"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "{{userId}}"
+        description: "[Encode]Personal Number BRI Agro (UserID Login) { MANDATORY }"
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/crs/find-usaha"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data": null
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/crs/find-usaha"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/crs/find-usaha"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+    response:
+      status: 401
+      statusText: Unauthorized
+      body:
+        type: text
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: empty data
+    request:
+      url: "{{base_url}}/v/1/crs/find-usaha"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "data": null,
+              "desc": "Error record not found",
+              "message": "CRS Tidak Ditemukan",
+              "status": 404
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{base_url}}/v/1/crs/find-usaha"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999961"
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 20 Jul 2022 01:00:47 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: Invalid Decode UserId
+    request:
+      url: "{{base_url}}/v/2/crs/list-qualitative-analysis"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: "[Encode]Personal Number BRI Agro (UserID Login) { MANDATORY }"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 14 Jun 2023 09:39:40 GMT
+        - name: Content-Length
+          value: "114"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Parameter userId tidak sesuai",
+              "message": "Maaf, Parameter user id tidak sesuai",
+              "status": 400
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/crs/find-usaha"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: UmF5YVBpUGVyVG9w9FR0lGD8PJZ01laNFpB91ptV5mkFfw==
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 14 Jun 2021 07:15:44 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "data": [
+                  {
+                      "id": 1,
+                      "orderNumber": 1,
+                      "type": "",
+                      "question": "Seberapa besar tingkat kepercayaan Anda terhadap nasabah",
+                      "isScoring": 0,
+                      "scoringKey": "",
+                      "answers": [
+                          {
+                              "id": 1,
+                              "orderNumber": "a",
+                              "answer": "Informasi yang diberikan debitur sesuai dengan kondisi sebenarnya dapat dibuktikan dengan dokumen atau pengamatan langsung",
+                              "scoringValue": ""
+                          },
+                          {
+                              "id": 2,
+                              "orderNumber": "b",
+                              "answer": "Informasi yang diberikan debitur sesuai dengan kondisi sebenarnya namun tidak dapat dibuktikan dengan dokumen pendukung atau pengamatan langsung",
+                              "scoringValue": ""
+                          },
+                          {
+                              "id": 3,
+                              "orderNumber": "c",
+                              "answer": "Sebagian kecil informasi yang diberikan kurang sesuai dengan kondisi sebenarnya",
+                              "scoringValue": ""
+                          },
+                          {
+                              "id": 4,
+                              "orderNumber": "d",
+                              "answer": "Sebagian besar atau seluruh informasi yang diberikan tidak sesuai dengan kondisi sebenarnya",
+                              "scoringValue": ""
+                          }
+                      ]
+                  },
+                  {
+                      "id": 2,
+                      "orderNumber": 2,
+                      "type": "",
+                      "question": "Seberapa sering nasabah berhubungan dengan bank",
+                      "isScoring": 0,
+                      "scoringKey": "",
+                      "answers": [
+                          {
+                              "id": 5,
+                              "orderNumber": "a",
+                              "answer": "Pernah/sedang memiliki pinjaman dalam 2 tahun terakhir dengan kolektabilitas seluruhnya selalu lancar",
+                              "scoringValue": ""
+                          },
+                          {
+                              "id": 6,
+                              "orderNumber": "b",
+                              "answer": "Pernah/sedang memiliki pinjaman dalam 2 tahun terakhir dengan kolektabilitasnya pernah DPK (kolektabilitas terakhir lancar)",
+                              "scoringValue": ""
+                          },
+                          {
+                              "id": 7,
+                              "orderNumber": "c",
+                              "answer": "Pernah/sedang memiliki pinjaman dalam 2 tahun terakhir dengan kolektabilitasnya pernah NPL (KL, D, M)",
+                              "scoringValue": ""
+                          },
+                          {
+                              "id": 8,
+                              "orderNumber": "d",
+                              "answer": "Nasabah baru atau belum pernah meminjam di Bank/Lembaga keuangan (tidak terdaftar di SLIK)",
+                              "scoringValue": ""
+                          },
+                          {
+                              "id": 9,
+                              "orderNumber": "e",
+                              "answer": "Memiliki tunggakan pinjaman posisi terakhir dengan kolektabilitas DPK",
+                              "scoringValue": ""
+                          },
+                          {
+                              "id": 10,
+                              "orderNumber": "f",
+                              "answer": "Memiliki tunggakan pinjaman posisi terakhir dengan kolektabilitas NPL",
+                              "scoringValue": ""
+                          },
+                          {
+                              "id": 11,
+                              "orderNumber": "g",
+                              "answer": "Sedang memiliki pinjaman dalam kondisi restrukturisasi",
+                              "scoringValue": ""
+                          }
+                      ]
+                  },
+                  {
+                      "id": 11,
+                      "orderNumber": 3,
+                      "type": "Karakter Kondisi Usaha",
+                      "question": "Bagaimana kondisi \npenjualan usaha nasabah?",
+                      "isScoring": 1,
+                      "scoringKey": "karakter_kondisi_usaha",
+                      "answers": [
+                          {
+                              "id": 33,
+                              "orderNumber": "a",
+                              "answer": "Memiliki pelanggan tetap atau Offtaker/mitra kerjasama",
+                              "scoringValue": "memiliki_pelanggan_tetap"
+                          },
+                          {
+                              "id": 35,
+                              "orderNumber": "b",
+                              "answer": "Tidak memiliki pelanggan tetap atau Offtaker/mitra kerjasama",
+                              "scoringValue": "tidak_memiliki_pelanggan_tetap"
+                          }
+                      ]
+                  },
+                  {
+                      "id": 12,
+                      "orderNumber": 4,
+                      "type": "Karakter Output Barang/Jasa Usaha",
+                      "question": "Bagaimana karakter \nbarang/jasa yang dijual \nterhadap persaingan usaha?",
+                      "isScoring": 1,
+                      "scoringKey": "karakter_output_barang_jasa",
+                      "answers": [
+                          {
+                              "id": 36,
+                              "orderNumber": "a",
+                              "answer": "Barang/jasa bersifat umum dan masih sedikit pesaing di sekitar",
+                              "scoringValue": "umum_sedikit_pesaing"
+                          },
+                          {
+                              "id": 37,
+                              "orderNumber": "b",
+                              "answer": "Barang/jasa bersifat umum dan banyak pesaing di sekitar",
+                              "scoringValue": "umum_banyak_pesaing"
+                          },
+                          {
+                              "id": 38,
+                              "orderNumber": "c",
+                              "answer": "Barang/jasa memiliki spesifikasi tertentu dengan pangsa pasar yang besar",
+                              "scoringValue": "tertentu_pangsa_besar"
+                          },
+                          {
+                              "id": 39,
+                              "orderNumber": "d",
+                              "answer": "Barang/jasa memiliki spesifikasi tertentu dengan pangsa pasar terbatas",
+                              "scoringValue": "tertentu_pangsa_terbatas"
+                          }
+                      ]
+                  }
+              ],
+              "desc": "Data Valid",
+              "message": "Data Ditemukan",
+              "status": 200
+          }
+  - name: Invalid Decode UserId
+    request:
+      url: "{{base_url}}/v/2/crs/list-qualitative-analysis"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: "[Encode]Personal Number BRI Agro (UserID Login) { MANDATORY }"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 14 Jun 2023 09:39:40 GMT
+        - name: Content-Length
+          value: "114"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Parameter userId tidak sesuai",
+              "message": "Maaf, Parameter user id tidak sesuai",
+              "status": 400
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/crs/find-usaha"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+    response:
+      status: 401
+      statusText: Unauthorized
+      body:
+        type: text
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/crs/find-usaha"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{base_url}}/v/1/crs/find-usaha"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999961"
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 20 Jul 2022 01:00:47 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/crs/find-usaha"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: UmF5YVBpUGVyVG9w9FR0lGD8PJZ01laNFpB91ptV5mkFfw==
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 14 Jun 2021 07:15:44 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "data": [
+                  {
+                      "id": 1,
+                      "orderNumber": 1,
+                      "type": "",
+                      "question": "Seberapa besar tingkat kepercayaan Anda terhadap nasabah",
+                      "isScoring": 0,
+                      "scoringKey": "",
+                      "answers": [
+                          {
+                              "id": 1,
+                              "orderNumber": "a",
+                              "answer": "Informasi yang diberikan debitur sesuai dengan kondisi sebenarnya dapat dibuktikan dengan dokumen atau pengamatan langsung",
+                              "scoringValue": ""
+                          },
+                          {
+                              "id": 2,
+                              "orderNumber": "b",
+                              "answer": "Informasi yang diberikan debitur sesuai dengan kondisi sebenarnya namun tidak dapat dibuktikan dengan dokumen pendukung atau pengamatan langsung",
+                              "scoringValue": ""
+                          },
+                          {
+                              "id": 3,
+                              "orderNumber": "c",
+                              "answer": "Sebagian kecil informasi yang diberikan kurang sesuai dengan kondisi sebenarnya",
+                              "scoringValue": ""
+                          },
+                          {
+                              "id": 4,
+                              "orderNumber": "d",
+                              "answer": "Sebagian besar atau seluruh informasi yang diberikan tidak sesuai dengan kondisi sebenarnya",
+                              "scoringValue": ""
+                          }
+                      ]
+                  },
+                  {
+                      "id": 2,
+                      "orderNumber": 2,
+                      "type": "",
+                      "question": "Seberapa sering nasabah berhubungan dengan bank",
+                      "isScoring": 0,
+                      "scoringKey": "",
+                      "answers": [
+                          {
+                              "id": 5,
+                              "orderNumber": "a",
+                              "answer": "Pernah/sedang memiliki pinjaman dalam 2 tahun terakhir dengan kolektabilitas seluruhnya selalu lancar",
+                              "scoringValue": ""
+                          },
+                          {
+                              "id": 6,
+                              "orderNumber": "b",
+                              "answer": "Pernah/sedang memiliki pinjaman dalam 2 tahun terakhir dengan kolektabilitasnya pernah DPK (kolektabilitas terakhir lancar)",
+                              "scoringValue": ""
+                          },
+                          {
+                              "id": 7,
+                              "orderNumber": "c",
+                              "answer": "Pernah/sedang memiliki pinjaman dalam 2 tahun terakhir dengan kolektabilitasnya pernah NPL (KL, D, M)",
+                              "scoringValue": ""
+                          },
+                          {
+                              "id": 8,
+                              "orderNumber": "d",
+                              "answer": "Nasabah baru atau belum pernah meminjam di Bank/Lembaga keuangan (tidak terdaftar di SLIK)",
+                              "scoringValue": ""
+                          },
+                          {
+                              "id": 9,
+                              "orderNumber": "e",
+                              "answer": "Memiliki tunggakan pinjaman posisi terakhir dengan kolektabilitas DPK",
+                              "scoringValue": ""
+                          },
+                          {
+                              "id": 10,
+                              "orderNumber": "f",
+                              "answer": "Memiliki tunggakan pinjaman posisi terakhir dengan kolektabilitas NPL",
+                              "scoringValue": ""
+                          },
+                          {
+                              "id": 11,
+                              "orderNumber": "g",
+                              "answer": "Sedang memiliki pinjaman dalam kondisi restrukturisasi",
+                              "scoringValue": ""
+                          }
+                      ]
+                  },
+                  {
+                      "id": 11,
+                      "orderNumber": 3,
+                      "type": "Karakter Kondisi Usaha",
+                      "question": "Bagaimana kondisi \npenjualan usaha nasabah?",
+                      "isScoring": 1,
+                      "scoringKey": "karakter_kondisi_usaha",
+                      "answers": [
+                          {
+                              "id": 33,
+                              "orderNumber": "a",
+                              "answer": "Memiliki pelanggan tetap atau Offtaker/mitra kerjasama",
+                              "scoringValue": "memiliki_pelanggan_tetap"
+                          },
+                          {
+                              "id": 35,
+                              "orderNumber": "b",
+                              "answer": "Tidak memiliki pelanggan tetap atau Offtaker/mitra kerjasama",
+                              "scoringValue": "tidak_memiliki_pelanggan_tetap"
+                          }
+                      ]
+                  },
+                  {
+                      "id": 12,
+                      "orderNumber": 4,
+                      "type": "Karakter Output Barang/Jasa Usaha",
+                      "question": "Bagaimana karakter \nbarang/jasa yang dijual \nterhadap persaingan usaha?",
+                      "isScoring": 1,
+                      "scoringKey": "karakter_output_barang_jasa",
+                      "answers": [
+                          {
+                              "id": 36,
+                              "orderNumber": "a",
+                              "answer": "Barang/jasa bersifat umum dan masih sedikit pesaing di sekitar",
+                              "scoringValue": "umum_sedikit_pesaing"
+                          },
+                          {
+                              "id": 37,
+                              "orderNumber": "b",
+                              "answer": "Barang/jasa bersifat umum dan banyak pesaing di sekitar",
+                              "scoringValue": "umum_banyak_pesaing"
+                          },
+                          {
+                              "id": 38,
+                              "orderNumber": "c",
+                              "answer": "Barang/jasa memiliki spesifikasi tertentu dengan pangsa pasar yang besar",
+                              "scoringValue": "tertentu_pangsa_besar"
+                          },
+                          {
+                              "id": 39,
+                              "orderNumber": "d",
+                              "answer": "Barang/jasa memiliki spesifikasi tertentu dengan pangsa pasar terbatas",
+                              "scoringValue": "tertentu_pangsa_terbatas"
+                          }
+                      ]
+                  }
+              ],
+              "desc": "Data Valid",
+              "message": "Data Ditemukan",
+              "status": 200
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/crs/find-usaha"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data": null
+          }
+  - name: empty data
+    request:
+      url: "{{base_url}}/v/1/crs/find-usaha"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "data": null,
+              "desc": "Error record not found",
+              "message": "CRS Tidak Ditemukan",
+              "status": 404
+          }

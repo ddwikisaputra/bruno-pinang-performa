@@ -1,0 +1,1311 @@
+info:
+  name: Detail Purchase Order V1
+  type: http
+  seq: 7
+
+http:
+  method: POST
+  url: "{{url}}/v/1/partnerships/po-detail"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "1"
+        description: User ID Login { MANDATORY }
+      - name: id
+        value: "111"
+        description: ID PO { MANDATORY }
+      - name: partnershipCode
+        value: OMS1
+        description: Kode Partnership (Login Session) { MANDATORY }
+  auth:
+    type: bearer
+    token: "{{tokenPartnership}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: success
+    request:
+      url: "{{url}}/v/1/partnerships/po-detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: id
+            value: "1"
+            description: ID PO { MANDATORY }
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 03:03:58 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "poDetail": {
+                      "id": 1,
+                      "prakarsaId": 30943,
+                      "poNumber": "P0001",
+                      "transactionalType": 1,
+                      "partnershipCode": "OMS1",
+                      "name": "Dwiki Saputra",
+                      "branchCode": "0010",
+                      "loanAmount": 5000000,
+                      "status": -1,
+                      "statusText": "PO Ditolak",
+                      "disbursementDate": "2022-01-23",
+                      "dueDate": "2022-01-23",
+                      "cancelReason": "Testing",
+                      "createdAt": "24-11-2021 15:42:15",
+                      "updatedAt": "24-11-2021 15:42:20"
+                  },
+                  "poLoanData": {
+                      "id": 2,
+                      "loanAmount": 520000,
+                      "tunggakanPokok": 520000,
+                      "tunggakanBunga": 47666,
+                      "jumlahHariBunga": 45,
+                      "tunggakanDenda": 23306,
+                      "jumlahHariDenda": 45,
+                      "daysCount": 45,
+                      "totalLoanPayment": 590972,
+                      "status": 3,
+                      "statusText": "Telat 45 Hari"
+                  },
+                  "poStatus": [
+                      {
+                          "title": "Menyetujui Purchase Order",
+                          "iconActive": 1,
+                          "buttonActive": 0
+                      },
+                      {
+                          "title": "Dana Telah ditransfer ke Rekening Mitra/Partner",
+                          "iconActive": 0,
+                          "buttonActive": 0
+                      }
+                  ]
+              },
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: status po dalam proses (dueDate & disbursementDate)
+    request:
+      url: "{{url}}/v/1/partnerships/po-detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: id
+            value: "40"
+            description: ID PO { MANDATORY }
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx/1.18.0 (Ubuntu)
+        - name: Date
+          value: Mon, 18 Apr 2022 01:33:31 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "772"
+        - name: Connection
+          value: keep-alive
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "poDetail": {
+                      "id": 40,
+                      "prakarsaId": 30943,
+                      "poNumber": "006PO",
+                      "transactionalType": 2,
+                      "partnershipCode": "OMS1",
+                      "name": "Dwiki Saputra",
+                      "branchCode": "9999",
+                      "loanAmount": 950000,
+                      "status": 0,
+                      "statusText": "Menunggu Persetujuan PO",
+                      "disbursementDate": "",
+                      "dueDate": "2022-05-02",
+                      "cancelReason": "",
+                      "createdAt": "22-03-2022 21:36:34",
+                      "updatedAt": "14-04-2022 16:54:11"
+                  },
+                  "poStatus": [
+                      {
+                          "title": "Menyetujui Purchase Order",
+                          "iconActive": 1,
+                          "buttonActive": 1
+                      },
+                      {
+                          "title": "Order Sedang Anda Proses",
+                          "iconActive": 0,
+                          "buttonActive": 0
+                      },
+                      {
+                          "title": "Konfirmasi Pengiriman Barang",
+                          "iconActive": 0,
+                          "buttonActive": 0
+                      },
+                      {
+                          "title": "Menunggu Konfirmasi Barang Sampai",
+                          "iconActive": 0,
+                          "buttonActive": 0
+                      },
+                      {
+                          "title": "Dana Telah ditransfer ke Rekening Partner",
+                          "iconActive": 0,
+                          "buttonActive": 0
+                      }
+                  ]
+              },
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: general error
+    request:
+      url: "{{url}}/v/1/partnerships/po-detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: id
+            value: "1"
+            description: ID PO { MANDATORY }
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Could not connect .....",
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "status": 500
+          }
+  - name: status po ditolak (dueDate & disbursementDate)
+    request:
+      url: "{{url}}/v/1/partnerships/po-detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: id
+            value: "40"
+            description: ID PO { MANDATORY }
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx/1.18.0 (Ubuntu)
+        - name: Date
+          value: Mon, 18 Apr 2022 01:33:58 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "751"
+        - name: Connection
+          value: keep-alive
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "poDetail": {
+                      "id": 40,
+                      "prakarsaId": 30943,
+                      "poNumber": "006PO",
+                      "transactionalType": 2,
+                      "partnershipCode": "OMS1",
+                      "name": "Dwiki Saputra",
+                      "branchCode": "9999",
+                      "loanAmount": 950000,
+                      "status": -1,
+                      "statusText": "PO Ditolak",
+                      "disbursementDate": "",
+                      "dueDate": "",
+                      "cancelReason": "Testing",
+                      "createdAt": "22-03-2022 21:36:34",
+                      "updatedAt": "14-04-2022 16:54:11"
+                  },
+                  "poStatus": [
+                      {
+                          "title": "Menyetujui Purchase Order",
+                          "iconActive": -1,
+                          "buttonActive": 0
+                      },
+                      {
+                          "title": "Order Sedang Anda Proses",
+                          "iconActive": 0,
+                          "buttonActive": 0
+                      },
+                      {
+                          "title": "Konfirmasi Pengiriman Barang",
+                          "iconActive": 0,
+                          "buttonActive": 0
+                      },
+                      {
+                          "title": "Menunggu Konfirmasi Barang Sampai",
+                          "iconActive": 0,
+                          "buttonActive": 0
+                      },
+                      {
+                          "title": "Dana Telah ditransfer ke Rekening Partner",
+                          "iconActive": 0,
+                          "buttonActive": 0
+                      }
+                  ]
+              },
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: unautorized
+    request:
+      url: "{{url}}/v/1/partnerships/po-detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: id
+            value: "1"
+            description: ID PO { MANDATORY }
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:44:34 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: error parameter validation
+    request:
+      url: "{{url}}/v/1/partnerships/po-detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: id
+            value: "1"
+            description: ID PO { MANDATORY }
+            disabled: true
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Parameter ... kosong",
+              "message": "Maaf, Parameter ... tidak boleh kosong",
+              "status": 500
+          }
+  - name: empty loan data
+    request:
+      url: "{{url}}/v/1/partnerships/po-detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: id
+            value: "35"
+            description: ID PO { MANDATORY }
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx/1.18.0 (Ubuntu)
+        - name: Date
+          value: Mon, 09 May 2022 05:09:38 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "979"
+        - name: Connection
+          value: keep-alive
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "poDetail": {
+                      "id": 1,
+                      "prakarsaId": 30943,
+                      "poNumber": "011PO",
+                      "transactionalType": 2,
+                      "partnershipCode": "OMS1",
+                      "name": "DWIKI SAPUTRA",
+                      "branchCode": "0010",
+                      "loanAmount": 2500000,
+                      "status": 3,
+                      "statusText": "Dana Telah Dicairkan",
+                      "disbursementDate": "2022-02-18",
+                      "dueDate": "2022-02-25",
+                      "cancelReason": "",
+                      "createdAt": "18-02-2022 17:28:36",
+                      "updatedAt": "11-04-2022 13:40:33"
+                  },
+                  "poLoanData": {
+                      "id": 0,
+                      "loanAmount": 0,
+                      "tunggakanPokok": 0,
+                      "tunggakanBunga": 0,
+                      "jumlahHariBunga": 0,
+                      "tunggakanDenda": 0,
+                      "jumlahHariDenda": 0,
+                      "daysCount": 0,
+                      "totalLoanPayment": 0,
+                      "status": 0,
+                      "statusText": ""
+                  },
+                  "poStatus": [
+                      {
+                          "title": "Menyetujui Purchase Order",
+                          "iconActive": 2,
+                          "buttonActive": 0
+                      },
+                      {
+                          "title": "Order Sedang Anda Proses",
+                          "iconActive": 2,
+                          "buttonActive": 0
+                      },
+                      {
+                          "title": "Konfirmasi Pengiriman Barang",
+                          "iconActive": 2,
+                          "buttonActive": 0
+                      },
+                      {
+                          "title": "Menunggu Konfirmasi Barang Sampai",
+                          "iconActive": 2,
+                          "buttonActive": 0
+                      },
+                      {
+                          "title": "Dana Telah ditransfer ke Rekening Partner",
+                          "iconActive": 2,
+                          "buttonActive": 0
+                      }
+                  ]
+              },
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: error database connection
+    request:
+      url: "{{url}}/v/1/partnerships/po-detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: id
+            value: "1"
+            description: ID PO { MANDATORY }
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: status po telah dicairkan (dueDate & disbursementDate)
+    request:
+      url: "{{url}}/v/1/partnerships/po-detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: id
+            value: "40"
+            description: ID PO { MANDATORY }
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx/1.18.0 (Ubuntu)
+        - name: Date
+          value: Mon, 18 Apr 2022 01:32:41 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "779"
+        - name: Connection
+          value: keep-alive
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "poDetail": {
+                      "id": 40,
+                      "prakarsaId": 30943,
+                      "poNumber": "006PO",
+                      "transactionalType": 2,
+                      "partnershipCode": "OMS1",
+                      "name": "Dwiki Saputra",
+                      "branchCode": "9999",
+                      "loanAmount": 950000,
+                      "status": 3,
+                      "statusText": "Dana Telah Dicairkan",
+                      "disbursementDate": "2022-03-22",
+                      "dueDate": "2022-04-04",
+                      "cancelReason": "",
+                      "createdAt": "22-03-2022 21:36:34",
+                      "updatedAt": "14-04-2022 16:54:11"
+                  },
+                  "poStatus": [
+                      {
+                          "title": "Menyetujui Purchase Order",
+                          "iconActive": 2,
+                          "buttonActive": 0
+                      },
+                      {
+                          "title": "Order Sedang Anda Proses",
+                          "iconActive": 2,
+                          "buttonActive": 0
+                      },
+                      {
+                          "title": "Konfirmasi Pengiriman Barang",
+                          "iconActive": 2,
+                          "buttonActive": 0
+                      },
+                      {
+                          "title": "Menunggu Konfirmasi Barang Sampai",
+                          "iconActive": 2,
+                          "buttonActive": 0
+                      },
+                      {
+                          "title": "Dana Telah ditransfer ke Rekening Partner",
+                          "iconActive": 2,
+                          "buttonActive": 0
+                      }
+                  ]
+              },
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: empty data
+    request:
+      url: "{{url}}/v/1/partnerships/po-detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: id
+            value: "-1"
+            description: ID PO { MANDATORY }
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 24 Nov 2021 18:18:31 GMT
+        - name: Content-Length
+          value: "657"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Data Purchase Order tidak ditemukan",
+              "message": "Purchase Order Tidak Ditemukan",
+              "status": 404
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{url}}/v/1/partnerships/po-detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "15"
+            description: User ID Login { MANDATORY }
+          - name: id
+            value: "111"
+            description: ID PO { MANDATORY }
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Server
+          value: nginx/1.18.0 (Ubuntu)
+        - name: Date
+          value: Mon, 25 Jul 2022 03:23:39 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "67"
+        - name: Connection
+          value: keep-alive
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: error database connection
+    request:
+      url: "{{url}}/v/1/partnerships/po-detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: id
+            value: "1"
+            description: ID PO { MANDATORY }
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: status po dalam proses (dueDate & disbursementDate)
+    request:
+      url: "{{url}}/v/1/partnerships/po-detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: id
+            value: "40"
+            description: ID PO { MANDATORY }
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx/1.18.0 (Ubuntu)
+        - name: Date
+          value: Mon, 18 Apr 2022 01:33:31 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "772"
+        - name: Connection
+          value: keep-alive
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "poDetail": {
+                      "id": 40,
+                      "prakarsaId": 30943,
+                      "poNumber": "006PO",
+                      "transactionalType": 2,
+                      "partnershipCode": "OMS1",
+                      "name": "Dwiki Saputra",
+                      "branchCode": "9999",
+                      "loanAmount": 950000,
+                      "status": 0,
+                      "statusText": "Menunggu Persetujuan PO",
+                      "disbursementDate": "",
+                      "dueDate": "2022-05-02",
+                      "cancelReason": "",
+                      "createdAt": "22-03-2022 21:36:34",
+                      "updatedAt": "14-04-2022 16:54:11"
+                  },
+                  "poStatus": [
+                      {
+                          "title": "Menyetujui Purchase Order",
+                          "iconActive": 1,
+                          "buttonActive": 1
+                      },
+                      {
+                          "title": "Order Sedang Anda Proses",
+                          "iconActive": 0,
+                          "buttonActive": 0
+                      },
+                      {
+                          "title": "Konfirmasi Pengiriman Barang",
+                          "iconActive": 0,
+                          "buttonActive": 0
+                      },
+                      {
+                          "title": "Menunggu Konfirmasi Barang Sampai",
+                          "iconActive": 0,
+                          "buttonActive": 0
+                      },
+                      {
+                          "title": "Dana Telah ditransfer ke Rekening Partner",
+                          "iconActive": 0,
+                          "buttonActive": 0
+                      }
+                  ]
+              },
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: status po ditolak (dueDate & disbursementDate)
+    request:
+      url: "{{url}}/v/1/partnerships/po-detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: id
+            value: "40"
+            description: ID PO { MANDATORY }
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx/1.18.0 (Ubuntu)
+        - name: Date
+          value: Mon, 18 Apr 2022 01:33:58 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "751"
+        - name: Connection
+          value: keep-alive
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "poDetail": {
+                      "id": 40,
+                      "prakarsaId": 30943,
+                      "poNumber": "006PO",
+                      "transactionalType": 2,
+                      "partnershipCode": "OMS1",
+                      "name": "Dwiki Saputra",
+                      "branchCode": "9999",
+                      "loanAmount": 950000,
+                      "status": -1,
+                      "statusText": "PO Ditolak",
+                      "disbursementDate": "",
+                      "dueDate": "",
+                      "cancelReason": "Testing",
+                      "createdAt": "22-03-2022 21:36:34",
+                      "updatedAt": "14-04-2022 16:54:11"
+                  },
+                  "poStatus": [
+                      {
+                          "title": "Menyetujui Purchase Order",
+                          "iconActive": -1,
+                          "buttonActive": 0
+                      },
+                      {
+                          "title": "Order Sedang Anda Proses",
+                          "iconActive": 0,
+                          "buttonActive": 0
+                      },
+                      {
+                          "title": "Konfirmasi Pengiriman Barang",
+                          "iconActive": 0,
+                          "buttonActive": 0
+                      },
+                      {
+                          "title": "Menunggu Konfirmasi Barang Sampai",
+                          "iconActive": 0,
+                          "buttonActive": 0
+                      },
+                      {
+                          "title": "Dana Telah ditransfer ke Rekening Partner",
+                          "iconActive": 0,
+                          "buttonActive": 0
+                      }
+                  ]
+              },
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: error parameter validation
+    request:
+      url: "{{url}}/v/1/partnerships/po-detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: id
+            value: "1"
+            description: ID PO { MANDATORY }
+            disabled: true
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Parameter ... kosong",
+              "message": "Maaf, Parameter ... tidak boleh kosong",
+              "status": 500
+          }
+  - name: success
+    request:
+      url: "{{url}}/v/1/partnerships/po-detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: id
+            value: "1"
+            description: ID PO { MANDATORY }
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 03:03:58 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "poDetail": {
+                      "id": 1,
+                      "prakarsaId": 30943,
+                      "poNumber": "P0001",
+                      "transactionalType": 1,
+                      "partnershipCode": "OMS1",
+                      "name": "Dwiki Saputra",
+                      "branchCode": "0010",
+                      "loanAmount": 5000000,
+                      "status": -1,
+                      "statusText": "PO Ditolak",
+                      "disbursementDate": "2022-01-23",
+                      "dueDate": "2022-01-23",
+                      "cancelReason": "Testing",
+                      "createdAt": "24-11-2021 15:42:15",
+                      "updatedAt": "24-11-2021 15:42:20"
+                  },
+                  "poLoanData": {
+                      "id": 2,
+                      "loanAmount": 520000,
+                      "tunggakanPokok": 520000,
+                      "tunggakanBunga": 47666,
+                      "jumlahHariBunga": 45,
+                      "tunggakanDenda": 23306,
+                      "jumlahHariDenda": 45,
+                      "daysCount": 45,
+                      "totalLoanPayment": 590972,
+                      "status": 3,
+                      "statusText": "Telat 45 Hari"
+                  },
+                  "poStatus": [
+                      {
+                          "title": "Menyetujui Purchase Order",
+                          "iconActive": 1,
+                          "buttonActive": 0
+                      },
+                      {
+                          "title": "Dana Telah ditransfer ke Rekening Mitra/Partner",
+                          "iconActive": 0,
+                          "buttonActive": 0
+                      }
+                  ]
+              },
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: general error
+    request:
+      url: "{{url}}/v/1/partnerships/po-detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: id
+            value: "1"
+            description: ID PO { MANDATORY }
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Could not connect .....",
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "status": 500
+          }
+  - name: empty loan data
+    request:
+      url: "{{url}}/v/1/partnerships/po-detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: id
+            value: "35"
+            description: ID PO { MANDATORY }
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx/1.18.0 (Ubuntu)
+        - name: Date
+          value: Mon, 09 May 2022 05:09:38 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "979"
+        - name: Connection
+          value: keep-alive
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "poDetail": {
+                      "id": 1,
+                      "prakarsaId": 30943,
+                      "poNumber": "011PO",
+                      "transactionalType": 2,
+                      "partnershipCode": "OMS1",
+                      "name": "DWIKI SAPUTRA",
+                      "branchCode": "0010",
+                      "loanAmount": 2500000,
+                      "status": 3,
+                      "statusText": "Dana Telah Dicairkan",
+                      "disbursementDate": "2022-02-18",
+                      "dueDate": "2022-02-25",
+                      "cancelReason": "",
+                      "createdAt": "18-02-2022 17:28:36",
+                      "updatedAt": "11-04-2022 13:40:33"
+                  },
+                  "poLoanData": {
+                      "id": 0,
+                      "loanAmount": 0,
+                      "tunggakanPokok": 0,
+                      "tunggakanBunga": 0,
+                      "jumlahHariBunga": 0,
+                      "tunggakanDenda": 0,
+                      "jumlahHariDenda": 0,
+                      "daysCount": 0,
+                      "totalLoanPayment": 0,
+                      "status": 0,
+                      "statusText": ""
+                  },
+                  "poStatus": [
+                      {
+                          "title": "Menyetujui Purchase Order",
+                          "iconActive": 2,
+                          "buttonActive": 0
+                      },
+                      {
+                          "title": "Order Sedang Anda Proses",
+                          "iconActive": 2,
+                          "buttonActive": 0
+                      },
+                      {
+                          "title": "Konfirmasi Pengiriman Barang",
+                          "iconActive": 2,
+                          "buttonActive": 0
+                      },
+                      {
+                          "title": "Menunggu Konfirmasi Barang Sampai",
+                          "iconActive": 2,
+                          "buttonActive": 0
+                      },
+                      {
+                          "title": "Dana Telah ditransfer ke Rekening Partner",
+                          "iconActive": 2,
+                          "buttonActive": 0
+                      }
+                  ]
+              },
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: empty data
+    request:
+      url: "{{url}}/v/1/partnerships/po-detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: id
+            value: "-1"
+            description: ID PO { MANDATORY }
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 24 Nov 2021 18:18:31 GMT
+        - name: Content-Length
+          value: "657"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Data Purchase Order tidak ditemukan",
+              "message": "Purchase Order Tidak Ditemukan",
+              "status": 404
+          }
+  - name: status po telah dicairkan (dueDate & disbursementDate)
+    request:
+      url: "{{url}}/v/1/partnerships/po-detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: id
+            value: "40"
+            description: ID PO { MANDATORY }
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx/1.18.0 (Ubuntu)
+        - name: Date
+          value: Mon, 18 Apr 2022 01:32:41 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "779"
+        - name: Connection
+          value: keep-alive
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "poDetail": {
+                      "id": 40,
+                      "prakarsaId": 30943,
+                      "poNumber": "006PO",
+                      "transactionalType": 2,
+                      "partnershipCode": "OMS1",
+                      "name": "Dwiki Saputra",
+                      "branchCode": "9999",
+                      "loanAmount": 950000,
+                      "status": 3,
+                      "statusText": "Dana Telah Dicairkan",
+                      "disbursementDate": "2022-03-22",
+                      "dueDate": "2022-04-04",
+                      "cancelReason": "",
+                      "createdAt": "22-03-2022 21:36:34",
+                      "updatedAt": "14-04-2022 16:54:11"
+                  },
+                  "poStatus": [
+                      {
+                          "title": "Menyetujui Purchase Order",
+                          "iconActive": 2,
+                          "buttonActive": 0
+                      },
+                      {
+                          "title": "Order Sedang Anda Proses",
+                          "iconActive": 2,
+                          "buttonActive": 0
+                      },
+                      {
+                          "title": "Konfirmasi Pengiriman Barang",
+                          "iconActive": 2,
+                          "buttonActive": 0
+                      },
+                      {
+                          "title": "Menunggu Konfirmasi Barang Sampai",
+                          "iconActive": 2,
+                          "buttonActive": 0
+                      },
+                      {
+                          "title": "Dana Telah ditransfer ke Rekening Partner",
+                          "iconActive": 2,
+                          "buttonActive": 0
+                      }
+                  ]
+              },
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: unautorized
+    request:
+      url: "{{url}}/v/1/partnerships/po-detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login { MANDATORY }
+          - name: id
+            value: "1"
+            description: ID PO { MANDATORY }
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:44:34 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{url}}/v/1/partnerships/po-detail"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "15"
+            description: User ID Login { MANDATORY }
+          - name: id
+            value: "111"
+            description: ID PO { MANDATORY }
+          - name: partnershipCode
+            value: OMS1
+            description: Kode Partnership (Login Session) { MANDATORY }
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Server
+          value: nginx/1.18.0 (Ubuntu)
+        - name: Date
+          value: Mon, 25 Jul 2022 03:23:39 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "67"
+        - name: Connection
+          value: keep-alive
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }

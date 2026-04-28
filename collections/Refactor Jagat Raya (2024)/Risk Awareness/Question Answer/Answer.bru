@@ -1,0 +1,84 @@
+meta {
+  name: Answer
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{BASE_URL}}/v1/risk-awareness/batch/question/answer
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: 
+}
+
+body:json {
+  {
+      "payload": "{{REQUEST_BODY}}"
+  }
+}
+
+script:pre-request {
+  const payload = {
+      "question_id": "6dbde103-3dac-4be2-8dd8-77db91fe07ee",
+      "question_choice_id": "6ce1888f-f310-42c1-9341-06a3903a2b84"
+  }
+  
+  const result = _.encrypt(JSON.stringify(payload))
+  bru.setEnvVar("REQUEST_BODY", result);
+}
+
+script:post-response {
+  const responseJSON = res.getBody()
+  if (responseJSON.status) {
+      const data = _.decrypt(responseJSON.data)
+      const parseData = JSON.parse(data)
+      const parseData2 = JSON.parse(parseData)
+      console.log('/v1/risk-awareness/batch/question/answer', parseData2)
+  }
+}
+
+settings {
+  encodeUrl: true
+}
+
+example {
+  name: Create
+  
+  request: {
+    url: {{BASE_URL}}/v1/risk-awareness/batch/question/answer
+    method: POST
+    mode: json
+    body:json: {
+      {
+          "payload": "{{REQUEST_BODY}}"
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Thu, 04 Jul 2024 06:54:56 GMT
+      Content-Length: 1026
+    }
+  
+    status: {
+      code: 200
+      text: 200
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": "Un9+nUPsXhspfGJBBZXxpuBqnKppsqNOhsHagOgqcXDZtzz4oRVzhOLhJlpPYMzGNHT7xv+DFn0dsV+NRrZlKjOzdcWiWee2XQQAYVwxBCg5XAAoeq/E6hZa5El9+K60fDu006ipm5wysl7sOYoQOEf+tjGOVXX33uYAYXPXETqWif4zHbQfGB88vWocvMCg4MM+ggeloZ7FvvZ5BWhFrqRzm+Iu8JQ0c04wHUIYHC50Om4n5WM0ag4vY+ZmStewGVb5KOEbFqz7RzSIYMDyCKE5GR4N/Njv5v+nbiTewxE/OtQvy4z0F6zaF4lwNH1H7Tsbj8kg6YRZYZmSiMhUieMDL0h7mBH7TiM6Frj+v4JkylDj1d+/ASCEtZumbU+JXxPo+MH9gvSs4SRSkhdiG2ebarSDezXe0EPpnSTnQow3dpRUwOgY1v5V7YnUP/mbCFfT9HuUBTnCfKU74CRtzuMtz9ScVV6nx+AQhN2dD2ufQs2bjXD+DJsvoE8cZN+yEncGSsDJRvQ2Q7vNPrYcGScAfdEDVN6fzvet62mHJW92XwW0Er7lzwg7bPBQaJ1p8lAZPSm/0E8GZOQGKq5p0KIvhm/j5Of23EF2rZ19a4Cy0o+Q92yEdLPfqEQCALt81ysDawL3BGd5a5M0zLLHIl6GFGNtCowPrhWs136c+rMvcoKVH37WUIaG7FMKM27zlRWHBO4ig1w4FWgd5ADhz2sPy7OFJ54BnSeL6yA17GsaD3KhioslSk2pDIrjYSUFlCSLKiCkNWH3AZrXuMoEAgODBg7b6q6uIraXLtnaLdhNEDy+lFAmfJ1ce7rYRkzbxhJhDt8U1R8f+tLT5hIMj6GaKDSY3Kw59DWkYPSB2DFD4uyTCv7iYTQGB7hJ7HTjGK3ElLpcJ/b1w1mXAjAXjKQc5oZF0ozC0vV3h+f9nMM2/9O5kcuFv5OjVZfiyFhA",
+            "message": "Permintaan berhasil diproses",
+            "status": true
+        }
+      '''
+    }
+  }
+}

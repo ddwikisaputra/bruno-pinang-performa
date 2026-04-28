@@ -1,0 +1,781 @@
+info:
+  name: Update Pinjaman V1
+  type: http
+  seq: 17
+
+http:
+  method: POST
+  url: "{{base_url}}/v/1/crs/update-pinjaman/700"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "999900"
+        description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+      - name: loanType
+        value: Pinang Mikro
+        description: Jenis Kredit { MANDATORY } [ Hardcode 'Pinang Mikro' ]
+      - name: facilityType
+        value: Performa Brilink
+        description: Jenis Failitas { OPTIONAL } [ 'KMK' | 'KI' ]
+      - name: installmentPattern
+        value: "1"
+        description: Pola Angsuran { OPTIONAL } ['Bulanan' => 1, '3 Bulanan' => 3, '4 Bulanan' => 4, '6 Bulanan' => 4,' 9 Bulanan' => 9, '12 Bulanan' => 12 ]
+      - name: loanTerm
+        value: "9"
+        description: Jangka Waktu Pinjaman { Optional } [ Dalam Bulan seperti Pola Angsuran ]
+      - name: loanAmount
+        value: "51000000"
+        description: Nominal Pinjaman { OPTIONAL }
+      - name: rate
+        value: "0.2550"
+        description: Suku Bunga {OPTIONAL}
+      - name: installmentAmount
+        value: "1230031.99"
+        description: Angsuran per Bulan/Musim  { OPTIONAL }
+      - name: totalLoanRepayment
+        value: "11070287.24"
+        description: Total Pengembalian Pinjaman  { OPTIONAL }
+      - name: insuranceType
+        value: BRISMA - Jamkrida
+        description: Asuransi Pinjaman { OPTIONAL } [ 'Askrindo', 'KBRU - Sinarmas Insurtech' ]
+      - name: insuranceAmount
+        value: "0"
+        description: Total Asuransi (dalam rupiah) { OPTIONAL }
+      - name: provisionFee
+        value: "0"
+        description: Biaya Provisi { OPTIONAL }
+      - name: administrationFee
+        value: "0"
+        description: Biaya Administrasi { OPTIONAL }
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/crs/update-pinjaman/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: loanType
+            value: Pinang Mikro
+            description: Jenis Kredit { MANDATORY } [ Hardcode 'Pinang Mikro' ]
+          - name: facilityType
+            value: KMK
+            description: Jenis Failitas { OPTIONAL } [ 'KMK' | 'KI' ]
+          - name: installmentPattern
+            value: "3"
+            description: Pola Angsuran { OPTIONAL } ['Bulanan' => 1, '3 Bulanan' => 3, '4 Bulanan' => 4, '6 Bulanan' => 4,' 9 Bulanan' => 9, '12 Bulanan' => 12 ]
+          - name: loanTerm
+            value: "12"
+            description: Jangka Waktu Pinjaman { Optional } [ Dalam Bulan seperti Pola Angsuran ]
+          - name: loanAmount
+            value: "9000000"
+            description: Nominal Pinjaman { OPTIONAL }
+          - name: rate
+            value: "20"
+            description: Suku Bunga {OPTIONAL}
+          - name: installmentAmount
+            value: "800000"
+            description: Angsuran per Bulan/Musim  { OPTIONAL }
+          - name: totalLoanRepayment
+            value: "9500000"
+            description: Total Pengembalian Pinjaman  { OPTIONAL }
+          - name: provisionFee
+            value: "300000"
+            description: Biaya Provisi { OPTIONAL }
+          - name: administrationFee
+            value: "400000"
+            description: Biaya Administrasi { OPTIONAL }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 18 Jun 2021 09:16:28 GMT
+        - name: Content-Length
+          value: "102"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Tidak Memliki Akses",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: error crs tidak ditemukan
+    request:
+      url: "{{base_url}}/v/1/crs/update-pinjaman/-1"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: loanType
+            value: Pinang Mikro
+            description: Jenis Kredit { MANDATORY } [ Hardcode 'Pinang Mikro' ]
+          - name: facilityType
+            value: KMK
+            description: Jenis Failitas { OPTIONAL } [ 'KMK' | 'KI' ]
+          - name: installmentPattern
+            value: "3"
+            description: Pola Angsuran { OPTIONAL } ['Bulanan' => 1, '3 Bulanan' => 3, '4 Bulanan' => 4, '6 Bulanan' => 4,' 9 Bulanan' => 9, '12 Bulanan' => 12 ]
+          - name: loanTerm
+            value: "12"
+            description: Jangka Waktu Pinjaman { Optional } [ Dalam Bulan seperti Pola Angsuran ]
+          - name: loanAmount
+            value: "9000000"
+            description: Nominal Pinjaman { OPTIONAL }
+          - name: rate
+            value: "20"
+            description: Suku Bunga {OPTIONAL}
+          - name: installmentAmount
+            value: "800000"
+            description: Angsuran per Bulan/Musim  { OPTIONAL }
+          - name: totalLoanRepayment
+            value: "9500000"
+            description: Total Pengembalian Pinjaman  { OPTIONAL }
+          - name: provisionFee
+            value: "300000"
+            description: Biaya Provisi { OPTIONAL }
+          - name: administrationFee
+            value: "400000"
+            description: Biaya Administrasi { OPTIONAL }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 18 Jun 2021 09:16:28 GMT
+        - name: Content-Length
+          value: "102"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Error record not found",
+              "message": "CRS Tidak Ditemukan",
+              "status": 500
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/crs/update-pinjaman/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: loanType
+            value: Pinang Mikro
+            description: Jenis Kredit { MANDATORY } [ Hardcode 'Pinang Mikro' ]
+          - name: facilityType
+            value: KMK
+            description: Jenis Failitas { OPTIONAL } [ 'KMK' | 'KI' ]
+          - name: installmentPattern
+            value: "3"
+            description: Pola Angsuran { OPTIONAL } ['Bulanan' => 1, '3 Bulanan' => 3, '4 Bulanan' => 4, '6 Bulanan' => 4,' 9 Bulanan' => 9, '12 Bulanan' => 12 ]
+          - name: loanTerm
+            value: "12"
+            description: Jangka Waktu Pinjaman { Optional } [ Dalam Bulan seperti Pola Angsuran ]
+          - name: loanAmount
+            value: "9000000"
+            description: Nominal Pinjaman { OPTIONAL }
+          - name: rate
+            value: "20"
+            description: Suku Bunga {OPTIONAL}
+          - name: installmentAmount
+            value: "800000"
+            description: Angsuran per Bulan/Musim  { OPTIONAL }
+          - name: totalLoanRepayment
+            value: "9500000"
+            description: Total Pengembalian Pinjaman  { OPTIONAL }
+          - name: provisionFee
+            value: "300000"
+            description: Biaya Provisi { OPTIONAL }
+          - name: administrationFee
+            value: "400000"
+            description: Biaya Administrasi { OPTIONAL }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 18 Jun 2021 09:16:28 GMT
+        - name: Content-Length
+          value: "102"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data": null
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/crs/update-pinjaman/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: loanType
+            value: Pinang Mikro
+            description: Jenis Kredit { MANDATORY } [ Hardcode 'Pinang Mikro' ]
+          - name: facilityType
+            value: KMK
+            description: Jenis Failitas { OPTIONAL } [ 'KMK' | 'KI' ]
+          - name: installmentPattern
+            value: "3"
+            description: Pola Angsuran { OPTIONAL } ['Bulanan' => 1, '3 Bulanan' => 3, '4 Bulanan' => 4, '6 Bulanan' => 4,' 9 Bulanan' => 9, '12 Bulanan' => 12 ]
+          - name: loanTerm
+            value: "12"
+            description: Jangka Waktu Pinjaman { Optional } [ Dalam Bulan seperti Pola Angsuran ]
+          - name: loanAmount
+            value: "9000000"
+            description: Nominal Pinjaman { OPTIONAL }
+          - name: rate
+            value: "20"
+            description: Suku Bunga {OPTIONAL}
+          - name: installmentAmount
+            value: "800000"
+            description: Angsuran per Bulan/Musim  { OPTIONAL }
+          - name: totalLoanRepayment
+            value: "9500000"
+            description: Total Pengembalian Pinjaman  { OPTIONAL }
+          - name: provisionFee
+            value: "300000"
+            description: Biaya Provisi { OPTIONAL }
+          - name: administrationFee
+            value: "400000"
+            description: Biaya Administrasi { OPTIONAL }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 18 Jun 2021 09:16:28 GMT
+        - name: Content-Length
+          value: "102"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "prakarsa_id": 2
+              },
+              "desc": "Data Tersimpan",
+              "message": "Data CRS berhasil disimpan",
+              "status": 200
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/crs/update-pinjaman/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: loanType
+            value: Pinang Mikro
+            description: Jenis Kredit { MANDATORY } [ Hardcode 'Pinang Mikro' ]
+          - name: facilityType
+            value: KMK
+            description: Jenis Failitas { OPTIONAL } [ 'KMK' | 'KI' ]
+          - name: installmentPattern
+            value: "3"
+            description: Pola Angsuran { OPTIONAL } ['Bulanan' => 1, '3 Bulanan' => 3, '4 Bulanan' => 4, '6 Bulanan' => 4,' 9 Bulanan' => 9, '12 Bulanan' => 12 ]
+          - name: loanTerm
+            value: "12"
+            description: Jangka Waktu Pinjaman { Optional } [ Dalam Bulan seperti Pola Angsuran ]
+          - name: loanAmount
+            value: "9000000"
+            description: Nominal Pinjaman { OPTIONAL }
+          - name: rate
+            value: "20"
+            description: Suku Bunga {OPTIONAL}
+          - name: installmentAmount
+            value: "800000"
+            description: Angsuran per Bulan/Musim  { OPTIONAL }
+          - name: totalLoanRepayment
+            value: "9500000"
+            description: Total Pengembalian Pinjaman  { OPTIONAL }
+          - name: provisionFee
+            value: "300000"
+            description: Biaya Provisi { OPTIONAL }
+          - name: administrationFee
+            value: "400000"
+            description: Biaya Administrasi { OPTIONAL }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 18 Jun 2021 09:16:28 GMT
+        - name: Content-Length
+          value: "102"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{base_url}}/v/1/crs/update-pinjaman/30946"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999951"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: loanType
+            value: Pinang Mikro
+            description: Jenis Kredit { MANDATORY } [ Hardcode 'Pinang Mikro' ]
+          - name: facilityType
+            value: KMK Angsuran Tetap
+            description: Jenis Failitas { OPTIONAL } [ 'KMK' | 'KI' ]
+          - name: installmentPattern
+            value: "1"
+            description: Pola Angsuran { OPTIONAL } ['Bulanan' => 1, '3 Bulanan' => 3, '4 Bulanan' => 4, '6 Bulanan' => 4,' 9 Bulanan' => 9, '12 Bulanan' => 12 ]
+          - name: loanTerm
+            value: "9"
+            description: Jangka Waktu Pinjaman { Optional } [ Dalam Bulan seperti Pola Angsuran ]
+          - name: loanAmount
+            value: "51000000"
+            description: Nominal Pinjaman { OPTIONAL }
+          - name: rate
+            value: "0.25"
+            description: Suku Bunga {OPTIONAL}
+          - name: installmentAmount
+            value: "1230031.99"
+            description: Angsuran per Bulan/Musim  { OPTIONAL }
+          - name: totalLoanRepayment
+            value: "11070287.24"
+            description: Total Pengembalian Pinjaman  { OPTIONAL }
+          - name: insuranceType
+            value: KBRU - Sinarmas Insurtech
+            description: Asuransi Pinjaman { OPTIONAL } [ 'Askrindo', 'KBRU - Sinarmas Insurtech' ]
+          - name: insuranceAmount
+            value: "500000"
+            description: Total Asuransi (dalam rupiah) { OPTIONAL }
+          - name: provisionFee
+            value: "300000"
+            description: Biaya Provisi { OPTIONAL }
+          - name: administrationFee
+            value: "400000"
+            description: Biaya Administrasi { OPTIONAL }
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 21 Jul 2022 00:51:03 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/crs/update-pinjaman/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: loanType
+            value: Pinang Mikro
+            description: Jenis Kredit { MANDATORY } [ Hardcode 'Pinang Mikro' ]
+          - name: facilityType
+            value: KMK
+            description: Jenis Failitas { OPTIONAL } [ 'KMK' | 'KI' ]
+          - name: installmentPattern
+            value: "3"
+            description: Pola Angsuran { OPTIONAL } ['Bulanan' => 1, '3 Bulanan' => 3, '4 Bulanan' => 4, '6 Bulanan' => 4,' 9 Bulanan' => 9, '12 Bulanan' => 12 ]
+          - name: loanTerm
+            value: "12"
+            description: Jangka Waktu Pinjaman { Optional } [ Dalam Bulan seperti Pola Angsuran ]
+          - name: loanAmount
+            value: "9000000"
+            description: Nominal Pinjaman { OPTIONAL }
+          - name: rate
+            value: "20"
+            description: Suku Bunga {OPTIONAL}
+          - name: installmentAmount
+            value: "800000"
+            description: Angsuran per Bulan/Musim  { OPTIONAL }
+          - name: totalLoanRepayment
+            value: "9500000"
+            description: Total Pengembalian Pinjaman  { OPTIONAL }
+          - name: provisionFee
+            value: "300000"
+            description: Biaya Provisi { OPTIONAL }
+          - name: administrationFee
+            value: "400000"
+            description: Biaya Administrasi { OPTIONAL }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 18 Jun 2021 09:16:28 GMT
+        - name: Content-Length
+          value: "102"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/crs/update-pinjaman/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: loanType
+            value: Pinang Mikro
+            description: Jenis Kredit { MANDATORY } [ Hardcode 'Pinang Mikro' ]
+          - name: facilityType
+            value: KMK
+            description: Jenis Failitas { OPTIONAL } [ 'KMK' | 'KI' ]
+          - name: installmentPattern
+            value: "3"
+            description: Pola Angsuran { OPTIONAL } ['Bulanan' => 1, '3 Bulanan' => 3, '4 Bulanan' => 4, '6 Bulanan' => 4,' 9 Bulanan' => 9, '12 Bulanan' => 12 ]
+          - name: loanTerm
+            value: "12"
+            description: Jangka Waktu Pinjaman { Optional } [ Dalam Bulan seperti Pola Angsuran ]
+          - name: loanAmount
+            value: "9000000"
+            description: Nominal Pinjaman { OPTIONAL }
+          - name: rate
+            value: "20"
+            description: Suku Bunga {OPTIONAL}
+          - name: installmentAmount
+            value: "800000"
+            description: Angsuran per Bulan/Musim  { OPTIONAL }
+          - name: totalLoanRepayment
+            value: "9500000"
+            description: Total Pengembalian Pinjaman  { OPTIONAL }
+          - name: provisionFee
+            value: "300000"
+            description: Biaya Provisi { OPTIONAL }
+          - name: administrationFee
+            value: "400000"
+            description: Biaya Administrasi { OPTIONAL }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 18 Jun 2021 09:16:28 GMT
+        - name: Content-Length
+          value: "102"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data": null
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/crs/update-pinjaman/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: loanType
+            value: Pinang Mikro
+            description: Jenis Kredit { MANDATORY } [ Hardcode 'Pinang Mikro' ]
+          - name: facilityType
+            value: KMK
+            description: Jenis Failitas { OPTIONAL } [ 'KMK' | 'KI' ]
+          - name: installmentPattern
+            value: "3"
+            description: Pola Angsuran { OPTIONAL } ['Bulanan' => 1, '3 Bulanan' => 3, '4 Bulanan' => 4, '6 Bulanan' => 4,' 9 Bulanan' => 9, '12 Bulanan' => 12 ]
+          - name: loanTerm
+            value: "12"
+            description: Jangka Waktu Pinjaman { Optional } [ Dalam Bulan seperti Pola Angsuran ]
+          - name: loanAmount
+            value: "9000000"
+            description: Nominal Pinjaman { OPTIONAL }
+          - name: rate
+            value: "20"
+            description: Suku Bunga {OPTIONAL}
+          - name: installmentAmount
+            value: "800000"
+            description: Angsuran per Bulan/Musim  { OPTIONAL }
+          - name: totalLoanRepayment
+            value: "9500000"
+            description: Total Pengembalian Pinjaman  { OPTIONAL }
+          - name: provisionFee
+            value: "300000"
+            description: Biaya Provisi { OPTIONAL }
+          - name: administrationFee
+            value: "400000"
+            description: Biaya Administrasi { OPTIONAL }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 18 Jun 2021 09:16:28 GMT
+        - name: Content-Length
+          value: "102"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "prakarsa_id": 2
+              },
+              "desc": "Data Tersimpan",
+              "message": "Data CRS berhasil disimpan",
+              "status": 200
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{base_url}}/v/1/crs/update-pinjaman/30946"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999951"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: loanType
+            value: Pinang Mikro
+            description: Jenis Kredit { MANDATORY } [ Hardcode 'Pinang Mikro' ]
+          - name: facilityType
+            value: KMK Angsuran Tetap
+            description: Jenis Failitas { OPTIONAL } [ 'KMK' | 'KI' ]
+          - name: installmentPattern
+            value: "1"
+            description: Pola Angsuran { OPTIONAL } ['Bulanan' => 1, '3 Bulanan' => 3, '4 Bulanan' => 4, '6 Bulanan' => 4,' 9 Bulanan' => 9, '12 Bulanan' => 12 ]
+          - name: loanTerm
+            value: "9"
+            description: Jangka Waktu Pinjaman { Optional } [ Dalam Bulan seperti Pola Angsuran ]
+          - name: loanAmount
+            value: "51000000"
+            description: Nominal Pinjaman { OPTIONAL }
+          - name: rate
+            value: "0.25"
+            description: Suku Bunga {OPTIONAL}
+          - name: installmentAmount
+            value: "1230031.99"
+            description: Angsuran per Bulan/Musim  { OPTIONAL }
+          - name: totalLoanRepayment
+            value: "11070287.24"
+            description: Total Pengembalian Pinjaman  { OPTIONAL }
+          - name: insuranceType
+            value: KBRU - Sinarmas Insurtech
+            description: Asuransi Pinjaman { OPTIONAL } [ 'Askrindo', 'KBRU - Sinarmas Insurtech' ]
+          - name: insuranceAmount
+            value: "500000"
+            description: Total Asuransi (dalam rupiah) { OPTIONAL }
+          - name: provisionFee
+            value: "300000"
+            description: Biaya Provisi { OPTIONAL }
+          - name: administrationFee
+            value: "400000"
+            description: Biaya Administrasi { OPTIONAL }
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 21 Jul 2022 00:51:03 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/crs/update-pinjaman/{{prakarsaId}}"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: loanType
+            value: Pinang Mikro
+            description: Jenis Kredit { MANDATORY } [ Hardcode 'Pinang Mikro' ]
+          - name: facilityType
+            value: KMK
+            description: Jenis Failitas { OPTIONAL } [ 'KMK' | 'KI' ]
+          - name: installmentPattern
+            value: "3"
+            description: Pola Angsuran { OPTIONAL } ['Bulanan' => 1, '3 Bulanan' => 3, '4 Bulanan' => 4, '6 Bulanan' => 4,' 9 Bulanan' => 9, '12 Bulanan' => 12 ]
+          - name: loanTerm
+            value: "12"
+            description: Jangka Waktu Pinjaman { Optional } [ Dalam Bulan seperti Pola Angsuran ]
+          - name: loanAmount
+            value: "9000000"
+            description: Nominal Pinjaman { OPTIONAL }
+          - name: rate
+            value: "20"
+            description: Suku Bunga {OPTIONAL}
+          - name: installmentAmount
+            value: "800000"
+            description: Angsuran per Bulan/Musim  { OPTIONAL }
+          - name: totalLoanRepayment
+            value: "9500000"
+            description: Total Pengembalian Pinjaman  { OPTIONAL }
+          - name: provisionFee
+            value: "300000"
+            description: Biaya Provisi { OPTIONAL }
+          - name: administrationFee
+            value: "400000"
+            description: Biaya Administrasi { OPTIONAL }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 18 Jun 2021 09:16:28 GMT
+        - name: Content-Length
+          value: "102"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Tidak Memliki Akses",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: error crs tidak ditemukan
+    request:
+      url: "{{base_url}}/v/1/crs/update-pinjaman/-1"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000230"
+            description: Personal Number BRI Agro (UserID Login) { MANDATORY }
+          - name: loanType
+            value: Pinang Mikro
+            description: Jenis Kredit { MANDATORY } [ Hardcode 'Pinang Mikro' ]
+          - name: facilityType
+            value: KMK
+            description: Jenis Failitas { OPTIONAL } [ 'KMK' | 'KI' ]
+          - name: installmentPattern
+            value: "3"
+            description: Pola Angsuran { OPTIONAL } ['Bulanan' => 1, '3 Bulanan' => 3, '4 Bulanan' => 4, '6 Bulanan' => 4,' 9 Bulanan' => 9, '12 Bulanan' => 12 ]
+          - name: loanTerm
+            value: "12"
+            description: Jangka Waktu Pinjaman { Optional } [ Dalam Bulan seperti Pola Angsuran ]
+          - name: loanAmount
+            value: "9000000"
+            description: Nominal Pinjaman { OPTIONAL }
+          - name: rate
+            value: "20"
+            description: Suku Bunga {OPTIONAL}
+          - name: installmentAmount
+            value: "800000"
+            description: Angsuran per Bulan/Musim  { OPTIONAL }
+          - name: totalLoanRepayment
+            value: "9500000"
+            description: Total Pengembalian Pinjaman  { OPTIONAL }
+          - name: provisionFee
+            value: "300000"
+            description: Biaya Provisi { OPTIONAL }
+          - name: administrationFee
+            value: "400000"
+            description: Biaya Administrasi { OPTIONAL }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 18 Jun 2021 09:16:28 GMT
+        - name: Content-Length
+          value: "102"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Error record not found",
+              "message": "CRS Tidak Ditemukan",
+              "status": 500
+          }

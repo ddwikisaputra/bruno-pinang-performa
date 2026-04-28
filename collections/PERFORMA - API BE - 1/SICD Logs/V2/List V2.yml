@@ -1,0 +1,321 @@
+info:
+  name: List V2
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{base_url_staging}}/v/2/sicd-logs/list"
+  body:
+    type: form-urlencoded
+    data:
+      - name: ktpNumber
+        value: UmF5YVBpUGVyVG9w/lx6nGT4lUZqKWaPHO473n2U6FWtyCIygSantUHgOoc=
+        description: "[ENCODE AES]"
+  auth:
+    type: bearer
+    token: "{{tokenJWT}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/2/sicd-logs/list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: ktpNumber
+            value: "3171051211950001"
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 14 Jul 2021 07:17:10 GMT
+        - name: Content-Length
+          value: "241"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "message": "signature is invalid || Token is expired"
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/2/sicd-logs/list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: ktpNumber
+            value: "3171051211950001"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 14 Jul 2021 07:17:10 GMT
+        - name: Content-Length
+          value: "241"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/2/sicd-logs/list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: ktpNumber
+            value: "3171051211950001"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 14 Jul 2021 07:17:10 GMT
+        - name: Content-Length
+          value: "241"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data": null
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/2/sicd-logs/list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: ktpNumber
+            value: "3171051211950001"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 14 Jul 2021 07:22:28 GMT
+        - name: Content-Length
+          value: "241"
+      body:
+        type: json
+        data: |-
+          {
+              "data": [
+                  {
+                      "id": 1,
+                      "prakarsaId": 99,
+                      "ktpNumber": "3171051211950001",
+                      "reason": "Prakarsa Disetujui, Tetapi Ditolak Nasabah",
+                      "status": 2,
+                      "createdAt": "25-06-2021",
+                      "updatedAt": "25-06-2021"
+                  }
+              ],
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: empty data
+    request:
+      url: "{{base_url}}/v/2/sicd-logs/list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: ktpNumber
+            value: "31710512119500013"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 14 Jul 2021 07:21:56 GMT
+        - name: Content-Length
+          value: "104"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Data SICD Logs tidak ditemukan",
+              "message": "SICD Logs Tidak Ditemukan",
+              "status": 404
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/2/sicd-logs/list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: ktpNumber
+            value: "3171051211950001"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 14 Jul 2021 07:22:28 GMT
+        - name: Content-Length
+          value: "241"
+      body:
+        type: json
+        data: |-
+          {
+              "data": [
+                  {
+                      "id": 1,
+                      "prakarsaId": 99,
+                      "ktpNumber": "3171051211950001",
+                      "reason": "Prakarsa Disetujui, Tetapi Ditolak Nasabah",
+                      "status": 2,
+                      "createdAt": "25-06-2021",
+                      "updatedAt": "25-06-2021"
+                  }
+              ],
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/2/sicd-logs/list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: ktpNumber
+            value: "3171051211950001"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 14 Jul 2021 07:17:10 GMT
+        - name: Content-Length
+          value: "241"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/2/sicd-logs/list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: ktpNumber
+            value: "3171051211950001"
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 14 Jul 2021 07:17:10 GMT
+        - name: Content-Length
+          value: "241"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "message": "signature is invalid || Token is expired"
+          }
+  - name: empty data
+    request:
+      url: "{{base_url}}/v/2/sicd-logs/list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: ktpNumber
+            value: "31710512119500013"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 14 Jul 2021 07:21:56 GMT
+        - name: Content-Length
+          value: "104"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Data SICD Logs tidak ditemukan",
+              "message": "SICD Logs Tidak Ditemukan",
+              "status": 404
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/2/sicd-logs/list"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: ktpNumber
+            value: "3171051211950001"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 14 Jul 2021 07:17:10 GMT
+        - name: Content-Length
+          value: "241"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data": null
+          }

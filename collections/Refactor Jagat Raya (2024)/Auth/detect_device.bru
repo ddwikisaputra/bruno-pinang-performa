@@ -1,0 +1,47 @@
+meta {
+  name: detect_device
+  type: http
+  seq: 32
+}
+
+post {
+  url: {{BASE_URL}}/v1/auth/login/advance
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "payload": "{{REQUEST_BODY}}"
+  }
+}
+
+script:pre-request {
+  const payload = {
+      "username": "000003",
+      "password": btoa("0"),
+      "device_id": "UDGPdb841864f747504bcAs",
+      "device_name": "samsung (SM-G965F)",
+      "version": "1.0.3"
+  }
+  
+  const result = _.encrypt(JSON.stringify(payload))
+  bru.setEnvVar("REQUEST_BODY", result);
+}
+
+script:post-response {
+  const responseJSON = res.getBody()
+  if (responseJSON.status) {
+      const data = _.decrypt(responseJSON.data)
+      const result = JSON.parse(JSON.parse(data))
+      bru.setEnvVar("TOKEN", result.access_token)
+      bru.setEnvVar("REFRESH_TOKEN", result.refresh_token)
+      bru.setEnvVar("DATA_ENCRYPT", responseJSON.data)
+      console.log("Access_Token", result.access_token)
+      console.log("Refresh_Token", result.refresh_token)
+  }
+}
+
+settings {
+  encodeUrl: true
+}

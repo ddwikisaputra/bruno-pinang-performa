@@ -1,0 +1,215 @@
+info:
+  name: Show Sales Kit Document V1
+  type: http
+  seq: 6
+
+http:
+  method: POST
+  url: "{{url-dev}}/v/1/master/saleskit-document-show"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "001308"
+        description: User ID Login/ PN { MANDATORY }
+      - name: id
+        value: "47"
+        description: "ID Dokumen Sales Kit { MANDATORY } "
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: unautorized
+    request:
+      url: "{{url}}/v/1/master/saleskit-document-show"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login/ PN { MANDATORY }
+          - name: id
+            value: "1"
+            description: "ID Dokumen Sales Kit { MANDATORY } "
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:44:34 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: general error
+    request:
+      url: "{{url}}/v/1/master/saleskit-document-show"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login/ PN { MANDATORY }
+          - name: id
+            value: "1"
+            description: "ID Dokumen Sales Kit { MANDATORY } "
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Could not connect .....",
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "status": 500
+          }
+  - name: error database connection
+    request:
+      url: "{{url}}/v/1/master/saleskit-document-show"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login/ PN { MANDATORY }
+          - name: id
+            value: "1"
+            description: "ID Dokumen Sales Kit { MANDATORY } "
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{url}}/v/1/master/saleskit-document-show"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999951"
+            description: User ID Login/ PN { MANDATORY }
+          - name: id
+            value: "1"
+            description: "ID Dokumen Sales Kit { MANDATORY } "
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 25 Jul 2022 06:41:28 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: success
+    request:
+      url: "{{url}}/v/1/master/saleskit-document-show"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login/ PN { MANDATORY }
+          - name: id
+            value: "1"
+            description: "ID Dokumen Sales Kit { MANDATORY } "
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 03:03:58 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Data Tersimpan",
+              "message": "Data dokumen sales kit berhasil ditampilkan",
+              "status": 200
+          }
+  - name: error parameter validation
+    request:
+      url: "{{url}}/v/1/master/saleskit-document-show"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1"
+            description: User ID Login/ PN { MANDATORY }
+            disabled: true
+          - name: id
+            value: "1"
+            description: "ID Dokumen Sales Kit { MANDATORY } "
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "desc": "Parameter ... kosong",
+              "message": "Maaf, Parameter ... tidak boleh kosong",
+              "status": 500
+          }

@@ -1,0 +1,607 @@
+info:
+  name: List By User Level V2
+  type: http
+  seq: 8
+
+http:
+  method: POST
+  url: "{{base_url_prod}}/v/2/prakarsa/list-by-user-level"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "{{userId}}"
+        description: "[Encode]Personal Number BRI Agro (UserID Login)"
+      - name: userLevel
+        value: "90"
+        description: Access Level ID (UserID Login) [ 10 = SF, 20 = Supervisor, 30 = Head, 50 = rbo, 90 = Kantor Pusat ]
+      - name: startIndex
+        value: "0"
+        description: Offset Data {Default 0}
+      - name: recordCount
+        value: "10"
+        description: Limit Data {Default 5}
+      - name: textSearch
+        value: ahmad tabroni
+        description: Text Pencarian Data { OPTIONAL }
+        disabled: true
+      - name: statusType
+        value: "9"
+        description: Filter by Status { OPTIONAL } [ 0 => All, 1 => Proses Input Pre-Screening, 2 => Menunggu Hasil Pre-Screening, 3 => Pre-Screening Disetujui, 4 => Proses Input CRS, 5 => Menunggu Putusan, 10 => Menunggu Putusan RBO, 6 => Prakarsa Disetujui, Minta Persetujuan Nasabah, 7 | 11 => Proses Akad Kredit, 8 => Proses Pencairan, 9 => Pencairan Berhasil, -1 => Pre-Screening Error, -2 => Pre-Screening Ditolak, -3 => Prakarsa Ditolak, -4 => Prakarsa Disetujui, Tetapi Ditolak Nasabah, -5 => Prakarsa Dibatalkan Pre-Screening, -6 => Prakarsa Dibatalkan Analisa Pinjaman, -7 => Prakarsa Ditolak RBO ]
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: access forbidden (403)
+    request:
+      url: "{{base_url}}/v/1/prakarsa/list-by-user-level"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: userLevel
+            value: "20"
+            description: Access Level ID (UserID Login) [ 10 = SF, 20 = Supervisor, 30 = Head, 90 = Kantor Pusat ]
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "10"
+            description: Limit Data {Default 5}
+          - name: textSearch
+            value: dwiki
+            description: Text Pencarian Data { OPTIONAL }
+            disabled: true
+          - name: statusType
+            value: "-5"
+            description: Filter by Status { OPTIONAL } [ 0 => All, 1 => Proses Input Pre-Screening, 2 => Menunggu Hasil Pre-Screening, 3 => Pre-Screening Disetujui, 4 => Proses Input CRS, 5 => Menunggu Putusan, 6 => Prakarsa Disetujui, Minta Persetujuan Nasabah, 7 => Proses Akad Kredit, 8 => Proses Pencairan, 9 => Pencairan Berhasil, -1 => Pre-Screening Error, -2 => Pre-Screening Ditolak, -3 => Prakarsa Ditolak, -4 => Prakarsa Disetujui, Tetapi Ditolak Nasabah, -5 => Prakarsa Dibatalkan Pre-Screening, -6 = Prakarsa Dibatalkan Analisa Pinjaman ]
+            disabled: true
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 18 Jul 2022 07:44:44 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/prakarsa/list-by-user-level"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000426"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: userLevel
+            value: "20"
+            description: Access Level ID (UserID Login) [ 10 = SF, 20 = Supervisor, 30 = Head ]
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "10"
+            description: Limit Data {Default 5}
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Sat, 22 May 2021 06:53:21 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Accept-Encoding
+        - name: Content-Encoding
+          value: gzip
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "message": "signature is invalid || Token is expired"
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/prakarsa/list-by-user-level"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000426"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: userLevel
+            value: "20"
+            description: Access Level ID (UserID Login) [ 10 = SF, 20 = Supervisor, 30 = Head ]
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "10"
+            description: Limit Data {Default 5}
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Sat, 22 May 2021 06:53:21 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Accept-Encoding
+        - name: Content-Encoding
+          value: gzip
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data" : null
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/prakarsa/list-by-user-level"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000426"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: userLevel
+            value: "20"
+            description: Access Level ID (UserID Login) [ 10 = SF, 20 = Supervisor, 30 = Head ]
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "10"
+            description: Limit Data {Default 5}
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: empty data
+    request:
+      url: "{{base_url}}/v/1/prakarsa/list-by-user-level"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000426"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: userLevel
+            value: "20"
+            description: Access Level ID (UserID Login) [ 10 = SF, 20 = Supervisor, 30 = Head ]
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "10"
+            description: Limit Data {Default 5}
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Sat, 22 May 2021 06:53:21 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Accept-Encoding
+        - name: Content-Encoding
+          value: gzip
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Data Prakarsa tidak ditemukan",
+              "message": "Prakarsa Tidak Ditemukan",
+              "status": 404
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/2/prakarsa/list-by-user-level"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: UmF5YVBpUGVyVG9w9FR0lGD8PJZ01laNFpB91ptV5mkFfw==
+            description: Personal Number BRI Agro (UserID Login)
+          - name: userLevel
+            value: "10"
+            description: Access Level ID (UserID Login) [ 10 = SF, 20 = Supervisor, 30 = Head, 90 = Kantor Pusat ]
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "1"
+            description: Limit Data {Default 5}
+          - name: textSearch
+            value: dwiki
+            description: Text Pencarian Data { OPTIONAL }
+            disabled: true
+          - name: statusType
+            value: "-5"
+            description: Filter by Status { OPTIONAL } [ 0 => All, 1 => Proses Input Pre-Screening, 2 => Menunggu Hasil Pre-Screening, 3 => Pre-Screening Disetujui, 4 => Proses Input CRS, 5 => Menunggu Putusan, 6 => Prakarsa Disetujui, Minta Persetujuan Nasabah, 7 => Proses Akad Kredit, 8 => Proses Pencairan, 9 => Pencairan Berhasil, -1 => Pre-Screening Error, -2 => Pre-Screening Ditolak, -3 => Prakarsa Ditolak, -4 => Prakarsa Disetujui, Tetapi Ditolak Nasabah, -5 => Prakarsa Dibatalkan Pre-Screening, -6 = Prakarsa Dibatalkan Analisa Pinjaman ]
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 03 Jan 2023 04:19:14 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "data": [
+                  {
+                      "id": 788,
+                      "name": "UmF5YVBpUGVyVG9wgAw4wTWjxVQZeTTIRcc0a/EjfOrER1Ekafyuc2Q=",
+                      "status": 3,
+                      "statusText": "Pre-Screening Disetujui",
+                      "ktpPicturePath": "prakarsa/ktp/2022/2/3/IMG_20220203150033.jpg",
+                      "ktpPictureMimetype": "image/jpeg",
+                      "ktpPictureBase64": "string base64",
+                      "ktpPictureSelfiePath": "prakarsa/ktp-selfie/2022/2/3/IMG_20220203150033.jpg",
+                      "ktpPictureSelfieMimtype": "image/jpeg",
+                      "ktpPictureSelfieBase64": "string base64",
+                      "partnershipName": "OMS",
+                      "isDukcapil": 0,
+                      "isPipeline": 0,
+                      "isPipelineProcessed": 1,
+                      "installmentPattern": 6,
+                      "loanTerm": 6,
+                      "loanAmount": 50000000,
+                      "totalLoanApproved": 50000000,
+                      "employeeId": 18,
+                      "employeeName": "Kang Tae-Mo",
+                      "statusExpiredAt": "Expired 15 Hari",
+                      "updatedAt": "26-12-2022"
+                  }
+              ],
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: empty data
+    request:
+      url: "{{base_url}}/v/1/prakarsa/list-by-user-level"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000426"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: userLevel
+            value: "20"
+            description: Access Level ID (UserID Login) [ 10 = SF, 20 = Supervisor, 30 = Head ]
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "10"
+            description: Limit Data {Default 5}
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Sat, 22 May 2021 06:53:21 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Accept-Encoding
+        - name: Content-Encoding
+          value: gzip
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Data Prakarsa tidak ditemukan",
+              "message": "Prakarsa Tidak Ditemukan",
+              "status": 404
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/prakarsa/list-by-user-level"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000426"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: userLevel
+            value: "20"
+            description: Access Level ID (UserID Login) [ 10 = SF, 20 = Supervisor, 30 = Head ]
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "10"
+            description: Limit Data {Default 5}
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Sat, 22 May 2021 06:53:21 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Accept-Encoding
+        - name: Content-Encoding
+          value: gzip
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data" : null
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/2/prakarsa/list-by-user-level"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: UmF5YVBpUGVyVG9w9FR0lGD8PJZ01laNFpB91ptV5mkFfw==
+            description: Personal Number BRI Agro (UserID Login)
+          - name: userLevel
+            value: "10"
+            description: Access Level ID (UserID Login) [ 10 = SF, 20 = Supervisor, 30 = Head, 90 = Kantor Pusat ]
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "1"
+            description: Limit Data {Default 5}
+          - name: textSearch
+            value: dwiki
+            description: Text Pencarian Data { OPTIONAL }
+            disabled: true
+          - name: statusType
+            value: "-5"
+            description: Filter by Status { OPTIONAL } [ 0 => All, 1 => Proses Input Pre-Screening, 2 => Menunggu Hasil Pre-Screening, 3 => Pre-Screening Disetujui, 4 => Proses Input CRS, 5 => Menunggu Putusan, 6 => Prakarsa Disetujui, Minta Persetujuan Nasabah, 7 => Proses Akad Kredit, 8 => Proses Pencairan, 9 => Pencairan Berhasil, -1 => Pre-Screening Error, -2 => Pre-Screening Ditolak, -3 => Prakarsa Ditolak, -4 => Prakarsa Disetujui, Tetapi Ditolak Nasabah, -5 => Prakarsa Dibatalkan Pre-Screening, -6 = Prakarsa Dibatalkan Analisa Pinjaman ]
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 03 Jan 2023 04:19:14 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "data": [
+                  {
+                      "id": 788,
+                      "name": "UmF5YVBpUGVyVG9wgAw4wTWjxVQZeTTIRcc0a/EjfOrER1Ekafyuc2Q=",
+                      "status": 3,
+                      "statusText": "Pre-Screening Disetujui",
+                      "ktpPicturePath": "prakarsa/ktp/2022/2/3/IMG_20220203150033.jpg",
+                      "ktpPictureMimetype": "image/jpeg",
+                      "ktpPictureBase64": "string base64",
+                      "ktpPictureSelfiePath": "prakarsa/ktp-selfie/2022/2/3/IMG_20220203150033.jpg",
+                      "ktpPictureSelfieMimtype": "image/jpeg",
+                      "ktpPictureSelfieBase64": "string base64",
+                      "partnershipName": "OMS",
+                      "isDukcapil": 0,
+                      "isPipeline": 0,
+                      "isPipelineProcessed": 1,
+                      "installmentPattern": 6,
+                      "loanTerm": 6,
+                      "loanAmount": 50000000,
+                      "totalLoanApproved": 50000000,
+                      "employeeId": 18,
+                      "employeeName": "Kang Tae-Mo",
+                      "statusExpiredAt": "Expired 15 Hari",
+                      "updatedAt": "26-12-2022"
+                  }
+              ],
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/prakarsa/list-by-user-level"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000426"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: userLevel
+            value: "20"
+            description: Access Level ID (UserID Login) [ 10 = SF, 20 = Supervisor, 30 = Head ]
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "10"
+            description: Limit Data {Default 5}
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Server
+          value: nginx
+        - name: Date
+          value: Sat, 22 May 2021 06:53:21 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Accept-Encoding
+        - name: Content-Encoding
+          value: gzip
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "message": "signature is invalid || Token is expired"
+          }
+  - name: access forbidden (403)
+    request:
+      url: "{{base_url}}/v/1/prakarsa/list-by-user-level"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999941"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: userLevel
+            value: "20"
+            description: Access Level ID (UserID Login) [ 10 = SF, 20 = Supervisor, 30 = Head, 90 = Kantor Pusat ]
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "10"
+            description: Limit Data {Default 5}
+          - name: textSearch
+            value: dwiki
+            description: Text Pencarian Data { OPTIONAL }
+            disabled: true
+          - name: statusType
+            value: "-5"
+            description: Filter by Status { OPTIONAL } [ 0 => All, 1 => Proses Input Pre-Screening, 2 => Menunggu Hasil Pre-Screening, 3 => Pre-Screening Disetujui, 4 => Proses Input CRS, 5 => Menunggu Putusan, 6 => Prakarsa Disetujui, Minta Persetujuan Nasabah, 7 => Proses Akad Kredit, 8 => Proses Pencairan, 9 => Pencairan Berhasil, -1 => Pre-Screening Error, -2 => Pre-Screening Ditolak, -3 => Prakarsa Ditolak, -4 => Prakarsa Disetujui, Tetapi Ditolak Nasabah, -5 => Prakarsa Dibatalkan Pre-Screening, -6 = Prakarsa Dibatalkan Analisa Pinjaman ]
+            disabled: true
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 18 Jul 2022 07:44:44 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 403,
+              "desc": "Tidak Memliki Akses",
+              "message": "403 Forbidden"
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/prakarsa/list-by-user-level"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "000426"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: userLevel
+            value: "20"
+            description: Access Level ID (UserID Login) [ 10 = SF, 20 = Supervisor, 30 = Head ]
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "10"
+            description: Limit Data {Default 5}
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }

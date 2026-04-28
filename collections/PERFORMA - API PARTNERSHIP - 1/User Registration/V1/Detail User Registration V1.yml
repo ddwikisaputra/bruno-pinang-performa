@@ -1,0 +1,446 @@
+info:
+  name: Detail User Registration V1
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{base-url-local}}/v/1/partnerships/detail-user-registration"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "1031212312312"
+        description: User ID Login { MANDATORY }
+      - name: id
+        value: "1"
+        description: ID User Registration { MANDATORY }
+  auth:
+    type: bearer
+    token: "{{tokenPartnership}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Unauthorized
+    request:
+      url: "{{base-url-local}}/v/1/partnerships/detail-user-registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1031212312312"
+            description: User ID Login { MANDATORY }
+          - name: id
+            value: "1"
+            description: ID User Registration { MANDATORY }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 29 Jan 2025 06:17:02 GMT
+        - name: Content-Length
+          value: "75"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: Empty Data
+    request:
+      url: "{{base-url-local}}/v/1/partnerships/detail-user-registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1031212312312"
+            description: User ID Login { MANDATORY }
+          - name: id
+            value: "10000"
+            description: ID User Registration { MANDATORY }
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 29 Jan 2025 06:19:37 GMT
+        - name: Content-Length
+          value: "120"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "status": 404,
+              "message": "User Registration Tidak Ditemukan",
+              "desc": "Data User Registration tidak ditemukan"
+          }
+  - name: Success
+    request:
+      url: "{{base-url-local}}/v/1/partnerships/detail-user-registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1031212312312"
+            description: User ID Login { MANDATORY }
+          - name: id
+            value: "2"
+            description: ID User Registration { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 29 Jan 2025 06:21:30 GMT
+        - name: Content-Length
+          value: "412"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "id": 2,
+                  "name": "tes",
+                  "email": "tes@gmail.com",
+                  "mobileNumber": "+6282288194042",
+                  "position": "pemilik",
+                  "partnershipCode": "RAN20",
+                  "partnershipName": "",
+                  "level": 10,
+                  "userId": 49,
+                  "status": 1,
+                  "statusText": "Disetujui",
+                  "approvedBy": "999941",
+                  "rejectedBy": "",
+                  "createdAt": "30-03-2022 19:01:19",
+                  "updatedAt": "23-01-2025 07:04:18",
+                  "actionAt": "23-01-2025 07:04:18"
+              },
+              "status": 200,
+              "message": "Data ditemukan",
+              "desc": "Data Valid"
+          }
+  - name: General Error
+    request:
+      url: "{{base-url-local}}/v/1/partnerships/detail-user-registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1031212312312"
+            description: User ID Login { MANDATORY }
+          - name: id
+            value: "2"
+            description: ID User Registration { MANDATORY }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 29 Jan 2025 08:00:43 GMT
+        - name: Content-Length
+          value: "189"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "status": 400,
+              "message": "Maaf, Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "desc": "Maaf, Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi."
+          }
+  - name: Database error
+    request:
+      url: "{{base-url-local}}/v/1/partnerships/detail-user-registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1031212312312"
+            description: User ID Login { MANDATORY }
+          - name: id
+            value: "2"
+            description: ID User Registration { MANDATORY }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 29 Jan 2025 08:17:15 GMT
+        - name: Content-Length
+          value: "180"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "status": 500,
+              "message": "User Registration Tidak Ditemukan",
+              "desc": "unable to open tcp connection with host '10.100.0.47:1433': dial tcp 10.100.0.47:1433: i/o timeout"
+          }
+  - name: Parameter error validation
+    request:
+      url: "{{url}}/v/1/partnerships/detail-user-registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "99941"
+            description: User ID Login { MANDATORY }
+          - name: id
+            value: "1"
+            description: ID User Registration { MANDATORY }
+            disabled: true
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Parameter ... kosong",
+              "message": "Maaf, Parameter ... tidak boleh kosong",
+              "status": 500
+          }
+  - name: Empty Data
+    request:
+      url: "{{base-url-local}}/v/1/partnerships/detail-user-registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1031212312312"
+            description: User ID Login { MANDATORY }
+          - name: id
+            value: "10000"
+            description: ID User Registration { MANDATORY }
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 29 Jan 2025 06:19:37 GMT
+        - name: Content-Length
+          value: "120"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "status": 404,
+              "message": "User Registration Tidak Ditemukan",
+              "desc": "Data User Registration tidak ditemukan"
+          }
+  - name: Parameter error validation
+    request:
+      url: "{{url}}/v/1/partnerships/detail-user-registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "99941"
+            description: User ID Login { MANDATORY }
+          - name: id
+            value: "1"
+            description: ID User Registration { MANDATORY }
+            disabled: true
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Fri, 23 Jul 2021 02:53:38 GMT
+        - name: Content-Length
+          value: "111"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Parameter ... kosong",
+              "message": "Maaf, Parameter ... tidak boleh kosong",
+              "status": 500
+          }
+  - name: Database error
+    request:
+      url: "{{base-url-local}}/v/1/partnerships/detail-user-registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1031212312312"
+            description: User ID Login { MANDATORY }
+          - name: id
+            value: "2"
+            description: ID User Registration { MANDATORY }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 29 Jan 2025 08:17:15 GMT
+        - name: Content-Length
+          value: "180"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "status": 500,
+              "message": "User Registration Tidak Ditemukan",
+              "desc": "unable to open tcp connection with host '10.100.0.47:1433': dial tcp 10.100.0.47:1433: i/o timeout"
+          }
+  - name: Success
+    request:
+      url: "{{base-url-local}}/v/1/partnerships/detail-user-registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1031212312312"
+            description: User ID Login { MANDATORY }
+          - name: id
+            value: "2"
+            description: ID User Registration { MANDATORY }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 29 Jan 2025 06:21:30 GMT
+        - name: Content-Length
+          value: "412"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "id": 2,
+                  "name": "tes",
+                  "email": "tes@gmail.com",
+                  "mobileNumber": "+6282288194042",
+                  "position": "pemilik",
+                  "partnershipCode": "RAN20",
+                  "partnershipName": "",
+                  "level": 10,
+                  "userId": 49,
+                  "status": 1,
+                  "statusText": "Disetujui",
+                  "approvedBy": "999941",
+                  "rejectedBy": "",
+                  "createdAt": "30-03-2022 19:01:19",
+                  "updatedAt": "23-01-2025 07:04:18",
+                  "actionAt": "23-01-2025 07:04:18"
+              },
+              "status": 200,
+              "message": "Data ditemukan",
+              "desc": "Data Valid"
+          }
+  - name: Unauthorized
+    request:
+      url: "{{base-url-local}}/v/1/partnerships/detail-user-registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1031212312312"
+            description: User ID Login { MANDATORY }
+          - name: id
+            value: "1"
+            description: ID User Registration { MANDATORY }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 29 Jan 2025 06:17:02 GMT
+        - name: Content-Length
+          value: "75"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: General Error
+    request:
+      url: "{{base-url-local}}/v/1/partnerships/detail-user-registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "1031212312312"
+            description: User ID Login { MANDATORY }
+          - name: id
+            value: "2"
+            description: ID User Registration { MANDATORY }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 29 Jan 2025 08:00:43 GMT
+        - name: Content-Length
+          value: "189"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "status": 400,
+              "message": "Maaf, Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "desc": "Maaf, Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi."
+          }

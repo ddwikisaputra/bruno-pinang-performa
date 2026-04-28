@@ -1,0 +1,472 @@
+info:
+  name: List Registration V2
+  type: http
+  seq: 7
+
+http:
+  method: POST
+  url: "{{base_url}}/v/2/partnerships/list-registration"
+  body:
+    type: form-urlencoded
+    data:
+      - name: startIndex
+        value: "0"
+        description: Offset Data {Default 0}
+      - name: recordCount
+        value: "5"
+        description: Limit Data {Default 5}
+      - name: textSearch
+        value: oms
+        description: Text Search { Default NULL }
+        disabled: true
+      - name: userId
+        value: UmF5YVBpUGVyVG9w9FR0lGH8cGJNF4M8yVwLukqMUy12WA==
+        description: "[ENCODE] Personal Number BRI Agro (UserID Login)"
+      - name: userLevel
+        value: "20"
+        description: Access Level ID (UserID Login) [ 10 = SF, 20 = Supervisor, 30 = Head, 90 = Kantor Pusat ]
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/partnerships/list-registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "5"
+            description: Limit Data {Default 5}
+          - name: textSearch
+            value: oms
+            description: Text Search { Default NULL }
+            disabled: true
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: userLevel
+            value: "30"
+            description: Access Level ID (UserID Login) [ 10 = SF, 20 = Supervisor, 30 = Head, 90 = Kantor Pusat ]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:35:05 GMT
+        - name: Content-Length
+          value: "141"
+      body:
+        type: json
+        data: |-
+          {
+              "data": [
+                  {
+                      "id": 1,
+                      "type": "partner",
+                      "name": "Majoo",
+                      "status": -1,
+                      "statusText": "Ditolak"
+                  }
+              ],
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/partnerships/list-registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "5"
+            description: Limit Data {Default 5}
+          - name: textSearch
+            value: oms
+            description: Text Search { Default NULL }
+            disabled: true
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: userLevel
+            value: "30"
+            description: Access Level ID (UserID Login) [ 10 = SF, 20 = Supervisor, 30 = Head, 90 = Kantor Pusat ]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:32:34 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data": null
+          }
+  - name: empty data
+    request:
+      url: "{{base_url}}/v/1/partnerships/list-registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "5"
+            description: Limit Data {Default 5}
+          - name: textSearch
+            value: oms
+            description: Text Search { Default NULL }
+            disabled: true
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: userLevel
+            value: "30"
+            description: Access Level ID (UserID Login) [ 10 = SF, 20 = Supervisor, 30 = Head, 90 = Kantor Pusat ]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:32:34 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Data Partnership tidak ditemukan",
+              "message": "Partnership Tidak Ditemukan",
+              "status": 404
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/partnerships/list-registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "5"
+            description: Limit Data {Default 5}
+          - name: textSearch
+            value: oms
+            description: Text Search { Default NULL }
+            disabled: true
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: userLevel
+            value: "30"
+            description: Access Level ID (UserID Login) [ 10 = SF, 20 = Supervisor, 30 = Head, 90 = Kantor Pusat ]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:32:34 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/partnerships/list-registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "5"
+            description: Limit Data {Default 5}
+          - name: textSearch
+            value: oms
+            description: Text Search { Default NULL }
+            disabled: true
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: userLevel
+            value: "30"
+            description: Access Level ID (UserID Login) [ 10 = SF, 20 = Supervisor, 30 = Head, 90 = Kantor Pusat ]
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:32:34 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }
+  - name: empty data
+    request:
+      url: "{{base_url}}/v/1/partnerships/list-registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "5"
+            description: Limit Data {Default 5}
+          - name: textSearch
+            value: oms
+            description: Text Search { Default NULL }
+            disabled: true
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: userLevel
+            value: "30"
+            description: Access Level ID (UserID Login) [ 10 = SF, 20 = Supervisor, 30 = Head, 90 = Kantor Pusat ]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:32:34 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Data Partnership tidak ditemukan",
+              "message": "Partnership Tidak Ditemukan",
+              "status": 404
+          }
+  - name: success
+    request:
+      url: "{{base_url}}/v/1/partnerships/list-registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "5"
+            description: Limit Data {Default 5}
+          - name: textSearch
+            value: oms
+            description: Text Search { Default NULL }
+            disabled: true
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: userLevel
+            value: "30"
+            description: Access Level ID (UserID Login) [ 10 = SF, 20 = Supervisor, 30 = Head, 90 = Kantor Pusat ]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:35:05 GMT
+        - name: Content-Length
+          value: "141"
+      body:
+        type: json
+        data: |-
+          {
+              "data": [
+                  {
+                      "id": 1,
+                      "type": "partner",
+                      "name": "Majoo",
+                      "status": -1,
+                      "statusText": "Ditolak"
+                  }
+              ],
+              "desc": "Data Valid",
+              "message": "Data ditemukan",
+              "status": 200
+          }
+  - name: error database connection
+    request:
+      url: "{{base_url}}/v/1/partnerships/list-registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "5"
+            description: Limit Data {Default 5}
+          - name: textSearch
+            value: oms
+            description: Text Search { Default NULL }
+            disabled: true
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: userLevel
+            value: "30"
+            description: Access Level ID (UserID Login) [ 10 = SF, 20 = Supervisor, 30 = Head, 90 = Kantor Pusat ]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:32:34 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "data": null,
+              "desc": "Unable to open tcp connection with host 'localhost': dial tcp localhost: connect: connection refused",
+              "message": "Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 400
+          }
+  - name: general error
+    request:
+      url: "{{base_url}}/v/1/partnerships/list-registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "5"
+            description: Limit Data {Default 5}
+          - name: textSearch
+            value: oms
+            description: Text Search { Default NULL }
+            disabled: true
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: userLevel
+            value: "30"
+            description: Access Level ID (UserID Login) [ 10 = SF, 20 = Supervisor, 30 = Head, 90 = Kantor Pusat ]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:32:34 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Server sedang maintenance, silahkan coba beberapa saat lagi",
+              "desc": "Could not connect .....",
+              "data": null
+          }
+  - name: unautorized
+    request:
+      url: "{{base_url}}/v/1/partnerships/list-registration"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: startIndex
+            value: "0"
+            description: Offset Data {Default 0}
+          - name: recordCount
+            value: "5"
+            description: Limit Data {Default 5}
+          - name: textSearch
+            value: oms
+            description: Text Search { Default NULL }
+            disabled: true
+          - name: userId
+            value: "999961"
+            description: Personal Number BRI Agro (UserID Login)
+          - name: userLevel
+            value: "30"
+            description: Access Level ID (UserID Login) [ 10 = SF, 20 = Supervisor, 30 = Head, 90 = Kantor Pusat ]
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Mon, 31 May 2021 06:32:34 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "code": 401,
+              "desc": "Expired",
+              "message": "Invalid Token || Token Is Expired"
+          }

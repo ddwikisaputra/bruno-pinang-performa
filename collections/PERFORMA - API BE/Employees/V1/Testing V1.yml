@@ -1,0 +1,19 @@
+info:
+  name: Testing V1
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: "{{base_url}}/v/1/employees/testing"
+  body:
+    type: form-urlencoded
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

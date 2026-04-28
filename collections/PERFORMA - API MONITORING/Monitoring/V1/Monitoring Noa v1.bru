@@ -1,0 +1,74 @@
+meta {
+  name: Monitoring Noa v1
+  type: http
+  seq: 8
+}
+
+post {
+  url: {{url}}/v/1/monitoring/pencapaian-noa
+  body: formUrlEncoded
+  auth: bearer
+}
+
+auth:bearer {
+  token: UmF5YVBpUGVyVG9wtk843jG/7RB5In2DFecy3IhPCIi6N/9g1KDYjEHKFfrchh+Eo9FYRDiVe/paZJ32GKHqK/hA3sulxsHQ7T9P45sD+L32owygMK30Vzk7FE9ZNhzbaF5rSDwfPKm5EOmKD5hmeDCkfrilzW7BWg==
+}
+
+body:form-urlencoded {
+  userId: 999932
+  branchCode: 0020
+}
+
+settings {
+  encodeUrl: true
+}
+
+example {
+  name: SUCCESS
+  
+  request: {
+    url: {{url}}/v/1/monitoring/pencapaian-noa
+    method: POST
+    mode: formUrlEncoded
+    body:form-urlencoded: {
+      userId: 999951
+      branchCode: 0020
+    }
+  }
+  
+  response: {
+    headers: {
+      Content-Type: application/json; charset=utf-8
+      Date: Tue, 28 Mar 2023 08:02:47 GMT
+      Content-Length: 340
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+            "data": {
+                "noaPosisiHariIni": "2023-02-20",
+                "noaPosisiTahunLalu": "2022-12-31",
+                "noaPosisiBulanLalu": "2023-01-31",
+                "noaHariIni": 74,
+                "noaBulanLalu": 69,
+                "noaTahunLalu": 68,
+                "noaPersentaseKenaikanTahunLalu": 100,
+                "noaPersentaseKenaikanBulanLalu": 100,
+                "noaDeltaTahunLalu": 6,
+                "noaDeltaBulanLalu": 5
+            },
+            "desc": "Data Valid",
+            "message": "Data Ditemukan",
+            "status": 200
+        }
+      '''
+    }
+  }
+}

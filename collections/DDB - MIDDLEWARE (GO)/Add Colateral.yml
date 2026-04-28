@@ -1,0 +1,143 @@
+info:
+  name: Add Colateral
+  type: http
+  seq: 11
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/digiagri/collateral/add"
+  body:
+    type: form-urlencoded
+    data:
+      - name: userId
+        value: "999991"
+      - name: kodeCabang
+        value: "0010"
+      - name: namaPemilik
+        value: Andi Pratama
+      - name: noIdPemilik
+        value: "3201123456789012"
+      - name: jenisAgunan
+        value: Sertifikat Rumah
+      - name: kodeLokasi
+        value: JK01
+      - name: alamatAgunan
+        value: Jalan Melati No 25, Jakarta
+      - name: tanggalPengikatan
+        value: 30/12/2024
+      - name: tanggalJatuhTempoPengikatan
+        value: 30/12/2025
+      - name: nilaiPasar
+        value: "500000000"
+      - name: nilaiLikuidasi
+        value: "400000000"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Invalid Date Format
+    request:
+      url: "{{baseUrl}}/api/digiagri/collateral/add"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999991"
+          - name: kodeCabang
+            value: "0010"
+          - name: namaPemilik
+            value: Andi Pratama
+          - name: noIdPemilik
+            value: "3201123456789012"
+          - name: jenisAgunan
+            value: Sertifikat Rumah
+          - name: kodeLokasi
+            value: JK01
+          - name: alamatAgunan
+            value: Jalan Melati No 25, Jakarta
+          - name: tanggalPengikatan
+            value: 30/12/2024
+          - name: tanggalJatuhTempoPengikatan
+            value: 30/12/2025
+          - name: nilaiPasar
+            value: "500000000"
+          - name: nilaiLikuidasi
+            value: "400000000"
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Date
+          value: Thu, 09 Oct 2025 03:13:24 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "92"
+        - name: Connection
+          value: keep-alive
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "statusCode": "99",
+              "statusDescription": "TanggalPengikatan invalid date format (DD/MM/YYYY)"
+          }
+  - name: Success Response
+    request:
+      url: "{{baseUrl}}/api/digiagri/collateral/add"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: userId
+            value: "999991"
+          - name: kodeCabang
+            value: "0010"
+          - name: namaPemilik
+            value: Andi Pratama
+          - name: noIdPemilik
+            value: "3201123456789012"
+          - name: jenisAgunan
+            value: Sertifikat Rumah
+          - name: kodeLokasi
+            value: JK01
+          - name: alamatAgunan
+            value: Jalan Melati No 25, Jakarta
+          - name: tanggalPengikatan
+            value: 30/12/2024
+          - name: tanggalJatuhTempoPengikatan
+            value: 30/12/2025
+          - name: nilaiPasar
+            value: "500000000"
+          - name: nilaiLikuidasi
+            value: "400000000"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Thu, 09 Oct 2025 03:14:02 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "72"
+        - name: Connection
+          value: keep-alive
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+      body:
+        type: json
+        data: |-
+          {
+              "statusCode": "1",
+              "statusDescription": "Success",
+              "idAgunan": "0000010694"
+          }

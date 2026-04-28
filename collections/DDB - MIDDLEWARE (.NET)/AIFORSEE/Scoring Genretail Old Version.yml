@@ -1,0 +1,30 @@
+info:
+  name: Scoring Genretail Old Version
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: https://sesretail.aiforesee.id/api/score
+  body:
+    type: json
+    data: "{\r
+
+      \    \"name\": \"Dwiki Saputra\",\r
+
+      \    \"ktp\": \"3171051211950001\",\r
+
+      \    \"phone\": \"+62881776527371\",\r
+
+      \    \"userId\": \"ORI-99\"\r
+
+      }"
+  auth:
+    type: bearer
+    token: 040b3428942025o5i3nn7008
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
