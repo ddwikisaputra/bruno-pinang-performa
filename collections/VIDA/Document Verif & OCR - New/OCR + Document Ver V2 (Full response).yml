@@ -1,0 +1,60 @@
+info:
+  name: OCR + Document Ver V2 (Full response)
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: https://my-services-sandbox.np.vida.id/api/v2/verify
+  body:
+    type: json
+    data: |-
+      {
+        "operations": ["ocr","idVerification"],
+        "payload": {
+          "partnerTrxId": "{{refid}}", //unique id every transaction
+          "groupId" : "{{$guid}}",//"group id to track complete KYC flow",
+          "idType": "ID_CARD",
+          "country": "IDN", //country code available : IDN
+          "idSubtype": "KTP",
+          "idFrontSideImage": "{{base64frontside}}" //landscape image of id front side
+        },
+        "userConsent": {
+          "userIp": "{{user IP Address}}",
+          "country": "IDN", //country code available : IDN
+          "obtained": true,
+          "obtainedAt": "{{today}}"
+        }
+      }
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: before-request
+      code: |-
+        const moment = require('moment');
+        function makeid(length) {
+            var result           = '';
+            var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            var charactersLength = characters.length;
+            for ( var i = 0; i < length; i++ ) {
+              result += characters.charAt(Math.floor(Math.random() * 
+         charactersLength));
+           }
+           return result;
+        }
+        pm.collectionVariables.set("refid", makeid(16));
+        pm.collectionVariables.set("today", moment().utc().unix());
+    - type: after-response
+      code: |-
+        test("The response has all properties", () => {
+            expect(res.getStatus()).to.eql(200);
+            var data = res.getBody();
+            pm.collectionVariables.set("transaction_id", data.data.transaction_id);
+        });
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

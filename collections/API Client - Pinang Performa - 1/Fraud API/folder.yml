@@ -1,0 +1,17 @@
+info:
+  name: Fraud API
+  type: folder
+  seq: 1
+
+request:
+  auth:
+    type: oauth2
+    flow: client_credentials
+    accessTokenUrl: https://qa-sso.vida.id/auth/realms/vida/protocol/openid-connect/token
+    credentials:
+      clientId: partner-pinangperforma-fraudapi-sandbox-sso
+      clientSecret: NdsQu0l619p8mWevY0q8nbC76lBI3qsQ
+      placement: basic_auth_header
+    tokenConfig:
+      placement: {}
+      source: access_token

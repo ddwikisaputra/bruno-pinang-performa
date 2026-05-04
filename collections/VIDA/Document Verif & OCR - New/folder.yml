@@ -1,0 +1,21 @@
+info:
+  name: Document Verif & OCR - New
+  type: folder
+  seq: 1
+
+request:
+  auth:
+    type: oauth2
+    flow: client_credentials
+    accessTokenUrl: https://qa-sso.vida.id/auth/realms/vida/protocol/openid-connect/token
+    credentials:
+      clientId: partner-pinangperforma-docver-ocr-sandbox-sso
+      clientSecret: 0nXgoSeEBeOjiTyvEzdrx3Ya1KqseGMv
+      placement: basic_auth_header
+    tokenConfig:
+      placement:
+        header: ""
+      source: access_token
+    settings:
+      autoFetchToken: true
+      autoRefreshToken: false

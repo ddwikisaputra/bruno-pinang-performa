@@ -1,0 +1,83 @@
+info:
+  name: Inline Sign
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: https://services-sandbox.vida.id/signer/v2/services/esign?raType=int&docType=nontemplate
+  params:
+    - name: raType
+      value: int
+      type: query
+    - name: docType
+      value: nontemplate
+      type: query
+  body:
+    type: json
+    data: |-
+      {
+          "partnerTrxId": "{{partnerTrxId}}",
+          "user": {
+              "vidaEkycEventId":"{{eventId}}"
+          },
+          "requestInfo": {
+              "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36",
+              "srcIp": "172.217.22.14",
+              "consentTimestamp": "{{today}}"
+          },
+          "device": {
+              "os": "R" ,
+              "model": "KB2001",
+              "uniqueId": "{{deviceId}}",
+              "networkProvider": "IND idea"
+          },
+          "signingInfo": [
+              {   
+                  "pdfFile":"{{pdf_file}}",
+                   "appearance": {
+                          "type": "standard"
+                      },
+             "pageNo":"1",
+              "xPoint":"60",
+              "yPoint":"150",
+              "height":"36",
+              "width":"139",
+              "qrEnable": false
+              }
+          ]
+      }
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: before-request
+      code: |-
+        const moment = require('moment');
+        function makeid(length) {
+            var result           = '';
+            var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            var charactersLength = characters.length;
+            for ( var i = 0; i < length; i++ ) {
+              result += characters.charAt(Math.floor(Math.random() * 
+         charactersLength));
+           }
+           return result;
+        }
+        pm.collectionVariables.set("partnerTrxId", makeid(32));
+        pm.collectionVariables.set("deviceId", makeid(10));
+        pm.collectionVariables.set("today", moment().utc().unix());
+    - type: after-response
+      code: |-
+        test("The response has all properties", () => {
+            expect(res.getStatus()).to.eql(201);
+            var data = res.getBody();
+            pm.collectionVariables.set("sign_transaction_id", data.data.id);
+            console.log(data.data.id);
+        });
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

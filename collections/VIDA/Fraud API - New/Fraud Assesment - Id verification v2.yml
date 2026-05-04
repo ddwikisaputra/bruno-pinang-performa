@@ -1,0 +1,60 @@
+info:
+  name: Fraud Assesment - Id verification v2
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: https://services-sandbox.vida.id/main/v2/services/fraud
+  body:
+    type: json
+    data: |
+      {
+          "partnerTrxId": "{{partnerTrxId}}",
+          "email": "testing-fraud@yopmail.com",
+          "mobile": "+627781777777",
+          "fullName": "UserIAAB",
+          "dob": "1890-05-13",
+          "govId": "3512001305908001",
+          "transactionType":"FULL_FRAUD_ASSESSMENT",
+          "selfiePhoto": "{{selfiePhoto}}", //base64 image jpg
+          "consent": {
+              "consentedAt": "{{today}}",
+              "consentGiven": true
+          }
+      }
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: before-request
+      code: |-
+        const moment = require('moment');
+        function makeid(length) {
+            var result           = '';
+            var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            var charactersLength = characters.length;
+            for ( var i = 0; i < length; i++ ) {
+              result += characters.charAt(Math.floor(Math.random() * 
+         charactersLength));
+           }
+           return result;
+        }
+        pm.collectionVariables.set("partnerTrxId", makeid(16));
+        pm.collectionVariables.set("groupId", makeid(10));
+        pm.collectionVariables.set("today", moment().utc().unix());
+    - type: after-response
+      code: |-
+        test("The response has all properties", () => {
+            expect(res.getStatus()).to.eql(200);
+            var data = res.getBody();
+            pm.collectionVariables.set("transaction_id", data.data.eventId);
+        });
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: VIDA Sandbox Fraud API can only be used with mock up data, please refer to this documentation for details information [https://docs.vida.id/fraud-prevention/api/mock-data-for-testing](https://docs.vida.id/fraud-prevention/api/mock-data-for-testing)
