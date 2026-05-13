@@ -1,0 +1,25 @@
+info:
+  name: Check Unread
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{base-url-dev}}/v/1/notifikasi/check-unread"
+  headers:
+    - name: Api-Key
+      value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
+  body:
+    type: form-urlencoded
+    data:
+      - name: kodePartnership
+        value: ""
+      - name: nomorIdentitas
+        value: ""
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
