@@ -1470,3 +1470,22 @@ examples:
               "message": "you don't have permission to access this resource",
               "status": 403
           }
+
+docs: |
+  HEADER
+  ------
+  Api-Key => [MANDATORY] FORMAT (APIKEY -> BASE64)
+  X-Transaction-Tag => [MANDATORY] FORMAT (AES(SHA256(json all params) + key (apiKey)))
+
+
+  PARAMETER
+  ---------
+  params => [MANDATORY] [JSON TO AES]
+
+  JSON EXAMPLE
+  {
+    "kodePrakarsa": "", --> base64
+    "kodePartnership": "", -> base64
+    "selfieBase64": "", -> base64
+    "selfieMimeType": "image/jpeg"
+  }

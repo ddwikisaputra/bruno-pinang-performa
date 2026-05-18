@@ -517,3 +517,19 @@ examples:
               "message": "Hitung biaya layanan berhasil.", // success message
               "status": 200
           }
+
+docs: |-
+  AUTH
+  ----
+  Bearer Token => User Token (PIN)
+
+  HEADER
+  ------
+  Api-Key => [MANDATORY] FORMAT (APIKEY -> BASE64)
+
+  PARAMETER
+  ---------
+  kodePrakarsa => Kode Prakarsa [MANDATORY] [BASE64]
+  kodePartnership => Kode Partnership [MANDATORY] [BASE64]
+  nominalPencairan => NOMINAL PENCAIRAN  [MANDATORY] [BASE64 INT]
+  jangkaWaktu => JANGKA WAKTU  [MANDATORY] [BASE64 INT]

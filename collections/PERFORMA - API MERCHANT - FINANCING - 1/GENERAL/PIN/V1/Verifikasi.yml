@@ -21,10 +21,6 @@ http:
       - name: kodePartnership
         value: TUox
         description: Kode Partnership [MANDATORY] [Base64]
-      - name: nomorIdentitas
-        value: MzIwOTEyMjAwMzk0MDAwNg==
-        description: sunarto
-        disabled: true
   auth:
     type: bearer
     token: "{{accessTokenPartner}}"
@@ -579,3 +575,18 @@ examples:
               "message": "Verifikasi PIN berhasil.",
               "status": 200
           }
+
+docs: |-
+  AUTH
+  ----
+  Bearer Token => Partnership Token
+
+  HEADER
+  ------
+  Api-Key => [MANDATORY] FORMAT (APIKEY -> BASE64)
+
+  PARAMETER
+  ---------
+  nomorIdentitas => Nomor Identitas User [MANDATORY] [BASE64]
+  kodePartnership => Kode Partnership [MANDATORY] [BASE64]
+  pinVerifikasi => PIN User [MANDATORY] [BASE64]

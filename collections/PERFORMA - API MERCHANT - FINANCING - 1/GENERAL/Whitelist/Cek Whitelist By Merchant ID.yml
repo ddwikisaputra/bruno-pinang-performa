@@ -38,7 +38,6 @@ examples:
           value: "{{apiKeyMerchant}}"
         - name: x-mock-response-code
           value: 503-service-unavailable
-          description: enable when use mock api
       body:
         type: form-urlencoded
         data:
@@ -570,3 +569,17 @@ examples:
               "data": "UmF5YVBpUGVyVG9wtk8pzCCshk4gOjHfVKpYm98dBpD0KPl6ycOAjBWHSqWc/FbR+YgBBnnXbPpKGN2MH8G0WfUvpoq48+X46Bdv495vk6L5sUO/P/ClCXpsUxtNNgy+Nx87B25YZfnkDUrLizjWlZo5sI0LCcvLyYOqJ/1gdcNnO4EcYHy5lwTaDSM9pmzOVhwNOn6jJg==",
               "verify": 1
           }
+
+docs: |-
+  AUTH
+  ----
+  Bearer Token => Partnership Token
+
+  HEADER
+  ------
+  Api-Key => [MANDATORY] FORMAT (APIKEY -> BASE64)
+
+  PARAMETER
+  ---------
+  merchantID => Merchant ID [MANDATORY] [BASE64]
+  kodePartnership => Kode Partnership [MANDATORY] [BASE64]

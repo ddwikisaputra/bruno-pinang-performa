@@ -9,11 +9,6 @@ http:
   headers:
     - name: Api-Key
       value: "{{apiKeyMerchant}}"
-      description: API KEY PARTNERSHIP_CODE -> GCM -> BASE64
-    - name: Api-Key
-      value: VW1GNVlWQnBVR1Z5Vkc5d2p5a2JnR1g4blNvdSs1WW9CQVFpME9ueEpBOEF5STA9
-      description: BRIMOLA DEV
-      disabled: true
   body:
     type: form-urlencoded
     data:
@@ -1080,7 +1075,6 @@ examples:
       headers:
         - name: Api-Key
           value: VW1GNVlWQnBVR1Z5Vkc5d2p5a2JnR1g4blNvdSs1WW9CQVFpME9ueEpBOEF5STA9
-          description: BRIMOLA DEV
           disabled: true
         - name: Api-Key
           value: "{{apiKeyMerchant}}"
@@ -1167,10 +1161,8 @@ examples:
       headers:
         - name: Api-Key
           value: "{{apiKeyMerchant}}"
-          description: API KEY PARTNERSHIP_CODE -> GCM -> BASE64
         - name: Api-Key
           value: VW1GNVlWQnBVR1Z5Vkc5d2p5a2JnR1g4blNvdSs1WW9CQVFpME9ueEpBOEF5STA9
-          description: BRIMOLA DEV
           disabled: true
       body:
         type: form-urlencoded
@@ -1304,3 +1296,25 @@ examples:
               "message": "Proses pencairan berhasil.",
               "status": 200
           }
+
+docs: |-
+  AUTH
+  ----
+  Bearer Token => User Token (PIN)
+
+  HEADER
+  ------
+  Api-Key => [MANDATORY] FORMAT (APIKEY -> BASE64)
+
+  PARAMETER
+  ---------
+  kodePrakarsa => Kode Prakarsa [MANDATORY] [BASE64]
+  kodePartnership => Kode Partnership [MANDATORY] [BASE64]
+  otp => OTP [MANDATORY] [BASE64]
+  otpKey => OTP Key [MANDATORY] [BASE64]
+  orderID => Order ID [MANDATORY] [BASE64]
+  kodeTransaksi[] => Kode Transaksi [MANDATORY] [ARRAY] [BASE64]
+  jangkaWaktu[] => Jangka Waktu [MANDATORY] [ARRAY] [BASE64 INT]
+  nominalPencairan[] => Nominal Pencairan [MANDATORY] [ARRA] [BASE64 INT]
+  kodeDistributor[] => Kode Distributor [MANDATORY] [ARRAY] [BASE64]
+  transaksi => ID Verifikasi Invoice [OPTIONAL] [VER-INV-ID_VEReFIKASI] [BASE64]

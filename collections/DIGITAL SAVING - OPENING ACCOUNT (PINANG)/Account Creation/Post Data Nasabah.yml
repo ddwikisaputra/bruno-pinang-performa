@@ -5,108 +5,62 @@ info:
 
 http:
   method: POST
-  url: "{{base_url}}/raya/opening-account/pinang/post-data-nasabah"
+  url: "{{base_url_prod}}/raya/opening-account/pinang/post-data-nasabah"
   body:
     type: json
-    data: "{\r
-
-      \    \"channelId\": \"PINANG-PERFORMA\",\r
-
-      \    \"mobileNo\": \"+6281776527375\",\r
-
-      \    \"nik\": \"3171051211950017\",\r
-
-      \    \"nama\": \"Joko Anwar\",\r
-
-      \    \"pob\": \"Jakarta\",\r
-
-      \    \"dob\": \"1995-12-11\",\r
-
-      \    \"email\": \"jokoanwar@gmail.com\",\r
-
-      \    \"namaIbuKandung\": \"Rohani\",\r
-
-      \    \"jenisKelamin\" : \"M\",\r
-
-      \    \"agama\" : \"ISL\",\r
-
-      \    \"statusPernikahan\" : \"K\",\r
-
-      \    \"kewarganegaraan\" : \"WNI\",\r
-
-      \    \"provinsi\" : \"DKI Jakarta\",\r
-
-      \    \"kota\" : \"Jakarta Pusat\",\r
-
-      \    \"kecamatan\" : \"Cempaka Putih\",\r
-
-      \    \"kelurahanDesa\" : \"Cempaka Putih Barat\",\r
-
-      \    \"kodePos\": \"10520\",\r
-
-      \    \"alamatLengkap\" : \"Jalan Irian No 3\",\r
-
-      \    \"pendidikanTerakhir\" : \"S1\",\r
-
-      \    \"jenisPekerjaan\": \"D88\",\r
-
-      \    \"bidangPekerjaan\": \"0001\",\r
-
-      \    \"jabatanPekerjaan\": \"09\",\r
-
-      \    \"sumberPenghasilan\": \"00012\",\r
-
-      \    \"penghasilanBulanan\": \"G3\",\r
-
-      \    \"transaksiNormalHarian\": \"N3\",\r
-
-      \    \"tujuanBukaRekening\": \"T2\",\r
-
-      \    \"namaTempatBekerja\": \"Bank Raya\",\r
-
-      \    \"noTlpTempatBekerja\": \"021123455\",\r
-
-      \    \"alamatTempatBekerja\": \"Menara BRILiaN\",\r
-
-      \    \"kelurahanTempatBekerja\": \"Menteng Dalam\",\r
-
-      \    \"kecamatanTempatBekerja\": \"Tebet\",\r
-
-      \    \"kotaTempatBekerja\": \"Jakarta Selatan\",\r
-
-      \    \"propinsiTempatBekerja\": \"DKI Jakarta\",\r
-
-      \    \"kodePosTempatBekerja\": \"12870\",\r
-
-      \    \"npwp\": \"3171051211950017\",\r
-
-      \    \"wajibPajakNonId\": \"T\",\r
-
-      \t\"wajibPajakUs\": \"T\",\r
-
-      \t\"tin\": \"\",\r
-
-      \t\"lahirDiUs\": \"T\",\r
-
-      \t\"adaSalinanSertifikat\": \"T\",\r
-
-      \t\"alasanTdkAdaSertifikat\": \"\",\r
-
-      \t\"wajibPajakSelainIdUs\": \"T\",\r
-
-      \t\"negaraFatca\": \"\",\r
-
-      \t\"punyaNpwpNonIdUs\": \"T\",\r
-
-      \t\"npwpNonUsId\": \"\",\r
-
-      \t\"alasanTdkAdaNpwpNonUsId\":\"\"\r
-
-      }"
+    data: |-
+      {
+          "channelId": "PINANG-PERFORMA",
+          "mobileNo": "+6282191378894",
+          "nik": "7311050607790001",
+          "nama": "Haerul Anwar",
+          "pob": "bojo barru",
+          "dob": "1979-07-04",
+          "email": "haerulfirst@gmail.com",
+          "namaIbuKandung": "sania",
+          "jenisKelamin" : "M",
+          "agama" : "ISL",
+          "statusPernikahan" : "K",
+          "kewarganegaraan" : "WNI",
+          "provinsi" : "Sulawesi Selatan",
+          "kota" : "Kab. Barru",
+          "kecamatan" : "Mallusetasi",
+          "kelurahanDesa" : "Bojo Baru",
+          "kodePos": "90753",
+          "alamatLengkap" : "Lojie RT.002/ RW.003",
+          "pendidikanTerakhir" : "S1",
+          "jenisPekerjaan": "D88",
+          "bidangPekerjaan": "0001",
+          "jabatanPekerjaan": "09",
+          "sumberPenghasilan": "00012",
+          "penghasilanBulanan": "G3",
+          "transaksiNormalHarian": "N3",
+          "tujuanBukaRekening": "T2",
+          "namaTempatBekerja": "Haerul Anwar",
+          "noTlpTempatBekerja": "+6282191378894",
+          "alamatTempatBekerja": "Lojie RT.002/ RW.003",
+          "kelurahanTempatBekerja": "Bojo Baru",
+          "kecamatanTempatBekerja": "Mallusetasi",
+          "kotaTempatBekerja": "Kab. Barru",
+          "propinsiTempatBekerja": "Sulawesi Selatan",
+          "kodePosTempatBekerja": "90753",
+          "npwp": "",
+          "wajibPajakNonId": "T",
+          "wajibPajakUs": "T",
+          "tin": "",
+          "lahirDiUs": "T",
+          "adaSalinanSertifikat": "T",
+          "alasanTdkAdaSertifikat": "",
+          "wajibPajakSelainIdUs": "T",
+          "negaraFatca": "",
+          "punyaNpwpNonIdUs": "T",
+          "npwpNonUsId": "",
+          "alasanTdkAdaNpwpNonUsId":""
+      }
   auth:
     type: basic
-    username: "{{username_dev}}"
-    password: "{{password_dev}}"
+    username: "{{username_prod}}"
+    password: "{{password_prod}}"
 
 settings:
   encodeUrl: true

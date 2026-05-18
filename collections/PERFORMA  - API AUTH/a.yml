@@ -1,0 +1,27 @@
+info:
+  name: a
+  type: http
+  seq: 8
+
+http:
+  method: post
+  url: http://localhost:7007/v/1/ekyc/cashloan/cek-ocr
+  headers:
+    - name: Api-Key
+      value: VW1GNVlWQnBVR1Z5Vkc5d2dDNE1nR2I1a09pOFRKNzJIS1FSYlE0RGJlOVlkVVE9
+    - name: Authorization
+      value: ••••••
+  body:
+    type: form-urlencoded
+    data:
+      - name: kodePrakarsa
+        value: Q0wtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbDk2bTJUMGxVTnFLVytLSE80NTJaZGZGSmpqYUswN2lkQ2Fua0xkRXJScUk1NHJoZlpEd21JSjAzSEpWems9
+      - name: kodePartnership
+        value: TUox
+  auth: inherit
+
+settings:
+  encodeUrl: false
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

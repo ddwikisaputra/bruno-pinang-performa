@@ -541,3 +541,18 @@ examples:
               "message": "Data Berhasil Disimpan",
               "status": 200
           }
+
+docs: |-
+  AUTH
+  ----
+  Bearer Token => Partnership Token
+
+  HEADER
+  ------
+  Api-Key => [MANDATORY] FORMAT (APIKEY -> BASE64)
+
+  PARAMETER
+  ---------
+  nomorIdentitas => Nomor Identitas User [MANDATORY] [BASE64]
+  merchantID => Merchant ID [MANDATORY] [BASE64]
+  kodePartnership => Kode Partnership [MANDATORY] [BASE64]

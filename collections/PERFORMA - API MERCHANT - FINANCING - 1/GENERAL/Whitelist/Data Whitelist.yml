@@ -426,3 +426,17 @@ examples:
               "message": "Terdaftar pada whitelist.",
               "status": 200
           }
+
+docs: |-
+  AUTH
+  ----
+  Bearer Token => User Token (PIN)
+
+  HEADER
+  ------
+  Api-Key => [MANDATORY] FORMAT (APIKEY -> BASE64)
+
+  PARAMETER
+  ---------
+  nomorIdentitas => Nomor Identitas User [MANDATORY] [BASE64]
+  kodePartnership => Kode Partnership [MANDATORY] [BASE64]

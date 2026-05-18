@@ -475,3 +475,18 @@ examples:
               "message": "Verifikasi tenor lolos.",
               "status": 200
           }
+
+docs: |-
+  AUTH
+  ----
+  Bearer Token => User Token (PIN)
+
+  HEADER
+  ------
+  Api-Key => [MANDATORY] FORMAT (APIKEY -> BASE64)
+
+  PARAMETER
+  ---------
+  kodePrakarsa => Kode Prakarsa [MANDATORY] [BASE64]
+  kodePartnership => Kode Partnership [MANDATORY] [BASE64]
+  jangkaWaktu => JANGKA WAKTU  [MANDATORY] [BASE64 INT]

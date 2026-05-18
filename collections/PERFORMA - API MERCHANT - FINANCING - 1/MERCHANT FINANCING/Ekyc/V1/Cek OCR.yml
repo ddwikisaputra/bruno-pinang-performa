@@ -841,3 +841,14 @@ examples:
               "message": "you don't have permission to access this resource",
               "status": 403
           }
+
+docs: |-
+  HEADER
+  ------
+  Api-Key => [MANDATORY] FORMAT (APIKEY -> BASE64)
+
+
+  PARAMETER
+  ---------
+  nomorIdentitas => Nomor Identitas User [MANDATORY] [BASE64]
+  kodePartnership => Kode Partnership [MANDATORY] [BASE64]

@@ -770,3 +770,27 @@ examples:
               "message": "Data member tidak masuk kriteria.",
               "status": 200
           }
+
+docs: |
+  AUTH
+  ----
+  Bearer Token => Partnership Token
+
+  HEADER
+  ------
+  Api-Key => [MANDATORY] FORMAT (APIKEY -> BASE64)
+
+  PARAMETER
+  ---------
+  nomorIdentitas => Nomor Identitas User [MANDATORY] [BASE64]
+  kodePartnership => Kode Partnership [MANDATORY] [BASE64]
+  nama => Nama [MANDATORY] [BASE64]
+  nomorTelepon => Nomor Telepon [MANDATORY] [BASE64]
+  email => Email [MANDATORY] [BASE64]
+  jumlahTransaksi12BulanBUMN => Jumlah Transaksi Dalam 12 Bulan Terakhir [MANDATORY] [BASE64] [RUPIAH]
+  jumlahVolume12BulanBUMN => Jumlah Volume Transaksi Dalam 12 Bulan Terakhir [MANDATORY] [BASE64][SATUAN]
+  jumlahTransaksi6BulanBUMN => Jumlah Transaksi Dalam 6 Bulan Terakhir [MANDATORY] [BASE64] [RUPIAH]
+  jumlahVolume6BulanBUMN => Jumlah Volume Transaksi Dalam 6 Bulan Terakhir [MANDATORY] [BASE64][SATUAN]
+  jumlahTransaksi3BulanBUMN => Jumlah Transaksi Dalam 3 Bulan Terakhir [MANDATORY] [BASE64] [RUPIAH]
+  jumlahVolume3BulanBUMN => Jumlah Volume Transaksi Dalam 3 Bulan Terakhir [MANDATORY] [BASE64][SATUAN]
+  sellerCategory => Kategori Seller [MANDATORY] [BASE64]

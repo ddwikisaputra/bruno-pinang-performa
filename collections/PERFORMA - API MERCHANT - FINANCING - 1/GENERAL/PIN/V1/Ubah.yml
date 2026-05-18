@@ -430,3 +430,18 @@ examples:
               "message": "PIN berhasil diubah. Silahkan mencoba untuk menggunakan PIN tersebut.",
               "status": 200
           }
+
+docs: |-
+  AUTH
+  ----
+  Bearer Token => Partnership Token
+
+  HEADER
+  ------
+  Api-Key => [MANDATORY] FORMAT (APIKEY -> BASE64)
+
+  PARAMETER
+  ---------
+  nomorIdentitas => Nomor Identitas User [MANDATORY] [BASE64]
+  pin => PIN User [MANDATORY] [BASE64]
+  kodePartnership => Kode Partnership [MANDATORY] [BASE64]

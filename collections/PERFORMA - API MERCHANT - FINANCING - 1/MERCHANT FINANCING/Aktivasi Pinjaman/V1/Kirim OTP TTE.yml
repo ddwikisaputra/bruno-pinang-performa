@@ -440,7 +440,6 @@ examples:
       headers:
         - name: Api-Key
           value: VW1GNVlWQnBVR1Z5Vkc5d2pDb1lnR1gwbElhV3crdC9IYTlPVll6VWtNcHkrSGc9
-          description: "{{apiKeyMerchant}}"
         - name: ""
           value: ""
           disabled: true
@@ -473,3 +472,17 @@ examples:
               "message": "OTP berhasil dikirim. Silahkan cek inbox message anda untuk mendapatkan OTP verifikasi.",
               "status": 200
           }
+
+docs: |-
+  AUTH
+  ----
+  Bearer Token => User Token (PIN)
+
+  HEADER
+  ------
+  Api-Key => [MANDATORY] FORMAT (APIKEY -> BASE64)
+
+  PARAMETER
+  ---------
+  kodePrakarsa => Kode Prakarsa [MANDATORY] [BASE64]
+  kodePartnership => Kode Partnership [MANDATORY] [BASE64]

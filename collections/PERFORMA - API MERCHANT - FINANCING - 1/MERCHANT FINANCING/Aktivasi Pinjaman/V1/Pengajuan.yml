@@ -12,6 +12,12 @@ http:
   body:
     type: form-urlencoded
     data:
+      - name: kodeTipePinjaman
+        value: CHILD-ATM-38
+        description: Kode Loan Type [MANDATORY]
+      - name: kodePartnership
+        value: TUox
+        description: Kode Partnership [MANDATORY] [Base64]
       - name: nomorIdentitas
         value: MzI3MzE4MDcxMjk2MDAwNw==
         description: Nomor Identitas User [MANDATORY] [Base64]
@@ -27,6 +33,30 @@ http:
       - name: jenisKelamin
         value: TGFraS1MYWtp
         description: Jenis Kelamin[MANDATORY] [Base64] ["Perempuan", "Laki-Laki"]
+      - name: namaIbuKandung
+        value: UnVtaXlhdGk=
+        description: Nama Ibu Kandung [MANDATORY] [Base64]
+      - name: nomorTelepon
+        value: KzYyODc4NzcyNzg4MzA=
+        description: "Nomor Telepon [MANDATORY] [Base64] [Ex : +628xxx]"
+      - name: email
+        value: ZHdpa2kuc2FwdXRyYUBiYW5rcmF5YS5jby5pZA==
+        description: "Email [MANDATORY] [Base64] [Ex : abc@mail.com]"
+      - name: statusPernikahan
+        value: Kawin
+        description: Status Pernikahan [MANDATORY] ["Kawin", "Belum Kawin", "Cerai Hidup", "Cerai Mati"]
+      - name: nomorIdentitasPasangan
+        value: MzE3MTA1MTIxMTk1MDAwMg==
+        description: Nomor Identitas Pasangan [MANDATORY] [Base64]
+      - name: namaPasangan
+        value: VGVzdGluZw==
+        description: Nama Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+      - name: tempatLahirPasangan
+        value: SmFrYXJ0YQ==
+        description: Tempat Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
+      - name: tanggalLahirPasangan
+        value: MjAwMC0xMS0xNw==
+        description: Tanggal Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64] [YYYY-MM-DD]
       - name: tanggalKtp
         value: 2000-11-17
         description: Tanggal Terbit KTP [MANDATORY]
@@ -51,45 +81,12 @@ http:
       - name: kodeAgama
         value: ISL
         description: Kode Agama [MANDATORY] ["BUD", "HIN", "ISL", "KRI", "KHC"]
-      - name: statusPernikahan
-        value: Kawin
-        description: Status Pernikahan [MANDATORY] ["Kawin", "Belum Kawin", "Cerai Hidup", "Cerai Mati"]
-      - name: namaIbuKandung
-        value: UnVtaXlhdGk=
-        description: Nama Ibu Kandung [MANDATORY] [Base64]
-      - name: nomorIdentitasPasangan
-        value: MzE3MTA1MTIxMTk1MDAwMg==
-        description: Nomor Identitas Pasangan [MANDATORY] [Base64]
-      - name: namaPasangan
-        value: VGVzdGluZw==
-        description: Nama Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
-      - name: tanggalLahirPasangan
-        value: MjAwMC0xMS0xNw==
-        description: Tanggal Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64] [YYYY-MM-DD]
-      - name: tempatLahirPasangan
-        value: SmFrYXJ0YQ==
-        description: Tempat Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
-      - name: nomorTelepon
-        value: KzYyODc4NzcyNzg4MzA=
-        description: "Nomor Telepon [MANDATORY] [Base64] [Ex : +628xxx]"
-      - name: email
-        value: ZHdpa2kuc2FwdXRyYUBiYW5rcmF5YS5jby5pZA==
-        description: "Email [MANDATORY] [Base64] [Ex : abc@mail.com]"
       - name: kodePendidikanTerakhir
         value: S1
         description: Pendidikan Terakhir [MANDATORY["SD", "SM", "SU", "D1", "D2", "D3", "S1", "S2", "S3", "TS", "BT"]
       - name: jumlahTanggungan
         value: "1"
         description: Jumlah Tanggungan [MANDATORY]
-      - name: namaKontakDarurat
-        value: Darurat
-        description: Nama Kontak Darurat [OPTIONAL]
-      - name: nomorKontakDarurat
-        value: "+6287877278830"
-        description: Nomor Telepon Darurat [OPTIONAL]
-      - name: hubunganKontakDarurat
-        value: Istri
-        description: Nama Kontak Darurat [OPTIONAL] ["Kepala Keluarga", "Suami", "Istri", "Anak", "Menantu", "Cucu", "Orang Tua", "Mertua", "Famili Lain", "Pembantu"]
       - name: kodeAreaUsaha
         value: "7541"
         description: Kode Area Usaha [MANDATORY]
@@ -111,16 +108,15 @@ http:
       - name: tanggalJoinPartner
         value: 2000-11-17
         description: Tanggal Join Partner [MANDATORY]
-      - name: kodeTipePinjaman
-        value: CHILD-ATM-38
-        description: Kode Loan Type [MANDATORY]
-      - name: kodePartnership
-        value: TUox
-        description: Kode Partnership [MANDATORY] [Base64]
-      - name: kodeReferensiTerakhir
-        value: EX-MJ1-UmF5YVBpUGVyVG9w/l59mWX1lENrKWaCHO473pdfFJjiaKo7itCYn0zdEzv+dkaYpenLi6dtldS4VYE=
-        description: Kode Referensi Terakhir [OPTIONAL] [MANDATORY ==> Jika Suplesi]
-        disabled: true
+      - name: namaKontakDarurat
+        value: Darurat
+        description: Nama Kontak Darurat [OPTIONAL]
+      - name: nomorKontakDarurat
+        value: "+6287877278830"
+        description: Nomor Telepon Darurat [OPTIONAL]
+      - name: hubunganKontakDarurat
+        value: Istri
+        description: Nama Kontak Darurat [OPTIONAL] ["Kepala Keluarga", "Suami", "Istri", "Anak", "Menantu", "Cucu", "Orang Tua", "Mertua", "Famili Lain", "Pembantu"]
   auth:
     type: bearer
     token: "{{tokenMerchant}}"
@@ -4098,3 +4094,51 @@ examples:
               "message": "Data Pengajuan Berhasil Disimpan.",
               "status": 200
           }
+
+docs: |+
+  AUTH
+  ----
+  Bearer Token => User Token (PIN)
+
+  HEADER
+  ------
+  Api-Key => [MANDATORY] FORMAT (APIKEY -> BASE64)
+
+  PARAMETER
+  ---------
+  kodeTipePinjaman => Kode Loan Type [MANDATORY]
+  kodePartnership => Kode Partnership [MANDATORY] [BASE64]
+  nomorIdentitas => Nomor Identitas User [MANDATORY] [BASE64]
+  nama => Nama [MANDATORY] [BASE64]
+  tanggalLahir => Tanggal Lahir [MANDATORY] [BASE64] FORMAT (YYYY-MM-DD)
+  tempatLahir => Tempat Lahir [MANDATORY] [BASE64]
+  jenisKelamin => Kode Partnership [MANDATORY] [BASE64] ["Perempuan", "Laki-Laki"]
+  namaIbuKandung => Nama Ibu Kandung [MANDATORY] [BASE64]
+  nomorTelepon => Nomor Telepon [MANDATORY] [BASE64] FORMAT (+628xxx)
+  email => Email [MANDATORY] [BASE64] FORMAT (abc@mail.com)
+  tanggalJoinPartner => Tanggal Join Partner [MANDATORY] FORMAT (YYYY-MM-DD)
+  nomorIdentitasPasangan => Nomor Identitas Pasangan [MANDATORY] [BASE64] [Jika Kawin]
+  namaPasangan => Nama Pasangan [MANDATORY] [BASE64] [Jika Kawin]
+  tanggalLahirPasangan => Tanggal Lahir Pasangan [MANDATORY] [BASE64] [Jika Kawin] FORMAT (YYYY-MM-DD)
+  tempatLahirPasangan => Tempat Lahir Pasangan [MANDATORY] [BASE64] [Jika Kawin]
+  tanggalKtp => Tanggal Terbit KTP [MANDATORY]
+  kodeArea => Kode Area [MANDATORY]
+  latitude => Latitude [MANDATORY]
+  longitude => Llongitude [MANDATORY]
+  alamat => Alamat [MANDATORY]
+  rt => RT [MANDATORY]
+  rw => RW [MANDATORY]
+  kodeAgama => Kode Agama [MANDATORY] ["BUD", "HIN", "ISL", "KRI", "KHC"]
+  statusPernikahan =>Status Pernikahan [MANDATORY] ["Kawin", "Belum Kawin", "Cerai Hidup", "Cerai Mati"]
+  kodePendidikanTerakhir => Pendidikan Terakhir [MANDATORY] ["SD", "SM", "SU", "D1", "D2", "D3", "S1", "S2", "S3", "TS", "BT"]
+  jumlahTanggungan => Jumlah Tanggungan [MANDATORY]
+  kodeAreaUsaha => Kode Area Usaha [MANDATORY]
+  alamatUsaha => Alamat Usaha [MANDATORY]
+  latitudeUsaha => Latitude Usaha [MANDATORY]
+  longitudeUsaha => Longitude Usaha [MANDATORY]
+  rtUsaha => RT Usaha [MANDATORY]
+  rwUsaha => RW Usaha [MANDATORY]
+  namaKontakDarurat => Nama Kontak Darurat [OPTIONAL]
+  nomorKontakDarurat => Nomor Telepon Darurat [OPTIONAL]
+  hubunganKontakDarurat => Hubungan Kontak Darurat [OPTIONAL] ["Kepala Keluarga", "Suami", "Istri", "Anak", "Menantu", "Cucu", "Orang Tua", "Mertua", "Famili Lain", "Pembantu"]
+

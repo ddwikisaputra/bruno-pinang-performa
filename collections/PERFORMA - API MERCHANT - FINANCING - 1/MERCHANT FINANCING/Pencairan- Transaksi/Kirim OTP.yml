@@ -9,9 +9,6 @@ http:
   headers:
     - name: Api-Key
       value: "{{apiKeyMerchant}}"
-    - name: Api-Key
-      value: VW1GNVlWQnBVR1Z5Vkc5d2p5a2JnR1g4blNvdSs1WW9CQVFpME9ueEpBOEF5STA9
-      disabled: true
   body:
     type: form-urlencoded
     data:
@@ -486,3 +483,17 @@ examples:
               "message": "OTP berhasil dikirim. Silahkan cek inbox message anda untuk mendapatkan OTP verifikasi.",
               "status": 200
           }
+
+docs: |-
+  AUTH
+  ----
+  Bearer Token => User Token (PIN)
+
+  HEADER
+  ------
+  Api-Key => [MANDATORY] FORMAT (APIKEY -> BASE64)
+
+  PARAMETER
+  ---------
+  kodePrakarsa => Kode Prakarsa [MANDATORY] [BASE64]
+  kodePartnership => Kode Partnership [MANDATORY] [BASE64]

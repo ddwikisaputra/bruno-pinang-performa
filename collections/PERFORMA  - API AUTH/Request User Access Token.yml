@@ -9,7 +9,6 @@ http:
   headers:
     - name: Api-Key
       value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
-      description: "API KEY PARTNERSHIP_CODE -> GCM -> BASE64 "
   body:
     type: form-urlencoded
     data:
@@ -50,7 +49,6 @@ examples:
       headers:
         - name: Api-Key
           value: "{{apiKeyDev}}"
-          description: API KEY [MANDATORY] PARTNERSUPCODE -> GCM -> BASE64
       body:
         type: form-urlencoded
         data:
@@ -84,7 +82,6 @@ examples:
       headers:
         - name: Api-Key
           value: "{{apiKeyDev}}"
-          description: API KEY [MANDATORY]
       body:
         type: form-urlencoded
         data:
@@ -119,7 +116,6 @@ examples:
       headers:
         - name: Api-Key
           value: "{{apiKeyDev}}"
-          description: API KEY [MANDATORY]
       body:
         type: form-urlencoded
         data:
@@ -153,7 +149,6 @@ examples:
       headers:
         - name: Api-Key
           value: VW1GNVlWQnBVR1Z5Vkc5d2pDb1lnR1gwbGRBTmdSOUczSHIvaWtDaS9CdXJUVHc9
-          description: API KEY [MANDATORY]
       body:
         type: form-urlencoded
         data:
@@ -187,7 +182,6 @@ examples:
       headers:
         - name: Api-Key
           value: "{{apiKeyDev}}"
-          description: API KEY [MANDATORY]
       body:
         type: form-urlencoded
         data:
@@ -221,7 +215,6 @@ examples:
       headers:
         - name: Api-Key
           value: "{{apiKeyDev}}"
-          description: API KEY [MANDATORY]
       body:
         type: form-urlencoded
         data:
@@ -248,3 +241,13 @@ examples:
               "code": 500,
               "message": "Maaf, Request token gagal."
           }
+
+docs: |-
+  HEADER
+  ------
+  Api-Key => [MANDATORY] FORMAT (APIKEY -> BASE64)
+
+  PARAMETER
+  --------
+  nomorIdentitas => Nomor Identitas [MANDATORY] -> FORMAT (BASE64 -> AES)
+  pin => PIN [MANDATORY] FORMAT (BASE64 -> AES)

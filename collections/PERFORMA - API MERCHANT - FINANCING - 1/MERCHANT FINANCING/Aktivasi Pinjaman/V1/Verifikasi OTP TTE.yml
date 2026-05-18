@@ -628,3 +628,19 @@ examples:
               "message": "Tanda tangan elektronik berhasil dilakukan. Silahkan menunggu untuk proses aktivasi limit pinjaman.",
               "status": 200
           }
+
+docs: |-
+  AUTH
+  ----
+  Bearer Token => User Token (PIN)
+
+  HEADER
+  ------
+  Api-Key => [MANDATORY] FORMAT (APIKEY -> BASE64)
+
+  PARAMETER
+  ---------
+  kodePrakarsa => Kode Prakarsa [MANDATORY] [BASE64]
+  kodePartnership => Kode Partnership [MANDATORY] [BASE64]
+  otpKey => OTP Key [MANDATORY] [BASE64]
+  otp => OTP [MANDATORY] [BASE64]

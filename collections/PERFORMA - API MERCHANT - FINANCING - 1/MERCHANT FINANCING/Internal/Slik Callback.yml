@@ -219,3 +219,18 @@ examples:
               "message": "Data pre screening berhasil disimpan.",
               "status": 200
           }
+
+docs: |-
+  AUTH
+  ----
+  No Auth
+
+  PARAMETER
+  ---------
+  userId => Kode Prakarsa [MANDATORY]
+  statusCode => Status SLIK [MANDATORY] [1 = Good | 2 = Tolak | 3 = Warning]
+  statusDescription => Deskripsi Status SLIK [MANDATORY] [Good |Tolak | Warning]
+  data => URL PDF SLIK [MANDATORY] [JSON STRING]
+
+  Data Example
+  {"pdfFile":"http://172.16.31.95:4343/api/digiagri/slik/pdf/ID_PRAKARSA"}

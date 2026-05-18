@@ -195,6 +195,8 @@ http:
         value: MTQ2OTM5NzE4
       - name: volumeTransaksi[]
         value: NDk=
+      - name: tanggalJoinPartner
+        value: YYYY-MM-DD
   auth:
     type: bearer
     token: "{{accessTokenPartner}}"
@@ -1718,3 +1720,47 @@ examples:
             "message": "Data whitelist berhasil disimpan.",
             "status": 200
           }
+
+docs: |
+  AUTH
+  ----
+  Bearer Token => Partnership Token
+
+  HEADER
+  ------
+  Api-Key => [MANDATORY] FORMAT (APIKEY -> BASE64)
+
+  PARAMETER
+  ---------
+  nomorIdentitas => Nomor Identitas User [MANDATORY] [BASE64]
+  kodePartnership => Kode Partnership [MANDATORY] [BASE64]
+  nama => Nama [MANDATORY] [BASE64]
+  nomorTelepon => Nomor Telepon [MANDATORY] [BASE64] FORMAT (+62xxx)
+  tipeTransaksi => Tipe Transaksi [MANDATORY] [BASE64] FORMAT (month | period)
+  transaksiPeriode[] => Transaksi Periode Ke-... [MANDATORY] [ARRAY] [BASE64] [MINIMAL 1 DATA] IF tipeTransaksi = period
+  transaksiBulan[] => Transaksi Bulan Ke-... [MANDATORY] [ARRAY] [BASE64] [MINIMAL 1 DATA] IF tipeTransaksi = month
+  jumlahTransaksi[] => Jumlah Transaksi [MANDATORY] [BASE64] [ARRAY] [RUPIAH] [MINIMAL 1 DATA]
+  volumeTransaksi[] => Volume Transaksi [MANDATORY] [BASE64] [ARRAY] [RUPIAH] [MINIMAL 1 DATA]
+  email => EMAIL [OPTIONAL] [BASE64]
+  tanggalLahir => Tanggal Lahir [OPTIONAL] [BASE64] FORMAT (YYYY-MM-DD)
+  tempatLahir => Tempat Lahir [OPTIONAL] [BASE64] FORMAT
+  jenisKelamin => Jenis Kelamin [OPTIONAL] [BASE64] FORMAT ("Perempuan" | "Laki-Laki")
+  statusPernikahan => Status Pernikahan [OPTIONAL] ("Kawin", "Belum Kawin", "Cerai Hidup", "Cerai Mati")
+  pendidikanTerakhir => Pendidikan Terakhir [OPTIONAL] FORMAT ("SD", "SMP", "SMA", "Diploma 1", "Diploma 2", "Diploma 3", "S1 / Diploma 4", "S2", "S3", "Tidak Sekolah", "Belum Tamat")
+  agama => Agama [OPTIONAL] FORMAT ("Budha", "Hindu", "Islam", "Kristen", "Konghucu", "Katolik", "Kepercayaan")
+  alamat => Alamat [OPTIONAL]
+  rt => RT [OPTIONAL] [BASE64]
+  rw => RW [OPTIONAL] [BASE64]
+  kodePos => Kode Partnership [OPTIONAL] [BASE64]
+  alamatUsaha => Kode Partnership [OPTIONAL] [BASE64]
+  rtUsaha => Kode Partnership [OPTIONAL] [BASE64]
+  rwUsaha => Kode Partnership [OPTIONAL] [BASE64]
+  kodePosUsaha => Kode Partnership [OPTIONAL] [BASE64]
+  namaTempatUsaha => Kode Partnership [OPTIONAL] [BASE64]
+  namaIbuKandung => Kode Partnership [OPTIONAL] [BASE64]
+  hubunganDalamKeluarga => Kode Partnership [OPTIONAL] [BASE64]
+  nomorIdentitasPasangan => Kode Partnership [OPTIONAL] [BASE64]
+  namaPasangan => Kode Partnership [OPTIONAL] [BASE64]
+  tanggalLahirPasangan => Kode Partnership [OPTIONAL] [BASE64]
+  tempatLahirPasangan => Kode Partnership [OPTIONAL] [BASE64]
+  jenisKelaminPasangan => Kode Partnership [OPTIONAL] [BASE64]

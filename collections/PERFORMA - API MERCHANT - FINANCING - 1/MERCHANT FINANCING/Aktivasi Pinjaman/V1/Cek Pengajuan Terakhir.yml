@@ -10,9 +10,6 @@ http:
     - name: Api-Key
       value: "{{apiKeyMerchant}}"
       disabled: true
-    - name: Api-Key
-      value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
-      description: PROD
   body:
     type: form-urlencoded
     data:
@@ -468,7 +465,6 @@ examples:
           disabled: true
         - name: Api-Key
           value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
-          description: PROD
       body:
         type: form-urlencoded
         data:
@@ -1185,7 +1181,6 @@ examples:
           disabled: true
         - name: Api-Key
           value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
-          description: PROD
       body:
         type: form-urlencoded
         data:
@@ -2270,3 +2265,17 @@ examples:
               "message": "Data pengajuan terakhir ditemukan.",
               "status": 200
           }
+
+docs: |-
+  AUTH
+  ----
+  Bearer Token => User Token (PIN)
+
+  HEADER
+  ------
+  Api-Key => [MANDATORY] FORMAT (APIKEY -> BASE64)
+
+  PARAMETER
+  ---------
+  nomorIdentitas => Nomor Identitas User [MANDATORY] [BASE64]
+  kodePartnership => Kode Partnership [MANDATORY] [BASE64]

@@ -10,9 +10,6 @@ http:
     - name: Api-Key
       value: "{{apiKeyMerchant}}"
       disabled: true
-    - name: Api-Key
-      value: VW1GNVlWQnBVR1Z5Vkc5d2p5a2JnR1g4blNvdSs1WW9CQVFpME9ueEpBOEF5STA9
-      description: BRIMOLA DEV
   body:
     type: form-urlencoded
     data:
@@ -787,3 +784,18 @@ examples:
               "message": "Validasi distributor berhasil.",
               "status": 200
           }
+
+docs: |-
+  AUTH
+  ----
+  Bearer Token => User Token (PIN)
+
+  HEADER
+  ------
+  Api-Key => [MANDATORY] FORMAT (APIKEY -> BASE64)
+
+  PARAMETER
+  ---------
+  kodePrakarsa => Kode Prakarsa [MANDATORY] [BASE64]
+  kodePartnership => Kode Partnership [MANDATORY] [BASE64]
+  kodeDistributor[] => Kode Distributor  [MANDATORY] [ARRAY] [BASE64]

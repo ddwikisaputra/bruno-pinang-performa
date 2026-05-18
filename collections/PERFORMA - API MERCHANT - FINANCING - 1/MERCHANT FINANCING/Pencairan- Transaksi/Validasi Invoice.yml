@@ -9,9 +9,6 @@ http:
   headers:
     - name: Api-Key
       value: "{{apiKeyMerchant}}"
-    - name: Api-Key
-      value: VW1GNVlWQnBVR1Z5Vkc5d2p5a2JnR1g4blNvdSs1WW9CQVFpME9ueEpBOEF5STA9
-      disabled: true
   body:
     type: form-urlencoded
     data:
@@ -900,3 +897,22 @@ examples:
               "message": "Data Berhasil Disimpan",
               "status": 200
           }
+
+docs: |-
+  AUTH
+  ----
+  Bearer Token => User Token (PIN)
+
+  HEADER
+  ------
+  Api-Key => [MANDATORY] FORMAT (APIKEY -> BASE64)
+
+  PARAMETER
+  ---------
+  kodePrakarsa => Kode Prakarsa [MANDATORY] [BASE64]
+  kodePartnership => Kode Partnership [MANDATORY] [BASE64]
+  kodeTransaksi => Kode Transaksi [MANDATORY] [BASE64]
+  nominalPencairan => Nominal Pencairan [MANDATORY] [BASE64 INT]
+  tenor => Tenor Pencairan [MANDATORY] [HARI] [BASE64 INT]
+  blobTransaksi => Blob File [MANDATORY] [BASE64]
+  mimeTypeTransaksi => MimeType File [MANDATORY] [application/pdf] [BASE64]

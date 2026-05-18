@@ -496,3 +496,19 @@ examples:
               "message": "Verifikasi OTP berhasil dilakukan.",
               "status": 200
           }
+
+docs: |-
+  AUTH
+  ----
+  Bearer Token => Partnership Token
+
+  HEADER
+  ------
+  Api-Key => [MANDATORY] FORMAT (APIKEY -> BASE64)
+
+  PARAMETER
+  ---------
+  nomorIdentitas => Nomor Identitas User [MANDATORY] [BASE64]
+  kodePartnership => Kode Partnership [MANDATORY] [BASE64]
+  otpKey => OTP Key [MANDATORY] [BASE64]
+  otp => OTP [MANDATORY] [BASE64]

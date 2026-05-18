@@ -648,3 +648,24 @@ examples:
               "message": "List tersedia.",
               "status": 200
           }
+
+docs: |-
+  AUTH
+  ----
+  Bearer Token => User Token (PIN)
+
+  HEADER
+  ------
+  Api-Key => [MANDATORY] FORMAT (APIKEY -> BASE64)
+
+  PARAMETER
+  ---------
+  kodePrakarsa => Kode Prakarsa [MANDATORY] [BASE64]
+  kodePartnership => Kode Partnership [MANDATORY] [BASE64]
+  filterStatus => Filter Status [MANDATORY] [-1 = All Kecuali Lunas | 1  = Aktif | 2 = Lunas | 3 = H- . . Jatuh Tempo | 4 = Jatuh Tempo | 5 = Telat . . Hari | 6 = Admin Belum Terbayar | Default = -1]
+  filterText => Untuk Search [OPTIONAL]
+  startIndex => Mulai Data Ke-... atau Offset [OPTIONAL] [DEFAULT = 0] [INT]
+  recordCount => Banyak Data atau Limit [OPTIONAL] [Default = 10, IF > 10 THEN ALL DATA]
+  filterDate => Flag Filter By Date [OPTIONAL] [0 = Non Aktif | 1 = Aktif] 
+  startDate => Tanggal Mulai Filter Date [OPTIONAL] [YYYY-MM-DD]
+  endDate => Tanggal Akhir Filter Date [OPTIONAL] [YYYY-MM-DD]
