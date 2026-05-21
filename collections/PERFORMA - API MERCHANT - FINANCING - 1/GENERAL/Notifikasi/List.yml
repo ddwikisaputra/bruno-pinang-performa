@@ -5,24 +5,26 @@ info:
 
 http:
   method: POST
-  url: "{{base-url-dev}}/v/1/notifikasi/list"
+  url: http://localhost:7008/v/1/notifikasi/list
   headers:
     - name: Api-Key
-      value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
+      value: "{{apiKeyMerchant}}}"
   body:
     type: form-urlencoded
     data:
       - name: kodePartnership
-        value: ""
+        value: TUox
       - name: nomorIdentitas
-        value: ""
+        value: MzI3NjA5MTcxMTAwMDEzNg==
       - name: recordCount
-        value: ""
+        value: "10"
       - name: startIndex
-        value: ""
+        value: "0"
       - name: orderText
         value: action_date DESC
-  auth: inherit
+  auth:
+    type: bearer
+    token: "{{tokenMerchant}}"
 
 settings:
   encodeUrl: true

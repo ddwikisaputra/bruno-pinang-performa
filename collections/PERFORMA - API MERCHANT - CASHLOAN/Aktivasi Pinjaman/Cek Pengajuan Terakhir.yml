@@ -8,16 +8,15 @@ http:
   url: "{{base-url-local}}/v/1/aktivasi/cashloan/cek-pengajuan-terakhir"
   headers:
     - name: Api-Key
-      value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
-      description: MAJOO CASHLOAN
+      value: "{{apiKeyMerchant}}"
   body:
     type: form-urlencoded
     data:
       - name: nomorIdentitas
-        value: MzE3MTA1MTIxMTk1MDAwMQ==
+        value: MzI3NjA5MTcxMTAwMDEzNw==
         description: Nomor Identitas User [MANDATORY] [Base64]
       - name: kodePartnership
-        value: TUNBLTI0NA==
+        value: TUox
         description: Kode Partnership [MANDATORY] [Base64]
   auth:
     type: bearer

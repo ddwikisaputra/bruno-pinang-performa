@@ -8,15 +8,15 @@ http:
   url: "{{base-url-local}}/v/1/aktivasi/checklist-tnc-digisaving"
   headers:
     - name: Api-Key
-      value: VW1GNVlWQnBVR1Z5Vkc5d2p5RU1nR0g5bFYrVEF2L3hDU1FIM25JVTl0M2Naam89
+      value: "{{apiKeyMerchant}}"
   body:
     type: form-urlencoded
     data:
       - name: kodePrakarsa
-        value: EX-BLA-501-UmF5YVBpUGVyVG9w/l99nmT8kUFrIGaNHO472ZdfFJjiaK87iNCYnkzcF6fboUvH5yxNUBYoLWp9uUg=
+        value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbDk2bTJUMGxVTnFLVytLSE84NDJaZGZGSmpnYUswN2l0Q2RuMC9iRld3QTNlWmdQci8yNnhGaVpGNGlCTEU9
         description: Nomor Identitas User [MANDATORY] [Base64]
       - name: kodePartnership
-        value: QkxBLTUwMQ==
+        value: TUox
         description: Kode Partnership [MANDATORY] [Base64]
       - name: checklist
         value: "1"

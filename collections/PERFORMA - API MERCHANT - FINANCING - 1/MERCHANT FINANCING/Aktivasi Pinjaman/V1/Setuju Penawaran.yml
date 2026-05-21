@@ -8,12 +8,12 @@ http:
   url: "{{base-url-local}}/v/1/aktivasi/setuju-penawaran"
   headers:
     - name: Api-Key
-      value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
+      value: "{{apiKeyMerchant}}"
   body:
     type: form-urlencoded
     data:
       - name: kodePrakarsa
-        value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmppYWFvNWc5T2VuRXpjRk1xK2gyWkhkRnBtZHVpcmh6RzBhcWc9
+        value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbDk2bTJUMGxVTnFLVytLSE84NDJaZGZGSmpnYUswN2l0Q2RuMC9iRld3QTNlWmdQci8yNnhGaVpGNGlCTEU9
         description: Kode Prakarsa [MANDATORY][BASE64 STRING]
       - name: kodePartnership
         value: TUox

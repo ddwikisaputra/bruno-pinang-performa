@@ -8,12 +8,12 @@ http:
   url: "{{base-url-local}}/v/1/aktivasi/ubah-pengajuan"
   headers:
     - name: Api-Key
-      value: "{{ApiKeyMajoMF}}"
+      value: "{{apiKeyMerchant}}"
   body:
     type: form-urlencoded
     data:
       - name: kodePrakarsa
-        value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbDk5bEdYL2xrUnJLMmFPSE80NzJaZGZGSmpqYWFvNGo5R1ZtMExkRlF2UEYvY2ZXbjFHVmRTUmxsS3IzUXc9
+        value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbDk2bTJUMGxVTnFLVytLSE84NDJKZGZGSmpnYUswN2k5Q2NtMDdaRTltZHloREZldWVGZm1GMUkyQW9XK289
         description: Kode Prakarsa [MANDATORY] [MANDATORY] [Base64]
       - name: kodeTipePinjaman
         value: CHILD-MMF-652
@@ -22,16 +22,16 @@ http:
         value: TUox
         description: Kode Partnership [MANDATORY] [Base64]
       - name: nomorIdentitas
-        value: MzIwOTEyMjAwMzk0MDAwNg==
+        value: MzI3NjA5MTcxMTAwMDEzNw==
         description: Nomor Identitas User [MANDATORY] [Base64]
       - name: nama
-        value: U1VOQVJUTw==
+        value: SGFycnkgUGFtdW5na2Fz
         description: Nama [MANDATORY] [Base64]
       - name: tanggalLahir
-        value: MTk5Ni0wMy0yMA==
+        value: MjAwMC0xMS0xNw==
         description: Tanggal Lahir [MANDATORY] [Base64] [YYYY-MM-DD]
       - name: tempatLahir
-        value: Q2lyZWJvbg==
+        value: SmFrYXJ0YQ==
         description: Tempat Lahir [MANDATORY] [Base64]
       - name: jenisKelamin
         value: TGFraS1MYWtp
@@ -61,10 +61,10 @@ http:
         value: SmFrYXJ0YQ==
         description: Tempat Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
       - name: tanggalKtp
-        value: 2000-11-17
+        value: 2026-05-21
         description: Tanggal Terbit KTP [MANDATORY]
       - name: kodeArea
-        value: "7541"
+        value: "7673"
         description: Kode Area [MANDATORY]
       - name: latitude
         value: "80"
@@ -73,13 +73,13 @@ http:
         value: "10"
         description: Longitude [MANDATORY]
       - name: alamat
-        value: Jl. Cempaka Putih Barat
+        value: Jl.Peninggaran Timur Ii
         description: Alamat [MANDATORY]
       - name: rt
-        value: "010"
+        value: "003"
         description: RT [MANDATORY]
       - name: rw
-        value: "002"
+        value: "009"
         description: RW [MANDATORY]
       - name: kodeAgama
         value: ISL
@@ -109,16 +109,16 @@ http:
         value: "004"
         description: RW Usaha [MANDATORY]
       - name: tanggalJoinPartner
-        value: 2000-11-17
+        value: 2025-12-30
         description: Tanggal Join Partner [MANDATORY]
       - name: namaKontakDarurat
-        value: Darurat Saja
+        value: ""
         description: Nama Kontak Darurat [OPTIONAL]
       - name: nomorKontakDarurat
-        value: "+62895421583720"
+        value: ""
         description: "Nomor Telepon Kontak Darurat [OPTIONAL] [Ex : +628xxx]"
       - name: hubunganKontakDarurat
-        value: Kepala Keluarga
+        value: ""
         description: Nama Kontak Darurat [OPTIONAL] ["Kepala Keluarga", "Suami", "Istri", "Anak", "Menantu", "Cucu", "Orang Tua", "Mertua", "Famili Lain", "Pembantu"]
   auth:
     type: bearer

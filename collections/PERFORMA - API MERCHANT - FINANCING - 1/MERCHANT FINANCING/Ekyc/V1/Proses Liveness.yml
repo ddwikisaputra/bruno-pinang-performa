@@ -5,20 +5,18 @@ info:
 
 http:
   method: POST
-  url: "{{base-url-staging}}/v/1/ekyc/proses-liveness"
+  url: "{{base-url-local}}/v/1/ekyc/proses-liveness"
   headers:
     - name: Api-Key
       value: "{{apiKeyMerchant}}"
     - name: X-Transaction-Tag
-      value: "{{hmacLivenessJsonParamDwiki}}"
-      disabled: true
+      value: UmF5YVBpUGVyVG9w+1sryTX+khI/IGyDT79p2IJdFczhavxqjdTNzR/eEvnZjQDV88wJFyjCevRZbJHxSry7LPdawNj1iITY+mwflBEb4fC+xqOIVpK20zQvVcI=
   body:
     type: form-urlencoded
     data:
       - name: params
-        value: "{{livenessJsonParamDwiki}}"
+        value: UmF5YVBpUGVyVG9wtk8mwjCo9AY6cz7IX78p1Zg/cs2iDM1mwq36+A+6TZy041n+4Ko9Fk/BGJogGv+mWu2ac/IApqOV8/bByQ5F5KN3u+uIwHurKdOEMGhXcyQoX0OaPDQKFX9iNuf0LBn9n1XixJofuYVRK+urh/jlMNhiaI5tV9VGFy2SIw5jAXkUq2hQp43IQTbSvZYghyuRAZ7jeBhQTErRP3grskeOIqBnY8xjE0qExaM8LckfDI1rI386fDjAVd72WjWgNP0GDeTkUrAE+kf6nmlQJ9lBmZdhMhDm4NFAKO5eeq/uMq/UP0UoR9Mg4/B7NStTQt4THPMHp4phhrsX4E8a0/taJbPFKuV+mS+YaYt2A40zwlsBGzIq3SNQ63sRHyKkQark3UCQe+L4VfkZL/CAf7nNgs0usUvrjDP8EX7t9gOKUQjMf5zq0N5wQOIEFNBuYTob2U4Xh1GuZ5XkA2u3UaMDBa7TiPcCkf+usBx2jDDBxP2zS7xHaGkDvEZ32SmyrGWaiLo9KpO9Cj7zNIQOVtxkplBflk54QQwTyBZCVfzbYzUTjBM3Y9oiIKSD1SHAL0+QO/IQkZ+vHJbu/Fu2zWCYswb0My9Yrz19c3H6b3fx8fzq5+QTJFh6I2611SZOecWq15fp1PazM04Ug/MIGqrcEMmKs7WrLgsYk9lGGv0YF0ET66zaERc8YPX/UWBZqq9Zynt2adpR2CU07PIDpvFZy2hqFT/HRRX2H/1NnQZfkdEMb25QieLYQdMCcKj25E2BQglQwFl6Nzuv1L2oU8rCXXhMG21gD6ahFejdWQ7fQja7F46VxJXAIW4nwfMi7Njlke14VX7nO+0nobBHymazJUgAirPe+XM7XMUyeTiu6/fTB2GxvkfOkIHILFYEG/cc0aApI8yESWDopyMl9iFloJFQoPW5nkz8+rOk1vlYSjVMKvT+CdNIfu4nd+KRbLNwygcNYDY+xZVwLVv3AP6hTuRFE5bzSrAGR1ncj5TzEfLMMKSX4qpz8tjXHXN7jwAmmWhEC1MQYL00aK/3I7q706MCwQJuU3lUSMWxIUP5w2GrLjbYjXRaep/0KLrBQUcVhRmdACW9U6EIl6DMUk3hjtndBZQUs5PvZglXofAVkxxgyuqhnFTWgMw9C9w9LhQNLXePA/uQ7OUXAf4H1U6lPS37vk+gTBf3fdHpOvu1OIAbWd0D3sKE/KZzvCDFtaya7/6CvyIOwgPh9AScvEKz9TDWBoIoHHuM9NRa8nXZ/gdqEGY0vV6xcHzNcc1xzNFIZKEGqqVfueBFF/QouXCbVRmrmfoyxmqXRGDzZH5HzcBN0M35gZziOD05bKUuQln76gsMxuoSWs9+Z85U18mwK4r9rG5E1E2Wyllkl27nKJWTRK5ohx8Sgo0yf13mLEsROsQkEWMZ7E09EXfTb0FxDm3o0UnJI1mY7BNqZ+UhQpO8jVyIi/ok4ZWQDhMCXuulNiPuFGYJFJt1MN7sNLW5UKwfi89yjCaagdmpIqJyWW6mEkTajrcM5biKFRJMqYWn57hySS8keTqmhccjxcnAsCdgJtn33hY4A+EGQN6EOHp0fNkkb4gHHRymIs/A6hxwt0qiQGigp89fNWDP70oJvYyhuQXQCjsqpPcpghKb4Tx9mD6M
         description: "[MANDATORY] [JSON TO AES]"
-        disabled: true
       - name: ""
         value: JSON EXAMPLE
         description: |-
@@ -755,45 +753,6 @@ examples:
               "message": "Maaf, Proses verifikasi wajah tidak dapat dilakukan karena sudah melebihi batas maksimal, silahkan coba kembali pada DD MM YYYY HH:II",
               "status": 500
           }
-  - name: 503 - Service Unavailable
-    request:
-      url: "{{base-url-local}}/v/1/ekyc/proses-liveness"
-      method: POST
-      headers:
-        - name: Api-Key
-          value: "{{apiKeyMerchant}}"
-      body:
-        type: form-urlencoded
-        data:
-          - name: kodePrakarsa
-            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrN2lkR2NuRTdkRjB0WXIzTi9NQVV1eTZ1RWluM2JSRXc9
-            description: Kode Prakarsa [MANDATORY] [Base64]
-          - name: kodePartnership
-            value: QVRFLTkx
-            description: Kode Partnership [MANDATORY] [Base64]
-          - name: selfieBase64
-            value: "{{selfieBase64JPG}}"
-            description: Foto Selfie [MANDATORY] [Base64]
-          - name: selfieMimeType
-            value: image/jpeg
-            description: Mimetype Foto Selfie  [MANDATORY] [image/jpeg]
-    response:
-      status: 503
-      statusText: Service Unavailable
-      headers:
-        - name: Content-Type
-          value: application/json; charset=utf-8
-        - name: Date
-          value: Wed, 21 Aug 2024 11:09:31 GMT
-        - name: Content-Length
-          value: "69"
-      body:
-        type: json
-        data: |-
-          {
-              "message": "Jam operasional Pinang Performa dari jam XX.XX - XX.XX WIB setiap hari. Kembali lagi nanti, ya!",
-              "status": 503
-          }
   - name: Error - Liveness tidak bisa dilakukan (dalam waktu tunggu)
     request:
       url: "{{base-url-local}}/v/1/ekyc/proses-liveness"
@@ -837,502 +796,7 @@ examples:
               "message": "Maaf, Proses verifikasi wajah tidak dapat dilakukan karena sudah melebihi batas maksimal, silahkan coba kembali pada DD MM YYYY HH:II",
               "status": 500
           }
-  - name: Error - Parameter Validation (Total Mandatory)
-    request:
-      url: "{{base-url-local}}/v/1/ekyc/proses-liveness"
-      method: POST
-      headers:
-        - name: Api-Key
-          value: "{{apiKeyMerchant}}"
-      body:
-        type: form-urlencoded
-        data:
-          - name: kodePrakarsa
-            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrN2lkR2NuRTdkRjB0WXIzTi9NQVV1eTZ1RWluM2JSRXc9
-            description: Kode Prakarsa [MANDATORY] [Base64]
-          - name: kodePartnership
-            value: TUox
-            description: Kode Partnership [MANDATORY] [Base64]
-          - name: selfieBase64
-            value: "{{selfieBase64JPG}}"
-            description: Foto Selfie [MANDATORY] [Base64]
-            disabled: true
-          - name: selfieMimeType
-            value: image/jpeg
-            description: Mimetype Foto Selfie  [MANDATORY] [image/jpeg]
-    response:
-      status: 200
-      statusText: OK
-      headers:
-        - name: Content-Type
-          value: application/json; charset=utf-8
-        - name: Date
-          value: Mon, 19 Aug 2024 11:28:24 GMT
-        - name: Content-Length
-          value: "53"
-      body:
-        type: json
-        data: |-
-          {
-              "data": "",
-              "message": "Parameter tidak terpenuhi.",
-              "status": 400
-          }
-  - name: Error - Access Forbidden (Status Not Access)
-    request:
-      url: "{{base-url-local}}/v/1/ekyc/proses-liveness"
-      method: POST
-      headers:
-        - name: Api-Key
-          value: "{{apiKeyMerchant}}"
-      body:
-        type: form-urlencoded
-        data:
-          - name: kodePrakarsa
-            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmppYUtFNWpkQ2FuMG5kRnhYL1l1UkJoM044Zkh2N2RXT0Fab2M9
-            description: Kode Prakarsa [MANDATORY] [Base64]
-            disabled: true
-          - name: kodePartnership
-            value: TUox
-            description: Kode Partnership [MANDATORY] [Base64]
-            disabled: true
-          - name: selfieBase64
-            value: "{{selfieBase64JPG}}"
-            description: Foto Selfie [MANDATORY] [Base64]
-            disabled: true
-          - name: selfieMimeType
-            value: image/jpeg
-            description: Mimetype Foto Selfie  [MANDATORY] [image/jpeg]
-            disabled: true
-          - name: params
-            value: "{{livenessJsonParamDwiki}}"
-            description: Encrypted Params Bundle
-          - name: ""
-            value: JSON EXAMPLE
-            description: |-
-              {
-              "kodePrakarsa": "", --> base64
-              "kodePartnership": "", -> base74
-              "selfieBase64": "", -> base64
-              "selfieMimeType": "image/jpeg"
-              }
-            disabled: true
-    response:
-      status: 403
-      statusText: Forbidden
-      headers:
-        - name: Cache-Control
-          value: none
-        - name: Content-Security-Policy
-          value: script-src 'self' pinang-performa.bankraya.co.id
-        - name: Content-Type
-          value: application/json; charset=utf-8
-        - name: Permissions-Policy
-          value: geolocation=()
-        - name: Referrer-Policy
-          value: no-referrer
-        - name: Strict-Transport-Security
-          value: max-age=16070400; includeSubDomains
-        - name: X-Content-Type-Options
-          value: nosniff
-        - name: X-Frame-Options
-          value: SAMEORIGIN
-        - name: X-Permitted-Cross-Domain-Policies
-          value: none
-        - name: Date
-          value: Wed, 30 Oct 2024 03:33:47 GMT
-        - name: Content-Length
-          value: "62"
-      body:
-        type: json
-        data: |-
-          {
-              "data": "",
-              "message": "Data tidak dapat diakses.",
-              "status": 403
-          }
-  - name: Error - Token Expired
-    request:
-      url: "{{base-url-local}}/v/1/ekyc/proses-liveness"
-      method: POST
-      headers:
-        - name: Api-Key
-          value: "{{apiKeyMerchant}}"
-      body:
-        type: form-urlencoded
-        data:
-          - name: kodePrakarsa
-            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrN2lkR2NuRTdkRjB0WXIzTi9NQVV1eTZ1RWluM2JSRXc9
-            description: Kode Prakarsa [MANDATORY] [Base64]
-          - name: kodePartnership
-            value: QVRFLTkx
-            description: Kode Partnership [MANDATORY] [Base64]
-          - name: selfieBase64
-            value: "{{selfieBase64JPG}}"
-            description: Foto Selfie [MANDATORY] [Base64]
-          - name: selfieMimeType
-            value: image/jpeg
-            description: Mimetype Foto Selfie  [MANDATORY] [image/jpeg]
-    response:
-      status: 401
-      statusText: Unauthorized
-      headers:
-        - name: Content-Type
-          value: application/json; charset=utf-8
-        - name: Date
-          value: Wed, 21 Aug 2024 11:09:31 GMT
-        - name: Content-Length
-          value: "69"
-      body:
-        type: json
-        data: |-
-          {
-              "message": "token has invalid claims: token is expired",
-              "status": 401
-          }
-  - name: Error - Parameter Token /  API Key Empty
-    request:
-      url: "{{base-url-local}}/v/1/ekyc/proses-liveness"
-      method: POST
-      headers:
-        - name: Api-Key
-          value: "{{apiKeyMerchant}}"
-          disabled: true
-      body:
-        type: form-urlencoded
-        data:
-          - name: kodePrakarsa
-            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrN2lkR2NuRTdkRjB0WXIzTi9NQVV1eTZ1RWluM2JSRXc9
-            description: Kode Prakarsa [MANDATORY] [Base64]
-          - name: kodePartnership
-            value: TUox
-            description: Kode Partnership [MANDATORY] [Base64]
-          - name: selfieBase64
-            value: "{{selfieBase64JPG}}"
-            description: Foto Selfie [MANDATORY] [Base64]
-          - name: selfieMimeType
-            value: image/jpeg
-            description: Mimetype Foto Selfie  [MANDATORY] [image/jpeg]
-    response:
-      status: 400
-      statusText: Bad Request
-      headers:
-        - name: Content-Type
-          value: application/json; charset=utf-8
-        - name: Date
-          value: Mon, 19 Aug 2024 11:26:06 GMT
-        - name: Content-Length
-          value: "51"
-      body:
-        type: json
-        data: |-
-          {
-              "message": "parameter token is empty",
-              "status": 400
-          }
-  - name: Error - Liveness Gagal (masih ada kesempatan)
-    request:
-      url: "{{base-url-local}}/v/1/ekyc/proses-liveness"
-      method: POST
-      headers:
-        - name: Api-Key
-          value: "{{apiKeyMerchant}}"
-      body:
-        type: form-urlencoded
-        data:
-          - name: kodePrakarsa
-            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrN2lkR2NuRTdkRjB0WXIzTi9NQVV1eTZ1RWluM2JSRXc9
-            description: Kode Prakarsa [MANDATORY] [Base64]
-          - name: kodePartnership
-            value: TUox
-            description: Kode Partnership [MANDATORY] [Base64]
-          - name: selfieBase64
-            value: "{{selfieBase64JPG}}"
-            description: Foto Selfie [MANDATORY] [Base64]
-          - name: selfieMimeType
-            value: image/jpeg
-            description: Mimetype Foto Selfie  [MANDATORY] [image/jpeg]
-    response:
-      status: 200
-      statusText: OK
-      headers:
-        - name: Content-Type
-          value: application/json; charset=utf-8
-        - name: Date
-          value: Mon, 19 Aug 2024 07:41:57 GMT
-        - name: Content-Length
-          value: "138"
-      body:
-        type: json
-        data: |-
-          {
-              "data":{
-                  "nextStep": "liveness-aktif",
-                  "showMessage": "Ada data yang tidak sesuai dan belum berhasil diverifikasi."
-              },
-              "message": "Proses verifikasi wajah belum berhasil! Kamu masih memiliki kesempatan x kali lagi, silakan mencobanya kembali.",
-              "status": 500
-          }
-  - name: Error - Parameter Validation (Tidak Sesuai)
-    request:
-      url: "{{base-url-local}}/v/1/ekyc/proses-liveness"
-      method: POST
-      headers:
-        - name: Api-Key
-          value: "{{apiKeyMerchant}}"
-      body:
-        type: form-urlencoded
-        data:
-          - name: kodePrakarsa
-            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrN2lkR2NuRTdkRjB0WXIzTi9NQVV1eTZ1RWluM2JSRXc9
-            description: Kode Prakarsa [MANDATORY] [Base64]
-          - name: kodePartnership
-            value: TUox
-            description: Kode Partnership [MANDATORY] [Base64]
-          - name: selfieBase64
-            value: "{{selfieBase64JPG}}"
-            description: Foto Selfie [MANDATORY] [Base64]
-          - name: selfieMimeType
-            value: image/jpegs
-            description: Mimetype Foto Selfie  [MANDATORY] [image/jpeg]
-    response:
-      status: 200
-      statusText: OK
-      headers:
-        - name: Content-Type
-          value: application/json; charset=utf-8
-        - name: Date
-          value: Mon, 19 Aug 2024 11:28:42 GMT
-        - name: Content-Length
-          value: "57"
-      body:
-        type: json
-        data: |-
-          {
-              "data": "",
-              "message": "... tidak sesuai.",
-              "status": 400
-          }
-  - name: Error - Liveness Gagal (kesempatan terakhir)
-    request:
-      url: "{{base-url-local}}/v/1/ekyc/proses-liveness"
-      method: POST
-      headers:
-        - name: Api-Key
-          value: "{{apiKeyMerchant}}"
-      body:
-        type: form-urlencoded
-        data:
-          - name: kodePrakarsa
-            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrN2lkR2NuRTdkRjB0WXIzTi9NQVV1eTZ1RWluM2JSRXc9
-            description: Kode Prakarsa [MANDATORY] [Base64]
-          - name: kodePartnership
-            value: TUox
-            description: Kode Partnership [MANDATORY] [Base64]
-          - name: selfieBase64
-            value: "{{selfieBase64JPG}}"
-            description: Foto Selfie [MANDATORY] [Base64]
-          - name: selfieMimeType
-            value: image/jpeg
-            description: Mimetype Foto Selfie  [MANDATORY] [image/jpeg]
-    response:
-      status: 200
-      statusText: OK
-      headers:
-        - name: Content-Type
-          value: application/json; charset=utf-8
-        - name: Date
-          value: Mon, 19 Aug 2024 09:34:11 GMT
-        - name: Content-Length
-          value: "165"
-      body:
-        type: json
-        data: |-
-          {
-              "data": {
-                  "nextStep": "liveness-block",
-                  "showMessage": "Proses verifikasi bisa kamu coba lagi pada DD MM YYYY HH:II atau hubungi Sapa Raya untuk informasi lebih lanjut."
-              },
-              "message": "Proses verifikasi wajah belum berhasil! Kesempatan kamu sudah habis karena sudah mencobanya sebanyak x kali. Namun tidak perlu khawatir, kamu dapat menunggu xx menit kedepan untuk mencobanya kembali.",
-              "status": 500
-          }
-  - name: Error - Access Forbidden (No Data Partnership)
-    request:
-      url: "{{base-url-local}}/v/1/ekyc/proses-liveness"
-      method: POST
-      headers:
-        - name: Api-Key
-          value: "{{apiKeyMerchant}}"
-      body:
-        type: form-urlencoded
-        data:
-          - name: kodePrakarsa
-            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrN2lkR2NuRTdkRjB0WXIzTi9NQVV1eTZ1RWluM2JSRXc9
-            description: Kode Prakarsa [MANDATORY] [Base64]
-          - name: kodePartnership
-            value: TUox
-            description: Kode Partnership [MANDATORY] [Base64]
-          - name: selfieBase64
-            value: "{{selfieBase64JPG}}"
-            description: Foto Selfie [MANDATORY] [Base64]
-          - name: selfieMimeType
-            value: image/jpeg
-            description: Mimetype Foto Selfie  [MANDATORY] [image/jpeg]
-    response:
-      status: 403
-      statusText: Forbidden
-      headers:
-        - name: Content-Type
-          value: application/json; charset=utf-8
-        - name: Date
-          value: Mon, 19 Aug 2024 11:27:04 GMT
-        - name: Content-Length
-          value: "70"
-      body:
-        type: json
-        data: |-
-          {
-              "message": "your access to this resource is unactivated",
-              "status": 403
-          }
-  - name: Success - Liveness Berhasil
-    request:
-      url: "{{base-url-dev}}/v/1/ekyc/proses-liveness"
-      method: POST
-      headers:
-        - name: Api-Key
-          value: "{{apiKeyMerchant}}"
-      body:
-        type: form-urlencoded
-        data:
-          - name: params
-            value: "{{livenessJsonParamDwiki}}"
-            description: "[MANDATORY] [JSON TO Base64 TO AES]"
-          - name: ""
-            value: JSON EXAMPLE
-            description: |-
-              {
-              "kodePrakarsa": "", --> base64
-              "kodePartnership": "", -> base64
-              "selfieBase64": "", -> base64
-              "selfieMimeType": "image/jpeg"
-              }
-            disabled: true
-    response:
-      status: 200
-      statusText: OK
-      headers:
-        - name: Date
-          value: Wed, 30 Oct 2024 08:01:54 GMT
-        - name: Content-Type
-          value: application/json; charset=utf-8
-        - name: Content-Length
-          value: "160"
-        - name: Connection
-          value: keep-alive
-        - name: Cache-Control
-          value: none
-        - name: Content-Security-Policy
-          value: script-src 'self' pinang-performa.bankraya.co.id
-        - name: Permissions-Policy
-          value: geolocation=()
-        - name: Referrer-Policy
-          value: no-referrer
-        - name: Strict-Transport-Security
-          value: max-age=31536000; includeSubDomains
-        - name: X-Content-Type-Options
-          value: nosniff
-        - name: X-Frame-Options
-          value: SAMEORIGIN
-        - name: X-Permitted-Cross-Domain-Policies
-          value: none
-      body:
-        type: json
-        data: |-
-          {
-              "data": "",
-              "message": "Proses verifikasi wajah berhasil. Silahkan cek inbox message anda untuk mendapatkan OTP verifikasi tanda tangan elektronik.",
-              "status": 200
-          }
-  - name: Error - Unauthorized / Expired
-    request:
-      url: "{{base-url-local}}/v/1/ekyc/proses-liveness"
-      method: POST
-      headers:
-        - name: Api-Key
-          value: "{{apiKeyMerchant}}"
-      body:
-        type: form-urlencoded
-        data:
-          - name: kodePrakarsa
-            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrN2lkR2NuRTdkRjB0WXIzTi9NQVV1eTZ1RWluM2JSRXc9
-            description: Kode Prakarsa [MANDATORY] [Base64]
-          - name: kodePartnership
-            value: TUox
-            description: Kode Partnership [MANDATORY] [Base64]
-          - name: selfieBase64
-            value: "{{selfieBase64JPG}}"
-            description: Foto Selfie [MANDATORY] [Base64]
-          - name: selfieMimeType
-            value: image/jpeg
-            description: Mimetype Foto Selfie  [MANDATORY] [image/jpeg]
-    response:
-      status: 401
-      statusText: Unauthorized
-      headers:
-        - name: Content-Type
-          value: application/json; charset=utf-8
-        - name: Date
-          value: Mon, 19 Aug 2024 09:20:44 GMT
-        - name: Content-Length
-          value: "50"
-      body:
-        type: json
-        data: |-
-          {
-              "message": "Unauthorized / Expired.",
-              "status": 401
-          }
-  - name: Error - Access Forbidden (Status Not Access)
-    request:
-      url: "{{base-url-local}}/v/1/ekyc/proses-liveness"
-      method: POST
-      headers:
-        - name: Api-Key
-          value: "{{apiKeyMerchant}}"
-      body:
-        type: form-urlencoded
-        data:
-          - name: kodePrakarsa
-            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrN2lkR2NuRTdkRjB0WXIzTi9NQVV1eTZ1RWluM2JSRXc9
-            description: Kode Prakarsa [MANDATORY] [Base64]
-          - name: kodePartnership
-            value: TUox
-            description: Kode Partnership [MANDATORY] [Base64]
-          - name: selfieBase64
-            value: "{{selfieBase64JPG}}"
-            description: Foto Selfie [MANDATORY] [Base64]
-          - name: selfieMimeType
-            value: image/jpeg
-            description: Mimetype Foto Selfie  [MANDATORY] [image/jpeg]
-    response:
-      status: 403
-      statusText: Forbidden
-      headers:
-        - name: Content-Type
-          value: application/json; charset=utf-8
-        - name: Date
-          value: Mon, 19 Aug 2024 11:25:47 GMT
-        - name: Content-Length
-          value: "52"
-      body:
-        type: json
-        data: |-
-          {
-              "message": "Data tidak dapat diakses.",
-              "status": 403
-          }
-  - name: Error - HMAC Validation (X-Transaction-Tag != All Param)
+  - name: Error - Dukcapil tidak lolos (masih ada quota)
     request:
       url: "{{base-url-local}}/v/1/ekyc/proses-liveness"
       method: POST
@@ -1340,12 +804,12 @@ examples:
         - name: Api-Key
           value: "{{apiKeyMerchant}}"
         - name: X-Transaction-Tag
-          value: "{{hmacOcrJsonParamDwikiGagal}}"
+          value: UmF5YVBpUGVyVG9w+1sryTX+khI/IGyDT79p2IJdFczhavxqjdTNzR/eEvnZjQDV88wJFyjCevRZbJHxSry7LPdawNj1iITY+mwflBEb4fC+xqOIVpK20zQvVcI=
       body:
         type: form-urlencoded
         data:
           - name: params
-            value: "{{livenessJsonParamDwiki}}"
+            value: UmF5YVBpUGVyVG9wtk8mwjCo9AY6cz7IX78p1Zg/cs2iDM1mwq36+A+6TZy041n+4Ko9Fk/BGJogGv+mWu2ac/IApqOV8/bByQ5F5KN3u+uIwHurKdOEMGhXcyQoX0OaPDQKFX9iNuf0LBn9n1XixJofuYVRK+urh/jlMNhiaI5tV9VGFy2SIw5jAXkUq2hQp43IQTbSvZYghyuRAZ7jeBhQTErRP3grskeOIqBnY8xjE0qExaM8LckfDI1rI386fDjAVd72WjWgNP0GDeTkUrAE+kf6nmlQJ9lBmZdhMhDm4NFAKO5eeq/uMq/UP0UoR9Mg4/B7NStTQt4THPMHp4phhrsX4E8a0/taJbPFKuV+mS+YaYt2A40zwlsBGzIq3SNQ63sRHyKkQark3UCQe+L4VfkZL/CAf7nNgs0usUvrjDP8EX7t9gOKUQjMf5zq0N5wQOIEFNBuYTob2U4Xh1GuZ5XkA2u3UaMDBa7TiPcCkf+usBx2jDDBxP2zS7xHaGkDvEZ32SmyrGWaiLo9KpO9Cj7zNIQOVtxkplBflk54QQwTyBZCVfzbYzUTjBM3Y9oiIKSD1SHAL0+QO/IQkZ+vHJbu/Fu2zWCYswb0My9Yrz19c3H6b3fx8fzq5+QTJFh6I2611SZOecWq15fp1PazM04Ug/MIGqrcEMmKs7WrLgsYk9lGGv0YF0ET66zaERc8YPX/UWBZqq9Zynt2adpR2CU07PIDpvFZy2hqFT/HRRX2H/1NnQZfkdEMb25QieLYQdMCcKj25E2BQglQwFl6Nzuv1L2oU8rCXXhMG21gD6ahFejdWQ7fQja7F46VxJXAIW4nwfMi7Njlke14VX7nO+0nobBHymazJUgAirPe+XM7XMUyeTiu6/fTB2GxvkfOkIHILFYEG/cc0aApI8yESWDopyMl9iFloJFQoPW5nkz8+rOk1vlYSjVMKvT+CdNIfu4nd+KRbLNwygcNYDY+xZVwLVv3AP6hTuRFE5bzSrAGR1ncj5TzEfLMMKSX4qpz8tjXHXN7jwAmmWhEC1MQYL00aK/3I7q706MCwQJuU3lUSMWxIUP5w2GrLjbYjXRaep/0KLrBQUcVhRmdACW9U6EIl6DMUk3hjtndBZQUs5PvZglXofAVkxxgyuqhnFTWgMw9C9w9LhQNLXePA/uQ7OUXAf4H1U6lPS37vk+gTBf3fdHpOvu1OIAbWd0D3sKE/KZzvCDFtaya7/6CvyIOwgPh9AScvEKz9TDWBoIoHHuM9NRa8nXZ/gdqEGY0vV6xcHzNcc1xzNFIZKEGqqVfueBFF/QouXCbVRmrmfoyxmqXRGDzZH5HzcBN0M35gZziOD05bKUuQln76gsMxuoSWs9+Z85U18mwK4r9rG5E1E2Wyllkl27nKJWTRK5ohx8Sgo0yf13mLEsROsQkEWMZ7E09EXfTb0FxDm3o0UnJI1mY7BNqZ+UhQpO8jVyIi/ok4ZWQDhMCXuulNiPuFGYJFJt1MN7sNLW5UKwfi89yjCaagdmpIqJyWW6mEkTajrcM5biKFRJMqYWn57hySS8keTqmhccjxcnAsCdgJtn33hY4A+EGQN6EOHp0fNkkb4gHHRymIs/A6hxwt0qiQGigp89fNWDP70oJvYyhuQXQCjsqpPcpghKb4Tx9mD6M
             description: "[MANDATORY] [JSON TO AES]"
           - name: ""
             value: JSON EXAMPLE
@@ -1361,114 +825,162 @@ examples:
       status: 200
       statusText: OK
       headers:
-        - name: Cache-Control
+        - name: cache-control
           value: none
-        - name: Content-Security-Policy
+        - name: content-security-policy
           value: script-src 'self' pinang-performa.bankraya.co.id
-        - name: Content-Type
+        - name: content-type
           value: application/json; charset=utf-8
-        - name: Permissions-Policy
+        - name: permissions-policy
           value: geolocation=()
-        - name: Referrer-Policy
+        - name: referrer-policy
           value: no-referrer
-        - name: Strict-Transport-Security
+        - name: strict-transport-security
           value: max-age=16070400; includeSubDomains
-        - name: X-Content-Type-Options
+        - name: x-content-type-options
           value: nosniff
-        - name: X-Frame-Options
+        - name: x-frame-options
           value: SAMEORIGIN
-        - name: X-Permitted-Cross-Domain-Policies
+        - name: x-permitted-cross-domain-policies
           value: none
-        - name: Date
-          value: Tue, 17 Dec 2024 08:56:27 GMT
-        - name: Content-Length
-          value: "60"
+        - name: date
+          value: Wed, 20 May 2026 06:21:37 GMT
+        - name: content-length
+          value: "273"
       body:
         type: json
         data: |-
           {
-              "data": "",
-              "message": "Parameter tidak sesuai.",
-              "status": 400
+            "data": {
+              "nextStep": "retry-dukcapil",
+              "showMessage": "Data dukcapil belum sesuai! Kamu masih memiliki kesempatan x kali lagi, silakan mencobanya kembali."
+            },
+            "message": "Maaf, Proses verifikasi wajah sedang tidak dapat dilakukan. Silahkan coba beberapa saat lagi.",
+            "status": 500
           }
-  - name: Error - Unregistered Whitelist
+  - name: Error - Dukcapil tidak lolos (quota habis)
     request:
       url: "{{base-url-local}}/v/1/ekyc/proses-liveness"
       method: POST
       headers:
         - name: Api-Key
           value: "{{apiKeyMerchant}}"
+        - name: X-Transaction-Tag
+          value: UmF5YVBpUGVyVG9w+1sryTX+khI/IGyDT79p2IJdFczhavxqjdTNzR/eEvnZjQDV88wJFyjCevRZbJHxSry7LPdawNj1iITY+mwflBEb4fC+xqOIVpK20zQvVcI=
       body:
         type: form-urlencoded
         data:
-          - name: kodePrakarsa
-            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrN2lkR2NuRTdkRjB0WXIzTi9NQVV1eTZ1RWluM2JSRXc9
-            description: Kode Prakarsa [MANDATORY] [Base64]
-          - name: kodePartnership
-            value: TUox
-            description: Kode Partnership [MANDATORY] [Base64]
-          - name: selfieBase64
-            value: "{{selfieBase64JPG}}"
-            description: Foto Selfie [MANDATORY] [Base64]
-          - name: selfieMimeType
-            value: image/jpeg
-            description: Mimetype Foto Selfie  [MANDATORY] [image/jpeg]
+          - name: params
+            value: UmF5YVBpUGVyVG9wtk8mwjCo9AY6cz7IX78p1Zg/cs2iDM1mwq36+A+6TZy041n+4Ko9Fk/BGJogGv+mWu2ac/IApqOV8/bByQ5F5KN3u+uIwHurKdOEMGhXcyQoX0OaPDQKFX9iNuf0LBn9n1XixJofuYVRK+urh/jlMNhiaI5tV9VGFy2SIw5jAXkUq2hQp43IQTbSvZYghyuRAZ7jeBhQTErRP3grskeOIqBnY8xjE0qExaM8LckfDI1rI386fDjAVd72WjWgNP0GDeTkUrAE+kf6nmlQJ9lBmZdhMhDm4NFAKO5eeq/uMq/UP0UoR9Mg4/B7NStTQt4THPMHp4phhrsX4E8a0/taJbPFKuV+mS+YaYt2A40zwlsBGzIq3SNQ63sRHyKkQark3UCQe+L4VfkZL/CAf7nNgs0usUvrjDP8EX7t9gOKUQjMf5zq0N5wQOIEFNBuYTob2U4Xh1GuZ5XkA2u3UaMDBa7TiPcCkf+usBx2jDDBxP2zS7xHaGkDvEZ32SmyrGWaiLo9KpO9Cj7zNIQOVtxkplBflk54QQwTyBZCVfzbYzUTjBM3Y9oiIKSD1SHAL0+QO/IQkZ+vHJbu/Fu2zWCYswb0My9Yrz19c3H6b3fx8fzq5+QTJFh6I2611SZOecWq15fp1PazM04Ug/MIGqrcEMmKs7WrLgsYk9lGGv0YF0ET66zaERc8YPX/UWBZqq9Zynt2adpR2CU07PIDpvFZy2hqFT/HRRX2H/1NnQZfkdEMb25QieLYQdMCcKj25E2BQglQwFl6Nzuv1L2oU8rCXXhMG21gD6ahFejdWQ7fQja7F46VxJXAIW4nwfMi7Njlke14VX7nO+0nobBHymazJUgAirPe+XM7XMUyeTiu6/fTB2GxvkfOkIHILFYEG/cc0aApI8yESWDopyMl9iFloJFQoPW5nkz8+rOk1vlYSjVMKvT+CdNIfu4nd+KRbLNwygcNYDY+xZVwLVv3AP6hTuRFE5bzSrAGR1ncj5TzEfLMMKSX4qpz8tjXHXN7jwAmmWhEC1MQYL00aK/3I7q706MCwQJuU3lUSMWxIUP5w2GrLjbYjXRaep/0KLrBQUcVhRmdACW9U6EIl6DMUk3hjtndBZQUs5PvZglXofAVkxxgyuqhnFTWgMw9C9w9LhQNLXePA/uQ7OUXAf4H1U6lPS37vk+gTBf3fdHpOvu1OIAbWd0D3sKE/KZzvCDFtaya7/6CvyIOwgPh9AScvEKz9TDWBoIoHHuM9NRa8nXZ/gdqEGY0vV6xcHzNcc1xzNFIZKEGqqVfueBFF/QouXCbVRmrmfoyxmqXRGDzZH5HzcBN0M35gZziOD05bKUuQln76gsMxuoSWs9+Z85U18mwK4r9rG5E1E2Wyllkl27nKJWTRK5ohx8Sgo0yf13mLEsROsQkEWMZ7E09EXfTb0FxDm3o0UnJI1mY7BNqZ+UhQpO8jVyIi/ok4ZWQDhMCXuulNiPuFGYJFJt1MN7sNLW5UKwfi89yjCaagdmpIqJyWW6mEkTajrcM5biKFRJMqYWn57hySS8keTqmhccjxcnAsCdgJtn33hY4A+EGQN6EOHp0fNkkb4gHHRymIs/A6hxwt0qiQGigp89fNWDP70oJvYyhuQXQCjsqpPcpghKb4Tx9mD6M
+            description: "[MANDATORY] [JSON TO AES]"
+          - name: ""
+            value: JSON EXAMPLE
+            description: |-
+              {
+              "kodePrakarsa": "", --> base64
+              "kodePartnership": "", -> base64
+              "selfieBase64": "", -> base64
+              "selfieMimeType": "image/jpeg"
+              }
+            disabled: true
     response:
       status: 200
       statusText: OK
       headers:
-        - name: Content-Type
+        - name: cache-control
+          value: none
+        - name: content-security-policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: content-type
           value: application/json; charset=utf-8
-        - name: Date
-          value: Mon, 19 Aug 2024 11:29:45 GMT
-        - name: Content-Length
-          value: "69"
+        - name: permissions-policy
+          value: geolocation=()
+        - name: referrer-policy
+          value: no-referrer
+        - name: strict-transport-security
+          value: max-age=16070400; includeSubDomains
+        - name: x-content-type-options
+          value: nosniff
+        - name: x-frame-options
+          value: SAMEORIGIN
+        - name: x-permitted-cross-domain-policies
+          value: none
+        - name: date
+          value: Wed, 20 May 2026 06:34:16 GMT
+        - name: content-length
+          value: "358"
       body:
         type: json
         data: |-
           {
-              "data": "",
-              "message": "Maaf, anda tidak terdaftar pada whitelist.",
-              "status": 500
+            "data": {
+              "nextStep": "dukcapil-block",
+              "showMessage": "Data Dukcapil belum sesuai! Kesempatan kamu sudah habis karena sudah mencobanya sebanyak 3 kali. Namun tidak perlu khawatir, kamu dapat menunggu 1 jam kedepan untuk mencobanya kembali."
+            },
+            "message": "Maaf, Proses verifikasi wajah sedang tidak dapat dilakukan. Silahkan coba beberapa saat lagi.",
+            "status": 500
           }
-  - name: Error - Access Forbidden
+  - name: Error - Dukcapil block
     request:
       url: "{{base-url-local}}/v/1/ekyc/proses-liveness"
       method: POST
       headers:
         - name: Api-Key
-          value: VW1GNVlWQnBVR1Z5Vkc5d255Z0JnR0w4bHJMTmxvYVQyb0Fqc004UEV2eTUvVEU9
+          value: "{{apiKeyMerchant}}"
+        - name: X-Transaction-Tag
+          value: UmF5YVBpUGVyVG9w+1sryTX+khI/IGyDT79p2IJdFczhavxqjdTNzR/eEvnZjQDV88wJFyjCevRZbJHxSry7LPdawNj1iITY+mwflBEb4fC+xqOIVpK20zQvVcI=
       body:
         type: form-urlencoded
         data:
-          - name: kodePrakarsa
-            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrN2lkR2NuRTdkRjB0WXIzTi9NQVV1eTZ1RWluM2JSRXc9
-            description: Kode Prakarsa [MANDATORY] [Base64]
-          - name: kodePartnership
-            value: TUox
-            description: Kode Partnership [MANDATORY] [Base64]
-          - name: selfieBase64
-            value: "{{selfieBase64JPG}}"
-            description: Foto Selfie [MANDATORY] [Base64]
-          - name: selfieMimeType
-            value: image/jpeg
-            description: Mimetype Foto Selfie  [MANDATORY] [image/jpeg]
+          - name: params
+            value: UmF5YVBpUGVyVG9wtk8mwjCo9AY6cz7IX78p1Zg/cs2iDM1mwq36+A+6TZy041n+4Ko9Fk/BGJogGv+mWu2ac/IApqOV8/bByQ5F5KN3u+uIwHurKdOEMGhXcyQoX0OaPDQKFX9iNuf0LBn9n1XixJofuYVRK+urh/jlMNhiaI5tV9VGFy2SIw5jAXkUq2hQp43IQTbSvZYghyuRAZ7jeBhQTErRP3grskeOIqBnY8xjE0qExaM8LckfDI1rI386fDjAVd72WjWgNP0GDeTkUrAE+kf6nmlQJ9lBmZdhMhDm4NFAKO5eeq/uMq/UP0UoR9Mg4/B7NStTQt4THPMHp4phhrsX4E8a0/taJbPFKuV+mS+YaYt2A40zwlsBGzIq3SNQ63sRHyKkQark3UCQe+L4VfkZL/CAf7nNgs0usUvrjDP8EX7t9gOKUQjMf5zq0N5wQOIEFNBuYTob2U4Xh1GuZ5XkA2u3UaMDBa7TiPcCkf+usBx2jDDBxP2zS7xHaGkDvEZ32SmyrGWaiLo9KpO9Cj7zNIQOVtxkplBflk54QQwTyBZCVfzbYzUTjBM3Y9oiIKSD1SHAL0+QO/IQkZ+vHJbu/Fu2zWCYswb0My9Yrz19c3H6b3fx8fzq5+QTJFh6I2611SZOecWq15fp1PazM04Ug/MIGqrcEMmKs7WrLgsYk9lGGv0YF0ET66zaERc8YPX/UWBZqq9Zynt2adpR2CU07PIDpvFZy2hqFT/HRRX2H/1NnQZfkdEMb25QieLYQdMCcKj25E2BQglQwFl6Nzuv1L2oU8rCXXhMG21gD6ahFejdWQ7fQja7F46VxJXAIW4nwfMi7Njlke14VX7nO+0nobBHymazJUgAirPe+XM7XMUyeTiu6/fTB2GxvkfOkIHILFYEG/cc0aApI8yESWDopyMl9iFloJFQoPW5nkz8+rOk1vlYSjVMKvT+CdNIfu4nd+KRbLNwygcNYDY+xZVwLVv3AP6hTuRFE5bzSrAGR1ncj5TzEfLMMKSX4qpz8tjXHXN7jwAmmWhEC1MQYL00aK/3I7q706MCwQJuU3lUSMWxIUP5w2GrLjbYjXRaep/0KLrBQUcVhRmdACW9U6EIl6DMUk3hjtndBZQUs5PvZglXofAVkxxgyuqhnFTWgMw9C9w9LhQNLXePA/uQ7OUXAf4H1U6lPS37vk+gTBf3fdHpOvu1OIAbWd0D3sKE/KZzvCDFtaya7/6CvyIOwgPh9AScvEKz9TDWBoIoHHuM9NRa8nXZ/gdqEGY0vV6xcHzNcc1xzNFIZKEGqqVfueBFF/QouXCbVRmrmfoyxmqXRGDzZH5HzcBN0M35gZziOD05bKUuQln76gsMxuoSWs9+Z85U18mwK4r9rG5E1E2Wyllkl27nKJWTRK5ohx8Sgo0yf13mLEsROsQkEWMZ7E09EXfTb0FxDm3o0UnJI1mY7BNqZ+UhQpO8jVyIi/ok4ZWQDhMCXuulNiPuFGYJFJt1MN7sNLW5UKwfi89yjCaagdmpIqJyWW6mEkTajrcM5biKFRJMqYWn57hySS8keTqmhccjxcnAsCdgJtn33hY4A+EGQN6EOHp0fNkkb4gHHRymIs/A6hxwt0qiQGigp89fNWDP70oJvYyhuQXQCjsqpPcpghKb4Tx9mD6M
+            description: "[MANDATORY] [JSON TO AES]"
+          - name: ""
+            value: JSON EXAMPLE
+            description: |-
+              {
+              "kodePrakarsa": "", --> base64
+              "kodePartnership": "", -> base64
+              "selfieBase64": "", -> base64
+              "selfieMimeType": "image/jpeg"
+              }
+            disabled: true
     response:
-      status: 403
-      statusText: Forbidden
+      status: 200
+      statusText: OK
       headers:
-        - name: Content-Type
+        - name: cache-control
+          value: none
+        - name: content-security-policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: content-type
           value: application/json; charset=utf-8
-        - name: Date
-          value: Mon, 19 Aug 2024 11:26:30 GMT
-        - name: Content-Length
-          value: "76"
+        - name: permissions-policy
+          value: geolocation=()
+        - name: referrer-policy
+          value: no-referrer
+        - name: strict-transport-security
+          value: max-age=16070400; includeSubDomains
+        - name: x-content-type-options
+          value: nosniff
+        - name: x-frame-options
+          value: SAMEORIGIN
+        - name: x-permitted-cross-domain-policies
+          value: none
+        - name: date
+          value: Wed, 20 May 2026 06:43:31 GMT
+        - name: content-length
+          value: "296"
       body:
         type: json
         data: |-
           {
-              "message": "you don't have permission to access this resource",
-              "status": 403
+            "data": {
+              "nextStep": "dukcapil-block",
+              "showMessage": "Proses verifikasi bisa kamu coba lagi pada   atau hubungi Sapa Raya untuk informasi lebih lanjut."
+            },
+            "message": "Maaf, Proses verifikasi wajah tidak dapat dilakukan karena sudah melebihi batas maksimal, silahkan coba kembali pada  ",
+            "status": 500
           }
 
 docs: |
