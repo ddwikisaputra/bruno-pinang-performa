@@ -5,7 +5,7 @@ info:
 
 http:
   method: POST
-  url: "{{base-url-dev}}/v/1/partnership/daftar-whitelist"
+  url: "{{base-url-prod}}/v/1/partnership/daftar-whitelist"
   headers:
     - name: Api-Key
       value: "{{apiKeyDevCL}}"
@@ -114,6 +114,8 @@ http:
         value: ""
         description: "[OPTIONAL] (string → base64)"
         disabled: true
+      - name: tanggalJoinPartner
+        value: YYYY-MM-DD
       - name: tipeTransaksi
         value: bW9udGg=
         description: "[MANDATORY 1 Data string -> Base64] [month | period]"
@@ -131,72 +133,103 @@ http:
         description: "[MANDATORY 1 Data] string -> Base64 (Satuan)"
       - name: transaksiBulan[]
         value: MTEvMjAyNQ==
+        disabled: true
       - name: jumlahTransaksi[]
         value: NDUxNTQyNTU=
+        disabled: true
       - name: volumeTransaksi[]
         value: MTk=
+        disabled: true
       - name: transaksiBulan[]
         value: MTAvMjAyNQ==
+        disabled: true
       - name: jumlahTransaksi[]
         value: MzkwNzkzNTA=
+        disabled: true
       - name: volumeTransaksi[]
         value: MjA=
+        disabled: true
       - name: transaksiBulan[]
         value: MDkvMjAyNQ==
+        disabled: true
       - name: jumlahTransaksi[]
         value: ODQyMjI2MDU=
+        disabled: true
       - name: volumeTransaksi[]
         value: NDg=
+        disabled: true
       - name: transaksiBulan[]
         value: MDgvMjAyNQ==
+        disabled: true
       - name: jumlahTransaksi[]
         value: MTI2OTEzMDUw
+        disabled: true
       - name: volumeTransaksi[]
         value: NTg=
+        disabled: true
       - name: transaksiBulan[]
         value: MDcvMjAyNQ==
+        disabled: true
       - name: jumlahTransaksi[]
         value: MjU3MTkyMzA1
+        disabled: true
       - name: volumeTransaksi[]
         value: Njg=
+        disabled: true
       - name: transaksiBulan[]
         value: MDYvMjAyNQ==
+        disabled: true
       - name: jumlahTransaksi[]
         value: NDA3Mzc4OTEw
+        disabled: true
       - name: volumeTransaksi[]
         value: MTA0
+        disabled: true
       - name: transaksiBulan[]
         value: MDUvMjAyNQ==
+        disabled: true
       - name: jumlahTransaksi[]
         value: MTQ2OTM5NzE4
+        disabled: true
       - name: volumeTransaksi[]
         value: NDk=
+        disabled: true
       - name: transaksiBulan[]
         value: MDQvMjAyNQ==
+        disabled: true
       - name: jumlahTransaksi[]
         value: MTQ2OTM5NzE4
+        disabled: true
       - name: volumeTransaksi[]
         value: NDk=
+        disabled: true
       - name: transaksiBulan[]
         value: MDMvMjAyNQ==
+        disabled: true
       - name: jumlahTransaksi[]
         value: MTQ2OTM5NzE4
+        disabled: true
       - name: volumeTransaksi[]
         value: NDk=
+        disabled: true
       - name: transaksiBulan[]
         value: MDIvMjAyNQ==
+        disabled: true
       - name: jumlahTransaksi[]
         value: MTQ2OTM5NzE4
+        disabled: true
       - name: volumeTransaksi[]
         value: NDk=
+        disabled: true
       - name: transaksiBulan[]
         value: MDEvMjAyNQ==
+        disabled: true
       - name: jumlahTransaksi[]
         value: MTQ2OTM5NzE4
+        disabled: true
       - name: volumeTransaksi[]
         value: NDk=
-      - name: tanggalJoinPartner
-        value: YYYY-MM-DD
+        disabled: true
   auth:
     type: bearer
     token: "{{accessTokenPartner}}"
@@ -1738,9 +1771,9 @@ docs: |
   nomorTelepon => Nomor Telepon [MANDATORY] [BASE64] FORMAT (+62xxx)
   tipeTransaksi => Tipe Transaksi [MANDATORY] [BASE64] FORMAT (month | period)
   transaksiPeriode[] => Transaksi Periode Ke-... [MANDATORY] [ARRAY] [BASE64] [MINIMAL 1 DATA] IF tipeTransaksi = period
-  transaksiBulan[] => Transaksi Bulan Ke-... [MANDATORY] [ARRAY] [BASE64] [MINIMAL 1 DATA] IF tipeTransaksi = month
+  transaksiBulan[] => Transaksi Bulan Ke-... [MANDATORY] [ARRAY] [BASE64] [MM-YYYY] [MINIMAL 1 DATA] IF tipeTransaksi = month
   jumlahTransaksi[] => Jumlah Transaksi [MANDATORY] [BASE64] [ARRAY] [RUPIAH] [MINIMAL 1 DATA]
-  volumeTransaksi[] => Volume Transaksi [MANDATORY] [BASE64] [ARRAY] [RUPIAH] [MINIMAL 1 DATA]
+  volumeTransaksi[] => Volume Transaksi [MANDATORY] [BASE64] [ARRAY] [SATUAN] [MINIMAL 1 DATA]
   email => EMAIL [OPTIONAL] [BASE64]
   tanggalLahir => Tanggal Lahir [OPTIONAL] [BASE64] FORMAT (YYYY-MM-DD)
   tempatLahir => Tempat Lahir [OPTIONAL] [BASE64] FORMAT
