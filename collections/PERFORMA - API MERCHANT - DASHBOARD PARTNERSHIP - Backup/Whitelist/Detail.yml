@@ -1,11 +1,14 @@
 info:
   name: Detail
   type: http
-  seq: 2
+  seq: 3
 
 http:
   method: POST
   url: "{{base-url-local}}/v/1/partnership/whitelist/detail"
+  headers:
+    - name: Api-Key
+      value: ""
   body:
     type: form-urlencoded
     data:
@@ -358,3 +361,16 @@ examples:
               "message": "Data partnership member ditemukan.",
               "status": 200
           }
+
+docs: |-
+  AUTH
+  ----
+  Bearer Token => Token User Dashboard Partnership
+
+  HEADER
+  ------
+  Api-Key => [MANDATORY] FORMAT (APIKEY -> BASE64)
+
+  PARAMETER
+  ---------
+  id =>  ID Data [MANDATORY] [BASE64]

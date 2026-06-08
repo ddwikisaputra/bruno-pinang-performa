@@ -1,11 +1,14 @@
 info:
   name: Download
   type: http
-  seq: 4
+  seq: 5
 
 http:
   method: POST
   url: "{{base-url-local}}/v/1/partnership/whitelist/download"
+  headers:
+    - name: Api-Key
+      value: ""
   auth:
     type: bearer
     token: "{{tokenPartnership}}"

@@ -1,7 +1,7 @@
 info:
   name: List
   type: http
-  seq: 1
+  seq: 2
 
 http:
   method: POST
@@ -11,6 +11,15 @@ http:
       value: "{{ApiKeyMajoMF}}"
   body:
     type: form-urlencoded
+    data:
+      - name: startIndex
+        value: "0"
+      - name: recordCount
+        value: "10"
+      - name: textSearch
+        value: "317105"
+      - name: sortBy
+        value: updated_at asc
   auth:
     type: bearer
     token: "{{accessTokenPartner}}"
@@ -363,3 +372,19 @@ examples:
               "message": "Data partnership member ditemukan.",
               "status": 200
           }
+
+docs: |-
+  AUTH
+  ----
+  Bearer Token => Token User Dashboard Partnership
+
+  HEADER
+  ------
+  Api-Key => [MANDATORY] FORMAT (APIKEY -> BASE64)
+
+  PARAMETER
+  ---------
+  startIndex =>  Mulai Data Ke-... atau Offset [OPTIONAL] [DEFAULT = 0] [INT]
+  recordCount => Banyak Data atau Limit [OPTIONAL] [Default = 10] [INT]
+  textSearch => Text Pencarian [OPTIONAL] [ktp_number | name | merchant id]
+  sortBy => Urutkan Berdasarkan [OPTIONAL] [Default = updated_at desc]
