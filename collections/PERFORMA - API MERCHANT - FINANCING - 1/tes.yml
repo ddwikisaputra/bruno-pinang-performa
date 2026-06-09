@@ -1,0 +1,97 @@
+info:
+  name: tes
+  type: http
+  seq: 4
+
+http:
+  method: post
+  url: https://pinang-performa.staging.rayain.net/api-merchant/v/1/aktivasi/pengajuan
+  headers:
+    - name: Api-Key
+      value: VW1GNVlWQnBVR1Z5Vkc5d25pQUxnR1g5VitTZEQ3VUhnVHdVWlllQ0U1eEd0UT09
+    - name: Content-Type
+      value: application/x-www-form-urlencoded
+    - name: Authorization
+      value: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NJZCI6IlVtRjVZVkJwVUdWeVZHOXcvbDE5V08vS3pHZXhHVVcvWVo1cjYydUU2QT09IiwiZXhwIjoxNzc3ODgzODc1LCJrRGF0YSI6IlVtRjVZVkJwVUdWeVZHOXdnamtxbmhxbjhRTVFpT3V2Z1Jra3NaOGFLSEZ0WTRnRiIsImtLZXkiOiJVbUY1WVZCcFVHVnlWRzl3Z0JjSW5ocUo1VVVWY2hiTlliUmczUGNwWmQyWUdhVTBteFR5Kzd0Vy9ia3dVUjE3VUxhbXp3PT0ifQ.VOSkyHmnimC4WmTHH4UtKcplqjvojCTIZEo-KnlejL4
+  body:
+    type: form-urlencoded
+    data:
+      - name: nomorIdentitas
+        value: MzE3NDA1NjIwMjk3MDAwNA==
+      - name: nama
+        value: Uml6a2EgQXVsaWEgRmVicmlhbnRp
+      - name: tanggalLahir
+        value: MTk5Ny0wMi0yMg==
+      - name: tempatLahir
+        value: SmFrYXJ0YQ==
+      - name: jenisKelamin
+        value: UGVyZW1wdWFu
+      - name: tanggalKtp
+        value: 2000-11-17
+      - name: kodeArea
+        value: "2451"
+      - name: latitude
+        value: "-20"
+      - name: longitude
+        value: "20"
+      - name: alamat
+        value: Cempaka Putih Barat
+      - name: rt
+        value: "001"
+      - name: rw
+        value: "002"
+      - name: kodeAgama
+        value: ISL
+      - name: statusPernikahan
+        value: Kawin
+      - name: namaIbuKandung
+        value: U2l0aQ==
+      - name: nomorIdentitasPasangan
+        value: MzE4NzY0NzU4OTg3ODg4Ng==
+      - name: namaPasangan
+        value: WmhhbmcgVGFlaHl1bmc=
+      - name: tanggalLahirPasangan
+        value: MTk5Ni0wOS0yMg==
+      - name: tempatLahirPasangan
+        value: SmFrYXJ0YQ==
+      - name: nomorTelepon
+        value: KzYyODc4NzY0MjY2MDU=
+      - name: email
+        value: cml6a2EuZmVicmlhbnRpQGJhbmtyYXlhLmNvLmlk
+      - name: kodePendidikanTerakhir
+        value: S1
+      - name: jumlahTanggungan
+        value: "1"
+      - name: namaKontakDarurat
+        value: Dina
+      - name: nomorKontakDarurat
+        value: " 6287876426605"
+      - name: hubunganKontakDarurat
+        value: Istri
+      - name: kodeAreaUsaha
+        value: "7451"
+      - name: alamatUsaha
+        value: Jl. Joha Baru 09
+      - name: latitudeUsaha
+        value: "-20"
+      - name: longitudeUsaha
+        value: "011"
+      - name: rtUsaha
+        value: "012"
+      - name: rwUsaha
+        value: "003"
+      - name: tanggalJoinPartner
+        value: 2000-11-17
+      - name: kodeTipePinjaman
+        value: CHILD-SMF-61
+      - name: kodePartnership
+        value: U01GLTEw
+      - name: kodeReferensiTerakhir
+        value: ""
+  auth: inherit
+
+settings:
+  encodeUrl: false
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
