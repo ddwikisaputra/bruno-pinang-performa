@@ -6,9 +6,6 @@ info:
 http:
   method: POST
   url: "{{base-url-local}}/v/1/partnership/whitelist/list"
-  headers:
-    - name: Api-Key
-      value: "{{ApiKeyMajoMF}}"
   body:
     type: form-urlencoded
     data:
@@ -17,12 +14,14 @@ http:
       - name: recordCount
         value: "10"
       - name: textSearch
-        value: "317105"
+        value: ""
+        disabled: true
       - name: sortBy
-        value: updated_at asc
+        value: ""
+        disabled: true
   auth:
     type: bearer
-    token: "{{accessTokenPartner}}"
+    token: UmF5YVBpUGVyVG9wtk843jG/7RB5In2PGvwnzdYCQ8O4GewrgMOenkneCvrYmAOEt81dSCuSdPFRe5fwH63yOqUagoCy29X463gRgN0R8Knpowi+LK3gSz83B0hVPRfEYlhsRHXVWvTznHE0a9ifUQxb31ha
 
 settings:
   encodeUrl: true
@@ -384,7 +383,7 @@ docs: |-
 
   PARAMETER
   ---------
-  startIndex =>  Mulai Data Ke-... atau Offset [OPTIONAL] [DEFAULT = 0] [INT]
-  recordCount => Banyak Data atau Limit [OPTIONAL] [Default = 10] [INT]
+  startIndex =>  Mulai Data Ke-... atau Offset [MANDATORY] [DEFAULT = 0] [INT]
+  recordCount => Banyak Data atau Limit [MANDATORY] [Default = 10] [INT]
   textSearch => Text Pencarian [OPTIONAL] [ktp_number | name | merchant id]
   sortBy => Urutkan Berdasarkan [OPTIONAL] [Default = updated_at desc]
