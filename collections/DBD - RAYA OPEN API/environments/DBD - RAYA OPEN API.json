@@ -1,0 +1,93 @@
+{
+  "name": "DBD - RAYA OPEN API",
+  "version": "1",
+  "variables": [
+    {
+      "name": "base-url-sandbox",
+      "value": "https://api.sandbox.bankraya.co.id",
+      "enabled": true
+    },
+    {
+      "name": "base-url-prod",
+      "value": "",
+      "enabled": true,
+      "secret": true
+    },
+    {
+      "name": "version-1",
+      "value": "v1.0",
+      "enabled": true
+    },
+    {
+      "name": "version-2",
+      "value": "v2.0",
+      "enabled": true
+    },
+    {
+      "name": "rekeningDummy",
+      "value": "",
+      "enabled": true,
+      "secret": true
+    },
+    {
+      "name": "client-id-sandbox",
+      "value": "",
+      "enabled": true,
+      "secret": true
+    },
+    {
+      "name": "client-secret-sandbox",
+      "value": "",
+      "enabled": true,
+      "secret": true
+    },
+    {
+      "name": "private-key-sandbox",
+      "value": "",
+      "enabled": true,
+      "secret": true
+    },
+    {
+      "name": "base-url-signature-sandbox",
+      "value": "http://10.99.0.240:3000",
+      "enabled": true
+    },
+    {
+      "name": "X-SIGNATURE",
+      "value": "",
+      "enabled": true,
+      "secret": true
+    },
+    {
+      "name": "X-TIMESTAMP",
+      "value": "",
+      "enabled": true
+    },
+    {
+      "name": "ACCESS-TOKEN-RAYA-OPENAPI",
+      "value": "",
+      "enabled": true,
+      "secret": true
+    },
+    {
+      "name": "X-EXTERNAL-ID",
+      "value": "8aca7c9633ec3e6730d",
+      "enabled": true
+    },
+    {
+      "name": "BODY-HEX",
+      "value": "",
+      "enabled": true
+    },
+    {
+      "name": "SIGNATURE-PAYLOAD",
+      "value": "POST:/snap/v2.0/account-inquiry-external:h0DzlL09lNAJDpqxMlomMGXOn5ey::2026-06-18T06:25:39+07:00",
+      "enabled": true
+    },
+    {
+      "name": "X-SIGNATURE-INQUIRY-EXTERNAL",
+      "value": "",
+      "enabled": true
+    }
+  ]
+}

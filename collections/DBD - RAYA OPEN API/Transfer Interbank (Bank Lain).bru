@@ -1,0 +1,596 @@
+meta {
+  name: Transfer Interbank (Bank Lain)
+  type: http
+  seq: 6
+}
+
+post {
+  url: {{base-url-sandbox}}/snap/{{version-2}}/transfer-interbank
+  body: json
+  auth: bearer
+}
+
+headers {
+  X-SIGNATURE: {{X-SIGNATURE-TF-INTERBANK}}
+  X-TIMESTAMP: {{X-TIMESTAMP}}
+  X-PARTNER-ID: {{X-PARTNER-ID}}
+  X-EXTERNAL-ID: {{X-EXTERNAL-ID}}
+  CHANNEL-ID: PINANGPERFORMAMF
+}
+
+auth:bearer {
+  token: {{ACCESS-TOKEN-RAYA-OPENAPI}}
+}
+
+body:json {
+  {
+    "partnerReferenceNo": "1101781837977",
+    "amount": {
+      "value": "10000.00",
+      "currency": "IDR"
+    },
+    "beneficiaryAccountName": "EVEREST LIVIN AWN",
+    "beneficiaryAccountNo": "2600002367725",
+    "beneficiaryBankCode": "BMRIIDJA",
+    "beneficiaryBankName": "Bank Mandiri",
+    "customerReference": "1906269IXAG",
+    "sourceAccountNo": "001001000024401",
+    "transactionDate": "2026-06-19T13:44:00+07:00",
+    "feeType": "OUR",
+    "originatorInfos": null,
+    "additionalInfo": {
+      "switcher": "BIFAST"
+    }
+  }
+}
+
+script:pre-request {
+  //## FOR TIMESTAMP
+  // 1. Ambil waktu UTC saat ini
+  const now = new Date();
+  
+  // 2. Geser waktu ke UTC+7 (Jakarta) dengan menambahkan 7 jam (7 * 60 * 60 * 1000 ms)
+  const offsetJakarta = 7 * 60 * 60 * 1000;
+  const jakartaTime = new Date(now.getTime() + offsetJakarta);
+  
+  // 3. Format komponen tanggal & waktu secara manual (ISO 8601)
+  const pad = (num) => String(num).padStart(2, '0');
+  
+  const yyyy = jakartaTime.getUTCFullYear();
+  const MM = pad(jakartaTime.getUTCMonth() + 1); // Bulan dimulai dari 0
+  const dd = pad(jakartaTime.getUTCDate());
+  const HH = pad(jakartaTime.getUTCHours());
+  const mm = pad(jakartaTime.getUTCMinutes());
+  const ss = pad(jakartaTime.getUTCSeconds());
+  
+  // 4. Gabungkan menjadi format yyyy-MM-ddTHH:mm:ss+07:00
+  const formattedDate = `${yyyy}-${MM}-${dd}T${HH}:${mm}:${ss}+07:00`;
+  
+  // 5. Simpan ke variabel Bruno
+  bru.setEnvVar("X-TIMESTAMP", formattedDate);
+  
+  // ## X-SIGNATURE
+  const CryptoJS = require("crypto-js");
+  // 1. Generate UUID v4 tanpa "-" sepanjang 19 karakter (X-EXTERNAL-ID)
+  function generateShortUuid() {
+    const hexDigits = "0123456789abcdef";
+    let uuid = "";
+    for (let i = 0; i < 32; i++) {
+      uuid += hexDigits[Math.floor(Math.random() * 16)];
+    }
+    return uuid.substring(0, 19);
+  }
+  
+  const shortUuid = generateShortUuid();
+  bru.setEnvVar("X-EXTERNAL-ID", shortUuid);
+  
+  // 2. Fungsi untuk Generate X-SIGNATURE (HMAC-SHA512 berdasarkan standar SNAP)
+  function getAuthHeader() {
+    const httpMethod = req.getMethod().toUpperCase();
+    let requestBody = req.getBody();
+    
+    // Normalisasi Body seperti perilaku JSON.stringify(JSON.parse(body)) di Postman
+    if (httpMethod === 'GET' || !requestBody) {
+      requestBody = '';
+    } else {
+      // Jika body berupa object (Bruno otomatis memparsing jika JSON), konversi ke string tanpa spasi tambahan
+      if (typeof requestBody === 'object') {
+        requestBody = JSON.stringify(requestBody);
+      } else if (typeof requestBody === 'string' && requestBody.trim() !== '') {
+        requestBody = JSON.stringify(JSON.parse(requestBody));
+      }
+    }
+  
+    // 3. Get Timestamp 
+    const timestamp = bru.getEnvVar('X-TIMESTAMP');
+    console.log("DISINI : ", timestamp)
+    bru.setEnvVar('X-TIMESTAMP', timestamp);
+  
+    // 4. Proses SHA256 dari Request Body (Menggunakan Web Crypto API / CryptoJS versi ringan jika didukung)
+    // Karena Bruno menggunakan Node.js runtime secara internal di versi terbarunya, kita bisa pakai 'crypto' bawaan internal jika diizinkan, 
+    // atau jika sandbox ketat, kita buat SHA256 manual. Untuk amannya kita pakai internal crypto jika ada, atau fallback ke metode string hashing.
+    
+    let bodyHex = "";
+    if (requestBody === "") {
+      // SHA256 dari string kosong
+      bodyHex = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
+    } else {
+      // Memanfaatkan fungsi enkripsi internal Node yang dibungkus aman di Bruno modern
+      try {
+        const crypto = require('crypto');
+        bodyHex = crypto.createHash('sha256').update(requestBody).digest('hex');
+      } catch (e) {
+        // Fallback jika 'crypto' diblokir total sandbox: Gunakan sjcl internal Bruno jika tersedia
+        // Namun umumnya Bruno terbaru mengizinkan pemrosesan teks via CryptoJS bawaan runtime pengeksekusinya
+        if (typeof CryptoJS !== 'undefined') {
+          bodyHex = CryptoJS.SHA256(requestBody).toString(CryptoJS.enc.Hex);
+        } else {
+          // Jika Bruno Anda benar-benar terkunci, Anda bisa memanfaatkan trik eksekusi hash manual
+          console.error("Modul crypto tidak aktif. Pastikan allow built-in node modules dicentang di preferensi Bruno.");
+        }
+      }
+    }
+    
+    bru.setEnvVar('BODY-HEX', bodyHex);
+  
+    // 5. Susun Payload SNAP
+    // Mengambil token dan client_secret dari Environment Bruno Anda
+    const token = bru.getEnvVar('ACCESS-TOKEN-RAYA-OPENAPI') || '';
+    const clientSecret = bru.getEnvVar('client-secret-sandbox') || '';
+    const path = '/snap/v2.0/transfer-interbank'; 
+  
+    const payload = `${httpMethod}:${path}:${token}:${bodyHex}:${timestamp}`;
+    bru.setEnvVar('SIGNATURE-PAYLOAD', payload);
+    console.log("Payload yang di-sign:", payload);
+  
+    // 6. HMAC-SHA512 Sign
+    let hmacSignature = "";
+    try {
+      const crypto = require('crypto');
+      hmacSignature = crypto.createHmac('sha512', clientSecret).update(payload).digest('hex');
+    } catch(e) {
+      if (typeof CryptoJS !== 'undefined') {
+        hmacSignature = CryptoJS.HmacSHA512(payload, clientSecret).toString(CryptoJS.enc.Hex);
+      }
+    }
+  
+    return hmacSignature;
+  }
+  
+  // Eksekusi fungsi utama dan simpan hasilnya langsung ke Environment Active Bruno
+  const signature = getAuthHeader();
+  bru.setEnvVar('X-SIGNATURE-TF-INTERBANK', signature);
+  console.log('X-SIGNATURE-TF-INTERBANK :',  signature)
+}
+
+script:post-response {
+  var jsonData = res.getBody();
+  if (jsonData.responseCode != "2001800"){
+    console.log("error : ", jsonData.responseCode)
+    return
+  }
+  bru.setEnvVar("EXTERNAL-REF-NUMBER", jsonData.referenceNo)
+  bru.setEnvVar("PARTNER-REF-NUMBER", jsonData.partnerReferenceNo)
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+}
+
+docs {
+  AUTH
+  ====
+  Bearer Token => 
+  
+  HEADER
+  ======
+  X-SIGNATURE => Transaction signature using HMAC_SHA512
+  X-TIMESTAMP => yyyy-MM-dd’T’HH:mm:ssTZD
+  X-PARTNER-ID => Partner ID for integration, value will be given by Bank Raya.
+  X-EXTERNAL-ID => Unique alphanumeric for API request. Number should be unique in the same day
+  CHANNEL-ID => Channel identification used by Partner, Value will be ignore by Bank Raya
+  
+  
+  BODY
+  ====
+  partnerReferenceNo [MANDATORY] => Transaction Reference Number. For successful transaction, the same partnerReferenceNo can not be used within 30 days.
+  amount [MANDATORY] => Object
+  value [MANDATORY] => Net amount of the transaction.
+  currency [MANDATORY] => Sample: IDR [End Object]
+  beneficiaryAccountName [MANDATORY] => Beneficiary Account Name
+  beneficiaryAccountNo [MANDATORY] => Beneficiary Account Number
+  beneficiaryBankCode [MANDATORY] => Beneficiary Bank Code
+  beneficiaryBankName [MANDATORY] => Beneficiary Bank Name
+  customerReference [MANDATORY] => Reference number from inquiry response ------ HARUS INQUIRY DULU?
+  sourceAccountNo [MANDATORY] => Source Account Number
+  transactionDate [MANDATORY] => Format Timestamp ISO8601
+  feeType [OPTIONAL] => Fee Type of Transaction: OUR = Fee is charged to the sender (default) | BEN = Fee is charge to the recipient
+  originatorInfos [C] => Array of Objects
+  originatorCustomerNo [MANDATORY] => Originator sender account number
+  originatorCustomerName [MANDATORY] => Originator sender account name
+  originatorBankCode [MANDATORY] => Originator sender bank / company code: 1. For bank entity, please fill with bank code, 2. For other entity, please fill with free format identifier [End Object]
+  additionalInfo [MANDATORY] => Object
+  switcher [OPTIONAL] => Default RTOL, Value will be: BIFAST | RTOL [End Object]
+  
+  
+}
+
+example {
+  name: Error - 4011801 - Invalid Token
+  
+  request: {
+    url: {{base-url-sandbox}}/snap/{{version-2}}/transfer-interbank
+    method: POST
+    mode: json
+    headers: {
+      X-SIGNATURE: 
+      X-TIMESTAMP: {{currentTimestamp}}
+      "X-PARTNER-ID ": 
+      X-EXTERNAL-ID: 
+      CHANNEL-ID: 
+    }
+  
+    body:json: {
+      {
+        "partnerReferenceNo": "1001781832990",
+        "amount": {
+          "value": "1821.00",
+          "currency": "IDR"
+        },
+        "beneficiaryAccountName": "EVEREST LIVIN AWN",
+        "beneficiaryAccountNo": "2600002367725",
+        "beneficiaryBankCode": "BRINIDJA",
+        "beneficiaryBankName": "Bank Mandiri",
+        "customerReference": "1906268L57I",
+        "sourceAccountNo": "001001000024401",
+        "transactionDate": "{{X-TIMESTAMP}}",
+        "feeType": "OUR",
+        "originatorInfos": [
+          {
+            "originatorCustomerNo": "001001000024401",
+            "originatorCustomerName": "Tes Performa",
+            "originatorBankCode": "494"
+          }
+        ],
+        "additionalInfo": {
+          "switcher": "BIFAST"
+        }
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      content-type: application/json
+      www-authenticate: Bearer realm="null",error="invalid_token",error_description="oauth.v2.InvalidAccessToken: Invalid access token"
+      x-timestamp: {{currentTimestamp}}
+      x-client-key: 
+      x-request-id: 0ff5c980-e561-4ca8-9c5e-e3a5879497d3
+      content-length: 157
+      date: Fri, 19 Jun 2026 01:38:43 GMT
+      via: 1.1 google
+      x-content-type-options: nosniff
+      x-frame-options: DENY
+      referrer-policy: no-referrer
+      strict-transport-security: max-age=31536000; includeSubDomains
+      alt-svc: h3=":443"; ma=2592000
+    }
+  
+    status: {
+      code: 401
+      text: Unauthorized
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "responseCode": "4011801",
+          "responseMessage": "Invalid Token (B2B)"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - 4011180 - Invalid X-SIGNATURE
+  
+  request: {
+    url: {{base-url-sandbox}}/snap/{{version-2}}/transfer-interbank
+    method: POST
+    mode: json
+    headers: {
+      X-SIGNATURE: {{X-SIGNATURE-TF-INTERBANK}}
+      X-TIMESTAMP: {{X-TIMESTAMP}}
+      X-PARTNER-ID: {{X-PARTNER-ID}}
+      X-EXTERNAL-ID: {{X-EXTERNAL-ID}}
+      CHANNEL-ID: PINANGPERFORMA
+    }
+  
+    body:json: {
+      {
+        "partnerReferenceNo": "1001781832990",
+        "amount": {
+          "value": "1821.00",
+          "currency": "IDR"
+        },
+        "beneficiaryAccountName": "EVEREST LIVIN AWN",
+        "beneficiaryAccountNo": "2600002367725",
+        "beneficiaryBankCode": "BRINIDJA",
+        "beneficiaryBankName": "Bank Mandiri",
+        "customerReference": "1906268L57I",
+        "sourceAccountNo": "001001000024401",
+        "transactionDate": "{{X-TIMESTAMP}}",
+        "feeType": "OUR",
+        "originatorInfos": [
+          {
+            "originatorCustomerNo": "001001000024401",
+            "originatorCustomerName": "Tes Performa",
+            "originatorBankCode": "494"
+          }
+        ],
+        "additionalInfo": {
+          "switcher": "BIFAST"
+        }
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      content-type: application/json
+      x-timestamp: 2026-06-19T08:41:10+07:00
+      x-client-key: 
+      x-request-id: 9963f775-949e-4dc0-8971-12fd8a1ba5da
+      content-length: 171
+      date: Fri, 19 Jun 2026 01:41:09 GMT
+      via: 1.1 google
+      x-content-type-options: nosniff
+      x-frame-options: DENY
+      referrer-policy: no-referrer
+      strict-transport-security: max-age=31536000; includeSubDomains
+      alt-svc: h3=":443"; ma=2592000
+    }
+  
+    status: {
+      code: 401
+      text: Unauthorized
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "responseCode": "4011800",
+          "responseMessage": "Unauthorized. Invalid X-SIGNATURE"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - 403815 - Minimum Amount
+  description: Minimum 10.000,00
+  
+  request: {
+    url: {{base-url-sandbox}}/snap/{{version-2}}/transfer-interbank
+    method: POST
+    mode: json
+    headers: {
+      X-SIGNATURE: {{X-SIGNATURE-TF-INTERBANK}}
+      X-TIMESTAMP: {{X-TIMESTAMP}}
+      X-PARTNER-ID: {{X-PARTNER-ID}}
+      X-EXTERNAL-ID: {{X-EXTERNAL-ID}}
+      CHANNEL-ID: PINANGPERFORMA
+    }
+  
+    body:json: {
+      {
+        "partnerReferenceNo": "2022111800155",
+        "amount": {
+          "value": "1821.00",
+          "currency": "IDR"
+        },
+        "beneficiaryAccountName": "EVEREST LIVIN AWN",
+        "beneficiaryAccountNo": "2600002367725",
+        "beneficiaryBankCode": "BMRIIDJA",
+        "beneficiaryBankName": "Bank Mandiri",
+        "customerReference": "190626MIT3P",
+        "sourceAccountNo": "001001000024401",
+        "transactionDate": "2026-03-10T13:44:00+07:00",
+        "feeType": "OUR",
+        "originatorInfos": null,
+        "additionalInfo": {
+          "switcher": "BIFAST"
+        }
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      date: Fri, 19 Jun 2026 01:49:41 GMT
+      content-type: application/json
+      content-length: 100
+      strict-transport-security: max-age=31536000; includeSubDomains
+      alt-svc: h3=":443"; ma=2592000, h3=":443"; ma=2592000
+      x-request-id: 0a3f8492-6091-474e-83f6-0945abc92923
+      via: 1.1 google, 1.1 google
+      x-content-type-options: nosniff
+      x-frame-options: DENY
+      referrer-policy: no-referrer
+    }
+  
+    status: {
+      code: 403
+      text: Forbidden
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "responseCode": "4031815",
+          "responseMessage": "Transaction Not Permitted. Minimum Amount is 10000.00"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - 4091801 - Duplicate customerReference
+  description: Tidak bisa menggunakan customerReference yang sama, harus hit external account inquiry lagi
+  
+  request: {
+    url: {{base-url-sandbox}}/snap/{{version-2}}/transfer-interbank
+    method: POST
+    mode: json
+    headers: {
+      X-SIGNATURE: {{X-SIGNATURE-TF-INTERBANK}}
+      X-TIMESTAMP: {{X-TIMESTAMP}}
+      X-PARTNER-ID: {{X-PARTNER-ID}}
+      X-EXTERNAL-ID: {{X-EXTERNAL-ID}}
+      CHANNEL-ID: PINANGPERFORMA
+    }
+  
+    body:json: {
+      {
+        "partnerReferenceNo": "1101781833913",
+        "amount": {
+          "value": "11821.00",
+          "currency": "IDR"
+        },
+        "beneficiaryAccountName": "EVEREST LIVIN AWN",
+        "beneficiaryAccountNo": "2600002367725",
+        "beneficiaryBankCode": "BMRIIDJA",
+        "beneficiaryBankName": "Bank Mandiri",
+        "customerReference": "190626MIT3P",
+        "sourceAccountNo": "001001000024401",
+        "transactionDate": "2026-06-19T13:44:00+07:00",
+        "feeType": "OUR",
+        "originatorInfos": null,
+        "additionalInfo": {
+          "switcher": "BIFAST"
+        }
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      date: Fri, 19 Jun 2026 01:52:01 GMT
+      content-type: application/json
+      content-length: 74
+      strict-transport-security: max-age=31536000; includeSubDomains
+      alt-svc: h3=":443"; ma=2592000, h3=":443"; ma=2592000
+      x-request-id: bfee66d8-d498-44c4-ad99-0fd5df22e671
+      via: 1.1 google, 1.1 google
+      x-content-type-options: nosniff
+      x-frame-options: DENY
+      referrer-policy: no-referrer
+    }
+  
+    status: {
+      code: 409
+      text: Conflict
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "responseCode": "4091801",
+          "responseMessage": "Duplicate customerReference"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Success - 2001800
+  
+  request: {
+    url: {{base-url-sandbox}}/snap/{{version-2}}/transfer-interbank
+    method: POST
+    mode: json
+    headers: {
+      X-SIGNATURE: {{X-SIGNATURE-TF-INTERBANK}}
+      X-TIMESTAMP: {{X-TIMESTAMP}}
+      X-PARTNER-ID: {{X-PARTNER-ID}}
+      X-EXTERNAL-ID: {{X-EXTERNAL-ID}}
+      CHANNEL-ID: PINANGPERFORMA
+    }
+  
+    body:json: {
+      {
+        "partnerReferenceNo": "1101781833913",
+        "amount": {
+          "value": "11821.00",
+          "currency": "IDR"
+        },
+        "beneficiaryAccountName": "EVEREST LIVIN AWN",
+        "beneficiaryAccountNo": "2600002367725",
+        "beneficiaryBankCode": "BMRIIDJA",
+        "beneficiaryBankName": "Bank Mandiri",
+        "customerReference": "190626AFGBB",
+        "sourceAccountNo": "001001000024401",
+        "transactionDate": "2026-06-19T13:44:00+07:00",
+        "feeType": "OUR",
+        "originatorInfos": null,
+        "additionalInfo": {
+          "switcher": "BIFAST"
+        }
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      date: Fri, 19 Jun 2026 01:53:08 GMT
+      content-type: application/json
+      content-length: 380
+      strict-transport-security: max-age=31536000; includeSubDomains
+      alt-svc: h3=":443"; ma=2592000, h3=":443"; ma=2592000
+      x-request-id: 82d47d5f-8d50-4539-9214-6e142f3908f2
+      via: 1.1 google, 1.1 google
+      x-content-type-options: nosniff
+      x-frame-options: DENY
+      referrer-policy: no-referrer
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "responseCode": "2001800",
+          "responseMessage": "Successful",
+          "referenceNo": "20260619AGTBIDJA010O9900011006",
+          "partnerReferenceNo": "1101781833913",
+          "amount": {
+            "value": "11821.00",
+            "currency": "IDR"
+          },
+          "beneficiaryAccountNo": "2600002367725",
+          "customerReference": "190626AFGBB",
+          "sourceAccountNo": "001001000024401",
+          "transactionDate": "2026-06-19 08:52:59 WIB",
+          "additionalInfo": {
+            "switcher": "BIFAST"
+          }
+        }
+      '''
+    }
+  }
+}

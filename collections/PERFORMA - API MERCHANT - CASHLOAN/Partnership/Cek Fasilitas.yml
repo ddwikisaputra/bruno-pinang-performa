@@ -5,22 +5,22 @@ info:
 
 http:
   method: POST
-  url: "{{base-url-staging}}/v/1/partnership/cashloan/cek-fasilitas"
+  url: "{{base-url-prod}}/v/1/partnership/cashloan/cek-fasilitas"
   headers:
     - name: Api-Key
-      value: VW1GNVlWQnBVR1Z5Vkc5d25qOE9nR0QvbkhtSE9iTHlCUUduMEt3UDN2WDZObE09
+      value: VW1GNVlWQnBVR1Z5Vkc5d25qOE9nR1g0UTdXOHVoTHY5ZVVsZ1lHenFpNThZQT09
   body:
     type: form-urlencoded
     data:
       - name: nomorIdentitas
-        value: MzE3MTA1MTIxMTk1MDAwMQ==
+        value: MzUyOTEzMTMwNzk0MDAwMg==
         description: Nomor Identitas User [MANDATORY] [BASE64 STRING]
       - name: kodePartnership
-        value: U1JDLTQyOA==
+        value: U1JDLTE1
         description: Kode Partnership [MANDATORY][BASE64 STRING]
   auth:
     type: bearer
-    token: "{{accessTokenPartner}}"
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NJZCI6IlVtRjVZVkJwVUdWeVZHOXcrTWM1aXdkWVpPTU9oTHUzNkR4c3IxUT0iLCJhcGlLZXkiOiJWVzFHTlZsV1FuQlZSMVo1VmtjNWQyNXFPRTluUjFnMFVUZFhPSFZvVEhZNVpWVnNaMWxIZW5GcE5UaFpRVDA5IiwiZXhwIjoxNzgxODYxOTMzLCJwYXNzd29yZCI6IlVtRjVZVkJwVUdWeVZHOXdxUXdPeUdPa2tFY3hkcURjZGg4UHkybTgzYzFTdUpFOGRDZz0iLCJ1c2VybmFtZSI6IlVtRjVZVkJwVUdWeVZHOXduajhPZ0dYNFE3Vzh1aEx2OWVVbGdZR3pxaTU4WUE9PSJ9.-uxbP6VYwg83-V0F-9ympcXWk5ZqcYEaZGgxvy9m97o
 
 settings:
   encodeUrl: true

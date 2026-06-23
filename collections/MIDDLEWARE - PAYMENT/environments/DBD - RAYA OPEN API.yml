@@ -1,0 +1,34 @@
+name: DBD - RAYA OPEN API
+variables:
+  - name: base-url-sandbox
+    value: https://api.sandbox.bankraya.co.id
+  - secret: true
+    name: base-url-prod
+  - name: version-1
+    value: v1.0
+  - name: version-2
+    value: v2.0
+  - secret: true
+    name: rekeningDummy
+  - secret: true
+    name: client-id-sandbox
+  - secret: true
+    name: client-secret-sandbox
+  - secret: true
+    name: private-key-sandbox
+  - name: base-url-signature-sandbox
+    value: http://10.99.0.240:3000
+  - secret: true
+    name: X-SIGNATURE
+  - name: X-TIMESTAMP
+    value: ""
+  - secret: true
+    name: ACCESS-TOKEN-RAYA-OPENAPI
+  - name: X-EXTERNAL-ID
+    value: 8aca7c9633ec3e6730d
+  - name: BODY-HEX
+    value: ""
+  - name: SIGNATURE-PAYLOAD
+    value: POST:/snap/v2.0/account-inquiry-external:h0DzlL09lNAJDpqxMlomMGXOn5ey::2026-06-18T06:25:39+07:00
+  - name: X-SIGNATURE-INQUIRY-EXTERNAL
+    value: ""

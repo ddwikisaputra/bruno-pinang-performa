@@ -1,0 +1,170 @@
+meta {
+  name: Request Access Token
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{base-url-sandbox}}/snap/{{version-1}}/access-token/b2b
+  body: json
+  auth: none
+}
+
+headers {
+  X-SIGNATURE: {{X-SIGNATURE}}
+  X-TIMESTAMP: {{X-TIMESTAMP}}
+  X-CLIENT-KEY: {{client-id-sandbox}}
+}
+
+body:json {
+  {
+    "grantType": "client_credentials"
+  }
+}
+
+script:post-response {
+  var jsonData = res.getBody();
+  if (jsonData.responseCode != "2007300"){
+    console.log("error : ", jsonData.responseCode)
+    return
+  }
+  bru.setEnvVar("ACCESS-TOKEN-RAYA-OPENAPI", jsonData.accessToken)
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+}
+
+docs {
+  HEADER
+  ======
+  X-SIGNATURE => (Private_Key, stringToSign). stringToSign = client_ID + “|” + X-TIMESTAMP -> FROM Get Signature Sandbox(Sandbox), Prod Manual Code
+  X-TIMESTAMP => yyyy-MM-ddTHH:mm:ss+07:00 
+  
+  
+  
+  BODY
+  ====
+  grantType [MANDATORY] => Apply token request key type, can be AUTHORIZATION_CODE
+  
+  
+  
+}
+
+example {
+  name: Success - 2007300
+  
+  request: {
+    url: {{base-url-sandbox}}/snap/{{version-1}}/access-token/b2b
+    method: POST
+    mode: json
+    headers: {
+      X-SIGNATURE: {{X-SIGNATURE}}
+      X-TIMESTAMP: {{X-TIMESTAMP}}
+      X-CLIENT-KEY: {{client-id-sandbox}}
+    }
+  
+    body:json: {
+      {
+        "grantType": "client_credentials"
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      content-type: application/json
+      strict-transport-security: max-age=31536000; includeSubDomains
+      x-frame-options: DENY
+      x-content-type-options: nosniff
+      content-security-policy: default-src 'self'
+      cache-control: no-store
+      access-control-allow-origin: *
+      x-timestamp: 2026-06-18T12:46:05+07:00
+      x-client-key: xfPiVWQYJ2tpNfONuveAz2l6EQVGq3DkKEv1cJGvhSv9sHeS
+      x-request-id: dad357c5-54ad-46d6-8b54-d62bb9a3bdf6
+      content-length: 271
+      date: Thu, 18 Jun 2026 05:46:32 GMT
+      via: 1.1 google
+      referrer-policy: no-referrer
+      alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "responseCode": "2007300",
+          "responseMessage": "Successful",
+          "accessToken": "eB7NE763fO6R3UWggPdQBBU0iqDo",
+          "tokenType": "BearerToken",
+          "expiresIn": "899"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - 4017300 - Invalid X-SIGNATURE
+  
+  request: {
+    url: {{base-url-sandbox}}/snap/{{version-1}}/access-token/b2b
+    method: POST
+    mode: json
+    headers: {
+      X-SIGNATURE: {{X-SIGNATURE}}
+      X-TIMESTAMP: 2026-06-18T12:47:05+07:00
+      X-CLIENT-KEY: {{client-id-sandbox}}
+    }
+  
+    body:json: {
+      {
+        "grantType": "client_credentials"
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      content-type: application/json
+      x-timestamp: 2026-06-18T12:47:05+07:00
+      x-client-key: xfPiVWQYJ2tpNfONuveAz2l6EQVGq3DkKEv1cJGvhSv9sHeS
+      x-request-id: 4900f8b1-5502-41ef-8e35-5718c3486ef5
+      content-length: 256
+      date: Thu, 18 Jun 2026 05:51:19 GMT
+      via: 1.1 google
+      x-content-type-options: nosniff
+      x-frame-options: DENY
+      referrer-policy: no-referrer
+      strict-transport-security: max-age=31536000; includeSubDomains
+      alt-svc: h3=":443"; ma=2592000
+    }
+  
+    status: {
+      code: 401
+      text: Unauthorized
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "responseCode": "4017300",
+          "responseMessage": "Unauthorized. Invalid X-SIGNATURE",
+          "accessToken": "",
+          "tokenType": "",
+          "expiresIn": ""
+        }
+      '''
+    }
+  }
+}

@@ -1,0 +1,374 @@
+meta {
+  name: Transaction Status Inquiry
+  type: http
+  seq: 7
+}
+
+post {
+  url: {{base-url-sandbox}}/snap/{{version-1-1}}/transfer/status
+  body: json
+  auth: bearer
+}
+
+headers {
+  X-SIGNATURE: {{X-SIGNATURE-TF-STATUS}}
+  X-TIMESTAMP: {{X-TIMESTAMP}}
+  X-PARTNER-ID: {{X-PARTNER-ID}}
+  X-EXTERNAL-ID: {{X-EXTERNAL-ID}}
+  CHANNEL-ID: PINANGPERFORMAMF
+}
+
+auth:bearer {
+  token: {{ACCESS-TOKEN-RAYA-OPENAPI}}
+}
+
+body:json {
+  {
+    "originalReferenceNo": "1906269IXAG",
+    "originalPartnerReferenceNo": "1101781837977",
+    "originalExternalId":"df2b477391a2727b674",
+    "serviceCode": "18"
+  }
+}
+
+script:pre-request {
+  //## FOR TIMESTAMP
+  
+  // 1. Ambil waktu UTC saat ini
+  const now = new Date();
+  
+  // 2. Geser waktu ke UTC+7 (Jakarta) dengan menambahkan 7 jam (7 * 60 * 60 * 1000 ms)
+  const offsetJakarta = 7 * 60 * 60 * 1000;
+  const jakartaTime = new Date(now.getTime() + offsetJakarta);
+  
+  // 3. Format komponen tanggal & waktu secara manual (ISO 8601)
+  const pad = (num) => String(num).padStart(2, '0');
+  
+  const yyyy = jakartaTime.getUTCFullYear();
+  const MM = pad(jakartaTime.getUTCMonth() + 1); // Bulan dimulai dari 0
+  const dd = pad(jakartaTime.getUTCDate());
+  const HH = pad(jakartaTime.getUTCHours());
+  const mm = pad(jakartaTime.getUTCMinutes());
+  const ss = pad(jakartaTime.getUTCSeconds());
+  
+  // 4. Gabungkan menjadi format yyyy-MM-ddTHH:mm:ss+07:00
+  const formattedDate = `${yyyy}-${MM}-${dd}T${HH}:${mm}:${ss}+07:00`;
+  
+  // 5. Simpan ke variabel Bruno
+  bru.setEnvVar("X-TIMESTAMP", formattedDate);
+  
+  // ## X-SIGNATURE
+  const CryptoJS = require("crypto-js");
+  // 1. Generate UUID v4 tanpa "-" sepanjang 19 karakter (X-EXTERNAL-ID)
+  function generateShortUuid() {
+    const hexDigits = "0123456789abcdef";
+    let uuid = "";
+    for (let i = 0; i < 32; i++) {
+      uuid += hexDigits[Math.floor(Math.random() * 16)];
+    }
+    return uuid.substring(0, 19);
+  }
+  
+  const shortUuid = generateShortUuid();
+  bru.setEnvVar("X-EXTERNAL-ID", shortUuid);
+  
+  // 2. Fungsi untuk Generate X-SIGNATURE (HMAC-SHA512 berdasarkan standar SNAP)
+  function getAuthHeader() {
+    const httpMethod = req.getMethod().toUpperCase();
+    let requestBody = req.getBody();
+    
+    // Normalisasi Body seperti perilaku JSON.stringify(JSON.parse(body)) di Postman
+    if (httpMethod === 'GET' || !requestBody) {
+      requestBody = '';
+    } else {
+      // Jika body berupa object (Bruno otomatis memparsing jika JSON), konversi ke string tanpa spasi tambahan
+      if (typeof requestBody === 'object') {
+        requestBody = JSON.stringify(requestBody);
+      } else if (typeof requestBody === 'string' && requestBody.trim() !== '') {
+        requestBody = JSON.stringify(JSON.parse(requestBody));
+      }
+    }
+  
+    // 3. Get Timestamp 
+    const timestamp = bru.getEnvVar('X-TIMESTAMP');
+    console.log("DISINI : ", timestamp)
+    bru.setEnvVar('X-TIMESTAMP', timestamp);
+  
+    // 4. Proses SHA256 dari Request Body (Menggunakan Web Crypto API / CryptoJS versi ringan jika didukung)
+    // Karena Bruno menggunakan Node.js runtime secara internal di versi terbarunya, kita bisa pakai 'crypto' bawaan internal jika diizinkan, 
+    // atau jika sandbox ketat, kita buat SHA256 manual. Untuk amannya kita pakai internal crypto jika ada, atau fallback ke metode string hashing.
+    
+    let bodyHex = "";
+    if (requestBody === "") {
+      // SHA256 dari string kosong
+      bodyHex = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
+    } else {
+      // Memanfaatkan fungsi enkripsi internal Node yang dibungkus aman di Bruno modern
+      try {
+        const crypto = require('crypto');
+        bodyHex = crypto.createHash('sha256').update(requestBody).digest('hex');
+      } catch (e) {
+        // Fallback jika 'crypto' diblokir total sandbox: Gunakan sjcl internal Bruno jika tersedia
+        // Namun umumnya Bruno terbaru mengizinkan pemrosesan teks via CryptoJS bawaan runtime pengeksekusinya
+        if (typeof CryptoJS !== 'undefined') {
+          bodyHex = CryptoJS.SHA256(requestBody).toString(CryptoJS.enc.Hex);
+        } else {
+          // Jika Bruno Anda benar-benar terkunci, Anda bisa memanfaatkan trik eksekusi hash manual
+          console.error("Modul crypto tidak aktif. Pastikan allow built-in node modules dicentang di preferensi Bruno.");
+        }
+      }
+    }
+    
+    bru.setEnvVar('BODY-HEX', bodyHex);
+  
+    // 5. Susun Payload SNAP
+    // Mengambil token dan client_secret dari Environment Bruno Anda
+    const token = bru.getEnvVar('ACCESS-TOKEN-RAYA-OPENAPI') || '';
+    const clientSecret = bru.getEnvVar('client-secret-sandbox') || '';
+    const path = '/snap/v1.1/transfer/status'; 
+  
+    const payload = `${httpMethod}:${path}:${token}:${bodyHex}:${timestamp}`;
+    bru.setEnvVar('SIGNATURE-PAYLOAD', payload);
+    console.log("Payload yang di-sign:", payload);
+  
+    // 6. HMAC-SHA512 Sign
+    let hmacSignature = "";
+    try {
+      const crypto = require('crypto');
+      hmacSignature = crypto.createHmac('sha512', clientSecret).update(payload).digest('hex');
+    } catch(e) {
+      if (typeof CryptoJS !== 'undefined') {
+        hmacSignature = CryptoJS.HmacSHA512(payload, clientSecret).toString(CryptoJS.enc.Hex);
+      }
+    }
+  
+    return hmacSignature;
+  }
+  
+  // Eksekusi fungsi utama dan simpan hasilnya langsung ke Environment Active Bruno
+  const signature = getAuthHeader();
+  bru.setEnvVar('X-SIGNATURE-TF-STATUS', signature);
+  console.log('X-SIGNATURE-TF-STATUS :',  signature)
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+}
+
+docs {
+  AUTH
+  ====
+  Bearer Token => 
+  
+  HEADER
+  ======
+  X-SIGNATURE => Transaction signature using HMAC_SHA512
+  X-TIMESTAMP => yyyy-MM-dd’T’HH:mm:ssTZD
+  X-PARTNER-ID => Partner ID for integration, value will be given by Bank Raya.
+  X-EXTERNAL-ID => Unique alphanumeric for API request. Number should be unique in the same day
+  CHANNEL-ID => Channel identification used by Partner, Value will be ignore by Bank Raya
+  
+  
+  BODY
+  ====
+  originalReferenceNo [MANDATORY] => Dari Transfer Interbank -> customerReference
+  originalPartnerReferenceNo [MANDATORY] => Dari Transfer Interbank -> partnerReferenceNoBeneficiary
+  originalExternalId [MANDATORY] => Dari Transfer Interbank -> Header - X-EXTERNAL-ID
+  serviceCode [MANDATORY] => 18 (Hardcode untuk code transfer interbank)
+  
+  
+  
+}
+
+example {
+  name: Error - 500
+  
+  request: {
+    url: {{base-url-sandbox}}/snap/{{version-1}}/transfer/status
+    method: POST
+    mode: json
+    headers: {
+      X-SIGNATURE: {{X-SIGNATURE-TF-STATUS}}
+      X-TIMESTAMP: {{X-TIMESTAMP}}
+      X-PARTNER-ID: {{X-PARTNER-ID}}
+      X-EXTERNAL-ID: {{X-EXTERNAL-ID}}
+      CHANNEL-ID: PINANGPERFORMA
+    }
+  
+    body:json: {
+      {
+        "originalReferenceNo": "20260619AGTBIDJA010O9900011006",
+        "originalPartnerReferenceNo": "1101781833913",
+        "originalExternalId":"f17e23a4cda216d8ef2",
+        "serviceCode": "18"
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      content-type: application/json
+      x-request-id: ba607818-a1f2-48f2-a2a7-3e10e32dcbc0
+      content-length: 119
+      date: Fri, 19 Jun 2026 02:56:28 GMT
+      via: 1.1 google
+      x-content-type-options: nosniff
+      x-frame-options: DENY
+      referrer-policy: no-referrer
+      strict-transport-security: max-age=31536000; includeSubDomains
+      alt-svc: h3=":443"; ma=2592000
+    }
+  
+    status: {
+      code: 500
+      text: Internal Server Error
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "fault": {
+            "faultstring": "Unresolved variable : targetpathsuffix",
+            "detail": {
+              "errorcode": "entities.UnresolvedVariable"
+            }
+          }
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - 4013601 - Token Expired
+  
+  request: {
+    url: {{base-url-sandbox}}/snap/{{version-1-1}}/transfer/status
+    method: POST
+    mode: json
+    headers: {
+      X-SIGNATURE: {{X-SIGNATURE-TF-STATUS}}
+      X-TIMESTAMP: {{X-TIMESTAMP}}
+      X-PARTNER-ID: {{X-PARTNER-ID}}
+      X-EXTERNAL-ID: {{X-EXTERNAL-ID}}
+      CHANNEL-ID: PINANGPERFORMA
+    }
+  
+    body:json: {
+      {
+        "originalReferenceNo": "1906269IXAG",
+        "originalPartnerReferenceNo": "1101781837977",
+        "originalExternalId":"df2b477391a2727b674",
+        "serviceCode": "18"
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      content-type: application/json
+      www-authenticate: Bearer realm="null",error="invalid_token",error_description="keymanagement.service.access_token_expired: Access Token expired"
+      x-timestamp: 2026-06-19T10:23:41+07:00
+      x-client-key: 
+      x-request-id: 7e2ce956-448d-4bc9-84ca-9d97607928e1
+      content-length: 172
+      date: Fri, 19 Jun 2026 03:23:45 GMT
+      via: 1.1 google
+      x-content-type-options: nosniff
+      x-frame-options: DENY
+      referrer-policy: no-referrer
+      strict-transport-security: max-age=31536000; includeSubDomains
+      alt-svc: h3=":443"; ma=2592000
+    }
+  
+    status: {
+      code: 401
+      text: Unauthorized
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "responseCode": "4013601",
+          "responseMessage": "Unauthorized. Access Token Expired"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Sucess - 2003600
+  
+  request: {
+    url: {{base-url-sandbox}}/snap/{{version-1-1}}/transfer/status
+    method: POST
+    mode: json
+    headers: {
+      X-SIGNATURE: {{X-SIGNATURE-TF-STATUS}}
+      X-TIMESTAMP: {{X-TIMESTAMP}}
+      X-PARTNER-ID: {{X-PARTNER-ID}}
+      X-EXTERNAL-ID: {{X-EXTERNAL-ID}}
+      CHANNEL-ID: PINANGPERFORMA
+    }
+  
+    body:json: {
+      {
+        "originalReferenceNo": "1906269IXAG",
+        "originalPartnerReferenceNo": "1101781837977",
+        "originalExternalId":"df2b477391a2727b674",
+        "serviceCode": "18"
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      date: Fri, 19 Jun 2026 03:24:39 GMT
+      content-type: application/json
+      content-length: 501
+      strict-transport-security: max-age=31536000; includeSubDomains
+      alt-svc: h3=":443"; ma=2592000, h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      x-request-id: 034fa3e4-a4df-4e5c-80f6-eb866dbdb928
+      via: 1.1 google, 1.1 google
+      x-content-type-options: nosniff
+      x-frame-options: DENY
+      referrer-policy: no-referrer
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "responseCode": "2003600",
+          "responseMessage": "Successful",
+          "referenceNumber": "190626U7A26",
+          "originalPartnerReferenceNo": "1101781837977",
+          "originalReferenceNo": "1906269IXAG",
+          "originalExternalId": "df2b477391a2727b674",
+          "serviceCode": "18",
+          "transactionDate": "2026-06-19T13:44:00+07:00",
+          "amount": {
+            "value": "10000.00",
+            "currency": "IDR"
+          },
+          "beneficiaryAccountNo": "2600002367725",
+          "beneficiaryBankCode": "BMRIIDJA",
+          "sourceAccountNo": "001001000024401",
+          "latestTransactionStatus": "00",
+          "transactionStatusDesc": "Successful"
+        }
+      '''
+    }
+  }
+}

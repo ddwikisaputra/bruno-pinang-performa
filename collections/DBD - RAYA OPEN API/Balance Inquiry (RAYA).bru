@@ -1,0 +1,253 @@
+meta {
+  name: Balance Inquiry (RAYA)
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{base-url-sandbox}}/snap/{{version-2}}/balance-inquiry
+  body: json
+  auth: bearer
+}
+
+headers {
+  X-SIGNATURE: {{X-SIGNATURE-BALANCE-INQUIRY}}
+  X-TIMESTAMP: {{X-TIMESTAMP}}
+  X-PARTNER-ID: {{X-PARTNER-ID}}
+  X-EXTERNAL-ID: {{X-EXTERNAL-ID}}
+  CHANNEL-ID: PINANGPERFORMAMF
+}
+
+auth:bearer {
+  token: {{ACCESS-TOKEN-RAYA-OPENAPI}}
+}
+
+body:json {
+  {
+    "accountNo":"001001000024401"
+  }
+}
+
+script:pre-request {
+  //## FOR TIMESTAMP
+  // 1. Ambil waktu UTC saat ini
+  const now = new Date();
+  
+  // 2. Geser waktu ke UTC+7 (Jakarta) dengan menambahkan 7 jam (7 * 60 * 60 * 1000 ms)
+  const offsetJakarta = 7 * 60 * 60 * 1000;
+  const jakartaTime = new Date(now.getTime() + offsetJakarta);
+  
+  // 3. Format komponen tanggal & waktu secara manual (ISO 8601)
+  const pad = (num) => String(num).padStart(2, '0');
+  
+  const yyyy = jakartaTime.getUTCFullYear();
+  const MM = pad(jakartaTime.getUTCMonth() + 1); // Bulan dimulai dari 0
+  const dd = pad(jakartaTime.getUTCDate());
+  const HH = pad(jakartaTime.getUTCHours());
+  const mm = pad(jakartaTime.getUTCMinutes());
+  const ss = pad(jakartaTime.getUTCSeconds());
+  
+  // 4. Gabungkan menjadi format yyyy-MM-ddTHH:mm:ss+07:00
+  const formattedDate = `${yyyy}-${MM}-${dd}T${HH}:${mm}:${ss}+07:00`;
+  
+  // 5. Simpan ke variabel Bruno
+  bru.setEnvVar("X-TIMESTAMP", formattedDate);
+  
+  // ## X-SIGNATURE
+  const CryptoJS = require("crypto-js");
+  // 1. Generate UUID v4 tanpa "-" sepanjang 19 karakter (X-EXTERNAL-ID)
+  function generateShortUuid() {
+    const hexDigits = "0123456789abcdef";
+    let uuid = "";
+    for (let i = 0; i < 32; i++) {
+      uuid += hexDigits[Math.floor(Math.random() * 16)];
+    }
+    return uuid.substring(0, 19);
+  }
+  
+  const shortUuid = generateShortUuid();
+  bru.setEnvVar("X-EXTERNAL-ID", shortUuid);
+  
+  // 2. Fungsi untuk Generate X-SIGNATURE (HMAC-SHA512 berdasarkan standar SNAP)
+  function getAuthHeader() {
+    const httpMethod = req.getMethod().toUpperCase();
+    let requestBody = req.getBody();
+    
+    // Normalisasi Body seperti perilaku JSON.stringify(JSON.parse(body)) di Postman
+    if (httpMethod === 'GET' || !requestBody) {
+      requestBody = '';
+    } else {
+      // Jika body berupa object (Bruno otomatis memparsing jika JSON), konversi ke string tanpa spasi tambahan
+      if (typeof requestBody === 'object') {
+        requestBody = JSON.stringify(requestBody);
+      } else if (typeof requestBody === 'string' && requestBody.trim() !== '') {
+        requestBody = JSON.stringify(JSON.parse(requestBody));
+      }
+    }
+  
+    // 3. Get Timestamp 
+    const timestamp = bru.getEnvVar('X-TIMESTAMP');
+    console.log("DISINI : ", timestamp)
+    bru.setEnvVar('X-TIMESTAMP', timestamp);
+  
+    // 4. Proses SHA256 dari Request Body (Menggunakan Web Crypto API / CryptoJS versi ringan jika didukung)
+    // Karena Bruno menggunakan Node.js runtime secara internal di versi terbarunya, kita bisa pakai 'crypto' bawaan internal jika diizinkan, 
+    // atau jika sandbox ketat, kita buat SHA256 manual. Untuk amannya kita pakai internal crypto jika ada, atau fallback ke metode string hashing.
+    
+    let bodyHex = "";
+    if (requestBody === "") {
+      // SHA256 dari string kosong
+      bodyHex = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
+    } else {
+      // Memanfaatkan fungsi enkripsi internal Node yang dibungkus aman di Bruno modern
+      try {
+        const crypto = require('crypto');
+        bodyHex = crypto.createHash('sha256').update(requestBody).digest('hex');
+      } catch (e) {
+        // Fallback jika 'crypto' diblokir total sandbox: Gunakan sjcl internal Bruno jika tersedia
+        // Namun umumnya Bruno terbaru mengizinkan pemrosesan teks via CryptoJS bawaan runtime pengeksekusinya
+        if (typeof CryptoJS !== 'undefined') {
+          bodyHex = CryptoJS.SHA256(requestBody).toString(CryptoJS.enc.Hex);
+        } else {
+          // Jika Bruno Anda benar-benar terkunci, Anda bisa memanfaatkan trik eksekusi hash manual
+          console.error("Modul crypto tidak aktif. Pastikan allow built-in node modules dicentang di preferensi Bruno.");
+        }
+      }
+    }
+    
+    bru.setEnvVar('BODY-HEX', bodyHex);
+  
+    // 5. Susun Payload SNAP
+    // Mengambil token dan client_secret dari Environment Bruno Anda
+    const token = bru.getEnvVar('ACCESS-TOKEN-RAYA-OPENAPI') || '';
+    const clientSecret = bru.getEnvVar('client-secret-sandbox') || '';
+    const path = '/snap/v2.0/balance-inquiry'; 
+  
+    const payload = `${httpMethod}:${path}:${token}:${bodyHex}:${timestamp}`;
+    bru.setEnvVar('SIGNATURE-PAYLOAD', payload);
+    console.log("Payload yang di-sign:", payload);
+  
+    // 6. HMAC-SHA512 Sign
+    let hmacSignature = "";
+    try {
+      const crypto = require('crypto');
+      hmacSignature = crypto.createHmac('sha512', clientSecret).update(payload).digest('hex');
+    } catch(e) {
+      if (typeof CryptoJS !== 'undefined') {
+        hmacSignature = CryptoJS.HmacSHA512(payload, clientSecret).toString(CryptoJS.enc.Hex);
+      }
+    }
+  
+    return hmacSignature;
+  }
+  
+  // Eksekusi fungsi utama dan simpan hasilnya langsung ke Environment Active Bruno
+  const signature = getAuthHeader();
+  bru.setEnvVar('X-SIGNATURE-BALANCE-INQUIRY', signature);
+  console.log('X-SIGNATURE-BALANCE-INQUIRY :',  signature)
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+}
+
+docs {
+  AUTH
+  ====
+  Bearer Token => 
+  
+  HEADER
+  ======
+  X-SIGNATURE => Transaction signature using HMAC_SHA512
+  X-TIMESTAMP => yyyy-MM-dd’T’HH:mm:ssTZD
+  X-PARTNER-ID => Partner ID for integration, value will be given by Bank Raya.
+  X-EXTERNAL-ID => Unique alphanumeric for API request. Number should be unique in the same day
+  CHANNEL-ID => Channel identification used by Partner, Value will be ignore by Bank Raya
+  
+  
+  BODY
+  ====
+  beneficiaryBankCode [MANDATORY] => Beneficiary Bank Code
+  beneficiaryAccountNo [MANDATORY] => Beneficiary Account Number
+  additionalInfo [OPTIONAL]
+  switcher [MANDATORY] => Value will be: BIFAST | RTOL
+  sourceAccountNo [MANDATORY] => Source Account Number, mandatory for RTOL methods
+  
+  
+  
+}
+
+example {
+  name: Success - 2001100
+  
+  request: {
+    url: {{base-url-sandbox}}/snap/{{version-2}}/balance-inquiry
+    method: POST
+    mode: json
+    headers: {
+      X-SIGNATURE: {{X-SIGNATURE-BALANCE-INQUIRY}}
+      X-TIMESTAMP: {{X-TIMESTAMP}}
+      X-PARTNER-ID: {{X-PARTNER-ID}}
+      X-EXTERNAL-ID: {{X-EXTERNAL-ID}}
+      CHANNEL-ID: PINANGPERFORMA
+    }
+  
+    body:json: {
+      {
+        "accountNo":"001001000024401"
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      date: Fri, 19 Jun 2026 01:27:19 GMT
+      content-type: application/json
+      content-length: 347
+      strict-transport-security: max-age=31536000; includeSubDomains
+      alt-svc: h3=":443"; ma=2592000, h3=":443"; ma=2592000
+      x-request-id: a36f0a6e-5207-44d4-ab52-dcf42fe3b88c
+      via: 1.1 google, 1.1 google
+      x-content-type-options: nosniff
+      x-frame-options: DENY
+      referrer-policy: no-referrer
+    }
+  
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "responseCode": "2001100",
+          "responseMessage": "Successful",
+          "accountNo": "001001000024401",
+          "name": "PT. Smartcoop",
+          "accountInfos": [
+            {
+              "availableBalance": {
+                "value": "2162661821.50",
+                "currency": "IDR"
+              },
+              "ledgerBalance": {
+                "value": "2162661821.50",
+                "currency": "IDR"
+              },
+              "status": "0001"
+            }
+          ],
+          "additionalInfo": {
+            "productType": "00010 (GIRO PERUSAHAAN IDR)",
+            "accountType": "D"
+          }
+        }
+      '''
+    }
+  }
+}

@@ -1,0 +1,121 @@
+info:
+  name: Transfer Interbank (Bank Lain)
+  type: http
+  seq: 5
+
+http:
+  method: POST
+  url: "{{base-url-sandbox}}/snap/{{version-2}}/transfer-interbank"
+  headers:
+    - name: X-SIGNATURE
+      value: ""
+    - name: X-TIMESTAMP
+      value: "{{currentTimestamp}}"
+    - name: "X-PARTNER-ID "
+      value: ""
+    - name: X-EXTERNAL-ID
+      value: ""
+    - name: CHANNEL-ID
+      value: ""
+  body:
+    type: json
+    data: |-
+      {
+        "partnerReferenceNo": "2022111800155",
+        "amount": {
+          "value": "10000.00",
+          "currency": "IDR"
+        },
+        "beneficiaryAccountName": "Bintang Kharisma",
+        "beneficiaryAccountNo": "065101014305500",
+        "beneficiaryBankCode": "BRINIDJA",
+        "beneficiaryBankName": "BRI",
+        "customerReference": "202212293173",
+        "sourceAccountNo": "001001000142306",
+        "transactionDate": "{{currentTimestamp}}",
+        "feeType": "OUR",
+        "originatorInfos": [
+          {
+            "originatorCustomerNo": "99901000003301",
+            "originatorCustomerName": "William Hunter",
+            "originatorBankCode": "002"
+          }
+        ],
+        "additionalInfo": {
+          "switcher": "RTOL"
+        }
+      }
+  auth:
+    type: bearer
+    token: ""
+
+runtime:
+  scripts:
+    - type: before-request
+      code: |-
+        //## FOR TIMESTAMP
+
+        // 1. Ambil waktu UTC saat ini
+        const now = new Date();
+
+        // 2. Geser waktu ke UTC+7 (Jakarta) dengan menambahkan 7 jam (7 * 60 * 60 * 1000 ms)
+        const offsetJakarta = 7 * 60 * 60 * 1000;
+        const jakartaTime = new Date(now.getTime() + offsetJakarta);
+
+        // 3. Format komponen tanggal & waktu secara manual (ISO 8601)
+        const pad = (num) => String(num).padStart(2, '0');
+
+        const yyyy = jakartaTime.getUTCFullYear();
+        const MM = pad(jakartaTime.getUTCMonth() + 1); // Bulan dimulai dari 0
+        const dd = pad(jakartaTime.getUTCDate());
+        const HH = pad(jakartaTime.getUTCHours());
+        const mm = pad(jakartaTime.getUTCMinutes());
+        const ss = pad(jakartaTime.getUTCSeconds());
+
+        // 4. Gabungkan menjadi format yyyy-MM-ddTHH:mm:ss+07:00
+        const formattedDate = `${yyyy}-${MM}-${dd}T${HH}:${mm}:${ss}+07:00`;
+
+        // 5. Simpan ke variabel Bruno
+        bru.setVar("currentTimestamp", formattedDate);
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |+
+  AUTH
+  ====
+  Bearer Token => 
+
+  HEADER
+  ======
+  X-SIGNATURE => Transaction signature using HMAC_SHA512
+  X-TIMESTAMP => yyyy-MM-dd’T’HH:mm:ssTZD
+  X-PARTNER-ID => Partner ID for integration, value will be given by Bank Raya.
+  X-EXTERNAL-ID => Unique alphanumeric for API request. Number should be unique in the same day
+  CHANNEL-ID => Channel identification used by Partner, Value will be ignore by Bank Raya
+
+
+  BODY
+  ====
+  partnerReferenceNo [MANDATORY] => Transaction Reference Number. For successful transaction, the same partnerReferenceNo can not be used within 30 days.
+  amount [MANDATORY] => Object
+  value [MANDATORY] => Net amount of the transaction.
+  currency [MANDATORY] => Sample: IDR [End Object]
+  beneficiaryAccountName [MANDATORY] => Beneficiary Account Name
+  beneficiaryAccountNo [MANDATORY] => Beneficiary Account Number
+  beneficiaryBankCode [MANDATORY] => Beneficiary Bank Code
+  beneficiaryBankName [MANDATORY] => Beneficiary Bank Name
+  customerReference [MANDATORY] => Reference number from inquiry response ------ HARUS INQUIRY DULU?
+  sourceAccountNo [MANDATORY] => Source Account Number
+  transactionDate [MANDATORY] => Format Timestamp ISO8601
+  feeType [OPTIONAL] => Fee Type of Transaction: OUR = Fee is charged to the sender (default) | BEN = Fee is charge to the recipient
+  originatorInfos [C] => Array of Objects
+  originatorCustomerNo [MANDATORY] => Originator sender account number
+  originatorCustomerName [MANDATORY] => Originator sender account name
+  originatorBankCode [MANDATORY] => Originator sender bank / company code: 1. For bank entity, please fill with bank code, 2. For other entity, please fill with free format identifier [End Object]
+  additionalInfo [MANDATORY] => Object
+  switcher [OPTIONAL] => Default RTOL, Value will be: BIFAST | RTOL [End Object]
+

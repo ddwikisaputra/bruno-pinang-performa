@@ -1,0 +1,99 @@
+info:
+  name: Get Signature Sandbox - Exteral Account Inquiry
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{base-url-signature-sandbox}}/tools/snap/generate-signature-b2b"
+  body:
+    type: json
+    data: |-
+      {
+          "privateKey": "{{private-key-sandbox}}",
+          "clientId": "{{client-id-sandbox}}",
+          "timestamp": "{{X-TIMESTAMP}}"
+      }
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: before-request
+      code: |-
+        //## FOR TIMESTAMP
+
+        // 1. Ambil waktu UTC saat ini
+        const now = new Date();
+
+        // 2. Geser waktu ke UTC+7 (Jakarta) dengan menambahkan 7 jam (7 * 60 * 60 * 1000 ms)
+        const offsetJakarta = 7 * 60 * 60 * 1000;
+        const jakartaTime = new Date(now.getTime() + offsetJakarta);
+
+        // 3. Format komponen tanggal & waktu secara manual (ISO 8601)
+        const pad = (num) => String(num).padStart(2, '0');
+
+        const yyyy = jakartaTime.getUTCFullYear();
+        const MM = pad(jakartaTime.getUTCMonth() + 1); // Bulan dimulai dari 0
+        const dd = pad(jakartaTime.getUTCDate());
+        const HH = pad(jakartaTime.getUTCHours());
+        const mm = pad(jakartaTime.getUTCMinutes());
+        const ss = pad(jakartaTime.getUTCSeconds());
+
+        // 4. Gabungkan menjadi format yyyy-MM-ddTHH:mm:ss+07:00
+        const formattedDate = `${yyyy}-${MM}-${dd}T${HH}:${mm}:${ss}+07:00`;
+
+        // 5. Simpan ke variabel Bruno
+        bru.setEnvVar("X-TIMESTAMP", formattedDate);
+    - type: after-response
+      code: |-
+        var jsonData = res.getBody();
+        bru.setEnvVar("X-SIGNATURE",  jsonData.signature)
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Success
+    request:
+      url: http://10.99.0.240:3000/tools/snap/generate-signature-b2b
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+              "privateKey": "{{private-key-sandbox}}",
+              "clientId": "{{client-id-sandbox}}",
+              "timestamp": "{{X-TIMESTAMP}}"
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: content-type
+          value: application/json; charset=utf-8
+        - name: content-length
+          value: "360"
+        - name: etag
+          value: W/"168-o+3hlXcmHvg6jLYaie1IMdDHWpo"
+        - name: date
+          value: Thu, 18 Jun 2026 05:46:06 GMT
+        - name: connection
+          value: keep-alive
+        - name: keep-alive
+          value: timeout=5
+      body:
+        type: json
+        data: |-
+          {
+            "signature": "v0lfjmV3NZFZcS4jT2UEo5AbMee0NqRnPreHipohgC6K8mN+fCBQZ/m89t+dJoI5QzM7HO2C9J78hNeeBtMC9pe4XE73Rk8W6Qs0LySgLq2QNmlDejPOsfG8iKTgiSvgePF64rdzrkJgaGLRqyESqTNR2Ufdqwko4nMBr7K6Xes7R4IAKwoXZeiLu5JuR1HiN+bOBwCUmmbhwxzHadYjwkuvvXLbr/dW8WyIu4ea9sRR4sF4LtWn8lAhi/MWygeWOc7I9jyj4DRAdn1uAbOfUe8ns9R/i+1678P69Kx41PUf3Rk54jjfzukM0FrCHg4USKu75ntr5VAB/USu3BeKCQ=="
+          }
+
+docs: |-
+  PARAMETER
+  =========
+  privateKey => Private Key (Provide from RAYA OPEN API)
+  clientId => Client ID (Provide from RAYA OPEN API)
+  timestamp => Now (Format : 2026-06-18T12:46:05+07:00) == harus selalu sama sampai ke request access token

@@ -1,0 +1,172 @@
+info:
+  name: Request Access Token
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: "{{base-url-sandbox}}/snap/{{version-1}}/access-token/b2b"
+  headers:
+    - name: X-SIGNATURE
+      value: "{{X-SIGNATURE}}"
+    - name: X-TIMESTAMP
+      value: "{{X-TIMESTAMP}}"
+    - name: X-CLIENT-KEY
+      value: "{{client-id-sandbox}}"
+  body:
+    type: json
+    data: |-
+      {
+        "grantType": "client_credentials"
+      }
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        var jsonData = res.getBody();
+        if (jsonData.responseCode != "2007300"){
+          console.log("error : ", jsonData.responseCode)
+          return
+        }
+        bru.setEnvVar("ACCESS-TOKEN-RAYA-OPENAPI", jsonData.accessToken)
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Success - 2007300
+    request:
+      url: "{{base-url-sandbox}}/snap/{{version-1}}/access-token/b2b"
+      method: POST
+      headers:
+        - name: X-SIGNATURE
+          value: "{{X-SIGNATURE}}"
+        - name: X-TIMESTAMP
+          value: "{{X-TIMESTAMP}}"
+        - name: X-CLIENT-KEY
+          value: "{{client-id-sandbox}}"
+      body:
+        type: json
+        data: |-
+          {
+            "grantType": "client_credentials"
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: content-type
+          value: application/json
+        - name: strict-transport-security
+          value: max-age=31536000; includeSubDomains
+        - name: x-frame-options
+          value: DENY
+        - name: x-content-type-options
+          value: nosniff
+        - name: content-security-policy
+          value: default-src 'self'
+        - name: cache-control
+          value: no-store
+        - name: access-control-allow-origin
+          value: "*"
+        - name: x-timestamp
+          value: 2026-06-18T12:46:05+07:00
+        - name: x-client-key
+          value: xfPiVWQYJ2tpNfONuveAz2l6EQVGq3DkKEv1cJGvhSv9sHeS
+        - name: x-request-id
+          value: dad357c5-54ad-46d6-8b54-d62bb9a3bdf6
+        - name: content-length
+          value: "271"
+        - name: date
+          value: Thu, 18 Jun 2026 05:46:32 GMT
+        - name: via
+          value: 1.1 google
+        - name: referrer-policy
+          value: no-referrer
+        - name: alt-svc
+          value: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      body:
+        type: json
+        data: |-
+          {
+            "responseCode": "2007300",
+            "responseMessage": "Successful",
+            "accessToken": "eB7NE763fO6R3UWggPdQBBU0iqDo",
+            "tokenType": "BearerToken",
+            "expiresIn": "899"
+          }
+  - name: Error - 4017300 - Invalid X-SIGNATURE
+    description: Perbedaan X-TIMESTAMP Header dengan Signature
+    request:
+      url: "{{base-url-sandbox}}/snap/{{version-1}}/access-token/b2b"
+      method: POST
+      headers:
+        - name: X-SIGNATURE
+          value: "{{X-SIGNATURE}}"
+        - name: X-TIMESTAMP
+          value: 2026-06-18T12:47:05+07:00
+        - name: X-CLIENT-KEY
+          value: "{{client-id-sandbox}}"
+      body:
+        type: json
+        data: |-
+          {
+            "grantType": "client_credentials"
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: content-type
+          value: application/json
+        - name: x-timestamp
+          value: 2026-06-18T12:47:05+07:00
+        - name: x-client-key
+          value: xfPiVWQYJ2tpNfONuveAz2l6EQVGq3DkKEv1cJGvhSv9sHeS
+        - name: x-request-id
+          value: 4900f8b1-5502-41ef-8e35-5718c3486ef5
+        - name: content-length
+          value: "256"
+        - name: date
+          value: Thu, 18 Jun 2026 05:51:19 GMT
+        - name: via
+          value: 1.1 google
+        - name: x-content-type-options
+          value: nosniff
+        - name: x-frame-options
+          value: DENY
+        - name: referrer-policy
+          value: no-referrer
+        - name: strict-transport-security
+          value: max-age=31536000; includeSubDomains
+        - name: alt-svc
+          value: h3=":443"; ma=2592000
+      body:
+        type: json
+        data: |-
+          {
+            "responseCode": "4017300",
+            "responseMessage": "Unauthorized. Invalid X-SIGNATURE",
+            "accessToken": "",
+            "tokenType": "",
+            "expiresIn": ""
+          }
+
+docs: |+
+  HEADER
+  ======
+  X-SIGNATURE => (Private_Key, stringToSign). stringToSign = client_ID + “|” + X-TIMESTAMP -> FROM Get Signature Sandbox(Sandbox), Prod Manual Code
+  X-TIMESTAMP => yyyy-MM-ddTHH:mm:ss+07:00 
+
+
+
+  BODY
+  ====
+  grantType [MANDATORY] => Apply token request key type, can be AUTHORIZATION_CODE
+
+
