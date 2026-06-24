@@ -28,11 +28,11 @@ runtime:
       code: |-
         var jsonData = res.getBody();
         bru.setGlobalEnvVar("token", jsonData.data.accessToken)
-        bru.setEnvVar("token", jsonData.data.accessToken)
+        bru.setVar("token", jsonData.data.accessToken)
         bru.setGlobalEnvVar("userId", jsonData.data.userId)
-        bru.setEnvVar('userId', jsonData.data.userId)
+        bru.setVar('userId', jsonData.data.userId)
         bru.setGlobalEnvVar("loginTicket", jsonData.data.loginTicket)
-        bru.setEnvVar('loginTicket', jsonData.data.loginTicket)
+        bru.setVar('loginTicket', jsonData.data.loginTicket)
 
 settings:
   encodeUrl: true

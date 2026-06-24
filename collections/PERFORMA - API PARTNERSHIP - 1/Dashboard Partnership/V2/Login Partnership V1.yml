@@ -22,7 +22,7 @@ runtime:
       code: |-
         var jsonData = res.getBody();
         bru.setGlobalEnvVar("tokenPartnership", jsonData.data.accessToken)
-        bru.setEnvVar("tokenPartnership", jsonData.data.accessToken)
+        bru.setVar("tokenPartnership", jsonData.data.accessToken)
 
 settings:
   encodeUrl: true

@@ -20,11 +20,12 @@ body:json {
 
 script:post-response {
   var data = res.getBody();
-  bru.setEnvVar("access_token", data.access_token);
+  bru.setVar("access_token", data.access_token);
 }
 
 settings {
   encodeUrl: true
+  timeout: 0
 }
 
 example {
@@ -93,7 +94,7 @@ example {
     mode: json
     body:json: {
       {
-      
+        
       }
     }
   }

@@ -46,9 +46,10 @@ script:pre-request {
   }
   
   const result = globalThis.encrypt(JSON.stringify(payload))
-  bru.setEnvVar("REQUEST_BODY", result);
+  bru.setVar("REQUEST_BODY", result);
 }
 
 settings {
   encodeUrl: true
+  timeout: 0
 }

@@ -23,7 +23,7 @@ runtime:
       code: |-
         var jsonData = res.getBody();
         bru.setGlobalEnvVar("tokenOTP", jsonData.access_token);
-        bru.setEnvVar("tokenOTP", jsonData.access_token)
+        bru.setVar("tokenOTP", jsonData.access_token)
 
 settings:
   encodeUrl: true

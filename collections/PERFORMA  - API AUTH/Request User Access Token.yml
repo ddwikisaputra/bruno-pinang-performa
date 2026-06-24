@@ -31,9 +31,9 @@ runtime:
       code: |-
         var jsonData = res.getBody();
         bru.setGlobalEnvVar("tokenMerchant", jsonData.token)
-        bru.setEnvVar("tokenMerchant", jsonData.token)
+        bru.setVar("tokenMerchant", jsonData.token)
         bru.setGlobalEnvVar("apiKeyMerchant", req.getHeader("Api-Key"))
-        bru.setEnvVar("apiKeyMerchant", req.getHeader("Api-Key"))
+        bru.setVar("apiKeyMerchant", req.getHeader("Api-Key"))
 
 settings:
   encodeUrl: true

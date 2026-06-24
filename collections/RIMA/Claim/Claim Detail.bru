@@ -25,7 +25,7 @@ script:pre-request {
     "loan_number": null
   }
   const result = encrypt(JSON.stringify(payload))
-  bru.setEnvVar("REQUEST_BODY", result);
+  bru.setVar("REQUEST_BODY", result);
 }
 
 script:post-response {
@@ -40,4 +40,5 @@ script:post-response {
 
 settings {
   encodeUrl: true
+  timeout: 0
 }
