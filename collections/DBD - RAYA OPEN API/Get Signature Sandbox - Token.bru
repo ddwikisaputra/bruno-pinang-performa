@@ -42,12 +42,12 @@ script:pre-request {
   const formattedDate = `${yyyy}-${MM}-${dd}T${HH}:${mm}:${ss}+07:00`;
   
   // 5. Simpan ke variabel Bruno
-  bru.setEnvVar("X-TIMESTAMP", formattedDate);
+  bru.setVar("X-TIMESTAMP", formattedDate);
 }
 
 script:post-response {
   var jsonData = res.getBody();
-  bru.setEnvVar("X-SIGNATURE",  jsonData.signature)
+  bru.setVar("X-SIGNATURE",  jsonData.signature)
 }
 
 settings {

@@ -14,7 +14,7 @@ headers {
   X-SIGNATURE: {{X-SIGNATURE-INQUIRY-EXTERNAL}}
   X-TIMESTAMP: {{X-TIMESTAMP}}
   X-PARTNER-ID: {{X-PARTNER-ID}}
-  X-EXTERNAL-ID: {{X-EXTERNAL-ID}}
+  X-EXTERNAL-ID: 1EXTIDMF65
   CHANNEL-ID: PINANGPERFORMAMF
 }
 
@@ -55,7 +55,7 @@ script:pre-request {
   const formattedDate = `${yyyy}-${MM}-${dd}T${HH}:${mm}:${ss}+07:00`;
   
   // 5. Simpan ke variabel Bruno
-  bru.setEnvVar("X-TIMESTAMP", formattedDate);
+  bru.setVar("X-TIMESTAMP", formattedDate);
   
   // ## X-SIGNATURE
   const CryptoJS = require("crypto-js");
@@ -70,7 +70,7 @@ script:pre-request {
   }
   
   const shortUuid = generateShortUuid();
-  bru.setEnvVar("X-EXTERNAL-ID", shortUuid);
+  bru.setVar("X-EXTERNAL-ID", shortUuid);
   
   // 2. Fungsi untuk Generate X-SIGNATURE (HMAC-SHA512 berdasarkan standar SNAP)
   function getAuthHeader() {
@@ -92,9 +92,9 @@ script:pre-request {
     console.log('REQUEST BODY : ', requestBody)
   
     // 3. Get Timestamp 
-    const timestamp = bru.getEnvVar('X-TIMESTAMP');
-    console.log("TIMESTAMPE : ", timestamp)
-    bru.setEnvVar('X-TIMESTAMP', timestamp);
+    const timestamp = bru.getVar('X-TIMESTAMP');
+    console.log("TIMESTAMP : ", timestamp)
+    bru.setVar('X-TIMESTAMP', timestamp);
   
     // 4. Proses SHA256 dari Request Body (Menggunakan Web Crypto API / CryptoJS versi ringan jika didukung)
     // Karena Bruno menggunakan Node.js runtime secara internal di versi terbarunya, kita bisa pakai 'crypto' bawaan internal jika diizinkan, 
@@ -121,17 +121,19 @@ script:pre-request {
       }
     }
     
-    bru.setEnvVar('BODY-HEX', bodyHex);
+    bru.setVar('BODY-HEX', bodyHex);
     console.log('BODY-HEX : ', bodyHex)
   
     // 5. Susun Payload SNAP
     // Mengambil token dan client_secret dari Environment Bruno Anda
-    const token = bru.getEnvVar('ACCESS-TOKEN-RAYA-OPENAPI') || '';
+    const token = bru.getVar('ACCESS-TOKEN-RAYA-OPENAPI') || '';
     const clientSecret = bru.getEnvVar('client-secret-sandbox') || '';
     const path = '/snap/v2.0/account-inquiry-external'; 
+     console.log("TOKEN : ", token)
+    console.log("CLIENT SECRET : ", clientSecret)
   
     const payload = `${httpMethod}:${path}:${token}:${bodyHex}:${timestamp}`;
-    bru.setEnvVar('SIGNATURE-PAYLOAD', payload);
+    bru.setVar('SIGNATURE-PAYLOAD', payload);
     console.log("Payload yang di-sign:", payload);
   
     // 6. HMAC-SHA512 Sign
@@ -150,7 +152,7 @@ script:pre-request {
   
   // Eksekusi fungsi utama dan simpan hasilnya langsung ke Environment Active Bruno
   const signature = getAuthHeader();
-  bru.setEnvVar('X-SIGNATURE-INQUIRY-EXTERNAL', signature);
+  bru.setVar('X-SIGNATURE-INQUIRY-EXTERNAL', signature);
   console.log('X-SIGNATURE-INQUIRY-EXTERNAL :',  signature)
 }
 
@@ -371,7 +373,7 @@ example {
 }
 
 example {
-  name: Error - 4031615 - Transaction Not Permitted
+  name: Error - 4031615 - Transaction Not Permitted (BIFAST Mati)
   description: retry hit
   
   request: {

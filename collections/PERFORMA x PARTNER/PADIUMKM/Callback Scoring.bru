@@ -5,15 +5,9 @@ meta {
 }
 
 get {
-  url: https://gatekeeper-stg.berasumkm.id/v2/financing/callback-scoring
+  url: {{base-url-sandbox-padi}}/v2/financing/callback-scoring
   body: json
   auth: inherit
-}
-
-headers {
-  X-App-Id: x
-  X-App-Secret: x’ \
-  "--header Content-Type": 
 }
 
 body:json {
@@ -27,6 +21,7 @@ body:json {
 
 settings {
   encodeUrl: true
+  timeout: 0
 }
 
 docs {

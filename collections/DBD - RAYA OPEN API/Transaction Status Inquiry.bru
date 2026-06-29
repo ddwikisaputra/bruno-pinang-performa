@@ -70,7 +70,7 @@ script:pre-request {
   }
   
   const shortUuid = generateShortUuid();
-  bru.setEnvVar("X-EXTERNAL-ID", shortUuid);
+  bru.setVar("X-EXTERNAL-ID", shortUuid);
   
   // 2. Fungsi untuk Generate X-SIGNATURE (HMAC-SHA512 berdasarkan standar SNAP)
   function getAuthHeader() {
@@ -92,7 +92,7 @@ script:pre-request {
     // 3. Get Timestamp 
     const timestamp = bru.getEnvVar('X-TIMESTAMP');
     console.log("DISINI : ", timestamp)
-    bru.setEnvVar('X-TIMESTAMP', timestamp);
+    bru.setVar('X-TIMESTAMP', timestamp);
   
     // 4. Proses SHA256 dari Request Body (Menggunakan Web Crypto API / CryptoJS versi ringan jika didukung)
     // Karena Bruno menggunakan Node.js runtime secara internal di versi terbarunya, kita bisa pakai 'crypto' bawaan internal jika diizinkan, 
@@ -119,7 +119,7 @@ script:pre-request {
       }
     }
     
-    bru.setEnvVar('BODY-HEX', bodyHex);
+    bru.setVar('BODY-HEX', bodyHex);
   
     // 5. Susun Payload SNAP
     // Mengambil token dan client_secret dari Environment Bruno Anda
@@ -128,7 +128,7 @@ script:pre-request {
     const path = '/snap/v1.1/transfer/status'; 
   
     const payload = `${httpMethod}:${path}:${token}:${bodyHex}:${timestamp}`;
-    bru.setEnvVar('SIGNATURE-PAYLOAD', payload);
+    bru.setVar('SIGNATURE-PAYLOAD', payload);
     console.log("Payload yang di-sign:", payload);
   
     // 6. HMAC-SHA512 Sign
@@ -147,7 +147,7 @@ script:pre-request {
   
   // Eksekusi fungsi utama dan simpan hasilnya langsung ke Environment Active Bruno
   const signature = getAuthHeader();
-  bru.setEnvVar('X-SIGNATURE-TF-STATUS', signature);
+  bru.setVar('X-SIGNATURE-TF-STATUS', signature);
   console.log('X-SIGNATURE-TF-STATUS :',  signature)
 }
 

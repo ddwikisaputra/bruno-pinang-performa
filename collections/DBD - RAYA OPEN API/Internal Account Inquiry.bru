@@ -1,17 +1,17 @@
 meta {
-  name: Balance Inquiry (RAYA)
+  name: Internal Account Inquiry
   type: http
-  seq: 5
+  seq: 8
 }
 
 post {
-  url: {{base-url-sandbox}}/snap/{{version-2}}/balance-inquiry
+  url: {{base-url-sandbox}}/snap/{{version-2}}/account-inquiry-internal
   body: json
   auth: bearer
 }
 
 headers {
-  X-SIGNATURE: {{X-SIGNATURE-BALANCE-INQUIRY}}
+  X-SIGNATURE: {{X-SIGNATURE-INQUIRY-INTERNAL}}
   X-TIMESTAMP: {{X-TIMESTAMP}}
   X-PARTNER-ID: {{X-PARTNER-ID}}
   X-EXTERNAL-ID: {{X-EXTERNAL-ID}}
@@ -24,7 +24,7 @@ auth:bearer {
 
 body:json {
   {
-    "accountNo":"001001000024401"
+      "beneficiaryAccountNo": "001001002295"
   }
 }
 
@@ -84,10 +84,12 @@ script:pre-request {
         requestBody = JSON.stringify(JSON.parse(requestBody));
       }
     }
+    
+    console.log('REQUEST BODY : ', requestBody)
   
     // 3. Get Timestamp 
-    const timestamp = bru.getEnvVar('X-TIMESTAMP');
-    console.log("DISINI : ", timestamp)
+    const timestamp = bru.getVar('X-TIMESTAMP');
+    console.log("TIMESTAMP : ", timestamp)
     bru.setVar('X-TIMESTAMP', timestamp);
   
     // 4. Proses SHA256 dari Request Body (Menggunakan Web Crypto API / CryptoJS versi ringan jika didukung)
@@ -116,12 +118,15 @@ script:pre-request {
     }
     
     bru.setVar('BODY-HEX', bodyHex);
+    console.log('BODY-HEX : ', bodyHex)
   
     // 5. Susun Payload SNAP
     // Mengambil token dan client_secret dari Environment Bruno Anda
-    const token = bru.getEnvVar('ACCESS-TOKEN-RAYA-OPENAPI') || '';
+    const token = bru.getVar('ACCESS-TOKEN-RAYA-OPENAPI') || '';
     const clientSecret = bru.getEnvVar('client-secret-sandbox') || '';
-    const path = '/snap/v2.0/balance-inquiry'; 
+    const path = '/snap/v2.0/account-inquiry-internal'; 
+     console.log("TOKEN : ", token)
+    console.log("CLIENT SECRET : ", clientSecret)
   
     const payload = `${httpMethod}:${path}:${token}:${bodyHex}:${timestamp}`;
     bru.setVar('SIGNATURE-PAYLOAD', payload);
@@ -143,8 +148,8 @@ script:pre-request {
   
   // Eksekusi fungsi utama dan simpan hasilnya langsung ke Environment Active Bruno
   const signature = getAuthHeader();
-  bru.setVar('X-SIGNATURE-BALANCE-INQUIRY', signature);
-  console.log('X-SIGNATURE-BALANCE-INQUIRY :',  signature)
+  bru.setVar('X-SIGNATURE-INQUIRY-INTERNAL', signature);
+  console.log('X-SIGNATURE-INQUIRY-INTERNAL :',  signature)
 }
 
 settings {
@@ -181,35 +186,35 @@ docs {
 }
 
 example {
-  name: Success - 2001100
+  name: Success - 2001500 - Rekening Aktif
   
   request: {
-    url: {{base-url-sandbox}}/snap/{{version-2}}/balance-inquiry
+    url: {{base-url-sandbox}}/snap/{{version-2}}/account-inquiry-internal
     method: POST
     mode: json
     headers: {
-      X-SIGNATURE: {{X-SIGNATURE-BALANCE-INQUIRY}}
+      X-SIGNATURE: {{X-SIGNATURE-INQUIRY-INTERNAL}}
       X-TIMESTAMP: {{X-TIMESTAMP}}
       X-PARTNER-ID: {{X-PARTNER-ID}}
       X-EXTERNAL-ID: {{X-EXTERNAL-ID}}
-      CHANNEL-ID: PINANGPERFORMA
+      CHANNEL-ID: PINANGPERFORMAMF
     }
   
     body:json: {
       {
-        "accountNo":"001001000024401"
+          "beneficiaryAccountNo": "001001000371401"
       }
     }
   }
   
   response: {
     headers: {
-      date: Fri, 19 Jun 2026 01:27:19 GMT
+      date: Fri, 26 Jun 2026 07:56:14 GMT
       content-type: application/json
-      content-length: 347
+      content-length: 254
       strict-transport-security: max-age=31536000; includeSubDomains
-      alt-svc: h3=":443"; ma=2592000, h3=":443"; ma=2592000
-      x-request-id: a36f0a6e-5207-44d4-ab52-dcf42fe3b88c
+      alt-svc: h3=":443"; ma=2592000, h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      x-request-id: cd42e806-f8a2-4198-897b-9ad48e77b024
       via: 1.1 google, 1.1 google
       x-content-type-options: nosniff
       x-frame-options: DENY
@@ -225,27 +230,120 @@ example {
       type: json
       content: '''
         {
-          "responseCode": "2001100",
+          "responseCode": "2001500",
           "responseMessage": "Successful",
-          "accountNo": "001001000024401",
-          "name": "PT. Smartcoop",
-          "accountInfos": [
-            {
-              "availableBalance": {
-                "value": "2162661821.50",
-                "currency": "IDR"
-              },
-              "ledgerBalance": {
-                "value": "2162661821.50",
-                "currency": "IDR"
-              },
-              "status": "0001"
-            }
-          ],
-          "additionalInfo": {
-            "productType": "00010 (GIRO PERUSAHAAN IDR)",
-            "accountType": "D"
-          }
+          "referenceNo": "260626UO291",
+          "beneficiaryAccountNo": "001001000371401",
+          "beneficiaryAccountName": "DEYA INDAR",
+          "beneficiaryAccountStatus": "Rekening Aktif",
+          "beneficiaryAccountType": "D",
+          "currency": "IDR"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - 4031518 - Rekening Tidak Aktif
+  
+  request: {
+    url: {{base-url-sandbox}}/snap/{{version-2}}/account-inquiry-internal
+    method: POST
+    mode: json
+    headers: {
+      X-SIGNATURE: {{X-SIGNATURE-INQUIRY-INTERNAL}}
+      X-TIMESTAMP: {{X-TIMESTAMP}}
+      X-PARTNER-ID: {{X-PARTNER-ID}}
+      X-EXTERNAL-ID: {{X-EXTERNAL-ID}}
+      CHANNEL-ID: PINANGPERFORMAMF
+    }
+  
+    body:json: {
+      {
+          "beneficiaryAccountNo": "001001002295318"
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      date: Fri, 26 Jun 2026 08:02:06 GMT
+      content-type: application/json
+      content-length: 63
+      strict-transport-security: max-age=31536000; includeSubDomains
+      alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000, h3=":443"; ma=2592000
+      x-request-id: 9dfbefa1-370f-4f55-9f79-b277ecf93376
+      via: 1.1 google, 1.1 google
+      x-content-type-options: nosniff
+      x-frame-options: DENY
+      referrer-policy: no-referrer
+    }
+  
+    status: {
+      code: 403
+      text: Forbidden
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "responseCode": "4031518",
+          "responseMessage": "Account Inactive"
+        }
+      '''
+    }
+  }
+}
+
+example {
+  name: Error - 4031515 - Invalid Account
+  
+  request: {
+    url: {{base-url-sandbox}}/snap/{{version-2}}/account-inquiry-internal
+    method: POST
+    mode: json
+    headers: {
+      X-SIGNATURE: {{X-SIGNATURE-INQUIRY-INTERNAL}}
+      X-TIMESTAMP: {{X-TIMESTAMP}}
+      X-PARTNER-ID: {{X-PARTNER-ID}}
+      X-EXTERNAL-ID: {{X-EXTERNAL-ID}}
+      CHANNEL-ID: PINANGPERFORMAMF
+    }
+  
+    body:json: {
+      {
+          "beneficiaryAccountNo": "001001002295"
+      }
+    }
+  }
+  
+  response: {
+    headers: {
+      date: Fri, 26 Jun 2026 08:02:34 GMT
+      content-type: application/json
+      content-length: 89
+      strict-transport-security: max-age=31536000; includeSubDomains
+      alt-svc: h3=":443"; ma=2592000, h3=":443"; ma=2592000
+      x-request-id: ec1efe16-5668-472a-a960-620363e4f353
+      via: 1.1 google, 1.1 google
+      x-content-type-options: nosniff
+      x-frame-options: DENY
+      referrer-policy: no-referrer
+    }
+  
+    status: {
+      code: 403
+      text: Forbidden
+    }
+  
+    body: {
+      type: json
+      content: '''
+        {
+          "responseCode": "4031515",
+          "responseMessage": "Transaction Not Permitted. Invalid Account"
         }
       '''
     }
