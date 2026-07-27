@@ -1,0 +1,527 @@
+info:
+  name: List Monitoring Pinjaman (CL)
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: "{{base-url-local}}/v/1/partnership/cl/list-monitoring-pinjaman"
+  headers:
+    - name: Api-Key
+      value: "{{apiKeyDev}}"
+  body:
+    type: form-urlencoded
+    data:
+      - name: startIndex
+        value: "0"
+        description: Start Index [OPTIONAL][NUMBER]
+      - name: recordCount
+        value: "10"
+        description: Record Count [OPTIONAL][NUMBER]
+      - name: sortBy
+        value: "due_date desc"
+        description: Sort By [OPTIONAL][STRING][name asc|desc, nominal asc|desc, due_date asc|desc]
+      - name: filterStatus
+        value: "-1"
+        description: Filter Status [OPTIONAL][INT][-1=All Kecuali Lunas | 1=Aktif | 2=Lunas | 3=H-. . Jatuh Tempo | 4=Jatuh Tempo | 5=Telat . . Hari | 6=Biaya Admin Belum Terbayar]
+      - name: textSearch
+        value: ""
+        description: Text Search [OPTIONAL][STRING]
+  auth:
+    type: bearer
+    token: "{{accessTokenPartner}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 503 - Service Unavailable
+    request:
+      url: "{{base-url-local}}/v/1/partnership/cl/list-monitoring-pinjaman"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: startIndex
+            value: ""
+            description: Start Index [OPTIONAL][NUMBER]
+          - name: recordCount
+            value: ""
+            description: Record Count [OPTIONAL][NUMBER]
+          - name: sortBy
+            value: ""
+            description: Sort By [OPTIONAL][STRING][name asc|desc, nominal asc|desc, due_date asc|desc]
+          - name: filterStatus
+            value: ""
+            description: Filter Status [OPTIONAL][INT][-1=All Kecuali Lunas | 1=Aktif | 2=Lunas | 3=H-. . Jatuh Tempo | 4=Jatuh Tempo | 5=Telat . . Hari | 6=Biaya Admin Belum Terbayar]
+          - name: textSearch
+            value: ""
+            description: Text Search [OPTIONAL][STRING]
+    response:
+      status: 503
+      statusText: Service Unavailable
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 03 Apr 2024 10:28:45 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Jam operasional Pinang Performa dari jam XX.XX - XX.XX WIB setiap hari. Kembali lagi nanti, ya!",
+              "status": 503
+          }
+  - name: Error - Token Expired
+    request:
+      url: "{{base-url-local}}/v/1/partnership/cl/list-monitoring-pinjaman"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: startIndex
+            value: ""
+            description: Start Index [OPTIONAL][NUMBER]
+          - name: recordCount
+            value: ""
+            description: Record Count [OPTIONAL][NUMBER]
+          - name: sortBy
+            value: ""
+            description: Sort By [OPTIONAL][STRING][name asc|desc, nominal asc|desc, due_date asc|desc]
+          - name: filterStatus
+            value: ""
+            description: Filter Status [OPTIONAL][INT][-1=All Kecuali Lunas | 1=Aktif | 2=Lunas | 3=H-. . Jatuh Tempo | 4=Jatuh Tempo | 5=Telat . . Hari | 6=Biaya Admin Belum Terbayar]
+          - name: textSearch
+            value: ""
+            description: Text Search [OPTIONAL][STRING]
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 03 Apr 2024 10:28:45 GMT
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "status": 401,
+              "message": "token has invalid claims: token is expired"
+          }
+  - name: Error - Parameter Token / API Key Empty
+    request:
+      url: "{{base-url-local}}/v/1/partnership/cl/list-monitoring-pinjaman"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+          disabled: true
+      body:
+        type: form-urlencoded
+        data:
+          - name: startIndex
+            value: "0"
+            description: Start Index [OPTIONAL][NUMBER]
+          - name: recordCount
+            value: "10"
+            description: Record Count [OPTIONAL][NUMBER]
+          - name: sortBy
+            value: "due_date desc"
+            description: Sort By [OPTIONAL][STRING][name asc|desc, nominal asc|desc, due_date asc|desc]
+          - name: filterStatus
+            value: "-1"
+            description: Filter Status [OPTIONAL][INT][-1=All Kecuali Lunas | 1=Aktif | 2=Lunas | 3=H-. . Jatuh Tempo | 4=Jatuh Tempo | 5=Telat . . Hari | 6=Biaya Admin Belum Terbayar]
+          - name: textSearch
+            value: ""
+            description: Text Search [OPTIONAL][STRING]
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Date
+          value: Thu, 19 Sep 2024 06:33:35 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "51"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "parameter token is empty",
+              "status": 401
+          }
+  - name: Error - Access Forbidden
+    request:
+      url: "{{base-url-local}}/v/1/partnership/cl/list-monitoring-pinjaman"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: startIndex
+            value: "0"
+            description: Start Index [OPTIONAL][NUMBER]
+          - name: recordCount
+            value: "10"
+            description: Record Count [OPTIONAL][NUMBER]
+          - name: sortBy
+            value: "due_date desc"
+            description: Sort By [OPTIONAL][STRING][name asc|desc, nominal asc|desc, due_date asc|desc]
+          - name: filterStatus
+            value: "-1"
+            description: Filter Status [OPTIONAL][INT][-1=All Kecuali Lunas | 1=Aktif | 2=Lunas | 3=H-. . Jatuh Tempo | 4=Jatuh Tempo | 5=Telat . . Hari | 6=Biaya Admin Belum Terbayar]
+          - name: textSearch
+            value: ""
+            description: Text Search [OPTIONAL][STRING]
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Date
+          value: Thu, 19 Sep 2024 06:36:27 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "76"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "you don't have permission to access this resource",
+              "status": 403
+          }
+  - name: Error - Access Forbidden (No Data Partnership)
+    request:
+      url: "{{base-url-local}}/v/1/partnership/cl/list-monitoring-pinjaman"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: startIndex
+            value: "0"
+            description: Start Index [OPTIONAL][NUMBER]
+          - name: recordCount
+            value: "10"
+            description: Record Count [OPTIONAL][NUMBER]
+          - name: sortBy
+            value: "due_date desc"
+            description: Sort By [OPTIONAL][STRING][name asc|desc, nominal asc|desc, due_date asc|desc]
+          - name: filterStatus
+            value: "-1"
+            description: Filter Status [OPTIONAL][INT][-1=All Kecuali Lunas | 1=Aktif | 2=Lunas | 3=H-. . Jatuh Tempo | 4=Jatuh Tempo | 5=Telat . . Hari | 6=Biaya Admin Belum Terbayar]
+          - name: textSearch
+            value: ""
+            description: Text Search [OPTIONAL][STRING]
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Date
+          value: Thu, 19 Sep 2024 06:36:56 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "70"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "your access to this resource is unactivated",
+              "status": 403
+          }
+  - name: Error - Access Forbidden (Status Not Access)
+    request:
+      url: "{{base-url-local}}/v/1/partnership/cl/list-monitoring-pinjaman"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: startIndex
+            value: "0"
+            description: Start Index [OPTIONAL][NUMBER]
+          - name: recordCount
+            value: "10"
+            description: Record Count [OPTIONAL][NUMBER]
+          - name: sortBy
+            value: "due_date desc"
+            description: Sort By [OPTIONAL][STRING][name asc|desc, nominal asc|desc, due_date asc|desc]
+          - name: filterStatus
+            value: "-1"
+            description: Filter Status [OPTIONAL][INT][-1=All Kecuali Lunas | 1=Aktif | 2=Lunas | 3=H-. . Jatuh Tempo | 4=Jatuh Tempo | 5=Telat . . Hari | 6=Biaya Admin Belum Terbayar]
+          - name: textSearch
+            value: ""
+            description: Text Search [OPTIONAL][STRING]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Thu, 19 Sep 2024 06:37:25 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "62"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Data tidak dapat diakses.",
+              "status": 403
+          }
+  - name: Error - Parameter Validation (Total Mandatory Tidak Sesuai)
+    request:
+      url: "{{base-url-local}}/v/1/partnership/cl/list-monitoring-pinjaman"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: startIndex
+            value: "0"
+            description: Start Index [OPTIONAL][NUMBER]
+          - name: recordCount
+            value: "10"
+            description: Record Count [OPTIONAL][NUMBER]
+          - name: sortBy
+            value: "due_date desc"
+            description: Sort By [OPTIONAL][STRING][name asc|desc, nominal asc|desc, due_date asc|desc]
+          - name: filterStatus
+            value: "-1"
+            description: Filter Status [OPTIONAL][INT][-1=All Kecuali Lunas | 1=Aktif | 2=Lunas | 3=H-. . Jatuh Tempo | 4=Jatuh Tempo | 5=Telat . . Hari | 6=Biaya Admin Belum Terbayar]
+          - name: textSearch
+            value: ""
+            description: Text Search [OPTIONAL][STRING]
+          - name: extraParam
+            value: "invalid"
+            description: Extra Param [MAKES VALIDATION FAIL]
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Thu, 19 Sep 2024 06:37:56 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "63"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Parameter tidak terpenuhi.",
+              "status": 400
+          }
+  - name: Error - Parameter Validation (Tidak Sesuai)
+    request:
+      url: "{{base-url-local}}/v/1/partnership/cl/list-monitoring-pinjaman"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: startIndex
+            value: "invalid"
+            description: Start Index [OPTIONAL][NUMBER]
+          - name: recordCount
+            value: "10"
+            description: Record Count [OPTIONAL][NUMBER]
+          - name: sortBy
+            value: "due_date desc"
+            description: Sort By [OPTIONAL][STRING][name asc|desc, nominal asc|desc, due_date asc|desc]
+          - name: filterStatus
+            value: "-1"
+            description: Filter Status [OPTIONAL][INT][-1=All Kecuali Lunas | 1=Aktif | 2=Lunas | 3=H-. . Jatuh Tempo | 4=Jatuh Tempo | 5=Telat . . Hari | 6=Biaya Admin Belum Terbayar]
+          - name: textSearch
+            value: ""
+            description: Text Search [OPTIONAL][STRING]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Date
+          value: Thu, 19 Sep 2024 06:38:29 GMT
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Content-Length
+          value: "67"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "... tidak sesuai.",
+              "status": 400
+          }
+  - name: Error - Unregistered Whitelist
+    request:
+      url: "{{base-url-local}}/v/1/partnership/cl/list-monitoring-pinjaman"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: startIndex
+            value: "0"
+            description: Start Index [OPTIONAL][NUMBER]
+          - name: recordCount
+            value: "10"
+            description: Record Count [OPTIONAL][NUMBER]
+          - name: sortBy
+            value: "due_date desc"
+            description: Sort By [OPTIONAL][STRING][name asc|desc, nominal asc|desc, due_date asc|desc]
+          - name: filterStatus
+            value: "-1"
+            description: Filter Status [OPTIONAL][INT][-1=All Kecuali Lunas | 1=Aktif | 2=Lunas | 3=H-. . Jatuh Tempo | 4=Jatuh Tempo | 5=Telat . . Hari | 6=Biaya Admin Belum Terbayar]
+          - name: textSearch
+            value: ""
+            description: Text Search [OPTIONAL][STRING]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 19 Sep 2024 06:40:53 GMT
+        - name: Content-Length
+          value: "79"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Maaf, anda tidak terdaftar pada whitelist.",
+              "status": 500
+          }
+  - name: Success - List Kosong
+    request:
+      url: "{{base-url-local}}/v/1/partnership/cl/list-monitoring-pinjaman"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: startIndex
+            value: "0"
+            description: Start Index [OPTIONAL][NUMBER]
+          - name: recordCount
+            value: "10"
+            description: Record Count [OPTIONAL][NUMBER]
+          - name: sortBy
+            value: "due_date desc"
+            description: Sort By [OPTIONAL][STRING][name asc|desc, nominal asc|desc, due_date asc|desc]
+          - name: filterStatus
+            value: "-1"
+            description: Filter Status [OPTIONAL][INT][-1=All Kecuali Lunas | 1=Aktif | 2=Lunas | 3=H-. . Jatuh Tempo | 4=Jatuh Tempo | 5=Telat . . Hari | 6=Biaya Admin Belum Terbayar]
+          - name: textSearch
+            value: ""
+            description: Text Search [OPTIONAL][STRING]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 03 Apr 2024 09:23:35 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "status": 200,
+              "message": "Data Pinjaman Kosong.",
+              "data": {
+                  "list": [],
+                  "totalData": 0
+              }
+          }
+  - name: Success - List Tersedia
+    request:
+      url: "{{base-url-local}}/v/1/partnership/cl/list-monitoring-pinjaman"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyDev}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: startIndex
+            value: "0"
+            description: Start Index [OPTIONAL][NUMBER]
+          - name: recordCount
+            value: "10"
+            description: Record Count [OPTIONAL][NUMBER]
+          - name: sortBy
+            value: "due_date desc"
+            description: Sort By [OPTIONAL][STRING][name asc|desc, nominal asc|desc, due_date asc|desc]
+          - name: filterStatus
+            value: "-1"
+            description: Filter Status [OPTIONAL][INT][-1=All Kecuali Lunas | 1=Aktif | 2=Lunas | 3=H-. . Jatuh Tempo | 4=Jatuh Tempo | 5=Telat . . Hari | 6=Biaya Admin Belum Terbayar]
+          - name: textSearch
+            value: ""
+            description: Text Search [OPTIONAL][STRING]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Tue, 17 Sep 2024 10:49:15 GMT
+        - name: Content-Length
+          value: "833"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "list": [
+                      {
+                          "kodePencairan": "", // string base64
+                          "namaPeminjam": "", // string base64
+                          "nominalPinjaman": "", // string base64
+                          "tanggalJatuhTempo": "2026-10-22",
+                          "status": 1,
+                          "statusPinjaman": "Aktif"
+                      }
+                  ],
+                  "totalData": 1
+              },
+              "message": "List Tersedia.",
+              "status": 200
+          }
