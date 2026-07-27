@@ -1,0 +1,531 @@
+info:
+  name: List Monitoring Pinjaman (MF)
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{base-url-local}}/v/1/partnership/mf/list-monitoring-pinjaman"
+  headers:
+    - name: Api-Key
+      value: "{{apiKeyMerchant}}"
+  body:
+    type: form-urlencoded
+    data:
+      - name: startIndex
+        value: "0"
+        description: Start Index [OPTIONAL]
+      - name: recordCount
+        value: "10"
+        description: Record Count [OPTIONAL]
+      - name: sortBy
+        value: due_date desc
+        description: Sort By [OPTIONAL] [oneof] 'name asc' | 'name desc' | 'invoice_number asc' | 'invoice_number desc' | 'nominal asc' | 'nominal desc' | 'due_date asc' | 'due_date desc'
+      - name: filterStatus
+        value: All
+        description: Filter Status [OPTIONAL] [oneof] 'All' | 'Aktif' | 'Lunas' | 'Sebelum Jatuh Tempo' | 'Jatuh Tempo' | 'Lewat Jatuh Tempo' | 'Biaya Admin Belum Terbayar'
+      - name: textSearch
+        value: ""
+        description: Text Search [OPTIONAL]
+  auth:
+    type: bearer
+    token: "{{tokenMerchant}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 503 - Service Unavailable
+    request:
+      url: "{{base-url-local}}/v/1/partnership/mf/list-monitoring-pinjaman"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: startIndex
+            value: "0"
+            description: Start Index [OPTIONAL]
+          - name: recordCount
+            value: "10"
+            description: Record Count [OPTIONAL]
+          - name: sortBy
+            value: due_date desc
+            description: Sort By [OPTIONAL] [oneof] 'name asc' | 'name desc' | 'invoice_number asc' | 'invoice_number desc' | 'nominal asc' | 'nominal desc' | 'due_date asc' | 'due_date desc'
+          - name: filterStatus
+            value: All
+            description: Filter Status [OPTIONAL] [oneof] 'All' | 'Aktif' | 'Lunas' | 'Sebelum Jatuh Tempo' | 'Jatuh Tempo' | 'Lewat Jatuh Tempo' | 'Biaya Admin Belum Terbayar'
+          - name: textSearch
+            value: ""
+            description: Text Search [OPTIONAL]
+    response:
+      status: 503
+      statusText: Service Unavailable
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 03 Apr 2024 10:28:45 GMT
+        - name: Content-Length
+          value: "123"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Jam operasional Pinang Performa dari jam XX.XX - XX.XX WIB setiap hari. Kembali lagi nanti, ya!",
+              "status": 503
+          }
+  - name: Error - Parameter Token / API Key Empty
+    request:
+      url: "{{base-url-local}}/v/1/partnership/mf/list-monitoring-pinjaman"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: startIndex
+            value: "0"
+            description: Start Index [OPTIONAL]
+          - name: recordCount
+            value: "10"
+            description: Record Count [OPTIONAL]
+          - name: sortBy
+            value: due_date desc
+            description: Sort By [OPTIONAL] [oneof] 'name asc' | 'name desc' | 'invoice_number asc' | 'invoice_number desc' | 'nominal asc' | 'nominal desc' | 'due_date asc' | 'due_date desc'
+          - name: filterStatus
+            value: All
+            description: Filter Status [OPTIONAL] [oneof] 'All' | 'Aktif' | 'Lunas' | 'Sebelum Jatuh Tempo' | 'Jatuh Tempo' | 'Lewat Jatuh Tempo' | 'Biaya Admin Belum Terbayar'
+          - name: textSearch
+            value: ""
+            description: Text Search [OPTIONAL]
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 03 Apr 2024 10:28:45 GMT
+        - name: Content-Length
+          value: "52"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "parameter token is empty",
+              "status": 401
+          }
+  - name: Error - Unauthorized / Expired
+    request:
+      url: "{{base-url-local}}/v/1/partnership/mf/list-monitoring-pinjaman"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: startIndex
+            value: "0"
+            description: Start Index [OPTIONAL]
+          - name: recordCount
+            value: "10"
+            description: Record Count [OPTIONAL]
+          - name: sortBy
+            value: due_date desc
+            description: Sort By [OPTIONAL] [oneof] 'name asc' | 'name desc' | 'invoice_number asc' | 'invoice_number desc' | 'nominal asc' | 'nominal desc' | 'due_date asc' | 'due_date desc'
+          - name: filterStatus
+            value: All
+            description: Filter Status [OPTIONAL] [oneof] 'All' | 'Aktif' | 'Lunas' | 'Sebelum Jatuh Tempo' | 'Jatuh Tempo' | 'Lewat Jatuh Tempo' | 'Biaya Admin Belum Terbayar'
+          - name: textSearch
+            value: ""
+            description: Text Search [OPTIONAL]
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 03 Apr 2024 10:28:45 GMT
+        - name: Content-Length
+          value: "51"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Unauthorized / Expired.",
+              "status": 401
+          }
+  - name: Error - Access Forbidden
+    request:
+      url: "{{base-url-local}}/v/1/partnership/mf/list-monitoring-pinjaman"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: startIndex
+            value: "0"
+            description: Start Index [OPTIONAL]
+          - name: recordCount
+            value: "10"
+            description: Record Count [OPTIONAL]
+          - name: sortBy
+            value: due_date desc
+            description: Sort By [OPTIONAL] [oneof] 'name asc' | 'name desc' | 'invoice_number asc' | 'invoice_number desc' | 'nominal asc' | 'nominal desc' | 'due_date asc' | 'due_date desc'
+          - name: filterStatus
+            value: All
+            description: Filter Status [OPTIONAL] [oneof] 'All' | 'Aktif' | 'Lunas' | 'Sebelum Jatuh Tempo' | 'Jatuh Tempo' | 'Lewat Jatuh Tempo' | 'Biaya Admin Belum Terbayar'
+          - name: textSearch
+            value: ""
+            description: Text Search [OPTIONAL]
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 03 Apr 2024 10:28:45 GMT
+        - name: Content-Length
+          value: "77"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "you don't have permission to access this resource",
+              "status": 403
+          }
+  - name: Error - General
+    request:
+      url: "{{base-url-local}}/v/1/partnership/mf/list-monitoring-pinjaman"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: startIndex
+            value: "0"
+            description: Start Index [OPTIONAL]
+          - name: recordCount
+            value: "10"
+            description: Record Count [OPTIONAL]
+          - name: sortBy
+            value: due_date desc
+            description: Sort By [OPTIONAL] [oneof] 'name asc' | 'name desc' | 'invoice_number asc' | 'invoice_number desc' | 'nominal asc' | 'nominal desc' | 'due_date asc' | 'due_date desc'
+          - name: filterStatus
+            value: All
+            description: Filter Status [OPTIONAL] [oneof] 'All' | 'Aktif' | 'Lunas' | 'Sebelum Jatuh Tempo' | 'Jatuh Tempo' | 'Lewat Jatuh Tempo' | 'Biaya Admin Belum Terbayar'
+          - name: textSearch
+            value: ""
+            description: Text Search [OPTIONAL]
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 03 Apr 2024 10:28:45 GMT
+        - name: Content-Length
+          value: "98"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Maaf, Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 500
+          }
+  - name: Error - Parameter Validation (Start Index)
+    request:
+      url: "{{base-url-local}}/v/1/partnership/mf/list-monitoring-pinjaman"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: startIndex
+            value: abc
+            description: Start Index [OPTIONAL]
+          - name: recordCount
+            value: "10"
+            description: Record Count [OPTIONAL]
+          - name: sortBy
+            value: due_date desc
+            description: Sort By [OPTIONAL] [oneof] 'name asc' | 'name desc' | 'invoice_number asc' | 'invoice_number desc' | 'nominal asc' | 'nominal desc' | 'due_date asc' | 'due_date desc'
+          - name: filterStatus
+            value: All
+            description: Filter Status [OPTIONAL] [oneof] 'All' | 'Aktif' | 'Lunas' | 'Sebelum Jatuh Tempo' | 'Jatuh Tempo' | 'Lewat Jatuh Tempo' | 'Biaya Admin Belum Terbayar'
+          - name: textSearch
+            value: ""
+            description: Text Search [OPTIONAL]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 03 Apr 2024 10:28:45 GMT
+        - name: Content-Length
+          value: "80"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Start Index hanya boleh menggunakan angka.",
+              "status": 400
+          }
+  - name: Error - Parameter Validation (Record Count)
+    request:
+      url: "{{base-url-local}}/v/1/partnership/mf/list-monitoring-pinjaman"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: startIndex
+            value: "0"
+            description: Start Index [OPTIONAL]
+          - name: recordCount
+            value: sepuluh
+            description: Record Count [OPTIONAL]
+          - name: sortBy
+            value: due_date desc
+            description: Sort By [OPTIONAL] [oneof] 'name asc' | 'name desc' | 'invoice_number asc' | 'invoice_number desc' | 'nominal asc' | 'nominal desc' | 'due_date asc' | 'due_date desc'
+          - name: filterStatus
+            value: All
+            description: Filter Status [OPTIONAL] [oneof] 'All' | 'Aktif' | 'Lunas' | 'Sebelum Jatuh Tempo' | 'Jatuh Tempo' | 'Lewat Jatuh Tempo' | 'Biaya Admin Belum Terbayar'
+          - name: textSearch
+            value: ""
+            description: Text Search [OPTIONAL]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 03 Apr 2024 10:28:45 GMT
+        - name: Content-Length
+          value: "81"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Record Count hanya boleh menggunakan angka.",
+              "status": 400
+          }
+  - name: Error - Parameter Validation (Sort By)
+    request:
+      url: "{{base-url-local}}/v/1/partnership/mf/list-monitoring-pinjaman"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: startIndex
+            value: "0"
+            description: Start Index [OPTIONAL]
+          - name: recordCount
+            value: "10"
+            description: Record Count [OPTIONAL]
+          - name: sortBy
+            value: nama asc
+            description: Sort By [OPTIONAL] [oneof] 'name asc' | 'name desc' | 'invoice_number asc' | 'invoice_number desc' | 'nominal asc' | 'nominal desc' | 'due_date asc' | 'due_date desc'
+          - name: filterStatus
+            value: All
+            description: Filter Status [OPTIONAL] [oneof] 'All' | 'Aktif' | 'Lunas' | 'Sebelum Jatuh Tempo' | 'Jatuh Tempo' | 'Lewat Jatuh Tempo' | 'Biaya Admin Belum Terbayar'
+          - name: textSearch
+            value: ""
+            description: Text Search [OPTIONAL]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 03 Apr 2024 10:28:45 GMT
+        - name: Content-Length
+          value: "194"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Sort By harus salah satu dari: 'name asc' 'name desc' 'invoice_number asc' 'invoice_number desc' 'nominal asc' 'nominal desc' 'due_date asc' 'due_date desc'",
+              "status": 400
+          }
+  - name: Error - Parameter Validation (Filter Status)
+    request:
+      url: "{{base-url-local}}/v/1/partnership/mf/list-monitoring-pinjaman"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: startIndex
+            value: "0"
+            description: Start Index [OPTIONAL]
+          - name: recordCount
+            value: "10"
+            description: Record Count [OPTIONAL]
+          - name: sortBy
+            value: due_date desc
+            description: Sort By [OPTIONAL] [oneof] 'name asc' | 'name desc' | 'invoice_number asc' | 'invoice_number desc' | 'nominal asc' | 'nominal desc' | 'due_date asc' | 'due_date desc'
+          - name: filterStatus
+            value: aktif
+            description: Filter Status [OPTIONAL] [oneof] 'All' | 'Aktif' | 'Lunas' | 'Sebelum Jatuh Tempo' | 'Jatuh Tempo' | 'Lewat Jatuh Tempo' | 'Biaya Admin Belum Terbayar'
+          - name: textSearch
+            value: ""
+            description: Text Search [OPTIONAL]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 03 Apr 2024 10:28:45 GMT
+        - name: Content-Length
+          value: "181"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Filter Status harus salah satu dari: 'All' 'Aktif' 'Lunas' 'Sebelum Jatuh Tempo' 'Jatuh Tempo' 'Lewat Jatuh Tempo' 'Biaya Admin Belum Terbayar'",
+              "status": 400
+          }
+  - name: Success - List Kosong
+    request:
+      url: "{{base-url-local}}/v/1/partnership/mf/list-monitoring-pinjaman"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: startIndex
+            value: "0"
+            description: Start Index [OPTIONAL]
+          - name: recordCount
+            value: "10"
+            description: Record Count [OPTIONAL]
+          - name: sortBy
+            value: due_date desc
+            description: Sort By [OPTIONAL] [oneof] 'name asc' | 'name desc' | 'invoice_number asc' | 'invoice_number desc' | 'nominal asc' | 'nominal desc' | 'due_date asc' | 'due_date desc'
+          - name: filterStatus
+            value: All
+            description: Filter Status [OPTIONAL] [oneof] 'All' | 'Aktif' | 'Lunas' | 'Sebelum Jatuh Tempo' | 'Jatuh Tempo' | 'Lewat Jatuh Tempo' | 'Biaya Admin Belum Terbayar'
+          - name: textSearch
+            value: zzzznotfound
+            description: Text Search [OPTIONAL]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 03 Apr 2024 10:28:45 GMT
+        - name: Content-Length
+          value: "81"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "list": [],
+                  "totalData": 0
+              },
+              "message": "List Tidak Tersedia.",
+              "status": 200
+          }
+  - name: Error - General
+    request:
+      url: "{{base-url-local}}/v/1/partnership/mf/list-monitoring-pinjaman"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: startIndex
+            value: "0"
+            description: Start Index [OPTIONAL]
+          - name: recordCount
+            value: "10"
+            description: Record Count [OPTIONAL]
+          - name: sortBy
+            value: due_date desc
+            description: Sort By [OPTIONAL] [oneof] 'name asc' | 'name desc' | 'invoice_number asc' | 'invoice_number desc' | 'nominal asc' | 'nominal desc' | 'due_date asc' | 'due_date desc'
+          - name: filterStatus
+            value: All
+            description: Filter Status [OPTIONAL] [oneof] 'All' | 'Aktif' | 'Lunas' | 'Sebelum Jatuh Tempo' | 'Jatuh Tempo' | 'Lewat Jatuh Tempo' | 'Biaya Admin Belum Terbayar'
+          - name: textSearch
+            value: ""
+            description: Text Search [OPTIONAL]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 03 Apr 2024 10:28:45 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Maaf, Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 500
+          }
+  - name: Success - List Tersedia
+    request:
+      url: "{{base-url-local}}/v/1/partnership/mf/list-monitoring-pinjaman"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: startIndex
+            value: "0"
+            description: Start Index [OPTIONAL]
+          - name: recordCount
+            value: "10"
+            description: Record Count [OPTIONAL]
+          - name: sortBy
+            value: due_date desc
+            description: Sort By [OPTIONAL] [oneof] 'name asc' | 'name desc' | 'invoice_number asc' | 'invoice_number desc' | 'nominal asc' | 'nominal desc' | 'due_date asc' | 'due_date desc'
+          - name: filterStatus
+            value: All
+            description: Filter Status [OPTIONAL] [oneof] 'All' | 'Aktif' | 'Lunas' | 'Sebelum Jatuh Tempo' | 'Jatuh Tempo' | 'Lewat Jatuh Tempo' | 'Biaya Admin Belum Terbayar'
+          - name: textSearch
+            value: ""
+            description: Text Search [OPTIONAL]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 03 Apr 2024 10:28:45 GMT
+        - name: Content-Length
+          value: "294"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "list": [
+                      {
+                          "kodePencairan": "RVgtTUoxLTIwMjYwMDAwMDE=",
+                          "namaPeminjam": "RHdpIEFqaSBTYXB1dHJh",
+                          "nominalPinjaman": "MTAwMDAwMDA=",
+                          "nomorInvoice": "INV/MJ1/2026/0001",
+                          "status": 1,
+                          "statusPinjaman": "Aktif",
+                          "tanggalJatuhTempo": "2026-10-22"
+                      }
+                  ],
+                  "totalData": 1
+              },
+              "message": "List Tersedia.",
+              "status": 200
+          }
