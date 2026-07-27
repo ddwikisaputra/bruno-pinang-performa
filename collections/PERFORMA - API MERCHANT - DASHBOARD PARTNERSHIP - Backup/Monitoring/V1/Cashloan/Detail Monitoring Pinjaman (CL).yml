@@ -1,0 +1,392 @@
+info:
+  name: Detail Monitoring Pinjaman (CL)
+  type: http
+  seq: 6
+
+http:
+  method: POST
+  url: "{{base-url-local}}/v/1/partnership/cl/detail-monitoring-pinjaman"
+  headers:
+    - name: Api-Key
+      value: "{{apiKeyMerchant}}"
+  body:
+    type: form-urlencoded
+    data:
+      - name: kodePencairan
+        value: Q0wtRElTQi0yMDI2MDAwMDAx
+        description: Kode Pencairan [MANDATORY] [Base64]
+  auth:
+    type: bearer
+    token: "{{tokenMerchant}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 503 - Service Unavailable
+    request:
+      url: "{{base-url-local}}/v/1/partnership/cl/detail-monitoring-pinjaman"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePencairan
+            value: Q0wtRElTQi0yMDI2MDAwMDAx
+            description: Kode Pencairan [MANDATORY] [Base64]
+    response:
+      status: 503
+      statusText: Service Unavailable
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 03 Apr 2024 10:28:45 GMT
+        - name: Content-Length
+          value: "123"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Jam operasional Pinang Performa dari jam XX.XX - XX.XX WIB setiap hari. Kembali lagi nanti, ya!",
+              "status": 503
+          }
+  - name: Error - Parameter Token / API Key Empty
+    request:
+      url: "{{base-url-local}}/v/1/partnership/cl/detail-monitoring-pinjaman"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePencairan
+            value: Q0wtRElTQi0yMDI2MDAwMDAx
+            description: Kode Pencairan [MANDATORY] [Base64]
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 03 Apr 2024 10:28:45 GMT
+        - name: Content-Length
+          value: "52"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "parameter token is empty",
+              "status": 401
+          }
+  - name: Error - Unauthorized / Expired
+    request:
+      url: "{{base-url-local}}/v/1/partnership/cl/detail-monitoring-pinjaman"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePencairan
+            value: Q0wtRElTQi0yMDI2MDAwMDAx
+            description: Kode Pencairan [MANDATORY] [Base64]
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 03 Apr 2024 10:28:45 GMT
+        - name: Content-Length
+          value: "51"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Unauthorized / Expired.",
+              "status": 401
+          }
+  - name: Error - Access Forbidden
+    request:
+      url: "{{base-url-local}}/v/1/partnership/cl/detail-monitoring-pinjaman"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePencairan
+            value: Q0wtRElTQi0yMDI2MDAwMDAx
+            description: Kode Pencairan [MANDATORY] [Base64]
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 03 Apr 2024 10:28:45 GMT
+        - name: Content-Length
+          value: "77"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "you don't have permission to access this resource",
+              "status": 403
+          }
+  - name: Error - General
+    request:
+      url: "{{base-url-local}}/v/1/partnership/cl/detail-monitoring-pinjaman"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePencairan
+            value: Q0wtRElTQi0yMDI2MDAwMDAx
+            description: Kode Pencairan [MANDATORY] [Base64]
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 03 Apr 2024 10:28:45 GMT
+        - name: Content-Length
+          value: "98"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Maaf, Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 500
+          }
+  - name: Error - Parameter Validation (Kode Pencairan)
+    request:
+      url: "{{base-url-local}}/v/1/partnership/cl/detail-monitoring-pinjaman"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePencairan
+            value: Q0wtRElTQi0yMDI2MDAwMDAx
+            description: Kode Pencairan [MANDATORY] [Base64]
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 03 Apr 2024 10:28:45 GMT
+        - name: Content-Length
+          value: "71"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Kode Pencairan tidak boleh kosong",
+              "status": 400
+          }
+  - name: Error - Invalid Kode Pencairan
+    request:
+      url: "{{base-url-local}}/v/1/partnership/cl/detail-monitoring-pinjaman"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePencairan
+            value: "!!!invalid-base64!!!"
+            description: Kode Pencairan [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 03 Apr 2024 10:28:45 GMT
+        - name: Content-Length
+          value: "61"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Invalid kode pencairan.",
+              "status": 400
+          }
+  - name: Error - Access Forbidden (Data Not Match)
+    request:
+      url: "{{base-url-local}}/v/1/partnership/cl/detail-monitoring-pinjaman"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePencairan
+            value: Q0wtWFgtMDAwMDAwMDAwMA==
+            description: Kode Pencairan [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 03 Apr 2024 10:28:45 GMT
+        - name: Content-Length
+          value: "87"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "you don't have permission to access this resource",
+              "status": 403
+          }
+  - name: Success - Detail Tidak Tersedia
+    request:
+      url: "{{base-url-local}}/v/1/partnership/cl/detail-monitoring-pinjaman"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePencairan
+            value: Q0wtRElTQi0yMDI2MDAwMDAx
+            description: Kode Pencairan [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 03 Apr 2024 10:28:45 GMT
+        - name: Content-Length
+          value: "58"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Data Tidak Tersedia.",
+              "status": 200
+          }
+  - name: Error - General
+    request:
+      url: "{{base-url-local}}/v/1/partnership/cl/detail-monitoring-pinjaman"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePencairan
+            value: Q0wtRElTQi0yMDI2MDAwMDAx
+            description: Kode Pencairan [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 03 Apr 2024 10:28:45 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Maaf, Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 500
+          }
+  - name: Success - Data Cicilan Kosong
+    request:
+      url: "{{base-url-local}}/v/1/partnership/cl/detail-monitoring-pinjaman"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePencairan
+            value: Q0wtRElTQi0yMDI2MDAwMDAx
+            description: Kode Pencairan [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 03 Apr 2024 10:28:45 GMT
+        - name: Content-Length
+          value: "58"
+      body:
+        type: json
+        data: |-
+          {
+              "data": [],
+              "message": "Data Cicilan Kosong.",
+              "status": 200
+          }
+  - name: Success - Detail Tersedia
+    request:
+      url: "{{base-url-local}}/v/1/partnership/cl/detail-monitoring-pinjaman"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePencairan
+            value: Q0wtRElTQi0yMDI2MDAwMDAx
+            description: Kode Pencairan [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 03 Apr 2024 10:28:45 GMT
+        - name: Content-Length
+          value: "873"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "adminPembayaran": "NTAwMDA=",
+                  "bungaPembayaran": "MTUwMDAw",
+                  "dendaPembayaran": "MA==",
+                  "jangkaWaktu": "14 Hari",
+                  "kodePencairan": "Q0wtRElTQi0yMDI2MDAwMDAx",
+                  "listCicilan": [
+                      {
+                          "kodePencairan": "Q0wtRElTQi0yMDI2MDAwMDAx",
+                          "sequenceCicilan": "MQ==",
+                          "totalSequenceCicilan": "MTQ=",
+                          "jatuhTempoCicilan": "MjAyNi0xMC0yMg==",
+                          "pokokCicilan": "NTAwMDAwMA==",
+                          "bungaCicilan": "MTUwMDAw",
+                          "dendaCicilan": "MA==",
+                          "totalCicilan": "NTE1MDAwMA==",
+                          "status": 1,
+                          "statusText": "Aktif",
+                          "isCicilanAktif": 1
+                      }
+                  ],
+                  "namaPeminjam": "RHdpIEFqaSBTYXB1dHJh",
+                  "nominalPinjaman": "MTAwMDAwMDA=",
+                  "nomorInvoice": "CL-DISB-2026000001",
+                  "nomorRekeningPembayaran": "MDA3MTIzNDU2Nzg5MA==",
+                  "pokokPembayaran": "NTAwMDAwMA==",
+                  "rincianPembayaran": "NTIwMDAwMA==",
+                  "status": 1,
+                  "statusPinjaman": "Aktif",
+                  "tanggalJatuhTempo": "2026-10-22",
+                  "tanggalPencairan": "2026-10-08",
+                  "totalPembayaran": "NTIwMDAwMA=="
+              },
+              "message": "List Tersedia.",
+              "status": 200
+          }
