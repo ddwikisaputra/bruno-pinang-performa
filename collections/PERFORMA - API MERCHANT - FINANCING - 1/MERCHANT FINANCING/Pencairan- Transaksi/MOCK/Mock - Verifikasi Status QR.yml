@@ -1,0 +1,43 @@
+info:
+  name: Mock - Verifikasi Status QR
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: https://pinang-performa.free.mockoapp.net/v/1/pencairan/verifikasi-qr/200-success
+  headers:
+    - name: x-key
+      value: performa
+  params:
+    - name: "401"
+      value: ""
+      type: query
+      disabled: true
+    - name: "403"
+      value: ""
+      type: query
+      disabled: true
+    - name: 400-error-param
+      value: ""
+      type: query
+      disabled: true
+    - name: 401-token-empty
+      value: ""
+      type: query
+      disabled: true
+    - name: 500-failed
+      value: ""
+      type: query
+      disabled: true
+    - name: 200-success
+      value: ""
+      type: query
+      disabled: true
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
