@@ -1,0 +1,130 @@
+info:
+  name: SACADETAIL (NEW)
+  type: http
+  seq: 14
+
+http:
+  method: POST
+  url: https://api-bem.dev.rayain.net/bem/v1/cbs/inquirySACADetail
+  headers:
+    - name: content-type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "branch": "0206",
+        "accountNumber": "001001000002303",
+        "requestBy": "PINANG",
+        "userId": "9997891",
+        "bankCode": "494",
+        "productCode": "002"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: error - bri
+    request:
+      url: https://api-bem.dev.rayain.net/bem/v1/cbs/inquirySACADetail
+      method: POST
+      headers:
+        - name: content-type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "branch": "0206",
+            "accountNumber": "20601121736506",
+            "requestBy": "PINANG",
+            "userId": "9997891",
+            "bankCode": "494",
+            "productCode": "002"
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: date
+          value: Fri, 31 Jul 2026 07:05:59 GMT
+        - name: content-type
+          value: application/json
+        - name: content-length
+          value: "61"
+        - name: grpc-metadata-content-type
+          value: application/grpc
+        - name: strict-transport-security
+          value: max-age=31536000; includeSubDomains
+        - name: via
+          value: 1.1 google
+        - name: alt-svc
+          value: h3=":443"; ma=2592000
+      body:
+        type: json
+        data: |-
+          {
+            "body": {
+              "responseCode": "76",
+              "responseDesc": "Inquriy Gagal"
+            }
+          }
+  - name: success - raya
+    request:
+      url: https://api-bem.dev.rayain.net/bem/v1/cbs/inquirySACADetail
+      method: POST
+      headers:
+        - name: content-type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "branch": "0206",
+            "accountNumber": "001001000002303",
+            "requestBy": "PINANG",
+            "userId": "9997891",
+            "bankCode": "494",
+            "productCode": "002"
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: date
+          value: Fri, 31 Jul 2026 07:11:32 GMT
+        - name: content-type
+          value: application/json
+        - name: content-length
+          value: "267"
+        - name: grpc-metadata-content-type
+          value: application/grpc
+        - name: strict-transport-security
+          value: max-age=31536000; includeSubDomains
+        - name: via
+          value: 1.1 google
+        - name: alt-svc
+          value: h3=":443"; ma=2592000
+      body:
+        type: json
+        data: |-
+          {
+            "body": {
+              "avaliableBalance": 197893685,
+              "cifNo": "0000000002",
+              "idNo": "1401121606760002",
+              "idType": "KT",
+              "ledgerBalance": 197943685,
+              "minimumBalance": 50000,
+              "name": "MARIHOT PARTOMUAN SIPAHUTAR",
+              "responseCode": "00",
+              "responseDesc": "SUCCESS",
+              "sccode": "",
+              "statusRekening": "Open"
+            }
+          }
