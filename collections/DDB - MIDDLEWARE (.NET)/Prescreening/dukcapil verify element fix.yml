@@ -1,11 +1,11 @@
 info:
   name: dukcapil verify element fix
   type: http
-  seq: 2
+  seq: 1
 
 http:
   method: POST
-  url: "{{base_url_dev}}/api/digiagri/dukcapilverifyelementwithresult"
+  url: "{{base_url_prod}}/api/digiagri/dukcapilverifyelementwithresult"
   body:
     type: form-urlencoded
     data:
@@ -13,10 +13,10 @@ http:
         value: OTk5OTQx
         description: User ID Aplikasi (Base64)
       - name: noKTP
-        value: MzIwNjEyMDUwNjg1MDAwMg==
+        value: MzE3MTA1MTIxMTk1MDAwMQ==
         description: Nomor KTP (Base64)
       - name: namaLengkap
-        value: RHdpa2kgU2FwdXRyYQ==
+        value: Uml6a2EgQXVsaWEgRmVicmlhbnRp
         description: Nama Lengkap sesuai KTP (Base64)
       - name: tempatLahir
         value: SmFrYXJ0YQ==
