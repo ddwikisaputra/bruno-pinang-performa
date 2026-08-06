@@ -1,0 +1,705 @@
+info:
+  name: Verifikasi Status QR
+  type: http
+  seq: 10
+
+http:
+  method: POST
+  url: "{{base-url-local}}/v/1/pencairan/verifikasi-status-qr"
+  headers:
+    - name: Api-Key
+      value: "{{apiKeyMerchant}}"
+  body:
+    type: form-urlencoded
+    data:
+      - name: kodePrakarsa
+        value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrN2lkR2NuRTdkRjB0WXIzTi9NQVV1eTZ1RWluM2JSRXc9
+        description: Kode Prakarsa [MANDATORY] [Base64] (express_prakarsa.references.id)
+      - name: kodePartnership
+        value: TUox
+        description: Kode Partnership [MANDATORY] [Base64]
+      - name: kodeQR
+        value: "20260805120405000001"
+        description: Kode QR [MANDATORY] [Numeric] (qr_disbursement.qr_code - nilai placeholder, perlu nilai QR asli)
+  auth:
+    type: bearer
+    token: "{{tokenMerchant}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Error - Parameter Validation (Total Mandatory)
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/verifikasi-status-qr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrN2lkR2NuRTdkRjB0WXIzTi9NQVV1eTZ1RWluM2JSRXc9
+            description: Kode Prakarsa [MANDATORY] [Base64] (express_prakarsa.references.id)
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: kodeQR
+            value: "20260805120405000001"
+            description: Kode QR [MANDATORY] [Numeric] (qr_disbursement.qr_code - nilai placeholder, perlu nilai QR asli)
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 05 Aug 2026 05:29:48 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Parameter tidak terpenuhi.",
+              "status": 400
+          }
+  - name: Error - Parameter Validation (Tidak Sesuai) [Kode QR]
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/verifikasi-status-qr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrN2lkR2NuRTdkRjB0WXIzTi9NQVV1eTZ1RWluM2JSRXc9
+            description: Kode Prakarsa [MANDATORY] [Base64] (express_prakarsa.references.id)
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: kodeQR
+            value: abc123
+            description: Kode QR [MANDATORY] [Numeric]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 05 Aug 2026 05:29:48 GMT
+        - name: Content-Length
+          value: "77"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Kode QR tidak sesuai.",
+              "status": 400
+          }
+  - name: Error - Parameter Token / API Key Empty
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/verifikasi-status-qr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+          disabled: true
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrN2lkR2NuRTdkRjB0WXIzTi9NQVV1eTZ1RWluM2JSRXc9
+            description: Kode Prakarsa [MANDATORY] [Base64] (express_prakarsa.references.id)
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: kodeQR
+            value: "20260805120405000001"
+            description: Kode QR [MANDATORY] [Numeric] (qr_disbursement.qr_code - nilai placeholder, perlu nilai QR asli)
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 05 Aug 2026 05:29:48 GMT
+        - name: Content-Length
+          value: "64"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "parameter token is empty",
+              "status": 400
+          }
+  - name: Error - Token Expired
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/verifikasi-status-qr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrN2lkR2NuRTdkRjB0WXIzTi9NQVV1eTZ1RWluM2JSRXc9
+            description: Kode Prakarsa [MANDATORY] [Base64] (express_prakarsa.references.id)
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: kodeQR
+            value: "20260805120405000001"
+            description: Kode QR [MANDATORY] [Numeric] (qr_disbursement.qr_code - nilai placeholder, perlu nilai QR asli)
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 05 Aug 2026 05:29:48 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "token has invalid claims: token is expired",
+              "status": 401
+          }
+  - name: Error - Unauthorized / Expired
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/verifikasi-status-qr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrN2lkR2NuRTdkRjB0WXIzTi9NQVV1eTZ1RWluM2JSRXc9
+            description: Kode Prakarsa [MANDATORY] [Base64] (express_prakarsa.references.id)
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: kodeQR
+            value: "20260805120405000001"
+            description: Kode QR [MANDATORY] [Numeric] (qr_disbursement.qr_code - nilai placeholder, perlu nilai QR asli)
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 05 Aug 2026 05:29:48 GMT
+        - name: Content-Length
+          value: "63"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Unauthorized / Expired.",
+              "status": 401
+          }
+  - name: Error - Access Forbidden
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/verifikasi-status-qr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrN2lkR2NuRTdkRjB0WXIzTi9NQVV1eTZ1RWluM2JSRXc9
+            description: Kode Prakarsa [MANDATORY] [Base64] (express_prakarsa.references.id)
+          - name: kodePartnership
+            value: QkxBLTUwMTA=
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: kodeQR
+            value: "20260805120405000001"
+            description: Kode QR [MANDATORY] [Numeric] (qr_disbursement.qr_code - nilai placeholder, perlu nilai QR asli)
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 05 Aug 2026 05:29:48 GMT
+        - name: Content-Length
+          value: "89"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "you don't have permission to access this resource",
+              "status": 403
+          }
+  - name: Error - Access Forbidden (Unactivated)
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/verifikasi-status-qr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrN2lkR2NuRTdkRjB0WXIzTi9NQVV1eTZ1RWluM2JSRXc9
+            description: Kode Prakarsa [MANDATORY] [Base64] (express_prakarsa.references.id)
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: kodeQR
+            value: "20260805120405000001"
+            description: Kode QR [MANDATORY] [Numeric] (qr_disbursement.qr_code - nilai placeholder, perlu nilai QR asli)
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 05 Aug 2026 05:29:48 GMT
+        - name: Content-Length
+          value: "83"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "your access to this resource is unactivated",
+              "status": 403
+          }
+  - name: Error - Access Forbidden (No Data Partnership)
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/verifikasi-status-qr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrN2lkR2NuRTdkRjB0WXIzTi9NQVV1eTZ1RWluM2JSRXc9
+            description: Kode Prakarsa [MANDATORY] [Base64] (express_prakarsa.references.id)
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: kodeQR
+            value: "20260805120405000001"
+            description: Kode QR [MANDATORY] [Numeric] (qr_disbursement.qr_code - nilai placeholder, perlu nilai QR asli)
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 05 Aug 2026 05:29:48 GMT
+        - name: Content-Length
+          value: "65"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Data tidak dapat diakses.",
+              "status": 403
+          }
+  - name: Error - Unregistered Whitelist
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/verifikasi-status-qr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrN2lkR2NuRTdkRjB0WXIzTi9NQVV1eTZ1RWluM2JSRXc9
+            description: Kode Prakarsa [MANDATORY] [Base64] (express_prakarsa.references.id)
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: kodeQR
+            value: "20260805120405000001"
+            description: Kode QR [MANDATORY] [Numeric] (qr_disbursement.qr_code - nilai placeholder, perlu nilai QR asli)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 05 Aug 2026 05:29:48 GMT
+        - name: Content-Length
+          value: "98"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Maaf, anda tidak terdaftar pada whitelist.",
+              "status": 500
+          }
+  - name: Error - Access Forbidden (Kode Partnership Tidak Cocok)
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/verifikasi-status-qr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrN2lkR2NuRTdkRjB0WXIzTi9NQVV1eTZ1RWluM2JSRXc9
+            description: Kode Prakarsa [MANDATORY] [Base64] (express_prakarsa.references.id)
+          - name: kodePartnership
+            value: QkxBLTUwMTA=
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: kodeQR
+            value: "20260805120405000001"
+            description: Kode QR [MANDATORY] [Numeric] (qr_disbursement.qr_code - nilai placeholder, perlu nilai QR asli)
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 05 Aug 2026 05:29:48 GMT
+        - name: Content-Length
+          value: "89"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "you don't have permission to access this resource",
+              "status": 403
+          }
+  - name: Error - Access Forbidden (Partnership Tidak Terdaftar)
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/verifikasi-status-qr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrN2lkR2NuRTdkRjB0WXIzTi9NQVV1eTZ1RWluM2JSRXc9
+            description: Kode Prakarsa [MANDATORY] [Base64] (express_prakarsa.references.id)
+          - name: kodePartnership
+            value: Wlpa
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: kodeQR
+            value: "20260805120405000001"
+            description: Kode QR [MANDATORY] [Numeric] (qr_disbursement.qr_code - nilai placeholder, perlu nilai QR asli)
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 05 Aug 2026 05:29:48 GMT
+        - name: Content-Length
+          value: "83"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "your access to this resource is unactivated",
+              "status": 403
+          }
+  - name: Error - Access Forbidden (Status Not Access)
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/verifikasi-status-qr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrN2lkR2NuRTdkRjB0WXIzTi9NQVV1eTZ1RWluM2JSRXc9
+            description: Kode Prakarsa [MANDATORY] [Base64] (express_prakarsa.references.id)
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: kodeQR
+            value: "20260805120405000001"
+            description: Kode QR [MANDATORY] [Numeric] (qr_disbursement.qr_code - nilai placeholder, perlu nilai QR asli)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 05 Aug 2026 05:29:48 GMT
+        - name: Content-Length
+          value: "81"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Data tidak dapat diakses.",
+              "status": 403
+          }
+  - name: Error - Prakarsa Not Found
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/verifikasi-status-qr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrN2lkR2NuRTdkRjB0WXIzTi9NQVV1eTZ1RWluM2JSRXc9
+            description: Kode Prakarsa [MANDATORY] [Base64] (express_prakarsa.references.id)
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: kodeQR
+            value: "20260805120405000001"
+            description: Kode QR [MANDATORY] [Numeric] (qr_disbursement.qr_code - nilai placeholder, perlu nilai QR asli)
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 05 Aug 2026 05:29:48 GMT
+        - name: Content-Length
+          value: "81"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Data tidak dapat diakses.",
+              "status": 403
+          }
+  - name: Error - General
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/verifikasi-status-qr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrN2lkR2NuRTdkRjB0WXIzTi9NQVV1eTZ1RWluM2JSRXc9
+            description: Kode Prakarsa [MANDATORY] [Base64] (express_prakarsa.references.id)
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: kodeQR
+            value: "20260805120405000001"
+            description: Kode QR [MANDATORY] [Numeric] (qr_disbursement.qr_code - nilai placeholder, perlu nilai QR asli)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 05 Aug 2026 05:29:48 GMT
+        - name: Content-Length
+          value: "126"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Maaf, Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 500
+          }
+  - name: Success - Status QR [Belum Verifikasi]
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/verifikasi-status-qr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrN2lkR2NuRTdkRjB0WXIzTi9NQVV1eTZ1RWluM2JSRXc9
+            description: Kode Prakarsa [MANDATORY] [Base64] (express_prakarsa.references.id)
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: kodeQR
+            value: "20260805120405000001"
+            description: Kode QR [MANDATORY] [Numeric] (qr_disbursement.qr_code - nilai placeholder, perlu nilai QR asli)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 05 Aug 2026 05:29:48 GMT
+        - name: Content-Length
+          value: "114"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "belum-verifikasi"
+              },
+              "message": "Data Ditemukan",
+              "status": 200
+          }
+  - name: Success - Status QR [Kedaluwarsa]
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/verifikasi-status-qr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrN2lkR2NuRTdkRjB0WXIzTi9NQVV1eTZ1RWluM2JSRXc9
+            description: Kode Prakarsa [MANDATORY] [Base64] (express_prakarsa.references.id)
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: kodeQR
+            value: "20260805120405000001"
+            description: Kode QR [MANDATORY] [Numeric] (qr_disbursement.qr_code - nilai placeholder, perlu nilai QR asli)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 05 Aug 2026 05:29:48 GMT
+        - name: Content-Length
+          value: "108"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "qr-expired"
+              },
+              "message": "Data Ditemukan",
+              "status": 200
+          }
+  - name: Error - Status QR [Tidak Ditemukan]
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/verifikasi-status-qr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrN2lkR2NuRTdkRjB0WXIzTi9NQVV1eTZ1RWluM2JSRXc9
+            description: Kode Prakarsa [MANDATORY] [Base64] (express_prakarsa.references.id)
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: kodeQR
+            value: "99999999999999999999"
+            description: Kode QR [MANDATORY] [Numeric] - nilai QR yang tidak terdaftar
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 05 Aug 2026 05:29:48 GMT
+        - name: Content-Length
+          value: "110"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "qr-not-found"
+              },
+              "message": "Data Ditemukan",
+              "status": 200
+          }
+  - name: Success - Status QR [Form Pencairan]
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/verifikasi-status-qr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrN2lkR2NuRTdkRjB0WXIzTi9NQVV1eTZ1RWluM2JSRXc9
+            description: Kode Prakarsa [MANDATORY] [Base64] (express_prakarsa.references.id)
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: kodeQR
+            value: "20260805120405000001"
+            description: Kode QR [MANDATORY] [Numeric] (qr_disbursement.qr_code - nilai placeholder, perlu nilai QR asli)
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 05 Aug 2026 05:29:48 GMT
+        - name: Content-Length
+          value: "156"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "form-pencairan",
+                  "nominal": "MjAwMDAw",
+                  "tenor": "Mw==",
+                  "nomorInvoice": "SU5WLTIwMjYwODA1MTIwNDA1MDAwMDAx"
+              },
+              "message": "Data Ditemukan",
+              "status": 200
+          }

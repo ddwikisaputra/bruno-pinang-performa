@@ -1,0 +1,963 @@
+info:
+  name: Verifikasi QR
+  type: http
+  seq: 9
+
+http:
+  method: POST
+  url: "{{base-url-local}}/v/1/pencairan/verifikasi-qr"
+  headers:
+    - name: Api-Key
+      value: "{{apiKeyMerchant}}"
+  body:
+    type: form-urlencoded
+    data:
+      - name: kodePartnership
+        value: TUox
+        description: Kode Partnership [MANDATORY] [Base64]
+      - name: dataParams
+        value: UExBQ0VIT0xERVItR0NNLUNJUEhFUlRFWFQtVjE=
+        description: Data Params [MANDATORY] [GCM Encode] - nilai = field "data" dari response Generate QR (AES/GCM), berisi {"qrCode":<Base64 Numeric>,"kodePrakarsa":<Base64>} (nilai placeholder - perlu capture dari Generate QR)
+      - name: nominal
+        value: MTAwMDAwMA==
+        description: Nominal [MANDATORY] [Base64] [Angka Desimal]
+      - name: nomorInvoice
+        value: SU5WLTAwMQ==
+        description: Nomor Invoice [MANDATORY] [Base64]
+      - name: tenor
+        value: Ng==
+        description: Tenor [OPTIONAL] [Base64] [Angka]
+        disabled: true
+  auth:
+    type: bearer
+    token: "{{tokenMerchant}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Error - Parameter dataParams Tidak Ditemukan
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/verifikasi-qr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: dataParams
+            value: UExBQ0VIT0xERVItR0NNLUNJUEhFUlRFWFQtVjE=
+            description: Data Params [MANDATORY] [GCM Encode] - nilai = field "data" dari response Generate QR (AES/GCM), berisi {"qrCode":<Base64 Numeric>,"kodePrakarsa":<Base64>} (nilai placeholder - perlu capture dari Generate QR)
+            disabled: true
+          - name: nominal
+            value: MTAwMDAwMA==
+            description: Nominal [MANDATORY] [Base64] [Angka Desimal]
+          - name: nomorInvoice
+            value: SU5WLTAwMQ==
+            description: Nomor Invoice [MANDATORY] [Base64]
+          - name: tenor
+            value: Ng==
+            description: Tenor [OPTIONAL] [Base64] [Angka]
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 05 Aug 2026 05:29:48 GMT
+        - name: Content-Length
+          value: "77"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Parameter dataParams tidak ditemukan.",
+              "status": 400
+          }
+  - name: Error - Parameter QR Tidak Valid
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/verifikasi-qr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: dataParams
+            value: INVALID-GCM-DATA-###
+            description: Data Params [MANDATORY] [GCM Encode] - nilai tidak valid (bukan ciphertext GCM asli dari Generate QR)
+          - name: nominal
+            value: MTAwMDAwMA==
+            description: Nominal [MANDATORY] [Base64] [Angka Desimal]
+          - name: nomorInvoice
+            value: SU5WLTAwMQ==
+            description: Nomor Invoice [MANDATORY] [Base64]
+          - name: tenor
+            value: Ng==
+            description: Tenor [OPTIONAL] [Base64] [Angka]
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 05 Aug 2026 05:29:48 GMT
+        - name: Content-Length
+          value: "65"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Parameter QR tidak valid.",
+              "status": 400
+          }
+  - name: Error - Parameter Token / API Key Empty
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/verifikasi-qr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+          disabled: true
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: dataParams
+            value: UExBQ0VIT0xERVItR0NNLUNJUEhFUlRFWFQtVjE=
+            description: Data Params [MANDATORY] [GCM Encode] - nilai = field "data" dari response Generate QR (AES/GCM), berisi {"qrCode":<Base64 Numeric>,"kodePrakarsa":<Base64>} (nilai placeholder - perlu capture dari Generate QR)
+          - name: nominal
+            value: MTAwMDAwMA==
+            description: Nominal [MANDATORY] [Base64] [Angka Desimal]
+          - name: nomorInvoice
+            value: SU5WLTAwMQ==
+            description: Nomor Invoice [MANDATORY] [Base64]
+          - name: tenor
+            value: Ng==
+            description: Tenor [OPTIONAL] [Base64] [Angka]
+            disabled: true
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 05 Aug 2026 05:29:48 GMT
+        - name: Content-Length
+          value: "64"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "parameter token is empty",
+              "status": 400
+          }
+  - name: Error - Token Expired
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/verifikasi-qr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: dataParams
+            value: UExBQ0VIT0xERVItR0NNLUNJUEhFUlRFWFQtVjE=
+            description: Data Params [MANDATORY] [GCM Encode] - nilai = field "data" dari response Generate QR (AES/GCM), berisi {"qrCode":<Base64 Numeric>,"kodePrakarsa":<Base64>} (nilai placeholder - perlu capture dari Generate QR)
+          - name: nominal
+            value: MTAwMDAwMA==
+            description: Nominal [MANDATORY] [Base64] [Angka Desimal]
+          - name: nomorInvoice
+            value: SU5WLTAwMQ==
+            description: Nomor Invoice [MANDATORY] [Base64]
+          - name: tenor
+            value: Ng==
+            description: Tenor [OPTIONAL] [Base64] [Angka]
+            disabled: true
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 05 Aug 2026 05:29:48 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "token has invalid claims: token is expired",
+              "status": 401
+          }
+  - name: Error - Unauthorized / Expired
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/verifikasi-qr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: dataParams
+            value: UExBQ0VIT0xERVItR0NNLUNJUEhFUlRFWFQtVjE=
+            description: Data Params [MANDATORY] [GCM Encode] - nilai = field "data" dari response Generate QR (AES/GCM), berisi {"qrCode":<Base64 Numeric>,"kodePrakarsa":<Base64>} (nilai placeholder - perlu capture dari Generate QR)
+          - name: nominal
+            value: MTAwMDAwMA==
+            description: Nominal [MANDATORY] [Base64] [Angka Desimal]
+          - name: nomorInvoice
+            value: SU5WLTAwMQ==
+            description: Nomor Invoice [MANDATORY] [Base64]
+          - name: tenor
+            value: Ng==
+            description: Tenor [OPTIONAL] [Base64] [Angka]
+            disabled: true
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 05 Aug 2026 05:29:48 GMT
+        - name: Content-Length
+          value: "63"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Unauthorized / Expired.",
+              "status": 401
+          }
+  - name: Error - Access Forbidden
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/verifikasi-qr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: dataParams
+            value: UExBQ0VIT0xERVItR0NNLUNJUEhFUlRFWFQtVjE=
+            description: Data Params [MANDATORY] [GCM Encode] - nilai = field "data" dari response Generate QR (AES/GCM), berisi {"qrCode":<Base64 Numeric>,"kodePrakarsa":<Base64>} (nilai placeholder - perlu capture dari Generate QR)
+          - name: nominal
+            value: MTAwMDAwMA==
+            description: Nominal [MANDATORY] [Base64] [Angka Desimal]
+          - name: nomorInvoice
+            value: SU5WLTAwMQ==
+            description: Nomor Invoice [MANDATORY] [Base64]
+          - name: tenor
+            value: Ng==
+            description: Tenor [OPTIONAL] [Base64] [Angka]
+            disabled: true
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 05 Aug 2026 05:29:48 GMT
+        - name: Content-Length
+          value: "89"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "you don't have permission to access this resource",
+              "status": 403
+          }
+  - name: Error - Access Forbidden (Unactivated)
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/verifikasi-qr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: dataParams
+            value: UExBQ0VIT0xERVItR0NNLUNJUEhFUlRFWFQtVjE=
+            description: Data Params [MANDATORY] [GCM Encode] - nilai = field "data" dari response Generate QR (AES/GCM), berisi {"qrCode":<Base64 Numeric>,"kodePrakarsa":<Base64>} (nilai placeholder - perlu capture dari Generate QR)
+          - name: nominal
+            value: MTAwMDAwMA==
+            description: Nominal [MANDATORY] [Base64] [Angka Desimal]
+          - name: nomorInvoice
+            value: SU5WLTAwMQ==
+            description: Nomor Invoice [MANDATORY] [Base64]
+          - name: tenor
+            value: Ng==
+            description: Tenor [OPTIONAL] [Base64] [Angka]
+            disabled: true
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 05 Aug 2026 05:29:48 GMT
+        - name: Content-Length
+          value: "83"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "your access to this resource is unactivated",
+              "status": 403
+          }
+  - name: Error - Access Forbidden (No Data Partnership)
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/verifikasi-qr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: dataParams
+            value: UExBQ0VIT0xERVItR0NNLUNJUEhFUlRFWFQtVjE=
+            description: Data Params [MANDATORY] [GCM Encode] - nilai = field "data" dari response Generate QR (AES/GCM), berisi {"qrCode":<Base64 Numeric>,"kodePrakarsa":<Base64>} (nilai placeholder - perlu capture dari Generate QR)
+          - name: nominal
+            value: MTAwMDAwMA==
+            description: Nominal [MANDATORY] [Base64] [Angka Desimal]
+          - name: nomorInvoice
+            value: SU5WLTAwMQ==
+            description: Nomor Invoice [MANDATORY] [Base64]
+          - name: tenor
+            value: Ng==
+            description: Tenor [OPTIONAL] [Base64] [Angka]
+            disabled: true
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 05 Aug 2026 05:29:48 GMT
+        - name: Content-Length
+          value: "65"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Data tidak dapat diakses.",
+              "status": 403
+          }
+  - name: Error - Parameter Validation (Total Mandatory)
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/verifikasi-qr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: dataParams
+            value: UExBQ0VIT0xERVItR0NNLUNJUEhFUlRFWFQtVjE=
+            description: Data Params [MANDATORY] [GCM Encode] - nilai = field "data" dari response Generate QR (AES/GCM), berisi {"qrCode":<Base64 Numeric>,"kodePrakarsa":<Base64>} (nilai placeholder - perlu capture dari Generate QR)
+          - name: nominal
+            value: MTAwMDAwMA==
+            description: Nominal [MANDATORY] [Base64] [Angka Desimal]
+            disabled: true
+          - name: nomorInvoice
+            value: SU5WLTAwMQ==
+            description: Nomor Invoice [MANDATORY] [Base64]
+            disabled: true
+          - name: tenor
+            value: Ng==
+            description: Tenor [OPTIONAL] [Base64] [Angka]
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 05 Aug 2026 05:29:48 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Parameter tidak terpenuhi.",
+              "status": 400
+          }
+  - name: Error - Parameter Validation (Tidak Sesuai) [Kode QR]
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/verifikasi-qr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: dataParams
+            value: UExBQ0VIT0xERVItR0NNLUNJUEhFUlRFWFQtVjE=
+            description: Data Params [MANDATORY] [GCM Encode] - nilai = field "data" dari response Generate QR (AES/GCM), berisi {"qrCode":<Base64 Numeric>,"kodePrakarsa":<Base64>} (nilai placeholder - perlu capture dari Generate QR)
+          - name: nominal
+            value: MTAwMDAwMA==
+            description: Nominal [MANDATORY] [Base64] [Angka Desimal]
+          - name: nomorInvoice
+            value: SU5WLTAwMQ==
+            description: Nomor Invoice [MANDATORY] [Base64]
+          - name: tenor
+            value: Ng==
+            description: Tenor [OPTIONAL] [Base64] [Angka]
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 05 Aug 2026 05:29:48 GMT
+        - name: Content-Length
+          value: "77"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Kode QR tidak sesuai.",
+              "status": 400
+          }
+  - name: Error - Unregistered Whitelist
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/verifikasi-qr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: dataParams
+            value: UExBQ0VIT0xERVItR0NNLUNJUEhFUlRFWFQtVjE=
+            description: Data Params [MANDATORY] [GCM Encode] - nilai = field "data" dari response Generate QR (AES/GCM), berisi {"qrCode":<Base64 Numeric>,"kodePrakarsa":<Base64>} (nilai placeholder - perlu capture dari Generate QR)
+          - name: nominal
+            value: MTAwMDAwMA==
+            description: Nominal [MANDATORY] [Base64] [Angka Desimal]
+          - name: nomorInvoice
+            value: SU5WLTAwMQ==
+            description: Nomor Invoice [MANDATORY] [Base64]
+          - name: tenor
+            value: Ng==
+            description: Tenor [OPTIONAL] [Base64] [Angka]
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 05 Aug 2026 05:29:48 GMT
+        - name: Content-Length
+          value: "98"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Maaf, anda tidak terdaftar pada whitelist.",
+              "status": 500
+          }
+  - name: Error - Access Forbidden (Kode Partnership Tidak Cocok)
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/verifikasi-qr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: dataParams
+            value: UExBQ0VIT0xERVItR0NNLUNJUEhFUlRFWFQtVjE=
+            description: Data Params [MANDATORY] [GCM Encode] - nilai = field "data" dari response Generate QR (AES/GCM), berisi {"qrCode":<Base64 Numeric>,"kodePrakarsa":<Base64>} (nilai placeholder - perlu capture dari Generate QR)
+          - name: nominal
+            value: MTAwMDAwMA==
+            description: Nominal [MANDATORY] [Base64] [Angka Desimal]
+          - name: nomorInvoice
+            value: SU5WLTAwMQ==
+            description: Nomor Invoice [MANDATORY] [Base64]
+          - name: tenor
+            value: Ng==
+            description: Tenor [OPTIONAL] [Base64] [Angka]
+            disabled: true
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 05 Aug 2026 05:29:48 GMT
+        - name: Content-Length
+          value: "89"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "you don't have permission to access this resource",
+              "status": 403
+          }
+  - name: Error - Access Forbidden (Partnership Tidak Terdaftar)
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/verifikasi-qr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: dataParams
+            value: UExBQ0VIT0xERVItR0NNLUNJUEhFUlRFWFQtVjE=
+            description: Data Params [MANDATORY] [GCM Encode] - nilai = field "data" dari response Generate QR (AES/GCM), berisi {"qrCode":<Base64 Numeric>,"kodePrakarsa":<Base64>} (nilai placeholder - perlu capture dari Generate QR)
+          - name: nominal
+            value: MTAwMDAwMA==
+            description: Nominal [MANDATORY] [Base64] [Angka Desimal]
+          - name: nomorInvoice
+            value: SU5WLTAwMQ==
+            description: Nomor Invoice [MANDATORY] [Base64]
+          - name: tenor
+            value: Ng==
+            description: Tenor [OPTIONAL] [Base64] [Angka]
+            disabled: true
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 05 Aug 2026 05:29:48 GMT
+        - name: Content-Length
+          value: "83"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "your access to this resource is unactivated",
+              "status": 403
+          }
+  - name: Error - Access Forbidden (Status Not Access)
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/verifikasi-qr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: dataParams
+            value: UExBQ0VIT0xERVItR0NNLUNJUEhFUlRFWFQtVjE=
+            description: Data Params [MANDATORY] [GCM Encode] - nilai = field "data" dari response Generate QR (AES/GCM), berisi {"qrCode":<Base64 Numeric>,"kodePrakarsa":<Base64>} (nilai placeholder - perlu capture dari Generate QR)
+          - name: nominal
+            value: MTAwMDAwMA==
+            description: Nominal [MANDATORY] [Base64] [Angka Desimal]
+          - name: nomorInvoice
+            value: SU5WLTAwMQ==
+            description: Nomor Invoice [MANDATORY] [Base64]
+          - name: tenor
+            value: Ng==
+            description: Tenor [OPTIONAL] [Base64] [Angka]
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 05 Aug 2026 05:29:48 GMT
+        - name: Content-Length
+          value: "81"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Data tidak dapat diakses.",
+              "status": 403
+          }
+  - name: Error - Prakarsa Not Found
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/verifikasi-qr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: dataParams
+            value: UExBQ0VIT0xERVItR0NNLUNJUEhFUlRFWFQtVjE=
+            description: Data Params [MANDATORY] [GCM Encode] - nilai = field "data" dari response Generate QR (AES/GCM), berisi {"qrCode":<Base64 Numeric>,"kodePrakarsa":<Base64>} (nilai placeholder - perlu capture dari Generate QR)
+          - name: nominal
+            value: MTAwMDAwMA==
+            description: Nominal [MANDATORY] [Base64] [Angka Desimal]
+          - name: nomorInvoice
+            value: SU5WLTAwMQ==
+            description: Nomor Invoice [MANDATORY] [Base64]
+          - name: tenor
+            value: Ng==
+            description: Tenor [OPTIONAL] [Base64] [Angka]
+            disabled: true
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 05 Aug 2026 05:29:48 GMT
+        - name: Content-Length
+          value: "81"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Data tidak dapat diakses.",
+              "status": 403
+          }
+  - name: Error - General
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/verifikasi-qr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: dataParams
+            value: UExBQ0VIT0xERVItR0NNLUNJUEhFUlRFWFQtVjE=
+            description: Data Params [MANDATORY] [GCM Encode] - nilai = field "data" dari response Generate QR (AES/GCM), berisi {"qrCode":<Base64 Numeric>,"kodePrakarsa":<Base64>} (nilai placeholder - perlu capture dari Generate QR)
+          - name: nominal
+            value: MTAwMDAwMA==
+            description: Nominal [MANDATORY] [Base64] [Angka Desimal]
+          - name: nomorInvoice
+            value: SU5WLTAwMQ==
+            description: Nomor Invoice [MANDATORY] [Base64]
+          - name: tenor
+            value: Ng==
+            description: Tenor [OPTIONAL] [Base64] [Angka]
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 05 Aug 2026 05:29:48 GMT
+        - name: Content-Length
+          value: "126"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Maaf, Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 500
+          }
+  - name: Error - QR Bukan Milik Anda
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/verifikasi-qr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: dataParams
+            value: UExBQ0VIT0xERVItR0NNLUNJUEhFUlRFWFQtVjE=
+            description: Data Params [MANDATORY] [GCM Encode] - nilai = field "data" dari response Generate QR (AES/GCM), berisi {"qrCode":<Base64 Numeric>,"kodePrakarsa":<Base64>} (nilai placeholder - perlu capture dari Generate QR)
+          - name: nominal
+            value: MTAwMDAwMA==
+            description: Nominal [MANDATORY] [Base64] [Angka Desimal]
+          - name: nomorInvoice
+            value: SU5WLTAwMQ==
+            description: Nomor Invoice [MANDATORY] [Base64]
+          - name: tenor
+            value: Ng==
+            description: Tenor [OPTIONAL] [Base64] [Angka]
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 05 Aug 2026 05:29:48 GMT
+        - name: Content-Length
+          value: "76"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "QR bukan milik anda.",
+              "status": 200
+          }
+  - name: Error - QR Sudah Kedaluwarsa
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/verifikasi-qr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: dataParams
+            value: UExBQ0VIT0xERVItR0NNLUNJUEhFUlRFWFQtVjE=
+            description: Data Params [MANDATORY] [GCM Encode] - nilai = field "data" dari response Generate QR (AES/GCM), berisi {"qrCode":<Base64 Numeric>,"kodePrakarsa":<Base64>} (nilai placeholder - perlu capture dari Generate QR)
+          - name: nominal
+            value: MTAwMDAwMA==
+            description: Nominal [MANDATORY] [Base64] [Angka Desimal]
+          - name: nomorInvoice
+            value: SU5WLTAwMQ==
+            description: Nomor Invoice [MANDATORY] [Base64]
+          - name: tenor
+            value: Ng==
+            description: Tenor [OPTIONAL] [Base64] [Angka]
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 05 Aug 2026 05:29:48 GMT
+        - name: Content-Length
+          value: "115"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "qr-expired"
+              },
+              "message": "QR sudah kedaluwarsa.",
+              "status": 200
+          }
+  - name: Success - Verifikasi QR Berhasil
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/verifikasi-qr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: dataParams
+            value: UExBQ0VIT0xERVItR0NNLUNJUEhFUlRFWFQtVjE=
+            description: Data Params [MANDATORY] [GCM Encode] - nilai = field "data" dari response Generate QR (AES/GCM), berisi {"qrCode":<Base64 Numeric>,"kodePrakarsa":<Base64>} (nilai placeholder - perlu capture dari Generate QR)
+          - name: nominal
+            value: MTAwMDAwMA==
+            description: Nominal [MANDATORY] [Base64] [Angka Desimal]
+          - name: nomorInvoice
+            value: SU5WLTAwMQ==
+            description: Nomor Invoice [MANDATORY] [Base64]
+          - name: tenor
+            value: Ng==
+            description: Tenor [OPTIONAL] [Base64] [Angka]
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 05 Aug 2026 05:29:48 GMT
+        - name: Content-Length
+          value: "121"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "form-pencairan"
+              },
+              "message": "Verifikasi QR berhasil.",
+              "status": 200
+          }
+  - name: Error - Gagal Update Status QR
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/verifikasi-qr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: dataParams
+            value: UExBQ0VIT0xERVItR0NNLUNJUEhFUlRFWFQtVjE=
+            description: Data Params [MANDATORY] [GCM Encode] - nilai = field "data" dari response Generate QR (AES/GCM), berisi {"qrCode":<Base64 Numeric>,"kodePrakarsa":<Base64>} (nilai placeholder - perlu capture dari Generate QR)
+          - name: nominal
+            value: MTAwMDAwMA==
+            description: Nominal [MANDATORY] [Base64] [Angka Desimal]
+          - name: nomorInvoice
+            value: SU5WLTAwMQ==
+            description: Nomor Invoice [MANDATORY] [Base64]
+          - name: tenor
+            value: Ng==
+            description: Tenor [OPTIONAL] [Base64] [Angka]
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 05 Aug 2026 05:29:48 GMT
+        - name: Content-Length
+          value: "105"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Maaf, proses verifikasi QR tidak dapat dilakukan.",
+              "status": 500
+          }
+  - name: Error - QR Tidak Ditemukan / Sudah Diproses
+    request:
+      url: "{{base-url-local}}/v/1/pencairan/verifikasi-qr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+          - name: dataParams
+            value: UExBQ0VIT0xERVItR0NNLUNJUEhFUlRFWFQtVjE=
+            description: Data Params [MANDATORY] [GCM Encode] - nilai = field "data" dari response Generate QR (AES/GCM), berisi {"qrCode":<Base64 Numeric>,"kodePrakarsa":<Base64>} (nilai placeholder - perlu capture dari Generate QR)
+          - name: nominal
+            value: MTAwMDAwMA==
+            description: Nominal [MANDATORY] [Base64] [Angka Desimal]
+          - name: nomorInvoice
+            value: SU5WLTAwMQ==
+            description: Nomor Invoice [MANDATORY] [Base64]
+          - name: tenor
+            value: Ng==
+            description: Tenor [OPTIONAL] [Base64] [Angka]
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Wed, 05 Aug 2026 05:29:48 GMT
+        - name: Content-Length
+          value: "94"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "QR tidak ditemukan atau sudah diproses",
+              "status": 200
+          }
