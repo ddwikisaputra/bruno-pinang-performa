@@ -5,18 +5,27 @@ info:
 
 http:
   method: POST
-  url: https://pinang-performa.free.mockoapp.net/v/1/aktivasi/data-whitelist/?400-token-empty
+  url: https://pinang-performa.free.mockoapp.net/v/1/aktivasi/data-whitelist/200-data-found-proc-ocr
   headers:
     - name: x-key
       value: performa
   params:
+    - name: 200-data-found-foto-ocr
+      value: ""
+      type: query
+      disabled: true
+    - name: 200-data-found-proc-ocr
+      value: ""
+      type: query
+      disabled: true
     - name: "503"
       value: ""
       type: query
       disabled: true
-    - name: 400-token-empty
+    - name: 500-unregistered-WL
       value: ""
       type: query
+      disabled: true
   auth: inherit
 
 settings:
