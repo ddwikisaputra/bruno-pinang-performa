@@ -8,10 +8,9 @@ http:
   url: "{{base-url-local}}/v/1/ekyc/cashloan/proses-ocr"
   headers:
     - name: Api-Key
-      value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
+      value: "{{apiKeyMerchant}}"
     - name: X-Transaction-Tag
-      value: UmF5YVBpUGVyVG9w/VsozjKukRZufWjcTrs919hcEZuyafk52NSZyB3YEf/ejQXW9ZpaEyyUdqZaZp+nSrq8KKZXloili4jbrG8Zx6rLcDwh+rdmber60MThw/I=
-      description: AES(SHA256(json all params) + key (apiKey))
+      value: "{{xTransactionTag}}"
   body:
     type: form-urlencoded
     data:
@@ -23,14 +22,15 @@ http:
         description: |-
           {
           "nomorIdentitas": "", --> base64
-          "kodePartnership": "", -> base74
-          "ktpFileBase64": "", -> base64
+          "kodePartnership": "", --> base64
+          "ktpFileBase64": "", --> base64
           "ktpFileMimeType": "image/jpeg"
           }
         disabled: true
-  auth:
-    type: bearer
-    token: "{{tokenMerchant}}"
+
+auth:
+  type: bearer
+  token: "{{tokenMerchant}}"
 
 settings:
   encodeUrl: true
@@ -46,12 +46,24 @@ examples:
       headers:
         - name: Api-Key
           value: "{{apiKeyMerchant}}"
+        - name: X-Transaction-Tag
+          value: "{{xTransactionTag}}"
       body:
         type: form-urlencoded
         data:
           - name: params
-            value: ""
-            description: "[MANDATORY] [JSON TO Base64 TO AES]"
+            value: UmF5YVBpUGVyVG9woQIhwDWiyh04fcCn9eXZX0AcFaev+FSk66Q=
+            description: "[MANDATORY] [JSON TO AES]"
+          - name: ""
+            value: JSON EXAMPLE
+            description: |-
+              {
+              "nomorIdentitas": "", --> base64
+              "kodePartnership": "", --> base64
+              "ktpFileBase64": "", --> base64
+              "ktpFileMimeType": "image/jpeg"
+              }
+            disabled: true
     response:
       status: 503
       statusText: Service Unavailable
@@ -59,9 +71,9 @@ examples:
         - name: Content-Type
           value: application/json; charset=utf-8
         - name: Date
-          value: Wed, 10 Jul 2024 01:54:27 GMT
+          value: Thu, 13 Aug 2026 09:15:30 GMT
         - name: Content-Length
-          value: "69"
+          value: "135"
       body:
         type: json
         data: |-
@@ -69,295 +81,8 @@ examples:
               "message": "Jam operasional Pinang Performa dari jam XX.XX - XX.XX WIB setiap hari. Kembali lagi nanti, ya!",
               "status": 503
           }
+
   - name: Error - Token Expired
-    request:
-      url: "{{base-url-local}}/v/1/ekyc/cashoan/proses-ocr"
-      method: POST
-      headers:
-        - name: Api-Key
-          value: "{{apiKeyMerchant}}"
-      body:
-        type: form-urlencoded
-        data:
-          - name: params
-            value: ""
-            description: "[MANDATORY] [JSON TO Base64 TO AES]"
-    response:
-      status: 401
-      statusText: Unauthorized
-      headers:
-        - name: Content-Type
-          value: application/json; charset=utf-8
-        - name: Date
-          value: Wed, 10 Jul 2024 01:54:27 GMT
-        - name: Content-Length
-          value: "69"
-      body:
-        type: json
-        data: |-
-          {
-              "message": "token is expired",
-              "status": 401
-          }
-  - name: Error - Unauthorized / Expired
-    request:
-      url: "{{base-url-local}}/v/1/ekyc/cashloan/proses-ocr"
-      method: POST
-      headers:
-        - name: Api-Key
-          value: "{{apiKeyMerchant}}"
-      body:
-        type: form-urlencoded
-        data:
-          - name: params
-            value: ""
-            description: "[MANDATORY] [JSON TO Base64 TO AES]"
-          - name: ""
-            value: JSON EXAMPLE
-            description: |-
-              {
-              "nomorIdentitas": "", --> base64
-              "kodePartnership": "", -> base74
-              "ktpFileBase64": "", -> base64
-              "ktpFileMimeType": "image/jpeg"
-              }
-    response:
-      status: 401
-      statusText: Unauthorized
-      headers:
-        - name: Content-Type
-          value: application/json; charset=utf-8
-        - name: Date
-          value: Tue, 16 Jul 2024 06:33:25 GMT
-        - name: Content-Length
-          value: "76"
-      body:
-        type: json
-        data: |-
-          {
-              "message": "Unauthorized / Expired.",
-              "status": 401
-          }
-  - name: Error - Paremeter Token / Api Key Empty
-    request:
-      url: "{{base-url-local}}/v/1/ekyc/cashloan/proses-ocr"
-      method: POST
-      headers:
-        - name: Api-Key
-          value: ""
-      body:
-        type: form-urlencoded
-        data:
-          - name: params
-            value: ""
-            description: "[MANDATORY] [JSON TO Base64 TO AES]"
-          - name: ""
-            value: JSON EXAMPLE
-            description: |-
-              {
-              "nomorIdentitas": "", --> base64
-              "kodePartnership": "", -> base74
-              "ktpFileBase64": "", -> base64
-              "ktpFileMimeType": "image/jpeg"
-              }
-    response:
-      status: 400
-      statusText: Bad Request
-      headers:
-        - name: Content-Type
-          value: application/json; charset=utf-8
-        - name: Date
-          value: Tue, 16 Jul 2024 06:35:21 GMT
-        - name: Content-Length
-          value: "51"
-      body:
-        type: json
-        data: |-
-          {
-              "message": "parameter token is empty",
-              "status": 400
-          }
-  - name: Error - Access Forbidden
-    request:
-      url: "{{base-url-local}}/v/1/ekyc/cashloan/proses-ocr"
-      method: POST
-      headers:
-        - name: Api-Key
-          value: "{{apiKeyMerchant}}"
-      body:
-        type: form-urlencoded
-        data:
-          - name: params
-            value: ""
-            description: "[MANDATORY] [JSON TO Base64 TO AES]"
-          - name: ""
-            value: JSON EXAMPLE
-            description: |-
-              {
-              "nomorIdentitas": "", --> base64
-              "kodePartnership": "", -> base74
-              "ktpFileBase64": "", -> base64
-              "ktpFileMimeType": "image/jpeg"
-              }
-    response:
-      status: 403
-      statusText: Forbidden
-      headers:
-        - name: Content-Type
-          value: application/json; charset=utf-8
-        - name: Date
-          value: Tue, 16 Jul 2024 06:41:51 GMT
-        - name: Content-Length
-          value: "76"
-      body:
-        type: json
-        data: |-
-          {
-              "message": "you don't have permission to access this resource",
-              "status": 403
-          }
-  - name: Error - Access Forbidden (No Data Partnership)
-    request:
-      url: "{{base-url-local}}/v/1/ekyc/cashloan/proses-ocr"
-      method: POST
-      headers:
-        - name: Api-Key
-          value: "{{apiKeyMerchant}}"
-      body:
-        type: form-urlencoded
-        data:
-          - name: params
-            value: ""
-            description: "[MANDATORY] [JSON TO Base64 TO AES]"
-          - name: ""
-            value: JSON EXAMPLE
-            description: |-
-              {
-              "nomorIdentitas": "", --> base64
-              "kodePartnership": "", -> base74
-              "ktpFileBase64": "", -> base64
-              "ktpFileMimeType": "image/jpeg"
-              }
-    response:
-      status: 403
-      statusText: Forbidden
-      headers:
-        - name: Content-Type
-          value: application/json; charset=utf-8
-        - name: Date
-          value: Wed, 17 Jul 2024 05:19:53 GMT
-        - name: Content-Length
-          value: "70"
-      body:
-        type: json
-        data: |-
-          {
-              "message": "your access to this resource is unactivated",
-              "status": 403
-          }
-  - name: Error - Not Registered Whitelist
-    request:
-      url: "{{base-url-local}}/v/1/ekyc/cashloan/proses-ocr"
-      method: POST
-      headers:
-        - name: Api-Key
-          value: "{{apiKeyMerchant}}"
-      body:
-        type: form-urlencoded
-        data:
-          - name: params
-            value: ""
-            description: "[MANDATORY] [JSON TO Base64 TO AES]"
-          - name: ""
-            value: JSON EXAMPLE
-            description: |-
-              {
-              "nomorIdentitas": "", --> base64
-              "kodePartnership": "", -> base74
-              "ktpFileBase64": "", -> base64
-              "ktpFileMimeType": "image/jpeg"
-              }
-    response:
-      status: 200
-      statusText: OK
-      headers:
-        - name: Content-Type
-          value: application/json; charset=utf-8
-        - name: Date
-          value: Wed, 17 Jul 2024 05:29:31 GMT
-        - name: Content-Length
-          value: "79"
-      body:
-        type: json
-        data: |-
-          {
-              "data": "",
-              "message": "Maaf, anda tidak terdaftar pada whitelist.",
-              "status": 500
-          }
-  - name: Error - Parameter Validation (Total Mandatory)
-    request:
-      url: "{{base-url-local}}/v/1/ekyc/cashloan/proses-ocr"
-      method: POST
-      headers:
-        - name: Api-Key
-          value: "{{apiKeyMerchant}}"
-      body:
-        type: form-urlencoded
-        data:
-          - name: params
-            value: ""
-            description: "[MANDATORY] [JSON TO Base64 TO AES]"
-    response:
-      status: 200
-      statusText: OK
-      headers:
-        - name: Content-Type
-          value: application/json; charset=utf-8
-        - name: Date
-          value: Tue, 16 Jul 2024 06:50:16 GMT
-        - name: Content-Length
-          value: "63"
-      body:
-        type: json
-        data: |-
-          {
-              "data": "",
-              "message": "Parameter tidak terpenuhi.",
-              "status": 400
-          }
-  - name: Error - Parameter Validation (Tidak Sesuai)
-    request:
-      url: "{{base-url-local}}/v/1/ekyc/cashloan/proses-ocr"
-      method: POST
-      headers:
-        - name: Api-Key
-          value: "{{apiKeyMerchant}}"
-      body:
-        type: form-urlencoded
-        data:
-          - name: params
-            value: ""
-            description: "[MANDATORY] [JSON TO Base64 TO AES]"
-    response:
-      status: 200
-      statusText: OK
-      headers:
-        - name: Content-Type
-          value: application/json; charset=utf-8
-        - name: Date
-          value: Wed, 10 Jul 2024 02:04:45 GMT
-        - name: Content-Length
-          value: "66"
-      body:
-        type: json
-        data: |-
-          {
-              "data": "",
-              "message": "... tidak sesuai.",
-              "status": 400
-          }
-  - name: Error - HMAC Validation (X-Transaction-Tag != All Param)
     request:
       url: "{{base-url-local}}/v/1/ekyc/cashloan/proses-ocr"
       method: POST
@@ -365,40 +90,492 @@ examples:
         - name: Api-Key
           value: "{{apiKeyMerchant}}"
         - name: X-Transaction-Tag
-          value: "{{hmacOcrJsonParamDwikiSuccess}}"
-          description: AES(SHA256(json all params) + key (apiKey))
+          value: "{{xTransactionTag}}"
       body:
         type: form-urlencoded
         data:
           - name: params
-            value: ""
+            value: UmF5YVBpUGVyVG9woQIhwDWiyh04fcCn9eXZX0AcFaev+FSk66Q=
             description: "[MANDATORY] [JSON TO AES]"
+          - name: ""
+            value: JSON EXAMPLE
+            description: |-
+              {
+              "nomorIdentitas": "", --> base64
+              "kodePartnership": "", --> base64
+              "ktpFileBase64": "", --> base64
+              "ktpFileMimeType": "image/jpeg"
+              }
+            disabled: true
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 13 Aug 2026 09:15:30 GMT
+        - name: Content-Length
+          value: "82"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "token has invalid claims: token is expired",
+              "status": 401
+          }
+
+  - name: Error - Unauthorized / Expired
+    request:
+      url: "{{base-url-local}}/v/1/ekyc/cashloan/proses-ocr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+        - name: X-Transaction-Tag
+          value: "{{xTransactionTag}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: params
+            value: UmF5YVBpUGVyVG9woQIhwDWiyh04fcCn9eXZX0AcFaev+FSk66Q=
+            description: "[MANDATORY] [JSON TO AES]"
+          - name: ""
+            value: JSON EXAMPLE
+            description: |-
+              {
+              "nomorIdentitas": "", --> base64
+              "kodePartnership": "", --> base64
+              "ktpFileBase64": "", --> base64
+              "ktpFileMimeType": "image/jpeg"
+              }
+            disabled: true
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 13 Aug 2026 09:15:30 GMT
+        - name: Content-Length
+          value: "63"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Unauthorized / Expired.",
+              "status": 401
+          }
+
+  - name: Error - Parameter Token / API Key Empty
+    request:
+      url: "{{base-url-local}}/v/1/ekyc/cashloan/proses-ocr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+          disabled: true
+        - name: X-Transaction-Tag
+          value: "{{xTransactionTag}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: params
+            value: UmF5YVBpUGVyVG9woQIhwDWiyh04fcCn9eXZX0AcFaev+FSk66Q=
+            description: "[MANDATORY] [JSON TO AES]"
+          - name: ""
+            value: JSON EXAMPLE
+            description: |-
+              {
+              "nomorIdentitas": "", --> base64
+              "kodePartnership": "", --> base64
+              "ktpFileBase64": "", --> base64
+              "ktpFileMimeType": "image/jpeg"
+              }
+            disabled: true
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 13 Aug 2026 09:15:30 GMT
+        - name: Content-Length
+          value: "64"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "parameter token is empty",
+              "status": 400
+          }
+
+  - name: Error - Parameter Nomor Identitas
+    request:
+      url: "{{base-url-local}}/v/1/ekyc/cashloan/proses-ocr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+        - name: X-Transaction-Tag
+          value: "{{xTransactionTag}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: params
+            value: UmF5YVBpUGVyVG9woQIhwDWiyh04fcCn9eXZX0AcFaev+FSk66Q=
+            description: "[MANDATORY] [JSON TO AES]"
+          - name: ""
+            value: JSON EXAMPLE
+            description: |-
+              {
+              "nomorIdentitas": "", --> base64
+              "kodePartnership": "", --> base64
+              "ktpFileBase64": "", --> base64
+              "ktpFileMimeType": "image/jpeg"
+              }
+            disabled: true
     response:
       status: 200
       statusText: OK
       headers:
-        - name: Cache-Control
-          value: none
-        - name: Content-Security-Policy
-          value: script-src 'self' pinang-performa.bankraya.co.id
         - name: Content-Type
           value: application/json; charset=utf-8
-        - name: Permissions-Policy
-          value: geolocation=()
-        - name: Referrer-Policy
-          value: no-referrer
-        - name: Strict-Transport-Security
-          value: max-age=16070400; includeSubDomains
-        - name: X-Content-Type-Options
-          value: nosniff
-        - name: X-Frame-Options
-          value: SAMEORIGIN
-        - name: X-Permitted-Cross-Domain-Policies
-          value: none
         - name: Date
-          value: Tue, 17 Dec 2024 08:44:59 GMT
+          value: Thu, 13 Aug 2026 09:15:30 GMT
         - name: Content-Length
-          value: "60"
+          value: "91"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Nomor Identitas tidak boleh kosong.",
+              "status": 400
+          }
+
+  - name: Error - Access Forbidden
+    request:
+      url: "{{base-url-local}}/v/1/ekyc/cashloan/proses-ocr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+        - name: X-Transaction-Tag
+          value: "{{xTransactionTag}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: params
+            value: UmF5YVBpUGVyVG9woQIhwDWiyh04fcCn9eXZX0AcFaev+FSk66Q=
+            description: "[MANDATORY] [JSON TO AES]"
+          - name: ""
+            value: JSON EXAMPLE
+            description: |-
+              {
+              "nomorIdentitas": "", --> base64
+              "kodePartnership": "", --> base64
+              "ktpFileBase64": "", --> base64
+              "ktpFileMimeType": "image/jpeg"
+              }
+            disabled: true
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 13 Aug 2026 09:15:30 GMT
+        - name: Content-Length
+          value: "89"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "you don't have permission to access this resource",
+              "status": 403
+          }
+
+  - name: Error - Access Forbidden (Unactivated)
+    request:
+      url: "{{base-url-local}}/v/1/ekyc/cashloan/proses-ocr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+        - name: X-Transaction-Tag
+          value: "{{xTransactionTag}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: params
+            value: UmF5YVBpUGVyVG9woQIhwDWiyh04fcCn9eXZX0AcFaev+FSk66Q=
+            description: "[MANDATORY] [JSON TO AES]"
+          - name: ""
+            value: JSON EXAMPLE
+            description: |-
+              {
+              "nomorIdentitas": "", --> base64
+              "kodePartnership": "", --> base64
+              "ktpFileBase64": "", --> base64
+              "ktpFileMimeType": "image/jpeg"
+              }
+            disabled: true
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 13 Aug 2026 09:15:30 GMT
+        - name: Content-Length
+          value: "83"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "your access to this resource is unactivated",
+              "status": 403
+          }
+
+  - name: Error - Access Forbidden (No Data Partnership)
+    request:
+      url: "{{base-url-local}}/v/1/ekyc/cashloan/proses-ocr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+        - name: X-Transaction-Tag
+          value: "{{xTransactionTag}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: params
+            value: UmF5YVBpUGVyVG9woQIhwDWiyh04fcCn9eXZX0AcFaev+FSk66Q=
+            description: "[MANDATORY] [JSON TO AES]"
+          - name: ""
+            value: JSON EXAMPLE
+            description: |-
+              {
+              "nomorIdentitas": "", --> base64
+              "kodePartnership": "", --> base64
+              "ktpFileBase64": "", --> base64
+              "ktpFileMimeType": "image/jpeg"
+              }
+            disabled: true
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 13 Aug 2026 09:15:30 GMT
+        - name: Content-Length
+          value: "65"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Data tidak dapat diakses.",
+              "status": 403
+          }
+
+  - name: Error - Failed Claims Token
+    request:
+      url: "{{base-url-local}}/v/1/ekyc/cashloan/proses-ocr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+        - name: X-Transaction-Tag
+          value: "{{xTransactionTag}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: params
+            value: UmF5YVBpUGVyVG9woQIhwDWiyh04fcCn9eXZX0AcFaev+FSk66Q=
+            description: "[MANDATORY] [JSON TO AES]"
+          - name: ""
+            value: JSON EXAMPLE
+            description: |-
+              {
+              "nomorIdentitas": "", --> base64
+              "kodePartnership": "", --> base64
+              "ktpFileBase64": "", --> base64
+              "ktpFileMimeType": "image/jpeg"
+              }
+            disabled: true
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 13 Aug 2026 09:15:30 GMT
+        - name: Content-Length
+          value: "59"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Failed Claims Token",
+              "status": 500
+          }
+
+  - name: Error - General (Token)
+    request:
+      url: "{{base-url-local}}/v/1/ekyc/cashloan/proses-ocr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+        - name: X-Transaction-Tag
+          value: "{{xTransactionTag}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: params
+            value: UmF5YVBpUGVyVG9woQIhwDWiyh04fcCn9eXZX0AcFaev+FSk66Q=
+            description: "[MANDATORY] [JSON TO AES]"
+          - name: ""
+            value: JSON EXAMPLE
+            description: |-
+              {
+              "nomorIdentitas": "", --> base64
+              "kodePartnership": "", --> base64
+              "ktpFileBase64": "", --> base64
+              "ktpFileMimeType": "image/jpeg"
+              }
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 13 Aug 2026 09:15:30 GMT
+        - name: Content-Length
+          value: "110"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Maaf, Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 500
+          }
+
+  - name: Error - General (Api-Key Decode)
+    request:
+      url: "{{base-url-local}}/v/1/ekyc/cashloan/proses-ocr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+        - name: X-Transaction-Tag
+          value: "{{xTransactionTag}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: params
+            value: UmF5YVBpUGVyVG9woQIhwDWiyh04fcCn9eXZX0AcFaev+FSk66Q=
+            description: "[MANDATORY] [JSON TO AES]"
+          - name: ""
+            value: JSON EXAMPLE
+            description: |-
+              {
+              "nomorIdentitas": "", --> base64
+              "kodePartnership": "", --> base64
+              "ktpFileBase64": "", --> base64
+              "ktpFileMimeType": "image/jpeg"
+              }
+            disabled: true
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 13 Aug 2026 09:15:30 GMT
+        - name: Content-Length
+          value: "110"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Maaf, Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 500
+          }
+
+  - name: Error - Parameter Validation (Total Mandatory)
+    request:
+      url: "{{base-url-local}}/v/1/ekyc/cashloan/proses-ocr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+        - name: X-Transaction-Tag
+          value: "{{xTransactionTag}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: params
+            value: UmF5YVBpUGVyVG9woQIhwDWiyh04fcCn9eXZX0AcFaev+FSk66Q=
+            description: "[MANDATORY] [JSON TO AES]"
+          - name: ""
+            value: JSON EXAMPLE
+            description: |-
+              {
+              "nomorIdentitas": "", --> base64
+              "kodePartnership": "", --> base64
+              "ktpFileBase64": "", --> base64
+              "ktpFileMimeType": "image/jpeg"
+              }
+            disabled: true
+
+  - name: Error - Parameter Validation (Tidak Sesuai)
+    request:
+      url: "{{base-url-local}}/v/1/ekyc/cashloan/proses-ocr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+        - name: X-Transaction-Tag
+          value: "{{xTransactionTag}}"
+          disabled: true
+      body:
+        type: form-urlencoded
+        data:
+          - name: params
+            value: UmF5YVBpUGVyVG9woQIhwDWiyh04fcCn9eXZX0AcFaev+FSk66Q=
+            description: "[MANDATORY] [JSON TO AES]"
+          - name: ""
+            value: JSON EXAMPLE
+            description: |-
+              {
+              "nomorIdentitas": "", --> base64
+              "kodePartnership": "", --> base64
+              "ktpFileBase64": "", --> base64
+              "ktpFileMimeType": "image/jpeg"
+              }
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 13 Aug 2026 09:15:30 GMT
+        - name: Content-Length
+          value: "79"
       body:
         type: json
         data: |-
@@ -407,19 +584,76 @@ examples:
               "message": "Parameter tidak sesuai.",
               "status": 400
           }
-  - name: Error - Proses OCR Gagal
+
+  - name: Error - Unregistered Whitelist
     request:
       url: "{{base-url-local}}/v/1/ekyc/cashloan/proses-ocr"
       method: POST
       headers:
         - name: Api-Key
           value: "{{apiKeyMerchant}}"
+        - name: X-Transaction-Tag
+          value: "{{xTransactionTag}}"
       body:
         type: form-urlencoded
         data:
           - name: params
-            value: ""
-            description: "[MANDATORY] [JSON TO Base64 TO AES]"
+            value: UmF5YVBpUGVyVG9woQIhwDWiyh04fcCn9eXZX0AcFaev+FSk66Q=
+            description: "[MANDATORY] [JSON TO AES]"
+          - name: ""
+            value: JSON EXAMPLE
+            description: |-
+              {
+              "nomorIdentitas": "", --> base64
+              "kodePartnership": "", --> base64
+              "ktpFileBase64": "", --> base64
+              "ktpFileMimeType": "image/jpeg"
+              }
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 13 Aug 2026 09:15:30 GMT
+        - name: Content-Length
+          value: "98"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Maaf, anda tidak terdaftar pada whitelist.",
+              "status": 500
+          }
+
+  - name: Error - General (Whitelist)
+    request:
+      url: "{{base-url-local}}/v/1/ekyc/cashloan/proses-ocr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+        - name: X-Transaction-Tag
+          value: "{{xTransactionTag}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: params
+            value: UmF5YVBpUGVyVG9woQIhwDWiyh04fcCn9eXZX0AcFaev+FSk66Q=
+            description: "[MANDATORY] [JSON TO AES]"
+          - name: ""
+            value: JSON EXAMPLE
+            description: |-
+              {
+              "nomorIdentitas": "", --> base64
+              "kodePartnership": "", --> base64
+              "ktpFileBase64": "", --> base64
+              "ktpFileMimeType": "image/jpeg"
+              }
+            disabled: true
     response:
       status: 403
       statusText: Forbidden
@@ -427,9 +661,52 @@ examples:
         - name: Content-Type
           value: application/json; charset=utf-8
         - name: Date
-          value: Tue, 16 Jul 2024 06:45:00 GMT
+          value: Thu, 13 Aug 2026 09:15:30 GMT
         - name: Content-Length
-          value: "97"
+          value: "110"
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Maaf, Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
+              "status": 500
+          }
+
+  - name: Error - General
+    request:
+      url: "{{base-url-local}}/v/1/ekyc/cashloan/proses-ocr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+        - name: X-Transaction-Tag
+          value: "{{xTransactionTag}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: params
+            value: UmF5YVBpUGVyVG9woQIhwDWiyh04fcCn9eXZX0AcFaev+FSk66Q=
+            description: "[MANDATORY] [JSON TO AES]"
+          - name: ""
+            value: JSON EXAMPLE
+            description: |-
+              {
+              "nomorIdentitas": "", --> base64
+              "kodePartnership": "", --> base64
+              "ktpFileBase64": "", --> base64
+              "ktpFileMimeType": "image/jpeg"
+              }
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 13 Aug 2026 09:15:30 GMT
+        - name: Content-Length
+          value: "126"
       body:
         type: json
         data: |-
@@ -438,45 +715,336 @@ examples:
               "message": "Maaf, Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi.",
               "status": 500
           }
-  - name: Error - Nomor Identitas dan Foto KTP tidak sama
+
+  - name: Error - Validasi Kuota OCR Habis
     request:
       url: "{{base-url-local}}/v/1/ekyc/cashloan/proses-ocr"
       method: POST
       headers:
         - name: Api-Key
           value: "{{apiKeyMerchant}}"
+        - name: X-Transaction-Tag
+          value: "{{xTransactionTag}}"
       body:
         type: form-urlencoded
         data:
           - name: params
-            value: ""
+            value: UmF5YVBpUGVyVG9woQIhwDWiyh04fcCn9eXZX0AcFaev+FSk66Q=
             description: "[MANDATORY] [JSON TO AES]"
+          - name: ""
+            value: JSON EXAMPLE
+            description: |-
+              {
+              "nomorIdentitas": "", --> base64
+              "kodePartnership": "", --> base64
+              "ktpFileBase64": "", --> base64
+              "ktpFileMimeType": "image/jpeg"
+              }
+            disabled: true
     response:
       status: 200
       statusText: OK
       headers:
-        - name: Cache-Control
-          value: none
-        - name: Content-Security-Policy
-          value: script-src 'self' pinang-performa.bankraya.co.id
         - name: Content-Type
           value: application/json; charset=utf-8
-        - name: Permissions-Policy
-          value: geolocation=()
-        - name: Referrer-Policy
-          value: no-referrer
-        - name: Strict-Transport-Security
-          value: max-age=16070400; includeSubDomains
-        - name: X-Content-Type-Options
-          value: nosniff
-        - name: X-Frame-Options
-          value: SAMEORIGIN
-        - name: X-Permitted-Cross-Domain-Policies
-          value: none
         - name: Date
-          value: Fri, 06 Dec 2024 03:28:00 GMT
+          value: Thu, 13 Aug 2026 09:15:30 GMT
         - name: Content-Length
-          value: "104"
+          value: "351"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "block",
+                  "showMessage": "Proses foto KTP bisa kamu coba lagi pada DD MM YYYY HH:II atau hubungi Sapa Raya untuk informasi lebih lanjut."
+              },
+              "message": "Maaf, Proses foto KTP tidak dapat dilakukan karena sudah melebihi batas maksimal, silahkan coba kembali pada DD MM YYYY HH:II",
+              "status": 500
+          }
+
+  - name: Error - General (Token Vida)
+    request:
+      url: "{{base-url-local}}/v/1/ekyc/cashloan/proses-ocr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+        - name: X-Transaction-Tag
+          value: "{{xTransactionTag}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: params
+            value: UmF5YVBpUGVyVG9woQIhwDWiyh04fcCn9eXZX0AcFaev+FSk66Q=
+            description: "[MANDATORY] [JSON TO AES]"
+          - name: ""
+            value: JSON EXAMPLE
+            description: |-
+              {
+              "nomorIdentitas": "", --> base64
+              "kodePartnership": "", --> base64
+              "ktpFileBase64": "", --> base64
+              "ktpFileMimeType": "image/jpeg"
+              }
+            disabled: true
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 13 Aug 2026 09:15:30 GMT
+        - name: Content-Length
+          value: "84"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "unexpected end of JSON input",
+              "status": 500
+          }
+
+  - name: Success - Process OCR [OCR Exists]
+    request:
+      url: "{{base-url-local}}/v/1/ekyc/cashloan/proses-ocr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+        - name: X-Transaction-Tag
+          value: "{{xTransactionTag}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: params
+            value: UmF5YVBpUGVyVG9woQIhwDWiyh04fcCn9eXZX0AcFaev+FSk66Q=
+            description: "[MANDATORY] [JSON TO AES]"
+          - name: ""
+            value: JSON EXAMPLE
+            description: |-
+              {
+              "nomorIdentitas": "", --> base64
+              "kodePartnership": "", --> base64
+              "ktpFileBase64": "", --> base64
+              "ktpFileMimeType": "image/jpeg"
+              }
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 13 Aug 2026 09:15:30 GMT
+        - name: Content-Length
+          value: "892"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "agama": "Islam",
+                  "alamat": "Cempaka Putih Barat",
+                  "golonganDarah": "-",
+                  "jenisKelamin": "LAKI-LAKI",
+                  "kecamatan": "Cempaka Putih",
+                  "kelurahan": "Cempaka Putih Barat",
+                  "kodeAgama": "ISL",
+                  "kota": "Jakarta Pusat",
+                  "ktpBase64": "LzlqLzRBQVFTa1pKUmdBQkFRQUFBUUFCQUFELzJRPT0=",
+                  "ktpMimeType": "image/jpeg",
+                  "masaBerlaku": "SEUMUR HIDUP",
+                  "masaTerbit": "2000-11-17",
+                  "nama": "Dwiki Saptura",
+                  "nextStep": "",
+                  "nomorIdentitas": "MzIwOTEyMjAwMzk0MDAwNg==",
+                  "pekerjaan": "KARYAWAN SWASTA",
+                  "provinsi": "DKI JAKARTA",
+                  "rt": "010",
+                  "rw": "002",
+                  "statusPerkawinan": "KAWIN",
+                  "tanggalLahir": "MTk2OS0xMC0xMA==",
+                  "tempatLahir": "Jakarta"
+              },
+              "message": "Process OCR berhasil dilakukan.",
+              "status": 200
+          }
+
+  - name: Error - Simpan File KTP
+    request:
+      url: "{{base-url-local}}/v/1/ekyc/cashloan/proses-ocr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+        - name: X-Transaction-Tag
+          value: "{{xTransactionTag}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: params
+            value: UmF5YVBpUGVyVG9woQIhwDWiyh04fcCn9eXZX0AcFaev+FSk66Q=
+            description: "[MANDATORY] [JSON TO AES]"
+          - name: ""
+            value: JSON EXAMPLE
+            description: |-
+              {
+              "nomorIdentitas": "", --> base64
+              "kodePartnership": "", --> base64
+              "ktpFileBase64": "", --> base64
+              "ktpFileMimeType": "image/jpeg"
+              }
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 13 Aug 2026 09:15:30 GMT
+        - name: Content-Length
+          value: "136"
+      body:
+        type: json
+        data: |-
+          {
+              "data": "",
+              "message": "Maaf, Proses OCR sedang tidak dapat dilakukan. Silahkan coba beberapa saat lagi.",
+              "status": 500
+          }
+
+  - name: Error - Proses OCR VIDA [Retry]
+    request:
+      url: "{{base-url-local}}/v/1/ekyc/cashloan/proses-ocr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+        - name: X-Transaction-Tag
+          value: "{{xTransactionTag}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: params
+            value: UmF5YVBpUGVyVG9woQIhwDWiyh04fcCn9eXZX0AcFaev+FSk66Q=
+            description: "[MANDATORY] [JSON TO AES]"
+          - name: ""
+            value: JSON EXAMPLE
+            description: |-
+              {
+              "nomorIdentitas": "", --> base64
+              "kodePartnership": "", --> base64
+              "ktpFileBase64": "", --> base64
+              "ktpFileMimeType": "image/jpeg"
+              }
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 13 Aug 2026 09:15:30 GMT
+        - name: Content-Length
+          value: "196"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "retry-ocr"
+              },
+              "message": "Proses foto KTP belum berhasil! Kamu masih memiliki kesempatan 2 kali lagi, silakan mencobanya kembali.",
+              "status": 500
+          }
+
+  - name: Error - Proses OCR VIDA [Block]
+    request:
+      url: "{{base-url-local}}/v/1/ekyc/cashloan/proses-ocr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+        - name: X-Transaction-Tag
+          value: "{{xTransactionTag}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: params
+            value: UmF5YVBpUGVyVG9woQIhwDWiyh04fcCn9eXZX0AcFaev+FSk66Q=
+            description: "[MANDATORY] [JSON TO AES]"
+          - name: ""
+            value: JSON EXAMPLE
+            description: |-
+              {
+              "nomorIdentitas": "", --> base64
+              "kodePartnership": "", --> base64
+              "ktpFileBase64": "", --> base64
+              "ktpFileMimeType": "image/jpeg"
+              }
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 13 Aug 2026 09:15:30 GMT
+        - name: Content-Length
+          value: "215"
+      body:
+        type: json
+        data: |-
+          {
+              "data": {
+                  "nextStep": "block"
+              },
+              "message": "Proses foto KTP belum berhasil! Kamu bisa coba lagi pada DD MM YYYY HH:II atau hubungi Sapa Raya untuk informasi lebih lanjut.",
+              "status": 500
+          }
+
+  - name: Error - NIK KTP Tidak Sesuai
+    request:
+      url: "{{base-url-local}}/v/1/ekyc/cashloan/proses-ocr"
+      method: POST
+      headers:
+        - name: Api-Key
+          value: "{{apiKeyMerchant}}"
+        - name: X-Transaction-Tag
+          value: "{{xTransactionTag}}"
+      body:
+        type: form-urlencoded
+        data:
+          - name: params
+            value: UmF5YVBpUGVyVG9woQIhwDWiyh04fcCn9eXZX0AcFaev+FSk66Q=
+            description: "[MANDATORY] [JSON TO AES]"
+          - name: ""
+            value: JSON EXAMPLE
+            description: |-
+              {
+              "nomorIdentitas": "", --> base64
+              "kodePartnership": "", --> base64
+              "ktpFileBase64": "", --> base64
+              "ktpFileMimeType": "image/jpeg"
+              }
+            disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Date
+          value: Thu, 13 Aug 2026 09:15:30 GMT
+        - name: Content-Length
+          value: "160"
       body:
         type: json
         data: |-
@@ -487,213 +1055,76 @@ examples:
               "message": "Maaf, Foto KTP yang anda upload tidak sesuai dengan data diri anda.",
               "status": 500
           }
-  - name: Error - OCR Gagal (masih ada kesempatan)
+
+  - name: Error - Find Religion
     request:
       url: "{{base-url-local}}/v/1/ekyc/cashloan/proses-ocr"
       method: POST
       headers:
         - name: Api-Key
           value: "{{apiKeyMerchant}}"
+        - name: X-Transaction-Tag
+          value: "{{xTransactionTag}}"
       body:
         type: form-urlencoded
         data:
           - name: params
-            value: ""
+            value: UmF5YVBpUGVyVG9woQIhwDWiyh04fcCn9eXZX0AcFaev+FSk66Q=
             description: "[MANDATORY] [JSON TO AES]"
-    response:
-      status: 500
-      statusText: Internal Server Error
-      headers:
-        - name: Cache-Control
-          value: none
-        - name: Content-Security-Policy
-          value: script-src 'self' pinang-performa.bankraya.co.id
-        - name: Content-Type
-          value: application/json; charset=utf-8
-        - name: Permissions-Policy
-          value: geolocation=()
-        - name: Referrer-Policy
-          value: no-referrer
-        - name: Strict-Transport-Security
-          value: max-age=16070400; includeSubDomains
-        - name: X-Content-Type-Options
-          value: nosniff
-        - name: X-Frame-Options
-          value: SAMEORIGIN
-        - name: X-Permitted-Cross-Domain-Policies
-          value: none
-        - name: Date
-          value: Wed, 04 Dec 2024 07:56:24 GMT
-        - name: Content-Length
-          value: "140"
-      body:
-        type: json
-        data: |-
-          {
-              "data": {
-                  "nextStep": "retry-ocr"
-              },
-              "message": "Proses foto KTP belum berhasil! Kamu masih memiliki kesempatan 2 kali lagi, silakan mencobanya kembali.",
-              "status": 500
-          }
-  - name: Error - OCR tidak bisa dilakukan (kesempatan terakhir)
-    request:
-      url: "{{base-url-local}}/v/1/ekyc/cashloan/proses-ocr"
-      method: POST
-      headers:
-        - name: Api-Key
-          value: "{{apiKeyMerchant}}"
-      body:
-        type: form-urlencoded
-        data:
-          - name: params
-            value: ""
-            description: "[MANDATORY] [JSON TO AES]"
-    response:
-      status: 500
-      statusText: Internal Server Error
-      headers:
-        - name: Cache-Control
-          value: none
-        - name: Content-Security-Policy
-          value: script-src 'self' pinang-performa.bankraya.co.id
-        - name: Content-Type
-          value: application/json; charset=utf-8
-        - name: Permissions-Policy
-          value: geolocation=()
-        - name: Referrer-Policy
-          value: no-referrer
-        - name: Strict-Transport-Security
-          value: max-age=16070400; includeSubDomains
-        - name: X-Content-Type-Options
-          value: nosniff
-        - name: X-Frame-Options
-          value: SAMEORIGIN
-        - name: X-Permitted-Cross-Domain-Policies
-          value: none
-        - name: Date
-          value: Wed, 04 Dec 2024 07:54:15 GMT
-        - name: Content-Length
-          value: "169"
-      body:
-        type: json
-        data: |-
-          {
-              "data": {
-                  "nextStep": "block"
-              },
-              "message": "Proses foto KTP belum berhasil! Kamu bisa coba lagi pada DD MM YYYYY HH:II atau hubungi Sapa Raya untuk informasi lebih lanjut.",
-              "status": 500
-          }
-  - name: Error - OCR tidak bisa dilakukan (dalam waktu tunggu)
-    request:
-      url: "{{base-url-local}}/v/1/ekyc/cashloan/proses-ocr"
-      method: POST
-      headers:
-        - name: Api-Key
-          value: "{{apiKeyMerchant}}"
-      body:
-        type: form-urlencoded
-        data:
-          - name: params
-            value: ""
-            description: "[MANDATORY] [JSON TO AES]"
+          - name: ""
+            value: JSON EXAMPLE
+            description: |-
+              {
+              "nomorIdentitas": "", --> base64
+              "kodePartnership": "", --> base64
+              "ktpFileBase64": "", --> base64
+              "ktpFileMimeType": "image/jpeg"
+              }
+            disabled: true
     response:
       status: 200
       statusText: OK
       headers:
-        - name: Cache-Control
-          value: none
-        - name: Content-Security-Policy
-          value: script-src 'self' pinang-performa.bankraya.co.id
         - name: Content-Type
           value: application/json; charset=utf-8
-        - name: Permissions-Policy
-          value: geolocation=()
-        - name: Referrer-Policy
-          value: no-referrer
-        - name: Strict-Transport-Security
-          value: max-age=16070400; includeSubDomains
-        - name: X-Content-Type-Options
-          value: nosniff
-        - name: X-Frame-Options
-          value: SAMEORIGIN
-        - name: X-Permitted-Cross-Domain-Policies
-          value: none
         - name: Date
-          value: Mon, 02 Dec 2024 09:13:24 GMT
+          value: Thu, 13 Aug 2026 09:15:30 GMT
         - name: Content-Length
-          value: "168"
-      body:
-        type: json
-        data: |-
-          {
-              "data": {
-                  "nextStep": "block"
-              },
-              "message": "Maaf, Proses foto KTP tidak dapat dilakukan karena sudah melebihi batas maksimal, silahkan coba kembali pada DD MM YYYYY HH:II",
-              "status": 500
-          }
-  - name: Error - KTP dari screenshot atau scan
-    request:
-      url: "{{base-url-local}}/v/1/ekyc/cashloan/proses-ocr"
-      method: POST
-      headers:
-        - name: Api-Key
-          value: "{{apiKeyMerchant}}"
-      body:
-        type: form-urlencoded
-        data:
-          - name: params
-            value: ""
-            description: ktp sunarto screenshot atau scan harusnya gagal
-    response:
-      status: 500
-      statusText: Internal Server Error
-      headers:
-        - name: Cache-Control
-          value: none
-        - name: Content-Security-Policy
-          value: script-src 'self' pinang-performa.bankraya.co.id
-        - name: Content-Type
-          value: application/json; charset=utf-8
-        - name: Permissions-Policy
-          value: geolocation=()
-        - name: Referrer-Policy
-          value: no-referrer
-        - name: Strict-Transport-Security
-          value: max-age=16070400; includeSubDomains
-        - name: X-Content-Type-Options
-          value: nosniff
-        - name: X-Frame-Options
-          value: SAMEORIGIN
-        - name: X-Permitted-Cross-Domain-Policies
-          value: none
-        - name: Date
-          value: Fri, 06 Dec 2024 03:26:03 GMT
-        - name: Content-Length
-          value: "140"
+          value: "76"
       body:
         type: json
         data: |-
           {
               "data": "",
-              "message": "Proses foto KTP belum berhasil! Kamu masih memiliki kesempatan 2 kali lagi, silakan mencobanya kembali.",
+              "message": "Data Tidak Ditemukan",
               "status": 500
           }
-  - name: Success - Proses OCR Berhasil
+
+  - name: Success - Process OCR
     request:
       url: "{{base-url-local}}/v/1/ekyc/cashloan/proses-ocr"
       method: POST
       headers:
         - name: Api-Key
           value: "{{apiKeyMerchant}}"
+        - name: X-Transaction-Tag
+          value: "{{xTransactionTag}}"
       body:
         type: form-urlencoded
         data:
           - name: params
-            value: ""
-            description: "[MANDATORY] [JSON TO Base64 TO AES]"
+            value: UmF5YVBpUGVyVG9woQIhwDWiyh04fcCn9eXZX0AcFaev+FSk66Q=
+            description: "[MANDATORY] [JSON TO AES]"
+          - name: ""
+            value: JSON EXAMPLE
+            description: |-
+              {
+              "nomorIdentitas": "", --> base64
+              "kodePartnership": "", --> base64
+              "ktpFileBase64": "", --> base64
+              "ktpFileMimeType": "image/jpeg"
+              }
+            disabled: true
     response:
       status: 200
       statusText: OK
@@ -701,37 +1132,36 @@ examples:
         - name: Content-Type
           value: application/json; charset=utf-8
         - name: Date
-          value: Tue, 16 Jul 2024 07:05:34 GMT
-        - name: Transfer-Encoding
-          value: chunked
+          value: Thu, 13 Aug 2026 09:15:30 GMT
+        - name: Content-Length
+          value: "880"
       body:
         type: json
         data: |-
           {
               "data": {
-                  "agama": "ISLAM",
-                  "alamat": "CEMPAKA PUTIH BARAT",
+                  "agama": "Islam",
+                  "alamat": "Cempaka Putih Barat",
                   "golonganDarah": "-",
                   "jenisKelamin": "Laki-Laki",
-                  "kecamatan": "CEMPAKA PUTIH",
-                  "kelurahan": "CEMPAKA PUTIH BARAT",
-                  "kewarganegaraan": "WNI",
+                  "kecamatan": "Cempaka Putih",
+                  "kelurahan": "Cempaka Putih Barat",
                   "kodeAgama": "ISL",
-                  "kota": "JAKARTA PUSAT",
-                  "ktpBase64": "base64 string", // string base64
+                  "kota": "Jakarta Pusat",
+                  "ktpBase64": "LzlqLzRBQVFTa1pKUmdBQkFRQUFBUUFCQUFELzJRPT0=",
                   "ktpMimeType": "image/jpeg",
-                  "masaBerlaku": "2018-11-12",
+                  "masaBerlaku": "9999/12/31",
                   "masaTerbit": "",
-                  "nama": "DWIKI SAPUTRA",
+                  "nama": "Dwiki Saptura",
                   "nextStep": "",
-                  "nomorIdentitas": "", // string base64
-                  "pekerjaan": "PELAJAR/MAHASISWA",
+                  "nomorIdentitas": "MzIwOTEyMjAwMzk0MDAwNg==",
+                  "pekerjaan": "KARYAWAN SWASTA",
                   "provinsi": "DKI JAKARTA",
                   "rt": "010",
                   "rw": "002",
-                  "statusPerkawinan": "BELUM KAWIN",
-                  "tanggalLahir": "", // string base64
-                  "tempatLahir": "JAKARTA"
+                  "statusPerkawinan": "KAWIN",
+                  "tanggalLahir": "MTk2OS0xMC0xMA==",
+                  "tempatLahir": "Jakarta"
               },
               "message": "Process OCR berhasil dilakukan.",
               "status": 200
