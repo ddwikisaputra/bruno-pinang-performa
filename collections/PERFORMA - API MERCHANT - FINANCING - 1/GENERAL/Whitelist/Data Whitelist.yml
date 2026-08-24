@@ -5,22 +5,25 @@ info:
 
 http:
   method: POST
-  url: "{{base-url-prod}}/v/1/aktivasi/data-whitelist"
+  url: localhost:7009/v/1/aktivasi/data-whitelist
   headers:
     - name: Api-Key
-      value: VW1GNVlWQnBVR1Z5Vkc5d2pDa0VnR3o1a2ZkRHdnNjVJL3R4cDNqOUZPSXJoQT09
+      value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
   body:
     type: form-urlencoded
     data:
       - name: nomorIdentitas
-        value: MzIwMTE1MTQxMDAwMDAwMQ==
+        value: MzI3NjA5MTcxMTAwMDEzMw==
         description: Nomor Identitas User [MANDATORY] [Base64]
       - name: kodePartnership
-        value: QURJLTg0
+        value: TUox
         description: Kode Partnership [MANDATORY] [Base64]
+      - name: tipeData
+        value: YWt0aXZhc2k=
+        description: Tipe Data [MANDATORY] [Base64] (aktivasi | pencairan)
   auth:
     type: bearer
-    token: "{{tokenMerchant}}"
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NJZCI6IlVtRjVZVkJwVUdWeVZHOXcvRjUwMWozZkMvNWR5bzdnSXF2WHBTZ1ZvQT09IiwiZXhwIjoxNzg3NzExODcxLCJrRGF0YSI6IlVtRjVZVkJwVUdWeVZHOXdnRGtFMXhxSjhVWndHVENrZUI3YzR0K05mQ0RKN2R0RyIsImtLZXkiOiJVbUY1WVZCcFVHVnlWRzl3Z0JjRW5ocW41VUVXVER6Q1lZcEttUGNwWWRDYkw2VTBSZW5FWEp3Vkkvb054ZUg3TG01SitRPT0ifQ.VAQU1OMlFrmQlm95yk4uxPZO8CVb-cbteSy1qVz1zhI
 
 settings:
   encodeUrl: true
@@ -49,6 +52,9 @@ examples:
           - name: kodePartnership
             value: TUox
             description: Kode Partnership [MANDATORY] [Base64]
+          - name: tipeData
+            value: YWt0aXZhc2k=
+            description: Tipe Data [MANDATORY] [Base64] (aktivasi | pencairan)
     response:
       status: 503
       statusText: Service Unavailable
@@ -84,6 +90,9 @@ examples:
           - name: kodePartnership
             value: TUox
             description: Kode Partnership [MANDATORY] [Base64]
+          - name: tipeData
+            value: YWt0aXZhc2k=
+            description: Tipe Data [MANDATORY] [Base64] (aktivasi | pencairan)
     response:
       status: 401
       statusText: Unauthorized
@@ -119,6 +128,9 @@ examples:
           - name: kodePartnership
             value: QkxBLTUwMQ==
             description: Kode Partnership [MANDATORY] [Base64]
+          - name: tipeData
+            value: YWt0aXZhc2k=
+            description: Tipe Data [MANDATORY] [Base64] (aktivasi | pencairan)
     response:
       status: 401
       statusText: Unauthorized
@@ -155,6 +167,9 @@ examples:
           - name: kodePartnership
             value: TUox
             description: Kode Partnership [MANDATORY] [Base64]
+          - name: tipeData
+            value: YWt0aXZhc2k=
+            description: Tipe Data [MANDATORY] [Base64] (aktivasi | pencairan)
     response:
       status: 401
       statusText: Unauthorized
@@ -190,6 +205,9 @@ examples:
           - name: kodePartnership
             value: TUox
             description: Kode Partnership [MANDATORY] [Base64]
+          - name: tipeData
+            value: YWt0aXZhc2k=
+            description: Tipe Data [MANDATORY] [Base64] (aktivasi | pencairan)
     response:
       status: 403
       statusText: Forbidden
@@ -225,6 +243,9 @@ examples:
           - name: kodePartnership
             value: TUox
             description: Kode Partnership [MANDATORY] [Base64]
+          - name: tipeData
+            value: YWt0aXZhc2k=
+            description: Tipe Data [MANDATORY] [Base64] (aktivasi | pencairan)
     response:
       status: 403
       statusText: Forbidden
@@ -261,6 +282,10 @@ examples:
           - name: kodePartnership
             value: TUox
             description: Kode Partnership [MANDATORY] [Base64]
+          - name: tipeData
+            value: YWt0aXZhc2k=
+            description: Tipe Data [MANDATORY] [Base64] (aktivasi | pencairan)
+            disabled: true
     response:
       status: 200
       statusText: OK
@@ -297,6 +322,9 @@ examples:
           - name: kodePartnership
             value: TUoxa
             description: Kode Partnership [MANDATORY] [Base64]
+          - name: tipeData
+            value: YWt0aXZhc2k=
+            description: Tipe Data [MANDATORY] [Base64] (aktivasi | pencairan)
     response:
       status: 200
       statusText: OK
@@ -333,6 +361,9 @@ examples:
           - name: kodePartnership
             value: TUox
             description: Kode Partnership [MANDATORY] [Base64]
+          - name: tipeData
+            value: YWt0aXZhc2k=
+            description: Tipe Data [MANDATORY] [Base64] (aktivasi | pencairan)
     response:
       status: 200
       statusText: OK
@@ -367,6 +398,9 @@ examples:
           - name: kodePartnership
             value: TUox
             description: Kode Partnership [MANDATORY] [Base64]
+          - name: tipeData
+            value: YWt0aXZhc2k=
+            description: Tipe Data [MANDATORY] [Base64] (aktivasi | pencairan)
     response:
       status: 200
       statusText: OK
@@ -392,12 +426,14 @@ examples:
         - name: Date
           value: Fri, 09 May 2025 02:20:18 GMT
         - name: Content-Length
-          value: "746"
+          value: "1120"
       body:
         type: json
         data: |-
           {
               "data": {
+                  "nextStep": "foto-ocr",
+                  "nomorIdentitas": "MzIwMTE1MTQxMDAwMDAwMQ==",
                   "nama": "RHdpa2kgU2FwdXRyYQ==",
                   "tempatLahir": "Jakarta",
                   "tanggalLahir": "MTk5NS0xMS0xMg==",
@@ -414,29 +450,28 @@ examples:
                   "rtUsaha": "010",
                   "rwUsaha": "002",
                   "jenisKelamin": "TGFraS1MYWtp",
+                  "tanggalKtp": "MjAwMC0xMS0xNw==",
+                  "kodeArea": 0,
+                  "deskripsiArea": "12810, Tebet Barat, Tebet, Jakarta Selatan, DKI Jakarta",
+                  "kodeAgama": "ISL",
+                  "deskripsiAgama": "Islam",
+                  "kodePendidikanTerakhir": "",
+                  "deskripsiPendidikanTerakhir": "",
+                  "jumlahTanggungan": 0,
+                  "kodeAreaUsaha": 0,
+                  "deskripsiAreaUsaha": "12810, Tebet Barat, Tebet, Jakarta Selatan, DKI Jakarta",
                   "tanggalLahirPasangan": "",
                   "tempatLahirPasangan": "",
                   "nomorNPWP": "MzE3MTA1MTIxMTk1MDAwMQ==",
-                  "kodePendidikanTerakhir": "",
-                  "kodeAgama": "ISL",
-                  "jumlahTanggungan": 0,
                   "tipePencairan": "partner",
-                  "tipeProduk": "merchant-financing"
+                  "tipeProduk": "merchant-financing",
+                  "isVerifyInvoice": 0,
+                  "ktpImage": "", //base64
+                  "namaKontakDarurat": "", //base64
+                  "hubunganKontakDarurat": "", //base64
+                  "deskripsiHubunganDarurat": "", //base64
+                  "nomorKontakDarurat": "" //base64
               },
               "message": "Terdaftar pada whitelist.",
               "status": 200
           }
-
-docs: |-
-  AUTH
-  ----
-  Bearer Token => User Token (PIN)
-
-  HEADER
-  ------
-  Api-Key => [MANDATORY] FORMAT (APIKEY -> BASE64)
-
-  PARAMETER
-  ---------
-  nomorIdentitas => Nomor Identitas User [MANDATORY] [BASE64]
-  kodePartnership => Kode Partnership [MANDATORY] [BASE64]

@@ -25,7 +25,7 @@ http:
         value: QXlhbm9rb2ppIFNhdG9ydQ==
         description: Nama [MANDATORY] [Base64]
       - name: tanggalLahir
-        value: MTk4OS0xMC0xMA==
+        value: MTkyMC0xMC0xMA==
         description: Tanggal Lahir [MANDATORY] [Base64] [YYYY-MM-DD]
       - name: tempatLahir
         value: SmFrYXJ0YQ==
@@ -43,7 +43,7 @@ http:
         value: ZHdpa2kuc2FwdXRyYUBiYW5rcmF5YS5jby5pZA==
         description: "Email [MANDATORY] [Base64] [Ex : abc@mail.com]"
       - name: statusPernikahan
-        value: Kawin
+        value: Belum Kawin
         description: Status Pernikahan [MANDATORY] ["Kawin", "Belum Kawin", "Cerai Hidup", "Cerai Mati"]
       - name: nomorIdentitasPasangan
         value: MzE3MTA1MTIxMTk1MDAwMg==
@@ -51,9 +51,6 @@ http:
       - name: namaPasangan
         value: VGVzdGluZw==
         description: Nama Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
-      - name: tempatLahirPasangan
-        value: SmFrYXJ0YQ==
-        description: Tempat Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
       - name: tanggalLahirPasangan
         value: MjAwMC0xMS0xNw==
         description: Tanggal Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64] [YYYY-MM-DD]

@@ -8,12 +8,12 @@ http:
   url: "{{base-url-local}}/v/1/aktivasi/ubah-pengajuan"
   headers:
     - name: Api-Key
-      value: "{{ApiKeyMajoMF}}"
+      value: "{{apiKeyMerchant}}"
   body:
     type: form-urlencoded
     data:
       - name: kodePrakarsa
-        value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbDk5bEdYL2xrUnJLMmFPSE80NzJaZGZGSmpqYWFvNGo5R1ZtMExkRlF2UEYvY2ZXbjFHVmRTUmxsS3IzUXc9
+        value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbDk2bm1YMWxFTnFLbWFNSE80NzJKZGZGSmpnYUtBN2k5Q1ptazNiRksvb2JsMVEyMjB2a0NzdkZYc1BsWFU9
         description: Kode Prakarsa [MANDATORY] [MANDATORY] [Base64]
       - name: kodeTipePinjaman
         value: CHILD-MMF-652
@@ -22,13 +22,13 @@ http:
         value: TUox
         description: Kode Partnership [MANDATORY] [Base64]
       - name: nomorIdentitas
-        value: MzIwOTEyMjAwMzk0MDAwNg==
+        value: MzI3MzE4MDcxMjk2MDAwNw==
         description: Nomor Identitas User [MANDATORY] [Base64]
       - name: nama
         value: U1VOQVJUTw==
         description: Nama [MANDATORY] [Base64]
       - name: tanggalLahir
-        value: MTk5Ni0wMy0yMA==
+        value: MTk5MC0xMC0xMA==
         description: Tanggal Lahir [MANDATORY] [Base64] [YYYY-MM-DD]
       - name: tempatLahir
         value: Q2lyZWJvbg==
@@ -46,7 +46,7 @@ http:
         value: c3VuYXJ0b0BiYW5rcmF5YS5jby5pZA==
         description: "Email [MANDATORY] [Base64] [Ex : abc@mail.com]"
       - name: statusPernikahan
-        value: Kawin
+        value: Belum Kawin
         description: Status Pernikahan [MANDATORY] ["Kawin", "Belum Kawin", "Cerai Hidup", "Cerai Mati"]
       - name: nomorIdentitasPasangan
         value: MzIwOTEyMjAwMzk0MDAxNg==
@@ -57,9 +57,6 @@ http:
       - name: tanggalLahirPasangan
         value: MjAwMC0xMS0xNw==
         description: Tanggal Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64] [YYYY-MM-DD]
-      - name: tempatLahirPasangan
-        value: SmFrYXJ0YQ==
-        description: Tempat Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
       - name: tanggalKtp
         value: 2000-11-17
         description: Tanggal Terbit KTP [MANDATORY]
