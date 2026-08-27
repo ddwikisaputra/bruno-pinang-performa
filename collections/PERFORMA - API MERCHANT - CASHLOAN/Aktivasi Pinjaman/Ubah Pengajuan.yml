@@ -39,19 +39,12 @@ http:
       - name: nomorIdentitasPasangan
         value: MzE3MTA1MTIxMTk1MDAwMg==
         description: Nomor Identitas Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
-        disabled: true
       - name: namaPasangan
         value: SXN0cmkgRHdpa2k=
         description: Nama Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
-        disabled: true
       - name: tanggalLahirPasangan
         value: MjAwMC0xMS0xNw==
         description: Tanggal Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64] [YYYY-MM-DD]
-        disabled: true
-      - name: tempatLahirPasangan
-        value: SmFrYXJ0YQ==
-        description: Tempat Lahir Pasangan [OPTIONAL] [MANDATORY ==> Jika statusPernikahan = "Kawin" ] [Base64]
-        disabled: true
       - name: kodePartnership
         value: TUNBLTI0NA==
         description: Kode Partnership [MANDATORY] [Base64]
