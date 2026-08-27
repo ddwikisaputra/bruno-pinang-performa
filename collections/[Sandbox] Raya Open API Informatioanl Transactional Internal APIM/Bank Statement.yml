@@ -1,0 +1,590 @@
+info:
+  name: Bank Statement
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v2.0/bank-statement"
+  headers:
+    - name: X-PARTNER-ID
+      value: "{{X-PARTNER-ID}}"
+    - name: CHANNEL-ID
+      value: APPS1
+    - name: X-EXTERNAL-ID
+      value: "{{externalId}}"
+  body:
+    type: json
+    data: "{\r
+
+      \    \"accountNo\": \"033001000001315\",\r
+
+      \    \"fromDateTime\": \"2024-05-01T00:01:00Z\",\r
+
+      \    \"toDateTime\": \"2024-05-30T23:59:00Z\",\r
+
+      \    \"additionalInfo\": {\r
+
+      \        \"pageSize\": 1,\r
+
+      \        \"pageNumber\": 3\r
+
+      \    }\r
+
+      }"
+  auth:
+    type: bearer
+    token: aksda
+
+runtime:
+  scripts:
+    - type: before-request
+      code: |-
+        var moment = require('moment');
+        var externalId = moment().format("YYYYMMDDHHmmss");
+        bru.setCollectionVar('externalId', externalId);
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: 2001400 - Successful
+    request:
+      url: "{{baseUrl}}/snap/v2.0/bank-statement"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: "{{X-PARTNER-ID}}"
+        - name: CHANNEL-ID
+          value: "95231"
+        - name: X-EXTERNAL-ID
+          value: "{{externalId}}"
+        - name: Authorization
+          value: Bearer {{token}}
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+      body:
+        type: json
+        data: "{\r
+
+          \    \"accountNo\": \"001001000060300\",\r
+
+          \    \"fromDateTime\": \"2020-11-01T01:00:00Z\",\r
+
+          \    \"toDateTime\": \"2020-11-04T23:59:00Z\",\r
+
+          \    \"additionalInfo\": {\r
+
+          \        \"pageSize\": 1,\r
+
+          \        \"pageNumber\": 3\r
+
+          \    }\r
+
+          }"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+        - name: Partnername
+          value: GENERAL
+        - name: Content-Type
+          value: application/json
+        - name: Content-Encoding
+          value: gzip
+        - name: Content-Length
+          value: "337"
+      body:
+        type: json
+        data: |-
+          {
+              "responseCode": "2001400",
+              "responseMessage": "Successful",
+              "totalCreditEntries": {
+                  "numberOfEntries": "0",
+                  "amount": {
+                      "value": "0.00",
+                      "currency": "IDR"
+                  }
+              },
+              "totalDebitEntries": {
+                  "numberOfEntries": "33",
+                  "amount": {
+                      "value": "33.00",
+                      "currency": "IDR"
+                  }
+              },
+              "detailData": [
+                  {
+                      "detailBalance": {
+                          "startAmount": [
+                              {
+                                  "amount": {
+                                      "value": "-2654800.64",
+                                      "currency": "IDR"
+                                  }
+                              }
+                          ],
+                          "endAmount": [
+                              {
+                                  "amount": {
+                                      "value": "-2654801.64",
+                                      "currency": "IDR"
+                                  }
+                              }
+                          ]
+                      },
+                      "amount": {
+                          "value": "1.00",
+                          "currency": "IDR"
+                      },
+                      "transactionDate": "2020-11-03T16:10:19:00Z",
+                      "remark": "QRPAY: REG RRN 202301318871 SEQNUM 008871",
+                      "transactionId": "001289103112090938370",
+                      "type": "Debit"
+                  }
+              ],
+              "hasMore": "Y"
+          }
+  - name: 4001401 - Invalid Field Format {fieldName}
+    request:
+      url: "{{baseUrl}}/snap/v2.0/bank-statement"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: "{{X-PARTNER-ID}}"
+        - name: CHANNEL-ID
+          value: APPS1
+        - name: X-EXTERNAL-ID
+          value: "{{externalId}}"
+        - name: X-TIMESTAMP
+          value: 2025-11-14 10:57:09+07:00
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+        - name: Authorization
+          value: Bearer {{token}}
+      body:
+        type: json
+        data: "{\r
+
+          \    \"accountNo\": \"001001000060300\",\r
+
+          \    \"fromDateTime\": \"2024-05-01T00:01:00Z\",\r
+
+          \    \"toDateTime\": \"2024-05-30T23:59:00Z\",\r
+
+          \    \"additionalInfo\": {\r
+
+          \        \"pageSize\": 1,\r
+
+          \        \"pageNumber\": 3\r
+
+          \    }\r
+
+          }"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "responseCode": "4001401",
+              "responseMessage": "Invalid Field Format X-TIMESTAMP"
+          }
+  - name: 4011401 - Invalid Access Token
+    request:
+      url: "{{baseUrl}}/snap/v2.0/bank-statement"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: "{{X-PARTNER-ID}}"
+        - name: CHANNEL-ID
+          value: APPS1
+        - name: X-EXTERNAL-ID
+          value: "{{externalId}}"
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+      body:
+        type: json
+        data: "{\r
+
+          \    \"accountNo\": \"001001000060300\",\r
+
+          \    \"fromDateTime\": \"2024-05-01T00:01:00Z\",\r
+
+          \    \"toDateTime\": \"2024-05-30T23:59:00Z\",\r
+
+          \    \"additionalInfo\": {\r
+
+          \        \"pageSize\": 1,\r
+
+          \        \"pageNumber\": 3\r
+
+          \    }\r
+
+          }"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "responseCode": "4011401",
+              "responseMessage": "Invalid Token (B2B)"
+          }
+  - name: 4001402 - Invalid Mandatory Field {fieldName}
+    request:
+      url: "{{baseUrl}}/snap/v2.0/bank-statement"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: "{{X-PARTNER-ID}}"
+        - name: CHANNEL-ID
+          value: APPS1
+        - name: X-EXTERNAL-ID
+          value: "{{externalId}}"
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+        - name: Authorization
+          value: Bearer {{token}}
+      body:
+        type: json
+        data: "{\r
+
+          \    \"accountNo\": \"\",\r
+
+          \    \"fromDateTime\": \"2024-05-01T00:01:00Z\",\r
+
+          \    \"toDateTime\": \"2024-05-30T23:59:00Z\",\r
+
+          \    \"additionalInfo\": {\r
+
+          \        \"pageSize\": 1,\r
+
+          \        \"pageNumber\": 3\r
+
+          \    }\r
+
+          }"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "responseCode": "4001402",
+              "responseMessage": "Invalid Mandatory Field accountNo"
+          }
+  - name: 4011400 - Unauthorized. {reason}
+    request:
+      url: "{{baseUrl}}/snap/v2.0/bank-statement"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: SMC2
+        - name: CHANNEL-ID
+          value: APPS1
+        - name: X-EXTERNAL-ID
+          value: "{{externalId}}"
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+        - name: Authorization
+          value: Bearer {{token}}
+      body:
+        type: json
+        data: "{\r
+
+          \    \"accountNo\": \"\",\r
+
+          \    \"fromDateTime\": \"2024-05-01T00:01:00Z\",\r
+
+          \    \"toDateTime\": \"2024-05-30T23:59:00Z\",\r
+
+          \    \"additionalInfo\": {\r
+
+          \        \"pageSize\": 1,\r
+
+          \        \"pageNumber\": 3\r
+
+          \    }\r
+
+          }"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "responseCode": "4011400",
+              "responseMessage": "Unauthorized. Invalid X-PARTNER-ID"
+          }
+  - name: 4091400 - Conflict
+    request:
+      url: "{{baseUrl}}/snap/v2.0/bank-statement"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: "{{X-PARTNER-ID}}"
+        - name: CHANNEL-ID
+          value: APPS1
+        - name: X-EXTERNAL-ID
+          value: "20251105153943"
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+        - name: Authorization
+          value: Bearer {{token}}
+      body:
+        type: json
+        data: "{\r
+
+          \    \"accountNo\": \"065101014305500\",\r
+
+          \    \"fromDateTime\": \"2024-05-01T00:01:00Z\",\r
+
+          \    \"toDateTime\": \"2024-05-30T23:59:00Z\",\r
+
+          \    \"additionalInfo\": {\r
+
+          \        \"pageSize\": 1,\r
+
+          \        \"pageNumber\": 3\r
+
+          \    }\r
+
+          }"
+    response:
+      body:
+        type: text
+        data: ""
+  - name: 5001400 - Internal Server Error
+    request:
+      url: "{{baseUrl}}/snap/v2.0/bank-statement"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: "{{X-PARTNER-ID}}"
+        - name: CHANNEL-ID
+          value: APPS1
+        - name: X-EXTERNAL-ID
+          value: "{{externalId}}"
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+        - name: Authorization
+          value: Bearer {{token}}
+      body:
+        type: json
+        data: "{\r
+
+          \    \"accountNo\": \"001001020966317\",\r
+
+          \    \"fromDateTime\": \"2024-05-01T00:01:00Z\",\r
+
+          \    \"toDateTime\": \"2024-05-30T23:59:00Z\",\r
+
+          \    \"additionalInfo\": {\r
+
+          \        \"pageSize\": 1,\r
+
+          \        \"pageNumber\": 3\r
+
+          \    }\r
+
+          }"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "responseCode": "5001400",
+              "responseMessage": "Internal Server Error"
+          }
+  - name: 4041401 - Transaction Not Found
+    request:
+      url: "{{baseUrl}}/snap/v2.0/bank-statement"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: "{{X-PARTNER-ID}}"
+        - name: CHANNEL-ID
+          value: APPS1
+        - name: X-EXTERNAL-ID
+          value: "{{externalId}}"
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+        - name: Authorization
+          value: Bearer {{token}}
+      body:
+        type: json
+        data: "{\r
+
+          \    \"accountNo\": \"001001000060300\",\r
+
+          \    \"fromDateTime\": \"2025-05-01T00:01:00Z\",\r
+
+          \    \"toDateTime\": \"2025-05-30T23:59:00Z\",\r
+
+          \    \"additionalInfo\": {\r
+
+          \        \"pageSize\": 1,\r
+
+          \        \"pageNumber\": 3\r
+
+          \    }\r
+
+          }"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "responseCode": "4041401",
+              "responseMessage": "Transaction Not Found"
+          }
+  - name: 4031418 - Account Inactive
+    request:
+      url: "{{baseUrl}}/snap/v2.0/bank-statement"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: "{{X-PARTNER-ID}}"
+        - name: CHANNEL-ID
+          value: APPS1
+        - name: X-EXTERNAL-ID
+          value: "{{externalId}}"
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+        - name: Authorization
+          value: Bearer {{token}}
+      body:
+        type: json
+        data: "{\r
+
+          \    \"accountNo\": \"001001016032312\",\r
+
+          \    \"fromDateTime\": \"2024-05-01T00:01:00Z\",\r
+
+          \    \"toDateTime\": \"2024-05-30T23:59:00Z\",\r
+
+          \    \"additionalInfo\": {\r
+
+          \        \"pageSize\": 1,\r
+
+          \        \"pageNumber\": 3\r
+
+          \    }\r
+
+          }"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "responseCode": "4031418",
+              "responseMessage": "Account Inactive"
+          }
+  - name: 4031409 - Dormant Account
+    request:
+      url: "{{baseUrl}}/snap/v2.0/bank-statement"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: "{{X-PARTNER-ID}}"
+        - name: CHANNEL-ID
+          value: APPS1
+        - name: X-EXTERNAL-ID
+          value: "{{externalId}}"
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+        - name: Authorization
+          value: Bearer {{token}}
+      body:
+        type: json
+        data: "{\r
+
+          \    \"accountNo\": \"011001005082305\",\r
+
+          \    \"fromDateTime\": \"2024-05-01T00:01:00Z\",\r
+
+          \    \"toDateTime\": \"2024-05-30T23:59:00Z\",\r
+
+          \    \"additionalInfo\": {\r
+
+          \        \"pageSize\": 1,\r
+
+          \        \"pageNumber\": 3\r
+
+          \    }\r
+
+          }"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "responseCode": "4031409",
+              "responseMessage": "Dormant Account"
+          }
+  - name: 4031405 - Do Not Honor
+    request:
+      url: "{{baseUrl}}/snap/v2.0/bank-statement"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: "{{X-PARTNER-ID}}"
+        - name: CHANNEL-ID
+          value: APPS1
+        - name: X-EXTERNAL-ID
+          value: "{{externalId}}"
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+        - name: Authorization
+          value: Bearer {{token}}
+      body:
+        type: json
+        data: "{\r
+
+          \    \"accountNo\": \"001001000066306\",\r
+
+          \    \"fromDateTime\": \"2024-05-01T00:01:00Z\",\r
+
+          \    \"toDateTime\": \"2024-05-30T23:59:00Z\",\r
+
+          \    \"additionalInfo\": {\r
+
+          \        \"pageSize\": 1,\r
+
+          \        \"pageNumber\": 3\r
+
+          \    }\r
+
+          }"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "responseCode": "4031405",
+              "responseMessage": "Do Not Honor"
+          }

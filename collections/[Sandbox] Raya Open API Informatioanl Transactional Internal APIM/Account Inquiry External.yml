@@ -1,0 +1,524 @@
+info:
+  name: Account Inquiry External
+  type: http
+  seq: 6
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v2.1/account-inquiry-external"
+  headers:
+    - name: X-PARTNER-ID
+      value: "{{X-PARTNER-ID}}"
+    - name: CHANNEL-ID
+      value: "95231"
+    - name: X-EXTERNAL-ID
+      value: "{{externalId}}"
+    - name: X-TIMESTAMP
+      value: "{{timestamp}}"
+    - name: X-SIGNATURE
+      value: "{{gen_signature}}"
+  body:
+    type: json
+    data: |-
+      {
+          "beneficiaryBankCode": "BRINIDJA",
+          "beneficiaryAccountNo": "001001001131",
+          "additionalInfo": {
+              "switcher": "RTOL",
+              "sourceAccountNo": "001001000024401"
+          }
+      }
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+runtime:
+  scripts:
+    - type: before-request
+      code: |-
+        var moment = require('moment');
+        var externalId = moment().format("YYYYMMDDHHmmss");
+        bru.setCollectionVar('externalId', externalId);
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: 2001600 - Successful (BIFAST)
+    request:
+      url: "{{baseUrl}}/snap/v2.0/account-inquiry-external"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: UATP001
+        - name: CHANNEL-ID
+          value: "95231"
+        - name: X-EXTERNAL-ID
+          value: "{{externalId}}"
+        - name: Authorization
+          value: Bearer {{token}}
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+      body:
+        type: json
+        data: '{"beneficiaryBankCode":"BMRIIDJA","beneficiaryAccountNo":"2600000129028","additionalInfo":{"switcher":"BIFAST"}}'
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+        - name: Partnername
+          value: GENERAL
+        - name: Content-Type
+          value: application/json
+        - name: Content-Encoding
+          value: gzip
+        - name: Content-Length
+          value: "214"
+      body:
+        type: json
+        data: |-
+          {
+              "responseCode": "2001600",
+              "responseMessage": "Successful",
+              "referenceNo": "241125TITS3",
+              "beneficiaryAccountNo": "2600000129028",
+              "beneficiaryAccountName": "Andhika Pro",
+              "beneficiaryBankCode": "BMRIIDJA",
+              "beneficiaryBankName": "Bank Mandiri",
+              "currency": "IDR",
+              "additionalInfo": {
+                  "switcher": "BIFAST"
+              }
+          }
+  - name: 2001600 - Successful (RTOL)
+    request:
+      url: "{{baseUrl}}/snap/v2.0/account-inquiry-external"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: "{{X-PARTNER-ID}}"
+        - name: CHANNEL-ID
+          value: "95231"
+        - name: X-EXTERNAL-ID
+          value: "{{externalId}}"
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+        - name: Authorization
+          value: Bearer {{token}}
+      body:
+        type: json
+        data: "{\r
+
+          \    \"beneficiaryBankCode\": \"BRINIDJA\",\r
+
+          \    \"beneficiaryAccountNo\": \"001001001131\",\r
+
+          \    \"additionalInfo\": {\r
+
+          \        \"switcher\": \"RTOL\",\r
+
+          \        \"sourceAccountNo\": \"001001000024401\"\r
+
+          \    }\r
+
+          }"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "responseCode": "2001600",
+              "responseMessage": "Successful",
+              "referenceNo": "241125SECUB",
+              "beneficiaryAccountNo": "001001001131",
+              "beneficiaryAccountName": "RUBY IHSAN",
+              "beneficiaryBankCode": "002",
+              "beneficiaryBankName": "Bank BRI",
+              "currency": "IDR",
+              "additionalInfo": {
+                  "switcher": "RTOL",
+                  "sourceAccountNo": "001001000024401"
+              }
+          }
+  - name: 4001601 - Invalid Field Format {fieldName}
+    request:
+      url: "{{baseUrl}}/snap/v2.0/account-inquiry-external"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: "{{X-PARTNER-ID}}"
+        - name: CHANNEL-ID
+          value: "95231"
+        - name: X-EXTERNAL-ID
+          value: "{{externalId}}"
+        - name: X-TIMESTAMP
+          value: 2025-11-20 12:27:35+07:00
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+        - name: Authorization
+          value: Bearer {{token}}
+      body:
+        type: json
+        data: "{\r
+
+          \    \"beneficiaryBankCode\": \"BRINIDJA\",\r
+
+          \    \"beneficiaryAccountNo\": \"065101014305500\",\r
+
+          \    \"additionalInfo\": {\r
+
+          \        \"switcher\": \"RTOL\",\r
+
+          \        \"sourceAccountNo\": \"001001000002311\"\r
+
+          \    }\r
+
+          }"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "responseCode": "4001601",
+              "responseMessage": "Invalid Field Format X-TIMESTAMP"
+          }
+  - name: 4001602 - Invalid Mandatory Field {fieldName{
+    request:
+      url: "{{baseUrl}}/snap/v2.0/account-inquiry-external"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: "{{X-PARTNER-ID}}"
+        - name: CHANNEL-ID
+          value: "95231"
+        - name: X-EXTERNAL-ID
+          value: "{{externalId}}"
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+        - name: Authorization
+          value: Bearer {{token}}
+      body:
+        type: json
+        data: "{\r
+
+          \    \"beneficiaryBankCode\": \"BRINIDJA\",\r
+
+          \    \"beneficiaryAccountNo\": \"065101014305500\",\r
+
+          \    \"additionalInfo\": {\r
+
+          \        \"switcher\": \"RTOL\",\r
+
+          \        \"sourceAccountNo\": \"\"\r
+
+          \    }\r
+
+          }"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "responseCode": "4001602",
+              "responseMessage": "Invalid Mandatory Field sourceAccountNo"
+          }
+  - name: 4011600 - Unauthorized. {reason}
+    request:
+      url: "{{baseUrl}}/snap/v2.0/account-inquiry-external"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: SMC2
+        - name: CHANNEL-ID
+          value: "95231"
+        - name: X-EXTERNAL-ID
+          value: "{{externalId}}"
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+        - name: Authorization
+          value: Bearer {{token}}
+      body:
+        type: json
+        data: "{\r
+
+          \    \"beneficiaryBankCode\": \"BRINIDJA\",\r
+
+          \    \"beneficiaryAccountNo\": \"065101014305500\",\r
+
+          \    \"additionalInfo\": {\r
+
+          \        \"switcher\": \"RTOL\",\r
+
+          \        \"sourceAccountNo\": \"001001000002311\"\r
+
+          \    }\r
+
+          }"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "responseCode": "4011600",
+              "responseMessage": "Unauthorized. Invalid X-PARTNER-ID"
+          }
+  - name: 4011601 - Invalid Access Token
+    request:
+      url: "{{baseUrl}}/snap/v2.0/account-inquiry-external"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: "{{X-PARTNER-ID}}"
+        - name: CHANNEL-ID
+          value: "95231"
+        - name: X-EXTERNAL-ID
+          value: "{{externalId}}"
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+      body:
+        type: json
+        data: "{\r
+
+          \    \"beneficiaryBankCode\": \"BRINIDJA\",\r
+
+          \    \"beneficiaryAccountNo\": \"001001001131\",\r
+
+          \    \"additionalInfo\": {\r
+
+          \        \"switcher\": \"RTOL\",\r
+
+          \        \"sourceAccountNo\": \"001001000002311\"\r
+
+          \    }\r
+
+          }"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "responseCode": "4011601",
+              "responseMessage": "Invalid Token (B2B)"
+          }
+  - name: 5001600 - Internal Server Error
+    request:
+      url: "{{baseUrl}}/snap/v2.0/account-inquiry-external"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: "{{X-PARTNER-ID}}"
+        - name: CHANNEL-ID
+          value: "95231"
+        - name: X-EXTERNAL-ID
+          value: "{{externalId}}"
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+        - name: Authorization
+          value: "{{token}}"
+      body:
+        type: json
+        data: "{\r
+
+          \    \"beneficiaryBankCode\": \"BRINIDJA\",\r
+
+          \    \"beneficiaryAccountNo\": \"9000003544924\",\r
+
+          \    \"additionalInfo\": {\r
+
+          \        \"switcher\": \"RTOL\",\r
+
+          \        \"sourceAccountNo\": \"001001000002311\"\r
+
+          \    }\r
+
+          }"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "responseCode": "5001600",
+              "responseMessage": "Internal Server Error"
+          }
+  - name: 4091600 - Conflict
+    request:
+      url: "{{baseUrl}}/snap/v2.0/account-inquiry-external"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: "{{X-PARTNER-ID}}"
+        - name: CHANNEL-ID
+          value: "95231"
+        - name: X-EXTERNAL-ID
+          value: "20251105153943"
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+        - name: Authorization
+          value: Bearer {{token}}
+      body:
+        type: json
+        data: "{\r
+
+          \    \"beneficiaryBankCode\": \"BRINIDJA\",\r
+
+          \    \"beneficiaryAccountNo\": \"9000003544924\",\r
+
+          \    \"additionalInfo\": {\r
+
+          \        \"switcher\": \"RTOL\",\r
+
+          \        \"sourceAccountNo\": \"001001000002311\"\r
+
+          \    }\r
+
+          }"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "responseCode": "4091600",
+              "responseMessage": "Conflict"
+          }
+  - name: 4031615 - Transaction Not Permitted. {reason}
+    request:
+      url: "{{baseUrl}}/snap/v2.0/account-inquiry-external"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: "{{X-PARTNER-ID}}"
+        - name: CHANNEL-ID
+          value: "95231"
+        - name: X-EXTERNAL-ID
+          value: "{{externalId}}"
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+        - name: Authorization
+          value: Bearer {{token}}
+      body:
+        type: json
+        data: "{\r
+
+          \    \"beneficiaryBankCode\": \"BRINIDJA\",\r
+
+          \    \"beneficiaryAccountNo\": \"001001001131\",\r
+
+          \    \"additionalInfo\": {\r
+
+          \        \"switcher\": \"RTOL\",\r
+
+          \        \"sourceAccountNo\": \"065101014305500\"\r
+
+          \    }\r
+
+          }"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "responseCode": "4031615",
+              "responseMessage": "Transaction Not Permitted. Don’t Have Access At This Account"
+          }
+  - name: 4041611 - Invalid Account
+    request:
+      url: "{{baseUrl}}/snap/v2.0/account-inquiry-external"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: "{{X-PARTNER-ID}}"
+        - name: CHANNEL-ID
+          value: "95231"
+        - name: X-EXTERNAL-ID
+          value: "{{externalId}}"
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+      body:
+        type: json
+        data: "{\r
+
+          \    \"beneficiaryBankCode\": \"BRINIDJA\",\r
+
+          \    \"beneficiaryAccountNo\": \"3010069229\",\r
+
+          \    \"additionalInfo\": {\r
+
+          \        \"switcher\": \"RTOL\",\r
+
+          \        \"sourceAccountNo\": \"001001000024401\"\r
+
+          \    }\r
+
+          }"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "responseCode": "4041611",
+              "responseMessage": "Invalid Account"
+          }
+  - name: 4031618 - Account Inactive
+    request:
+      url: "{{baseUrl}}/snap/v2.0/account-inquiry-external"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: "{{X-PARTNER-ID}}"
+        - name: CHANNEL-ID
+          value: "95231"
+        - name: X-EXTERNAL-ID
+          value: "{{externalId}}"
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+      body:
+        type: json
+        data: "{\r
+
+          \    \"beneficiaryBankCode\": \"BRINIDJA\",\r
+
+          \    \"beneficiaryAccountNo\": \"9000003544923\",\r
+
+          \    \"additionalInfo\": {\r
+
+          \        \"switcher\": \"RTOL\",\r
+
+          \        \"sourceAccountNo\": \"001001000024401\"\r
+
+          \    }\r
+
+          }"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "responseCode": "4031618",
+              "responseMessage": "Account Inactive"
+          }

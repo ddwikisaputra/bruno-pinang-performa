@@ -1,0 +1,347 @@
+info:
+  name: Account Inquiry Internal
+  type: http
+  seq: 4
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v2.1/account-inquiry-internal"
+  headers:
+    - name: X-PARTNER-ID
+      value: "{{X-PARTNER-ID}}"
+    - name: CHANNEL-ID
+      value: APPS1
+    - name: X-EXTERNAL-ID
+      value: "{{externalId}}"
+  body:
+    type: json
+    data: "{\r
+
+      \    \"beneficiaryAccountNo\": \"033001000001315\"\r
+
+      }"
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+runtime:
+  scripts:
+    - type: before-request
+      code: |-
+        var moment = require('moment');
+        var externalId = moment().format("YYYYMMDDHHmmss");
+        bru.setCollectionVar('externalId', externalId);
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: 2001500 - Successful
+    request:
+      url: "{{baseUrl}}/snap/v2.0/account-inquiry-internal"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: "{{X-PARTNER-ID}}"
+        - name: CHANNEL-ID
+          value: "95231"
+        - name: X-EXTERNAL-ID
+          value: "{{externalId}}"
+        - name: Authorization
+          value: Bearer {{token}}
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+        - name: Authorization
+          value: Bearer {{token}}
+      body:
+        type: json
+        data: "{\r
+
+          \    \"beneficiaryAccountNo\": \"001001000002311\"\r
+
+          }"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+        - name: Partnername
+          value: GENERAL
+        - name: Content-Type
+          value: application/json
+        - name: Content-Encoding
+          value: gzip
+        - name: Content-Length
+          value: "187"
+      body:
+        type: json
+        data: |-
+          {
+              "responseCode": "2001500",
+              "responseMessage": "Successful",
+              "referenceNo": "090725VUY8O",
+              "beneficiaryAccountNo": "001001000002311",
+              "beneficiaryAccountName": "MANATAR OKSNEL SIAHAAN",
+              "beneficiaryAccountStatus": "Rekening Aktif",
+              "beneficiaryAccountType": "S",
+              "currency": "IDR"
+          }
+  - name: 4001501 - Invalid Field Format {fieldName}
+    request:
+      url: "{{baseUrl}}/snap/v2.0/account-inquiry-internal"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: "{{X-PARTNER-ID}}"
+        - name: CHANNEL-ID
+          value: APPS1
+        - name: X-EXTERNAL-ID
+          value: "{{externalId}}"
+        - name: X-TIMESTAMP
+          value: 2025-11-17 10:52:33+07:00
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+        - name: Authorization
+          value: Bearer {{token}}
+      body:
+        type: json
+        data: "{\r
+
+          \    \"beneficiaryAccountNo\": \"001001000002311\"\r
+
+          }"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "responseCode": "4001501",
+              "responseMessage": "Invalid Field Format X-TIMESTAMP"
+          }
+  - name: 4001502 - Invalid Mandatory Field {fieldName}
+    request:
+      url: "{{baseUrl}}/snap/v2.0/account-inquiry-internal"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: "{{X-PARTNER-ID}}"
+        - name: CHANNEL-ID
+          value: APPS1
+        - name: X-EXTERNAL-ID
+          value: "{{externalId}}"
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+        - name: Authorization
+          value: Bearer {{token}}
+      body:
+        type: json
+        data: "{\r
+
+          \    \"beneficiaryAccountNo\": \"\"\r
+
+          }"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "responseCode": "4001502",
+              "responseMessage": "Invalid Mandatory Field beneficiaryAccountNo"
+          }
+  - name: 4011501 - Invalid Access Token
+    request:
+      url: "{{baseUrl}}/snap/v2.0/account-inquiry-internal"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: "{{X-PARTNER-ID}}"
+        - name: CHANNEL-ID
+          value: APPS1
+        - name: X-EXTERNAL-ID
+          value: "{{externalId}}"
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+      body:
+        type: json
+        data: "{\r
+
+          \    \"beneficiaryAccountNo\": \"001001000002311\"\r
+
+          }"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "responseCode": "4011501",
+              "responseMessage": "Invalid Token (B2B)"
+          }
+  - name: 4011500 - Unauthorized. {reason}
+    request:
+      url: "{{baseUrl}}/snap/v2.0/account-inquiry-internal"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: SMC2
+        - name: CHANNEL-ID
+          value: APPS1
+        - name: X-EXTERNAL-ID
+          value: "{{externalId}}"
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+      body:
+        type: json
+        data: "{\r
+
+          \    \"beneficiaryAccountNo\": \"001001000002311\"\r
+
+          }"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "responseCode": "4011500",
+              "responseMessage": "Unauthorized. Invalid X-PARTNER-ID"
+          }
+  - name: 4031515 - Transaction Not Permitted. {reason}
+    request:
+      url: "{{baseUrl}}/snap/v2.0/account-inquiry-internal"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: "{{X-PARTNER-ID}}"
+        - name: CHANNEL-ID
+          value: APPS1
+        - name: X-EXTERNAL-ID
+          value: "{{externalId}}"
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+        - name: Authorization
+          value: Bearer {{token}}
+      body:
+        type: json
+        data: "{\r
+
+          \    \"beneficiaryAccountNo\": \"065101014305500\"\r
+
+          }"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "responseCode": "4031515",
+              "responseMessage": "Transaction Not Permitted. Don’t Have Access At This Account"
+          }
+  - name: 4031518 - Account Inactive
+    request:
+      url: "{{baseUrl}}/snap/v2.0/account-inquiry-internal"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: "{{X-PARTNER-ID}}"
+        - name: CHANNEL-ID
+          value: APPS1
+        - name: X-EXTERNAL-ID
+          value: "{{externalId}}"
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+        - name: Authorization
+          value: Bearer {{token}}
+      body:
+        type: json
+        data: "{\r
+
+          \    \"beneficiaryAccountNo\": \"001001016032312\"\r
+
+          }"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "responseCode": "4031518",
+              "responseMessage": "Account Inactive"
+          }
+  - name: 4091500 - Conflict
+    request:
+      url: "{{baseUrl}}/snap/v2.0/account-inquiry-internal"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: "{{X-PARTNER-ID}}"
+        - name: CHANNEL-ID
+          value: APPS1
+        - name: X-EXTERNAL-ID
+          value: "20251105153943"
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+        - name: Authorization
+          value: Bearer {{token}}
+      body:
+        type: json
+        data: "{\r
+
+          \    \"beneficiaryAccountNo\": \"001001016032312\"\r
+
+          }"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "responseCode": "4091500",
+              "responseMessage": "Conflict"
+          }
+  - name: 5001500 - Internal Server Error
+    request:
+      url: "{{baseUrl}}/snap/v2.0/account-inquiry-internal"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: "{{X-PARTNER-ID}}"
+        - name: CHANNEL-ID
+          value: APPS1
+        - name: X-EXTERNAL-ID
+          value: "{{externalId}}"
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+        - name: Authorization
+          value: Bearer {{token}}
+      body:
+        type: json
+        data: "{\r
+
+          \    \"beneficiaryAccountNo\": \"001001020966317\"\r
+
+          }"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "responseCode": "5001500",
+              "responseMessage": "Internal Server Error"
+          }

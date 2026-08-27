@@ -1,0 +1,114 @@
+info:
+  name: Transaction Status Inquiry
+  type: http
+  seq: 8
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v1.1/transfer/status"
+  headers:
+    - name: X-PARTNER-ID
+      value: "{{X-PARTNER-ID}}"
+    - name: CHANNEL-ID
+      value: "95231"
+    - name: X-EXTERNAL-ID
+      value: "{{externalId}}"
+    - name: X-TIMESTAMP
+      value: "{{timestamp}}"
+    - name: X-SIGNATURE
+      value: "{{gen_signature}}"
+  body:
+    type: json
+    data: "{\r
+
+      \    \"originalPartnerReferenceNo\": \"2026082600000000001\",\r
+
+      \    \"originalReferenceNo\": \"260826B8DLU\",\r
+
+      \    \"originalExternalId\": \"20260826094412\",\r
+
+      \    \"serviceCode\": \"17\"\r
+
+      }"
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+runtime:
+  scripts:
+    - type: before-request
+      code: |-
+        var moment = require('moment');
+        var externalId = moment().format("YYYYMMDDHHmmss");
+        bru.setCollectionVar('externalId', externalId);
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: 2003600 - Successful
+    request:
+      url: "{{baseUrl}}/snap/v1.0/transfer/status"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: UATP001
+        - name: CHANNEL-ID
+          value: "95231"
+        - name: X-EXTERNAL-ID
+          value: "{{externalId}}"
+        - name: Authorization
+          value: Bearer {{token}}
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+      body:
+        type: json
+        data: "{\r
+
+          \    \"originalReferenceNo\": \"0907253O693\",\r
+
+          \    \"originalPartnerReferenceNo\": \"2022111800157\",\r
+
+          \    \"originalExternalId\": \"20250709101237\",\r
+
+          \    \"serviceCode\": \"18\"\r
+
+          }"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+        - name: Partnername
+          value: GENERAL
+        - name: Content-Type
+          value: application/json
+        - name: Content-Encoding
+          value: gzip
+        - name: Content-Length
+          value: "270"
+      body:
+        type: json
+        data: |-
+          {
+              "responseCode": "2003600",
+              "responseMessage": "Successful",
+              "originalPartnerReferenceNo": "2022111800157",
+              "originalReferenceNo": "0907253O693",
+              "originalExternalId": "20250709101237",
+              "serviceCode": "18",
+              "transactionDate": "2025-07-09T10:08:00+07:00",
+              "amount": "10000.00",
+              "beneficiaryAccountNo": "065101014305500",
+              "beneficiaryBankCode": "BRINIDJA",
+              "sourceAccountNo": "001001000002311",
+              "latestTransactionStatus": "00",
+              "transactionStatusDesc": "Successful"
+          }

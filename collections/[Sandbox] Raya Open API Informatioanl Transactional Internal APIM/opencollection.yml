@@ -1,0 +1,42 @@
+opencollection: 1.0.0
+
+info:
+  name: PAYMENT - RAYA OPEN API (INTERNAL)
+config:
+  proxy:
+    inherit: true
+    config:
+      protocol: http
+      hostname: ""
+      port: ""
+      auth:
+        username: ""
+        password: ""
+      bypassProxy: ""
+
+request:
+  variables:
+    - name: baseUrl
+      value: ""
+    - name: X-CLIENT-KEY
+      value: ""
+    - name: timestamp
+      value: ""
+    - name: X-SIGNATURE
+      value: ""
+    - name: token
+      value: ""
+    - name: externalId
+      value: ""
+    - name: newRefNo
+      value: ""
+    - name: X-PARTNER-ID
+      value: ""
+    - name: clientSecret
+      value: ""
+bundled: false
+extensions:
+  bruno:
+    ignore:
+      - node_modules
+      - .git
