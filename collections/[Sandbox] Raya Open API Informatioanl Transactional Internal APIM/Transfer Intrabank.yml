@@ -1,0 +1,936 @@
+info:
+  name: Transfer Intrabank
+  type: http
+  seq: 5
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v2.1/transfer-intrabank"
+  headers:
+    - name: X-PARTNER-ID
+      value: "{{X-PARTNER-ID}}"
+    - name: CHANNEL-ID
+      value: APPS1
+    - name: X-EXTERNAL-ID
+      value: "{{externalId}}"
+  body:
+    type: json
+    data: "{\r
+
+      \    \"partnerReferenceNo\": \"2026082600000000001\",\r
+
+      \    \"amount\": {\r
+
+      \        \"value\": \"50000000.00\",\r
+
+      \        \"currency\": \"IDR\"\r
+
+      \    },\r
+
+      \    \"beneficiaryAccountNo\": \"033001000001315\",\r
+
+      \    \"customerReference\": \"260826B8DLU\",\r
+
+      \    \"remark\": \"OATRFINTRA TESTING HUNTER\",\r
+
+      \    \"sourceAccountNo\": \"001001000024401\",\r
+
+      \    \"transactionDate\": \"2026-08-26T09:44:00+07:00\",\r
+
+      \    \"originatorInfos\": {\r
+
+      \        \"originatorCustomerNo\": \"081235123582\",\r
+
+      \        \"originatorCustomerName\": \"XXXXX\",\r
+
+      \        \"originatorBankCode\": \"002\"\r
+
+      \    }\r
+
+      }"
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+runtime:
+  scripts:
+    - type: before-request
+      code: |-
+        var moment = require('moment');
+        var externalId = moment().format("YYYYMMDDHHmmss");
+        bru.setCollectionVar('externalId', externalId);
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: 2001700 - Successful
+    request:
+      url: "{{baseUrl}}/snap/v2.0/transfer-intrabank"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: "{{X-PARTNER-ID}}"
+        - name: CHANNEL-ID
+          value: "95231"
+        - name: X-EXTERNAL-ID
+          value: "{{externalId}}"
+        - name: Authorization
+          value: Bearer {{token}}
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+      body:
+        type: json
+        data: "{\r
+
+          \    \"responseCode\": \"2001700\",\r
+
+          \    \"responseMessage\": \"Successful\",\r
+
+          \    \"referenceNo\": \"090725Y4GG4\",\r
+
+          \    \"partnerReferenceNo\": \"2022111800001210146\",\r
+
+          \    \"amount\": {\r
+
+          \        \"value\": \"50000.00\",\r
+
+          \        \"currency\": \"IDR\"\r
+
+          \    },\r
+
+          \    \"beneficiaryAccountNo\": \"001001000002311\",\r
+
+          \    \"customerReference\": \"090725VUY8O\",\r
+
+          \    \"sourceAccountNo\": \"001001000024401\",\r
+
+          \    \"transactionDate\": \"2025-07-09 09:43:37 WIB\",\r
+
+          \    \"originatorInfos\": [{\r
+
+          \        \"originatorCustomerNo\": \"081235123582\",\r
+
+          \        \"originatorCustomerName\": \"XXXXX\",\r
+
+          \        \"originatorBankCode\": \"002\"\r
+
+          \    }]\r
+
+          }"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+        - name: Partnername
+          value: GENERAL
+        - name: Content-Type
+          value: application/json
+        - name: Content-Encoding
+          value: gzip
+        - name: Content-Length
+          value: "282"
+      body:
+        type: json
+        data: |-
+          {
+              "responseCode": "2001700",
+              "responseMessage": "Successful",
+              "referenceNo": "090725Y4GG4",
+              "partnerReferenceNo": "2022111800001210146",
+              "amount": {
+                  "value": "50000.00",
+                  "currency": "IDR"
+              },
+              "beneficiaryAccountNo": "001001000002311",
+              "customerReference": "090725VUY8O",
+              "sourceAccountNo": "001001000024401",
+              "transactionDate": "2025-07-09 09:43:37 WIB",
+              "originatorInfos": {
+                  "originatorCustomerNo": "081235123582",
+                  "originatorCustomerName": "XXXXX",
+                  "originatorBankCode": "002"
+              }
+          }
+  - name: 4001701 - Invalid Field Format {fieldName}
+    request:
+      url: "{{baseUrl}}/snap/v2.0/transfer-intrabank"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: "{{X-PARTNER-ID}}"
+        - name: CHANNEL-ID
+          value: APPS1
+        - name: X-EXTERNAL-ID
+          value: "{{externalId}}"
+        - name: X-TIMESTAMP
+          value: 2025-11-18 14:12:04+07:00
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+        - name: Authorization
+          value: Bearer {{token}}
+      body:
+        type: json
+        data: "{\r
+
+          \    \"partnerReferenceNo\": \"298140144190009\",\r
+
+          \    \"amount\": {\r
+
+          \        \"value\": \"2000.00\",\r
+
+          \        \"currency\": \"IDR\"\r
+
+          \    },\r
+
+          \    \"beneficiaryAccountNo\": \"032001000311301\",\r
+
+          \    \"customerReference\": \"051125ATGD8\",\r
+
+          \    \"remark\": \"TESTING\",\r
+
+          \    \"sourceAccountNo\": \"001001002789317\",\r
+
+          \    \"transactionDate\": \"2025-11-05T08:26:03+07:00\",\r
+
+          \    \"originatorInfos\": {\r
+
+          \        \"originatorCustomerNo\": \"081235123582\",\r
+
+          \        \"originatorCustomerName\": \"XXXXX\",\r
+
+          \        \"originatorBankCode\": \"002\"\r
+
+          \    }\r
+
+          }"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "responseCode": "4001701",
+              "responseMessage": "Invalid Field Format X-TIMESTAMP"
+          }
+  - name: 4001702 - Invalid Mandatory {fieldName}
+    request:
+      url: "{{baseUrl}}/snap/v2.0/transfer-intrabank"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: "{{X-PARTNER-ID}}"
+        - name: CHANNEL-ID
+          value: APPS1
+        - name: X-EXTERNAL-ID
+          value: "{{externalId}}"
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+        - name: Authorization
+          value: Bearer {{token}}
+      body:
+        type: json
+        data: "{\r
+
+          \    \"partnerReferenceNo\": \"\",\r
+
+          \    \"amount\": {\r
+
+          \        \"value\": \"2000.00\",\r
+
+          \        \"currency\": \"IDR\"\r
+
+          \    },\r
+
+          \    \"beneficiaryAccountNo\": \"032001000311301\",\r
+
+          \    \"customerReference\": \"051125ATGD8\",\r
+
+          \    \"remark\": \"TESTING\",\r
+
+          \    \"sourceAccountNo\": \"001001002789317\",\r
+
+          \    \"transactionDate\": \"2025-11-05T08:26:03+07:00\",\r
+
+          \    \"originatorInfos\": {\r
+
+          \        \"originatorCustomerNo\": \"081235123582\",\r
+
+          \        \"originatorCustomerName\": \"XXXXX\",\r
+
+          \        \"originatorBankCode\": \"002\"\r
+
+          \    }\r
+
+          }"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "responseCode": "4001702",
+              "responseMessage": "Invalid Mandatory Field partnerReferenceNo"
+          }
+  - name: 4011700 - Unauthorized. {reason}
+    request:
+      url: "{{baseUrl}}/snap/v2.0/transfer-intrabank"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: SMC2
+        - name: CHANNEL-ID
+          value: APPS1
+        - name: X-EXTERNAL-ID
+          value: "{{externalId}}"
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+        - name: Authorization
+          value: Bearer {{token}}
+      body:
+        type: json
+        data: "{\r
+
+          \    \"partnerReferenceNo\": \"298140144190009\",\r
+
+          \    \"amount\": {\r
+
+          \        \"value\": \"2000.00\",\r
+
+          \        \"currency\": \"IDR\"\r
+
+          \    },\r
+
+          \    \"beneficiaryAccountNo\": \"032001000311301\",\r
+
+          \    \"customerReference\": \"051125ATGD8\",\r
+
+          \    \"remark\": \"TESTING\",\r
+
+          \    \"sourceAccountNo\": \"001001002789317\",\r
+
+          \    \"transactionDate\": \"2025-11-05T08:26:03+07:00\",\r
+
+          \    \"originatorInfos\": {\r
+
+          \        \"originatorCustomerNo\": \"081235123582\",\r
+
+          \        \"originatorCustomerName\": \"XXXXX\",\r
+
+          \        \"originatorBankCode\": \"002\"\r
+
+          \    }\r
+
+          }"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "responseCode": "4011700",
+              "responseMessage": "Unauthorized. Invalid X-PARTNER-ID"
+          }
+  - name: 4011701 - Invalid Access Token
+    request:
+      url: "{{baseUrl}}/snap/v2.0/transfer-intrabank"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: "{{X-PARTNER-ID}}"
+        - name: CHANNEL-ID
+          value: APPS1
+        - name: X-EXTERNAL-ID
+          value: "{{externalId}}"
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+      body:
+        type: json
+        data: "{\r
+
+          \    \"partnerReferenceNo\": \"298140144190009\",\r
+
+          \    \"amount\": {\r
+
+          \        \"value\": \"2000.00\",\r
+
+          \        \"currency\": \"IDR\"\r
+
+          \    },\r
+
+          \    \"beneficiaryAccountNo\": \"032001000311301\",\r
+
+          \    \"customerReference\": \"051125ATGD8\",\r
+
+          \    \"remark\": \"TESTING\",\r
+
+          \    \"sourceAccountNo\": \"001001002789317\",\r
+
+          \    \"transactionDate\": \"2025-11-05T08:26:03+07:00\",\r
+
+          \    \"originatorInfos\": {\r
+
+          \        \"originatorCustomerNo\": \"081235123582\",\r
+
+          \        \"originatorCustomerName\": \"XXXXX\",\r
+
+          \        \"originatorBankCode\": \"002\"\r
+
+          \    }\r
+
+          }"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "responseCode": "4011701",
+              "responseMessage": "Invalid Token (B2B)"
+          }
+  - name: 5001700 - Internal Server Error
+    request:
+      url: "{{baseUrl}}/snap/v2.0/transfer-intrabank"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: "{{X-PARTNER-ID}}"
+        - name: CHANNEL-ID
+          value: APPS1
+        - name: X-EXTERNAL-ID
+          value: "{{externalId}}"
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+        - name: Authorization
+          value: Bearer {{token}}
+      body:
+        type: json
+        data: "{\r
+
+          \    \"partnerReferenceNo\": \"298140144190001\",\r
+
+          \    \"amount\": {\r
+
+          \        \"value\": \"2000.00\",\r
+
+          \        \"currency\": \"IDR\"\r
+
+          \    },\r
+
+          \    \"beneficiaryAccountNo\": \"032001000311301\",\r
+
+          \    \"customerReference\": \"051125ATGD8\",\r
+
+          \    \"remark\": \"TESTING\",\r
+
+          \    \"sourceAccountNo\": \"001001020966317\",\r
+
+          \    \"transactionDate\": \"2025-11-05T08:26:03+07:00\",\r
+
+          \    \"originatorInfos\": {\r
+
+          \        \"originatorCustomerNo\": \"081235123582\",\r
+
+          \        \"originatorCustomerName\": \"XXXXX\",\r
+
+          \        \"originatorBankCode\": \"002\"\r
+
+          \    }\r
+
+          }"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "responseCode": "5001700",
+              "responseMessage": "Internal Server Error"
+          }
+  - name: 4091701 - Duplicate Partner Reference No
+    request:
+      url: "{{baseUrl}}/snap/v2.0/transfer-intrabank"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: "{{X-PARTNER-ID}}"
+        - name: CHANNEL-ID
+          value: APPS1
+        - name: X-EXTERNAL-ID
+          value: "{{externalId}}"
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+        - name: Authorization
+          value: Bearer {{token}}
+      body:
+        type: json
+        data: "{\r
+
+          \    \"partnerReferenceNo\": \"298140144190009\",\r
+
+          \    \"amount\": {\r
+
+          \        \"value\": \"2000.00\",\r
+
+          \        \"currency\": \"IDR\"\r
+
+          \    },\r
+
+          \    \"beneficiaryAccountNo\": \"032001000311301\",\r
+
+          \    \"customerReference\": \"051125ATGD8\",\r
+
+          \    \"remark\": \"TESTING\",\r
+
+          \    \"sourceAccountNo\": \"001001002789317\",\r
+
+          \    \"transactionDate\": \"2025-11-05T08:26:03+07:00\",\r
+
+          \    \"originatorInfos\": {\r
+
+          \        \"originatorCustomerNo\": \"081235123582\",\r
+
+          \        \"originatorCustomerName\": \"XXXXX\",\r
+
+          \        \"originatorBankCode\": \"002\"\r
+
+          \    }\r
+
+          }"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "responseCode": "4091701",
+              "responseMessage": "Duplicate partnerReferenceNo"
+          }
+  - name: 4091700 - Conflict
+    request:
+      url: "{{baseUrl}}/snap/v2.0/transfer-intrabank"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: "{{X-PARTNER-ID}}"
+        - name: CHANNEL-ID
+          value: APPS1
+        - name: X-EXTERNAL-ID
+          value: "20251105153943"
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+        - name: Authorization
+          value: Bearer {{token}}
+      body:
+        type: json
+        data: "{\r
+
+          \    \"partnerReferenceNo\": \"298140144190001\",\r
+
+          \    \"amount\": {\r
+
+          \        \"value\": \"2000.00\",\r
+
+          \        \"currency\": \"IDR\"\r
+
+          \    },\r
+
+          \    \"beneficiaryAccountNo\": \"032001000311301\",\r
+
+          \    \"customerReference\": \"051125ATGD8\",\r
+
+          \    \"remark\": \"TESTING\",\r
+
+          \    \"sourceAccountNo\": \"001001002789317\",\r
+
+          \    \"transactionDate\": \"2025-11-05T08:26:03+07:00\",\r
+
+          \    \"originatorInfos\": {\r
+
+          \        \"originatorCustomerNo\": \"081235123582\",\r
+
+          \        \"originatorCustomerName\": \"XXXXX\",\r
+
+          \        \"originatorBankCode\": \"002\"\r
+
+          \    }\r
+
+          }"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "responseCode": "4091700",
+              "responseMessage": "Conflict"
+          }
+  - name: 4031718 - Account Inactive
+    request:
+      url: "{{baseUrl}}/snap/v2.0/transfer-intrabank"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: "{{X-PARTNER-ID}}"
+        - name: CHANNEL-ID
+          value: APPS1
+        - name: X-EXTERNAL-ID
+          value: "{{externalId}}"
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+        - name: Authorization
+          value: Bearer {{token}}
+      body:
+        type: json
+        data: "{\r
+
+          \    \"partnerReferenceNo\": \"298140144190001\",\r
+
+          \    \"amount\": {\r
+
+          \        \"value\": \"2000.00\",\r
+
+          \        \"currency\": \"IDR\"\r
+
+          \    },\r
+
+          \    \"beneficiaryAccountNo\": \"032001000311301\",\r
+
+          \    \"customerReference\": \"051125ATGD8\",\r
+
+          \    \"remark\": \"TESTING\",\r
+
+          \    \"sourceAccountNo\": \"001001016032312\",\r
+
+          \    \"transactionDate\": \"2025-11-05T08:26:03+07:00\",\r
+
+          \    \"originatorInfos\": {\r
+
+          \        \"originatorCustomerNo\": \"081235123582\",\r
+
+          \        \"originatorCustomerName\": \"XXXXX\",\r
+
+          \        \"originatorBankCode\": \"002\"\r
+
+          \    }\r
+
+          }"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "responseCode": "4031718",
+              "responseMessage": "Account Inactive"
+          }
+  - name: 4031715 - Transaction Not Permitted. {reason}
+    request:
+      url: "{{baseUrl}}/snap/v2.0/transfer-intrabank"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: "{{X-PARTNER-ID}}"
+        - name: CHANNEL-ID
+          value: APPS1
+        - name: X-EXTERNAL-ID
+          value: "{{externalId}}"
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+        - name: Authorization
+          value: Bearer {{token}}
+      body:
+        type: json
+        data: "{\r
+
+          \    \"partnerReferenceNo\": \"298140144190001\",\r
+
+          \    \"amount\": {\r
+
+          \        \"value\": \"2000.00\",\r
+
+          \        \"currency\": \"IDR\"\r
+
+          \    },\r
+
+          \    \"beneficiaryAccountNo\": \"032001000311301\",\r
+
+          \    \"customerReference\": \"051125ATGD8\",\r
+
+          \    \"remark\": \"TESTING\",\r
+
+          \    \"sourceAccountNo\": \"065101014305500\",\r
+
+          \    \"transactionDate\": \"2025-11-05T08:26:03+07:00\",\r
+
+          \    \"originatorInfos\": {\r
+
+          \        \"originatorCustomerNo\": \"081235123582\",\r
+
+          \        \"originatorCustomerName\": \"XXXXX\",\r
+
+          \        \"originatorBankCode\": \"002\"\r
+
+          \    }\r
+
+          }"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "responseCode": "4031715",
+              "responseMessage": "Transaction Not Permitted. Don’t Have Access At This Account"
+          }
+  - name: 4031714 - Insufficient Funds
+    request:
+      url: "{{baseUrl}}/snap/v2.0/transfer-intrabank"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: "{{X-PARTNER-ID}}"
+        - name: CHANNEL-ID
+          value: APPS1
+        - name: X-EXTERNAL-ID
+          value: "{{externalId}}"
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+      body:
+        type: json
+        data: "{\r
+
+          \    \"partnerReferenceNo\": \"298140144190001\",\r
+
+          \    \"amount\": {\r
+
+          \        \"value\": \"10000000.00\",\r
+
+          \        \"currency\": \"IDR\"\r
+
+          \    },\r
+
+          \    \"beneficiaryAccountNo\": \"032001000311301\",\r
+
+          \    \"customerReference\": \"051125ATGD8\",\r
+
+          \    \"remark\": \"TESTING\",\r
+
+          \    \"sourceAccountNo\": \"001001002789317\",\r
+
+          \    \"transactionDate\": \"2025-11-05T08:26:03+07:00\",\r
+
+          \    \"originatorInfos\": {\r
+
+          \        \"originatorCustomerNo\": \"081235123582\",\r
+
+          \        \"originatorCustomerName\": \"XXXXX\",\r
+
+          \        \"originatorBankCode\": \"002\"\r
+
+          \    }\r
+
+          }"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "responseCode": "4031714",
+              "responseMessage": "Insufficient Funds"
+          }
+  - name: 4031709 - Dormant Account
+    request:
+      url: "{{baseUrl}}/snap/v2.0/transfer-intrabank"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: "{{X-PARTNER-ID}}"
+        - name: CHANNEL-ID
+          value: APPS1
+        - name: X-EXTERNAL-ID
+          value: "{{externalId}}"
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+        - name: Authorization
+          value: Bearer {{token}}
+      body:
+        type: json
+        data: "{\r
+
+          \    \"partnerReferenceNo\": \"2022111800001210146\",\r
+
+          \    \"amount\": {\r
+
+          \        \"value\": \"50000.00\",\r
+
+          \        \"currency\": \"IDR\"\r
+
+          \    },\r
+
+          \    \"beneficiaryAccountNo\": \"001001000002311\",\r
+
+          \    \"customerReference\": \"090725VUY8O\",\r
+
+          \    \"remark\": \"OATRFINTRA TESTING HUNTER\",\r
+
+          \    \"sourceAccountNo\": \"011001005082305\",\r
+
+          \    \"transactionDate\": \"2025-07-09T22:34:00+07:00\",\r
+
+          \    \"originatorInfos\": {\r
+
+          \        \"originatorCustomerNo\": \"081235123582\",\r
+
+          \        \"originatorCustomerName\": \"XXXXX\",\r
+
+          \        \"originatorBankCode\": \"002\"\r
+
+          \    }\r
+
+          }"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "responseCode": "4031709",
+              "responseMessage": "Dormant Account"
+          }
+  - name: 4031705 - Do Not Honor
+    request:
+      url: "{{baseUrl}}/snap/v2.0/transfer-intrabank"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: "{{X-PARTNER-ID}}"
+        - name: CHANNEL-ID
+          value: APPS1
+        - name: X-EXTERNAL-ID
+          value: "{{externalId}}"
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+        - name: Authorization
+          value: Bearer {{token}}
+      body:
+        type: json
+        data: "{\r
+
+          \    \"partnerReferenceNo\": \"2022111800001210146\",\r
+
+          \    \"amount\": {\r
+
+          \        \"value\": \"50000.00\",\r
+
+          \        \"currency\": \"IDR\"\r
+
+          \    },\r
+
+          \    \"beneficiaryAccountNo\": \"001001000002311\",\r
+
+          \    \"customerReference\": \"090725VUY8O\",\r
+
+          \    \"remark\": \"OATRFINTRA TESTING HUNTER\",\r
+
+          \    \"sourceAccountNo\": \"001001000066306\",\r
+
+          \    \"transactionDate\": \"2025-07-09T22:34:00+07:00\",\r
+
+          \    \"originatorInfos\": {\r
+
+          \        \"originatorCustomerNo\": \"081235123582\",\r
+
+          \        \"originatorCustomerName\": \"XXXXX\",\r
+
+          \        \"originatorBankCode\": \"002\"\r
+
+          \    }\r
+
+          }"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "responseCode": "4031705",
+              "responseMessage": "Do Not Honor"
+          }
+  - name: 4031702 - Exceeds Transaction Amount Limit
+    request:
+      url: "{{baseUrl}}/snap/v2.0/transfer-intrabank"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: "{{X-PARTNER-ID}}"
+        - name: CHANNEL-ID
+          value: APPS1
+        - name: X-EXTERNAL-ID
+          value: "{{externalId}}"
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+      body:
+        type: json
+        data: "{\r
+
+          \    \"partnerReferenceNo\": \"2022111800001210146\",\r
+
+          \    \"amount\": {\r
+
+          \        \"value\": \"50000000.00\",\r
+
+          \        \"currency\": \"IDR\"\r
+
+          \    },\r
+
+          \    \"beneficiaryAccountNo\": \"001001000002311\",\r
+
+          \    \"customerReference\": \"090725VUY8O\",\r
+
+          \    \"remark\": \"OATRFINTRA TESTING HUNTER\",\r
+
+          \    \"sourceAccountNo\": \"001001000024401\",\r
+
+          \    \"transactionDate\": \"2025-07-09T22:34:00+07:00\",\r
+
+          \    \"originatorInfos\": {\r
+
+          \        \"originatorCustomerNo\": \"081235123582\",\r
+
+          \        \"originatorCustomerName\": \"XXXXX\",\r
+
+          \        \"originatorBankCode\": \"002\"\r
+
+          \    }\r
+
+          }"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "responseCode": "4031702",
+              "responseMessage": "Exceeds Transaction Amount Limit"
+          }

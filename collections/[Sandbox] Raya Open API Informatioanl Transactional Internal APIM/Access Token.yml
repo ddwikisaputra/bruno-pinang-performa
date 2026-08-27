@@ -1,0 +1,101 @@
+info:
+  name: Access Token
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{baseUrl}}/oauth/accesstoken?grant_type=client_credentials"
+  params:
+    - name: grant_type
+      value: client_credentials
+      type: query
+  body:
+    type: form-urlencoded
+    data:
+      - name: client_id
+        value: "{{X-CLIENT-KEY}}"
+      - name: client_secret
+        value: "{{clientSecret}}"
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        var jsonData = res.getBody();
+        bru.setCollectionVar("token", jsonData.access_token)
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: 2007300 - Successful
+    request:
+      url: "{{baseUrl}}/snap/v1.0/access-token/b2b"
+      method: POST
+      headers:
+        - name: X-SIGNATURE
+          value: "{{X-SIGNATURE}}"
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-CLIENT-KEY
+          value: "{{X-CLIENT-KEY}}"
+      body:
+        type: json
+        data: "{\r
+
+          \    \"grantType\": \"client_credentials\"\r
+
+          }"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Set-Cookie
+          value: ssnid=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT;
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-TIMESTAMP
+          value: 2025-07-09T10:05:57+07:00
+        - name: Permissions-Policy
+          value: geolocation=(), microphone=(), camera=()
+        - name: Pragma
+          value: no-cache
+        - name: Cross-Origin-Opener-Policy
+          value: same-origin
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+        - name: Referrer-Policy
+          value: no-referrer-when-downgrade
+        - name: Content-type
+          value: application/json;charset=UTF-8
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains; preload
+        - name: X-CLIENT-KEY
+          value: 58980c8f-bf47-4ad6-97c6-6907ec4388de
+        - name: Cache-Control
+          value: no-store
+        - name: Content-Security-Policy
+          value: default-src 'self'
+        - name: Cross-Origin-Resource-Policy
+          value: same-origin
+        - name: Cross-Origin-Embedder-Policy
+          value: require-corp
+        - name: Content-Encoding
+          value: gzip
+        - name: Content-Length
+          value: "172"
+      body:
+        type: json
+        data: |-
+          {
+              "responseCode": "2007300",
+              "responseMessage": "Successful",
+              "accessToken": "ad188410b2484597aef01928f69961483f576e17e42a494e9fcfda568732e27b",
+              "tokenType": "Bearer",
+              "expiresIn": "3600"
+          }

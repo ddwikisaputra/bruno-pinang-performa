@@ -1,0 +1,1137 @@
+info:
+  name: Transfer Interbank
+  type: http
+  seq: 7
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v2.1/transfer-interbank"
+  headers:
+    - name: X-PARTNER-ID
+      value: "{{X-PARTNER-ID}}"
+    - name: CHANNEL-ID
+      value: "95231"
+    - name: X-EXTERNAL-ID
+      value: "{{externalId}}"
+  body:
+    type: json
+    data: "{\r
+
+      \  \"partnerReferenceNo\": \"2026082600001\",\r
+
+      \  \"amount\": {\r
+
+      \    \"value\": \"50000000.00\",\r
+
+      \    \"currency\": \"IDR\"\r
+
+      \  },\r
+
+      \  \"beneficiaryAccountName\": \"RUBY IHSAN\",\r
+
+      \  \"beneficiaryAccountNo\": \"001001001131\",\r
+
+      \  \"beneficiaryBankCode\": \"BRINIDJA\",\r
+
+      \  \"beneficiaryBankName\": \"Bank BRI\",\r
+
+      \  \"customerReference\": \"260826LJX3S\",\r
+
+      \  \"sourceAccountNo\": \"001001000024401\",\r
+
+      \  \"transactionDate\": \"2026-08-26T09:33:00+07:00\",\r
+
+      \  \"feeType\": \"OUR\",\r
+
+      \  \"originatorInfos\": {\r
+
+      \    \"originatorCustomerNo\": \"001001000024401\",\r
+
+      \    \"originatorCustomerName\": \"Andhika Pro\",\r
+
+      \    \"originatorBankCode\": \"002\"\r
+
+      \  },\r
+
+      \  \"additionalInfo\": {\r
+
+      \    \"switcher\": \"RTOL\"\r
+
+      \  }\r
+
+      }\r\n"
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+runtime:
+  scripts:
+    - type: before-request
+      code: |-
+        var moment = require('moment');
+        var externalId = moment().format("YYYYMMDDHHmmss");
+        bru.setCollectionVar('externalId', externalId);
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: 2001800 - Successful RTOL
+    request:
+      url: "{{baseUrl}}/snap/v2.0/transfer-interbank"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: UATP001
+        - name: CHANNEL-ID
+          value: "95231"
+        - name: X-EXTERNAL-ID
+          value: "{{externalId}}"
+        - name: Authorization
+          value: Bearer {{token}}
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+      body:
+        type: json
+        data: "{\r
+
+          \  \"partnerReferenceNo\": \"2022111800157\",\r
+
+          \  \"amount\": {\r
+
+          \    \"value\": \"10000.00\",\r
+
+          \    \"currency\": \"IDR\"\r
+
+          \  },\r
+
+          \  \"beneficiaryAccountName\": \"RUBY IHSAN\",\r
+
+          \  \"beneficiaryAccountNo\": \"001001001131\",\r
+
+          \  \"beneficiaryBankCode\": \"BRINIDJA\",\r
+
+          \  \"beneficiaryBankName\": \"Bank BRI\",\r
+
+          \  \"customerReference\": \"241125SECUB\",\r
+
+          \  \"sourceAccountNo\": \"001001000024401\",\r
+
+          \  \"transactionDate\": \"2025-07-09T10:08:00+07:00\",\r
+
+          \  \"feeType\": \"OUR\",\r
+
+          \  \"originatorInfos\": {\r
+
+          \    \"originatorCustomerNo\": \"001001000024401\",\r
+
+          \    \"originatorCustomerName\": \"Andhika Pro\",\r
+
+          \    \"originatorBankCode\": \"002\"\r
+
+          \  },\r
+
+          \  \"additionalInfo\": {\r
+
+          \    \"switcher\": \"RTOL\"\r
+
+          \  }\r
+
+          }\r\n"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+        - name: Partnername
+          value: GENERAL
+        - name: Content-Type
+          value: application/json
+        - name: Content-Encoding
+          value: gzip
+        - name: Content-Length
+          value: "310"
+      body:
+        type: json
+        data: |-
+          {
+              "responseCode": "2001800",
+              "responseMessage": "Successful",
+              "referenceNo": "000000006603",
+              "partnerReferenceNo": "2022111800157",
+              "amount": {
+                  "value": "10000.00",
+                  "currency": "IDR"
+              },
+              "beneficiaryAccountNo": "065101014305500",
+              "customerReference": "0907253O693",
+              "sourceAccountNo": "001001000002311",
+              "transactionDate": "2025-07-09 10:12:34 WIB",
+              "additionalInfo": {
+                  "switcher": "RTOL"
+              },
+              "originatorInfos": {
+                  "originatorCustomerNo": "99901000003301",
+                  "originatorCustomerName": "William Hunter",
+                  "originatorBankCode": "002"
+              }
+          }
+  - name: 2001800 - Successful BIFAST
+    request:
+      url: "{{baseUrl}}/snap/v2.0/transfer-interbank"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: "{{X-PARTNER-ID}}"
+        - name: CHANNEL-ID
+          value: "95231"
+        - name: X-EXTERNAL-ID
+          value: "{{externalId}}"
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+      body:
+        type: json
+        data: "{\r
+
+          \  \"partnerReferenceNo\": \"2022111800157\",\r
+
+          \  \"amount\": {\r
+
+          \    \"value\": \"10000.00\",\r
+
+          \    \"currency\": \"IDR\"\r
+
+          \  },\r
+
+          \  \"beneficiaryAccountName\": \"Andhika Pro\",\r
+
+          \  \"beneficiaryAccountNo\": \"2600000129028\",\r
+
+          \  \"beneficiaryBankCode\": \"BMRIIDJA\",\r
+
+          \  \"beneficiaryBankName\": \"Bank Mandiri\",\r
+
+          \  \"customerReference\": \"241125TITS3\",\r
+
+          \  \"sourceAccountNo\": \"001001000024401\",\r
+
+          \  \"transactionDate\": \"2025-07-09T10:08:00+07:00\",\r
+
+          \  \"feeType\": \"OUR\",\r
+
+          \  \"originatorInfos\": {\r
+
+          \    \"originatorCustomerNo\": \"001001000024401\",\r
+
+          \    \"originatorCustomerName\": \"RUBY IHSAN\",\r
+
+          \    \"originatorBankCode\": \"494\"\r
+
+          \  },\r
+
+          \  \"additionalInfo\": {\r
+
+          \    \"switcher\": \"BIFAST\"\r
+
+          \  }\r
+
+          }\r\n"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "responseCode": "2001800",
+              "responseMessage": "Successful",
+              "referenceNo": "20251124AGTBIDJA010O9929347720",
+              "partnerReferenceNo": "202511240002",
+              "amount": {
+                  "value": "10000.00",
+                  "currency": "IDR"
+              },
+              "beneficiaryAccountNo": "2600000129028",
+              "customerReference": "241125TITS3",
+              "sourceAccountNo": "001001000024401",
+              "transactionDate": "2025-11-24 14:26:47 WIB",
+              "additionalInfo": {
+                  "switcher": "BIFAST"
+              },
+              "originatorInfos": {
+                  "originatorCustomerNo": "001001000024401",
+                  "originatorCustomerName": "Prof. Sa'pik Siregar S.IH, M.S",
+                  "originatorBankCode": "002"
+              }
+          }
+  - name: 4001601 - Invalid Field Format {fieldName}
+    request:
+      url: "{{baseUrl}}/snap/v2.0/transfer-interbank"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: "{{X-PARTNER-ID}}"
+        - name: CHANNEL-ID
+          value: "95231"
+        - name: X-EXTERNAL-ID
+          value: "{{externalId}}"
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+        - name: Authorization
+          value: Bearer {{token}}
+      body:
+        type: json
+        data: "{\r
+
+          \  \"partnerReferenceNo\": \"$%^&*\",\r
+
+          \  \"amount\": {\r
+
+          \    \"value\": \"10000.00\",\r
+
+          \    \"currency\": \"IDR\"\r
+
+          \  },\r
+
+          \  \"beneficiaryAccountName\": \"RUBY IHSAN\",\r
+
+          \  \"beneficiaryAccountNo\": \"001001001131\",\r
+
+          \  \"beneficiaryBankCode\": \"BRINIDJA\",\r
+
+          \  \"beneficiaryBankName\": \"Bank BRI\",\r
+
+          \  \"customerReference\": \"241125SECUB\",\r
+
+          \  \"sourceAccountNo\": \"001001000024401\",\r
+
+          \  \"transactionDate\": \"2025-07-09T10:08:00+07:00\",\r
+
+          \  \"feeType\": \"OUR\",\r
+
+          \  \"originatorInfos\": {\r
+
+          \    \"originatorCustomerNo\": \"001001000024401\",\r
+
+          \    \"originatorCustomerName\": \"Andhika Pro\",\r
+
+          \    \"originatorBankCode\": \"002\"\r
+
+          \  },\r
+
+          \  \"additionalInfo\": {\r
+
+          \    \"switcher\": \"RTOL\"\r
+
+          \  }\r
+
+          }\r\n"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "responseCode": "4001601",
+              "responseMessage": "Invalid Field Format partnerReferenceNo"
+          }
+  - name: 4001602 - Invalid Mandatory Field {fieldName}
+    request:
+      url: "{{baseUrl}}/snap/v2.0/transfer-interbank"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: "{{X-PARTNER-ID}}"
+        - name: CHANNEL-ID
+          value: "95231"
+        - name: X-EXTERNAL-ID
+          value: "{{externalId}}"
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+        - name: Authorization
+          value: Bearer {{token}}
+      body:
+        type: json
+        data: "{\r
+
+          \  \"partnerReferenceNo\": \"\",\r
+
+          \  \"amount\": {\r
+
+          \    \"value\": \"10000.00\",\r
+
+          \    \"currency\": \"IDR\"\r
+
+          \  },\r
+
+          \  \"beneficiaryAccountName\": \"Andhika Pro\",\r
+
+          \  \"beneficiaryAccountNo\": \"2600000129028\",\r
+
+          \  \"beneficiaryBankCode\": \"BMRIIDJA\",\r
+
+          \  \"beneficiaryBankName\": \"Bank Mandiri\",\r
+
+          \  \"customerReference\": \"241125TITS3\",\r
+
+          \  \"sourceAccountNo\": \"001001000024401\",\r
+
+          \  \"transactionDate\": \"2025-07-09T10:08:00+07:00\",\r
+
+          \  \"feeType\": \"OUR\",\r
+
+          \  \"originatorInfos\": {\r
+
+          \    \"originatorCustomerNo\": \"001001000024401\",\r
+
+          \    \"originatorCustomerName\": \"RUBY IHSAN\",\r
+
+          \    \"originatorBankCode\": \"494\"\r
+
+          \  },\r
+
+          \  \"additionalInfo\": {\r
+
+          \    \"switcher\": \"BIFAST\"\r
+
+          \  }\r
+
+          }\r\n"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "responseCode": "4001602",
+              "responseMessage": "Invalid Mandatory Field partnerReferenceNo"
+          }
+  - name: 4011800 - Unauthorized. {reason}
+    request:
+      url: "{{baseUrl}}/snap/v2.0/transfer-interbank"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: SMC2
+        - name: CHANNEL-ID
+          value: "95231"
+        - name: X-EXTERNAL-ID
+          value: "{{externalId}}"
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+        - name: Authorization
+          value: Bearer {{token}}
+      body:
+        type: json
+        data: "{\r
+
+          \  \"partnerReferenceNo\": \"2022111800157\",\r
+
+          \  \"amount\": {\r
+
+          \    \"value\": \"10000.00\",\r
+
+          \    \"currency\": \"IDR\"\r
+
+          \  },\r
+
+          \  \"beneficiaryAccountName\": \"Andhika Pro\",\r
+
+          \  \"beneficiaryAccountNo\": \"2600000129028\",\r
+
+          \  \"beneficiaryBankCode\": \"BMRIIDJA\",\r
+
+          \  \"beneficiaryBankName\": \"Bank Mandiri\",\r
+
+          \  \"customerReference\": \"241125TITS3\",\r
+
+          \  \"sourceAccountNo\": \"001001000024401\",\r
+
+          \  \"transactionDate\": \"2025-07-09T10:08:00+07:00\",\r
+
+          \  \"feeType\": \"OUR\",\r
+
+          \  \"originatorInfos\": {\r
+
+          \    \"originatorCustomerNo\": \"001001000024401\",\r
+
+          \    \"originatorCustomerName\": \"RUBY IHSAN\",\r
+
+          \    \"originatorBankCode\": \"494\"\r
+
+          \  },\r
+
+          \  \"additionalInfo\": {\r
+
+          \    \"switcher\": \"BIFAST\"\r
+
+          \  }\r
+
+          }\r\n"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "responseCode": "4011800",
+              "responseMessage": "Unauthorized. Invalid X-PARTNER-ID"
+          }
+  - name: 5001800 - Internal Server Error
+    request:
+      url: "{{baseUrl}}/snap/v2.0/transfer-interbank"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: "{{X-PARTNER-ID}}"
+        - name: CHANNEL-ID
+          value: "95231"
+        - name: X-EXTERNAL-ID
+          value: "{{externalId}}"
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+        - name: Authorization
+          value: Bearer {{token}}
+      body:
+        type: json
+        data: "{\r
+
+          \  \"partnerReferenceNo\": \"2022111800157\",\r
+
+          \  \"amount\": {\r
+
+          \    \"value\": \"10000.00\",\r
+
+          \    \"currency\": \"IDR\"\r
+
+          \  },\r
+
+          \  \"beneficiaryAccountName\": \"Andhika Pro\",\r
+
+          \  \"beneficiaryAccountNo\": \"2600000129028\",\r
+
+          \  \"beneficiaryBankCode\": \"BMRIIDJA\",\r
+
+          \  \"beneficiaryBankName\": \"Bank Mandiri\",\r
+
+          \  \"customerReference\": \"241125TITS3\",\r
+
+          \  \"sourceAccountNo\": \"001001020966317\",\r
+
+          \  \"transactionDate\": \"2025-07-09T10:08:00+07:00\",\r
+
+          \  \"feeType\": \"OUR\",\r
+
+          \  \"originatorInfos\": {\r
+
+          \    \"originatorCustomerNo\": \"001001000024401\",\r
+
+          \    \"originatorCustomerName\": \"RUBY IHSAN\",\r
+
+          \    \"originatorBankCode\": \"494\"\r
+
+          \  },\r
+
+          \  \"additionalInfo\": {\r
+
+          \    \"switcher\": \"BIFAST\"\r
+
+          \  }\r
+
+          }\r\n"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "responseCode": "5001800",
+              "responseMessage": "Internal Server Error"
+          }
+  - name: 4091801 - Duplicate Partner Reference No
+    request:
+      url: "{{baseUrl}}/snap/v2.0/transfer-interbank"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: "{{X-PARTNER-ID}}"
+        - name: CHANNEL-ID
+          value: "95231"
+        - name: X-EXTERNAL-ID
+          value: "{{externalId}}"
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+        - name: Authorization
+          value: Bearer {{token}}
+      body:
+        type: json
+        data: "{\r
+
+          \  \"partnerReferenceNo\": \"298140144190009\",\r
+
+          \  \"amount\": {\r
+
+          \    \"value\": \"10000.00\",\r
+
+          \    \"currency\": \"IDR\"\r
+
+          \  },\r
+
+          \  \"beneficiaryAccountName\": \"RUBY IHSAN\",\r
+
+          \  \"beneficiaryAccountNo\": \"001001001131\",\r
+
+          \  \"beneficiaryBankCode\": \"BRINIDJA\",\r
+
+          \  \"beneficiaryBankName\": \"Bank BRI\",\r
+
+          \  \"customerReference\": \"241125SECUB\",\r
+
+          \  \"sourceAccountNo\": \"001001000024401\",\r
+
+          \  \"transactionDate\": \"2025-07-09T10:08:00+07:00\",\r
+
+          \  \"feeType\": \"OUR\",\r
+
+          \  \"originatorInfos\": {\r
+
+          \    \"originatorCustomerNo\": \"001001000024401\",\r
+
+          \    \"originatorCustomerName\": \"Andhika Pro\",\r
+
+          \    \"originatorBankCode\": \"002\"\r
+
+          \  },\r
+
+          \  \"additionalInfo\": {\r
+
+          \    \"switcher\": \"RTOL\"\r
+
+          \  }\r
+
+          }\r\n"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "responseCode": "4091801",
+              "responseMessage": "Duplicate partnerReferenceNo"
+          }
+  - name: 4091800 - Conflict
+    request:
+      url: "{{baseUrl}}/snap/v2.0/transfer-interbank"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: "{{X-PARTNER-ID}}"
+        - name: CHANNEL-ID
+          value: "95231"
+        - name: X-EXTERNAL-ID
+          value: "20251105153943"
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+        - name: Authorization
+          value: Bearer {{token}}
+      body:
+        type: json
+        data: "{\r
+
+          \  \"partnerReferenceNo\": \"2022111800157\",\r
+
+          \  \"amount\": {\r
+
+          \    \"value\": \"10000.00\",\r
+
+          \    \"currency\": \"IDR\"\r
+
+          \  },\r
+
+          \  \"beneficiaryAccountName\": \"RUBY IHSAN\",\r
+
+          \  \"beneficiaryAccountNo\": \"001001001131\",\r
+
+          \  \"beneficiaryBankCode\": \"BRINIDJA\",\r
+
+          \  \"beneficiaryBankName\": \"Bank BRI\",\r
+
+          \  \"customerReference\": \"241125SECUB\",\r
+
+          \  \"sourceAccountNo\": \"001001000024401\",\r
+
+          \  \"transactionDate\": \"2025-07-09T10:08:00+07:00\",\r
+
+          \  \"feeType\": \"OUR\",\r
+
+          \  \"originatorInfos\": {\r
+
+          \    \"originatorCustomerNo\": \"001001000024401\",\r
+
+          \    \"originatorCustomerName\": \"Andhika Pro\",\r
+
+          \    \"originatorBankCode\": \"002\"\r
+
+          \  },\r
+
+          \  \"additionalInfo\": {\r
+
+          \    \"switcher\": \"RTOL\"\r
+
+          \  }\r
+
+          }\r\n"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "responseCode": "4091800",
+              "responseMessage": "Conflict"
+          }
+  - name: 4031818 - Account Inactive
+    request:
+      url: "{{baseUrl}}/snap/v2.0/transfer-interbank"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: "{{X-PARTNER-ID}}"
+        - name: CHANNEL-ID
+          value: "95231"
+        - name: X-EXTERNAL-ID
+          value: "{{externalId}}"
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+        - name: Authorization
+          value: Bearer {{token}}
+      body:
+        type: json
+        data: "{\r
+
+          \  \"partnerReferenceNo\": \"2022111800157\",\r
+
+          \  \"amount\": {\r
+
+          \    \"value\": \"10000.00\",\r
+
+          \    \"currency\": \"IDR\"\r
+
+          \  },\r
+
+          \  \"beneficiaryAccountName\": \"RUBY IHSAN\",\r
+
+          \  \"beneficiaryAccountNo\": \"001001001131\",\r
+
+          \  \"beneficiaryBankCode\": \"BRINIDJA\",\r
+
+          \  \"beneficiaryBankName\": \"Bank BRI\",\r
+
+          \  \"customerReference\": \"241125SECUB\",\r
+
+          \  \"sourceAccountNo\": \"001001016032312\",\r
+
+          \  \"transactionDate\": \"2025-07-09T10:08:00+07:00\",\r
+
+          \  \"feeType\": \"OUR\",\r
+
+          \  \"originatorInfos\": {\r
+
+          \    \"originatorCustomerNo\": \"001001000024401\",\r
+
+          \    \"originatorCustomerName\": \"Andhika Pro\",\r
+
+          \    \"originatorBankCode\": \"002\"\r
+
+          \  },\r
+
+          \  \"additionalInfo\": {\r
+
+          \    \"switcher\": \"RTOL\"\r
+
+          \  }\r
+
+          }\r\n"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "responseCode": "4031818",
+              "responseMessage": "Account Inactive"
+          }
+  - name: 4031815 - Transaction Not Permitted. {reason}
+    request:
+      url: "{{baseUrl}}/snap/v2.0/transfer-interbank"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: "{{X-PARTNER-ID}}"
+        - name: CHANNEL-ID
+          value: "95231"
+        - name: X-EXTERNAL-ID
+          value: "{{externalId}}"
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+        - name: Authorization
+          value: Bearer {{token}}
+      body:
+        type: json
+        data: "{\r
+
+          \  \"partnerReferenceNo\": \"2022111800157\",\r
+
+          \  \"amount\": {\r
+
+          \    \"value\": \"10000.00\",\r
+
+          \    \"currency\": \"IDR\"\r
+
+          \  },\r
+
+          \  \"beneficiaryAccountName\": \"RUBY IHSAN\",\r
+
+          \  \"beneficiaryAccountNo\": \"001001001131\",\r
+
+          \  \"beneficiaryBankCode\": \"BRINIDJA\",\r
+
+          \  \"beneficiaryBankName\": \"Bank BRI\",\r
+
+          \  \"customerReference\": \"241125SECUB\",\r
+
+          \  \"sourceAccountNo\": \"065101014305500\",\r
+
+          \  \"transactionDate\": \"2025-07-09T10:08:00+07:00\",\r
+
+          \  \"feeType\": \"OUR\",\r
+
+          \  \"originatorInfos\": {\r
+
+          \    \"originatorCustomerNo\": \"001001000024401\",\r
+
+          \    \"originatorCustomerName\": \"Andhika Pro\",\r
+
+          \    \"originatorBankCode\": \"002\"\r
+
+          \  },\r
+
+          \  \"additionalInfo\": {\r
+
+          \    \"switcher\": \"RTOL\"\r
+
+          \  }\r
+
+          }\r\n"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "responseCode": "4031815",
+              "responseMessage": "Transaction Not Permitted. Don’t Have Access At This Account"
+          }
+  - name: 4031814 - Insufficient Funds
+    request:
+      url: "{{baseUrl}}/snap/v2.0/transfer-interbank"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: "{{X-PARTNER-ID}}"
+        - name: CHANNEL-ID
+          value: "95231"
+        - name: X-EXTERNAL-ID
+          value: "{{externalId}}"
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+        - name: Authorization
+          value: Bearer {{token}}
+      body:
+        type: json
+        data: "{\r
+
+          \  \"partnerReferenceNo\": \"2022111800157\",\r
+
+          \  \"amount\": {\r
+
+          \    \"value\": \"10000000.00\",\r
+
+          \    \"currency\": \"IDR\"\r
+
+          \  },\r
+
+          \  \"beneficiaryAccountName\": \"RUBY IHSAN\",\r
+
+          \  \"beneficiaryAccountNo\": \"001001001131\",\r
+
+          \  \"beneficiaryBankCode\": \"BRINIDJA\",\r
+
+          \  \"beneficiaryBankName\": \"Bank BRI\",\r
+
+          \  \"customerReference\": \"241125SECUB\",\r
+
+          \  \"sourceAccountNo\": \"001001000024401\",\r
+
+          \  \"transactionDate\": \"2025-07-09T10:08:00+07:00\",\r
+
+          \  \"feeType\": \"OUR\",\r
+
+          \  \"originatorInfos\": {\r
+
+          \    \"originatorCustomerNo\": \"001001000024401\",\r
+
+          \    \"originatorCustomerName\": \"Andhika Pro\",\r
+
+          \    \"originatorBankCode\": \"002\"\r
+
+          \  },\r
+
+          \  \"additionalInfo\": {\r
+
+          \    \"switcher\": \"RTOL\"\r
+
+          \  }\r
+
+          }\r\n"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "responseCode": "4031814",
+              "responseMessage": "Insufficient Funds"
+          }
+  - name: 4031809 - Dormant Account
+    request:
+      url: "{{baseUrl}}/snap/v2.0/transfer-interbank"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: "{{X-PARTNER-ID}}"
+        - name: CHANNEL-ID
+          value: "95231"
+        - name: X-EXTERNAL-ID
+          value: "{{externalId}}"
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+        - name: Authorization
+          value: Bearer {{token}}
+      body:
+        type: json
+        data: "{\r
+
+          \  \"partnerReferenceNo\": \"2022111800157\",\r
+
+          \  \"amount\": {\r
+
+          \    \"value\": \"10000.00\",\r
+
+          \    \"currency\": \"IDR\"\r
+
+          \  },\r
+
+          \  \"beneficiaryAccountName\": \"RUBY IHSAN\",\r
+
+          \  \"beneficiaryAccountNo\": \"001001001131\",\r
+
+          \  \"beneficiaryBankCode\": \"BRINIDJA\",\r
+
+          \  \"beneficiaryBankName\": \"Bank BRI\",\r
+
+          \  \"customerReference\": \"241125SECUB\",\r
+
+          \  \"sourceAccountNo\": \"011001005082305\",\r
+
+          \  \"transactionDate\": \"2025-07-09T10:08:00+07:00\",\r
+
+          \  \"feeType\": \"OUR\",\r
+
+          \  \"originatorInfos\": {\r
+
+          \    \"originatorCustomerNo\": \"001001000024401\",\r
+
+          \    \"originatorCustomerName\": \"Andhika Pro\",\r
+
+          \    \"originatorBankCode\": \"002\"\r
+
+          \  },\r
+
+          \  \"additionalInfo\": {\r
+
+          \    \"switcher\": \"RTOL\"\r
+
+          \  }\r
+
+          }\r\n"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "responseCode": "4031809",
+              "responseMessage": "Dormant Account"
+          }
+  - name: 4031805 - Do Not Honor
+    request:
+      url: "{{baseUrl}}/snap/v2.0/transfer-interbank"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: "{{X-PARTNER-ID}}"
+        - name: CHANNEL-ID
+          value: "95231"
+        - name: X-EXTERNAL-ID
+          value: "{{externalId}}"
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+        - name: Authorization
+          value: Bearer {{token}}
+      body:
+        type: json
+        data: "{\r
+
+          \  \"partnerReferenceNo\": \"2022111800157\",\r
+
+          \  \"amount\": {\r
+
+          \    \"value\": \"10000.00\",\r
+
+          \    \"currency\": \"IDR\"\r
+
+          \  },\r
+
+          \  \"beneficiaryAccountName\": \"RUBY IHSAN\",\r
+
+          \  \"beneficiaryAccountNo\": \"001001001131\",\r
+
+          \  \"beneficiaryBankCode\": \"BRINIDJA\",\r
+
+          \  \"beneficiaryBankName\": \"Bank BRI\",\r
+
+          \  \"customerReference\": \"241125SECUB\",\r
+
+          \  \"sourceAccountNo\": \"001001000066306\",\r
+
+          \  \"transactionDate\": \"2025-07-09T10:08:00+07:00\",\r
+
+          \  \"feeType\": \"OUR\",\r
+
+          \  \"originatorInfos\": {\r
+
+          \    \"originatorCustomerNo\": \"001001000024401\",\r
+
+          \    \"originatorCustomerName\": \"Andhika Pro\",\r
+
+          \    \"originatorBankCode\": \"002\"\r
+
+          \  },\r
+
+          \  \"additionalInfo\": {\r
+
+          \    \"switcher\": \"RTOL\"\r
+
+          \  }\r
+
+          }\r\n"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "responseCode": "4031805",
+              "responseMessage": "Do Not Honor"
+          }
+  - name: 4031802 - Exceeds Transaction Amount Limit
+    request:
+      url: "{{baseUrl}}/snap/v2.0/transfer-interbank"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: "{{X-PARTNER-ID}}"
+        - name: CHANNEL-ID
+          value: "95231"
+        - name: X-EXTERNAL-ID
+          value: "{{externalId}}"
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+        - name: Authorization
+          value: Bearer {{token}}
+      body:
+        type: json
+        data: "{\r
+
+          \  \"partnerReferenceNo\": \"2022111800157\",\r
+
+          \  \"amount\": {\r
+
+          \    \"value\": \"50000000.00\",\r
+
+          \    \"currency\": \"IDR\"\r
+
+          \  },\r
+
+          \  \"beneficiaryAccountName\": \"RUBY IHSAN\",\r
+
+          \  \"beneficiaryAccountNo\": \"001001001131\",\r
+
+          \  \"beneficiaryBankCode\": \"BRINIDJA\",\r
+
+          \  \"beneficiaryBankName\": \"Bank BRI\",\r
+
+          \  \"customerReference\": \"241125SECUB\",\r
+
+          \  \"sourceAccountNo\": \"001001000024401\",\r
+
+          \  \"transactionDate\": \"2025-07-09T10:08:00+07:00\",\r
+
+          \  \"feeType\": \"OUR\",\r
+
+          \  \"originatorInfos\": {\r
+
+          \    \"originatorCustomerNo\": \"001001000024401\",\r
+
+          \    \"originatorCustomerName\": \"Andhika Pro\",\r
+
+          \    \"originatorBankCode\": \"002\"\r
+
+          \  },\r
+
+          \  \"additionalInfo\": {\r
+
+          \    \"switcher\": \"RTOL\"\r
+
+          \  }\r
+
+          }\r\n"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "responseCode": "4031802",
+              "responseMessage": "Exceeds Transaction Amount Limit"
+          }

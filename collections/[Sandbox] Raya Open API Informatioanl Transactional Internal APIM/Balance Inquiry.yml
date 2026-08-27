@@ -1,0 +1,392 @@
+info:
+  name: Balance Inquiry
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{baseUrl}}/v2.0/balance-inquiry"
+  headers:
+    - name: X-PARTNER-ID
+      value: "{{X-PARTNER-ID}}"
+    - name: CHANNEL-ID
+      value: APPS1
+    - name: X-EXTERNAL-ID
+      value: "{{externalId}}"
+  body:
+    type: json
+    data: "{\r
+
+      \    \"accountNo\": \"001001008668315\"\r
+
+      }"
+  auth:
+    type: bearer
+    token: "{{token}}"
+
+runtime:
+  scripts:
+    - type: before-request
+      code: |-
+        var moment = require('moment');
+        var externalId = moment().format("YYYYMMDDHHmmss");
+        bru.setCollectionVar('externalId', externalId);
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: 2001100 - Successful
+    request:
+      url: "{{baseUrl}}/snap/v2.0/balance-inquiry"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: "{{X-PARTNER-ID}}"
+        - name: CHANNEL-ID
+          value: "95231"
+        - name: X-EXTERNAL-ID
+          value: "{{externalId}}"
+        - name: Authorization
+          value: Bearer {{token}}
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+      body:
+        type: json
+        data: "{\r
+
+          \    \"accountNo\": \"001001000060300\"\r
+
+          }"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+        - name: Partnername
+          value: GENERAL
+        - name: Content-Type
+          value: application/json
+        - name: Content-Encoding
+          value: gzip
+        - name: Content-Length
+          value: "243"
+      body:
+        type: json
+        data: |-
+          {
+              "responseCode": "2001100",
+              "responseMessage": "Successful",
+              "accountNo": "001001000001403",
+              "name": "AROMA MEGA SARI PT",
+              "accountInfos": [
+                  {
+                      "holdAmount": {
+                          "value": "1.00",
+                          "currency": "IDR"
+                      },
+                      "availableBalance": {
+                          "value": "131638053.90",
+                          "currency": "IDR"
+                      },
+                      "ledgerBalance": {
+                          "value": "131638054.90",
+                          "currency": "IDR"
+                      },
+                      "status": "0001"
+                  }
+              ],
+              "additionalInfo": {
+                  "productType": "00010 (GIRO PERUSAHAAN IDR)",
+                  "accountType": "D"
+              }
+          }
+  - name: 4001102 - Invalid Mandatory Field {field name}
+    request:
+      url: "{{baseUrl}}/snap/v2.0/balance-inquiry"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: "{{X-PARTNER-ID}}"
+        - name: CHANNEL-ID
+          value: APPS1
+        - name: X-EXTERNAL-ID
+          value: "{{externalId}}"
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+        - name: Authorization
+          value: Bearer {{token}}
+      body:
+        type: json
+        data: "{\r\n    \"accountNo\": \"\"\r\n}"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "responseCode": "4001102",
+              "responseMessage": "Invalid Mandatory Field accountNo"
+          }
+  - name: 4011101 - Invalid Access Token B2B
+    request:
+      url: "{{baseUrl}}/snap/v2.0/balance-inquiry"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: "{{X-PARTNER-ID}}"
+        - name: CHANNEL-ID
+          value: APPS1
+        - name: X-EXTERNAL-ID
+          value: "{{externalId}}"
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+      body:
+        type: json
+        data: "{\r
+
+          \    \"accountNo\": \"001001000060300\"\r
+
+          }"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "responseCode": "4011101",
+              "responseMessage": "Invalid Token (B2B)"
+          }
+  - name: 4001101 - Invalid Field Format {fieldName}
+    request:
+      url: "{{baseUrl}}/snap/v2.0/balance-inquiry"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: "{{X-PARTNER-ID}}"
+        - name: CHANNEL-ID
+          value: APPS1
+        - name: X-EXTERNAL-ID
+          value: "{{externalId}}"
+        - name: X-TIMESTAMP
+          value: 2025-11-05 15:52:45+07:00
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+        - name: Authorization
+          value: Bearer {{token}}
+      body:
+        type: json
+        data: "{\r
+
+          \    \"accountNo\": \"001001000060300\"\r
+
+          }"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "responseCode": "4001101",
+              "responseMessage": "Invalid Field Format X-TIMESTAMP"
+          }
+  - name: 4031115 - Transaction Not Permitted
+    request:
+      url: "{{baseUrl}}/snap/v2.0/balance-inquiry"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: "{{X-PARTNER-ID}}"
+        - name: CHANNEL-ID
+          value: APPS1
+        - name: X-EXTERNAL-ID
+          value: "{{externalId}}"
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+        - name: Authorization
+          value: Bearer {{token}}
+      body:
+        type: json
+        data: "{\r
+
+          \    \"accountNo\": \"065101014305500\"\r
+
+          }"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "responseCode": "4031115",
+              "responseMessage": "Transaction Not Permitted. Don’t Have Access At This Account"
+          }
+  - name: 4091100 - Conflict
+    request:
+      url: "{{baseUrl}}/snap/v2.0/balance-inquiry"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: "{{X-PARTNER-ID}}"
+        - name: CHANNEL-ID
+          value: APPS1
+        - name: X-EXTERNAL-ID
+          value: "20251105153943"
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+        - name: Authorization
+          value: Bearer {{token}}
+      body:
+        type: json
+        data: "{\r
+
+          \    \"accountNo\": \"065101014305500\"\r
+
+          }"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "responseCode": "4091100",
+              "responseMessage": "Conflict"
+          }
+  - name: 5001100 - Internal Server Error
+    request:
+      url: "{{baseUrl}}/snap/v2.0/balance-inquiry"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: "{{X-PARTNER-ID}}"
+        - name: CHANNEL-ID
+          value: APPS1
+        - name: X-EXTERNAL-ID
+          value: "{{externalId}}"
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+        - name: Authorization
+          value: Bearer {{token}}
+      body:
+        type: json
+        data: "{\r
+
+          \    \"accountNo\": \"001001020966317\"\r
+
+          }"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "responseCode": "5001100",
+              "responseMessage": "Internal Server Error"
+          }
+  - name: 4031109 - Dormant Account
+    request:
+      url: "{{baseUrl}}/snap/v2.0/balance-inquiry"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: "{{X-PARTNER-ID}}"
+        - name: CHANNEL-ID
+          value: APPS1
+        - name: X-EXTERNAL-ID
+          value: "{{externalId}}"
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+        - name: Authorization
+          value: Bearer {{token}}
+      body:
+        type: json
+        data: "{\r
+
+          \    \"accountNo\": \"011001005082305\"\r
+
+          }"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "responseCode": "4031109",
+              "responseMessage": "Dormant Account"
+          }
+  - name: 4031118 - Account Inactive
+    request:
+      url: "{{baseUrl}}/snap/v2.0/balance-inquiry"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: "{{X-PARTNER-ID}}"
+        - name: CHANNEL-ID
+          value: APPS1
+        - name: X-EXTERNAL-ID
+          value: "{{externalId}}"
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+        - name: Authorization
+          value: Bearer {{token}}
+      body:
+        type: json
+        data: "{\r
+
+          \    \"accountNo\": \"001001016032312\"\r
+
+          }"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "responseCode": "4031118",
+              "responseMessage": "Account Inactive"
+          }
+  - name: 4031105 - Do Not Honor
+    request:
+      url: "{{baseUrl}}/snap/v2.0/balance-inquiry"
+      method: POST
+      headers:
+        - name: X-PARTNER-ID
+          value: "{{X-PARTNER-ID}}"
+        - name: CHANNEL-ID
+          value: APPS1
+        - name: X-EXTERNAL-ID
+          value: "{{externalId}}"
+        - name: X-TIMESTAMP
+          value: "{{timestamp}}"
+        - name: X-SIGNATURE
+          value: "{{gen_signature}}"
+        - name: Authorization
+          value: Bearer {{token}}
+      body:
+        type: json
+        data: "{\r
+
+          \    \"accountNo\": \"001001000066306\"\r
+
+          }"
+    response:
+      body:
+        type: text
+        data: |-
+          {
+              "responseCode": "4031105",
+              "responseMessage": "Do Not Honor"
+          }
