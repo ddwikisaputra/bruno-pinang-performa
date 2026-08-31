@@ -14,10 +14,13 @@ http:
     data:
       - name: kodePartnership
         value: TUox
+        description: "[MANDATORY] [BASE64]"
       - name: nomorIdentitas
         value: MzI3NjA5MTcxMTAwMDEzNg==
+        description: "[MANDATORY] [BASE64]"
       - name: kodeNotifikasi
         value: OTM=
+        description: "[MANDATORY] [BASE64]"
   auth:
     type: bearer
     token: "{{tokenMerchant}}"
@@ -27,6 +30,7 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+  forwardAuthorizationHeader: true
 
 examples:
   - name: Success - Data Saved

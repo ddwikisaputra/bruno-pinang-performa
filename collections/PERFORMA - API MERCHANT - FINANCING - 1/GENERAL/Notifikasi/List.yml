@@ -14,15 +14,20 @@ http:
     data:
       - name: kodePartnership
         value: ""
+        description: "[MANDATORY] [BASE64]"
       - name: nomorIdentitas
         value: ""
+        description: "[MANDATORY] [BASE64]"
       - name: recordCount
         value: ""
+        description: "[OPTIONAL] [Default 10]"
       - name: startIndex
         value: "0"
+        description: "[OPTIONAL] [Default 0]"
         disabled: true
       - name: orderText
         value: action_date DESC
+        description: "[OPTIONAL] [Default id DESC] [action_date ASC | id ASC | action_date DESC | id DESC]"
         disabled: true
   auth:
     type: bearer
@@ -33,6 +38,7 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+  forwardAuthorizationHeader: true
 
 examples:
   - name: 503 - Service Unavailable
