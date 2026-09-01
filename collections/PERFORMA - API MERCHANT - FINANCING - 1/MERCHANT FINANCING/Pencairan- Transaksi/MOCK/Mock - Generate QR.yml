@@ -5,7 +5,7 @@ info:
 
 http:
   method: POST
-  url: https://pinang-performa.free.mockoapp.net/v/1/pencairan/generate-qr/200-success
+  url: https://pinang-performa.free.mockoapp.net/v/1/pencairan/generate-qr/500-block-qr-limit
   headers:
     - name: x-key
       value: performa
@@ -27,6 +27,14 @@ http:
       type: query
       disabled: true
     - name: 401-token-empty
+      value: ""
+      type: query
+      disabled: true
+    - name: 500-block-qr-limit
+      value: ""
+      type: query
+      disabled: true
+    - name: 500-block-qr-tunggakan
       value: ""
       type: query
       disabled: true
