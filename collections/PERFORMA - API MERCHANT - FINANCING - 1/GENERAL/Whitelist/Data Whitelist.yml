@@ -5,22 +5,22 @@ info:
 
 http:
   method: POST
-  url: "{{base-url-prod}}/v/1/aktivasi/data-whitelist"
+  url: localhost:7009/v/1/aktivasi/data-whitelist
   headers:
     - name: Api-Key
-      value: VW1GNVlWQnBVR1Z5Vkc5d2pDa0VnR3o1a2ZkRHdnNjVJL3R4cDNqOUZPSXJoQT09
+      value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
   body:
     type: form-urlencoded
     data:
       - name: nomorIdentitas
-        value: MzIwMTE1MTQxMDAwMDAwMQ==
+        value: MzI3NjA5MTcxMTAwMDEzMw==
         description: Nomor Identitas User [MANDATORY] [Base64]
       - name: kodePartnership
-        value: QURJLTg0
+        value: TUox
         description: Kode Partnership [MANDATORY] [Base64]
   auth:
     type: bearer
-    token: "{{tokenMerchant}}"
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NJZCI6IlVtRjVZVkJwVUdWeVZHOXcvRjUwMWozZkMvNWR5bzdnSXF2WHBTZ1ZvQT09IiwiZXhwIjoxNzg4NDM5OTg2LCJrRGF0YSI6IlVtRjVZVkJwVUdWeVZHOXdnRGtFMXhxSjhVWndHVENrZUI3YzR0K05mQ0RKN2R0RyIsImtLZXkiOiJVbUY1WVZCcFVHVnlWRzl3Z0JjRW5ocW41VUVXVER6Q1lZcEttUGNwWWRDYkw2VTBSZW5FWEp3Vkkvb054ZUg3TG01SitRPT0ifQ.y1JeJ5pa8d-pLZ4_Llx89aOJvshGs8sMzfZBcPEGB48
 
 settings:
   encodeUrl: true
@@ -353,16 +353,16 @@ examples:
           }
   - name: Success - Whitelist Ditemukan
     request:
-      url: "{{base-url-local}}/v/1/aktivasi/data-whitelist"
+      url: localhost:7009/v/1/aktivasi/data-whitelist
       method: POST
       headers:
         - name: Api-Key
-          value: "{{apiKeyMerchant}}"
+          value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
       body:
         type: form-urlencoded
         data:
           - name: nomorIdentitas
-            value: MzE3MTA1MTIxMTk1MDAwMQ==
+            value: MzI3NjA5MTcxMTAwMDEzMw==
             description: Nomor Identitas User [MANDATORY] [Base64]
           - name: kodePartnership
             value: TUox
@@ -371,60 +371,62 @@ examples:
       status: 200
       statusText: OK
       headers:
-        - name: Cache-Control
+        - name: cache-control
           value: none
-        - name: Content-Security-Policy
+        - name: content-security-policy
           value: script-src 'self' pinang-performa.bankraya.co.id
-        - name: Content-Type
+        - name: content-type
           value: application/json; charset=utf-8
-        - name: Permissions-Policy
+        - name: permissions-policy
           value: geolocation=()
-        - name: Referrer-Policy
+        - name: referrer-policy
           value: no-referrer
-        - name: Strict-Transport-Security
+        - name: strict-transport-security
           value: max-age=16070400; includeSubDomains
-        - name: X-Content-Type-Options
+        - name: x-content-type-options
           value: nosniff
-        - name: X-Frame-Options
+        - name: x-frame-options
           value: SAMEORIGIN
-        - name: X-Permitted-Cross-Domain-Policies
+        - name: x-permitted-cross-domain-policies
           value: none
-        - name: Date
-          value: Fri, 09 May 2025 02:20:18 GMT
-        - name: Content-Length
-          value: "746"
+        - name: date
+          value: Thu, 03 Sep 2026 11:54:19 GMT
+        - name: content-length
+          value: "773"
       body:
         type: json
         data: |-
           {
-              "data": {
-                  "nama": "RHdpa2kgU2FwdXRyYQ==",
-                  "tempatLahir": "Jakarta",
-                  "tanggalLahir": "MTk5NS0xMS0xMg==",
-                  "namaIbuKandung": "UnVtaXlhdGk=",
-                  "statusPerkawinan": "Belum Kawin",
-                  "alamat": "Cempaka Putih Barat",
-                  "rt": "010",
-                  "rw": "002",
-                  "nomorTelepon": "KzYyODE3NzY1MjczNzE=",
-                  "email": "ZHdpa2kuc2FwdXRyYUBiYW5rcmF5YS5jby5pZA==",
-                  "nomorIdentitasPasangan": "MzE3MTA1MTIxMTk1MDAwMQ==",
-                  "namaPasangan": "RHdpa2kgMg==",
-                  "alamatUsaha": "Jl Joha Baru",
-                  "rtUsaha": "010",
-                  "rwUsaha": "002",
-                  "jenisKelamin": "TGFraS1MYWtp",
-                  "tanggalLahirPasangan": "",
-                  "tempatLahirPasangan": "",
-                  "nomorNPWP": "MzE3MTA1MTIxMTk1MDAwMQ==",
-                  "kodePendidikanTerakhir": "",
-                  "kodeAgama": "ISL",
-                  "jumlahTanggungan": 0,
-                  "tipePencairan": "partner",
-                  "tipeProduk": "merchant-financing"
-              },
-              "message": "Terdaftar pada whitelist.",
-              "status": 200
+            "data": {
+              "nama": "SGFycnkgUGFtdW5na2Fz",
+              "tempatLahir": "Jakarta",
+              "tanggalLahir": "MjAwMC0xMS0xNw==",
+              "namaIbuKandung": "V2luYXJuaQ==",
+              "statusPerkawinan": "Belum Kawin",
+              "alamat": "Jl.Peninggaran Timur Ii",
+              "rt": "003",
+              "rw": "009",
+              "nomorTelepon": "KzYyODk1NDIxNTg3MzUy",
+              "email": "aGlrYXJ1MjNAbmFyYS5jb20=",
+              "nomorIdentitasPasangan": "",
+              "namaPasangan": "",
+              "alamatUsaha": "Belka Residence Jl Binawan XII Blok b3 no 14",
+              "rtUsaha": "001",
+              "rwUsaha": "002",
+              "jenisKelamin": "UGVyZW1wdWFu",
+              "tanggalLahirPasangan": "",
+              "tempatLahirPasangan": "",
+              "nomorNPWP": "MzI3NjA5MTcxMTAwMDA2Nw==",
+              "kodePendidikanTerakhir": "S1",
+              "kodeAgama": "ISL",
+              "jumlahTanggungan": 0,
+              "tipePencairan": "distributor",
+              "tipeProduk": "merchant-financing",
+              "isVerifyInvoice": 0,
+              "isDisburseQR": 1
+            },
+            "message": "Terdaftar pada whitelist.",
+            "status": 200
           }
 
 docs: |-
