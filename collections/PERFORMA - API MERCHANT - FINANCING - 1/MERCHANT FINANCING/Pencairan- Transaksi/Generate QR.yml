@@ -5,22 +5,22 @@ info:
 
 http:
   method: POST
-  url: "{{base-url-local}}/v/1/pencairan/generate-qr"
+  url: localhost:7009/v/1/pencairan/generate-qr
   headers:
     - name: Api-Key
-      value: "{{apiKeyMerchant}}"
+      value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
   body:
     type: form-urlencoded
     data:
       - name: kodePrakarsa
-        value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbHg2bkdUNGxVWnFLV2FQSE80NzNwZGZGSmprYWFrN2lkR2NuRTdkRjB0WXIzTi9NQVV1eTZ1RWluM2JSRXc9
+        value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbDk2bTJUMGxVTnFLVytLSE84NDNKZGZGSmpnYUswNGk5Q2NtMG5jSDFJWUkrdElZbUdhY3dhanlWdnJnRGs9
         description: Kode Prakarsa [MANDATORY] [Base64] (express_prakarsa.references.id)
       - name: kodePartnership
         value: TUox
         description: Kode Partnership [MANDATORY] [Base64]
   auth:
     type: bearer
-    token: "{{tokenMerchant}}"
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NJZCI6IlVtRjVZVkJwVUdWeVZHOXcvRjUwMWozZkMvNWR5bzdnSXF2WHBTZ1ZvQT09IiwiZXhwIjoxNzg4NDMwMzg2LCJrRGF0YSI6IlVtRjVZVkJwVUdWeVZHOXdnRGtFMXhxSjhVWndHVENrZUI3YzR0K05mQ0RKN2R0RyIsImtLZXkiOiJVbUY1WVZCcFVHVnlWRzl3Z0JjRW5ocW41VUVXVER6Q1lZcEttUGNwWWRDYkw2VTBSZW5FWEp3Vkkvb054ZUg3TG01SitRPT0ifQ.sabha2qnbsMjqeB7ENueB1kC0p5zGSMmDZxtNi9ChUg
 
 settings:
   encodeUrl: true
@@ -116,8 +116,8 @@ examples:
             value: TUox
             description: Kode Partnership [MANDATORY] [Base64]
     response:
-      status: 400
-      statusText: Bad Request
+      status: 401
+      statusText: Unauthorized
       headers:
         - name: Content-Type
           value: application/json; charset=utf-8
@@ -130,7 +130,7 @@ examples:
         data: |-
           {
               "message": "parameter token is empty",
-              "status": 400
+              "status": 401
           }
   - name: Error - Token Expired
     request:
@@ -632,4 +632,56 @@ examples:
               "data": "UExBQ0VIT0xERVItQUVTLUdDTS1DSVBIRVJURVhU",
               "message": "QR berhasil dibuat.",
               "status": 200
+          }
+  - name: Error - Block QR - Limit Not Suffcuient
+    request:
+      url: localhost:7009/v/1/pencairan/generate-qr
+      method: POST
+      headers:
+        - name: Api-Key
+          value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
+      body:
+        type: form-urlencoded
+        data:
+          - name: kodePrakarsa
+            value: RVgtTUoxLVVtRjVZVkJwVUdWeVZHOXcvbDk2bTJUMGxVTnFLVytLSE84NDNKZGZGSmpnYUswNGk5Q2NtMG5jSDFJWUkrdElZbUdhY3dhanlWdnJnRGs9
+            description: Kode Prakarsa [MANDATORY] [Base64] (express_prakarsa.references.id)
+          - name: kodePartnership
+            value: TUox
+            description: Kode Partnership [MANDATORY] [Base64]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: cache-control
+          value: none
+        - name: content-security-policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: content-type
+          value: application/json; charset=utf-8
+        - name: permissions-policy
+          value: geolocation=()
+        - name: referrer-policy
+          value: no-referrer
+        - name: strict-transport-security
+          value: max-age=16070400; includeSubDomains
+        - name: x-content-type-options
+          value: nosniff
+        - name: x-frame-options
+          value: SAMEORIGIN
+        - name: x-permitted-cross-domain-policies
+          value: none
+        - name: date
+          value: Thu, 03 Sep 2026 09:15:23 GMT
+        - name: content-length
+          value: "149"
+      body:
+        type: json
+        data: |-
+          {
+            "data": {
+              "nextStep": "block-qr"
+            },
+            "message": "Kamu tidak bisa melanjutkan transaksi karena limit yang tersedia kurang dari Rp500.000.000.",
+            "status": 500
           }
