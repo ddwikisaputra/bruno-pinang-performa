@@ -1,11 +1,11 @@
 info:
-  name: MOCK - List Dokumen Pinjaman
+  name: MOCK - Detail Notifikasi
   type: http
-  seq: 3
+  seq: 2
 
 http:
   method: POST
-  url: https://pinang-performa.free.mockoapp.net/v/1/profile/list-dokumen-pinjaman/200
+  url: https://pinang-performa.free.mockoapp.net/v/1/notifikasi/detail/200-sts-1
   headers:
     - name: x-key
       value: performa
@@ -18,7 +18,7 @@ http:
       value: ""
       type: query
       disabled: true
-    - name: "200"
+    - name: 200-sts-1
       value: ""
       type: query
       disabled: true
