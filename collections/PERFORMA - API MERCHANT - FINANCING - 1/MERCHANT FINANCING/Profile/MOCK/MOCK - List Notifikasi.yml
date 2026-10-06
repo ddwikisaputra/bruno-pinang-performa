@@ -1,0 +1,31 @@
+info:
+  name: MOCK - List Notifikasi
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: https://pinang-performa.free.mockoapp.net/v/1/notifikasi/list/200-sts-1
+  headers:
+    - name: x-key
+      value: performa
+  params:
+    - name: "503"
+      value: ""
+      type: query
+      disabled: true
+    - name: 400-token-empty
+      value: ""
+      type: query
+      disabled: true
+    - name: 200-sts-1
+      value: ""
+      type: query
+      disabled: true
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
