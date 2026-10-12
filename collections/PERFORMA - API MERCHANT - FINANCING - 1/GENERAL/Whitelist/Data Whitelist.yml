@@ -18,6 +18,9 @@ http:
       - name: kodePartnership
         value: TUox
         description: Kode Partnership [MANDATORY] [Base64]
+      - name: tipeData
+        value: ""
+        description: Tipe Data [MANDATORY] [One of "aktivasi" | "pencairan"] [Base64]
   auth:
     type: bearer
     token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NJZCI6IlVtRjVZVkJwVUdWeVZHOXcvRjUwMWozZkMvNWR5bzdnSXF2WHBTZ1ZvQT09IiwiZXhwIjoxNzg4NDM5OTg2LCJrRGF0YSI6IlVtRjVZVkJwVUdWeVZHOXdnRGtFMXhxSjhVWndHVENrZUI3YzR0K05mQ0RKN2R0RyIsImtLZXkiOiJVbUY1WVZCcFVHVnlWRzl3Z0JjRW5ocW41VUVXVER6Q1lZcEttUGNwWWRDYkw2VTBSZW5FWEp3Vkkvb054ZUg3TG01SitRPT0ifQ.y1JeJ5pa8d-pLZ4_Llx89aOJvshGs8sMzfZBcPEGB48
