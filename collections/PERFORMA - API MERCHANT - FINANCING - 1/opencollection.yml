@@ -3,6 +3,10 @@ opencollection: 1.0.0
 info:
   name: PERFORMA - API MERCHANT - FINANCING
 config:
+  protobuf:
+    protoFiles:
+      - type: file
+        path: //wsl.localhost/Ubuntu/home/harry/work/src/gitlab.com/bridgtl-pm-be-api-merchant/services/bulkWL/scoring/proto/scoring.proto
   proxy:
     inherit: true
     config:

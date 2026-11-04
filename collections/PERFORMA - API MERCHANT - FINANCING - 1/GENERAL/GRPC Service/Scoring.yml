@@ -1,0 +1,53 @@
+info:
+  name: Scoring
+  type: grpc
+  seq: 1
+
+grpc:
+  url: "{{host}}:50051"
+  method: ""
+  protoFilePath: //wsl.localhost/Ubuntu/home/harry/work/src/gitlab.com/bridgtl-pm-be-api-merchant/services/bulkWL/scoring/proto/scoring.proto
+  message:
+    - title: message 1
+      message: |-
+        {
+          "kode_partnership": "MJ1",
+          "date": "20261103",
+          "path": "2026/11/03/MJ1/upload.xlsx",
+          "ktp_number": "3174012804708894",
+          "data_excel": {
+            "nama_cadeb": "- - TOKO RENO",
+            "nomor_member": "KLMJ1Y",
+            "tgl_join_member": "18/05/2025",
+            "nomor_ektp": "3174012804708894",
+            "tanggal_lahir": "29/01/2015",
+            "jenis_kelamin": "Laki-laki",
+            "alamat": "Jl. Gatot Subroto No. 9, Medan",
+            "no_hp": "082138720385",
+            "periode_kunjungan": "01 March     2026 - 31 August    2026",
+            "jumlah_kunjungan": 2000,
+            "jumlah_produk_dibeli": 2000,
+            "sales_gross": 2000,
+            "sales_rata_rata_kunjungan": 2000,
+            "sales_rata_rata_minggu": 2000,
+            "gmv_1": 152000000,
+            "gmv_2": 152000000,
+            "gmv_3": 152000000,
+            "gmv_4": 152000000,
+            "gmv_5": 152000000,
+            "gmv_6": 152000000,
+            "status_rekomendasi_indogrosir": "",
+            "status_pengajuan": "",
+            "koordinat": "",
+            "product_type": "indogrosir",
+            "transaction_type": "month",
+            "gmvf_1": 0,
+            "gmvf_2": 0,
+            "gmvf_3": 0,
+            "gmvf_4": 0,
+            "gmvf_5": 0,
+            "gmvf_6": 0,
+            "customer_id_member": "Lolos1"
+          }
+        }
+  auth: inherit
