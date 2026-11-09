@@ -1,0 +1,261 @@
+info:
+  name: One Time Token
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{base-url-local}}/v/1/request-onetime-token"
+  headers:
+    - name: Content-Type
+      value: application/x-www-form-urlencoded
+    - name: Api-Key
+      value: UmF5YVBpUGVyVG9wgCd8ydJrVKF9iYxounlkwQWdGw==
+      description: Harus cocok dengan kolom api_key pada tabel partnerships.
+  body:
+    type: form-urlencoded
+    data:
+      - name: usernam
+        value: MJ1
+        description: Harus cocok dengan kolom code pada tabel partnerships DAN kolom username pada tabel api_access_authentication.
+      - name: password
+        value: performa
+        description: "\tHarus cocok dengan kolom password pada tabel api_access_authentication."
+      - name: params
+        value: cif=123456&loan_id=789
+        description: Bebas string parameter apa saja
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: success - Request One Time Token
+    request:
+      url: "{{base-url-local}}/v/1/request-onetime-token"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+        - name: Api-Key
+          value: UmF5YVBpUGVyVG9wgCd8ydJrVKF9iYxounlkwQWdGw==
+          description: Harus cocok dengan kolom api_key pada tabel partnerships.
+      body:
+        type: form-urlencoded
+        data:
+          - name: username
+            value: MJ1
+            description: Harus cocok dengan kolom code pada tabel partnerships DAN kolom username pada tabel api_access_authentication.
+          - name: password
+            value: performa
+            description: "\tHarus cocok dengan kolom password pada tabel api_access_authentication."
+          - name: params
+            value: cif=123456&loan_id=789
+            description: Bebas string parameter apa saja
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: cache-control
+          value: none
+        - name: content-security-policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: content-type
+          value: application/json; charset=utf-8
+        - name: permissions-policy
+          value: geolocation=()
+        - name: referrer-policy
+          value: no-referrer
+        - name: strict-transport-security
+          value: max-age=16070400; includeSubDomains
+        - name: x-content-type-options
+          value: nosniff
+        - name: x-frame-options
+          value: SAMEORIGIN
+        - name: x-permitted-cross-domain-policies
+          value: none
+        - name: date
+          value: Mon, 09 Nov 2026 03:12:07 GMT
+        - name: content-length
+          value: "321"
+      body:
+        type: json
+        data: |-
+          {
+            "code": 200,
+            "expire": "2026-11-09T10:17:07.5745373+07:00",
+            "message": "Berhasil",
+            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlLZXkiOiJVbUY1WVZCcFVHVnlWRzl3Z0NkOHlkSnJWS0Y5aVl4b3VubGt3UVdkR3c9PSIsImV4cCI6MTc5NDE5NDIyNywicGFzc3dvcmQiOiJwZXJmb3JtYSIsInVzZXJuYW1lIjoiTUoxIn0.B0jspFdwLOXezl4m3fQXTImCFJRaTP4Obg1MlyMGCaA"
+          }
+  - name: 500 - Token Exist
+    description: jika request token sebelum 5 menit
+    request:
+      url: "{{base-url-local}}/v/1/request-onetime-token"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+        - name: Api-Key
+          value: UmF5YVBpUGVyVG9wgCd8ydJrVKF9iYxounlkwQWdGw==
+          description: Harus cocok dengan kolom api_key pada tabel partnerships.
+      body:
+        type: form-urlencoded
+        data:
+          - name: username
+            value: MJ1
+            description: Harus cocok dengan kolom code pada tabel partnerships DAN kolom username pada tabel api_access_authentication.
+          - name: password
+            value: performa
+            description: "\tHarus cocok dengan kolom password pada tabel api_access_authentication."
+          - name: params
+            value: cif=123456&loan_id=789
+            description: Bebas string parameter apa saja
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: cache-control
+          value: none
+        - name: content-security-policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: content-type
+          value: application/json; charset=utf-8
+        - name: permissions-policy
+          value: geolocation=()
+        - name: referrer-policy
+          value: no-referrer
+        - name: strict-transport-security
+          value: max-age=16070400; includeSubDomains
+        - name: x-content-type-options
+          value: nosniff
+        - name: x-frame-options
+          value: SAMEORIGIN
+        - name: x-permitted-cross-domain-policies
+          value: none
+        - name: date
+          value: Mon, 09 Nov 2026 03:19:02 GMT
+        - name: content-length
+          value: "58"
+      body:
+        type: json
+        data: |-
+          {
+            "code": 500,
+            "message": "Maaf, Masih terdapat token aktif."
+          }
+  - name: 401 - Invalid API Key
+    description: jika nilai dari tabel api_access_authentication atau partnerships tidak valid
+    request:
+      url: "{{base-url-local}}/v/1/request-onetime-token"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+        - name: Api-Key
+          value: UmF5YVBpUGVyVG9wgCd8ydJrVKF9iYxounlkwQWdGw==
+          description: Harus cocok dengan kolom api_key pada tabel partnerships.
+      body:
+        type: form-urlencoded
+        data:
+          - name: username
+            value: MJ
+            description: Harus cocok dengan kolom code pada tabel partnerships DAN kolom username pada tabel api_access_authentication.
+          - name: password
+            value: performa
+            description: "\tHarus cocok dengan kolom password pada tabel api_access_authentication."
+          - name: params
+            value: cif=123456&loan_id=789
+            description: Bebas string parameter apa saja
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: cache-control
+          value: none
+        - name: content-security-policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: content-type
+          value: application/json; charset=utf-8
+        - name: permissions-policy
+          value: geolocation=()
+        - name: referrer-policy
+          value: no-referrer
+        - name: strict-transport-security
+          value: max-age=16070400; includeSubDomains
+        - name: x-content-type-options
+          value: nosniff
+        - name: x-frame-options
+          value: SAMEORIGIN
+        - name: x-permitted-cross-domain-policies
+          value: none
+        - name: date
+          value: Mon, 09 Nov 2026 03:22:16 GMT
+        - name: content-length
+          value: "40"
+      body:
+        type: json
+        data: |-
+          {
+            "code": 401,
+            "message": "Invalid API Key"
+          }
+  - name: 400 - Parameter Validation
+    description: jika nama parameter tidak valid
+    request:
+      url: "{{base-url-local}}/v/1/request-onetime-token"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+        - name: Api-Key
+          value: UmF5YVBpUGVyVG9wgCd8ydJrVKF9iYxounlkwQWdGw==
+          description: Harus cocok dengan kolom api_key pada tabel partnerships.
+      body:
+        type: form-urlencoded
+        data:
+          - name: usernam
+            value: MJ1
+            description: Harus cocok dengan kolom code pada tabel partnerships DAN kolom username pada tabel api_access_authentication.
+          - name: password
+            value: performa
+            description: "\tHarus cocok dengan kolom password pada tabel api_access_authentication."
+          - name: params
+            value: cif=123456&loan_id=789
+            description: Bebas string parameter apa saja
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: cache-control
+          value: none
+        - name: content-security-policy
+          value: script-src 'self' pinang-performa.bankraya.co.id
+        - name: content-type
+          value: application/json; charset=utf-8
+        - name: permissions-policy
+          value: geolocation=()
+        - name: referrer-policy
+          value: no-referrer
+        - name: strict-transport-security
+          value: max-age=16070400; includeSubDomains
+        - name: x-content-type-options
+          value: nosniff
+        - name: x-frame-options
+          value: SAMEORIGIN
+        - name: x-permitted-cross-domain-policies
+          value: none
+        - name: date
+          value: Mon, 09 Nov 2026 03:23:56 GMT
+        - name: content-length
+          value: "45"
+      body:
+        type: json
+        data: |-
+          {
+            "code": 400,
+            "message": "Parameter Validation"
+          }
