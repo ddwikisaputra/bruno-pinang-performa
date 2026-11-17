@@ -1,0 +1,497 @@
+info:
+  name: Internal - Generate Keypair
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{base-url-local}}/v/1/internal/generate-keypair"
+  body:
+    type: form-urlencoded
+    data:
+      - name: bits
+        value: "3072"
+        description: "RSA key size [OPTIONAL] [2048 | 3072 | 4096] [default: 3072]"
+  auth:
+    type: basic
+    username: genkey
+    password: passdummy
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 503 - Service Unavailable (outside operational hours)
+    request:
+      url: "{{base-url-local}}/v/1/internal/generate-keypair"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: bits
+            value: "3072"
+            description: RSA key size [OPTIONAL] [2048 | 3072 | 4096]
+    response:
+      status: 503
+      statusText: Service Unavailable
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+      body:
+        type: json
+        data: |-
+          {
+              "status": 503,
+              "message": "Jam operasional Pinang Performa dari jam 08:00 - 17:00 WIB setiap hari. Kembali lagi nanti, ya!"
+          }
+  - name: 500 - Error - Setting params not found
+    request:
+      url: "{{base-url-local}}/v/1/internal/generate-keypair"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: bits
+            value: "3072"
+            description: RSA key size [OPTIONAL] [2048 | 3072 | 4096]
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Maaf, Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi."
+          }
+  - name: 401 - Error - Missing Basic Auth
+    request:
+      url: "{{base-url-local}}/v/1/internal/generate-keypair"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: bits
+            value: "3072"
+            description: RSA key size [OPTIONAL] [2048 | 3072 | 4096]
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: WWW-Authenticate
+          value: Basic realm="internal"
+        - name: Content-Type
+          value: application/json; charset=utf-8
+      body:
+        type: json
+        data: |-
+          {
+              "status": 401,
+              "message": "Unauthorized"
+          }
+  - name: 401 - Error - Wrong Basic Auth credentials
+    request:
+      url: "{{base-url-local}}/v/1/internal/generate-keypair"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: bits
+            value: "3072"
+            description: RSA key size [OPTIONAL] [2048 | 3072 | 4096]
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: WWW-Authenticate
+          value: Basic realm="internal"
+        - name: Content-Type
+          value: application/json; charset=utf-8
+      body:
+        type: json
+        data: |-
+          {
+              "status": 401,
+              "message": "Unauthorized"
+          }
+  - name: 400 - Error - bits below range (1024)
+    request:
+      url: "{{base-url-local}}/v/1/internal/generate-keypair"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: bits
+            value: "1024"
+            description: Invalid on purpose - minimum is 2048
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+      body:
+        type: json
+        data: |-
+          {
+              "status": 400,
+              "message": "Ukuran Key harus salah satu dari: 2048 3072 4096",
+              "data": ""
+          }
+  - name: 400 - Error - bits above range (8192)
+    request:
+      url: "{{base-url-local}}/v/1/internal/generate-keypair"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: bits
+            value: "8192"
+            description: Invalid on purpose - maximum is 4096
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+      body:
+        type: json
+        data: |-
+          {
+              "status": 400,
+              "message": "Ukuran Key harus salah satu dari: 2048 3072 4096",
+              "data": ""
+          }
+  - name: 400 - Error - bits not numeric
+    request:
+      url: "{{base-url-local}}/v/1/internal/generate-keypair"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: bits
+            value: abc
+            description: Invalid on purpose - must be 2048, 3072, or 4096
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+      body:
+        type: json
+        data: |-
+          {
+              "status": 400,
+              "message": "Ukuran Key harus salah satu dari: 2048 3072 4096",
+              "data": ""
+          }
+  - name: 400 - Error - bits empty
+    request:
+      url: "{{base-url-local}}/v/1/internal/generate-keypair"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: bits
+            value: ""
+            description: Invalid on purpose - empty value fails oneof validation
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+      body:
+        type: json
+        data: |-
+          {
+              "status": 400,
+              "message": "Ukuran Key harus salah satu dari: 2048 3072 4096",
+              "data": ""
+          }
+  - name: 200 - Success - 2048-bit
+    request:
+      url: "{{base-url-local}}/v/1/internal/generate-keypair"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: bits
+            value: "2048"
+            description: RSA key size [OPTIONAL] [2048 | 3072 | 4096]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Cache-Control
+          value: no-store
+        - name: Pragma
+          value: no-cache
+        - name: X-Content-Type-Options
+          value: nosniff
+      body:
+        type: json
+        data: |-
+          {
+              "status": 200,
+              "message": "Key pair berhasil dibuat.",
+              "data": {
+                  "keyId": "RSA-<uuid>",
+                  "algorithm": "RSA-OAEP-SHA256",
+                  "publicKey": "<base64 AES-GCM ciphertext>",
+                  "privateKey": "<base64 AES-GCM ciphertext>"
+              }
+          }
+  - name: 200 - Success - 3072-bit (explicit)
+    request:
+      url: "{{base-url-local}}/v/1/internal/generate-keypair"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: bits
+            value: "3072"
+            description: RSA key size [OPTIONAL] [2048 | 3072 | 4096]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Cache-Control
+          value: no-store
+      body:
+        type: json
+        data: |-
+          {
+              "status": 200,
+              "message": "Key pair berhasil dibuat.",
+              "data": {
+                  "keyId": "RSA-<uuid>",
+                  "algorithm": "RSA-OAEP-SHA256",
+                  "publicKey": "<base64 AES-GCM ciphertext>",
+                  "privateKey": "<base64 AES-GCM ciphertext>"
+              }
+          }
+  - name: 200 - Success - 3072-bit (default, bits omitted)
+    request:
+      url: "{{base-url-local}}/v/1/internal/generate-keypair"
+      method: POST
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Cache-Control
+          value: no-store
+      body:
+        type: json
+        data: |-
+          {
+              "status": 200,
+              "message": "Key pair berhasil dibuat.",
+              "data": {
+                  "keyId": "RSA-<uuid>",
+                  "algorithm": "RSA-OAEP-SHA256",
+                  "publicKey": "<base64 AES-GCM ciphertext>",
+                  "privateKey": "<base64 AES-GCM ciphertext>"
+              }
+          }
+  - name: 200 - Success - 4096-bit
+    request:
+      url: "{{base-url-local}}/v/1/internal/generate-keypair"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: bits
+            value: "4096"
+            description: RSA key size [OPTIONAL] [2048 | 3072 | 4096]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+        - name: Cache-Control
+          value: no-store
+      body:
+        type: json
+        data: |-
+          {
+              "status": 200,
+              "message": "Key pair berhasil dibuat.",
+              "data": {
+                  "keyId": "RSA-<uuid>",
+                  "algorithm": "RSA-OAEP-SHA256",
+                  "publicKey": "<base64 AES-GCM ciphertext>",
+                  "privateKey": "<base64 AES-GCM ciphertext>"
+              }
+          }
+  - name: 500 - Error - Key generation failed
+    request:
+      url: "{{base-url-local}}/v/1/internal/generate-keypair"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: bits
+            value: "3072"
+            description: Valid request - failure is environment/internal only
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Maaf, proses pembuatan key pair gagal."
+          }
+  - name: 500 - Error - Key encryption failed
+    request:
+      url: "{{base-url-local}}/v/1/internal/generate-keypair"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: bits
+            value: "3072"
+            description: Valid request - requires invalid GCM_SECRETKEY/GCM_NONCE configuration
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+      body:
+        type: json
+        data: |-
+          {
+              "status": 500,
+              "message": "Maaf, proses enkripsi key pair gagal."
+          }
+  - name: 400 - Error - Defensive invalid bits (validator bypassed)
+    request:
+      url: "{{base-url-local}}/v/1/internal/generate-keypair"
+      method: POST
+      body:
+        type: form-urlencoded
+        data:
+          - name: bits
+            value: "1000"
+            description: Not reachable through the normal route - validator rejects it first
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; charset=utf-8
+      body:
+        type: json
+        data: |-
+          {
+              "status": 400,
+              "message": "Ukuran key tidak valid. Gunakan 2048, 3072, atau 4096 bit."
+          }
+
+docs: |
+  POST /v/1/internal/generate-keypair
+
+  Internal service-to-service endpoint that generates a new RSA key pair.
+
+  AUTHENTICATION
+  --------------
+  HTTP Basic Auth (hardcoded for now):
+    username: genkey
+    password: passdummy
+
+  REQUEST
+  -------
+  Content-Type: application/x-www-form-urlencoded
+
+  bits => RSA key size [OPTIONAL] [2048 | 3072 | 4096] [default: 3072]
+
+  RESPONSE
+  --------
+  status   => business status (200 on success)
+  message  => Indonesian user-facing message
+  data.keyId      => RSA-<uuid> reference (not persisted)
+  data.algorithm  => RSA-OAEP-SHA256
+  data.publicKey  => PKIX PEM encrypted with AES-GCM (GcmEncodeSilent), base64
+  data.privateKey => PKCS#8 PEM encrypted with AES-GCM (GcmEncodeSilent), base64
+
+  IMPORTANT
+  ---------
+  publicKey/privateKey are NOT raw PEM. They are AES-GCM ciphertext:
+    base64(nonce || AES-GCM ciphertext)
+
+  Decode with the same GCM_SECRETKEY / GCM_NONCE:
+    publicPEM, status := Helper.GcmDecode(resp.Data.PublicKey, setup)
+    privatePEM, status := Helper.GcmDecode(resp.Data.PrivateKey, setup)
+
+  Success response headers:
+    Cache-Control: no-store
+    Pragma: no-cache
+    X-Content-Type-Options: nosniff
+
+  RESPONSE MATRIX
+  ---------------
+  HTTP 503, body.status 503
+    Trigger: outside OPERATIONAL_START - OPERATIONAL_END (OPERATIONAL_ALWAYSON = 0)
+    Message: "Jam operasional Pinang Performa dari jam XX:XX - XX:XX WIB setiap hari. Kembali lagi nanti, ya!"
+
+  HTTP 500, body.status 500
+    Trigger: OPERATIONAL_* setting params missing/unreadable
+    Message: "Maaf, Server sedang dalam perbaikan. Silahkan coba beberapa saat lagi."
+
+  HTTP 401, body.status 401
+    Trigger: missing, malformed, or wrong Basic Auth credentials
+    Headers: WWW-Authenticate: Basic realm="internal"
+    Message: "Unauthorized"
+
+  HTTP 200, body.status 400
+    Trigger: bits is present but not exactly 2048, 3072, or 4096
+            (below range, above range, non-numeric, or empty string)
+    Message: "Ukuran Key harus salah satu dari: 2048 3072 4096"
+    Data: "" (the validator process adds an empty data field)
+
+  HTTP 200, body.status 200
+    Trigger: valid request (bits omitted defaults to 3072)
+    Message: "Key pair berhasil dibuat."
+    Data: keyId, algorithm, publicKey, privateKey
+
+  HTTP 200, body.status 500
+    Trigger A: RSA key generation failed (environment/internal failure)
+    Message: "Maaf, proses pembuatan key pair gagal."
+    Trigger B: GCM_SECRETKEY is not 16/24/32 bytes or GCM_NONCE is not 12 bytes
+    Message: "Maaf, proses enkripsi key pair gagal."
+
+  HTTP 200, body.status 400 (defensive)
+    Trigger: validator bypassed with an invalid bits value (not reachable via the route)
+    Message: "Ukuran key tidak valid. Gunakan 2048, 3072, atau 4096 bit."
+
+  NOTES
+  -----
+  - Middleware order: InjectServiceUnavailable -> BasicAuthInternal -> ValidateGenerateKeypair
+    -> GenerateKeypair.
+  - Therefore 503/500 from InjectServiceUnavailable take precedence over 401,
+    and 401 takes precedence over 400 validation.
+  - Business errors use HTTP 200 + body.status (repo convention). Middleware
+    failures (401/500/503) use the real HTTP status.
+  - There is no rate limiter and no concurrency semaphore in v1.
+  - The 500 generation/encryption examples cannot be triggered by request input;
+    they are environment/internal failures and are documented for completeness.
