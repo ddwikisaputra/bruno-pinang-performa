@@ -1,0 +1,307 @@
+info:
+  name: Request One Time Token
+  type: http
+  seq: 8
+
+http:
+  method: POST
+  url: "{{base-url-dev}}/v/1/request-onetime-token"
+  headers:
+    - name: Api-Key
+      value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
+    - name: Content-Type
+      value: application/x-www-form-urlencoded
+  body:
+    type: form-urlencoded
+    data:
+      - name: username
+        value: TUox
+        description: clientID
+      - name: password
+        value: cGVyZm9ybWE=
+        description: clientSecret
+      - name: params
+        value: ZW5McEVxeGZld0srZUwxbWJ0ZHIyYm9OVnJkTk9oTmxVbitMSGNoVVI4dklHOFRhS1VvcHRHbHlSSXBUWnF1NzZRK2E3YktkYlFRZkRza2F6RDlmRkJzQzRFRlhvdTdkWGpMclFNbEtYZnl5Rkt5UzNhRnhXU05oYURScHB2TC9CM0ZMd2E1UGFLbHZ1dFRvUkN2ZEZKYTNXNS9rMGpoQmJucVorbHNzKzlnNEUxMmtPcVl0MnF5ckdZVndtL1o3bmJpUE54TWJ5NWlJV0tMVDJHL1lzRGkxYytDL2QrOXlFYjRrb2ppaERJcFAwS092Y2x3Z2lUbzZCbXFSTlh3UUlQbkFOeWVFTjBQSlpEdlpETjRQTnhYRFRvSFZ0SmNUdmgyV1BqaW5BZjJVNTYwTUVFSlZ5a01DVFkwMzNVZGUwQ3RudmdKMTZlTEFBN0F0OU1udHZEWkhyUkI3TVNwM0pGbHZmVUJqWG5KTUhsb3BxWExER0VEaXFzdmEwSVBpaG1aUGtlVDVPdUh0QWd1S2c0VUFMNzVSUHE4c1BaMEVVMVM3c3dNMEZMaWZsd3dIN2gvSjNFbmV6L2hQK3hxWHJhbnFRbld3WmkyYnlTUlBrTURBQWdWR3RQdVR2dFIwOHU3MDN5Z0pDRHhQWUZBMlJYL2lWeWlMcnZ6eGpVR3YuU1VVQ1licWVQNkt1MVUvOUtNN2NtVkNHeGhSdGlULy9DN3hHS2dmY2VlOCswL05MOW1xV1Fja00vbHB2cnFMUXBUcmZueldoL2hKY00vdnM5dU16S1BhUWY1UGdpZDdobXBEaG5wMGEramU5NlQ5L3BXN1owcmkrVm5hY1l6S1N3cmZoa2xwQUFtWHFaeG8xMit2TzRnckNtY0NjQVB5MnRKd3UyOFF0YWpyN1dTL0tNZWtWak5QN1h6VjZaaDA1ZFFwMTRoUzhZZklTamcwNENqQUVhVnVHb0NDYWw3eDRrcFdtM09wSUJFTVI2SWpJTng0RWJxMWdPQktmdWFxaUw3ODJNNHRZcDVqclRkUUJWbEtlUjR0UWhCSVFOUC9UN012RlErbFdST0lrUVFCQm1XZjdkYndzMVhJeWIwQ0VuVWJ4ZS9kWWg2L0thRW1OTGMzSmowUTQ4UENRMVhNUFBneHREUVdmbkFyMEorQ2crTlQvdmdWL3kvckhWU01yU21kRkNIeUxmMDhRK3ovM2JEVXYxYktubjFTREdNa3FwWGJPRFhtY1BCaUVYczdyQmFsWHRGKzNMVWxHZ3k2MjVJSGRMVE1mSHJTa3krVk54S0VoeEgzRHc1am9GMi95YlptamZMSXhqZjlyZlNhOUdFaHY0RGNZTGhWbVJZOGIuYVB0emZMenJsNHozWHZvOUVhTm5yaFkxVUo0STl6dnJTWUp0WFJuTnRGa3l4WEI3S01BMmpUWUx0QmFkUEpIbFNRditiZDJhTHdYaTl6WUYyd3BUUjJFSzlhOGtjUUhIdFNlVnFGdWI3S25RVUQwK3pXbVhpZUJiQXhaMWdoOW13Y2FYYUM5RXpyaktobzdkamZ5eHVNSU5IdmtBbmptU0hPU0JrS0s0ZU00eHlNMFUxdkowZDZwdGkrREpRTTlhWEhvN3Q5c2c1MUNXT1FDclZlU0gxVkZMMUFxYVpVaVVVSm5QclJ0S0M5cHdSenNRVWNweUc1U0lMQXBnQmYrNVQwZUZPajg5TDZTaWNzUWZqSFEwV2lISHNyZ3h3Zz09
+        description: parameter Webview
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: 200 - Success
+    request:
+      url: http://localhost:4004/v/1/request-onetime-token
+      method: POST
+      headers:
+        - name: Api-Key
+          value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: username
+            value: TUox
+            description: clientID
+          - name: password
+            value: cGVyZm9ybWE=
+            description: clientSecret
+          - name: params
+            value: ZW5McEVxeGZld0srZUwxbWJ0ZHIyYm9OVnJkTk9oTmxVbitMSGNoVVI4dklHOFRhS1VvcHRHbHlSSXBUWnF1NzZRK2E3YktkYlFRZkRza2F6RDlmRkJzQzRFRlhvdTdkWGpMclFNbEtYZnl5Rkt5UzNhRnhXU05oYURScHB2TC9CM0ZMd2E1UGFLbHZ1dFRvUkN2ZEZKYTNXNS9rMGpoQmJucVorbHNzKzlnNEUxMmtPcVl0MnF5ckdZVndtL1o3bmJpUE54TWJ5NWlJV0tMVDJHL1lzRGkxYytDL2QrOXlFYjRrb2ppaERJcFAwS092Y2x3Z2lUbzZCbXFSTlh3UUlQbkFOeWVFTjBQSlpEdlpETjRQTnhYRFRvSFZ0SmNUdmgyV1BqaW5BZjJVNTYwTUVFSlZ5a01DVFkwMzNVZGUwQ3RudmdKMTZlTEFBN0F0OU1udHZEWkhyUkI3TVNwM0pGbHZmVUJqWG5KTUhsb3BxWExER0VEaXFzdmEwSVBpaG1aUGtlVDVPdUh0QWd1S2c0VUFMNzVSUHE4c1BaMEVVMVM3c3dNMEZMaWZsd3dIN2gvSjNFbmV6L2hQK3hxWHJhbnFRbld3WmkyYnlTUlBrTURBQWdWR3RQdVR2dFIwOHU3MDN5Z0pDRHhQWUZBMlJYL2lWeWlMcnZ6eGpVR3YuU1VVQ1licWVQNkt1MVUvOUtNN2NtVkNHeGhSdGlULy9DN3hHS2dmY2VlOCswL05MOW1xV1Fja00vbHB2cnFMUXBUcmZueldoL2hKY00vdnM5dU16S1BhUWY1UGdpZDdobXBEaG5wMGEramU5NlQ5L3BXN1owcmkrVm5hY1l6S1N3cmZoa2xwQUFtWHFaeG8xMit2TzRnckNtY0NjQVB5MnRKd3UyOFF0YWpyN1dTL0tNZWtWak5QN1h6VjZaaDA1ZFFwMTRoUzhZZklTamcwNENqQUVhVnVHb0NDYWw3eDRrcFdtM09wSUJFTVI2SWpJTng0RWJxMWdPQktmdWFxaUw3ODJNNHRZcDVqclRkUUJWbEtlUjR0UWhCSVFOUC9UN012RlErbFdST0lrUVFCQm1XZjdkYndzMVhJeWIwQ0VuVWJ4ZS9kWWg2L0thRW1OTGMzSmowUTQ4UENRMVhNUFBneHREUVdmbkFyMEorQ2crTlQvdmdWL3kvckhWU01yU21kRkNIeUxmMDhRK3ovM2JEVXYxYktubjFTREdNa3FwWGJPRFhtY1BCaUVYczdyQmFsWHRGKzNMVWxHZ3k2MjVJSGRMVE1mSHJTa3krVk54S0VoeEgzRHc1am9GMi95YlptamZMSXhqZjlyZlNhOUdFaHY0RGNZTGhWbVJZOGIuYVB0emZMenJsNHozWHZvOUVhTm5yaFkxVUo0STl6dnJTWUp0WFJuTnRGa3l4WEI3S01BMmpUWUx0QmFkUEpIbFNRditiZDJhTHdYaTl6WUYyd3BUUjJFSzlhOGtjUUhIdFNlVnFGdWI3S25RVUQwK3pXbVhpZUJiQXhaMWdoOW13Y2FYYUM5RXpyaktobzdkamZ5eHVNSU5IdmtBbmptU0hPU0JrS0s0ZU00eHlNMFUxdkowZDZwdGkrREpRTTlhWEhvN3Q5c2c1MUNXT1FDclZlU0gxVkZMMUFxYVpVaVVVSm5QclJ0S0M5cHdSenNRVWNweUc1U0lMQXBnQmYrNVQwZUZPajg5TDZTaWNzUWZqSFEwV2lISHNyZ3h3Zz09
+            description: parameter Webview
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: cache-control
+          value: none
+        - name: content-security-policy
+          value: script-src 'self' rayain.net
+        - name: content-type
+          value: application/json; charset=utf-8
+        - name: permissions-policy
+          value: geolocation=()
+        - name: referrer-policy
+          value: no-referrer
+        - name: strict-transport-security
+          value: max-age=31536000
+        - name: x-content-type-options
+          value: nosniff
+        - name: x-frame-options
+          value: SAMEORIGIN
+        - name: x-permitted-cross-domain-policies
+          value: none
+        - name: date
+          value: Thu, 12 Nov 2026 13:12:19 GMT
+        - name: content-length
+          value: "522"
+      body:
+        type: json
+        data: |-
+          {
+            "code": 200,
+            "expire": "2026-11-13T20:12:19.9578094+07:00",
+            "message": "Berhasil",
+            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NJZCI6IlVtRjVZVkJwVUdWeVZHOXcvNWNzbEdJYll0WUNqbWJ1SEF5TG0yZz0iLCJhcGlLZXkiOiJWVzFHTlZsV1FuQlZSMVo1VmtjNWQyZERaRGg1WkVweVZrdEdPV2xaZUc5MWJteHJkMUZYWkVkM1BUMD0iLCJleHAiOjE3OTQ1NzU1MzksInBhc3N3b3JkIjoiVW1GNVlWQnBVR1Z5Vkc5d3ZRZy95enUveVJVc2g0U0lmanNBSkVlSWVXaWdUdUhmIiwidXNlcm5hbWUiOiJVbUY1WVZCcFVHVnlWRzl3Z0NkOHlkSnJWS0Y5aVl4b3VubGt3UVdkR3c9PSJ9.x4kauKcVEzJhKzunI02lflgTO7HHTkCPUaUi2h35-f8"
+          }
+  - name: 500 - Token Exist
+    request:
+      url: http://localhost:4004/v/1/request-onetime-token
+      method: POST
+      headers:
+        - name: Api-Key
+          value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: username
+            value: TUox
+            description: clientID
+          - name: password
+            value: cGVyZm9ybWE=
+            description: clientSecret
+          - name: params
+            value: ZW5McEVxeGZld0srZUwxbWJ0ZHIyYm9OVnJkTk9oTmxVbitMSGNoVVI4dklHOFRhS1VvcHRHbHlSSXBUWnF1NzZRK2E3YktkYlFRZkRza2F6RDlmRkJzQzRFRlhvdTdkWGpMclFNbEtYZnl5Rkt5UzNhRnhXU05oYURScHB2TC9CM0ZMd2E1UGFLbHZ1dFRvUkN2ZEZKYTNXNS9rMGpoQmJucVorbHNzKzlnNEUxMmtPcVl0MnF5ckdZVndtL1o3bmJpUE54TWJ5NWlJV0tMVDJHL1lzRGkxYytDL2QrOXlFYjRrb2ppaERJcFAwS092Y2x3Z2lUbzZCbXFSTlh3UUlQbkFOeWVFTjBQSlpEdlpETjRQTnhYRFRvSFZ0SmNUdmgyV1BqaW5BZjJVNTYwTUVFSlZ5a01DVFkwMzNVZGUwQ3RudmdKMTZlTEFBN0F0OU1udHZEWkhyUkI3TVNwM0pGbHZmVUJqWG5KTUhsb3BxWExER0VEaXFzdmEwSVBpaG1aUGtlVDVPdUh0QWd1S2c0VUFMNzVSUHE4c1BaMEVVMVM3c3dNMEZMaWZsd3dIN2gvSjNFbmV6L2hQK3hxWHJhbnFRbld3WmkyYnlTUlBrTURBQWdWR3RQdVR2dFIwOHU3MDN5Z0pDRHhQWUZBMlJYL2lWeWlMcnZ6eGpVR3YuU1VVQ1licWVQNkt1MVUvOUtNN2NtVkNHeGhSdGlULy9DN3hHS2dmY2VlOCswL05MOW1xV1Fja00vbHB2cnFMUXBUcmZueldoL2hKY00vdnM5dU16S1BhUWY1UGdpZDdobXBEaG5wMGEramU5NlQ5L3BXN1owcmkrVm5hY1l6S1N3cmZoa2xwQUFtWHFaeG8xMit2TzRnckNtY0NjQVB5MnRKd3UyOFF0YWpyN1dTL0tNZWtWak5QN1h6VjZaaDA1ZFFwMTRoUzhZZklTamcwNENqQUVhVnVHb0NDYWw3eDRrcFdtM09wSUJFTVI2SWpJTng0RWJxMWdPQktmdWFxaUw3ODJNNHRZcDVqclRkUUJWbEtlUjR0UWhCSVFOUC9UN012RlErbFdST0lrUVFCQm1XZjdkYndzMVhJeWIwQ0VuVWJ4ZS9kWWg2L0thRW1OTGMzSmowUTQ4UENRMVhNUFBneHREUVdmbkFyMEorQ2crTlQvdmdWL3kvckhWU01yU21kRkNIeUxmMDhRK3ovM2JEVXYxYktubjFTREdNa3FwWGJPRFhtY1BCaUVYczdyQmFsWHRGKzNMVWxHZ3k2MjVJSGRMVE1mSHJTa3krVk54S0VoeEgzRHc1am9GMi95YlptamZMSXhqZjlyZlNhOUdFaHY0RGNZTGhWbVJZOGIuYVB0emZMenJsNHozWHZvOUVhTm5yaFkxVUo0STl6dnJTWUp0WFJuTnRGa3l4WEI3S01BMmpUWUx0QmFkUEpIbFNRditiZDJhTHdYaTl6WUYyd3BUUjJFSzlhOGtjUUhIdFNlVnFGdWI3S25RVUQwK3pXbVhpZUJiQXhaMWdoOW13Y2FYYUM5RXpyaktobzdkamZ5eHVNSU5IdmtBbmptU0hPU0JrS0s0ZU00eHlNMFUxdkowZDZwdGkrREpRTTlhWEhvN3Q5c2c1MUNXT1FDclZlU0gxVkZMMUFxYVpVaVVVSm5QclJ0S0M5cHdSenNRVWNweUc1U0lMQXBnQmYrNVQwZUZPajg5TDZTaWNzUWZqSFEwV2lISHNyZ3h3Zz09
+            description: parameter Webview
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: cache-control
+          value: none
+        - name: content-security-policy
+          value: script-src 'self' rayain.net
+        - name: content-type
+          value: application/json; charset=utf-8
+        - name: permissions-policy
+          value: geolocation=()
+        - name: referrer-policy
+          value: no-referrer
+        - name: strict-transport-security
+          value: max-age=31536000
+        - name: x-content-type-options
+          value: nosniff
+        - name: x-frame-options
+          value: SAMEORIGIN
+        - name: x-permitted-cross-domain-policies
+          value: none
+        - name: date
+          value: Thu, 12 Nov 2026 13:14:08 GMT
+        - name: content-length
+          value: "58"
+      body:
+        type: json
+        data: |-
+          {
+            "code": 500,
+            "message": "Maaf, Masih terdapat token aktif."
+          }
+  - name: 400 - Parameter Validation
+    request:
+      url: http://localhost:4004/v/1/request-onetime-token
+      method: POST
+      headers:
+        - name: Api-Key
+          value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: usernam
+            value: TUox
+            description: clientID
+          - name: password
+            value: cGVyZm9ybWE=
+            description: clientSecret
+          - name: params
+            value: ZW5McEVxeGZld0srZUwxbWJ0ZHIyYm9OVnJkTk9oTmxVbitMSGNoVVI4dklHOFRhS1VvcHRHbHlSSXBUWnF1NzZRK2E3YktkYlFRZkRza2F6RDlmRkJzQzRFRlhvdTdkWGpMclFNbEtYZnl5Rkt5UzNhRnhXU05oYURScHB2TC9CM0ZMd2E1UGFLbHZ1dFRvUkN2ZEZKYTNXNS9rMGpoQmJucVorbHNzKzlnNEUxMmtPcVl0MnF5ckdZVndtL1o3bmJpUE54TWJ5NWlJV0tMVDJHL1lzRGkxYytDL2QrOXlFYjRrb2ppaERJcFAwS092Y2x3Z2lUbzZCbXFSTlh3UUlQbkFOeWVFTjBQSlpEdlpETjRQTnhYRFRvSFZ0SmNUdmgyV1BqaW5BZjJVNTYwTUVFSlZ5a01DVFkwMzNVZGUwQ3RudmdKMTZlTEFBN0F0OU1udHZEWkhyUkI3TVNwM0pGbHZmVUJqWG5KTUhsb3BxWExER0VEaXFzdmEwSVBpaG1aUGtlVDVPdUh0QWd1S2c0VUFMNzVSUHE4c1BaMEVVMVM3c3dNMEZMaWZsd3dIN2gvSjNFbmV6L2hQK3hxWHJhbnFRbld3WmkyYnlTUlBrTURBQWdWR3RQdVR2dFIwOHU3MDN5Z0pDRHhQWUZBMlJYL2lWeWlMcnZ6eGpVR3YuU1VVQ1licWVQNkt1MVUvOUtNN2NtVkNHeGhSdGlULy9DN3hHS2dmY2VlOCswL05MOW1xV1Fja00vbHB2cnFMUXBUcmZueldoL2hKY00vdnM5dU16S1BhUWY1UGdpZDdobXBEaG5wMGEramU5NlQ5L3BXN1owcmkrVm5hY1l6S1N3cmZoa2xwQUFtWHFaeG8xMit2TzRnckNtY0NjQVB5MnRKd3UyOFF0YWpyN1dTL0tNZWtWak5QN1h6VjZaaDA1ZFFwMTRoUzhZZklTamcwNENqQUVhVnVHb0NDYWw3eDRrcFdtM09wSUJFTVI2SWpJTng0RWJxMWdPQktmdWFxaUw3ODJNNHRZcDVqclRkUUJWbEtlUjR0UWhCSVFOUC9UN012RlErbFdST0lrUVFCQm1XZjdkYndzMVhJeWIwQ0VuVWJ4ZS9kWWg2L0thRW1OTGMzSmowUTQ4UENRMVhNUFBneHREUVdmbkFyMEorQ2crTlQvdmdWL3kvckhWU01yU21kRkNIeUxmMDhRK3ovM2JEVXYxYktubjFTREdNa3FwWGJPRFhtY1BCaUVYczdyQmFsWHRGKzNMVWxHZ3k2MjVJSGRMVE1mSHJTa3krVk54S0VoeEgzRHc1am9GMi95YlptamZMSXhqZjlyZlNhOUdFaHY0RGNZTGhWbVJZOGIuYVB0emZMenJsNHozWHZvOUVhTm5yaFkxVUo0STl6dnJTWUp0WFJuTnRGa3l4WEI3S01BMmpUWUx0QmFkUEpIbFNRditiZDJhTHdYaTl6WUYyd3BUUjJFSzlhOGtjUUhIdFNlVnFGdWI3S25RVUQwK3pXbVhpZUJiQXhaMWdoOW13Y2FYYUM5RXpyaktobzdkamZ5eHVNSU5IdmtBbmptU0hPU0JrS0s0ZU00eHlNMFUxdkowZDZwdGkrREpRTTlhWEhvN3Q5c2c1MUNXT1FDclZlU0gxVkZMMUFxYVpVaVVVSm5QclJ0S0M5cHdSenNRVWNweUc1U0lMQXBnQmYrNVQwZUZPajg5TDZTaWNzUWZqSFEwV2lISHNyZ3h3Zz09
+            description: parameter Webview
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: cache-control
+          value: none
+        - name: content-security-policy
+          value: script-src 'self' rayain.net
+        - name: content-type
+          value: application/json; charset=utf-8
+        - name: permissions-policy
+          value: geolocation=()
+        - name: referrer-policy
+          value: no-referrer
+        - name: strict-transport-security
+          value: max-age=31536000
+        - name: x-content-type-options
+          value: nosniff
+        - name: x-frame-options
+          value: SAMEORIGIN
+        - name: x-permitted-cross-domain-policies
+          value: none
+        - name: date
+          value: Thu, 12 Nov 2026 13:14:28 GMT
+        - name: content-length
+          value: "45"
+      body:
+        type: json
+        data: |-
+          {
+            "code": 400,
+            "message": "Parameter Validation"
+          }
+  - name: 401 - Invalid API Key
+    request:
+      url: http://localhost:4004/v/1/request-onetime-token
+      method: POST
+      headers:
+        - name: Api-Key
+          value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: username
+            value: QlVMLTY1NQ==
+            description: clientID
+          - name: password
+            value: cGVyZm9ybWE=
+            description: clientSecret
+          - name: params
+            value: ZW5McEVxeGZld0srZUwxbWJ0ZHIyYm9OVnJkTk9oTmxVbitMSGNoVVI4dklHOFRhS1VvcHRHbHlSSXBUWnF1NzZRK2E3YktkYlFRZkRza2F6RDlmRkJzQzRFRlhvdTdkWGpMclFNbEtYZnl5Rkt5UzNhRnhXU05oYURScHB2TC9CM0ZMd2E1UGFLbHZ1dFRvUkN2ZEZKYTNXNS9rMGpoQmJucVorbHNzKzlnNEUxMmtPcVl0MnF5ckdZVndtL1o3bmJpUE54TWJ5NWlJV0tMVDJHL1lzRGkxYytDL2QrOXlFYjRrb2ppaERJcFAwS092Y2x3Z2lUbzZCbXFSTlh3UUlQbkFOeWVFTjBQSlpEdlpETjRQTnhYRFRvSFZ0SmNUdmgyV1BqaW5BZjJVNTYwTUVFSlZ5a01DVFkwMzNVZGUwQ3RudmdKMTZlTEFBN0F0OU1udHZEWkhyUkI3TVNwM0pGbHZmVUJqWG5KTUhsb3BxWExER0VEaXFzdmEwSVBpaG1aUGtlVDVPdUh0QWd1S2c0VUFMNzVSUHE4c1BaMEVVMVM3c3dNMEZMaWZsd3dIN2gvSjNFbmV6L2hQK3hxWHJhbnFRbld3WmkyYnlTUlBrTURBQWdWR3RQdVR2dFIwOHU3MDN5Z0pDRHhQWUZBMlJYL2lWeWlMcnZ6eGpVR3YuU1VVQ1licWVQNkt1MVUvOUtNN2NtVkNHeGhSdGlULy9DN3hHS2dmY2VlOCswL05MOW1xV1Fja00vbHB2cnFMUXBUcmZueldoL2hKY00vdnM5dU16S1BhUWY1UGdpZDdobXBEaG5wMGEramU5NlQ5L3BXN1owcmkrVm5hY1l6S1N3cmZoa2xwQUFtWHFaeG8xMit2TzRnckNtY0NjQVB5MnRKd3UyOFF0YWpyN1dTL0tNZWtWak5QN1h6VjZaaDA1ZFFwMTRoUzhZZklTamcwNENqQUVhVnVHb0NDYWw3eDRrcFdtM09wSUJFTVI2SWpJTng0RWJxMWdPQktmdWFxaUw3ODJNNHRZcDVqclRkUUJWbEtlUjR0UWhCSVFOUC9UN012RlErbFdST0lrUVFCQm1XZjdkYndzMVhJeWIwQ0VuVWJ4ZS9kWWg2L0thRW1OTGMzSmowUTQ4UENRMVhNUFBneHREUVdmbkFyMEorQ2crTlQvdmdWL3kvckhWU01yU21kRkNIeUxmMDhRK3ovM2JEVXYxYktubjFTREdNa3FwWGJPRFhtY1BCaUVYczdyQmFsWHRGKzNMVWxHZ3k2MjVJSGRMVE1mSHJTa3krVk54S0VoeEgzRHc1am9GMi95YlptamZMSXhqZjlyZlNhOUdFaHY0RGNZTGhWbVJZOGIuYVB0emZMenJsNHozWHZvOUVhTm5yaFkxVUo0STl6dnJTWUp0WFJuTnRGa3l4WEI3S01BMmpUWUx0QmFkUEpIbFNRditiZDJhTHdYaTl6WUYyd3BUUjJFSzlhOGtjUUhIdFNlVnFGdWI3S25RVUQwK3pXbVhpZUJiQXhaMWdoOW13Y2FYYUM5RXpyaktobzdkamZ5eHVNSU5IdmtBbmptU0hPU0JrS0s0ZU00eHlNMFUxdkowZDZwdGkrREpRTTlhWEhvN3Q5c2c1MUNXT1FDclZlU0gxVkZMMUFxYVpVaVVVSm5QclJ0S0M5cHdSenNRVWNweUc1U0lMQXBnQmYrNVQwZUZPajg5TDZTaWNzUWZqSFEwV2lISHNyZ3h3Zz09
+            description: parameter Webview
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: cache-control
+          value: none
+        - name: content-security-policy
+          value: script-src 'self' rayain.net
+        - name: content-type
+          value: application/json; charset=utf-8
+        - name: permissions-policy
+          value: geolocation=()
+        - name: referrer-policy
+          value: no-referrer
+        - name: strict-transport-security
+          value: max-age=31536000
+        - name: x-content-type-options
+          value: nosniff
+        - name: x-frame-options
+          value: SAMEORIGIN
+        - name: x-permitted-cross-domain-policies
+          value: none
+        - name: date
+          value: Thu, 12 Nov 2026 13:24:21 GMT
+        - name: content-length
+          value: "40"
+      body:
+        type: json
+        data: |-
+          {
+            "code": 401,
+            "message": "Invalid API Key"
+          }
+  - name: 500 - Gagal Request Token
+    request:
+      url: http://localhost:4004/v/1/request-onetime-token
+      method: POST
+      headers:
+        - name: Api-Key
+          value: VW1GNVlWQnBVR1Z5Vkc5d2dDZDh5ZEpyVktGOWlZeG91bmxrd1FXZEd3PT0=
+        - name: Content-Type
+          value: application/x-www-form-urlencoded
+      body:
+        type: form-urlencoded
+        data:
+          - name: username
+            value: TUox
+            description: clientID
+          - name: password
+            value: cGVyZm9ybWE=
+            description: clientSecret
+          - name: params
+            value: ZW5McEVxeGZld0srZUwxbWJ0ZHIyYm9OVnJkTk9oTmxVbitMSGNoVVI4dklHOFRhS1VvcHRHbHlSSXBUWnF1NzZRK2E3YktkYlFRZkRza2F6RDlmRkJzQzRFRlhvdTdkWGpMclFNbEtYZnl5Rkt5UzNhRnhXU05oYURScHB2TC9CM0ZMd2E1UGFLbHZ1dFRvUkN2ZEZKYTNXNS9rMGpoQmJucVorbHNzKzlnNEUxMmtPcVl0MnF5ckdZVndtL1o3bmJpUE54TWJ5NWlJV0tMVDJHL1lzRGkxYytDL2QrOXlFYjRrb2ppaERJcFAwS092Y2x3Z2lUbzZCbXFSTlh3UUlQbkFOeWVFTjBQSlpEdlpETjRQTnhYRFRvSFZ0SmNUdmgyV1BqaW5BZjJVNTYwTUVFSlZ5a01DVFkwMzNVZGUwQ3RudmdKMTZlTEFBN0F0OU1udHZEWkhyUkI3TVNwM0pGbHZmVUJqWG5KTUhsb3BxWExER0VEaXFzdmEwSVBpaG1aUGtlVDVPdUh0QWd1S2c0VUFMNzVSUHE4c1BaMEVVMVM3c3dNMEZMaWZsd3dIN2gvSjNFbmV6L2hQK3hxWHJhbnFRbld3WmkyYnlTUlBrTURBQWdWR3RQdVR2dFIwOHU3MDN5Z0pDRHhQWUZBMlJYL2lWeWlMcnZ6eGpVR3YuU1VVQ1licWVQNkt1MVUvOUtNN2NtVkNHeGhSdGlULy9DN3hHS2dmY2VlOCswL05MOW1xV1Fja00vbHB2cnFMUXBUcmZueldoL2hKY00vdnM5dU16S1BhUWY1UGdpZDdobXBEaG5wMGEramU5NlQ5L3BXN1owcmkrVm5hY1l6S1N3cmZoa2xwQUFtWHFaeG8xMit2TzRnckNtY0NjQVB5MnRKd3UyOFF0YWpyN1dTL0tNZWtWak5QN1h6VjZaaDA1ZFFwMTRoUzhZZklTamcwNENqQUVhVnVHb0NDYWw3eDRrcFdtM09wSUJFTVI2SWpJTng0RWJxMWdPQktmdWFxaUw3ODJNNHRZcDVqclRkUUJWbEtlUjR0UWhCSVFOUC9UN012RlErbFdST0lrUVFCQm1XZjdkYndzMVhJeWIwQ0VuVWJ4ZS9kWWg2L0thRW1OTGMzSmowUTQ4UENRMVhNUFBneHREUVdmbkFyMEorQ2crTlQvdmdWL3kvckhWU01yU21kRkNIeUxmMDhRK3ovM2JEVXYxYktubjFTREdNa3FwWGJPRFhtY1BCaUVYczdyQmFsWHRGKzNMVWxHZ3k2MjVJSGRMVE1mSHJTa3krVk54S0VoeEgzRHc1am9GMi95YlptamZMSXhqZjlyZlNhOUdFaHY0RGNZTGhWbVJZOGIuYVB0emZMenJsNHozWHZvOUVhTm5yaFkxVUo0STl6dnJTWUp0WFJuTnRGa3l4WEI3S01BMmpUWUx0QmFkUEpIbFNRditiZDJhTHdYaTl6WUYyd3BUUjJFSzlhOGtjUUhIdFNlVnFGdWI3S25RVUQwK3pXbVhpZUJiQXhaMWdoOW13Y2FYYUM5RXpyaktobzdkamZ5eHVNSU5IdmtBbmptU0hPU0JrS0s0ZU00eHlNMFUxdkowZDZwdGkrREpRTTlhWEhvN3Q5c2c1MUNXT1FDclZlU0gxVkZMMUFxYVpVaVVVSm5QclJ0S0M5cHdSenNRVWNweUc1U0lMQXBnQmYrNVQwZUZPajg5TDZTaWNzUWZqSFEwV2lISHNyZ3h3Zz09
+            description: parameter Webview
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: cache-control
+          value: none
+        - name: content-security-policy
+          value: script-src 'self' rayain.net
+        - name: content-type
+          value: application/json; charset=utf-8
+        - name: permissions-policy
+          value: geolocation=()
+        - name: referrer-policy
+          value: no-referrer
+        - name: strict-transport-security
+          value: max-age=31536000
+        - name: x-content-type-options
+          value: nosniff
+        - name: x-frame-options
+          value: SAMEORIGIN
+        - name: x-permitted-cross-domain-policies
+          value: none
+        - name: date
+          value: Thu, 12 Nov 2026 13:30:37 GMT
+        - name: content-length
+          value: "44"
+      body:
+        type: json
+        data: |-
+          {
+            "code": 500,
+            "message": "Gagal Request Token"
+          }
